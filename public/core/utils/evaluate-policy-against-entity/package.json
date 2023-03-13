@@ -1,0 +1,34 @@
+{
+  "name": "@bimo/core-utils-services-evaluate-policy-against-entity",
+  "version": "0.0.1",
+  "description": "Evaluates a policy on an entity.",
+  "main": "index.js",
+  "author": "Gaël Haméon <gael.hameon@gmail.com>",
+  "license": "LGPL-3.0-or-later",
+  "dependencies": {
+    "@bimo/core-utils-create-props-from-items": "^0.0.1",
+    "@bimo/core-utils-logging": "^0.0.1"
+  },
+  "devDependencies": {
+    "@bimo-core/policy": "^0.0.1",
+    "@bimo-core/policy-rule": "^0.0.1",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nyc": "^15.1.0"
+  },
+  "scripts": {
+    "test": "mocha --recursive __tests__/**/*.spec.js",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
+  },
+  "peerDependencies": {
+    "@bimo/core-entities": "0"
+  },
+  "peerDependenciesMeta": {
+    "@bimo/core-entities": {
+      "optional": true
+    }
+  },
+  "homepage": "https://bimodata.com/",
+  "bugs": "https://github.com/bimodata/bimo/issues",
+  "repository": "github:bimodata/bimo"
+}

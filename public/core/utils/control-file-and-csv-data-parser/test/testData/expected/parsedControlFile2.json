@@ -1,0 +1,38 @@
+{
+  "separator": "|",
+  "headerRow": null,
+  "lineInfoByKeyword": {
+    "other": {
+      "keyword": "other",
+      "ignore": false,
+      "objectType": "other",
+      "items": [{ "name": "1" }, { "name": "2" }, { "name": "3" }]
+    },
+    "titi": {
+      "keyword": "titi",
+      "ignore": false,
+      "objectType": "titi",
+      "items": [
+        { "name": "fakeItem4" },
+        { "name": "fakeItem2" },
+        { "name": "fakeItem8" },
+        { "name": "fakeItem6" },
+        { "name": "fakeItem4" }
+      ],
+      "lineInfoByKeyword": {
+        "toto": {
+          "keyword": "toto",
+          "ignore": false,
+          "objectType": "toto",
+          "items": [{ "name": "1" }, { "name": "2" }, { "name": "3" }]
+        },
+        "hoho": {
+          "keyword": "hoho",
+          "ignore": false,
+          "objectType": "hoho",
+          "items": [{ "name": "1" }, { "name": "2" }, { "name": "3" }]
+        }
+      }
+    }
+  }
+}

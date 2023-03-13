@@ -1,0 +1,33 @@
+{
+  "name": "@bimo/core-services-check-and-repair-consist-changes-in-vsc",
+  "version": "0.0.1",
+  "description": "Checks and repairs consist changes.",
+  "main": "index.js",
+  "author": "Gaël Haméon <gael.hameon@gmail.com>",
+  "license": "LGPL-3.0-or-later",
+  "scripts": {
+    "test": "mocha --recursive __tests__/**/*.spec.js",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
+  },
+  "dependencies": {
+    "@bimo/core-utils-logging": "^0.0.1"
+  },
+  "devDependencies": {
+    "@bimo/test-utils-get-test-data": "^0.0.1",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nyc": "^15.1.0",
+    "sinon": "^13.0.1"
+  },
+  "peerDependencies": {
+    "@bimo/core-entities": "0"
+  },
+  "peerDependenciesMeta": {
+    "@bimo/core-entities": {
+      "optional": true
+    }
+  },
+  "homepage": "https://bimodata.com/",
+  "bugs": "https://github.com/bimodata/bimo/issues",
+  "repository": "github:bimodata/bimo"
+}

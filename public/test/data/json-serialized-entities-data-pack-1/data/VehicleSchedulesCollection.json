@@ -1,0 +1,6890 @@
+{
+  "serializedRootObject": {
+    "_type": "VehicleSchedulesCollection",
+    "_id": "1"
+  },
+  "serializedInstanceByIdByType": {
+    "VehicleSchedulesCollection": {
+      "1": {
+        "customProps": {
+          "_type": "Object",
+          "_id": "1"
+        },
+        "itemName": "VehicleSchedule",
+        "idPropName": "vscIntId",
+        "labelPropName": "vscDescription",
+        "associationType": "composition",
+        "items": [
+          {
+            "_type": "VehicleSchedule",
+            "_id": "1"
+          }
+        ],
+        "_tripsCollectionOfAllTripsOfAllVscs": null,
+        "links": []
+      }
+    },
+    "Object": {
+      "1": {},
+      "2": {},
+      "3": {},
+      "4": {},
+      "5": {},
+      "6": {},
+      "7": {},
+      "8": {},
+      "9": {},
+      "10": {},
+      "11": {},
+      "12": {},
+      "13": {},
+      "14": {},
+      "15": {},
+      "16": {},
+      "17": {},
+      "18": {},
+      "19": {},
+      "20": {},
+      "21": {},
+      "22": {},
+      "23": {},
+      "24": {},
+      "25": {},
+      "26": {},
+      "27": {},
+      "28": {},
+      "29": {},
+      "30": {},
+      "31": {},
+      "32": {},
+      "33": {},
+      "34": {},
+      "35": {},
+      "36": {},
+      "37": {},
+      "38": {},
+      "39": {},
+      "40": {},
+      "41": {},
+      "42": {},
+      "43": {},
+      "44": {},
+      "45": {},
+      "46": {},
+      "47": {},
+      "48": {},
+      "49": {},
+      "50": {},
+      "51": {},
+      "52": {},
+      "53": {},
+      "54": {},
+      "55": {},
+      "56": {},
+      "57": {},
+      "58": {},
+      "59": {},
+      "60": {},
+      "61": {},
+      "62": {},
+      "63": {},
+      "64": {},
+      "65": {},
+      "66": {},
+      "67": {},
+      "68": {},
+      "69": {},
+      "70": {},
+      "71": {},
+      "72": {},
+      "73": {},
+      "74": {},
+      "75": {},
+      "76": {},
+      "77": {},
+      "78": {},
+      "79": {},
+      "80": {},
+      "81": {},
+      "82": {},
+      "83": {},
+      "84": {},
+      "85": {},
+      "86": {},
+      "87": {},
+      "88": {},
+      "89": {},
+      "90": {},
+      "91": {},
+      "92": {},
+      "93": {},
+      "94": {},
+      "95": {},
+      "96": {},
+      "97": {},
+      "98": {},
+      "99": {},
+      "100": {},
+      "101": {},
+      "102": {},
+      "103": {},
+      "104": {},
+      "105": {},
+      "106": {},
+      "107": {},
+      "108": {},
+      "109": {},
+      "110": {},
+      "111": {},
+      "112": {},
+      "113": {},
+      "114": {},
+      "115": {},
+      "116": {},
+      "117": {},
+      "118": {},
+      "119": {},
+      "120": {},
+      "121": {},
+      "122": {},
+      "123": {},
+      "124": {},
+      "125": {},
+      "126": {},
+      "127": {},
+      "128": {},
+      "129": {},
+      "130": {},
+      "131": {},
+      "132": {},
+      "133": {},
+      "134": {},
+      "135": {},
+      "136": {},
+      "137": {},
+      "138": {},
+      "139": {},
+      "140": {},
+      "141": {},
+      "142": {},
+      "143": {},
+      "144": {},
+      "145": {},
+      "146": {},
+      "147": {},
+      "148": {},
+      "149": {},
+      "150": {},
+      "151": {},
+      "152": {},
+      "153": {},
+      "154": {},
+      "155": {},
+      "156": {},
+      "157": {},
+      "158": {},
+      "159": {},
+      "160": {},
+      "161": {},
+      "162": {},
+      "163": {},
+      "164": {},
+      "165": {},
+      "166": {},
+      "167": {},
+      "168": {},
+      "169": {},
+      "170": {},
+      "171": {},
+      "172": {},
+      "173": {},
+      "174": {},
+      "175": {},
+      "176": {},
+      "177": {},
+      "178": {},
+      "179": {},
+      "180": {},
+      "181": {},
+      "182": {},
+      "183": {},
+      "184": {},
+      "185": {},
+      "186": {},
+      "187": {},
+      "188": {},
+      "189": {},
+      "190": {},
+      "191": {},
+      "192": {},
+      "193": {},
+      "194": {},
+      "195": {},
+      "196": {},
+      "197": {},
+      "198": {},
+      "199": {},
+      "200": {},
+      "201": {},
+      "202": {},
+      "203": {},
+      "204": {},
+      "205": {},
+      "206": {},
+      "207": {},
+      "208": {},
+      "209": {},
+      "210": {},
+      "211": {},
+      "212": {},
+      "213": {},
+      "214": {},
+      "215": {},
+      "216": {}
+    },
+    "VehicleSchedule": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedulesCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "2"
+        },
+        "vscName": "h",
+        "vscScenario": "1",
+        "vscSchedType": "0",
+        "vscBooking": "ASKsUe",
+        "vscDescription": "",
+        "vscSchedUnit": "Fd5bAq",
+        "vscMainRoute": "L2",
+        "vscServiceCtxId": "",
+        "vscOwner": "meA7Wi",
+        "vscPublicAccess": "0",
+        "vscProdPhase": "0",
+        "vscPlacePattern_1": "",
+        "vscPlacePattern_2": "",
+        "vscKeyTimingPoint_1": "",
+        "vscKeyTimingPoint_2": "",
+        "vscRteverId": "EAhVvI9pr",
+        "vscRtverId": "wCDczizvBp",
+        "vscDtverId": "",
+        "vscDeadheadIntUse": "1",
+        "vscGarageUsageVersion": "",
+        "vscParverId": "",
+        "vscCvtverId": "",
+        "vscVehicleActivityVersion": "",
+        "vscVehicleCoverageVersion": "",
+        "vscLayoverDefaultVersionId": "",
+        "vscServiceGuidelineVersionId": "",
+        "vscReliefOpportunityVersionId": "",
+        "vscNetworkConstraintVersion": "",
+        "vscPassengerLoadVersionId": "",
+        "vscMeetBuilderVersionId": "",
+        "vscCompositeHeadwayVersionId": "",
+        "vscVehActReqVersionId": "",
+        "vscPlanningMode": "",
+        "vscIntId": "1",
+        "vscDatetimeStamp": "",
+        "vscUserStamp": "",
+        "vscBlockingAtt": "",
+        "vscBlockingValue": "",
+        "vscConsiderOtherAgencies": "",
+        "vscincloirs": {
+          "_type": "VscincloirsCollection",
+          "_id": "1"
+        },
+        "networkEvents": {
+          "_type": "NetworkEventsCollection",
+          "_id": "1"
+        },
+        "vehicleUnits": {
+          "_type": "VehicleUnitsCollection",
+          "_id": "1"
+        },
+        "blocks": {
+          "_type": "BlocksCollection",
+          "_id": "1"
+        },
+        "vehicleStandbys": {
+          "_type": "VehicleStandbysCollection",
+          "_id": "1"
+        },
+        "maintenances": {
+          "_type": "MaintenancesCollection",
+          "_id": "1"
+        },
+        "trips": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "tripShifts": {
+          "_type": "TripShiftsCollection",
+          "_id": "1"
+        },
+        "consistChanges": {
+          "_type": "ConsistChangesCollection",
+          "_id": "1"
+        },
+        "overnightLinks": {
+          "_type": "OvernightLinksCollection",
+          "_id": "1"
+        },
+        "_blockActivityLinksAreLoaded": false
+      }
+    },
+    "VscincloirsCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "3"
+        },
+        "itemName": "Vscincloir",
+        "idPropName": "bimoId",
+        "labelPropName": "vscincloirIntKey",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "NetworkEventsCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "4"
+        },
+        "itemName": "NetworkEvent",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "VehicleUnitsCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "5"
+        },
+        "itemName": "VehicleUnit",
+        "idPropName": "vehuInternalNumber",
+        "labelPropName": "vehuIdentifierUser",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "BlocksCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "6"
+        },
+        "itemName": "Block",
+        "idPropName": "blkIntNumber",
+        "labelPropName": "blkNumber",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "VehicleStandbysCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "7"
+        },
+        "itemName": "VehicleStandby",
+        "idPropName": "bimoId",
+        "businessIdPropName": "sdbyStandbyNo",
+        "labelPropName": "sdbyComment",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "MaintenancesCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "8"
+        },
+        "itemName": "Maintenance",
+        "idPropName": "bimoId",
+        "businessIdPropName": "mtnInternalNumber",
+        "labelPropName": "mtnVehicleActivityId",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "TripsCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "9"
+        },
+        "itemName": "Trip",
+        "idPropName": "bimoId",
+        "businessIdPropName": "trpIntNumber",
+        "labelPropName": "shortLoggingOutput",
+        "associationType": "composition",
+        "items": [
+          {
+            "_type": "Trip",
+            "_id": "1"
+          },
+          {
+            "_type": "Trip",
+            "_id": "2"
+          },
+          {
+            "_type": "Trip",
+            "_id": "3"
+          },
+          {
+            "_type": "Trip",
+            "_id": "4"
+          },
+          {
+            "_type": "Trip",
+            "_id": "5"
+          },
+          {
+            "_type": "Trip",
+            "_id": "6"
+          },
+          {
+            "_type": "Trip",
+            "_id": "7"
+          },
+          {
+            "_type": "Trip",
+            "_id": "8"
+          },
+          {
+            "_type": "Trip",
+            "_id": "9"
+          },
+          {
+            "_type": "Trip",
+            "_id": "10"
+          },
+          {
+            "_type": "Trip",
+            "_id": "11"
+          },
+          {
+            "_type": "Trip",
+            "_id": "12"
+          },
+          {
+            "_type": "Trip",
+            "_id": "13"
+          },
+          {
+            "_type": "Trip",
+            "_id": "14"
+          },
+          {
+            "_type": "Trip",
+            "_id": "15"
+          },
+          {
+            "_type": "Trip",
+            "_id": "16"
+          },
+          {
+            "_type": "Trip",
+            "_id": "17"
+          },
+          {
+            "_type": "Trip",
+            "_id": "18"
+          },
+          {
+            "_type": "Trip",
+            "_id": "19"
+          },
+          {
+            "_type": "Trip",
+            "_id": "20"
+          },
+          {
+            "_type": "Trip",
+            "_id": "21"
+          },
+          {
+            "_type": "Trip",
+            "_id": "22"
+          },
+          {
+            "_type": "Trip",
+            "_id": "23"
+          },
+          {
+            "_type": "Trip",
+            "_id": "24"
+          },
+          {
+            "_type": "Trip",
+            "_id": "25"
+          },
+          {
+            "_type": "Trip",
+            "_id": "26"
+          },
+          {
+            "_type": "Trip",
+            "_id": "27"
+          },
+          {
+            "_type": "Trip",
+            "_id": "28"
+          },
+          {
+            "_type": "Trip",
+            "_id": "29"
+          },
+          {
+            "_type": "Trip",
+            "_id": "30"
+          },
+          {
+            "_type": "Trip",
+            "_id": "31"
+          },
+          {
+            "_type": "Trip",
+            "_id": "32"
+          },
+          {
+            "_type": "Trip",
+            "_id": "33"
+          },
+          {
+            "_type": "Trip",
+            "_id": "34"
+          },
+          {
+            "_type": "Trip",
+            "_id": "35"
+          },
+          {
+            "_type": "Trip",
+            "_id": "36"
+          },
+          {
+            "_type": "Trip",
+            "_id": "37"
+          },
+          {
+            "_type": "Trip",
+            "_id": "38"
+          },
+          {
+            "_type": "Trip",
+            "_id": "39"
+          },
+          {
+            "_type": "Trip",
+            "_id": "40"
+          },
+          {
+            "_type": "Trip",
+            "_id": "41"
+          },
+          {
+            "_type": "Trip",
+            "_id": "42"
+          },
+          {
+            "_type": "Trip",
+            "_id": "43"
+          },
+          {
+            "_type": "Trip",
+            "_id": "44"
+          },
+          {
+            "_type": "Trip",
+            "_id": "45"
+          },
+          {
+            "_type": "Trip",
+            "_id": "46"
+          },
+          {
+            "_type": "Trip",
+            "_id": "47"
+          },
+          {
+            "_type": "Trip",
+            "_id": "48"
+          },
+          {
+            "_type": "Trip",
+            "_id": "49"
+          },
+          {
+            "_type": "Trip",
+            "_id": "50"
+          },
+          {
+            "_type": "Trip",
+            "_id": "51"
+          }
+        ]
+      }
+    },
+    "Trip": {
+      "1": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "10"
+        },
+        "trpNumber": "yoMtn",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "5:52",
+        "trpTimeEnd": "6:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "5:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "1",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "1"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "1"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "1"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "2": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "14"
+        },
+        "trpNumber": "bvjdk",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "6:07",
+        "trpTimeEnd": "6:42",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "6:07",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "2",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "2"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "2"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "2"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "3": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "18"
+        },
+        "trpNumber": "4rYnv",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "6:37",
+        "trpTimeEnd": "7:12",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "6:37",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "3",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "3"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "3"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "3"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "4": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "22"
+        },
+        "trpNumber": "R0cK4",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "6:53",
+        "trpTimeEnd": "7:31",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "6:53",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "4",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "4"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "4"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "4"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "5": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "26"
+        },
+        "trpNumber": "7isn7",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "7:34",
+        "trpTimeEnd": "8:13",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "7:34",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "5",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "5"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "5"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "5"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "6": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "30"
+        },
+        "trpNumber": "K4XUF",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "7:43",
+        "trpTimeEnd": "8:19",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "7:43",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "6",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "6"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "6"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "6"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "7": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "34"
+        },
+        "trpNumber": "aHFnQ",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "7:53",
+        "trpTimeEnd": "8:31",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "7:53",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "7",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "7"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "7"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "7"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "8": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "38"
+        },
+        "trpNumber": "LfiAq",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "8:13",
+        "trpTimeEnd": "8:49",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "8:13",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "8",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "8"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "8"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "8"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "9": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "42"
+        },
+        "trpNumber": "WO0E1",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "8:23",
+        "trpTimeEnd": "9:01",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "8:23",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "9",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "9"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "9"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "9"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "10": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "46"
+        },
+        "trpNumber": "008VP",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "8:34",
+        "trpTimeEnd": "9:13",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "8:34",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "10",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "10"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "10"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "10"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "11": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "50"
+        },
+        "trpNumber": "H4BnY",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "8:43",
+        "trpTimeEnd": "9:19",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "8:43",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "11",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "11"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "11"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "11"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "12": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "54"
+        },
+        "trpNumber": "ToxPn",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "9:04",
+        "trpTimeEnd": "9:43",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "9:04",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "12",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "12"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "12"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "12"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "13": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "58"
+        },
+        "trpNumber": "MAyI1",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "9:13",
+        "trpTimeEnd": "9:49",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "9:13",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "13",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "13"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "13"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "13"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "14": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "62"
+        },
+        "trpNumber": "B8cj6",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "9:23",
+        "trpTimeEnd": "10:01",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "9:23",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "14",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "14"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "14"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "14"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "15": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "66"
+        },
+        "trpNumber": "UG8Pm",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "9:34",
+        "trpTimeEnd": "10:13",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "9:34",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "15",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "15"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "15"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "15"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "16": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "70"
+        },
+        "trpNumber": "xj3aN",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "9:52",
+        "trpTimeEnd": "10:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "9:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "16",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "16"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "16"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "16"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "17": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "74"
+        },
+        "trpNumber": "5fA6R",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "10:07",
+        "trpTimeEnd": "10:42",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "10:07",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "17",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "17"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "17"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "17"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "18": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "78"
+        },
+        "trpNumber": "IKtkl",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "10:22",
+        "trpTimeEnd": "10:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "10:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "18",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "18"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "18"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "18"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "19": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "82"
+        },
+        "trpNumber": "j0BX5",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "10:52",
+        "trpTimeEnd": "11:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "10:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "19",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "19"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "19"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "19"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "20": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "86"
+        },
+        "trpNumber": "Odjzb",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "11:22",
+        "trpTimeEnd": "11:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "11:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "20",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "20"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "20"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "20"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "21": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "90"
+        },
+        "trpNumber": "QVOUd",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "11:52",
+        "trpTimeEnd": "12:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "11:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "21",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "21"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "21"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "21"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "22": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "94"
+        },
+        "trpNumber": "tchQq",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "12:07",
+        "trpTimeEnd": "12:42",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "12:07",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "22",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "22"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "22"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "22"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "23": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "98"
+        },
+        "trpNumber": "BPeT1",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "12:22",
+        "trpTimeEnd": "12:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "12:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "23",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "23"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "23"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "23"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "24": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "102"
+        },
+        "trpNumber": "W7s3f",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "12:52",
+        "trpTimeEnd": "13:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "12:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "24",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "24"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "24"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "24"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "25": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "106"
+        },
+        "trpNumber": "16wPP",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "13:22",
+        "trpTimeEnd": "13:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "13:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "25",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "25"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "25"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "25"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "26": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "110"
+        },
+        "trpNumber": "hTopW",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "13:52",
+        "trpTimeEnd": "14:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "13:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "26",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "26"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "26"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "26"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "27": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "114"
+        },
+        "trpNumber": "7WVBy",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "14:07",
+        "trpTimeEnd": "14:42",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "14:07",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "27",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "27"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "27"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "27"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "28": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "118"
+        },
+        "trpNumber": "XfI4Z",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "14:22",
+        "trpTimeEnd": "14:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "14:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "28",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "28"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "28"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "28"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "29": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "122"
+        },
+        "trpNumber": "WhjO8",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "14:52",
+        "trpTimeEnd": "15:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "14:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "29",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "29"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "29"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "29"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "30": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "126"
+        },
+        "trpNumber": "SEZng",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "15:22",
+        "trpTimeEnd": "15:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "15:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "30",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "30"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "30"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "30"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "31": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "130"
+        },
+        "trpNumber": "ZzJIX",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "15:52",
+        "trpTimeEnd": "16:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "15:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "31",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "31"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "31"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "31"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "32": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "134"
+        },
+        "trpNumber": "rHI4y",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "16:22",
+        "trpTimeEnd": "16:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "16:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "32",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "32"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "32"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "32"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "33": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "138"
+        },
+        "trpNumber": "Z3mYg",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "16:52",
+        "trpTimeEnd": "17:29",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "16:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "33",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "33"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "33"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "33"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "34": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "142"
+        },
+        "trpNumber": "eYpRN",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "17:23",
+        "trpTimeEnd": "18:01",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "17:23",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "34",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "34"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "34"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "34"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "35": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "146"
+        },
+        "trpNumber": "aEy8n",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "17:34",
+        "trpTimeEnd": "18:13",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "17:34",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "35",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "35"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "35"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "35"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "36": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "150"
+        },
+        "trpNumber": "RSuZm",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "17:43",
+        "trpTimeEnd": "18:19",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "17:43",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "36",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "36"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "36"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "36"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "37": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "154"
+        },
+        "trpNumber": "d6HDI",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "17:53",
+        "trpTimeEnd": "18:31",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "17:53",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "37",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "37"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "37"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "37"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "38": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "158"
+        },
+        "trpNumber": "718xw",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "18:04",
+        "trpTimeEnd": "18:43",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "18:04",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "38",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "38"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "38"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "38"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "39": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "162"
+        },
+        "trpNumber": "3U31c",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "18:23",
+        "trpTimeEnd": "19:01",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "18:23",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "39",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "39"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "39"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "39"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "40": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "166"
+        },
+        "trpNumber": "chm9R",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "18:34",
+        "trpTimeEnd": "19:13",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "18:34",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "40",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "40"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "40"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "40"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "41": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "170"
+        },
+        "trpNumber": "9slwS",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "18:53",
+        "trpTimeEnd": "19:31",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "18:53",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "41",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "41"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "41"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "41"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "42": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "174"
+        },
+        "trpNumber": "i3hOi",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "19:04",
+        "trpTimeEnd": "19:43",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "19:04",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "42",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "42"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "42"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "42"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "43": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "178"
+        },
+        "trpNumber": "nNfj3",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "19:22",
+        "trpTimeEnd": "19:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "19:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "43",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "43"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "43"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "43"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "44": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "182"
+        },
+        "trpNumber": "fzvYj",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "19:37",
+        "trpTimeEnd": "20:12",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "19:37",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "44",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "44"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "44"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "44"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "45": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "186"
+        },
+        "trpNumber": "LD22k",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "20:07",
+        "trpTimeEnd": "20:42",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "20:07",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "45",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "45"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "45"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "45"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "46": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "190"
+        },
+        "trpNumber": "mXLNW",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "20:22",
+        "trpTimeEnd": "20:57",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "20:22",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "46",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "46"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "46"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "46"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "47": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "194"
+        },
+        "trpNumber": "OzUVY",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "20:52",
+        "trpTimeEnd": "21:27",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "20:52",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "47",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "47"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "47"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "47"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "48": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "198"
+        },
+        "trpNumber": "7c1i0",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "21:07",
+        "trpTimeEnd": "21:42",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "21:07",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "48",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "48"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "48"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "48"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "49": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "202"
+        },
+        "trpNumber": "GyFJe",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "21:26",
+        "trpTimeEnd": "22:03",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "21:26",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "49",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "49"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "49"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "49"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "50": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "206"
+        },
+        "trpNumber": "KFWv5",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "21:56",
+        "trpTimeEnd": "22:33",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "21:56",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "50",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "50"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "50"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "50"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      },
+      "51": {
+        "parent": {
+          "_type": "TripsCollection",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "210"
+        },
+        "trpNumber": "zsegV",
+        "trpIsProtected": "1",
+        "trpRoute": "9J",
+        "trpViaVariant": "",
+        "trpType": "0",
+        "trpDirection": "5",
+        "_trpPlaceStart": "WZKR5G",
+        "_trpPlaceEnd": "cNTk",
+        "_trpOriginalStartPlace": "WZKR5G",
+        "_trpOriginalEndPlace": "Q2OL",
+        "trpOriginalBuildSpecPlace": "",
+        "trpTimeStart": "22:56",
+        "trpTimeEnd": "23:33",
+        "trpStartLayUser": "",
+        "trpEndLayUser": "",
+        "trpInternalDistance": null,
+        "trpCreator": "1",
+        "trpNote": "",
+        "trpSecondNote": "",
+        "_trpIsPublic": "1",
+        "trpShftMaxEarlier": "0h00",
+        "trpShftMaxLater": "0h00",
+        "trpInternalShftMaxEarlier": "0h00",
+        "trpInternalShftMaxLater": "0h00",
+        "trpIsSpecial": "0",
+        "trpAvailForTravel": "1",
+        "trpOperatesSun": "1",
+        "trpOperatesMon": "1",
+        "trpOperatesTue": "1",
+        "trpOperatesWed": "1",
+        "trpOperatesThu": "1",
+        "trpOperatesFri": "1",
+        "trpOperatesSat": "1",
+        "trpEventForOir": "",
+        "trpEventStatusForOir": "",
+        "trpGarage": "",
+        "trpPattern": "",
+        "trpVehicleDisplay": "",
+        "trpBuildAt": "0",
+        "trpBuildSpecPlace": "",
+        "trpBuildTime": "22:56",
+        "trpBlockingGarage": "",
+        "trpRunTimePattern": "",
+        "_trpIntNumber": "51",
+        "trpAreVehGroupSpecsFromVehcv": "1",
+        "trpAreVehSpecCstrFromVehcv": "1",
+        "trpRecommendedVehGroup": "",
+        "trpConsiderLoadAtStart": "0",
+        "trpConsiderLoadAtEnd": "0",
+        "BlockNo": "",
+        "tripTps": {
+          "_type": "TripTpsCollection",
+          "_id": "51"
+        },
+        "tripPoints": {
+          "_type": "TripPointsCollection",
+          "_id": "51"
+        },
+        "tripvehgrpspecs": {
+          "_type": "TripvehgrpspecsCollection",
+          "_id": "51"
+        },
+        "trpTrainEas": "0",
+        "trpCommentaireVoySncfDi": "",
+        "trpNumDeCourseSubstituee": "",
+        "trpNumOperation": "",
+        "trpCodeTct": "",
+        "trpMaterielRemorque": "",
+        "trpProfilDeVitesse": "",
+        "trpPrecoAo": "",
+        "trpEstEnSnu": "0",
+        "trpOpReleve": ""
+      }
+    },
+    "TripTpsCollection": {
+      "1": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "11"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "2": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "2"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "15"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "3": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "3"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "19"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "4": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "4"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "23"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "5": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "5"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "27"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "6": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "6"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "31"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "7": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "7"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "35"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "8": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "8"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "39"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "9": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "9"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "43"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "10": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "10"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "47"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "11": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "11"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "51"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "12": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "12"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "55"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "13": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "13"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "59"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "14": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "14"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "63"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "15": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "15"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "67"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "16": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "16"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "71"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "17": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "17"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "75"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "18": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "18"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "79"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "19": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "19"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "83"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "20": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "20"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "87"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "21": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "21"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "91"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "22": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "22"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "95"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "23": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "23"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "99"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "24": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "24"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "103"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "25": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "25"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "107"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "26": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "26"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "111"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "27": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "27"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "115"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "28": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "28"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "119"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "29": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "29"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "123"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "30": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "30"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "127"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "31": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "31"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "131"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "32": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "32"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "135"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "33": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "33"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "139"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "34": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "34"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "143"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "35": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "35"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "147"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "36": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "36"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "151"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "37": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "37"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "155"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "38": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "38"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "159"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "39": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "39"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "163"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "40": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "40"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "167"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "41": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "41"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "171"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "42": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "42"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "175"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "43": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "43"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "179"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "44": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "44"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "183"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "45": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "45"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "187"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "46": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "46"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "191"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "47": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "47"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "195"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "48": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "48"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "199"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "49": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "49"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "203"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "50": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "50"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "207"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      },
+      "51": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "51"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "211"
+        },
+        "itemName": "TripTp",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "TripPointsCollection": {
+      "1": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "12"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "2": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "2"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "16"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "3": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "3"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "20"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "4": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "4"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "24"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "5": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "5"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "28"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "6": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "6"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "32"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "7": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "7"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "36"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "8": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "8"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "40"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "9": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "9"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "44"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "10": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "10"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "48"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "11": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "11"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "52"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "12": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "12"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "56"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "13": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "13"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "60"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "14": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "14"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "64"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "15": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "15"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "68"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "16": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "16"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "72"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "17": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "17"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "76"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "18": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "18"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "80"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "19": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "19"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "84"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "20": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "20"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "88"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "21": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "21"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "92"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "22": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "22"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "96"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "23": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "23"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "100"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "24": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "24"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "104"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "25": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "25"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "108"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "26": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "26"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "112"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "27": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "27"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "116"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "28": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "28"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "120"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "29": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "29"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "124"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "30": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "30"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "128"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "31": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "31"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "132"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "32": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "32"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "136"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "33": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "33"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "140"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "34": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "34"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "144"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "35": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "35"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "148"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "36": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "36"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "152"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "37": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "37"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "156"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "38": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "38"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "160"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "39": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "39"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "164"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "40": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "40"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "168"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "41": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "41"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "172"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "42": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "42"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "176"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "43": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "43"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "180"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "44": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "44"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "184"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "45": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "45"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "188"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "46": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "46"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "192"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "47": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "47"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "196"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "48": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "48"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "200"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "49": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "49"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "204"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "50": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "50"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "208"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      },
+      "51": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "51"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "212"
+        },
+        "itemName": "TripPoint",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "TripvehgrpspecsCollection": {
+      "1": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "13"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "2": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "2"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "17"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "3": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "3"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "21"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "4": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "4"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "25"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "5": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "5"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "29"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "6": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "6"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "33"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "7": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "7"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "37"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "8": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "8"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "41"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "9": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "9"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "45"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "10": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "10"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "49"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "11": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "11"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "53"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "12": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "12"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "57"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "13": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "13"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "61"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "14": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "14"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "65"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "15": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "15"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "69"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "16": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "16"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "73"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "17": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "17"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "77"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "18": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "18"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "81"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "19": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "19"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "85"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "20": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "20"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "89"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "21": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "21"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "93"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "22": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "22"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "97"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "23": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "23"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "101"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "24": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "24"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "105"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "25": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "25"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "109"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "26": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "26"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "113"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "27": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "27"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "117"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "28": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "28"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "121"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "29": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "29"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "125"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "30": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "30"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "129"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "31": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "31"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "133"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "32": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "32"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "137"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "33": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "33"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "141"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "34": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "34"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "145"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "35": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "35"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "149"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "36": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "36"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "153"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "37": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "37"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "157"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "38": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "38"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "161"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "39": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "39"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "165"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "40": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "40"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "169"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "41": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "41"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "173"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "42": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "42"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "177"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "43": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "43"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "181"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "44": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "44"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "185"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "45": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "45"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "189"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "46": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "46"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "193"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "47": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "47"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "197"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "48": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "48"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "201"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "49": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "49"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "205"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "50": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "50"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "209"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      },
+      "51": {
+        "parent": {
+          "_type": "Trip",
+          "_id": "51"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "213"
+        },
+        "itemName": "Tripvehgrpspec",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "TripShiftsCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "214"
+        },
+        "itemName": "TripShift",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "ConsistChangesCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "215"
+        },
+        "itemName": "ConsistChange",
+        "idPropName": "cchgInternalNumber",
+        "businessIdPropName": "cchgInternalNumber",
+        "labelPropName": "",
+        "associationType": "composition",
+        "items": []
+      }
+    },
+    "OvernightLinksCollection": {
+      "1": {
+        "parent": {
+          "_type": "VehicleSchedule",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "216"
+        },
+        "itemName": "OvernightLink",
+        "associationType": "composition",
+        "items": []
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+titi|fakeValue4-1|fakeValue2-1|fakeValue8-1|fakeValue6-1|fakeValue4-1
+titi|fakeValue4-2|fakeValue2-2|fakeValue8-2|fakeValue6-2|fakeValue4-2
+toto|11|21|31
+toto|12|22|32
+titi|fakeValue4-3|fakeValue2-3|fakeValue8-3|fakeValue6-3|fakeValue4-3
+other|item1|item2|item3

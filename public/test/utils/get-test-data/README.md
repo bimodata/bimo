@@ -1,0 +1,1 @@
+Right now this only copies ... eventually it could be a little smarter and accept options that tell it which parts of a datapack it should get.

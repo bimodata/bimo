@@ -1,0 +1,59 @@
+#
+#
+#
+# Bloc de commentaires
+#
+#
+#
+
+
+random_header_prop "Voici du texte pour le début"
+desc  "Ce fichier de contrôle décrit des données bidon 
+       Mais dans un vrai fichier, il pourrait y avoir besoin d'une longue
+       description sur plusieurs lignes comme celle-ci
+       "
+
+separator ";"
+
+line titi
+   {
+   keyword titi
+   object titi
+   item fakeItem1
+   item fakeItem2
+   item fakeItem3
+   item fakeItem4
+   # ligne de commentaire 
+   item fakeItem5
+   item fakeItem6 { some very special prop }
+   item fakeItem7 # un commentaire après un item
+   item fakeItem8
+   item fakeItem9
+
+   line toto
+        {
+            keyword toto
+            object toto
+            item 1
+            item 2
+            item 3
+
+            line deepLine
+                {
+                keyword deepLine
+                object deepLine
+                item it1
+                item it2 { some special prop }
+                item it3
+                }
+        }
+   } 
+
+line other
+   {
+    keyword other
+    object other
+    item 1
+    item 2
+    item 3
+   }

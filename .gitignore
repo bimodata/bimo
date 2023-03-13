@@ -1,0 +1,35 @@
+**/TEMP/**
+**/temp/**
+**/node_modules/**
+**/.nyc_output/**
+**/coverage/**
+**/build/**
+lerna-debug.log
+.env
+cypress.env.json
+
+**/backup/**
+**/zipped test/**
+**/publish/**
+cypress/videos/**
+cypress/screenshots/**
+cypress/output-data/**
+**/scripts-data/**
+yarn-error.log
+
+*.heapsnapshot
+.nmprc
+.yarnrc
+debug.log
+packageInfoByPackageName.json
+
+.yarn/*
+.yarnrc.yml
+yarn.lock
+# !.yarn/cache
+# !.yarn/patches
+# !.yarn/releases
+# !.yarn/plugins
+# !.yarn/sdks
+# !.yarn/versions
+.pnp.*

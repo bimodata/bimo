@@ -1,0 +1,11 @@
+{
+  "name": "@bimo/test-data-json-serialized-entities-data-pack-1",
+  "version": "0.0.1",
+  "description": "Data pack that contains anonymized individual entities",
+  "main": "index.js",
+  "author": "Gaël Haméon <gael.hameon@gmail.com>",
+  "license": "LGPL-3.0-or-later",
+  "homepage": "https://bimodata.com/",
+  "bugs": "https://github.com/bimodata/bimo/issues",
+  "repository": "github:bimodata/bimo"
+}

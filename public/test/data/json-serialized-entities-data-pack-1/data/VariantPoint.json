@@ -1,0 +1,25 @@
+{
+  "serializedRootObject": {
+    "_type": "VariantPoint",
+    "_id": "1"
+  },
+  "serializedInstanceByIdByType": {
+    "VariantPoint": {
+      "1": {
+        "customProps": {
+          "_type": "Object",
+          "_id": "1"
+        },
+        "varptIsTimingPoint": "1",
+        "varptPlace": "aQI",
+        "varptNoStopping": "0",
+        "_varptPublicInfo": "1",
+        "varptRoutingPoint": "0",
+        "varptAllowLoadTime": "1"
+      }
+    },
+    "Object": {
+      "1": {}
+    }
+  }
+}

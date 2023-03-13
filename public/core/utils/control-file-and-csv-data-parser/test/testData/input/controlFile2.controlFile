@@ -1,0 +1,39 @@
+separator "|"
+
+line other
+   {
+    keyword other
+    object other
+    item 1
+    item 2
+    item 3
+   }
+
+line titi
+   {
+   keyword titi
+   object titi
+   item fakeItem4
+   item fakeItem2
+   item fakeItem8
+   item fakeItem6
+   item fakeItem4
+   
+   line toto
+      {
+         keyword toto
+         object toto
+         item 1
+         item 2
+         item 3
+      }
+
+   line hoho
+      {
+         keyword hoho
+         object hoho
+         item 1
+         item 2
+         item 3
+      }
+   }

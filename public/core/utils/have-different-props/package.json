@@ -1,0 +1,24 @@
+{
+  "name": "@bimo/core-utils-have-different-props",
+  "version": "0.0.1",
+  "description": "Checks if the values of some props are all the same on an array of items. Returns the first found different value if not.",
+  "main": "index.js",
+  "author": "Gaël Haméon <gael.hameon@gmail.com>",
+  "license": "LGPL-3.0-or-later",
+  "scripts": {
+    "test": "mocha --recursive __tests__/**/*.spec.js",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
+  },
+  "dependencies": {
+    "@bimo/core-utils-logging": "^0.0.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nyc": "^15.1.0"
+  },
+  "homepage": "https://bimodata.com/",
+  "bugs": "https://github.com/bimodata/bimo/issues",
+  "repository": "github:bimodata/bimo"
+}

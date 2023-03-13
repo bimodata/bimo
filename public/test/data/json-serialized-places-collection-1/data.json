@@ -1,0 +1,165 @@
+{
+  "serializedRootObject": {
+    "_type": "PlacesCollection",
+    "_id": "1"
+  },
+  "serializedInstanceByIdByType": {
+    "PlacesCollection": {
+      "1": {
+        "itemName": "Place",
+        "idPropName": "plcIdentifier",
+        "associationType": "composition",
+        "items": [
+          {
+            "_type": "Place",
+            "_id": "1"
+          },
+          {
+            "_type": "Place",
+            "_id": "2"
+          },
+          {
+            "_type": "Place",
+            "_id": "3"
+          },
+          {
+            "_type": "Place",
+            "_id": "4"
+          },
+          {
+            "_type": "Place",
+            "_id": "5"
+          },
+          {
+            "_type": "Place",
+            "_id": "6"
+          },
+          {
+            "_type": "Place",
+            "_id": "7"
+          },
+          {
+            "_type": "Place",
+            "_id": "8"
+          },
+          {
+            "_type": "Place",
+            "_id": "9"
+          },
+          {
+            "_type": "Place",
+            "_id": "10"
+          },
+          {
+            "_type": "Place",
+            "_id": "11"
+          }
+        ],
+        "libelle": "simple places collection",
+        "_placesByReferencePlace": null,
+        "id": "simple_places_collection"
+      }
+    },
+    "Place": {
+      "1": {
+        "plcIdentifier": "CJV-00",
+        "plcDescription": "Cergy BV",
+        "plcReferencePlace": "",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "2": {
+        "plcIdentifier": "CJV-MG",
+        "plcDescription": "Cergy Garage",
+        "plcReferencePlace": "",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "3": {
+        "plcIdentifier": "CJV1",
+        "plcDescription": "Cergy voie 1",
+        "plcReferencePlace": "CJV-BV",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "4": {
+        "plcIdentifier": "CJV2",
+        "plcDescription": "Cergy voie 2",
+        "plcReferencePlace": "CJV-00",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "5": {
+        "plcIdentifier": "CJV6",
+        "plcDescription": "Cergy voie 6 (garage)",
+        "plcReferencePlace": "CJV-MG",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "6": {
+        "plcIdentifier": "CJV7",
+        "plcDescription": "Cergy voie 7 (garage)",
+        "plcReferencePlace": "CJV-MG",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "7": {
+        "plcIdentifier": "ACH-SS",
+        "plcDescription": "Achères SAS",
+        "plcReferencePlace": "",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "8": {
+        "plcIdentifier": "ACH-FE",
+        "plcDescription": "Achères Escale",
+        "plcReferencePlace": "",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "9": {
+        "plcIdentifier": "ACH-GV",
+        "plcDescription": "Achères Garage Voyageurs",
+        "plcReferencePlace": "",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "10": {
+        "plcIdentifier": "ACHe13",
+        "plcDescription": "Achères Escale voie 13",
+        "plcReferencePlace": "ACH-FE",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      },
+      "11": {
+        "plcIdentifier": "_prob",
+        "plcDescription": "Lieu avec lieu de ref inexistant",
+        "plcReferencePlace": "PRO-BL",
+        "parent": {
+          "_type": "PlacesCollection",
+          "_id": "1"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+titi;fakeValue1-1;fakeValue2-1;fakeValue3-1;fakeValue4-1;fakeValue5-1;fakeValue6-1;fakeValue7-1;fakeValue8-1;fakeValue9-1
+titi;fakeValue1-2;fakeValue2-2;fakeValue3-2;fakeValue4-2;fakeValue5-2;fakeValue6-2;fakeValue7-2;fakeValue8-2;fakeValue9-2
+toto;11;21;31
+deepLine;it11;it21;it31
+deepLine;it12;it22;it32
+toto;12;22;32
+deepLine;it12;it22;it32
+titi;fakeValue1-3;fakeValue2-3;fakeValue3-3;fakeValue4-3;fakeValue5-3;fakeValue6-3;fakeValue7-3;fakeValue8-3;fakeValue9-3
+other;item1;item2;item3

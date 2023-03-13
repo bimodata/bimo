@@ -1,0 +1,48 @@
+{
+  "separator": ";",
+  "headerRow": null,
+  "lineInfoByKeyword": {
+    "titi": {
+      "keyword": "titi",
+      "ignore": false,
+      "objectType": "titi",
+      "items": [
+        { "name": "fakeItem1" },
+        { "name": "fakeItem2" },
+        { "name": "fakeItem3" },
+        { "name": "fakeItem4" },
+        { "name": "fakeItem5" },
+        { "name": "fakeItem6", "special": "{ some very special prop }" },
+        { "name": "fakeItem7" },
+        { "name": "fakeItem8" },
+        { "name": "fakeItem9" }
+      ],
+      "lineInfoByKeyword": {
+        "toto": {
+          "keyword": "toto",
+          "ignore": false,
+          "objectType": "toto",
+          "items": [{ "name": "1" }, { "name": "2" }, { "name": "3" }],
+          "lineInfoByKeyword": {
+            "deepLine": {
+              "keyword": "deepLine",
+              "ignore": false,
+              "objectType": "deepLine",
+              "items": [
+                { "name": "it1" },
+                { "name": "it2", "special": "{ some special prop }" },
+                { "name": "it3" }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "other": {
+      "keyword": "other",
+      "ignore": false,
+      "objectType": "other",
+      "items": [{ "name": "1" }, { "name": "2" }, { "name": "3" }]
+    }
+  }
+}

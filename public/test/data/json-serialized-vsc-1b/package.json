@@ -1,0 +1,11 @@
+{
+  "name": "@bimo/test-data-json-serialized-vsc-1b",
+  "version": "0.0.1",
+  "description": "Anonymized test data",
+  "main": "jsonSerializedVsc1b.js",
+  "author": "Gaël Haméon <gael.hameon@gmail.com>",
+  "license": "LGPL-3.0-or-later",
+  "homepage": "https://bimodata.com/",
+  "bugs": "https://github.com/bimodata/bimo/issues",
+  "repository": "github:bimodata/bimo"
+}

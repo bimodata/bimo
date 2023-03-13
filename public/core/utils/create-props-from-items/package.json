@@ -1,0 +1,28 @@
+{
+  "name": "@bimo/core-utils-create-props-from-items",
+  "version": "0.0.1",
+  "description": "Create props for a new item based on sources items",
+  "main": "index.js",
+  "author": "Gaël Haméon <gael.hameon@gmail.com>",
+  "license": "LGPL-3.0-or-later",
+  "scripts": {
+    "test": "mocha --recursive __tests__/**/*.spec.js",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
+  },
+  "dependencies": {
+    "@bimo/core-utils-get-with-self": "^0.0.1",
+    "@bimo/core-utils-logging": "^0.0.1",
+    "@bimo/core-utils-shallow-assign": "^0.0.1",
+    "@bimo/core-utils-string": "^0.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nyc": "^15.1.0",
+    "proxyquire": "^2.1.3",
+    "sinon": "^13.0.1"
+  },
+  "homepage": "https://bimodata.com/",
+  "bugs": "https://github.com/bimodata/bimo/issues",
+  "repository": "github:bimodata/bimo"
+}

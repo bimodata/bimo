@@ -1,0 +1,425 @@
+[
+  {
+    "fullName": "4770-AEROPORT CHARLES DE GAULLE 2 TGV",
+    "cleanName": "aeroport charles de gaulle 2 tgv",
+    "bestMatch": {
+      "id": "CGPhr",
+      "fullName": "Charles de Gaulle Friedland *00*",
+      "cleanName": "charles de gaulle friedland"
+    }
+  },
+  {
+    "fullName": "4771-AEROPORT CHARLES DE GAULLE 1",
+    "cleanName": "aeroport charles de gaulle 1",
+    "bestMatch": {
+      "id": "RSYhr",
+      "fullName": "Aéroport CDG T1 *00*",
+      "cleanName": "aéroport cdg t1"
+    }
+  },
+  {
+    "fullName": "4740-PARC DES EXPOSITIONS",
+    "cleanName": "parc des expositions",
+    "bestMatch": {
+      "id": "PEX-00",
+      "fullName": "Parc-des-Expositions Bâtiment Voyageurs",
+      "cleanName": "parc-des-expositions"
+    }
+  },
+  {
+    "fullName": "4818-VILLEPINTE",
+    "cleanName": "villepinte",
+    "bestMatch": {
+      "id": "VPN-00",
+      "fullName": "Villepinte Bâtiment Voyageurs",
+      "cleanName": "villepinte"
+    }
+  },
+  {
+    "fullName": "4774-SEVRAN BEAUDOTTES",
+    "cleanName": "sevran beaudottes",
+    "bestMatch": {
+      "id": "BDE-00",
+      "fullName": "Sevran-Beaudottes *00*",
+      "cleanName": "sevran-beaudottes"
+    }
+  },
+  {
+    "fullName": "4995-MITRY CLAYE",
+    "cleanName": "mitry claye",
+    "bestMatch": {
+      "id": "MY-00",
+      "fullName": "Mitry-Claye Bâtiment Voyageurs",
+      "cleanName": "mitry-claye"
+    }
+  },
+  {
+    "fullName": "4816-VILLEPARISIS MITRY LE NEUF",
+    "cleanName": "villeparisis mitry le neuf",
+    "bestMatch": {
+      "id": "VII-00",
+      "fullName": "Villeparisis Bâtiment Voyageurs",
+      "cleanName": "villeparisis"
+    }
+  },
+  {
+    "fullName": "4837-VERT GALANT",
+    "cleanName": "vert galant",
+    "bestMatch": {
+      "id": "VGL-00",
+      "fullName": "Vert-Galant *00*",
+      "cleanName": "vert-galant"
+    }
+  },
+  {
+    "fullName": "4812-SEVRAN LIVRY",
+    "cleanName": "sevran livry",
+    "bestMatch": {
+      "id": "SEV-00",
+      "fullName": "Sevran-Livry Bâtiment Voyageurs",
+      "cleanName": "sevran-livry"
+    }
+  },
+  {
+    "fullName": "4941-AULNAY SOUS BOIS",
+    "cleanName": "aulnay sous bois",
+    "bestMatch": {
+      "id": "AB-BV",
+      "fullName": "Aulnay-sous-Bois Bâtiment Voyageurs",
+      "cleanName": "aulnay-sous-bois"
+    }
+  },
+  {
+    "fullName": "4947-LE BLANC MESNIL ",
+    "cleanName": "le blanc mesnil ",
+    "bestMatch": {
+      "id": "BAM-00",
+      "fullName": "Le Blanc-Mesnil *00*",
+      "cleanName": "le blanc-mesnil"
+    }
+  },
+  {
+    "fullName": "4938-DRANCY",
+    "cleanName": "drancy",
+    "bestMatch": {
+      "id": "DRN-00",
+      "fullName": "Drancy *00*",
+      "cleanName": "drancy"
+    }
+  },
+  {
+    "fullName": "5006-LE BOURGET ",
+    "cleanName": "le bourget ",
+    "bestMatch": {
+      "id": "LBT-00",
+      "fullName": "Le Bourget Bâtiment Voyageurs",
+      "cleanName": "le bourget"
+    }
+  },
+  {
+    "fullName": "4942-LA COURNEUVE AUBERVILLIERS ",
+    "cleanName": "la courneuve aubervilliers ",
+    "bestMatch": {
+      "id": "CUU-BV",
+      "fullName": "La Courneuve-Dugny Bâtiment Voyageurs",
+      "cleanName": "la courneuve-dugny"
+    }
+  },
+  {
+    "fullName": "5008-LA PLAINE STADE DE FRANCE ",
+    "cleanName": "la plaine stade de france ",
+    "bestMatch": {
+      "id": "LPD-00",
+      "fullName": "La Plaine-Voyageurs *00*",
+      "cleanName": "la plaine-voyageurs"
+    }
+  },
+  {
+    "fullName": "4736-PARIS NORD",
+    "cleanName": "paris nord",
+    "bestMatch": {
+      "id": "PNO-BV",
+      "fullName": "Paris-Nord Bâtiment Voyageurs",
+      "cleanName": "paris-nord"
+    }
+  },
+  {
+    "fullName": "4731-CHATELET LES HALLES",
+    "cleanName": "chatelet les halles",
+    "bestMatch": {
+      "id": "CLX-BV",
+      "fullName": "Châtelet-les-Halles Bâtiment Voyageurs",
+      "cleanName": "châtelet-les-halles"
+    }
+  },
+  {
+    "fullName": "4972-SAINT-MICHEL NOTRE DAME",
+    "cleanName": "saint-michel notre dame",
+    "bestMatch": {
+      "id": "SHL-00",
+      "fullName": "St-Michel-Notre-Dame Bâtiment Voyageurs",
+      "cleanName": "st-michel-notre-dame"
+    }
+  },
+  {
+    "fullName": "4636-LUXEMBOURG",
+    "cleanName": "luxembourg",
+    "bestMatch": {
+      "id": "LXJ-00",
+      "fullName": "Luxembourg (RATP) *00*",
+      "cleanName": "luxembourg ()"
+    }
+  },
+  {
+    "fullName": "4817-PORT ROYAL",
+    "cleanName": "port royal",
+    "bestMatch": {
+      "id": "PWR-00",
+      "fullName": "Port-Royal *00*",
+      "cleanName": "port-royal"
+    }
+  },
+  {
+    "fullName": "4607-DENFERT ROCHEREAU",
+    "cleanName": "denfert rochereau",
+    "bestMatch": {
+      "id": "DFR-00",
+      "fullName": "Denfert-Rochereau Bâtiment Voyageurs",
+      "cleanName": "denfert-rochereau"
+    }
+  },
+  {
+    "fullName": "4718-CITE UNIVERSITAIRE",
+    "cleanName": "cite universitaire",
+    "bestMatch": {
+      "id": "CUF-00",
+      "fullName": "Cité Universitaire *00*",
+      "cleanName": "cité universitaire"
+    }
+  },
+  {
+    "fullName": "4610-GENTILLY",
+    "cleanName": "gentilly",
+    "bestMatch": {
+      "id": "GTL-00",
+      "fullName": "Gentilly *00*",
+      "cleanName": "gentilly"
+    }
+  },
+  {
+    "fullName": "4631-LAPLACE",
+    "cleanName": "laplace",
+    "bestMatch": {
+      "id": "LJA-00",
+      "fullName": "Laplace *00*",
+      "cleanName": "laplace"
+    }
+  },
+  {
+    "fullName": "4686-ARCUEIL CACHAN",
+    "cleanName": "arcueil cachan",
+    "bestMatch": {
+      "id": "ARK-00",
+      "fullName": "Arcueil-Cachan (RATP) *00*",
+      "cleanName": "arcueil-cachan ()"
+    }
+  },
+  {
+    "fullName": "4716-BAGNEUX",
+    "cleanName": "bagneux",
+    "bestMatch": {
+      "id": "BGK-00",
+      "fullName": "Bagneux *00*",
+      "cleanName": "bagneux"
+    }
+  },
+  {
+    "fullName": "4706-BOURG LA REINE",
+    "cleanName": "bourg la reine",
+    "bestMatch": {
+      "id": "BQQ-00",
+      "fullName": "Bourg-la-Reine Bâtiment Voyageurs",
+      "cleanName": "bourg-la-reine"
+    }
+  },
+  {
+    "fullName": "4802-PARC DE SCEAUX",
+    "cleanName": "parc de sceaux",
+    "bestMatch": {
+      "id": "PCX-00",
+      "fullName": "Parc de Sceaux *00*",
+      "cleanName": "parc de sceaux"
+    }
+  },
+  {
+    "fullName": "4600-LA CROIX DE BERNY",
+    "cleanName": "la croix de berny",
+    "bestMatch": {
+      "id": "XBY-00",
+      "fullName": "La Croix-de-Berny *00*",
+      "cleanName": "la croix-de-berny"
+    }
+  },
+  {
+    "fullName": "4688-ANTONY",
+    "cleanName": "antony",
+    "bestMatch": {
+      "id": "ATW-00",
+      "fullName": "Antony RATP *00*",
+      "cleanName": "antony "
+    }
+  },
+  {
+    "fullName": "4606-FONTAINE MICHALON",
+    "cleanName": "fontaine michalon",
+    "bestMatch": {
+      "id": "FMN-00",
+      "fullName": "Fontaine-Michalon *00*",
+      "cleanName": "fontaine-michalon"
+    }
+  },
+  {
+    "fullName": "4684-LES BACONNETS",
+    "cleanName": "les baconnets",
+    "bestMatch": {
+      "id": "BQC-00",
+      "fullName": "Les Baconnets *00*",
+      "cleanName": "les baconnets"
+    }
+  },
+  {
+    "fullName": "4603-MASSY VERRIERES",
+    "cleanName": "massy verrieres",
+    "bestMatch": {
+      "id": "MVW-00",
+      "fullName": "Massy-Verrières *00*",
+      "cleanName": "massy-verrières"
+    }
+  },
+  {
+    "fullName": "4821-MASSY PALAISEAU",
+    "cleanName": "massy palaiseau",
+    "bestMatch": {
+      "id": "MP-00",
+      "fullName": "Massy-Palaiseau Bâtiment Voyageurs",
+      "cleanName": "massy-palaiseau"
+    }
+  },
+  {
+    "fullName": "4804-PALAISEAU",
+    "cleanName": "palaiseau",
+    "bestMatch": {
+      "id": "PAX-00",
+      "fullName": "Palaiseau *00*",
+      "cleanName": "palaiseau"
+    }
+  },
+  {
+    "fullName": "4805-PALAISEAU VILLEBON",
+    "cleanName": "palaiseau villebon",
+    "bestMatch": {
+      "id": "PAW-00",
+      "fullName": "Palaiseau-Villebon *00*",
+      "cleanName": "palaiseau-villebon"
+    }
+  },
+  {
+    "fullName": "4639-LOZERE",
+    "cleanName": "lozere",
+    "bestMatch": {
+      "id": "LZV-00",
+      "fullName": "Lozère *00*",
+      "cleanName": "lozère"
+    }
+  },
+  {
+    "fullName": "4608-LE GUICHET",
+    "cleanName": "le guichet",
+    "bestMatch": {
+      "id": "GUW-00",
+      "fullName": "Le Guichet *00*",
+      "cleanName": "le guichet"
+    }
+  },
+  {
+    "fullName": "4808-Orsay Ville",
+    "cleanName": "orsay ville",
+    "bestMatch": {
+      "id": "ORS-00",
+      "fullName": "Orsay-Ville RATP *00*",
+      "cleanName": "orsay-ville "
+    }
+  },
+  {
+    "fullName": "4711-BURES SUR YVETTE",
+    "cleanName": "bures sur yvette",
+    "bestMatch": {
+      "id": "BVJ-00",
+      "fullName": "Bures-Sur-Yvette *00*",
+      "cleanName": "bures-sur-yvette"
+    }
+  },
+  {
+    "fullName": "4626-LA HAQUINIERE",
+    "cleanName": "la haquiniere",
+    "bestMatch": {
+      "id": "HAQ-00",
+      "fullName": "La Hacquinière *00*",
+      "cleanName": "la hacquinière"
+    }
+  },
+  {
+    "fullName": "4609-GIF SUR YVETTE",
+    "cleanName": "gif sur yvette",
+    "bestMatch": {
+      "id": "GIF-00",
+      "fullName": "Gif-sur-Yvette *00*",
+      "cleanName": "gif-sur-yvette"
+    }
+  },
+  {
+    "fullName": "4602-COURCELLE SUR YVETTE",
+    "cleanName": "courcelle sur yvette",
+    "bestMatch": {
+      "id": "CVW-00",
+      "fullName": "Courcelle-sur-Yvette *00*",
+      "cleanName": "courcelle-sur-yvette"
+    }
+  },
+  {
+    "fullName": "4832-SAINT-REMY LES CHEVREUSE",
+    "cleanName": "saint-remy les chevreuse",
+    "bestMatch": {
+      "id": "USE-00",
+      "fullName": "St-Rémy-lès-Chevreuse Bâtiment Voyageurs",
+      "cleanName": "st-rémy-lès-chevreuse"
+    }
+  },
+  {
+    "fullName": "4833-SCEAUX",
+    "cleanName": "sceaux",
+    "bestMatch": {
+      "id": "SKX-00",
+      "fullName": "Sceaux *00*",
+      "cleanName": "sceaux"
+    }
+  },
+  {
+    "fullName": "4605-FONTENAY AUX ROSES",
+    "cleanName": "fontenay aux roses",
+    "bestMatch": {
+      "id": "FNR-00",
+      "fullName": "Fontenay-aux-Roses *00*",
+      "cleanName": "fontenay-aux-roses"
+    }
+  },
+  {
+    "fullName": "4835-ROBINSON",
+    "cleanName": "robinson",
+    "bestMatch": {
+      "id": "RNS-00",
+      "fullName": "Robinson Bâtiment Voyageurs",
+      "cleanName": "robinson"
+    }
+  }
+]

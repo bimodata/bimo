@@ -1,0 +1,45 @@
+{
+  "name": "@bimo/core-entities",
+  "version": "0.0.1",
+  "description": "Bimo core entities",
+  "main": "index.js",
+  "author": "Gaël Haméon",
+  "license": "LGPL-3.0-or-later",
+  "homepage": "https://bimodata.com/",
+  "bugs": "https://github.com/bimodata/bimo/issues",
+  "repository": "github:bimodata/bimo",
+  "scripts": {
+    "test": "mocha --recursive __tests__/**/*.spec.js",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
+  },
+  "dependencies": {
+    "@bimo/core-utils-collection": "^0.0.1",
+    "@bimo/core-utils-evaluate-item-query": "^0.0.1",
+    "@bimo/core-utils-get-and-set-if-required": "^0.0.1",
+    "@bimo/core-utils-get-and-validate-prop-from-props": "^0.0.1",
+    "@bimo/core-utils-get-iterator-for-values-at-path": "^0.0.1",
+    "@bimo/core-utils-item": "^0.0.1",
+    "@bimo/core-utils-maps-and-sets": "^0.0.1",
+    "@bimo/core-utils-reset-all-entities-next-ids": "^0.0.1",
+    "@bimo/core-utils-serialization": "^0.0.1",
+    "@bimo/core-utils-string": "^0.0.1",
+    "@bimo/core-utils-time-and-date": "^0.0.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@bimo/core-services-check-and-repair-consist-changes-in-vsc": "^0.0.1",
+    "@bimo/core-utils-filesystem": "^0.0.1",
+    "@bimo/core-utils-logging": "^0.0.1",
+    "@bimo/test-data-json-serialized-entities-data-pack-1": "^0.0.1",
+    "@bimo/test-data-json-serialized-places-collection-1": "^0.0.1",
+    "@bimo/test-data-json-serialized-vsc-1": "^0.0.1",
+    "@bimo/test-data-json-serialized-vsc-1b": "^0.0.1",
+    "@bimo/test-data-json-serialized-vsc-collection-1": "^0.0.1",
+    "@bimo/test-utils-generate-test-network": "^0.0.1",
+    "@bimo/test-utils-get-test-data": "^0.0.1",
+    "@bimo/test-utils-hash-and-compare-contents": "^0.0.1",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nyc": "^15.1.0"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@bimo/core-utils-get-async-iterator-for-lines-of-file",
+  "version": "0.0.1",
+  "description": "Returns an iterator that will yield each line of the file at the provided path individually.",
+  "main": "index.js",
+  "author": "Gaël Haméon <gael.hameon@gmail.com>",
+  "license": "LGPL-3.0-or-later",
+  "scripts": {
+    "test": "mocha --recursive __tests__/**/*.spec.js",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
+  },
+  "dependencies": {
+    "@bimo/core-utils-logging": "^0.0.1",
+    "line-by-line": "^0.1.6"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
+    "nyc": "^15.1.0"
+  },
+  "homepage": "https://bimodata.com/",
+  "bugs": "https://github.com/bimodata/bimo/issues",
+  "repository": "github:bimodata/bimo"
+}
