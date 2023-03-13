@@ -6,8 +6,9 @@ const KEYS_TO_IGNORE = new Set([
 ]);
 
 function serializeObjectOrBufferOrMapInstance(objectOrBufferOrMapInstance, dataByConstructorName, linkIsAggregation = false, options) {
+  const { treatAggregationAsComposition = false } = options;
   // if aggreg, simply return the ID if it exists. Throw if missing and disallowed by options.
-  if (linkIsAggregation) {
+  if (linkIsAggregation && !treatAggregationAsComposition) {
     if (!objectOrBufferOrMapInstance.id && !options.allowUnknownAggregatedInstances) {
       const newError = new Error(
         `An aggregated instance is unknown. Save it to its repo first, or use "allowUnknownAggregatedInstances" option.`
@@ -53,7 +54,10 @@ function serializeObjectOrBufferOrMapInstance(objectOrBufferOrMapInstance, dataB
     else if (objectOrBufferOrMapInstance.constructor.name === 'Buffer') {
       serializedVersionOfThisObjectOrBufferOrMapInstance = Array.from(objectOrBufferOrMapInstance);
     }
-    else if (objectOrBufferOrMapInstance.associationType && (objectOrBufferOrMapInstance.associationType === 'aggregation')) {
+    else if (objectOrBufferOrMapInstance.associationType
+      && (objectOrBufferOrMapInstance.associationType === 'aggregation')
+      && !treatAggregationAsComposition
+    ) {
       // meilleur moyen de détecter si c'est une collection pour le moment
       serializedVersionOfThisObjectOrBufferOrMapInstance = {};
       Object.keys(objectOrBufferOrMapInstance).forEach((key) => {
