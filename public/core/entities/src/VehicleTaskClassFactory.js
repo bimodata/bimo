@@ -32,7 +32,7 @@ const VehicleTaskClassFactory = () => {
     }
 
     get shortLoggingOutput() {
-      return `(${this.id})-"${this.label}"-[${this.blocks.count()}]`;
+      return `(${this.id})-"${this.label}"-[${this.blocks.count()}]: ${this.totalDistanceOfTrips.toFixed(1)} km`;
     }
 
     get longLoggingOutput() {
@@ -56,6 +56,16 @@ const VehicleTaskClassFactory = () => {
     /** @type {import ('./BlockSectionsCollection')} */
     get blockSections() {
       return this.vehicleSchedule.blocksAndActsAndSectionsByVta.get(this).blockSections;
+    }
+
+    get totalDistanceOfTrips() {
+      /** TODO: manage cases where coupling/uncoupling happens during a trip */
+      return this.blockActivities.reduce((prev, current) => {
+        if (current.activityEntityClassKey === 'Trip') {
+          return prev + parseFloat(current.activityEntityItem.trpDistance);
+        }
+        return prev;
+      }, 0);
     }
   }
 
