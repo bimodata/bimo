@@ -9,18 +9,11 @@ const VehicleUnitClassFactory = () => {
   class VehicleUnit extends Item {
     constructor(props) {
       super(props);
-      /** */ this.vehuInternalNumber = getAndValidatePropFromProps('vehuInternalNumber', props);
-      /** */ this.vehuIdentifierUser = getAndValidatePropFromProps('vehuIdentifierUser', props);
-      /** */ this.vehuVehicleGroup = getAndValidatePropFromProps('vehuVehicleGroup', props);
-      /** */ this.vehuVehicleType = getAndValidatePropFromProps('vehuVehicleType', props);
-
-      /** */ this.vehuCodeRoulement = getAndValidatePropFromProps('vehuCodeRoulement', props);
-
-      /* Children */
-
-      /* Links */
-
-      this.vehicleTask = undefined;
+      this.vehuInternalNumber = getAndValidatePropFromProps('vehuInternalNumber', props);
+      this.vehuIdentifierUser = getAndValidatePropFromProps('vehuIdentifierUser', props);
+      this.vehuVehicleGroup = getAndValidatePropFromProps('vehuVehicleGroup', props);
+      this.vehuVehicleType = getAndValidatePropFromProps('vehuVehicleType', props);
+      this.vehuCodeRoulement = getAndValidatePropFromProps('vehuCodeRoulement', props);
     }
 
     get shortLoggingOutput() {
@@ -30,6 +23,14 @@ const VehicleUnitClassFactory = () => {
     /** @type {VehicleSchedule} */
     get vehicleSchedule() {
       return this.parent && this.parent.parent;
+    }
+
+    get vehicleTask() {
+      return this._getCachedValue('vehicleTask');
+    }
+
+    set vehicleTask(v) {
+      this._setCachedValue('vehicleTask', v);
     }
   }
 
