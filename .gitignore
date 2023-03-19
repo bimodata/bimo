@@ -8,6 +8,11 @@ lerna-debug.log
 .env
 cypress.env.json
 
+not-public-yet/**
+lauritz/**
+apollo/**
+sncf/**
+
 **/backup/**
 **/zipped test/**
 **/publish/**
