@@ -103,6 +103,10 @@ const VehicleScheduleClassFactory = (entityConstructorByEntityClassKey) => {
       return `${this.vscName} - ${this.vscDescription} (${this.vscSchedType})\n${this.vehicleTasks.blo}`;
     }
 
+    get businessKey() {
+      return `${this.vscBooking}-${this.vscName}-${this.vscSchedType}-${this.vscScenario}`;
+    }
+
     addTrip(trip) {
       this.trips.add(trip);
     }
