@@ -2,6 +2,7 @@
 **/node_modules/**
 # Ignore built files and next files
 **/build/**
+**/dist/**
 **/.next/**
 **/out/**
 # Ignore test data

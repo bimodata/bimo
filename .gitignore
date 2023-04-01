@@ -4,6 +4,7 @@
 **/.nyc_output/**
 **/coverage/**
 **/build/**
+**/dist/**
 lerna-debug.log
 .env
 cypress.env.json

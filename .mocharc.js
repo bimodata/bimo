@@ -1,4 +1,5 @@
 module.exports = {
-  exclude: ["**/node_modules/**",  "cypress/**", "**/scripts-data/**"],
+  exclude: ["**/node_modules/**", "cypress/**", "**/scripts-data/**"],
   recursive: true,
+  "require": "ts-node/register"
 }
