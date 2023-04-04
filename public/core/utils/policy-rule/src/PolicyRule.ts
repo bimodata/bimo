@@ -16,7 +16,7 @@ export interface PolicyRuleEvaluationArgs<ItemType extends Entity> {
 }
 
 export interface PolicyRuleEvaluateFn<ItemType extends Entity> {
-  (args: PolicyRuleEvaluationArgs<ItemType>, context: Context): any;
+  (args: PolicyRuleEvaluationArgs<ItemType>, context: Context): string;
 }
 
 export type EvaluateFnByEventKey<ItemType extends Entity> = {
@@ -51,7 +51,7 @@ export class PolicyRule<ItemType extends Entity> {
     eventKey: PolicyRuleEvent = "default",
     args: PolicyRuleEvaluationArgs<ItemType> = {},
     context: Context = {}
-  ) {
+  ): string | null {
     const evaluateFn = this._evaluateFnByEventKey[eventKey];
     if (!evaluateFn) return null;
     return evaluateFn(args, context);

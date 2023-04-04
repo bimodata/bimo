@@ -1,52 +1,66 @@
-const PolicyRule = require('@bimo-core/policy-rule/src/PolicyRule');
-const { getAndAddLoggerToServiceOptions } = require('@bimo/core-utils-logging');
+import PolicyRule, {
+  PolicyRuleEvent,
+  PolicyRuleEvaluationArgs,
+} from "@bimo-core/policy-rule";
+import { Entity, Context } from "@bimo/core-utils-entity";
+import { getAndAddLoggerToServiceOptions } from "@bimo/core-utils-logging";
 
-/**
-   * @typedef {object} PolicyRuleConfig
-   *
-   */
+export type PolicyRuleLevel = "info" | "warning" | "error";
 
-/**
-   * @typedef {[PolicyRule, PolicyRuleConfig]} RuleAndConfigTuple
-   *
-   */
+export interface PolicyRuleConfig {
+  level?: PolicyRuleLevel;
+}
 
-class Policy {
-  /**
-   *
-   * @param {object} props
-   * @param {string} props.key - a unique short key for this policy
-   * @param {string} props.description - a description of the policy
-   * @param {RuleAndConfigTuple[]} props.ruleAndConfigTuples -
-   * @param {object} props.options - options
-   */
-  constructor(props) {
+export interface PolicyProps<ItemType extends Entity> {
+  key: string;
+  description?: string;
+  ruleAndConfigTuples: [PolicyRule<ItemType>, PolicyRuleConfig][];
+  options?: any;
+}
+
+export interface PolicyEvaluationResult {
+  ruleKey: string;
+  level: PolicyRuleLevel;
+  message: string;
+}
+
+export class Policy<ItemType extends Entity> {
+  key: string;
+  description?: string;
+  ruleAndConfigTuples: [PolicyRule<ItemType>, PolicyRuleConfig][];
+  options?: any;
+
+  constructor(props: PolicyProps<ItemType>) {
     this.key = props.key;
     this.description = props.description;
     this.ruleAndConfigTuples = props.ruleAndConfigTuples;
     this.options = props.options;
   }
 
-  /**
-   *
-   * @param {'add'|'remove'|'default'} eventKey
-   * @param {object} args
-   */
-  evaluate(eventKey = 'default', args = {}, context = {}) {
-    const logger = getAndAddLoggerToServiceOptions(context, { serviceName: `Policy.evaluate` });
-    const results = [];
+  evaluate(
+    eventKey: PolicyRuleEvent = "default",
+    args: PolicyRuleEvaluationArgs<ItemType> = {},
+    context: Context = {}
+  ) {
+    const logger = getAndAddLoggerToServiceOptions(context, {
+      serviceName: `Policy.evaluate`,
+    });
+    const results: PolicyEvaluationResult[] = [];
     this.ruleAndConfigTuples.forEach((ruleAndConfigTuple) => {
       const [rule, config = {}] = ruleAndConfigTuple;
-      const { level = 'warning' } = config;
+      const { level = "warning" } = config;
       logger.debug(`Evaluating rule ${rule.key} of policy ${this.key}`);
       const message = rule.evaluate(eventKey, args, context);
       if (message) {
         results.push({ ruleKey: rule.key, level, message });
-        if (level === 'error') throw new Error(`Error on rule ${rule.description} (${rule.key}):\n${message}`);
+        if (level === "error")
+          throw new Error(
+            `Error on rule ${rule.description} (${rule.key}):\n${message}`
+          );
       }
     });
     return results;
   }
 }
 
-module.exports = Policy;
+export default Policy;
