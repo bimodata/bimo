@@ -51,6 +51,25 @@ exports.getFilesInFolder = getFilesInFolder;
 
 /**
  *
+ * @param {string} rootFolderPath - full path to the root folder
+ * @param {BimoDirent[]} allFiles - array of dirent files objects
+ */
+async function getAllFilesRecursively(rootFolderPath, allFiles) {
+  const filesAndFolders = await getFilesAndFoldersInFolder(rootFolderPath, { addFullPath: true });
+  await Promise.all((filesAndFolders.map(async (fileOrFolder) => {
+    if (fileOrFolder.isDirectory()) {
+      await getAllFilesRecursively(fileOrFolder.fullPath, allFiles);
+    }
+    else {
+      allFiles.push(fileOrFolder);
+    }
+  })));
+  return allFiles;
+}
+exports.getAllFilesRecursively = getAllFilesRecursively;
+
+/**
+ *
  * @param {string} folderPath
  * @returns {Promise<BimoDirent[]>}
  */
