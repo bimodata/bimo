@@ -1,0 +1,15 @@
+{
+  "name": "@bimo/scripts-switch-package-to-typescript",
+  "version": "0.0.1",
+  "description": "Performs some task that help switch a package from javascript to typescript",
+  "main": "index.js",
+  "bin": "index.js",
+  "author": "Gaël Haméon",
+  "license": "LGPL-3.0-or-later",
+  "dependencies": {
+    "@bimo/core-utils-filesystem": "^0.0.1"
+  },
+  "files": [
+    "src"
+  ]
+}
