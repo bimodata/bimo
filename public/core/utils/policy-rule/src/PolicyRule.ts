@@ -1,16 +1,40 @@
-/* Class definition */
-class PolicyRule {
-  /**
-   *
-   * @param {object} props
-   * @param {string} props.key - a unique short key for this rule
-   * @param {string} props.description - a description of the rule
-   * @param {object} props.evaluateFnByEventKey -
-   * @param {function} props.evaluateFnByEventKey.default - the validation function to use in general
-   * @param {function} [props.evaluateFnByEventKey.add] - the validation function to use when an item is added to the collection
-   * @param {function} [props.evaluateFnByEventKey.remove] - the validation funciton to use when an item is removed from the collection
-   */
-  constructor(props) {
+import { Item } from "@bimo/core-utils-item";
+import { Context, Entity } from "@bimo/core-utils-entity";
+import { Collection } from "@bimo/core-utils-collection";
+
+/**
+ * - add occurs when an item is added to the collection
+ * - remove occurs when an item is removed from the collection
+ * - default is the event to use in any other case
+ */
+export type PolicyRuleEvent = "add" | "remove" | "default";
+
+// TODO: switch collection to proper type
+export interface PolicyRuleEvaluationArgs<ItemType extends Entity> {
+  item?: Item<ItemType>;
+  collection?: any;
+}
+
+export interface PolicyRuleEvaluateFn<ItemType extends Entity> {
+  (args: PolicyRuleEvaluationArgs<ItemType>, context: Context): any;
+}
+
+export type EvaluateFnByEventKey<ItemType extends Entity> = {
+  [eventKey in PolicyRuleEvent]: PolicyRuleEvaluateFn<ItemType>;
+};
+
+export interface PolicyRuleProps<ItemType extends Entity> {
+  key: string;
+  description?: string;
+  evaluateFnByEventKey: EvaluateFnByEventKey<ItemType>;
+}
+
+export class PolicyRule<ItemType extends Entity> {
+  key: string; // a unique short key for this rule
+  description?: string; // a description of the rule
+  _evaluateFnByEventKey: EvaluateFnByEventKey<ItemType>;
+
+  constructor(props: PolicyRuleProps<ItemType>) {
     this.key = props.key;
     this.description = props.description;
     this._evaluateFnByEventKey = props.evaluateFnByEventKey;
@@ -23,11 +47,15 @@ class PolicyRule {
    * @param {object=} args.item
    * @param {object=} args.collection
    */
-  evaluate(eventKey = 'default', args = {}, context = {}) {
+  evaluate(
+    eventKey: PolicyRuleEvent = "default",
+    args: PolicyRuleEvaluationArgs<ItemType> = {},
+    context: Context = {}
+  ) {
     const evaluateFn = this._evaluateFnByEventKey[eventKey];
     if (!evaluateFn) return null;
     return evaluateFn(args, context);
   }
 }
 
-module.exports = PolicyRule;
+export default PolicyRule;
