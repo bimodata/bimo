@@ -1,13 +1,19 @@
-const { expect } = require('chai');
+import { expect } from 'chai';
 
-const shallowAssign = require('..');
+import { shallowAssign } from '..';
 
 describe('shallowAssign', () => {
   context('when source or target are not objects', () => {
     it('throws an error', () => {
-      expect(() => shallowAssign('toto', {})).to.throw(`Target must be an object`);
-      expect(() => shallowAssign('toto', 'toto')).to.throw(`Target must be an object`);
-      expect(() => shallowAssign({}, 'toto')).to.throw(`Source must be an object`);
+      expect(() => shallowAssign('toto', {})).to.throw(
+        `Target must be an object`,
+      );
+      expect(() => shallowAssign('toto', 'toto')).to.throw(
+        `Target must be an object`,
+      );
+      expect(() => shallowAssign({}, 'toto')).to.throw(
+        `Source must be an object`,
+      );
     });
   });
   context('when source and target are objects', () => {
@@ -34,13 +40,13 @@ describe('shallowAssign', () => {
         expect(shallowAssign({}, { key: null })).to.eql({ key: null });
       });
       it('does not copy functions from source to target', () => {
-        expect(shallowAssign({}, { key: () => 'toto' })).to.eql({ });
+        expect(shallowAssign({}, { key: () => 'toto' })).to.eql({});
       });
       it('does not copy objects from source to target', () => {
-        expect(shallowAssign({}, { key: {} })).to.eql({ });
+        expect(shallowAssign({}, { key: {} })).to.eql({});
       });
       it('does not copy undefined from source to target', () => {
-        expect(shallowAssign({}, { key: undefined })).to.eql({ });
+        expect(shallowAssign({}, { key: undefined })).to.eql({});
       });
     });
     describe('it overwrites target values with source values', () => {
@@ -53,7 +59,12 @@ describe('shallowAssign', () => {
         expect(shallowAssign({ key: 'toto' }, { key: {} })).to.eql({ key: 'toto' });
       });
       it('leaves target values that do not exist in source untouched', () => {
-        expect(shallowAssign({ key1: 'toto', key2: 'titi' }, { key: 'taco', key1: 'tutu' })).to.eql({ key: 'taco', key1: 'tutu', key2: 'titi' });
+        expect(
+          shallowAssign(
+            { key1: 'toto', key2: 'titi' },
+            { key: 'taco', key1: 'tutu' },
+          ),
+        ).to.eql({ key: 'taco', key1: 'tutu', key2: 'titi' });
       });
     });
   });

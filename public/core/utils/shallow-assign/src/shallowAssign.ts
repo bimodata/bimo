@@ -5,7 +5,7 @@ const TYPES_TO_KEEP = ["string", "number", "boolean"];
  * @param {object} target - the target object
  * @param {object} source - the source object
  */
-function shallowAssign(target, source) {
+export function shallowAssign(target: any, source: any) {
   if (typeof target !== "object")
     throw new Error(`Target must be an object. Got ${typeof source}`);
   if (typeof source !== "object")
@@ -20,5 +20,3 @@ function shallowAssign(target, source) {
   });
   return target;
 }
-
-module.exports = shallowAssign;
