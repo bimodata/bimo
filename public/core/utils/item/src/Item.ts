@@ -1,7 +1,7 @@
 import { cloneDeepWith } from "lodash";
 import { Entity, EntityProps, Context } from "@bimo/core-utils-entity";
-import shallowAssign = require("@bimo/core-utils-shallow-assign");
 import { Collection } from "@bimo/core-utils-collection";
+import { shallowAssign } from "@bimo/core-utils-shallow-assign";
 
 export interface RawOigProps {
   [key: string]: string;
