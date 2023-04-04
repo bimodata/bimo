@@ -2,7 +2,7 @@ const _ = require('lodash');
 const partition = require('@bimo/core-utils-partition');
 const { emptyPolicy, Policy } = require('@bimo-core/policy');
 const asyncForEach = require('@bimo/core-utils-async-for-each');
-const Entity = require('@bimo/core-utils-entity');
+const { Entity } = require('@bimo/core-utils-entity');
 const uniqueIdPolicy = require('./uniqueIdPolicy');
 
 /* Class definition */
@@ -382,7 +382,7 @@ class Collection extends Entity {
 
   /**
    *
-   * @param {ItemType} itemProps
+   * @param {Object} itemProps
    * @param {*} [options]
    * @returns {ItemType}
    */
