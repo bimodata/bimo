@@ -7,6 +7,7 @@
     "public/**"
   ],
   "scripts": {
+    "build:all": "yarn workspaces foreach -A -v -t run build",
     "test": "cross-env UPDATE_EXPECTED=false NODE_ENV=test mocha **/*.spec.js"
   },
   "devDependencies": {

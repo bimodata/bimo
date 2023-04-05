@@ -27,7 +27,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
-  "peerDependencies": {
+  "dependencies": {
     "@bimo/core-utils-item": "^0.0.1"
   },
   "homepage": "https://bimodata.com/",
