@@ -1,7 +1,7 @@
 import PolicyRule, {
   PolicyRuleEvent,
   PolicyRuleEvaluationArgs,
-} from "@bimo-core/policy-rule";
+} from "@bimo/core-policy-rule";
 import { Entity, Context } from "@bimo/core-utils-entity";
 import { getAndAddLoggerToServiceOptions } from "@bimo/core-utils-logging";
 

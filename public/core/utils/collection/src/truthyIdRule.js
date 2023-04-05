@@ -1,4 +1,4 @@
-const PolicyRule = require('@bimo-core/policy-rule');
+const PolicyRule = require('@bimo/core-policy-rule');
 const Collection = require('./Collection');
 
 /**
@@ -36,6 +36,6 @@ module.exports = new PolicyRule({
   evaluateFnByEventKey: {
     add: evaluateAdd,
     default: evaluateDefault,
-    remove: () => {},
+    remove: () => { },
   },
 });

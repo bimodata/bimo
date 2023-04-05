@@ -1,5 +1,5 @@
 {
-  "name": "@bimo-core/policy",
+  "name": "@bimo/core-policy",
   "version": "0.0.1",
   "description": "Policy class.",
   "main": "dist/cjs/index.js",
@@ -17,8 +17,11 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@bimo-core/policy-rule": "^0.0.1",
+    "@bimo/core-policy-rule": "^0.0.1",
     "@bimo/core-utils-logging": "^0.0.1"
+  },
+  "peerDependencies": {
+    "@bimo/core-utils-item": "^0.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",

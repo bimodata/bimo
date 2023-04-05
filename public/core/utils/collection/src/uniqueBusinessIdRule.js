@@ -1,4 +1,4 @@
-const PolicyRule = require('@bimo-core/policy-rule');
+const PolicyRule = require('@bimo/core-policy-rule');
 const { evaluateAdd, evaluateDefault } = require('./uniquePropHelperFunctions');
 
 module.exports = new PolicyRule({

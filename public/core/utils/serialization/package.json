@@ -13,6 +13,9 @@
     "@bimo/core-utils-async-for-each": "^0.0.1",
     "@bimo/core-utils-shallow-assign": "^0.0.1"
   },
+  "peerDependencies": {
+    "@bimo/core-utils-item": "^0.0.1"
+  },
   "devDependencies": {
     "@bimo/test-utils-test-entities": "^0.0.1",
     "chai": "^4.3.6",

@@ -1,6 +1,6 @@
 const { PlacesCollection } = require('@bimo/core-entities');
-const { Policy } = require('@bimo-core/policy');
-const PolicyRule = require('@bimo-core/policy-rule');
+const { Policy } = require('@bimo/core-policy');
+const PolicyRule = require('@bimo/core-policy-rule');
 
 const validPlacesCollection = () => new PlacesCollection({
   items: [

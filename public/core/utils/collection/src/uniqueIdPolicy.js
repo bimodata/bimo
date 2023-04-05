@@ -1,4 +1,4 @@
-const { Policy } = require('@bimo-core/policy');
+const { Policy } = require('@bimo/core-policy');
 const uniqueIdRule = require('./uniqueIdRule');
 const uniqueBusinessIdRule = require('./uniqueBusinessIdRule');
 const truthyIdRule = require('./truthyIdRule');

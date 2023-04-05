@@ -10,12 +10,15 @@
     "coverage": "nyc --reporter=html --reporter=text npm test"
   },
   "dependencies": {
-    "@bimo-core/policy": "^0.0.1",
-    "@bimo-core/policy-rule": "^0.0.1",
+    "@bimo/core-policy": "^0.0.1",
+    "@bimo/core-policy-rule": "^0.0.1",
     "@bimo/core-utils-async-for-each": "^0.0.1",
     "@bimo/core-utils-entity": "^0.0.1",
     "@bimo/core-utils-partition": "^0.0.1",
     "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "@bimo/core-utils-item": "^0.0.1"
   },
   "devDependencies": {
     "chai": "^4.3.6",

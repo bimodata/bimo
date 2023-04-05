@@ -1,5 +1,5 @@
 {
-  "name": "@bimo/core-global-types",
+  "name": "@bimo/core-types",
   "version": "0.0.1",
   "description": "Bimo types that are used across the project.",
   "main": "dist/cjs/index.js",

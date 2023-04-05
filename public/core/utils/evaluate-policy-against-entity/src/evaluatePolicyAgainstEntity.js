@@ -44,7 +44,7 @@ module.exports = evaluatePolicyAgainstEntity;
 
 /**
  * @typedef {Object} EvaluatePolicyAgainstEntityConfig
- * @property {import('@bimo-core/policy/src/Policy')} [policy]
+ * @property {import('@bimo/core-policy/src/Policy')} [policy]
  * @property {string} [policyKey]
  */
 

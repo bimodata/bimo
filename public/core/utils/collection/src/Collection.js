@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const partition = require('@bimo/core-utils-partition');
-const { emptyPolicy, Policy } = require('@bimo-core/policy');
+const { emptyPolicy, Policy } = require('@bimo/core-policy');
 const asyncForEach = require('@bimo/core-utils-async-for-each');
 const { Entity } = require('@bimo/core-utils-entity');
 const uniqueIdPolicy = require('./uniqueIdPolicy');

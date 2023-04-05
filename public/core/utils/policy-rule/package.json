@@ -1,5 +1,5 @@
 {
-  "name": "@bimo-core/policy-rule",
+  "name": "@bimo/core-policy-rule",
   "version": "0.0.1",
   "description": "Policy rule class.",
   "main": "dist/cjs/index.js",

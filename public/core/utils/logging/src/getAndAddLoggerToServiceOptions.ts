@@ -1,8 +1,8 @@
-import { BimoContext } from "@bimo/core-types";
+import { BimoContext } from "@bimo/core-global-types";
 import { Logger, LoggerContext, LogLevel } from "./Logger";
 import getStupidLogger from "./getStupidLogger";
 
-function getAndAddLoggerToServiceOptions(
+export function getAndAddLoggerToServiceOptions(
   options: BimoContext = {},
   newContext: LoggerContext = {}
 ) {
@@ -70,4 +70,4 @@ function getAndAddLoggerToServiceOptions(
   return logger;
 }
 
-module.exports = getAndAddLoggerToServiceOptions;
+export default getAndAddLoggerToServiceOptions;
