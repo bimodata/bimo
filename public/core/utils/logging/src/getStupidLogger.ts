@@ -1,26 +1,29 @@
-function getStupidLogger(silentMode = false) {
-  const doNothing = function doNothing() {
-  };
+import { Logger, LogLevel } from "./Logger";
 
-  const functionToUse = silentMode ? doNothing : (message, level) => {
-    // eslint-disable-next-line no-console
-    console.log(`logger(${level}): ${message}`);
-  };
-  const logOrThrow = (level, message) => {
-    if (level === 'throw') throw new Error(message);
+export function getStupidLogger(silentMode = false): Logger {
+  const doNothing = function doNothing() {};
+
+  const functionToUse = silentMode
+    ? doNothing
+    : (message: string, level: LogLevel) => {
+        // eslint-disable-next-line no-console
+        console.log(`logger(${level}): ${message}`);
+      };
+  const logOrThrow = (level: LogLevel | "throw", message: string) => {
+    if (level === "throw") throw new Error(message);
     return functionToUse(message, level);
   };
   return {
     OFF: () => {},
-    silly: (message) => functionToUse(message, `silly`),
-    trace: (message) => functionToUse(message, `trace`),
-    debug: (message) => functionToUse(message, `debug`),
-    info: (message) => functionToUse(message, `info`),
-    progress: (message) => functionToUse(message, `progress`),
-    warning: (message) => functionToUse(message, `warn`),
-    warn: (message) => functionToUse(message, `warn`),
-    error: (message) => functionToUse(message, `error`),
-    throw: (message) => {
+    silly: (message: string) => functionToUse(message, `silly`),
+    trace: (message: string) => functionToUse(message, `trace`),
+    debug: (message: string) => functionToUse(message, `debug`),
+    info: (message: string) => functionToUse(message, `info`),
+    progress: (message: string) => functionToUse(message, `progress`),
+    warning: (message: string) => functionToUse(message, `warn`),
+    warn: (message: string) => functionToUse(message, `warn`),
+    error: (message: string) => functionToUse(message, `error`),
+    throw: (message: string) => {
       throw new Error(message);
     },
     logOrThrow,
@@ -28,4 +31,4 @@ function getStupidLogger(silentMode = false) {
   };
 }
 
-module.exports = getStupidLogger;
+export default getStupidLogger;

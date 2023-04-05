@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const { getStupidLogger } = require('..');
+const { getStupidLogger } = require('../dist/cjs/index');
 
 function itReturnsAnObjectWithAllExpectedMethods(options) {
   const expectedFunctionProps = [
