@@ -1,4 +1,4 @@
-import { Logger, LogLevel } from "./Logger";
+import { Logger, LogLevel } from "@bimo/core-global-types";
 
 export function getStupidLogger(silentMode = false): Logger {
   const doNothing = function doNothing() {};

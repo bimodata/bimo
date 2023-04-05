@@ -16,6 +16,9 @@
     "prepublish": "tsc",
     "tsc": "tsc"
   },
+  "dependencies": {
+    "@bimo/core-global-types": "^0.0.1"
+  },
   "devDependencies": {
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",

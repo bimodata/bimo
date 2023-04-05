@@ -1,4 +1,4 @@
-import { Logger } from "@bimo/core-utils-logging";
+import { Logger } from "./Logger";
 
 export interface BimoContext {
   [key: string]: any;
