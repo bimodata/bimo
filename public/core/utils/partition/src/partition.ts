@@ -1,28 +1,20 @@
-const _ = require('lodash');
+import _ from "lodash";
 
-/**
- *
- * @param {any[]} collection an array of items to partition
- * @param {function|object|string[]|string} iteratee
- */
-function partition(collection, iteratee) {
-  const matchedValues = [];
-  const unmatchedValues = [];
+export function partition(
+  collection: any[],
+  iteratee: Function | object | string[] | string
+) {
+  const matchedValues: any[] = [];
+  const unmatchedValues: any[] = [];
   const callback = _.iteratee(iteratee);
   collection.forEach((value, index, array) => {
     if (callback(value, index, array)) {
       matchedValues.push(value);
-    }
-    else {
+    } else {
       unmatchedValues.push(value);
     }
   });
   return [matchedValues, unmatchedValues];
 }
 
-module.exports = partition;
-
-/**
- * @typedef {Object} PartitionConfig
- * @property {string} param
- */
+export default partition;
