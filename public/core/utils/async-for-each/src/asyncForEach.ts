@@ -1,12 +1,33 @@
 /* eslint-disable no-await-in-loop */
 
-async function asyncForEachArray(array, callback) {
+/**
+ * @callback ArrayOrCollOrMapCallback
+ * @param {T} value
+ * @param {number|string} indexOrKey
+ * @param {T[]|object<string,T>|Map<string,T>} arrayOrCollOrMap
+ * @template T
+ */
+
+/**
+ *
+ * @param {T[]|Object<string,T>|Map<string,T>} arrayOrCollectionOrMap
+ * @param {ArrayOrCollOrMapCallback<T>} callback
+ * @template T
+ */
+
+export async function asyncForEachArray<T>(
+  array: T[],
+  callback: (item: T, index: number, array: T[]) => any
+) {
   for (let index = 0; index < array.length; index += 1) {
     await callback(array[index], index, array);
   }
 }
 
-async function asyncForEachMap(map, callback) {
+export async function asyncForEachMap<K, V>(
+  map: Map<K, V>,
+  callback: (value: V, key: K, map: Map<K, V>) => any
+) {
   const entries = Array.from(map.entries());
   for (let index = 0; index < entries.length; index += 1) {
     const key = entries[index][0];
@@ -15,7 +36,14 @@ async function asyncForEachMap(map, callback) {
   }
 }
 
-async function asyncForEachColl(collection, callback) {
+type Collection<V> = {
+  [key: string]: V;
+};
+
+export async function asyncForEachColl<V>(
+  collection: Collection<V>,
+  callback: (value: V, key: string, collection: Collection<V>) => any
+) {
   const keys = Object.keys(collection);
   const values = Object.values(collection);
   for (let index = 0; index < keys.length; index += 1) {
@@ -25,7 +53,14 @@ async function asyncForEachColl(collection, callback) {
   }
 }
 
-async function asyncForEach(arrayOrCollectionOrMap, callback) {
+export async function asyncForEach<K, V>(
+  arrayOrCollectionOrMap: V[] | Map<K, V> | Collection<V>,
+  callback: {
+    (item: V, index: number, array: V[]): any;
+    (value: V, key: string, collection: Collection<V>): any;
+    (value: V, key: K, map: Map<K, V>): any;
+  }
+) {
   if (!arrayOrCollectionOrMap) return null;
   if (Array.isArray(arrayOrCollectionOrMap)) {
     return asyncForEachArray(arrayOrCollectionOrMap, callback);
@@ -37,4 +72,4 @@ async function asyncForEach(arrayOrCollectionOrMap, callback) {
   return asyncForEachColl(arrayOrCollectionOrMap, callback);
 }
 
-module.exports = asyncForEach;
+export default asyncForEach;

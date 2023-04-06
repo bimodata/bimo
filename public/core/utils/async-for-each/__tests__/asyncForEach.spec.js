@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const asyncForEach = require('..');
+const { asyncForEach } = require('..');
 
 describe('asyncForEach', () => {
   context('when arrayOrCollectionOrMap is an array', () => {
