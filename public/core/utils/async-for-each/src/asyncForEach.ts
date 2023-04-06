@@ -1,20 +1,5 @@
 /* eslint-disable no-await-in-loop */
 
-/**
- * @callback ArrayOrCollOrMapCallback
- * @param {T} value
- * @param {number|string} indexOrKey
- * @param {T[]|object<string,T>|Map<string,T>} arrayOrCollOrMap
- * @template T
- */
-
-/**
- *
- * @param {T[]|Object<string,T>|Map<string,T>} arrayOrCollectionOrMap
- * @param {ArrayOrCollOrMapCallback<T>} callback
- * @template T
- */
-
 export async function asyncForEachArray<T>(
   array: T[],
   callback: (item: T, index: number, array: T[]) => any
@@ -24,9 +9,9 @@ export async function asyncForEachArray<T>(
   }
 }
 
-export async function asyncForEachMap<K, V>(
-  map: Map<K, V>,
-  callback: (value: V, key: K, map: Map<K, V>) => any
+export async function asyncForEachMap<V>(
+  map: Map<any, V>,
+  callback: (value: V, key: any, map: Map<any, V>) => any
 ) {
   const entries = Array.from(map.entries());
   for (let index = 0; index < entries.length; index += 1) {
@@ -53,12 +38,10 @@ export async function asyncForEachColl<V>(
   }
 }
 
-export async function asyncForEach<K, V>(
-  arrayOrCollectionOrMap: V[] | Map<K, V> | Collection<V>,
+export async function asyncForEach<V>(
+  arrayOrCollectionOrMap: V[] | Map<any, V> | Collection<V>,
   callback: {
-    (item: V, index: number, array: V[]): any;
-    (value: V, key: string, collection: Collection<V>): any;
-    (value: V, key: K, map: Map<K, V>): any;
+    (item: V, index: any, collection: V[] | Collection<V> | Map<any, V>): any;
   }
 ) {
   if (!arrayOrCollectionOrMap) return null;

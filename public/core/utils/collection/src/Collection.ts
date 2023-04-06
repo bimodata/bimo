@@ -36,7 +36,7 @@ interface ArrayMethodsCallback<ItemType extends ExtendedItem<ItemType>> {
 }
 
 interface AsyncArrayMethodsCallback<ItemType extends ExtendedItem<ItemType>> {
-  (value: ItemType, index: number, array: ItemType[]): Promise<any>;
+  (value: ItemType, index: number | string, array: ItemType[]): Promise<any>;
 }
 
 interface AddItemOptions {
@@ -173,6 +173,7 @@ export class Collection<ItemType extends ExtendedItem<ItemType>> extends Entity 
   }
 
   async asyncForEach(callback: AsyncArrayMethodsCallback<ItemType>) {
+    //@ts-ignore
     return asyncForEach(this.items, callback);
   }
 
