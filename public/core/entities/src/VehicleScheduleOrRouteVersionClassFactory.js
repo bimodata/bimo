@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const Item = require('@bimo/core-utils-item');
+const { Item } = require('@bimo/core-utils-collection');
 const Collection = require('@bimo/core-utils-collection/src/Collection');
 const { get } = require('lodash');
 const mapsAndSets = require('@bimo/core-utils-maps-and-sets');

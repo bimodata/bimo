@@ -1,9 +1,8 @@
 const { getAndAddLoggerToServiceOptions } = require('@bimo/core-utils-logging');
 const computeItemKey = require('@bimo/core-utils-services-compute-item-key');
 const matchTwoListsOfStrings = require('@bimo/core-utils-match-two-lists-of-strings');
-const Collection = require('@bimo/core-utils-collection/src/Collection');
+const { Collection, Item } = require('@bimo/core-utils-collection');
 // eslint-disable-next-line no-unused-vars
-const Item = require('@bimo/core-utils-item/src/Item');
 
 /**
  *

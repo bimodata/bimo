@@ -1,7 +1,9 @@
 // eslint-disable-next-line max-classes-per-file
 const { expect } = require('chai');
 
-const { uniqueIdRule, Collection } = require('..');
+const { uniqueIdRuleFactory, Collection } = require('..');
+
+const uniqueIdRule = uniqueIdRuleFactory();
 
 class TestCollection1 extends Collection {
   constructor(props = {}) {

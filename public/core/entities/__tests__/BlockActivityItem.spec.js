@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const Item = require('@bimo/core-utils-item');
+const { Item } = require('@bimo/core-utils-collection');
 const { BlockActivityItemMixin, VehicleSchedule, Trip } = require('..');
 
 class TestClass1 extends BlockActivityItemMixin(Item, { blkActIdPropName: 'blkactTripNo', itemIdPropName: 'trpIntNumber' }) {

@@ -2,8 +2,7 @@ const sinon = require('sinon');
 const { assert, expect } = require('chai');
 const proxyquire = require('proxyquire');
 
-const { Collection } = require('@bimo/core-utils-collection');
-const Item = require('@bimo/core-utils-item');
+const { Collection, Item } = require('@bimo/core-utils-collection');
 
 const logger = require('@bimo/core-utils-logging').getStupidLogger(true);
 

@@ -16,7 +16,6 @@
     "@bimo/core-utils-services-compute-item-key": "^0.0.1"
   },
   "devDependencies": {
-    "@bimo/core-utils-item": "^0.0.1",
     "chai": "^4.3.6",
     "deep-freeze-es6": "^1.4.1",
     "mocha": "^9.2.2",

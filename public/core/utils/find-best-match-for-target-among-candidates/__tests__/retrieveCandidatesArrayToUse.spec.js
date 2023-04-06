@@ -1,7 +1,6 @@
 const { expect } = require('chai');
 
-const { Collection } = require('@bimo/core-utils-collection');
-const Item = require('@bimo/core-utils-item');
+const { Collection, Item } = require('@bimo/core-utils-collection');
 const deepFreeze = require('deep-freeze-es6');
 
 const { retrieveCandidatesArrayToUse } = require('../src/retrieveCandidatesArrayToUse');

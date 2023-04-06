@@ -1,6 +1,8 @@
 const { expect } = require('chai');
 
-const { uniqueIdPolicy, Collection } = require('..');
+const { uniqueIdPolicyFactory, Collection } = require('..');
+
+const uniqueIdPolicy = uniqueIdPolicyFactory();
 
 class TestCollection extends Collection {
   constructor(props = {}) {

@@ -18,7 +18,6 @@
     "@bimo/core-utils-get-and-set-if-required": "^0.0.1",
     "@bimo/core-utils-get-and-validate-prop-from-props": "^0.0.1",
     "@bimo/core-utils-get-iterator-for-values-at-path": "^0.0.1",
-    "@bimo/core-utils-item": "^0.0.1",
     "@bimo/core-utils-maps-and-sets": "^0.0.1",
     "@bimo/core-utils-reset-all-entities-next-ids": "^0.0.1",
     "@bimo/core-utils-serialization": "^0.0.1",

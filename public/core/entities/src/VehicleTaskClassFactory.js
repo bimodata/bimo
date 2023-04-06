@@ -2,7 +2,7 @@
  * This class is not serializable. It is meant to be computed from an existing vehicle schedule.
  */
 
-const Item = require('@bimo/core-utils-item');
+const { Item } = require('@bimo/core-utils-collection');
 
 const VehicleTaskClassFactory = () => {
   class VehicleTask extends Item {

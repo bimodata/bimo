@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@bimo/core-utils-collection": "^0.0.1",
-    "@bimo/core-utils-item": "^0.0.1",
     "@bimo/core-utils-logging": "^0.0.1",
     "@bimo/core-utils-match-two-lists-of-strings": "^0.0.1",
     "@bimo/core-utils-services-compute-item-key": "^0.0.1"

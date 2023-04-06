@@ -16,9 +16,9 @@ export interface EntityProps {
 }
 
 export class Entity {
-  parent: Entity;
+  parent?: Entity;
   customProps: CustomProps;
-  label: string;
+  label?: string;
   private _context: Context;
   private _cachedValueByValueKey: { [key: string]: any };
 
@@ -113,8 +113,8 @@ export class Entity {
     set(this._cachedValueByValueKey, key, null);
   }
 
-  _getAndSetCachedValue(key: string, computeValueFn: () => any) {
-    let value = get(this._cachedValueByValueKey, key);
+  _getAndSetCachedValue<T>(key: string, computeValueFn: () => T): T {
+    let value: T | undefined = get(this._cachedValueByValueKey, key);
     if (!value) {
       value = computeValueFn();
       this._setCachedValue(key, value);

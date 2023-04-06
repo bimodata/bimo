@@ -2,30 +2,54 @@
   "name": "@bimo/core-utils-collection",
   "version": "0.0.1",
   "description": "Abstract collection to be extended to create entities collections.",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
   "author": "Gaël Haméon <gael.hameon@gmail.com>",
   "license": "LGPL-3.0-or-later",
   "scripts": {
-    "test": "mocha --recursive __tests__/**/*.spec.js",
-    "coverage": "nyc --reporter=html --reporter=text npm test"
+    "clean": "rimraf ./dist && rimraf ./types",
+    "build": "yarn clean && yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc -p ./configs/tsconfig.esm.json",
+    "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+    "prepack": "build",
+    "test": "mocha",
+    "coverage": "nyc --reporter=html --reporter=text npm test",
+    "prepublish": "tsc",
+    "tsc": "tsc"
   },
   "dependencies": {
-    "@bimo/core-policy": "^0.0.1",
-    "@bimo/core-policy-rule": "^0.0.1",
     "@bimo/core-utils-async-for-each": "^0.0.1",
     "@bimo/core-utils-entity": "^0.0.1",
     "@bimo/core-utils-partition": "^0.0.1",
     "lodash": "^4.17.21"
   },
-  "peerDependencies": {
-    "@bimo/core-utils-item": "^0.0.1"
-  },
   "devDependencies": {
-    "chai": "^4.3.6",
-    "mocha": "^9.2.2",
-    "nyc": "^15.1.0"
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.15.11",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "rimraf": "^4.4.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
   },
   "homepage": "https://bimodata.com/",
   "bugs": "https://github.com/bimodata/bimo/issues",
-  "repository": "github:bimodata/bimo"
+  "repository": "github:bimodata/bimo",
+  "types": "types/cjs/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./types/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  }
 }

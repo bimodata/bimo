@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 
-const Item = require('@bimo/core-utils-item');
+const { Item } = require('@bimo/core-utils-collection');
 
 const { get, set } = require('lodash');
 

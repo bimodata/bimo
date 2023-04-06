@@ -1,7 +1,9 @@
 // eslint-disable-next-line max-classes-per-file
 const { expect } = require('chai');
 
-const { truthyIdRule, Collection } = require('..');
+const { truthyIdRuleFactory, Collection } = require('..');
+
+const truthyIdRule = truthyIdRuleFactory();
 
 class TestCollection1 extends Collection {
   constructor(props = {}) {
@@ -39,7 +41,9 @@ describe('truthyIdRule', () => {
   });
   describe(`@description`, () => {
     it(`equals 'Ensures that each item in a collection has a truthy id.'`, () => {
-      expect(truthyIdRule.description).to.equal('Ensures that each item in a collection has a truthy id.');
+      expect(truthyIdRule.description).to.equal(
+        'Ensures that each item in a collection has a truthy id.',
+      );
     });
   });
   describe(`#evaluate()`, () => {
@@ -47,7 +51,13 @@ describe('truthyIdRule', () => {
       /** @type {TestCollection1} */
       let collection;
       beforeEach(() => {
-        collection = new TestCollection1({ items: [{ id: '1', label: '1' }, { id: '2', label: '2' }], associationType: 'aggregation' });
+        collection = new TestCollection1({
+          items: [
+            { id: '1', label: '1' },
+            { id: '2', label: '2' },
+          ],
+          associationType: 'aggregation',
+        });
       });
       context(`with event 'add'`, () => {
         context(`when the new item's id is truthy`, () => {
@@ -59,7 +69,9 @@ describe('truthyIdRule', () => {
         context(`when the new item's id is falsey`, () => {
           const item = { label: '3' };
           it(`returns a meaningfull message`, () => {
-            expect(truthyIdRule.evaluate('add', { item, collection })).to.contain('id est invalide');
+            expect(truthyIdRule.evaluate('add', { item, collection })).to.contain(
+              'id est invalide',
+            );
           });
         });
       });
@@ -72,7 +84,9 @@ describe('truthyIdRule', () => {
         context(`when the collection contains items with misssing ids`, () => {
           it(`returns a meaningfull message`, () => {
             collection.add({ label: '3' });
-            expect(truthyIdRule.evaluate('default', { collection })).to.contain('Un item a une valeur invalide');
+            expect(truthyIdRule.evaluate('default', { collection })).to.contain(
+              'Un item a une valeur invalide',
+            );
           });
         });
       });
@@ -81,7 +95,12 @@ describe('truthyIdRule', () => {
       /** @type {TestCollection2} */
       let collection;
       beforeEach(() => {
-        collection = new TestCollection2({ items: [{ id: '1', label: '1' }, { id: '2', label: '2' }] });
+        collection = new TestCollection2({
+          items: [
+            { id: '1', label: '1' },
+            { id: '2', label: '2' },
+          ],
+        });
       });
       it(`returns false`, () => {
         expect(truthyIdRule.evaluate('add', { item: {}, collection })).to.equal(false);

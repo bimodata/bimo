@@ -1,5 +1,5 @@
 const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const Item = require('@bimo/core-utils-item');
+const { Item } = require('@bimo/core-utils-collection');
 
 const SchedulingUnitRouteClassFactory = () => {
   class SchedulingUnitRoute extends Item {

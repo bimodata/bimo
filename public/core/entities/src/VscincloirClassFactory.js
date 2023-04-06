@@ -2,7 +2,7 @@
 const childClasses = [];
 const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
 const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const Item = require('@bimo/core-utils-item');
+const { Item } = require('@bimo/core-utils-collection');
 
 const VscincloirClassFactory = () => {
   class Vscincloir extends Item {

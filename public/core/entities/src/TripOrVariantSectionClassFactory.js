@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 
-const Item = require('@bimo/core-utils-item');
+const { Item } = require('@bimo/core-utils-collection');
 
 /**
  * Bimo specific class that represents a sub section of a trip or variant

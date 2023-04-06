@@ -3,7 +3,7 @@
  * A block section is a section of a block that is operated by a specific vehicle unit
  */
 
-const Item = require('@bimo/core-utils-item');
+const { Item } = require('@bimo/core-utils-collection');
 
 const BlockSectionClassFactory = ({ BlockActivitiesCollection }) => {
   class BlockSection extends Item {

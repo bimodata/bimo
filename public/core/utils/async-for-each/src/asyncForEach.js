@@ -25,20 +25,6 @@ async function asyncForEachColl(collection, callback) {
   }
 }
 
-/**
- * @callback ArrayOrCollOrMapCallback
- * @param {T} value
- * @param {number|string} indexOrKey
- * @param {T[]|object<string,T>|Map<string,T>} arrayOrCollOrMap
- * @template T
- */
-
-/**
-  *
-  * @param {T[]|Object<string,T>|Map<string,T>} arrayOrCollectionOrMap
-  * @param {ArrayOrCollOrMapCallback<T>} callback
-  * @template T
-  */
 async function asyncForEach(arrayOrCollectionOrMap, callback) {
   if (!arrayOrCollectionOrMap) return null;
   if (Array.isArray(arrayOrCollectionOrMap)) {
