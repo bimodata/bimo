@@ -32,7 +32,7 @@ export class Item<ItemType> extends Entity {
   static getRawOigProps(props: EntityProps) {
     const shallowProps = shallowAssign({}, props);
     return Object.fromEntries(
-      Object.entries(shallowProps).map(([key, value]) => [key, (value as any).toString()])
+      Object.entries(shallowProps).map(([key, value]) => [key, value && value.toString()])
     );
   }
 }
