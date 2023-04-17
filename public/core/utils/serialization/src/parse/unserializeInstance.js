@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define */
 // @ts-nocheck
 
-const asyncForEach = require('@bimo/core-utils-async-for-each');
-const shallowAssign = require('@bimo/core-utils-shallow-assign');
+const { asyncForEach } = require('@bimo/core-utils-async-for-each');
+const { shallowAssign } = require('@bimo/core-utils-shallow-assign');
 
 async function unserializeInstance(serializedObjectTypeAndId, params) {
   if (!serializedObjectTypeAndId) {
