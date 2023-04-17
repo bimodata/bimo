@@ -3,6 +3,7 @@
   "include": ["../src/**/*", "../index.ts"],
   "compilerOptions": {
     "outDir": "../dist/cjs",
-    "declarationDir": "../types/cjs"
+    "declarationDir": "../types/cjs",
+    "noImplicitAny": false
   }
 }
