@@ -85,13 +85,23 @@ describe('timeAndDate utils', () => {
     });
   });
   describe(`# numberOfSecondsToHastusHoursAndMinutesString`, () => {
-    context(`when given a valid numbers of seconds as string or numbers`, () => {
+    describe(`when given a valid numbers of seconds as string or numbers, and no options`, () => {
       it(`returns them in hastus format`, () => {
         expect(numberOfSecondsToHastusHoursAndMinutesString(65)).to.equal(`0h01`);
         expect(numberOfSecondsToHastusHoursAndMinutesString(29)).to.equal(`0h00`);
         expect(numberOfSecondsToHastusHoursAndMinutesString(120)).to.equal(`0h02`);
         expect(numberOfSecondsToHastusHoursAndMinutesString(3600)).to.equal(`1h00`);
         expect(numberOfSecondsToHastusHoursAndMinutesString(36060)).to.equal(`10h01`);
+      });
+    });
+    describe(`when given a valid numbers of seconds as string or numbers, and options to allow seconds`, () => {
+      const options = { allowSeconds: true };
+      it(`returns them in hastus format`, () => {
+        expect(numberOfSecondsToHastusHoursAndMinutesString(65, options)).to.equal(`0h01;05`);
+        expect(numberOfSecondsToHastusHoursAndMinutesString(29, options)).to.equal(`0h00;29`);
+        expect(numberOfSecondsToHastusHoursAndMinutesString(120, options)).to.equal(`0h02;00`);
+        expect(numberOfSecondsToHastusHoursAndMinutesString(3611, options)).to.equal(`1h00;11`);
+        expect(numberOfSecondsToHastusHoursAndMinutesString(36060, options)).to.equal(`10h01;00`);
       });
     });
   });

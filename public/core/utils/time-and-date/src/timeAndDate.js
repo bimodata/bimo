@@ -108,11 +108,12 @@ function numberOfSecondsToHastusMinutesAndSecondsString(numberOfSeconds) {
 
 /**
  * @param {number|String} numberOfSeconds Number of seconds since midnight
- * @returns {String} Hastus extended hours string
+ * @returns {String} Hastus hours and minutes string
  */
-function numberOfSecondsToHastusHoursAndMinutesString(numberOfSeconds) {
+function numberOfSecondsToHastusHoursAndMinutesString(numberOfSeconds, { allowSeconds = false } = {}) {
   const numberOfSecondsAsInt = parseInt(numberOfSeconds, 10);
-  return Duration.fromMillis(numberOfSecondsAsInt * 1000).toFormat(`h;mm`).replace(';', 'h');
+  const toFormat = allowSeconds ? `h:mm;ss` : `h:mm`;
+  return Duration.fromMillis(numberOfSecondsAsInt * 1000).toFormat(toFormat).replace(':', 'h');
 }
 
 const isoDateStringMatcher = /^(\d{4})-(\d{2})-(\d{2})$/;
