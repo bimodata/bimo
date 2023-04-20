@@ -1,11 +1,12 @@
 const { getAndAddLoggerToServiceOptions } = require('@bimo/core-utils-logging');
 
 // À modifier, il faudra plutôt passer par le contexte
-const { Place, PlacesCollection, TripOrVariantPoint, TripPoint, VariantPoint } = require('@bimo/core-entities');
+const { Place, PlacesCollection, TripOrVariantPoint, TripPoint, VariantPoint, TrainPathVariantPoint } = require('@bimo/core-entities');
 
 const placeIdPropByConstructor = new Map([
   [TripPoint, `trpptPlace`],
   [VariantPoint, `varptPlace`],
+  [TrainPathVariantPoint, `trnpvptPlace`],
 ]);
 
 /**
