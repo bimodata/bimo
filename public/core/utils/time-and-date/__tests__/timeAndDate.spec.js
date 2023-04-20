@@ -5,6 +5,7 @@ const {
   getDifferenceInSecondsBetweenTwoHastusExtendedHoursStrings,
   getDifferenceInSecondsBetweenTwoHastusMinutesAndSecondsStrings,
   hastusMinutesAndSecondsToDuration,
+  hastusHoursAndMinutesToDuration,
   numberOfSecondsToHastusMinutesAndSecondsString,
   numberOfSecondsToHastusHoursAndMinutesString,
   isoTimeStringToDuration, durationToIsoTimeString,
@@ -75,12 +76,21 @@ describe('timeAndDate utils', () => {
     });
   });
   describe(`# hastusMinutesAndSecondsToDuration`, () => {
-    context(`when given a valid numbers of seconds as string or numbers`, () => {
+    context(`when given a valid hastus minutes and seconds string`, () => {
       it(`parses the data correctly`, () => {
         expect(hastusMinutesAndSecondsToDuration('12;30').shiftTo('seconds').seconds).to.equal(12 * 60 + 30);
         expect(hastusMinutesAndSecondsToDuration('12;50').shiftTo('seconds').seconds).to.equal(12 * 60 + 50);
         expect(hastusMinutesAndSecondsToDuration('12').shiftTo('seconds').seconds).to.equal(12 * 60);
         expect(hastusMinutesAndSecondsToDuration('0;30').shiftTo('seconds').seconds).to.equal(30);
+      });
+    });
+  });
+  describe(`# hastusHoursAndMinutesToDuration`, () => {
+    context(`when given a valid hastus hours and minutes (and seconds) string`, () => {
+      it(`parses the data correctly`, () => {
+        expect(hastusHoursAndMinutesToDuration('0h01').shiftTo('seconds').seconds).to.equal(0 * 3600 + 1 * 60 + 0);
+        expect(hastusHoursAndMinutesToDuration('2h59;07').shiftTo('seconds').seconds).to.equal(2 * 3600 + 59 * 60 + 7);
+        expect(hastusHoursAndMinutesToDuration('0h11;00').shiftTo('seconds').seconds).to.equal(0 * 3600 + 11 * 60 + 0);
       });
     });
   });

@@ -36,6 +36,20 @@ function hastusMinutesAndSecondsToDuration(hastusMinutesAndSecondsString) {
   return duration;
 }
 
+const hastusHoursAndMinutesMatcher = /^(\d?\d?\d)h([0-5][0-9])(?:;([0-5][0-9]))?$/;
+function hastusHoursAndMinutesToDuration(hastusHoursAndMinutesString) {
+  const matchResult = hastusHoursAndMinutesMatcher.exec(hastusHoursAndMinutesString);
+  if (!matchResult) {
+    throw new Error(`${hastusHoursAndMinutesString} is not a valid Hastus hours and minutes duration`);
+  }
+  const duration = Duration.fromObject({
+    hours: (matchResult[1] && parseInt(matchResult[1], 10)) || 0,
+    minutes: (matchResult[2] && parseInt(matchResult[2], 10)) || 0,
+    seconds: (matchResult[3] && parseInt(matchResult[3], 10)) || 0,
+  });
+  return duration;
+}
+
 function durationToDateTime(duration) {
   return DATE_TO_USE_FOR_UNKNOWN_DATES.plus(duration);
 }
@@ -157,6 +171,7 @@ exports.durationToHastusExtendedHoursString = durationToHastusExtendedHoursStrin
 exports.numberOfSecondsToHastusExtendedHoursString = numberOfSecondsToHastusExtendedHoursString;
 exports.getDifferenceInSecondsBetweenTwoHastusExtendedHoursStrings = getDifferenceInSecondsBetweenTwoHastusExtendedHoursStrings;
 exports.hastusMinutesAndSecondsToDuration = hastusMinutesAndSecondsToDuration;
+exports.hastusHoursAndMinutesToDuration = hastusHoursAndMinutesToDuration;
 exports.getDifferenceInSecondsBetweenTwoHastusMinutesAndSecondsStrings = getDifferenceInSecondsBetweenTwoHastusMinutesAndSecondsStrings;
 exports.numberOfSecondsToHastusMinutesAndSecondsString = numberOfSecondsToHastusMinutesAndSecondsString;
 exports.numberOfSecondsToHastusHoursAndMinutesString = numberOfSecondsToHastusHoursAndMinutesString;
