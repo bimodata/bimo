@@ -36,7 +36,7 @@ function computeItemKey(item, config, context = {}) {
   }
   catch (error) {
     logger[noticeLevelForKeyComputationError](
-      `Erreur au moment de calculer la key de ${item.shortLoggingOutput}: ${error.message}.`,
+      `Erreur au moment de calculer la key de ${item.shortLoggingOutput}: ${error.message}\n${error.stack}.`,
     );
     return returnValueForKeyComputationError;
   }
