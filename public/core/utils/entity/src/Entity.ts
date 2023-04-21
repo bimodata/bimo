@@ -1,5 +1,5 @@
-import { get } from "lodash";
-import { set } from "lodash";
+import { get, set } from "lodash";
+import { serializeThis, parseThis } from "@bimo/core-utils-serialization";
 
 export interface CustomProps {
   [key: string]: any;
@@ -21,6 +21,9 @@ export class Entity {
   label?: string;
   private _context: Context;
   private _cachedValueByValueKey: { [key: string]: any };
+  static parseModel: Function;
+  static allChildClasses?: Set<Entity>;
+  serializeModel: Function;
 
   constructor(props: EntityProps = {}, context: Context = {}) {
     this.parent = props.parent;
@@ -134,3 +137,8 @@ export class Entity {
     this._cachedValueByValueKey = {};
   }
 }
+
+Entity.prototype.serializeModel = serializeThis;
+Entity.parseModel = parseThis;
+
+export default Entity;

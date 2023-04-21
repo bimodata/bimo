@@ -8,10 +8,12 @@ export interface RawOigProps {
 }
 
 export class Item<ItemType> extends Entity {
-  private _rawOigProps: RawOigProps;
+  _rawOigProps: RawOigProps;
   static updateNextIdFunction?: (knownId?: string) => void;
   static incrementIdFunction: () => void;
   static nextIdValue: string;
+  static hastusKeywords?: string[];
+  static hastusObject?: string;
 
   constructor(props = {}, context = {}) {
     super(props, context);
@@ -32,7 +34,10 @@ export class Item<ItemType> extends Entity {
   static getRawOigProps(props: EntityProps) {
     const shallowProps = shallowAssign({}, props);
     return Object.fromEntries(
-      Object.entries(shallowProps).map(([key, value]) => [key, value && value.toString()])
+      Object.entries(shallowProps).map(([key, value]) => [
+        key,
+        value ? value.toString() : "",
+      ])
     );
   }
 }
