@@ -10,7 +10,8 @@ const returnRawTypes = ['string', 'number', 'boolean'];
  * @param {any} defaultValue
  * @param {object} options
  * @param {string=} options.altPropName
- * @param {object=} options.parent
+ * @param {any=} options.parent
+ * @param {boolean=} options.forbidLoosePropNameMatching
  */
 function getAndValidatePropFromProps(propName, props, Type = `string`, defaultValue = undefined, options = {}) {
   let rawProp = props[propName] ?? (options.altPropName && props[options.altPropName]);
