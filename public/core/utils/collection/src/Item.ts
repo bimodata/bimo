@@ -1,11 +1,14 @@
 import { cloneDeepWith } from "lodash";
-import { Entity, EntityProps, Context } from "@bimo/core-utils-entity";
+import { Entity, EntityProps } from "@bimo/core-utils-entity";
 import { Collection } from "./Collection";
 import { shallowAssign } from "@bimo/core-utils-shallow-assign";
+import { BimoContext } from "@bimo/core-global-types";
 
 export interface RawOigProps {
   [key: string]: string;
 }
+
+export interface ItemProps extends EntityProps {}
 
 export class Item<ItemType> extends Entity {
   _rawOigProps: RawOigProps;
@@ -15,7 +18,7 @@ export class Item<ItemType> extends Entity {
   static hastusKeywords?: string[];
   static hastusObject?: string;
 
-  constructor(props = {}, context = {}) {
+  constructor(props: ItemProps = {}, context: BimoContext = {}) {
     super(props, context);
     this._rawOigProps = Item.getRawOigProps(props);
   }

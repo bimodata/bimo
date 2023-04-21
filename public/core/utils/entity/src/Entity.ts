@@ -1,11 +1,8 @@
 import { get, set } from "lodash";
 import { serializeThis, parseThis } from "@bimo/core-utils-serialization";
+import { BimoContext } from "@bimo/core-global-types";
 
 export interface CustomProps {
-  [key: string]: any;
-}
-
-export interface Context {
   [key: string]: any;
 }
 
@@ -19,13 +16,13 @@ export class Entity {
   parent?: Entity;
   customProps: CustomProps;
   label?: string;
-  private _context: Context;
+  private _context: BimoContext;
   private _cachedValueByValueKey: { [key: string]: any };
   static parseModel: Function;
   static allChildClasses?: Set<Entity>;
   serializeModel: Function;
 
-  constructor(props: EntityProps = {}, context: Context = {}) {
+  constructor(props: EntityProps = {}, context: BimoContext = {}) {
     this.parent = props.parent;
     this.customProps = props.customProps || {};
     this.label = props.label;

@@ -1,6 +1,6 @@
 import PolicyRule, { PolicyRuleEvent, PolicyRuleEvaluationArgs } from "./PolicyRule";
 import { ExtendedItem } from "./Item";
-import { Context } from "@bimo/core-utils-entity";
+import { BimoContext } from "@bimo/core-global-types";
 import { getAndAddLoggerToServiceOptions } from "@bimo/core-utils-logging";
 
 export type PolicyRuleLevel = "info" | "warning" | "error";
@@ -38,7 +38,7 @@ export class Policy<ItemType extends ExtendedItem<ItemType>> {
   evaluate(
     eventKey: PolicyRuleEvent = "default",
     args: PolicyRuleEvaluationArgs<ItemType>,
-    context: Context = {}
+    context: BimoContext = {}
   ) {
     const logger = getAndAddLoggerToServiceOptions(context, {
       serviceName: `Policy.evaluate`,

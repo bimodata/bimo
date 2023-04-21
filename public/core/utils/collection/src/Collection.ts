@@ -1,3 +1,4 @@
+import type { SetOptional } from "type-fest";
 import _ from "lodash";
 import partition from "@bimo/core-utils-partition";
 import asyncForEach from "@bimo/core-utils-async-for-each";
@@ -9,6 +10,11 @@ import { uniqueIdPolicyFactory } from "./uniqueIdPolicyFactory";
 import { PolicyRuleEvent } from "./PolicyRule";
 
 export type CollectionAssociationType = "composition" | "aggregation";
+
+export interface ExtendedCollectionProps<ItemType extends ExtendedItem<ItemType>>
+  extends SetOptional<CollectionProps<ItemType>, "ItemConstructor" | "itemName"> {
+  [propName: string]: any;
+}
 
 export interface CollectionProps<ItemType extends ExtendedItem<ItemType>>
   extends EntityProps {
