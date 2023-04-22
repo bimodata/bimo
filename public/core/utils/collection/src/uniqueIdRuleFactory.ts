@@ -1,9 +1,12 @@
-import { ExtendedItem } from "./Item";
+import { ExtendedItem, ExtendedItemProps } from "./Item";
 import PolicyRule from "./PolicyRule";
 import { evaluateAdd, evaluateDefault } from "./uniquePropHelperFunctions";
 
-export function uniqueIdRuleFactory<ItemType extends ExtendedItem<ItemType>>() {
-  return new PolicyRule<ItemType>({
+export function uniqueIdRuleFactory<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+>() {
+  return new PolicyRule<ItemType, ItemProps>({
     key: "uniqueId",
     description:
       "Ensures that each item in a collection has a unique id. Falsey ids are ignored.",

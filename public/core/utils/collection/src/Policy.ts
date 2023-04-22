@@ -1,5 +1,5 @@
 import PolicyRule, { PolicyRuleEvent, PolicyRuleEvaluationArgs } from "./PolicyRule";
-import { ExtendedItem } from "./Item";
+import { ExtendedItem, ExtendedItemProps } from "./Item";
 import { BimoContext } from "@bimo/core-global-types";
 import { getAndAddLoggerToServiceOptions } from "@bimo/core-utils-logging";
 
@@ -9,10 +9,13 @@ export interface PolicyRuleConfig {
   level?: PolicyRuleLevel;
 }
 
-export interface PolicyProps<ItemType extends ExtendedItem<ItemType>> {
+export interface PolicyProps<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> {
   key: string;
   description?: string;
-  ruleAndConfigTuples: [PolicyRule<ItemType>, PolicyRuleConfig][];
+  ruleAndConfigTuples: [PolicyRule<ItemType, ItemProps>, PolicyRuleConfig][];
   options?: any;
 }
 
@@ -22,13 +25,16 @@ export interface PolicyEvaluationResult {
   message: string;
 }
 
-export class Policy<ItemType extends ExtendedItem<ItemType>> {
+export class Policy<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> {
   key: string;
   description?: string;
-  ruleAndConfigTuples: [PolicyRule<ItemType>, PolicyRuleConfig][];
+  ruleAndConfigTuples: [PolicyRule<ItemType, ItemProps>, PolicyRuleConfig][];
   options?: any;
 
-  constructor(props: PolicyProps<ItemType>) {
+  constructor(props: PolicyProps<ItemType, ItemProps>) {
     this.key = props.key;
     this.description = props.description;
     this.ruleAndConfigTuples = props.ruleAndConfigTuples;
@@ -37,7 +43,7 @@ export class Policy<ItemType extends ExtendedItem<ItemType>> {
 
   evaluate(
     eventKey: PolicyRuleEvent = "default",
-    args: PolicyRuleEvaluationArgs<ItemType>,
+    args: PolicyRuleEvaluationArgs<ItemType, ItemProps>,
     context: BimoContext = {}
   ) {
     const logger = getAndAddLoggerToServiceOptions(context, {

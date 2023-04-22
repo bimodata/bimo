@@ -1,5 +1,5 @@
 import { BimoContext } from "@bimo/core-global-types";
-import { ExtendedItem } from "./Item";
+import { ExtendedItem, ExtendedItemProps } from "./Item";
 import { Collection } from "./Collection";
 
 /**
@@ -9,38 +9,50 @@ import { Collection } from "./Collection";
  */
 export type PolicyRuleEvent = "add" | "remove" | "default";
 
-export interface PolicyRuleEvaluationArgs<ItemType extends ExtendedItem<ItemType>> {
+export interface PolicyRuleEvaluationArgs<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> {
   item?: ItemType;
-  collection: Collection<ItemType>;
+  collection: Collection<ItemType, ItemProps>;
 }
 
-export type EvaluateFnByEventKey<ItemType extends ExtendedItem<ItemType>> = {
+export type EvaluateFnByEventKey<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> = {
   add: (
-    args: { item: ItemType; collection: Collection<ItemType> },
+    args: { item: ItemType; collection: Collection<ItemType, ItemProps> },
     context?: BimoContext
   ) => string | false;
   remove: (
-    args: { item: ItemType; collection: Collection<ItemType> },
+    args: { item: ItemType; collection: Collection<ItemType, ItemProps> },
     context?: BimoContext
   ) => string | false;
   default: (
-    args: { collection: Collection<ItemType> },
+    args: { collection: Collection<ItemType, ItemProps> },
     context?: BimoContext
   ) => string | false;
 };
 
-export interface PolicyRuleProps<ItemType extends ExtendedItem<ItemType>> {
+export interface PolicyRuleProps<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> {
   key: string;
   description?: string;
-  evaluateFnByEventKey: EvaluateFnByEventKey<ItemType>;
+  evaluateFnByEventKey: EvaluateFnByEventKey<ItemType, ItemProps>;
 }
 
-export class PolicyRule<ItemType extends ExtendedItem<ItemType>> {
+export class PolicyRule<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> {
   key: string; // a unique short key for this rule
   description?: string; // a description of the rule
-  _evaluateFnByEventKey: EvaluateFnByEventKey<ItemType>;
+  _evaluateFnByEventKey: EvaluateFnByEventKey<ItemType, ItemProps>;
 
-  constructor(props: PolicyRuleProps<ItemType>) {
+  constructor(props: PolicyRuleProps<ItemType, ItemProps>) {
     this.key = props.key;
     this.description = props.description;
     this._evaluateFnByEventKey = props.evaluateFnByEventKey;
@@ -48,13 +60,13 @@ export class PolicyRule<ItemType extends ExtendedItem<ItemType>> {
 
   evaluate(
     eventKey: PolicyRuleEvent = "default",
-    args: PolicyRuleEvaluationArgs<ItemType>,
+    args: PolicyRuleEvaluationArgs<ItemType, ItemProps>,
     context: BimoContext = {}
   ): string | false {
     const evaluateFn = this._evaluateFnByEventKey[eventKey];
     if (!evaluateFn) return false;
     return evaluateFn(
-      args as { item: ItemType; collection: Collection<ItemType> },
+      args as { item: ItemType; collection: Collection<ItemType, ItemProps> },
       context
     );
   }

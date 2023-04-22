@@ -1,8 +1,11 @@
 import PolicyRule from "./PolicyRule";
-import { ExtendedItem } from "./Item";
+import { ExtendedItem, ExtendedItemProps } from "./Item";
 
-export function truthyIdRuleFactory<ItemType extends ExtendedItem<ItemType>>() {
-  return new PolicyRule<ItemType>({
+export function truthyIdRuleFactory<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+>() {
+  return new PolicyRule<ItemType, ItemProps>({
     key: "truthyId",
     description: "Ensures that each item in a collection has a truthy id.",
     evaluateFnByEventKey: {

@@ -1,13 +1,16 @@
-import { ExtendedItem } from "./Item";
+import { ExtendedItem, ExtendedItemProps } from "./Item";
 import { Collection } from "./Collection";
 
-export function evaluateAdd<ItemType extends ExtendedItem<ItemType>>({
+export function evaluateAdd<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+>({
   item,
   collection,
   propName,
 }: {
   item: ItemType;
-  collection: Collection<ItemType>;
+  collection: Collection<ItemType, ItemProps>;
   propName: string;
 }): false | string {
   const value = item[propName];
@@ -22,11 +25,14 @@ export function evaluateAdd<ItemType extends ExtendedItem<ItemType>>({
   return false;
 }
 
-export function evaluateDefault<ItemType extends ExtendedItem<ItemType>>({
+export function evaluateDefault<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+>({
   collection,
   propName,
 }: {
-  collection: Collection<ItemType>;
+  collection: Collection<ItemType, ItemProps>;
   propName: string;
 }): false | string {
   const takenValues = new Set();

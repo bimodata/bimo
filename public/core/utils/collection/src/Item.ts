@@ -8,7 +8,9 @@ export interface RawOigProps {
   [key: string]: string;
 }
 
-export interface ItemProps extends EntityProps {}
+export interface ExtendedItemProps extends EntityProps {
+  [propName: string]: any;
+}
 
 export class Item<ItemType> extends Entity {
   _rawOigProps: RawOigProps;
@@ -18,7 +20,7 @@ export class Item<ItemType> extends Entity {
   static hastusKeywords?: string[];
   static hastusObject?: string;
 
-  constructor(props: ItemProps = {}, context: BimoContext = {}) {
+  constructor(props: ExtendedItemProps = {}, context: BimoContext = {}) {
     super(props, context);
     this._rawOigProps = Item.getRawOigProps(props);
   }
@@ -50,7 +52,7 @@ function createParentLinksOnChildren<ItemType extends ExtendedItem<ItemType>>(
   parent: any
 ) {
   if (object instanceof Collection) {
-    (object as Collection<ItemType>).parent = parent;
+    object.parent = parent;
     object.items.forEach((item: any) => createParentLinksOnChildren(item, object));
     return;
   }

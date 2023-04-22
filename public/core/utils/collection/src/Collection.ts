@@ -3,7 +3,7 @@ import _ from "lodash";
 import partition from "@bimo/core-utils-partition";
 import asyncForEach from "@bimo/core-utils-async-for-each";
 import { Entity, EntityProps } from "@bimo/core-utils-entity";
-import { Item, ExtendedItem } from "./Item";
+import { Item, ExtendedItem, ExtendedItemProps } from "./Item";
 import { Policy } from "./Policy";
 import { emptyPolicyFactory } from "./emptyPolicyFactory";
 import { uniqueIdPolicyFactory } from "./uniqueIdPolicyFactory";
@@ -11,13 +11,20 @@ import { PolicyRuleEvent } from "./PolicyRule";
 
 export type CollectionAssociationType = "composition" | "aggregation";
 
-export interface ExtendedCollectionProps<ItemType extends ExtendedItem<ItemType>>
-  extends SetOptional<CollectionProps<ItemType>, "ItemConstructor" | "itemName"> {
+export interface ExtendedCollectionProps<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> extends SetOptional<
+    CollectionProps<ItemType, ItemProps>,
+    "ItemConstructor" | "itemName"
+  > {
   [propName: string]: any;
 }
 
-export interface CollectionProps<ItemType extends ExtendedItem<ItemType>>
-  extends EntityProps {
+export interface CollectionProps<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> extends EntityProps {
   itemName: string;
   ItemConstructor: any;
   items?: (Item<ItemType> | EntityProps)[];
@@ -25,7 +32,7 @@ export interface CollectionProps<ItemType extends ExtendedItem<ItemType>>
   businessIdPropName?: string;
   labelPropName?: string;
   associationType?: CollectionAssociationType;
-  policy?: Policy<ItemType>;
+  policy?: Policy<ItemType, ItemProps>;
 }
 
 interface ReduceCb<ItemType extends ExtendedItem<ItemType>> {
@@ -50,7 +57,10 @@ interface AddItemOptions {
   ensureId?: boolean; //- add id to the item before adding it if missing.
 }
 
-export class Collection<ItemType extends ExtendedItem<ItemType>> extends Entity {
+export class Collection<
+  ItemType extends ExtendedItem<ItemType>,
+  ItemProps extends ExtendedItemProps
+> extends Entity {
   itemName: string;
   ItemConstructor: typeof Item;
   items: ItemType[];
@@ -58,11 +68,13 @@ export class Collection<ItemType extends ExtendedItem<ItemType>> extends Entity 
   businessIdPropName?: string;
   labelPropName?: string;
   associationType: CollectionAssociationType;
-  policy: Policy<ItemType>;
+  policy: Policy<ItemType, ItemProps>;
   updateNextIdFunction: (knownId?: string) => void;
   incrementIdFunction: () => void;
+  static defaultExportedDataDataName?: string;
+  static defaultImportDataDataName?: string;
 
-  constructor(props: CollectionProps<ItemType>) {
+  constructor(props: CollectionProps<ItemType, ItemProps>) {
     super(props);
     const {
       itemName,
@@ -78,8 +90,8 @@ export class Collection<ItemType extends ExtendedItem<ItemType>> extends Entity 
     this.policy =
       policy ||
       (associationType === "composition"
-        ? uniqueIdPolicyFactory<ItemType>()
-        : emptyPolicyFactory<ItemType>());
+        ? uniqueIdPolicyFactory<ItemType, ItemProps>()
+        : emptyPolicyFactory<ItemType, ItemProps>());
 
     this.itemName = itemName;
     this.idPropName = idPropName;
@@ -382,10 +394,7 @@ export class Collection<ItemType extends ExtendedItem<ItemType>> extends Entity 
     return this.items.indexOf(item) >= 0;
   }
 
-  createNewItem(
-    itemProps: { [propName: string]: any } = {},
-    options?: AddItemOptions
-  ): ItemType {
+  createNewItem(itemProps: ItemProps, options?: AddItemOptions): ItemType {
     if (this.ensureId(itemProps))
       throw new Error("Error! Got an id when using createNewItem");
     const item = new this.ItemConstructor(itemProps) as unknown as ItemType;
@@ -499,7 +508,7 @@ export class Collection<ItemType extends ExtendedItem<ItemType>> extends Entity 
   getOrCreateItemByPropName(
     propName: string,
     value: any,
-    defaultPropsForNewItem: EntityProps
+    defaultPropsForNewItem: ItemProps
   ) {
     let item = this.getByPropName(propName, value);
     if (!item) {
