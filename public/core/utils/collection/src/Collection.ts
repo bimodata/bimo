@@ -27,7 +27,7 @@ export interface CollectionProps<
 > extends EntityProps {
   itemName: string;
   ItemConstructor: any;
-  items?: (Item<ItemType> | EntityProps)[];
+  items?: ItemProps[];
   idPropName?: string;
   businessIdPropName?: string;
   labelPropName?: string;
