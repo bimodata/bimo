@@ -1,22 +1,25 @@
-/* Linked Classes */
-const NetworkEvent = require('./NetworkEvent');
 
-/* Serialization utilities dependencies */
+import { NetworkEvent, NetworkEventProps } from "./NetworkEvent";
+
+
 const childClasses = [NetworkEvent];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-/** @extends {Collection<NetworkEvent>} */
-class NetworkEventsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface NetworkEventsCollectionProps extends ExtendedCollectionProps<NetworkEvent, NetworkEventProps> {
+}
+
+export class NetworkEventsCollection extends Collection<NetworkEvent, NetworkEventProps> {
+  constructor(props: NetworkEventsCollectionProps = {}) {
     super({ itemName: 'NetworkEvent', ItemConstructor: NetworkEvent, items: props.items, parent: props.parent });
   }
 }
 
-/* Serialization utilities */
-NetworkEventsCollection.allChildClasses = getAllChildClasses(childClasses);
-NetworkEventsCollection.prototype.serializeModel = serializeThis;
-NetworkEventsCollection.parseModel = parseThis;
 
-module.exports = NetworkEventsCollection;
+NetworkEventsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default NetworkEventsCollection;

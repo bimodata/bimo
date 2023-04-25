@@ -1,22 +1,45 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const { Item } = require('@bimo/core-utils-collection');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 const childClasses = [];
 
-class SdefSchedulingUnit extends Item {
-  constructor(props) {
+export interface SdefSchedulingUnitProps extends ExtendedItemProps {
+  sdscuIdentifier?: string;
+  sdscuType?: string;
+  sdscuInclSunday?: string;
+  sdscuInclMonday?: string;
+  sdscuInclTuesday?: string;
+  sdscuInclWednesday?: string;
+  sdscuInclThursday?: string;
+  sdscuInclFriday?: string;
+  sdscuInclSaturday?: string;
+  includedSchedulingUnits?: string;
+}
+
+export class SdefSchedulingUnit extends Item<SdefSchedulingUnit> {
+  sdscuIdentifier?: string;
+  sdscuType?: string;
+  sdscuInclSunday?: string;
+  sdscuInclMonday?: string;
+  sdscuInclTuesday?: string;
+  sdscuInclWednesday?: string;
+  sdscuInclThursday?: string;
+  sdscuInclFriday?: string;
+  sdscuInclSaturday?: string;
+  includedSchedulingUnits?: string;
+  constructor(props: SdefSchedulingUnitProps) {
     super(props);
-    this.sdscuIdentifier = getAndValidatePropFromProps('sdscuIdentifier', props, `string`);
-    this.sdscuType = getAndValidatePropFromProps('sdscuType', props, `string`, '1100');
-    this.sdscuInclSunday = getAndValidatePropFromProps('sdscuInclSunday', props, `string`, '1');
-    this.sdscuInclMonday = getAndValidatePropFromProps('sdscuInclMonday', props, `string`, '1');
-    this.sdscuInclTuesday = getAndValidatePropFromProps('sdscuInclTuesday', props, `string`, '1');
-    this.sdscuInclWednesday = getAndValidatePropFromProps('sdscuInclWednesday', props, `string`, '1');
-    this.sdscuInclThursday = getAndValidatePropFromProps('sdscuInclThursday', props, `string`, '1');
-    this.sdscuInclFriday = getAndValidatePropFromProps('sdscuInclFriday', props, `string`, '1');
-    this.sdscuInclSaturday = getAndValidatePropFromProps('sdscuInclSaturday', props, `string`, '1');
+    this.sdscuIdentifier = gavpfp('sdscuIdentifier', props, `string`);
+    this.sdscuType = gavpfp('sdscuType', props, `string`, '1100');
+    this.sdscuInclSunday = gavpfp('sdscuInclSunday', props, `string`, '1');
+    this.sdscuInclMonday = gavpfp('sdscuInclMonday', props, `string`, '1');
+    this.sdscuInclTuesday = gavpfp('sdscuInclTuesday', props, `string`, '1');
+    this.sdscuInclWednesday = gavpfp('sdscuInclWednesday', props, `string`, '1');
+    this.sdscuInclThursday = gavpfp('sdscuInclThursday', props, `string`, '1');
+    this.sdscuInclFriday = gavpfp('sdscuInclFriday', props, `string`, '1');
+    this.sdscuInclSaturday = gavpfp('sdscuInclSaturday', props, `string`, '1');
 
     this.includedSchedulingUnits = [];
   }
@@ -26,7 +49,7 @@ SdefSchedulingUnit.hastusKeywords = ['sdef_scheduling_unit_incl'];
 SdefSchedulingUnit.hastusObject = 'sdef_scheduling_unit';
 
 SdefSchedulingUnit.allChildClasses = getAllChildClasses(childClasses);
-SdefSchedulingUnit.prototype.serializeModel = serializeThis;
-SdefSchedulingUnit.parseModel = parseThis;
 
-module.exports = SdefSchedulingUnit;
+
+
+export default SdefSchedulingUnit;

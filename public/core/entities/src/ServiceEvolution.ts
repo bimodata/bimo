@@ -1,20 +1,35 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { serializeThis, parseThis } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-class ServiceEvolution extends Item {
-  constructor(props) {
+export interface ServiceEvolutionProps extends ExtendedItemProps {
+  sevoStartDate?: string;
+  sevoDisplayName?: string;
+  sevoDescription?: string;
+  sevoComment?: string;
+  sevoDatetimeStamp?: string;
+  sevoUserStamp?: string;
+}
+
+export class ServiceEvolution extends Item<ServiceEvolution> {
+  sevoStartDate?: string;
+  sevoDisplayName?: string;
+  sevoDescription?: string;
+  sevoComment?: string;
+  sevoDatetimeStamp?: string;
+  sevoUserStamp?: string;
+  constructor(props: ServiceEvolutionProps) {
     super(props);
-    this.sevoStartDate = getAndValidatePropFromProps('sevoStartDate', props, `string`);
-    this.sevoDisplayName = getAndValidatePropFromProps('sevoDisplayName', props, `string`);
-    this.sevoDescription = getAndValidatePropFromProps('sevoDescription', props, `string`);
-    this.sevoComment = getAndValidatePropFromProps('sevoComment', props);
-    this.sevoDatetimeStamp = getAndValidatePropFromProps('sevoDatetimeStamp', props, `string`);
-    this.sevoUserStamp = getAndValidatePropFromProps('sevoUserStamp', props, 'string');
+    this.sevoStartDate = gavpfp('sevoStartDate', props, `string`);
+    this.sevoDisplayName = gavpfp('sevoDisplayName', props, `string`);
+    this.sevoDescription = gavpfp('sevoDescription', props, `string`);
+    this.sevoComment = gavpfp('sevoComment', props);
+    this.sevoDatetimeStamp = gavpfp('sevoDatetimeStamp', props, `string`);
+    this.sevoUserStamp = gavpfp('sevoUserStamp', props, 'string');
   }
 }
 
-ServiceEvolution.prototype.serializeModel = serializeThis;
-ServiceEvolution.parseModel = parseThis;
 
-module.exports = ServiceEvolution;
+
+
+export default ServiceEvolution;

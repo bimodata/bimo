@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const ServiceEvolutionPeriod = require('./ServiceEvolutionPeriod');
+import { ServiceEvolutionPeriod, ServiceEvolutionPeriodProps } from "./ServiceEvolutionPeriod";
 
 const childClasses = [ServiceEvolutionPeriod];
 
-/** @extends {Collection<ServiceEvolutionPeriod>} */
-class ServiceEvolutionPeriodsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface ServiceEvolutionPeriodsCollectionProps extends ExtendedCollectionProps<ServiceEvolutionPeriod, ServiceEvolutionPeriodProps> {
+}
+
+export class ServiceEvolutionPeriodsCollection extends Collection<ServiceEvolutionPeriod, ServiceEvolutionPeriodProps> {
+  constructor(props: ServiceEvolutionPeriodsCollectionProps = {}) {
     super({
       itemName: 'ServiceEvolutionPeriod',
       ItemConstructor: ServiceEvolutionPeriod,
@@ -18,7 +21,7 @@ class ServiceEvolutionPeriodsCollection extends Collection {
 }
 
 ServiceEvolutionPeriodsCollection.allChildClasses = getAllChildClasses(childClasses);
-ServiceEvolutionPeriodsCollection.prototype.serializeModel = serializeThis;
-ServiceEvolutionPeriodsCollection.parseModel = parseThis;
 
-module.exports = ServiceEvolutionPeriodsCollection;
+
+
+export default ServiceEvolutionPeriodsCollection;

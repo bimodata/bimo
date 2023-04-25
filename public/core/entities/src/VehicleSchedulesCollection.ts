@@ -1,24 +1,27 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-self-assign */
 
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
-const { evaluateItemQuery } = require('@bimo/core-utils-evaluate-item-query');
-const mapsAndSets = require('@bimo/core-utils-maps-and-sets');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { evaluateItemQuery } from '@bimo/core-utils-evaluate-item-query';
+import mapsAndSets from '@bimo/core-utils-maps-and-sets';
 
-/* Linked Classes */
-const VehicleSchedule = require('./VehicleSchedule');
 
-const VehicleTasksCollection = require(`./VehicleTasksCollection`);
-const TripsCollection = require(`./TripsCollection`);
+import { VehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
 
-/* Serialization utilities dependencies */
+import VehicleTasksCollection from `./VehicleTasksCollection`;
+import TripsCollection from `./TripsCollection`;
+
+
 const childClasses = [VehicleSchedule];
 
-/* Class definition */
-/** @extends {Collection<VehicleSchedule>} */
-class VehicleSchedulesCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface VehicleSchedulesCollectionProps extends ExtendedCollectionProps<VehicleSchedule, VehicleScheduleProps> {
+}
+
+export class VehicleSchedulesCollection extends Collection<VehicleSchedule, VehicleScheduleProps> {
+  constructor(props: VehicleSchedulesCollectionProps = {}) {
     super({
       itemName: 'VehicleSchedule',
       ItemConstructor: VehicleSchedule,
@@ -162,13 +165,13 @@ class VehicleSchedulesCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
+
 VehicleSchedulesCollection.allChildClasses = getAllChildClasses(childClasses);
-VehicleSchedulesCollection.prototype.serializeModel = serializeThis;
-VehicleSchedulesCollection.parseModel = parseThis;
+
+
 
 /* I/O info */
 VehicleSchedulesCollection.defaultExportedDataDataName = `output_vsc`;
 VehicleSchedulesCollection.defaultImportDataDataName = `input_vsc`;
 
-module.exports = VehicleSchedulesCollection;
+export default VehicleSchedulesCollection;

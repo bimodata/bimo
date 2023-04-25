@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const ServiceEvolutionPeriodSchedulesBooking = require('./ServiceEvolutionPeriodSchedulesBooking');
+import { ServiceEvolutionPeriodSchedulesBooking, ServiceEvolutionPeriodSchedulesBookingProps } from "./ServiceEvolutionPeriodSchedulesBooking";
 
 const childClasses = [ServiceEvolutionPeriodSchedulesBooking];
 
-/** @extends {Collection<ServiceEvolutionPeriodSchedulesBooking>} */
-class ServiceEvolutionPeriodSchedulesBookingsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface ServiceEvolutionPeriodSchedulesBookingsCollectionProps extends ExtendedCollectionProps<ServiceEvolutionPeriodSchedulesBooking, ServiceEvolutionPeriodSchedulesBookingProps> {
+}
+
+export class ServiceEvolutionPeriodSchedulesBookingsCollection extends Collection<ServiceEvolutionPeriodSchedulesBooking, ServiceEvolutionPeriodSchedulesBookingProps> {
+  constructor(props: ServiceEvolutionPeriodSchedulesBookingsCollectionProps = {}) {
     super({
       itemName: 'ServiceEvolutionPeriodSchedulesBooking',
       ItemConstructor: ServiceEvolutionPeriodSchedulesBooking,
@@ -18,7 +21,7 @@ class ServiceEvolutionPeriodSchedulesBookingsCollection extends Collection {
 }
 
 ServiceEvolutionPeriodSchedulesBookingsCollection.allChildClasses = getAllChildClasses(childClasses);
-ServiceEvolutionPeriodSchedulesBookingsCollection.prototype.serializeModel = serializeThis;
-ServiceEvolutionPeriodSchedulesBookingsCollection.parseModel = parseThis;
 
-module.exports = ServiceEvolutionPeriodSchedulesBookingsCollection;
+
+
+export default ServiceEvolutionPeriodSchedulesBookingsCollection;

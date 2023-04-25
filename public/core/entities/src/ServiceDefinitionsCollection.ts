@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const ServiceDefinition = require('./ServiceDefinition');
+import { ServiceDefinition, ServiceDefinitionProps } from "./ServiceDefinition";
 
 const childClasses = [ServiceDefinition];
 
-/** @extends {Collection<ServiceDefinition>} */
-class ServiceDefinitionsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface ServiceDefinitionsCollectionProps extends ExtendedCollectionProps<ServiceDefinition, ServiceDefinitionProps> {
+}
+
+export class ServiceDefinitionsCollection extends Collection<ServiceDefinition, ServiceDefinitionProps> {
+  constructor(props: ServiceDefinitionsCollectionProps = {}) {
     super({
       itemName: 'ServiceDefinition',
       ItemConstructor: ServiceDefinition,
@@ -22,7 +25,7 @@ class ServiceDefinitionsCollection extends Collection {
 ServiceDefinitionsCollection.ItemConstructor = ServiceDefinition;
 
 ServiceDefinitionsCollection.allChildClasses = getAllChildClasses(childClasses);
-ServiceDefinitionsCollection.prototype.serializeModel = serializeThis;
-ServiceDefinitionsCollection.parseModel = parseThis;
 
-module.exports = ServiceDefinitionsCollection;
+
+
+export default ServiceDefinitionsCollection;

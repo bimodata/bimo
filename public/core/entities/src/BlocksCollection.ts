@@ -1,14 +1,17 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const Block = require('./Block');
+import { Block, BlockProps } from "./Block";
 
 const childClasses = [Block];
 
-/* Class definition */
-/** @extends {Collection<Block>} */
-class BlocksCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface BlocksCollectionProps extends ExtendedCollectionProps<Block, BlockProps> {
+}
+
+export class BlocksCollection extends Collection<Block, BlockProps> {
+  constructor(props: BlocksCollectionProps = {}) {
     super({
       itemName: 'Block',
       ItemConstructor: Block,
@@ -21,9 +24,9 @@ class BlocksCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-BlocksCollection.allChildClasses = getAllChildClasses(childClasses);
-BlocksCollection.prototype.serializeModel = serializeThis;
-BlocksCollection.parseModel = parseThis;
 
-module.exports = BlocksCollection;
+BlocksCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default BlocksCollection;

@@ -1,26 +1,51 @@
-const { Item } = require('@bimo/core-utils-collection');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-/* Linked Classes */
+
 
 const childClasses = [];
 
-/* Class definition */
-class LoadTime extends Item {
-  constructor(props) {
+
+export interface LoadTimeProps extends ExtendedItemProps {
+  bimoId?: string;
+  ltPlaceId?: string;
+  ltLoadPlaceId?: string;
+  ltPeriodStartTime?: string;
+  ltPeriodEndTime?: string;
+  ltDirection?: string;
+  ltLoadTime?: string;
+  ltRouteId?: string;
+  ltVariantId?: string;
+  ltNetworkEventId?: string;
+  ltDetourId?: string;
+}
+
+export class LoadTime extends Item<LoadTime> {
+  bimoId?: string;
+  ltPlaceId?: string;
+  ltLoadPlaceId?: string;
+  ltPeriodStartTime?: string;
+  ltPeriodEndTime?: string;
+  ltDirection?: string;
+  ltLoadTime?: string;
+  ltRouteId?: string;
+  ltVariantId?: string;
+  ltNetworkEventId?: string;
+  ltDetourId?: string;
+  constructor(props: LoadTimeProps) {
     super(props);
-    this.bimoId = getAndValidatePropFromProps('bimoId', props);
-    this.ltPlaceId = getAndValidatePropFromProps('ltPlaceId', props, `string`);
-    this.ltLoadPlaceId = getAndValidatePropFromProps('ltLoadPlaceId', props, `string`);
-    this.ltPeriodStartTime = getAndValidatePropFromProps('ltPeriodStartTime', props, `string`);
-    this.ltPeriodEndTime = getAndValidatePropFromProps('ltPeriodEndTime', props, `string`);
-    this.ltDirection = getAndValidatePropFromProps('ltDirection', props, `string`);
-    this.ltLoadTime = getAndValidatePropFromProps('ltLoadTime', props, `string`);
-    this.ltRouteId = getAndValidatePropFromProps('ltRouteId', props, `string`);
-    this.ltVariantId = getAndValidatePropFromProps('ltVariantId', props, `string`);
-    this.ltNetworkEventId = getAndValidatePropFromProps('ltNetworkEventId', props, `string`);
-    this.ltDetourId = getAndValidatePropFromProps('ltDetourId', props, `string`);
+    this.bimoId = gavpfp('bimoId', props);
+    this.ltPlaceId = gavpfp('ltPlaceId', props, `string`);
+    this.ltLoadPlaceId = gavpfp('ltLoadPlaceId', props, `string`);
+    this.ltPeriodStartTime = gavpfp('ltPeriodStartTime', props, `string`);
+    this.ltPeriodEndTime = gavpfp('ltPeriodEndTime', props, `string`);
+    this.ltDirection = gavpfp('ltDirection', props, `string`);
+    this.ltLoadTime = gavpfp('ltLoadTime', props, `string`);
+    this.ltRouteId = gavpfp('ltRouteId', props, `string`);
+    this.ltVariantId = gavpfp('ltVariantId', props, `string`);
+    this.ltNetworkEventId = gavpfp('ltNetworkEventId', props, `string`);
+    this.ltDetourId = gavpfp('ltDetourId', props, `string`);
   }
 
   /** @type {string} key made of all attributes except the loadtime */
@@ -39,9 +64,9 @@ class LoadTime extends Item {
 LoadTime.hastusKeywords = ['loadtime'];
 LoadTime.hastusObject = 'load_time';
 
-/* Serialization utilities */
-LoadTime.allChildClasses = getAllChildClasses(childClasses);
-LoadTime.prototype.serializeModel = serializeThis;
-LoadTime.parseModel = parseThis;
 
-module.exports = LoadTime;
+LoadTime.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default LoadTime;

@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
-const TripOrVariantSection = require('./TripOrVariantSection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { TripOrVariantSection, TripOrVariantSectionProps } from "./TripOrVariantSection";
 
 const childClasses = [TripOrVariantSection];
 
-/* Class definition */
-/** @extends {Collection<TripOrVariantSection>} */
-class TripOrVariantSectionsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface TripOrVariantSectionsCollectionProps extends ExtendedCollectionProps<TripOrVariantSection, TripOrVariantSectionProps> {
+}
+
+export class TripOrVariantSectionsCollection extends Collection<TripOrVariantSection, TripOrVariantSectionProps> {
+  constructor(props: TripOrVariantSectionsCollectionProps = {}) {
     super({
       itemName: 'TripOrVariantSection',
       ItemConstructor: TripOrVariantSection,
@@ -16,9 +19,9 @@ class TripOrVariantSectionsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-TripOrVariantSectionsCollection.allChildClasses = getAllChildClasses(childClasses);
-TripOrVariantSectionsCollection.prototype.serializeModel = serializeThis;
-TripOrVariantSectionsCollection.parseModel = parseThis;
 
-module.exports = TripOrVariantSectionsCollection;
+TripOrVariantSectionsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default TripOrVariantSectionsCollection;

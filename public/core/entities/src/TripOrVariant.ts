@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
-const { Item } = require('@bimo/core-utils-collection');
-const { Collection } = require('@bimo/core-utils-collection');
-const { get } = require('lodash');
-const TripOrVariantSectionsCollection = require('./TripOrVariantSectionsCollection');
-const computeTripOrVariantSectionsOfTripOrVariant = require('./subs/computeTripOrVariantSectionsOfTripOrVariant');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { get } from 'lodash';
+import { TripOrVariantSectionsCollection, TripOrVariantSectionsCollectionProps } from "./TripOrVariantSectionsCollection";
+import computeTripOrVariantSectionsOfTripOrVariant from './subs/computeTripOrVariantSectionsOfTripOrVariant';
 
 const pathByTripOrVariantPropNameByTripOrVariantType = {
   trip: {
@@ -31,11 +31,16 @@ const pathByTripOrVariantPropNameByTripOrVariantType = {
 };
 
 /** @template PointType */
-class TripOrVariant extends Item {
+export interface TripOrVariantProps extends ExtendedItemProps {
+  _abstract?: string;
+}
+
+export class TripOrVariant extends Item<TripOrVariant> {
   /**
    * @param {Object} props
    * @param {'variant'|'trip'} tripOrVariantType
    */
+  _abstract?: string;
   constructor(props, tripOrVariantType) {
     super(props);
     this._abstract = {
@@ -158,4 +163,4 @@ class TripOrVariant extends Item {
   }
 }
 
-module.exports = TripOrVariant;
+export default TripOrVariant;

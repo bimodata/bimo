@@ -1,15 +1,18 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Linked Classes */
-const RunTime = require('./RunTime');
+
+import { RunTime, RunTimeProps } from "./RunTime";
 
 const childClasses = [RunTime];
 
-/* Class definition */
-/** @extends {Collection<RunTime>} */
-class RunTimesCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface RunTimesCollectionProps extends ExtendedCollectionProps<RunTime, RunTimeProps> {
+}
+
+export class RunTimesCollection extends Collection<RunTime, RunTimeProps> {
+  constructor(props: RunTimesCollectionProps = {}) {
     super({
       itemName: 'RunTime',
       ItemConstructor: RunTime,
@@ -20,9 +23,9 @@ class RunTimesCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-RunTimesCollection.allChildClasses = getAllChildClasses(childClasses);
-RunTimesCollection.prototype.serializeModel = serializeThis;
-RunTimesCollection.parseModel = parseThis;
 
-module.exports = RunTimesCollection;
+RunTimesCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default RunTimesCollection;

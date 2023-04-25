@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const NetworkEdge = require('./NetworkEdge');
+import { NetworkEdge, NetworkEdgeProps } from "./NetworkEdge";
 
 const childClasses = [NetworkEdge];
 
-/** @extends {Collection<NetworkEdge>} */
-class NetworkEdgesCollection extends Collection {
-  constructor(props = {}) {
+
+export interface NetworkEdgesCollectionProps extends ExtendedCollectionProps<NetworkEdge, NetworkEdgeProps> {
+}
+
+export class NetworkEdgesCollection extends Collection<NetworkEdge, NetworkEdgeProps> {
+  constructor(props: NetworkEdgesCollectionProps = {}) {
     super({
       itemName: 'NetworkEdge',
       ItemConstructor: NetworkEdge,
@@ -21,7 +24,7 @@ class NetworkEdgesCollection extends Collection {
 }
 
 NetworkEdgesCollection.allChildClasses = getAllChildClasses(childClasses);
-NetworkEdgesCollection.prototype.serializeModel = serializeThis;
-NetworkEdgesCollection.parseModel = parseThis;
 
-module.exports = NetworkEdgesCollection;
+
+
+export default NetworkEdgesCollection;

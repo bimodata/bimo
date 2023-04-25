@@ -1,15 +1,22 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 const childClasses = [];
 
-class TrainPathVariantDate extends Item {
-  constructor(props) {
+export interface TrainPathVariantDateProps extends ExtendedItemProps {
+  trnpdEffectiveDate?: string;
+  trnpdStatusOir?: string;
+}
+
+export class TrainPathVariantDate extends Item<TrainPathVariantDate> {
+  trnpdEffectiveDate?: string;
+  trnpdStatusOir?: string;
+  constructor(props: TrainPathVariantDateProps) {
     super(props);
 
-    this.trnpdEffectiveDate = getAndValidatePropFromProps('trnpdEffectiveDate', props, `string`);
-    this.trnpdStatusOir = getAndValidatePropFromProps('trnpdStatusOir', props, `string`);
+    this.trnpdEffectiveDate = gavpfp('trnpdEffectiveDate', props, `string`);
+    this.trnpdStatusOir = gavpfp('trnpdStatusOir', props, `string`);
   }
 
   get shortLoggingOutput() {
@@ -18,7 +25,7 @@ class TrainPathVariantDate extends Item {
 }
 
 TrainPathVariantDate.allChildClasses = getAllChildClasses(childClasses);
-TrainPathVariantDate.prototype.serializeModel = serializeThis;
-TrainPathVariantDate.parseModel = parseThis;
 
-module.exports = TrainPathVariantDate;
+
+
+export default TrainPathVariantDate;

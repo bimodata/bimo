@@ -1,11 +1,11 @@
-/* Linked Classes */
 
-/* Serialization utilities dependencies */
+
+
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const TripOrVariantPoint = require('./TripOrVariantPoint');
+import { TripOrVariantPoint, TripOrVariantPointProps } from "./TripOrVariantPoint";
 
 /**
  * Propriétés de point de variante
@@ -15,47 +15,92 @@ const TripOrVariantPoint = require('./TripOrVariantPoint');
  * @see VariantPoint
  */
 
-/* Class definition */
-class VariantPoint extends TripOrVariantPoint {
+
+export interface VariantPointProps extends ExtendedItemProps {
+  varptIsTimingPoint?: string;
+  varptPlace?: string;
+  varptNoStopping?: string;
+  varptSpecTpDistance?: string;
+  _varptPublicInfo?: string;
+  varptStop?: string;
+  varptRefStoploc?: string;
+  varptTimeFactor?: string;
+  varptRoutingPoint?: string;
+  varptSpecDistrict?: string;
+  varptSpecZone?: string;
+  varptSpecPassengersMvmtRestrict?: string;
+  varptLoadPlace?: string;
+  varptLoadDistrict?: string;
+  varptLoadZone?: string;
+  varptAllowLoadTime?: string;
+  varptTpDistance?: string;
+  varptDistance?: string;
+  varptCodeCs?: string;
+  varptTypeArret?: string;
+  varptNaturePointDeCommutation?: string;
+}
+
+export class VariantPoint extends TripOrVariantPoint {
   /**
    *
    * @param {VariantPointProps} props - props
    */
-  constructor(props) {
+  varptIsTimingPoint?: string;
+  varptPlace?: string;
+  varptNoStopping?: string;
+  varptSpecTpDistance?: string;
+  _varptPublicInfo?: string;
+  varptStop?: string;
+  varptRefStoploc?: string;
+  varptTimeFactor?: string;
+  varptRoutingPoint?: string;
+  varptSpecDistrict?: string;
+  varptSpecZone?: string;
+  varptSpecPassengersMvmtRestrict?: string;
+  varptLoadPlace?: string;
+  varptLoadDistrict?: string;
+  varptLoadZone?: string;
+  varptAllowLoadTime?: string;
+  varptTpDistance?: string;
+  varptDistance?: string;
+  varptCodeCs?: string;
+  varptTypeArret?: string;
+  varptNaturePointDeCommutation?: string;
+  constructor(props: VariantPointProps) {
     super(props, 'variant');
-    this.varptIsTimingPoint = getAndValidatePropFromProps('varptIsTimingPoint', props, 'string', '1');
-    this.varptPlace = getAndValidatePropFromProps('varptPlace', props, 'string');
-    this.varptNoStopping = getAndValidatePropFromProps('varptNoStopping', props, 'string');
+    this.varptIsTimingPoint = gavpfp('varptIsTimingPoint', props, 'string', '1');
+    this.varptPlace = gavpfp('varptPlace', props, 'string');
+    this.varptNoStopping = gavpfp('varptNoStopping', props, 'string');
 
     /** en km */
-    this.varptSpecTpDistance = getAndValidatePropFromProps('varptSpecTpDistance', props, 'string');
-    this._varptPublicInfo = getAndValidatePropFromProps('varptPublicInfo', props, 'string');
-    this.varptStop = getAndValidatePropFromProps('varptStop', props, 'string');
-    this.varptRefStoploc = getAndValidatePropFromProps('varptRefStoploc', props, 'string');
-    this.varptTimeFactor = getAndValidatePropFromProps('varptTimeFactor', props, 'string');
-    this.varptRoutingPoint = getAndValidatePropFromProps('varptRoutingPoint', props, 'string');
-    this.varptSpecDistrict = getAndValidatePropFromProps('varptSpecDistrict', props, 'string');
-    this.varptSpecZone = getAndValidatePropFromProps('varptSpecZone', props, 'string');
-    this.varptSpecPassengersMvmtRestrict = getAndValidatePropFromProps('varptSpecPassengersMvmtRestrict', props, 'string');
-    this.varptLoadPlace = getAndValidatePropFromProps('varptLoadPlace', props, 'string');
-    this.varptLoadDistrict = getAndValidatePropFromProps('varptLoadDistrict', props, 'string');
-    this.varptLoadZone = getAndValidatePropFromProps('varptLoadZone', props, 'string');
-    this.varptAllowLoadTime = getAndValidatePropFromProps('varptAllowLoadTime', props, 'string');
+    this.varptSpecTpDistance = gavpfp('varptSpecTpDistance', props, 'string');
+    this._varptPublicInfo = gavpfp('varptPublicInfo', props, 'string');
+    this.varptStop = gavpfp('varptStop', props, 'string');
+    this.varptRefStoploc = gavpfp('varptRefStoploc', props, 'string');
+    this.varptTimeFactor = gavpfp('varptTimeFactor', props, 'string');
+    this.varptRoutingPoint = gavpfp('varptRoutingPoint', props, 'string');
+    this.varptSpecDistrict = gavpfp('varptSpecDistrict', props, 'string');
+    this.varptSpecZone = gavpfp('varptSpecZone', props, 'string');
+    this.varptSpecPassengersMvmtRestrict = gavpfp('varptSpecPassengersMvmtRestrict', props, 'string');
+    this.varptLoadPlace = gavpfp('varptLoadPlace', props, 'string');
+    this.varptLoadDistrict = gavpfp('varptLoadDistrict', props, 'string');
+    this.varptLoadZone = gavpfp('varptLoadZone', props, 'string');
+    this.varptAllowLoadTime = gavpfp('varptAllowLoadTime', props, 'string');
 
     /** en km */
-    this.varptTpDistance = getAndValidatePropFromProps('varptTpDistance', props, 'string', this.varptSpecTpDistance);
+    this.varptTpDistance = gavpfp('varptTpDistance', props, 'string', this.varptSpecTpDistance);
 
     /** en mètres */
-    this.varptDistance = getAndValidatePropFromProps('varptDistance', props, 'string');
+    this.varptDistance = gavpfp('varptDistance', props, 'string');
 
     /**
      * ## Spécifique SNCF ## --> décision du 24/08/2022
      *
      * TODO: rendre modulaire les spécificités des exploitants ferroviaires
      */
-    this.varptCodeCs = getAndValidatePropFromProps('varptCodeCs', props);
-    this.varptTypeArret = getAndValidatePropFromProps('varptTypeArret', props);
-    this.varptNaturePointDeCommutation = getAndValidatePropFromProps('varptNaturePointDeCommutation', props);
+    this.varptCodeCs = gavpfp('varptCodeCs', props);
+    this.varptTypeArret = gavpfp('varptTypeArret', props);
+    this.varptNaturePointDeCommutation = gavpfp('varptNaturePointDeCommutation', props);
   }
 
   /** @type {import ('./Variant')} */
@@ -130,9 +175,9 @@ class VariantPoint extends TripOrVariantPoint {
 VariantPoint.hastusKeywords = ['rvpoint'];
 VariantPoint.hastusObject = 'variant_point';
 
-/* Serialization utilities */
-VariantPoint.allChildClasses = getAllChildClasses(childClasses);
-VariantPoint.prototype.serializeModel = serializeThis;
-VariantPoint.parseModel = parseThis;
 
-module.exports = VariantPoint;
+VariantPoint.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default VariantPoint;

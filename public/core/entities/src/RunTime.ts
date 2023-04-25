@@ -1,27 +1,50 @@
-const { Item } = require('@bimo/core-utils-collection');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-/* Linked Classes */
+
 
 const childClasses = [];
 
-/* Class definition */
-class RunTime extends Item {
-  constructor(props) {
-    super(props);
-    this.bimoId = getAndValidatePropFromProps('bimoId', props);
-    this.rtStartPlaceId = getAndValidatePropFromProps('rtStartPlaceId', props, `string`);
-    this.rtEndPlaceId = getAndValidatePropFromProps('rtEndPlaceId', props, `string`);
-    this.rtPeriodStartTime = getAndValidatePropFromProps('rtPeriodStartTime', props, `string`);
-    this.rtPeriodEndTime = getAndValidatePropFromProps('rtPeriodEndTime', props, `string`);
-    this.rtRunTime = getAndValidatePropFromProps('rtRunTime', props, `string`);
-    this.rtRouteId = getAndValidatePropFromProps('rtRouteId', props, `string`);
-    this.rtVariantId = getAndValidatePropFromProps('rtVariantId', props, `string`);
-    this.rtNetworkEventId = getAndValidatePropFromProps('rtNetworkEventId', props, `string`);
-    this.rtDetourId = getAndValidatePropFromProps('rtDetourId', props, `string`);
 
-    this.parent = props.parent;
+export interface RunTimeProps extends ExtendedItemProps {
+  bimoId?: string;
+  rtStartPlaceId?: string;
+  rtEndPlaceId?: string;
+  rtPeriodStartTime?: string;
+  rtPeriodEndTime?: string;
+  rtRunTime?: string;
+  rtRouteId?: string;
+  rtVariantId?: string;
+  rtNetworkEventId?: string;
+  rtDetourId?: string;
+}
+
+export class RunTime extends Item<RunTime> {
+  bimoId?: string;
+  rtStartPlaceId?: string;
+  rtEndPlaceId?: string;
+  rtPeriodStartTime?: string;
+  rtPeriodEndTime?: string;
+  rtRunTime?: string;
+  rtRouteId?: string;
+  rtVariantId?: string;
+  rtNetworkEventId?: string;
+  rtDetourId?: string;
+  constructor(props: RunTimeProps) {
+    super(props);
+    this.bimoId = gavpfp('bimoId', props);
+    this.rtStartPlaceId = gavpfp('rtStartPlaceId', props, `string`);
+    this.rtEndPlaceId = gavpfp('rtEndPlaceId', props, `string`);
+    this.rtPeriodStartTime = gavpfp('rtPeriodStartTime', props, `string`);
+    this.rtPeriodEndTime = gavpfp('rtPeriodEndTime', props, `string`);
+    this.rtRunTime = gavpfp('rtRunTime', props, `string`);
+    this.rtRouteId = gavpfp('rtRouteId', props, `string`);
+    this.rtVariantId = gavpfp('rtVariantId', props, `string`);
+    this.rtNetworkEventId = gavpfp('rtNetworkEventId', props, `string`);
+    this.rtDetourId = gavpfp('rtDetourId', props, `string`);
+
+
   }
 
   copy() {
@@ -57,9 +80,9 @@ class RunTime extends Item {
 RunTime.hastusKeywords = ['runtime'];
 RunTime.hastusObject = 'run_time';
 
-/* Serialization utilities */
-RunTime.allChildClasses = getAllChildClasses(childClasses);
-RunTime.prototype.serializeModel = serializeThis;
-RunTime.parseModel = parseThis;
 
-module.exports = RunTime;
+RunTime.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default RunTime;

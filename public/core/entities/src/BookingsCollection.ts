@@ -1,16 +1,19 @@
 /* eslint-disable no-self-assign */
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Linked Classes */
-const Booking = require('./Booking');
+
+import { Booking, BookingProps } from "./Booking";
 
 const childClasses = [Booking];
 
-/* Class definition */
-/** @extends {Collection<Booking>} */
-class BookingsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface BookingsCollectionProps extends ExtendedCollectionProps<Booking, BookingProps> {
+}
+
+export class BookingsCollection extends Collection<Booking, BookingProps> {
+  constructor(props: BookingsCollectionProps = {}) {
     super({
       itemName: 'Booking',
       ItemConstructor: Booking,
@@ -28,13 +31,13 @@ class BookingsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
+
 BookingsCollection.allChildClasses = getAllChildClasses(childClasses);
-BookingsCollection.prototype.serializeModel = serializeThis;
-BookingsCollection.parseModel = parseThis;
+
+
 
 /* I/O info */
 BookingsCollection.defaultExportedDataDataName = `output_booking`;
 BookingsCollection.defaultImportDataDataName = `input_booking`;
 
-module.exports = BookingsCollection;
+export default BookingsCollection;

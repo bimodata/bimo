@@ -1,30 +1,45 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const { Item } = require('@bimo/core-utils-collection'); const NetworkNodesCollection = require('./NetworkNodesCollection');
-const NetworkEdgesCollection = require('./NetworkEdgesCollection');
+import { Item } from '@bimo/core-utils-collection'); const NetworkNodesCollection = require('./NetworkNodesCollection';
+import { NetworkEdgesCollection, NetworkEdgesCollectionProps } from "./NetworkEdgesCollection";
 
 const childClasses = [NetworkNodesCollection, NetworkEdgesCollection];
 
 /** Un sous-ensembe de nodes et d'edges d'un network qui partagent des caractéristiques communes.
  * Par exemple un ensemble de nodes et d'edges qui forment la voie 1 entre Amiens et Beauvais.
  */
-class NetworkSection extends Item {
+export interface NetworkSectionProps extends ExtendedItemProps {
+  bimoId?: string;
+  businessId?: string;
+  label?: string;
+  customProps?: string;
+  nodes?: string;
+  edges?: string;
+}
+
+export class NetworkSection extends Item<NetworkSection> {
   /**
    *
    * @param {NetworkSection} props
    */
-  constructor(props) {
+  bimoId?: string;
+  businessId?: string;
+  label?: string;
+  customProps?: string;
+  nodes?: string;
+  edges?: string;
+  constructor(props: NetworkSectionProps) {
     super(props, 'NetworkSection');
-    this.bimoId = getAndValidatePropFromProps('bimoId', props, 'string');
-    this.businessId = getAndValidatePropFromProps('businessId', props, 'string');
-    this.label = getAndValidatePropFromProps('label', props, 'string');
-    this.customProps = getAndValidatePropFromProps('customProps', props, Object, {});
+    this.bimoId = gavpfp('bimoId', props, 'string');
+    this.businessId = gavpfp('businessId', props, 'string');
+    this.label = gavpfp('label', props, 'string');
+    this.customProps = gavpfp('customProps', props, Object, {});
 
     /** @type {NetworkNodesCollection} */
-    this.nodes = getAndValidatePropFromProps('nodes', props, NetworkNodesCollection, [], { associationType: 'aggregation' });
+    this.nodes = gavpfp('nodes', props, NetworkNodesCollection, [], { associationType: 'aggregation' });
     /** @type {NetworkEdgesCollection} */
-    this.edges = getAndValidatePropFromProps('edges', props, NetworkEdgesCollection, [], { associationType: 'aggregation' });
+    this.edges = gavpfp('edges', props, NetworkEdgesCollection, [], { associationType: 'aggregation' });
   }
 
   get shortLoggingOutput() {
@@ -78,7 +93,7 @@ class NetworkSection extends Item {
 }
 
 NetworkSection.allChildClasses = getAllChildClasses(childClasses);
-NetworkSection.prototype.serializeModel = serializeThis;
-NetworkSection.parseModel = parseThis;
 
-module.exports = NetworkSection;
+
+
+export default NetworkSection;

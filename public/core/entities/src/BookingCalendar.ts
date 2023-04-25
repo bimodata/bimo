@@ -1,37 +1,42 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const BookingCalendarDatesCollection = require('./BookingCalendarDatesCollection');
-const ServiceEvolutionsCollection = require('./ServiceEvolutionsCollection');
-const ServiceContextsCollection = require('./ServiceContextsCollection');
+import { BookingCalendarDatesCollection, BookingCalendarDatesCollectionProps } from "./BookingCalendarDatesCollection";
+import { ServiceEvolutionsCollection, ServiceEvolutionsCollectionProps } from "./ServiceEvolutionsCollection";
+import { ServiceContextsCollection, ServiceContextsCollectionProps } from "./ServiceContextsCollection";
 
 const childClasses = [BookingCalendarDatesCollection, ServiceEvolutionsCollection, ServiceContextsCollection];
 
-class BookingCalendar extends Item {
-  constructor(props) {
+export interface BookingCalendarProps extends ExtendedItemProps {
+  bcalBookingId?: string;
+}
+
+export class BookingCalendar extends Item<BookingCalendar> {
+  bcalBookingId?: string;
+  constructor(props: BookingCalendarProps) {
     super(props);
-    this.bcalBookingId = getAndValidatePropFromProps('bcalBookingId', props, `string`);
+    this.bcalBookingId = gavpfp('bcalBookingId', props, `string`);
     if (!this.bcalBookingId) {
       throw new Error('Pas de PA cible');
     }
-    this.bcalCalendarId = getAndValidatePropFromProps('bcalCalendarId', props, `string`);
+    this.bcalCalendarId = gavpfp('bcalCalendarId', props, `string`);
     /** Par défaut à 2 = 'Autre'. Autres options : 0 ='En vigueur' ou 1 ='Planifié' */
-    this.bcalType = getAndValidatePropFromProps('bcalType', props, `string`, '2');
-    this.bcalDescription = getAndValidatePropFromProps('bcalDescription', props);
-    this.bcalOwner = getAndValidatePropFromProps('bcalOwner', props, `string`, `ADMIN`);
+    this.bcalType = gavpfp('bcalType', props, `string`, '2');
+    this.bcalDescription = gavpfp('bcalDescription', props);
+    this.bcalOwner = gavpfp('bcalOwner', props, `string`, `ADMIN`);
     /** 0 = Privé par défaut */
-    this.bcalPublicAccess = getAndValidatePropFromProps('bcalPublicAccess', props, 'string', '0');
+    this.bcalPublicAccess = gavpfp('bcalPublicAccess', props, 'string', '0');
     /** 0 = Le calendrier créé n'est pas, par défaut, destiné à assurer la compatibilité d'un ancien calendrier
      * avec la version actuelle d'HASTUS
      */
-    this.bcalIsForCompatibility = getAndValidatePropFromProps('bcalIsForCompatibility', props, 'string', '0');
+    this.bcalIsForCompatibility = gavpfp('bcalIsForCompatibility', props, 'string', '0');
     /** Propriété nécessaire si calendrier pour compatibilité : référence à l'ancien calendrier */
-    this.bcalEffectiveCalendarId = getAndValidatePropFromProps('bcalEffectiveCalendarId', props);
+    this.bcalEffectiveCalendarId = gavpfp('bcalEffectiveCalendarId', props);
 
     /* Children */
     /** @type {BookingCalendarDatesCollection} */
-    this.bookingCalendarDates = getAndValidatePropFromProps(
+    this.bookingCalendarDates = gavpfp(
       'bookingCalendarDates', props,
       BookingCalendarDatesCollection,
       new BookingCalendarDatesCollection(),
@@ -39,7 +44,7 @@ class BookingCalendar extends Item {
     );
 
     /** @type {ServiceEvolutionsCollection} */
-    this.serviceEvolutions = getAndValidatePropFromProps(
+    this.serviceEvolutions = gavpfp(
       'serviceEvolutions', props,
       ServiceEvolutionsCollection,
       new ServiceEvolutionsCollection(),
@@ -47,7 +52,7 @@ class BookingCalendar extends Item {
     );
 
     /** @type {ServiceContextsCollection} */
-    this.serviceContexts = getAndValidatePropFromProps(
+    this.serviceContexts = gavpfp(
       'serviceContexts', props,
       ServiceContextsCollection,
       new ServiceContextsCollection(),
@@ -71,7 +76,7 @@ class BookingCalendar extends Item {
 }
 
 BookingCalendar.allChildClasses = getAllChildClasses(childClasses);
-BookingCalendar.prototype.serializeModel = serializeThis;
-BookingCalendar.parseModel = parseThis;
 
-module.exports = BookingCalendar;
+
+
+export default BookingCalendar;

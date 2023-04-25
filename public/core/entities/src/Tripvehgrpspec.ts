@@ -1,16 +1,23 @@
-/* Linked Classes */
 
-/* Serialization utilities dependencies */
+
+
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-/* Class definition */
-class Tripvehgrpspec {
-  constructor(props) {
-    /** */ this.tripvehgrpspecVehGroup = getAndValidatePropFromProps('tripvehgrpspecVehGroup', props);
-    /** */ this.tripvehgrpspecReqType = getAndValidatePropFromProps('tripvehgrpspecReqType', props);
-    /** */ this.tripvehgrpspecPriority = getAndValidatePropFromProps('tripvehgrpspecPriority', props);
+
+export interface TripvehgrpspecProps extends ExtendedItemProps {
+  tripvehgrpspecReqType?: string;
+  tripvehgrpspecPriority?: string;
+}
+
+export class Tripvehgrpspec {
+  tripvehgrpspecReqType?: string;
+  tripvehgrpspecPriority?: string;
+  constructor(props: TripvehgrpspecProps) {
+    /** */ this.tripvehgrpspecVehGroup = gavpfp('tripvehgrpspecVehGroup', props);
+    /** */ this.tripvehgrpspecReqType = gavpfp('tripvehgrpspecReqType', props);
+    /** */ this.tripvehgrpspecPriority = gavpfp('tripvehgrpspecPriority', props);
 
     /* Children */
 
@@ -21,9 +28,9 @@ class Tripvehgrpspec {
 Tripvehgrpspec.hastusKeywords = ['tripvehgroupspec'];
 Tripvehgrpspec.hastusObject = 'tripvehgrpspec';
 
-/* Serialization utilities */
-Tripvehgrpspec.allChildClasses = getAllChildClasses(childClasses);
-Tripvehgrpspec.prototype.serializeModel = serializeThis;
-Tripvehgrpspec.parseModel = parseThis;
 
-module.exports = Tripvehgrpspec;
+Tripvehgrpspec.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default Tripvehgrpspec;

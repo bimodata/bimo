@@ -1,33 +1,52 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const { Item } = require('@bimo/core-utils-collection'); const NetworkNodesCollection = require('./NetworkNodesCollection');
-const NetworkEdge = require('./NetworkEdge');
-const NetworkNode = require('./NetworkNode');
-const NetworkEdgesCollection = require('./NetworkEdgesCollection');
-const NetworkSectionsCollection = require('./NetworkSectionsCollection');
-const AdjacentLink = require('./AdjacentLink');
+import { Item } from '@bimo/core-utils-collection'); const NetworkNodesCollection = require('./NetworkNodesCollection';
+import { NetworkEdge, NetworkEdgeProps } from "./NetworkEdge";
+import { NetworkNode, NetworkNodeProps } from "./NetworkNode";
+import { NetworkEdgesCollection, NetworkEdgesCollectionProps } from "./NetworkEdgesCollection";
+import { NetworkSectionsCollection, NetworkSectionsCollectionProps } from "./NetworkSectionsCollection";
+import { AdjacentLink, AdjacentLinkProps } from "./AdjacentLink";
 
 const childClasses = [NetworkNodesCollection, NetworkEdgesCollection, NetworkSectionsCollection];
 
 /** Un ensemble de nodes et d'edges qui forment une représentation logique d'un réseau de transport. */
-class Network extends Item {
+export interface NetworkProps extends ExtendedItemProps {
+  bimoId?: string;
+  businessId?: string;
+  label?: string;
+  nodes?: string;
+  edges?: string;
+  sections?: string;
+  deletedNodes?: string;
+  deletedEdges?: string;
+}
+
+export class Network extends Item<Network> {
   /**
    *
    * @param {Network} props
    */
-  constructor(props) {
+  bimoId?: string;
+  businessId?: string;
+  label?: string;
+  nodes?: string;
+  edges?: string;
+  sections?: string;
+  deletedNodes?: string;
+  deletedEdges?: string;
+  constructor(props: NetworkProps) {
     super(props, 'Network');
-    this.bimoId = getAndValidatePropFromProps('bimoId', props, 'string');
-    this.businessId = getAndValidatePropFromProps('businessId', props, 'string');
-    this.label = getAndValidatePropFromProps('label', props, 'string');
+    this.bimoId = gavpfp('bimoId', props, 'string');
+    this.businessId = gavpfp('businessId', props, 'string');
+    this.label = gavpfp('label', props, 'string');
 
     /** @type {NetworkNodesCollection} */
-    this.nodes = getAndValidatePropFromProps('nodes', props, NetworkNodesCollection, [], { parent: this });
+    this.nodes = gavpfp('nodes', props, NetworkNodesCollection, [], { parent: this });
     /** @type {NetworkEdgesCollection} */
-    this.edges = getAndValidatePropFromProps('edges', props, NetworkEdgesCollection, [], { parent: this });
+    this.edges = gavpfp('edges', props, NetworkEdgesCollection, [], { parent: this });
     /** @type {NetworkSectionsCollection} */
-    this.sections = getAndValidatePropFromProps('sections', props, NetworkSectionsCollection, [], { parent: this });
+    this.sections = gavpfp('sections', props, NetworkSectionsCollection, [], { parent: this });
     this.deletedNodes = new Set();
     this.deletedEdges = new Set();
   }
@@ -224,7 +243,7 @@ ${this.nodes.pick((node) => node.degree === 0).map((node) => `${node.businessId}
 }
 
 NetworkEdge.allChildClasses = getAllChildClasses(childClasses);
-Network.prototype.serializeModel = serializeThis;
-Network.parseModel = parseThis;
 
-module.exports = Network;
+
+
+export default Network;

@@ -1,23 +1,44 @@
-/* Linked Classes */
 
-/* Serialization utilities dependencies */
+
+
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-/* Class definition */
-class TripTp {
-  constructor(props) {
-    /** */ this.ttpPlace = getAndValidatePropFromProps('ttpPlace', props);
-    /** */ this.ttpPassingTime = getAndValidatePropFromProps('ttpPassingTime', props);
-    /** */ this.ttpRunTimeDiff = getAndValidatePropFromProps('ttpRunTimeDiff', props);
-    /** */ this.ttpSkipped = getAndValidatePropFromProps('ttpSkipped', props);
-    /** */ this.ttpNote = getAndValidatePropFromProps('ttpNote', props);
-    /** */ this.ttpDistance = getAndValidatePropFromProps('ttpDistance', props);
-    /** */ this.ttpIsPublic = getAndValidatePropFromProps('ttpIsPublic', props);
-    /** */ this.ttpHoldTime = getAndValidatePropFromProps('ttpHoldTime', props);
-    /** */ this.ttpHoldType = getAndValidatePropFromProps('ttpHoldType', props);
-    /** */ this.ttpIsLoading = getAndValidatePropFromProps('ttpIsLoading', props);
+
+export interface TripTpProps extends ExtendedItemProps {
+  ttpPassingTime?: string;
+  ttpRunTimeDiff?: string;
+  ttpSkipped?: string;
+  ttpNote?: string;
+  ttpDistance?: string;
+  ttpIsPublic?: string;
+  ttpHoldTime?: string;
+  ttpHoldType?: string;
+  ttpIsLoading?: string;
+}
+
+export class TripTp {
+  ttpPassingTime?: string;
+  ttpRunTimeDiff?: string;
+  ttpSkipped?: string;
+  ttpNote?: string;
+  ttpDistance?: string;
+  ttpIsPublic?: string;
+  ttpHoldTime?: string;
+  ttpHoldType?: string;
+  ttpIsLoading?: string;
+  constructor(props: TripTpProps) {
+    /** */ this.ttpPlace = gavpfp('ttpPlace', props);
+    /** */ this.ttpPassingTime = gavpfp('ttpPassingTime', props);
+    /** */ this.ttpRunTimeDiff = gavpfp('ttpRunTimeDiff', props);
+    /** */ this.ttpSkipped = gavpfp('ttpSkipped', props);
+    /** */ this.ttpNote = gavpfp('ttpNote', props);
+    /** */ this.ttpDistance = gavpfp('ttpDistance', props);
+    /** */ this.ttpIsPublic = gavpfp('ttpIsPublic', props);
+    /** */ this.ttpHoldTime = gavpfp('ttpHoldTime', props);
+    /** */ this.ttpHoldType = gavpfp('ttpHoldType', props);
+    /** */ this.ttpIsLoading = gavpfp('ttpIsLoading', props);
 
     /* Children */
 
@@ -28,9 +49,9 @@ class TripTp {
 TripTp.hastusKeywords = ['trip_tp'];
 TripTp.hastusObject = 'trip_tp';
 
-/* Serialization utilities */
-TripTp.allChildClasses = getAllChildClasses(childClasses);
-TripTp.prototype.serializeModel = serializeThis;
-TripTp.parseModel = parseThis;
 
-module.exports = TripTp;
+TripTp.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default TripTp;

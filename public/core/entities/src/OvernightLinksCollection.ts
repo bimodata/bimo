@@ -1,22 +1,25 @@
-/* Linked Classes */
-const OvernightLink = require('./OvernightLink');
 
-/* Serialization utilities dependencies */
+import { OvernightLink, OvernightLinkProps } from "./OvernightLink";
+
+
 const childClasses = [OvernightLink];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-/** @extends {Collection<OvernightLink>} */
-class OvernightLinksCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface OvernightLinksCollectionProps extends ExtendedCollectionProps<OvernightLink, OvernightLinkProps> {
+}
+
+export class OvernightLinksCollection extends Collection<OvernightLink, OvernightLinkProps> {
+  constructor(props: OvernightLinksCollectionProps = {}) {
     super({ itemName: 'OvernightLink', ItemConstructor: OvernightLink, items: props.items, parent: props.parent });
   }
 }
 
-/* Serialization utilities */
-OvernightLinksCollection.allChildClasses = getAllChildClasses(childClasses);
-OvernightLinksCollection.prototype.serializeModel = serializeThis;
-OvernightLinksCollection.parseModel = parseThis;
 
-module.exports = OvernightLinksCollection;
+OvernightLinksCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default OvernightLinksCollection;

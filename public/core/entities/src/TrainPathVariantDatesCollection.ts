@@ -1,16 +1,19 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
 
-const { Collection } = require('@bimo/core-utils-collection');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const TrainPathVariantDate = require('./TrainPathVariantDate');
+import { TrainPathVariantDate, TrainPathVariantDateProps } from "./TrainPathVariantDate";
 
 const childClasses = [TrainPathVariantDate];
 
-/** @extends {Collection<TrainPathVariantDate>} */
-class TrainPathVariantDatesCollection extends Collection {
-  constructor(props = {}) {
+
+export interface TrainPathVariantDatesCollectionProps extends ExtendedCollectionProps<TrainPathVariantDate, TrainPathVariantDateProps> {
+}
+
+export class TrainPathVariantDatesCollection extends Collection<TrainPathVariantDate, TrainPathVariantDateProps> {
+  constructor(props: TrainPathVariantDatesCollectionProps = {}) {
     super({
       itemName: 'TrainPathVariantDate',
       ItemConstructor: TrainPathVariantDate,
@@ -25,7 +28,7 @@ class TrainPathVariantDatesCollection extends Collection {
 }
 
 TrainPathVariantDatesCollection.allChildClasses = getAllChildClasses(childClasses);
-TrainPathVariantDatesCollection.prototype.serializeModel = serializeThis;
-TrainPathVariantDatesCollection.parseModel = parseThis;
 
-module.exports = TrainPathVariantDatesCollection;
+
+
+export default TrainPathVariantDatesCollection;

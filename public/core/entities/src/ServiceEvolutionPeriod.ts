@@ -1,21 +1,32 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const ServiceEvolutionPeriodSchedulesBookingsCollection = require('./ServiceEvolutionPeriodSchedulesBookingsCollection');
-const ServiceContextWeeksCollection = require('./ServiceContextWeeksCollection');
+import { ServiceEvolutionPeriodSchedulesBookingsCollection, ServiceEvolutionPeriodSchedulesBookingsCollectionProps } from "./ServiceEvolutionPeriodSchedulesBookingsCollection";
+import { ServiceContextWeeksCollection, ServiceContextWeeksCollectionProps } from "./ServiceContextWeeksCollection";
 
 const childClasses = [ServiceEvolutionPeriodSchedulesBookingsCollection, ServiceContextWeeksCollection];
 
-class ServiceEvolutionPeriod extends Item {
-  constructor(props) {
+export interface ServiceEvolutionPeriodProps extends ExtendedItemProps {
+  sevopStartDate?: string;
+  sevopServiceDefId?: string;
+  serviceEvolutionPeriodSchedulesBookings?: string;
+  serviceContextWeeks?: string;
+}
+
+export class ServiceEvolutionPeriod extends Item<ServiceEvolutionPeriod> {
+  sevopStartDate?: string;
+  sevopServiceDefId?: string;
+  serviceEvolutionPeriodSchedulesBookings?: string;
+  serviceContextWeeks?: string;
+  constructor(props: ServiceEvolutionPeriodProps) {
     super(props);
-    this.sevopStartDate = getAndValidatePropFromProps('sevopStartDate', props, `string`);
-    this.sevopServiceDefId = getAndValidatePropFromProps('sevopServiceDefId', props, `string`);
+    this.sevopStartDate = gavpfp('sevopStartDate', props, `string`);
+    this.sevopServiceDefId = gavpfp('sevopServiceDefId', props, `string`);
 
     /* Children */
     /** @type {ServiceEvolutionPeriodSchedulesBookingsCollection} */
-    this.serviceEvolutionPeriodSchedulesBookings = getAndValidatePropFromProps(
+    this.serviceEvolutionPeriodSchedulesBookings = gavpfp(
       'serviceEvolutionPeriodSchedulesBookings', props,
       ServiceEvolutionPeriodSchedulesBookingsCollection,
       new ServiceEvolutionPeriodSchedulesBookingsCollection(),
@@ -23,7 +34,7 @@ class ServiceEvolutionPeriod extends Item {
     );
 
     /** @type {ServiceContextWeeksCollection} */
-    this.serviceContextWeeks = getAndValidatePropFromProps(
+    this.serviceContextWeeks = gavpfp(
       'serviceContextWeeks', props,
       ServiceContextWeeksCollection,
       new ServiceContextWeeksCollection(),
@@ -33,7 +44,7 @@ class ServiceEvolutionPeriod extends Item {
 }
 
 ServiceEvolutionPeriod.allChildClasses = getAllChildClasses(childClasses);
-ServiceEvolutionPeriod.prototype.serializeModel = serializeThis;
-ServiceEvolutionPeriod.parseModel = parseThis;
 
-module.exports = ServiceEvolutionPeriod;
+
+
+export default ServiceEvolutionPeriod;

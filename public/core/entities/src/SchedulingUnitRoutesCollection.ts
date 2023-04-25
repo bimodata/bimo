@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
-const SchedulingUnitRoute = require('./SchedulingUnitRoute');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { SchedulingUnitRoute, SchedulingUnitRouteProps } from "./SchedulingUnitRoute";
 
 const childClasses = [SchedulingUnitRoute];
 
-/* Class definition */
-/** @extends {Collection<SchedulingUnitRoute>} */
-class SchedulingUnitRoutesCollection extends Collection {
-  constructor(props) {
+
+
+export interface SchedulingUnitRoutesCollectionProps extends ExtendedCollectionProps<SchedulingUnitRoute, SchedulingUnitRouteProps> {
+}
+
+export class SchedulingUnitRoutesCollection extends Collection<SchedulingUnitRoute, SchedulingUnitRouteProps> {
+  constructor(props: SchedulingUnitRoutesCollectionProps) {
     super({
       itemName: 'SchedulingUnitRoute',
       ItemConstructor: SchedulingUnitRoute,
@@ -19,7 +22,7 @@ class SchedulingUnitRoutesCollection extends Collection {
 }
 
 SchedulingUnitRoutesCollection.allChildClasses = getAllChildClasses(childClasses);
-SchedulingUnitRoutesCollection.prototype.serializeModel = serializeThis;
-SchedulingUnitRoutesCollection.parseModel = parseThis;
 
-module.exports = SchedulingUnitRoutesCollection;
+
+
+export default SchedulingUnitRoutesCollection;

@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
 
-const { Collection } = require('@bimo/core-utils-collection');
-const ServiceContextWeek = require('./ServiceContextWeek');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { ServiceContextWeek, ServiceContextWeekProps } from "./ServiceContextWeek";
 
 const childClasses = [ServiceContextWeek];
 
-/** @extends {Collection<ServiceContextWeek>} */
-class ServiceContextWeeksCollection extends Collection {
-  constructor(props = {}) {
+
+export interface ServiceContextWeeksCollectionProps extends ExtendedCollectionProps<ServiceContextWeek, ServiceContextWeekProps> {
+}
+
+export class ServiceContextWeeksCollection extends Collection<ServiceContextWeek, ServiceContextWeekProps> {
+  constructor(props: ServiceContextWeeksCollectionProps = {}) {
     super({
       itemName: 'ServiceContextWeek',
       businessIdPropName: 'scwkSchedUnitId',
@@ -19,7 +22,7 @@ class ServiceContextWeeksCollection extends Collection {
 }
 
 ServiceContextWeeksCollection.allChildClasses = getAllChildClasses(childClasses);
-ServiceContextWeeksCollection.prototype.serializeModel = serializeThis;
-ServiceContextWeeksCollection.parseModel = parseThis;
 
-module.exports = ServiceContextWeeksCollection;
+
+
+export default ServiceContextWeeksCollection;

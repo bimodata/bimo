@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const DataFile = require('./DataFile');
+import { DataFile, DataFileProps } from "./DataFile";
 
 const childClasses = [DataFile];
 
-/** @extends {Collection<DataFile>} */
-class DataFilesCollection extends Collection {
-  constructor(props = {}) {
+
+export interface DataFilesCollectionProps extends ExtendedCollectionProps<DataFile, DataFileProps> {
+}
+
+export class DataFilesCollection extends Collection<DataFile, DataFileProps> {
+  constructor(props: DataFilesCollectionProps = {}) {
     super({
       itemName: 'DataFile',
       ItemConstructor: DataFile,
@@ -21,7 +24,7 @@ class DataFilesCollection extends Collection {
 }
 
 DataFilesCollection.allChildClasses = getAllChildClasses(childClasses);
-DataFilesCollection.prototype.serializeModel = serializeThis;
-DataFilesCollection.parseModel = parseThis;
 
-module.exports = DataFilesCollection;
+
+
+export default DataFilesCollection;

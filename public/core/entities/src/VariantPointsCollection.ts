@@ -1,14 +1,17 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const VariantPoint = require('./VariantPoint');
+import { VariantPoint, VariantPointProps } from "./VariantPoint";
 
 const childClasses = [VariantPoint];
 
-/* Class definition */
-/** @extends {Collection<VariantPoint>} */
-class VariantPointsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface VariantPointsCollectionProps extends ExtendedCollectionProps<VariantPoint, VariantPointProps> {
+}
+
+export class VariantPointsCollection extends Collection<VariantPoint, VariantPointProps> {
+  constructor(props: VariantPointsCollectionProps = {}) {
     super({
       itemName: 'VariantPoint',
       ItemConstructor: VariantPoint,
@@ -27,9 +30,9 @@ class VariantPointsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-VariantPointsCollection.allChildClasses = getAllChildClasses(childClasses);
-VariantPointsCollection.prototype.serializeModel = serializeThis;
-VariantPointsCollection.parseModel = parseThis;
 
-module.exports = VariantPointsCollection;
+VariantPointsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default VariantPointsCollection;

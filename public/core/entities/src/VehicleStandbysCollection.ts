@@ -1,12 +1,15 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
-const VehicleStandby = require('./VehicleStandby');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { VehicleStandby, VehicleStandbyProps } from "./VehicleStandby";
 
 const childClasses = [VehicleStandby];
 
-/** @extends {Collection<VehicleStandby>} */
-class VehicleStandbysCollection extends Collection {
-  constructor(props = {}) {
+
+export interface VehicleStandbysCollectionProps extends ExtendedCollectionProps<VehicleStandby, VehicleStandbyProps> {
+}
+
+export class VehicleStandbysCollection extends Collection<VehicleStandby, VehicleStandbyProps> {
+  constructor(props: VehicleStandbysCollectionProps = {}) {
     super({
       itemName: 'VehicleStandby',
       ItemConstructor: VehicleStandby,
@@ -18,9 +21,9 @@ class VehicleStandbysCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-VehicleStandbysCollection.allChildClasses = getAllChildClasses(childClasses);
-VehicleStandbysCollection.prototype.serializeModel = serializeThis;
-VehicleStandbysCollection.parseModel = parseThis;
 
-module.exports = VehicleStandbysCollection;
+VehicleStandbysCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default VehicleStandbysCollection;

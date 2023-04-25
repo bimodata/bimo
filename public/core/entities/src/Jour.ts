@@ -1,4 +1,4 @@
-const { serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import { serializeThis, parseThis } from '@bimo/core-utils-serialization';
 
 const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
   1: {
@@ -66,7 +66,10 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
   },
 };
 
-class Jour {
+export interface JourProps extends ExtendedItemProps {
+}
+
+export class Jour {
   constructor(jourValue) {
     if (jourValue instanceof Jour) {
       return jourValue;
@@ -125,9 +128,9 @@ Object.keys(ALL_JOUR_VALUE_BY_KEY_BY_ID).forEach((id) => {
 
 Jour.jourIdByJourValue = jourIdByJourValue;
 
-Jour.prototype.serializeModel = serializeThis;
-Jour.parseModel = parseThis;
+
+
 
 Object.keys(ALL_JOUR_VALUE_BY_KEY_BY_ID).forEach((id) => new Jour(id));
 
-module.exports = Jour;
+export default Jour;

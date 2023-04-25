@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 
-const { Item } = require('@bimo/core-utils-collection');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 /**
  * Bimo specific class that represents a sub section of a trip or variant
@@ -17,12 +17,17 @@ const { Item } = require('@bimo/core-utils-collection');
  * Initial use case: comparing the distances we have in Hastus with external distances
  * Potential future use cases: combining trips or variants to create longer itineraries
  */
-class TripOrVariantSection extends Item {
+export interface TripOrVariantSectionProps extends ExtendedItemProps {
+  points?: string;
+}
+
+export class TripOrVariantSection extends Item<TripOrVariantSection> {
   /**
    * @param {Object} props
    * @param {import('./TripOrVariantPoint')[]} props.points
    */
-  constructor(props) {
+  points?: string;
+  constructor(props: TripOrVariantSectionProps) {
     super(props);
     const { points } = props;
     this.points = points;
@@ -61,4 +66,4 @@ class TripOrVariantSection extends Item {
   }
 }
 
-module.exports = TripOrVariantSection;
+export default TripOrVariantSection;

@@ -1,22 +1,25 @@
-/* Linked Classes */
-const TripShift = require('./TripShift');
 
-/* Serialization utilities dependencies */
+import { TripShift, TripShiftProps } from "./TripShift";
+
+
 const childClasses = [TripShift];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-/** @extends {Collection<TripShift>} */
-class TripShiftsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface TripShiftsCollectionProps extends ExtendedCollectionProps<TripShift, TripShiftProps> {
+}
+
+export class TripShiftsCollection extends Collection<TripShift, TripShiftProps> {
+  constructor(props: TripShiftsCollectionProps = {}) {
     super({ itemName: 'TripShift', ItemConstructor: TripShift, items: props.items, parent: props.parent });
   }
 }
 
-/* Serialization utilities */
-TripShiftsCollection.allChildClasses = getAllChildClasses(childClasses);
-TripShiftsCollection.prototype.serializeModel = serializeThis;
-TripShiftsCollection.parseModel = parseThis;
 
-module.exports = TripShiftsCollection;
+TripShiftsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default TripShiftsCollection;

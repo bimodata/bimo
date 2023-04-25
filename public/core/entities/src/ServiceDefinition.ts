@@ -1,24 +1,39 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const { Item } = require('@bimo/core-utils-collection');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const SdefSchedulingUnitsCollection = require('./SdefSchedulingUnitsCollection');
+import { SdefSchedulingUnitsCollection, SdefSchedulingUnitsCollectionProps } from "./SdefSchedulingUnitsCollection";
 
 const childClasses = [SdefSchedulingUnitsCollection];
 
-class ServiceDefinition extends Item {
-  constructor(props) {
+export interface ServiceDefinitionProps extends ExtendedItemProps {
+  sdefIdentifier?: string;
+  sdefDescription?: string;
+  sdefOwner?: string;
+  sdefDataGroup?: string;
+  sdefPublicAccess?: string;
+  schedulingUnits?: string;
+}
+
+export class ServiceDefinition extends Item<ServiceDefinition> {
+  sdefIdentifier?: string;
+  sdefDescription?: string;
+  sdefOwner?: string;
+  sdefDataGroup?: string;
+  sdefPublicAccess?: string;
+  schedulingUnits?: string;
+  constructor(props: ServiceDefinitionProps) {
     super(props);
-    this.sdefIdentifier = getAndValidatePropFromProps('sdefIdentifier', props, `string`);
-    this.sdefDescription = getAndValidatePropFromProps('sdefDescription', props, `string`, 'Générée par Lauritz');
-    this.sdefOwner = getAndValidatePropFromProps('sdefOwner', props, `string`, 'ADMIN');
-    this.sdefDataGroup = getAndValidatePropFromProps('sdefDataGroup', props, `string`);
-    this.sdefPublicAccess = getAndValidatePropFromProps('sdefPublicAccess', props, `string`, '1');
+    this.sdefIdentifier = gavpfp('sdefIdentifier', props, `string`);
+    this.sdefDescription = gavpfp('sdefDescription', props, `string`, 'Générée par Lauritz');
+    this.sdefOwner = gavpfp('sdefOwner', props, `string`, 'ADMIN');
+    this.sdefDataGroup = gavpfp('sdefDataGroup', props, `string`);
+    this.sdefPublicAccess = gavpfp('sdefPublicAccess', props, `string`, '1');
 
     /* Children */
     /** @type {SdefSchedulingUnitsCollection} */
-    this.schedulingUnits = getAndValidatePropFromProps(
+    this.schedulingUnits = gavpfp(
       'sdefSchedulingUnit', props,
       SdefSchedulingUnitsCollection,
       new SdefSchedulingUnitsCollection(),
@@ -35,7 +50,7 @@ ServiceDefinition.hastusKeywords = ['service_definition'];
 ServiceDefinition.hastusObject = 'service_definition';
 
 ServiceDefinition.allChildClasses = getAllChildClasses(childClasses);
-ServiceDefinition.prototype.serializeModel = serializeThis;
-ServiceDefinition.parseModel = parseThis;
 
-module.exports = ServiceDefinition;
+
+
+export default ServiceDefinition;

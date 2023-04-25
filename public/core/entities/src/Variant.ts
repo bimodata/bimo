@@ -1,33 +1,64 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const TripOrVariant = require('./TripOrVariant');
-const VariantPointsCollection = require('./VariantPointsCollection');
-const VariantPoint = require('./VariantPoint');
+import { TripOrVariant, TripOrVariantProps } from "./TripOrVariant";
+import { VariantPointsCollection, VariantPointsCollectionProps } from "./VariantPointsCollection";
+import { VariantPoint, VariantPointProps } from "./VariantPoint";
 
 const childClasses = [VariantPointsCollection];
 
-/** @extends {TripOrVariant<VariantPoint>} */
-class Variant extends TripOrVariant {
-  constructor(props) {
+
+export interface VariantProps extends ExtendedItemProps {
+  bimoId?: string;
+  varIdentifier?: string;
+  varDescription?: string;
+  varDirection?: string;
+  varReversible?: string;
+  varUsualTermin?: string;
+  varDestinationNote?: string;
+  varProductive?: string;
+  varPriority?: string;
+  varAllowDeviationFromTrackNetwork?: string;
+  varNatureMouvementTechnique?: string;
+  varIndiceCompo?: string;
+  variantPoints?: string;
+  _links?: string;
+}
+
+export class Variant extends TripOrVariant {
+  bimoId?: string;
+  varIdentifier?: string;
+  varDescription?: string;
+  varDirection?: string;
+  varReversible?: string;
+  varUsualTermin?: string;
+  varDestinationNote?: string;
+  varProductive?: string;
+  varPriority?: string;
+  varAllowDeviationFromTrackNetwork?: string;
+  varNatureMouvementTechnique?: string;
+  varIndiceCompo?: string;
+  variantPoints?: string;
+  _links?: string;
+  constructor(props: VariantProps) {
     super(props, 'variant');
-    this.bimoId = getAndValidatePropFromProps('bimoId', props);
-    this.varIdentifier = getAndValidatePropFromProps('varIdentifier', props);
-    this.varDescription = getAndValidatePropFromProps('varDescription', props);
-    this.varDirection = getAndValidatePropFromProps('varDirection', props);
-    this.varReversible = getAndValidatePropFromProps('varReversible', props);
-    this.varUsualTermin = getAndValidatePropFromProps('varUsualTermin', props);
-    this.varDestinationNote = getAndValidatePropFromProps('varDestinationNote', props);
-    this.varProductive = getAndValidatePropFromProps('varProductive', props);
-    this.varPriority = getAndValidatePropFromProps('varPriority', props);
-    this.varAllowDeviationFromTrackNetwork = getAndValidatePropFromProps('varAllowDeviationFromTrackNetwork', props, 'string', '0');
+    this.bimoId = gavpfp('bimoId', props);
+    this.varIdentifier = gavpfp('varIdentifier', props);
+    this.varDescription = gavpfp('varDescription', props);
+    this.varDirection = gavpfp('varDirection', props);
+    this.varReversible = gavpfp('varReversible', props);
+    this.varUsualTermin = gavpfp('varUsualTermin', props);
+    this.varDestinationNote = gavpfp('varDestinationNote', props);
+    this.varProductive = gavpfp('varProductive', props);
+    this.varPriority = gavpfp('varPriority', props);
+    this.varAllowDeviationFromTrackNetwork = gavpfp('varAllowDeviationFromTrackNetwork', props, 'string', '0');
 
     // Site spec à bouger vers Lauritz un jour
-    this.varNatureMouvementTechnique = getAndValidatePropFromProps('varNatureMouvementTechnique', props);
-    this.varIndiceCompo = getAndValidatePropFromProps('varIndiceCompo', props);
+    this.varNatureMouvementTechnique = gavpfp('varNatureMouvementTechnique', props);
+    this.varIndiceCompo = gavpfp('varIndiceCompo', props);
 
     /* Children */
-    /** */ this.variantPoints = getAndValidatePropFromProps(
+    /** */ this.variantPoints = gavpfp(
       'variantPoints', props, VariantPointsCollection, new VariantPointsCollection(), { altPropName: 'variant_point' },
     );
     this.variantPoints.parent = this;
@@ -154,9 +185,9 @@ class Variant extends TripOrVariant {
 Variant.hastusKeywords = ['rvariant'];
 Variant.hastusObject = 'variant';
 
-/* Serialization utilities */
-Variant.allChildClasses = getAllChildClasses(childClasses);
-Variant.prototype.serializeModel = serializeThis;
-Variant.parseModel = parseThis;
 
-module.exports = Variant;
+Variant.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default Variant;

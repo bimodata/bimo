@@ -1,23 +1,44 @@
 /* eslint-disable no-use-before-define */
-/* Linked Classes */
+
 
 /* Serialization utilities dependencies and others ... */
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-class BlockActivity extends Item {
-  constructor(props) {
+
+export interface BlockActivityProps extends ExtendedItemProps {
+  blkactVehicleActivityTypeNo?: string;
+  blkactTripNo?: string;
+  blkactHasFixedLink?: string;
+  blkactCchgNo?: string;
+  blkactVehicleStandbyNo?: string;
+  blkactMaintenanceNo?: string;
+  bimoId?: string;
+  activityEntityClassKey?: string;
+  activityNameByLanguageCode?: string;
+}
+
+export class BlockActivity extends Item<BlockActivity> {
+  blkactVehicleActivityTypeNo?: string;
+  blkactTripNo?: string;
+  blkactHasFixedLink?: string;
+  blkactCchgNo?: string;
+  blkactVehicleStandbyNo?: string;
+  blkactMaintenanceNo?: string;
+  bimoId?: string;
+  activityEntityClassKey?: string;
+  activityNameByLanguageCode?: string;
+  constructor(props: BlockActivityProps) {
     super(props);
-    /** */ this.blkactVehicleActivityTypeNo = getAndValidatePropFromProps('blkactVehicleActivityTypeNo', props);
-    /** */ this.blkactTripNo = getAndValidatePropFromProps('blkactTripNo', props);
-    /** */ this.blkactHasFixedLink = getAndValidatePropFromProps('blkactHasFixedLink', props, 'string', '0');
-    /** */ this.blkactCchgNo = getAndValidatePropFromProps('blkactCchgNo', props);
-    /** */ this.blkactVehicleStandbyNo = getAndValidatePropFromProps('blkactVehicleStandbyNo', props);
-    /** */ this.blkactMaintenanceNo = getAndValidatePropFromProps('blkactMaintenanceNo', props);
-    /** Doesn't exist in hastus but we create it for consistency */ this.bimoId = getAndValidatePropFromProps('bimoId', props);
+    /** */ this.blkactVehicleActivityTypeNo = gavpfp('blkactVehicleActivityTypeNo', props);
+    /** */ this.blkactTripNo = gavpfp('blkactTripNo', props);
+    /** */ this.blkactHasFixedLink = gavpfp('blkactHasFixedLink', props, 'string', '0');
+    /** */ this.blkactCchgNo = gavpfp('blkactCchgNo', props);
+    /** */ this.blkactVehicleStandbyNo = gavpfp('blkactVehicleStandbyNo', props);
+    /** */ this.blkactMaintenanceNo = gavpfp('blkactMaintenanceNo', props);
+    /** Doesn't exist in hastus but we create it for consistency */ this.bimoId = gavpfp('bimoId', props);
 
     if (this.blkactTripNo) {
       this.activityEntityClassKey = `Trip`;
@@ -162,9 +183,9 @@ class BlockActivity extends Item {
 BlockActivity.hastusKeywords = ['block_activity'];
 BlockActivity.hastusObject = 'block_activity';
 
-/* Serialization utilities */
-BlockActivity.allChildClasses = getAllChildClasses(childClasses);
-BlockActivity.prototype.serializeModel = serializeThis;
-BlockActivity.parseModel = parseThis;
 
-module.exports = BlockActivity;
+BlockActivity.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default BlockActivity;

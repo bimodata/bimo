@@ -1,34 +1,71 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const ServiceContextParentsCollection = require('./ServiceContextParentsCollection');
-const ServiceContextIntervalsCollection = require('./ServiceContextIntervalsCollection');
-const ServiceEvolutionPeriodsCollection = require('./ServiceEvolutionPeriodsCollection');
+import { ServiceContextParentsCollection, ServiceContextParentsCollectionProps } from "./ServiceContextParentsCollection";
+import { ServiceContextIntervalsCollection, ServiceContextIntervalsCollectionProps } from "./ServiceContextIntervalsCollection";
+import { ServiceEvolutionPeriodsCollection, ServiceEvolutionPeriodsCollectionProps } from "./ServiceEvolutionPeriodsCollection";
 
 const childClasses = [ServiceContextParentsCollection, ServiceContextIntervalsCollection, ServiceEvolutionPeriodsCollection];
 
-class ServiceContext extends Item {
-  constructor(props) {
+export interface ServiceContextProps extends ExtendedItemProps {
+  sctxName?: string;
+  sctxUserCreated?: string;
+  sctxIsMainBase?: string;
+  sctxIsBase?: string;
+  sctxDescription?: string;
+  sctxColor?: string;
+  sctxColorInternalNumber?: string;
+  sctxWeekColumns?: string;
+  sctxIsolatedWeekday?: string;
+  sctxIntervalSource?: string;
+  sctxDateFilter?: string;
+  sctxNetworkEventRelated?: string;
+  sctxOwner?: string;
+  sctxPublicAccess?: string;
+  serviceContextParents?: string;
+  serviceContextIntervals?: string;
+  serviceEvolutionPeriods?: string;
+}
+
+export class ServiceContext extends Item<ServiceContext> {
+  sctxName?: string;
+  sctxUserCreated?: string;
+  sctxIsMainBase?: string;
+  sctxIsBase?: string;
+  sctxDescription?: string;
+  sctxColor?: string;
+  sctxColorInternalNumber?: string;
+  sctxWeekColumns?: string;
+  sctxIsolatedWeekday?: string;
+  sctxIntervalSource?: string;
+  sctxDateFilter?: string;
+  sctxNetworkEventRelated?: string;
+  sctxOwner?: string;
+  sctxPublicAccess?: string;
+  serviceContextParents?: string;
+  serviceContextIntervals?: string;
+  serviceEvolutionPeriods?: string;
+  constructor(props: ServiceContextProps) {
     super(props);
-    this.sctxName = getAndValidatePropFromProps('sctxName', props, `string`, 'Base');
-    this.sctxUserCreated = getAndValidatePropFromProps('sctxUserCreated', props, `string`, '1');
-    this.sctxIsMainBase = getAndValidatePropFromProps('sctxIsMainBase', props, `string`, '1');
-    this.sctxIsBase = getAndValidatePropFromProps('sctxIsBase', props, 'string', '1');
-    this.sctxDescription = getAndValidatePropFromProps('sctxDescription', props, `string`);
-    this.sctxColor = getAndValidatePropFromProps('sctxColor', props, 'string');
-    this.sctxColorInternalNumber = getAndValidatePropFromProps('sctxColorInternalNumber', props, 'string');
-    this.sctxWeekColumns = getAndValidatePropFromProps('sctxWeekColumns', props);
-    this.sctxIsolatedWeekday = getAndValidatePropFromProps('sctxIsolatedWeekday', props);
-    this.sctxIntervalSource = getAndValidatePropFromProps('sctxIntervalSource', props, 'string', '0');
-    this.sctxDateFilter = getAndValidatePropFromProps('sctxDateFilter', props);
-    this.sctxNetworkEventRelated = getAndValidatePropFromProps('sctxNetworkEventRelated', props);
-    this.sctxOwner = getAndValidatePropFromProps('sctxOwner', props, 'string', 'ADMIN');
-    this.sctxPublicAccess = getAndValidatePropFromProps('sctxPublicAccess', props, 'string', '1');
+    this.sctxName = gavpfp('sctxName', props, `string`, 'Base');
+    this.sctxUserCreated = gavpfp('sctxUserCreated', props, `string`, '1');
+    this.sctxIsMainBase = gavpfp('sctxIsMainBase', props, `string`, '1');
+    this.sctxIsBase = gavpfp('sctxIsBase', props, 'string', '1');
+    this.sctxDescription = gavpfp('sctxDescription', props, `string`);
+    this.sctxColor = gavpfp('sctxColor', props, 'string');
+    this.sctxColorInternalNumber = gavpfp('sctxColorInternalNumber', props, 'string');
+    this.sctxWeekColumns = gavpfp('sctxWeekColumns', props);
+    this.sctxIsolatedWeekday = gavpfp('sctxIsolatedWeekday', props);
+    this.sctxIntervalSource = gavpfp('sctxIntervalSource', props, 'string', '0');
+    this.sctxDateFilter = gavpfp('sctxDateFilter', props);
+    this.sctxNetworkEventRelated = gavpfp('sctxNetworkEventRelated', props);
+    this.sctxOwner = gavpfp('sctxOwner', props, 'string', 'ADMIN');
+    this.sctxPublicAccess = gavpfp('sctxPublicAccess', props, 'string', '1');
 
     /* Children */
     /** @type {ServiceContextParentsCollection} */
-    this.serviceContextParents = getAndValidatePropFromProps(
+    this.serviceContextParents = gavpfp(
       'serviceContextParents', props,
       ServiceContextParentsCollection,
       new ServiceContextParentsCollection(),
@@ -36,7 +73,7 @@ class ServiceContext extends Item {
     );
 
     /** @type {ServiceContextIntervalsCollection} */
-    this.serviceContextIntervals = getAndValidatePropFromProps(
+    this.serviceContextIntervals = gavpfp(
       'serviceContextIntervals', props,
       ServiceContextIntervalsCollection,
       new ServiceContextIntervalsCollection(),
@@ -44,7 +81,7 @@ class ServiceContext extends Item {
     );
 
     /** @type {ServiceEvolutionPeriodsCollection} */
-    this.serviceEvolutionPeriods = getAndValidatePropFromProps(
+    this.serviceEvolutionPeriods = gavpfp(
       'serviceEvolutionPeriods', props,
       ServiceEvolutionPeriodsCollection,
       new ServiceEvolutionPeriodsCollection(),
@@ -54,7 +91,7 @@ class ServiceContext extends Item {
 }
 
 ServiceContext.allChildClasses = getAllChildClasses(childClasses);
-ServiceContext.prototype.serializeModel = serializeThis;
-ServiceContext.parseModel = parseThis;
 
-module.exports = ServiceContext;
+
+
+export default ServiceContext;

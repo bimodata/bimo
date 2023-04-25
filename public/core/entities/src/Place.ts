@@ -1,41 +1,98 @@
-/* Linked Classes */
 
-/* Serialization utilities dependencies */
+
+
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-class Place extends Item {
+
+export interface PlaceProps extends ExtendedItemProps {
+  bimoId?: string;
+  plcIdentifier?: string;
+  plcDescription?: string;
+  plcReferencePlace?: string;
+  plcType?: string;
+  plcDistrict?: string;
+  plcAlterName?: string;
+  plcNumber?: string;
+  plcFlowMethod?: string;
+  plcDataGroup?: string;
+  locaXCoord?: string;
+  locaYCoord?: string;
+  locaLocStatus?: string;
+  locaSegmentExtId?: string;
+  locaDistInter1?: string;
+  locaDistInter2?: string;
+  locaSegmentSide?: string;
+  locaLocMethod?: string;
+  locaLocApproved?: string;
+  plcLastApprovedSegmentName?: string;
+  plcLastApprovedSegmentSide?: string;
+  plcLastApprovedIntersect1?: string;
+  plcLastApprovedIntersect2?: string;
+  plcLastApprovedDistInter1?: string;
+  plcLastApprovedDistInter2?: string;
+  plcRim?: string;
+  relatedPlaces?: string;
+}
+
+export class Place extends Item<Place> {
+  bimoId?: string;
+  plcIdentifier?: string;
+  plcDescription?: string;
+  plcReferencePlace?: string;
+  plcType?: string;
+  plcDistrict?: string;
+  plcAlterName?: string;
+  plcNumber?: string;
+  plcFlowMethod?: string;
+  plcDataGroup?: string;
+  locaXCoord?: string;
+  locaYCoord?: string;
+  locaLocStatus?: string;
+  locaSegmentExtId?: string;
+  locaDistInter1?: string;
+  locaDistInter2?: string;
+  locaSegmentSide?: string;
+  locaLocMethod?: string;
+  locaLocApproved?: string;
+  plcLastApprovedSegmentName?: string;
+  plcLastApprovedSegmentSide?: string;
+  plcLastApprovedIntersect1?: string;
+  plcLastApprovedIntersect2?: string;
+  plcLastApprovedDistInter1?: string;
+  plcLastApprovedDistInter2?: string;
+  plcRim?: string;
+  relatedPlaces?: string;
   constructor(props, entityClassKey = 'Place') {
     super(props, entityClassKey);
-    this.bimoId = getAndValidatePropFromProps('bimoId', props);
-    this.plcIdentifier = getAndValidatePropFromProps('plcIdentifier', props);
-    this.plcDescription = getAndValidatePropFromProps('plcDescription', props);
-    this.plcReferencePlace = getAndValidatePropFromProps('plcReferencePlace', props);
-    this.plcType = getAndValidatePropFromProps('plcType', props);
-    this.plcDistrict = getAndValidatePropFromProps('plcDistrict', props);
-    this.plcAlterName = getAndValidatePropFromProps('plcAlterName', props);
-    this.plcNumber = getAndValidatePropFromProps('plcNumber', props);
-    this.plcFlowMethod = getAndValidatePropFromProps('plcFlowMethod', props, 'string', '0');
-    this.plcDataGroup = getAndValidatePropFromProps('plcDataGroup', props);
-    this.locaXCoord = getAndValidatePropFromProps('locaXCoord', props);
-    this.locaYCoord = getAndValidatePropFromProps('locaYCoord', props);
-    this.locaLocStatus = getAndValidatePropFromProps('locaLocStatus', props, 'string');
-    this.locaSegmentExtId = getAndValidatePropFromProps('locaSegmentExtId', props, 'string');
-    this.locaDistInter1 = getAndValidatePropFromProps('locaDistInter1', props, 'string');
-    this.locaDistInter2 = getAndValidatePropFromProps('locaDistInter2', props, 'string');
-    this.locaSegmentSide = getAndValidatePropFromProps('locaSegmentSide', props, 'string');
-    this.locaLocMethod = getAndValidatePropFromProps('locaLocMethod', props, 'string');
-    this.locaLocApproved = getAndValidatePropFromProps('locaLocApproved', props, 'string');
-    this.plcLastApprovedSegmentName = getAndValidatePropFromProps('plcLastApprovedSegmentName', props, 'string');
-    this.plcLastApprovedSegmentSide = getAndValidatePropFromProps('plcLastApprovedSegmentSide', props, 'string');
-    this.plcLastApprovedIntersect1 = getAndValidatePropFromProps('plcLastApprovedIntersect1', props, 'string');
-    this.plcLastApprovedIntersect2 = getAndValidatePropFromProps('plcLastApprovedIntersect2', props, 'string');
-    this.plcLastApprovedDistInter1 = getAndValidatePropFromProps('plcLastApprovedDistInter1', props, 'string');
-    this.plcLastApprovedDistInter2 = getAndValidatePropFromProps('plcLastApprovedDistInter2', props, 'string');
-    this.plcRim = getAndValidatePropFromProps('plcRim', props, 'string');
+    this.bimoId = gavpfp('bimoId', props);
+    this.plcIdentifier = gavpfp('plcIdentifier', props);
+    this.plcDescription = gavpfp('plcDescription', props);
+    this.plcReferencePlace = gavpfp('plcReferencePlace', props);
+    this.plcType = gavpfp('plcType', props);
+    this.plcDistrict = gavpfp('plcDistrict', props);
+    this.plcAlterName = gavpfp('plcAlterName', props);
+    this.plcNumber = gavpfp('plcNumber', props);
+    this.plcFlowMethod = gavpfp('plcFlowMethod', props, 'string', '0');
+    this.plcDataGroup = gavpfp('plcDataGroup', props);
+    this.locaXCoord = gavpfp('locaXCoord', props);
+    this.locaYCoord = gavpfp('locaYCoord', props);
+    this.locaLocStatus = gavpfp('locaLocStatus', props, 'string');
+    this.locaSegmentExtId = gavpfp('locaSegmentExtId', props, 'string');
+    this.locaDistInter1 = gavpfp('locaDistInter1', props, 'string');
+    this.locaDistInter2 = gavpfp('locaDistInter2', props, 'string');
+    this.locaSegmentSide = gavpfp('locaSegmentSide', props, 'string');
+    this.locaLocMethod = gavpfp('locaLocMethod', props, 'string');
+    this.locaLocApproved = gavpfp('locaLocApproved', props, 'string');
+    this.plcLastApprovedSegmentName = gavpfp('plcLastApprovedSegmentName', props, 'string');
+    this.plcLastApprovedSegmentSide = gavpfp('plcLastApprovedSegmentSide', props, 'string');
+    this.plcLastApprovedIntersect1 = gavpfp('plcLastApprovedIntersect1', props, 'string');
+    this.plcLastApprovedIntersect2 = gavpfp('plcLastApprovedIntersect2', props, 'string');
+    this.plcLastApprovedDistInter1 = gavpfp('plcLastApprovedDistInter1', props, 'string');
+    this.plcLastApprovedDistInter2 = gavpfp('plcLastApprovedDistInter2', props, 'string');
+    this.plcRim = gavpfp('plcRim', props, 'string');
 
     // bimo specific:
     this.relatedPlaces = new Set();
@@ -95,9 +152,9 @@ class Place extends Item {
 Place.hastusKeywords = ['place'];
 Place.hastusObject = 'place';
 
-/* Serialization utilities */
-Place.allChildClasses = getAllChildClasses(childClasses);
-Place.prototype.serializeModel = serializeThis;
-Place.parseModel = parseThis;
 
-module.exports = Place;
+Place.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default Place;

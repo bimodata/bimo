@@ -3,12 +3,23 @@
  * A block section is a section of a block that is operated by a specific vehicle unit
  */
 
-const { Item } = require('@bimo/core-utils-collection');
-const BlockActivitiesCollection = require('./BlockActivitiesCollection');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { BlockActivitiesCollection, BlockActivitiesCollectionProps } from "./BlockActivitiesCollection";
 
-/* Class definition */
-class BlockSection extends Item {
-  constructor(props) {
+
+export interface BlockSectionProps extends ExtendedItemProps {
+  id?: string;
+  label?: string;
+  block?: string;
+  blockActivities?: string;
+}
+
+export class BlockSection extends Item<BlockSection> {
+  id?: string;
+  label?: string;
+  block?: string;
+  blockActivities?: string;
+  constructor(props: BlockSectionProps) {
     super(props);
 
     this.id = props.id;
@@ -67,4 +78,4 @@ class BlockSection extends Item {
   }
 }
 
-module.exports = BlockSection;
+export default BlockSection;

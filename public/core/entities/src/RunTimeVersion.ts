@@ -1,38 +1,67 @@
-const { Item } = require('@bimo/core-utils-collection');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-/* Linked Classes */
-const RunTimesCollection = require('./RunTimesCollection');
-const LoadTimesCollection = require('./LoadTimesCollection');
+
+import { RunTimesCollection, RunTimesCollectionProps } from "./RunTimesCollection";
+import { LoadTimesCollection, LoadTimesCollectionProps } from "./LoadTimesCollection";
 
 const childClasses = [RunTimesCollection, LoadTimesCollection];
 
-/* Class definition */
-class RunTimeVersion extends Item {
-  constructor(props) {
+
+export interface RunTimeVersionProps extends ExtendedItemProps {
+  bimoId?: string;
+  rtvIdentifier?: string;
+  rtvDescription?: string;
+  rtvScheduleType?: string;
+  rtvSchedulingUnit?: string;
+  rtvEffectiveDate?: string;
+  rtvOwner?: string;
+  rtvPublicAccess?: string;
+  rtvDataGroup?: string;
+  rtvAllowsMapBasedRunTimes?: string;
+  rtvMapBasedRunTimeFactor?: string;
+  runTimes?: string;
+  loadTimes?: string;
+}
+
+export class RunTimeVersion extends Item<RunTimeVersion> {
+  bimoId?: string;
+  rtvIdentifier?: string;
+  rtvDescription?: string;
+  rtvScheduleType?: string;
+  rtvSchedulingUnit?: string;
+  rtvEffectiveDate?: string;
+  rtvOwner?: string;
+  rtvPublicAccess?: string;
+  rtvDataGroup?: string;
+  rtvAllowsMapBasedRunTimes?: string;
+  rtvMapBasedRunTimeFactor?: string;
+  runTimes?: string;
+  loadTimes?: string;
+  constructor(props: RunTimeVersionProps) {
     super(props);
     /** We can't use rtevIdentifier: it has a functional meaning */
-    this.bimoId = getAndValidatePropFromProps('bimoId', props);
-    this.rtvIdentifier = getAndValidatePropFromProps('rtvIdentifier', props, `string`);
-    this.rtvDescription = getAndValidatePropFromProps('rtvDescription', props, `string`);
-    this.rtvScheduleType = getAndValidatePropFromProps('rtvScheduleType', props, `string`);
-    this.rtvSchedulingUnit = getAndValidatePropFromProps('rtvSchedulingUnit', props, `string`);
-    this.rtvEffectiveDate = getAndValidatePropFromProps('rtvEffectiveDate', props, `string`);
-    this.rtvOwner = getAndValidatePropFromProps('rtvOwner', props, `string`);
-    this.rtvPublicAccess = getAndValidatePropFromProps('rtvPublicAccess', props, `string`);
-    this.rtvDataGroup = getAndValidatePropFromProps('rtvDataGroup', props, `string`);
-    this.rtvAllowsMapBasedRunTimes = getAndValidatePropFromProps('rtvAllowsMapBasedRunTimes', props, `string`, `0`);
-    this.rtvMapBasedRunTimeFactor = getAndValidatePropFromProps('rtvMapBasedRunTimeFactor', props, `string`, `1`);
+    this.bimoId = gavpfp('bimoId', props);
+    this.rtvIdentifier = gavpfp('rtvIdentifier', props, `string`);
+    this.rtvDescription = gavpfp('rtvDescription', props, `string`);
+    this.rtvScheduleType = gavpfp('rtvScheduleType', props, `string`);
+    this.rtvSchedulingUnit = gavpfp('rtvSchedulingUnit', props, `string`);
+    this.rtvEffectiveDate = gavpfp('rtvEffectiveDate', props, `string`);
+    this.rtvOwner = gavpfp('rtvOwner', props, `string`);
+    this.rtvPublicAccess = gavpfp('rtvPublicAccess', props, `string`);
+    this.rtvDataGroup = gavpfp('rtvDataGroup', props, `string`);
+    this.rtvAllowsMapBasedRunTimes = gavpfp('rtvAllowsMapBasedRunTimes', props, `string`, `0`);
+    this.rtvMapBasedRunTimeFactor = gavpfp('rtvMapBasedRunTimeFactor', props, `string`, `1`);
 
     /** @type {RunTimesCollection} */
-    this.runTimes = getAndValidatePropFromProps(
+    this.runTimes = gavpfp(
       'runTimes', props, RunTimesCollection, new RunTimesCollection(), { altPropName: 'run_time' },
     );
     this.runTimes.parent = this;
 
     /** @type {LoadTimesCollection} */
-    this.loadTimes = getAndValidatePropFromProps(
+    this.loadTimes = gavpfp(
       'loadTimes', props, LoadTimesCollection, new LoadTimesCollection(), { altPropName: 'load_time' },
     );
     this.loadTimes.parent = this;
@@ -59,9 +88,9 @@ class RunTimeVersion extends Item {
 RunTimeVersion.hastusKeywords = ['runtime_version'];
 RunTimeVersion.hastusObject = 'runtime_version';
 
-/* Serialization utilities */
-RunTimeVersion.allChildClasses = getAllChildClasses(childClasses);
-RunTimeVersion.prototype.serializeModel = serializeThis;
-RunTimeVersion.parseModel = parseThis;
 
-module.exports = RunTimeVersion;
+RunTimeVersion.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default RunTimeVersion;

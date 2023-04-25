@@ -1,19 +1,22 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const { Collection } = require('@bimo/core-utils-collection');
-const BookingsCollection = require('./BookingsCollection');
-const BookingCalendar = require('./BookingCalendar');
-const ServiceDefinitionsCollection = require('./ServiceDefinitionsCollection');
-const SchedulingUnitsCollection = require('./SchedulingUnitsCollection');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { BookingsCollection, BookingsCollectionProps } from "./BookingsCollection";
+import { BookingCalendar, BookingCalendarProps } from "./BookingCalendar";
+import { ServiceDefinitionsCollection, ServiceDefinitionsCollectionProps } from "./ServiceDefinitionsCollection";
+import { SchedulingUnitsCollection, SchedulingUnitsCollectionProps } from "./SchedulingUnitsCollection";
 
 const childClasses = [BookingCalendar];
 
-/** @extends {Collection<BookingCalendarDate>} */
-class BookingCalendarsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface BookingCalendarsCollectionProps extends ExtendedCollectionProps<BookingCalendar, BookingCalendarProps> {
+}
+
+export class BookingCalendarsCollection extends Collection<BookingCalendar, BookingCalendarProps> {
+  constructor(props: BookingCalendarsCollectionProps = {}) {
     super({
       itemName: 'BookingCalendar',
       ItemConstructor: BookingCalendar,
@@ -23,7 +26,7 @@ class BookingCalendarsCollection extends Collection {
 
     /* Unofficial children */
     /** @type {ServiceDefinitionsCollection} */
-    this.serviceDefinitions = getAndValidatePropFromProps(
+    this.serviceDefinitions = gavpfp(
       'serviceDefinition', props,
       ServiceDefinitionsCollection,
       new ServiceDefinitionsCollection(),
@@ -31,7 +34,7 @@ class BookingCalendarsCollection extends Collection {
     );
 
     /** @type {SchedulingUnitsCollection} */
-    this.schedulingUnits = getAndValidatePropFromProps(
+    this.schedulingUnits = gavpfp(
       'schedulingUnit', props,
       SchedulingUnitsCollection,
       new SchedulingUnitsCollection(),
@@ -39,7 +42,7 @@ class BookingCalendarsCollection extends Collection {
     );
 
     /** @type {BookingsCollection} */
-    this.bookings = getAndValidatePropFromProps(
+    this.bookings = gavpfp(
       'booking', props,
       BookingsCollection,
       new BookingsCollection(),
@@ -97,7 +100,7 @@ class BookingCalendarsCollection extends Collection {
 }
 
 BookingCalendarsCollection.allChildClasses = getAllChildClasses(childClasses);
-BookingCalendarsCollection.prototype.serializeModel = serializeThis;
-BookingCalendarsCollection.parseModel = parseThis;
 
-module.exports = BookingCalendarsCollection;
+
+
+export default BookingCalendarsCollection;

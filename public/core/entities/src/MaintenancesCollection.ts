@@ -1,12 +1,15 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
-const Maintenance = require('./Maintenance');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { Maintenance, MaintenanceProps } from "./Maintenance";
 
 const childClasses = [Maintenance];
 
-/** @extends {Collection<Maintenance>} */
-class MaintenancesCollection extends Collection {
-  constructor(props = {}) {
+
+export interface MaintenancesCollectionProps extends ExtendedCollectionProps<Maintenance, MaintenanceProps> {
+}
+
+export class MaintenancesCollection extends Collection<Maintenance, MaintenanceProps> {
+  constructor(props: MaintenancesCollectionProps = {}) {
     super({
       itemName: 'Maintenance',
       ItemConstructor: Maintenance,
@@ -19,7 +22,7 @@ class MaintenancesCollection extends Collection {
 }
 
 MaintenancesCollection.allChildClasses = getAllChildClasses(childClasses);
-MaintenancesCollection.prototype.serializeModel = serializeThis;
-MaintenancesCollection.parseModel = parseThis;
 
-module.exports = MaintenancesCollection;
+
+
+export default MaintenancesCollection;

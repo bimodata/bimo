@@ -1,27 +1,28 @@
-/* Linked Classes */
-
-/* Serialization utilities dependencies */
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { Block } from "./Block";
 
-/* Class definition */
-class Blkvehuoir extends Item {
-  constructor(props) {
+export interface BlkvehuoirProps extends ExtendedItemProps {
+  blkvehuoirRank?: string;
+  VehuUniqueId?: string;
+  bimoId?: string;
+}
+
+export class Blkvehuoir extends Item<Blkvehuoir> {
+  blkvehuoirRank?: string;
+  VehuUniqueId?: string;
+  bimoId?: string;
+  constructor(props: BlkvehuoirProps) {
     super(props);
-    /** */ this.blkvehuoirRank = getAndValidatePropFromProps('blkvehuoirRank', props);
-    /** */ this.VehuUniqueId = getAndValidatePropFromProps('VehuUniqueId', props);
-    /** Pas dans hastus, mais pour consistance */ this.bimoId = getAndValidatePropFromProps('bimoId', props);
-
-    /* Children */
-
-    /* Links */
+    this.blkvehuoirRank = gavpfp("blkvehuoirRank", props);
+    this.VehuUniqueId = gavpfp("VehuUniqueId", props);
+    this.bimoId = gavpfp("bimoId", props);
   }
 
-  /** @type {import('@bimo-hastus/domain-entities/src/Block')} */
   get block() {
-    return this.parent?.parent;
+    return this.parent && (this.parent.parent as Block);
   }
 
   get vehicleSchedule() {
@@ -33,12 +34,9 @@ class Blkvehuoir extends Item {
   }
 }
 
-Blkvehuoir.hastusKeywords = ['blk_vehicle_unit_at_start'];
-Blkvehuoir.hastusObject = 'blkvehuoir';
+Blkvehuoir.hastusKeywords = ["blk_vehicle_unit_at_start"];
+Blkvehuoir.hastusObject = "blkvehuoir";
 
-/* Serialization utilities */
 Blkvehuoir.allChildClasses = getAllChildClasses(childClasses);
-Blkvehuoir.prototype.serializeModel = serializeThis;
-Blkvehuoir.parseModel = parseThis;
 
-module.exports = Blkvehuoir;
+export default Blkvehuoir;

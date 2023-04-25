@@ -1,19 +1,22 @@
 /* eslint-disable no-param-reassign */
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Linked Classes */
-const RouteVersion = require('./RouteVersion');
-const RoutesCollection = require('./RoutesCollection');
-const VariantsCollection = require('./VariantsCollection');
 
-/* Serialization utilities dependencies */
+import { RouteVersion, RouteVersionProps } from "./RouteVersion";
+import { RoutesCollection, RoutesCollectionProps } from "./RoutesCollection";
+import { VariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
+
+
 const childClasses = [RouteVersion, RoutesCollection];
 
-/* Class definition */
-/** @extends {Collection<RouteVersion>} */
-class RouteVersionsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface RouteVersionsCollectionProps extends ExtendedCollectionProps<RouteVersion, RouteVersionProps> {
+}
+
+export class RouteVersionsCollection extends Collection<RouteVersion, RouteVersionProps> {
+  constructor(props: RouteVersionsCollectionProps = {}) {
     super({
       itemName: 'RouteVersion',
       ItemConstructor: RouteVersion,
@@ -92,13 +95,13 @@ class RouteVersionsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
+
 RouteVersionsCollection.allChildClasses = getAllChildClasses(childClasses);
-RouteVersionsCollection.prototype.serializeModel = serializeThis;
-RouteVersionsCollection.parseModel = parseThis;
+
+
 
 /* I/O info */
 RouteVersionsCollection.defaultExportedDataDataName = `output_rtever`;
 RouteVersionsCollection.defaultImportDataDataName = `input_rtever`;
 
-module.exports = RouteVersionsCollection;
+export default RouteVersionsCollection;

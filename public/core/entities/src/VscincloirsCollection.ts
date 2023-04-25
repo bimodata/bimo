@@ -1,15 +1,18 @@
-/* Linked Classes */
-const Vscincloir = require('./Vscincloir');
 
-/* Serialization utilities dependencies */
+import { Vscincloir, VscincloirProps } from "./Vscincloir";
+
+
 const childClasses = [Vscincloir];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-/** @extends {Collection<Vscincloir>} */
-class VscincloirsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface VscincloirsCollectionProps extends ExtendedCollectionProps<Vscincloir, VscincloirProps> {
+}
+
+export class VscincloirsCollection extends Collection<Vscincloir, VscincloirProps> {
+  constructor(props: VscincloirsCollectionProps = {}) {
     super({
       itemName: 'Vscincloir',
       ItemConstructor: Vscincloir,
@@ -21,9 +24,9 @@ class VscincloirsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-VscincloirsCollection.allChildClasses = getAllChildClasses(childClasses);
-VscincloirsCollection.prototype.serializeModel = serializeThis;
-VscincloirsCollection.parseModel = parseThis;
 
-module.exports = VscincloirsCollection;
+VscincloirsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default VscincloirsCollection;

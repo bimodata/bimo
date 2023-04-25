@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const NetworkSection = require('./NetworkSection');
+import { NetworkSection, NetworkSectionProps } from "./NetworkSection";
 
 const childClasses = [NetworkSection];
 
-/** @extends {Collection<NetworkSection>} */
-class NetworkSectionsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface NetworkSectionsCollectionProps extends ExtendedCollectionProps<NetworkSection, NetworkSectionProps> {
+}
+
+export class NetworkSectionsCollection extends Collection<NetworkSection, NetworkSectionProps> {
+  constructor(props: NetworkSectionsCollectionProps = {}) {
     super({
       itemName: 'NetworkSection',
       ItemConstructor: NetworkSection,
@@ -21,7 +24,7 @@ class NetworkSectionsCollection extends Collection {
 }
 
 NetworkSectionsCollection.allChildClasses = getAllChildClasses(childClasses);
-NetworkSectionsCollection.prototype.serializeModel = serializeThis;
-NetworkSectionsCollection.parseModel = parseThis;
 
-module.exports = NetworkSectionsCollection;
+
+
+export default NetworkSectionsCollection;

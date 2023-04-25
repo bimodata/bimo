@@ -1,22 +1,35 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const ServiceContextDaysCollection = require('./ServiceContextDaysCollection');
+import { ServiceContextDaysCollection, ServiceContextDaysCollectionProps } from "./ServiceContextDaysCollection";
 
 const childClasses = [ServiceContextDaysCollection];
 
-class ServiceContextWeek extends Item {
-  constructor(props) {
+export interface ServiceContextWeekProps extends ExtendedItemProps {
+  scwkSchedUnitId?: string;
+  scwkSchedUnitType?: string;
+  scwkDescription?: string;
+  scwkAddedForNetEvent?: string;
+  serviceContextDays?: string;
+}
+
+export class ServiceContextWeek extends Item<ServiceContextWeek> {
+  scwkSchedUnitId?: string;
+  scwkSchedUnitType?: string;
+  scwkDescription?: string;
+  scwkAddedForNetEvent?: string;
+  serviceContextDays?: string;
+  constructor(props: ServiceContextWeekProps) {
     super(props);
-    this.scwkSchedUnitId = getAndValidatePropFromProps('scwkSchedUnitId', props, `string`);
-    this.scwkSchedUnitType = getAndValidatePropFromProps('scwkSchedUnitType', props, `string`, '1100');
-    this.scwkDescription = getAndValidatePropFromProps('scwkDescription', props, `string`);
-    this.scwkAddedForNetEvent = getAndValidatePropFromProps('scwkAddedForNetEvent', props, 'string', '0');
+    this.scwkSchedUnitId = gavpfp('scwkSchedUnitId', props, `string`);
+    this.scwkSchedUnitType = gavpfp('scwkSchedUnitType', props, `string`, '1100');
+    this.scwkDescription = gavpfp('scwkDescription', props, `string`);
+    this.scwkAddedForNetEvent = gavpfp('scwkAddedForNetEvent', props, 'string', '0');
 
     /* Children */
     /** @type {ServiceContextDaysCollection} */
-    this.serviceContextDays = getAndValidatePropFromProps(
+    this.serviceContextDays = gavpfp(
       'serviceContextDays', props,
       ServiceContextDaysCollection,
       new ServiceContextDaysCollection(),
@@ -26,7 +39,7 @@ class ServiceContextWeek extends Item {
 }
 
 ServiceContextWeek.allChildClasses = getAllChildClasses(childClasses);
-ServiceContextWeek.prototype.serializeModel = serializeThis;
-ServiceContextWeek.parseModel = parseThis;
 
-module.exports = ServiceContextWeek;
+
+
+export default ServiceContextWeek;

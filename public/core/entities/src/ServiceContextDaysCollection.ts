@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
 
-const { Collection } = require('@bimo/core-utils-collection');
-const ServiceContextDay = require('./ServiceContextDay');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { ServiceContextDay, ServiceContextDayProps } from "./ServiceContextDay";
 
 const childClasses = [ServiceContextDay];
 
-/** @extends {Collection<ServiceContextDay>} */
-class ServiceContextDaysCollection extends Collection {
-  constructor(props = {}) {
+
+export interface ServiceContextDaysCollectionProps extends ExtendedCollectionProps<ServiceContextDay, ServiceContextDayProps> {
+}
+
+export class ServiceContextDaysCollection extends Collection<ServiceContextDay, ServiceContextDayProps> {
+  constructor(props: ServiceContextDaysCollectionProps = {}) {
     super({
       itemName: 'ServiceContextDay',
       ItemConstructor: ServiceContextDay,
@@ -18,7 +21,7 @@ class ServiceContextDaysCollection extends Collection {
 }
 
 ServiceContextDaysCollection.allChildClasses = getAllChildClasses(childClasses);
-ServiceContextDaysCollection.prototype.serializeModel = serializeThis;
-ServiceContextDaysCollection.parseModel = parseThis;
 
-module.exports = ServiceContextDaysCollection;
+
+
+export default ServiceContextDaysCollection;

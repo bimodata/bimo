@@ -1,26 +1,53 @@
-/* Linked Classes */
 
-/* Serialization utilities dependencies */
+
+
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-/* Class definition */
-class OvernightLink {
-  constructor(props) {
-    /** */ this.olInternalNumber = getAndValidatePropFromProps('olInternalNumber', props);
-    /** */ this.olOriginTripNo = getAndValidatePropFromProps('olOriginTripNo', props);
-    /** */ this.olOriginOrigTripNo = getAndValidatePropFromProps('olOriginOrigTripNo', props);
-    /** */ this.olOriginPlace = getAndValidatePropFromProps('olOriginPlace', props);
-    /** */ this.olOriginRoute = getAndValidatePropFromProps('olOriginRoute', props);
-    /** */ this.olOriginTime = getAndValidatePropFromProps('olOriginTime', props);
-    /** */ this.olDestinationTripNo = getAndValidatePropFromProps('olDestinationTripNo', props);
-    /** */ this.olDestinationOrigTripNo = getAndValidatePropFromProps('olDestinationOrigTripNo', props);
-    /** */ this.olDestinationPlace = getAndValidatePropFromProps('olDestinationPlace', props);
-    /** */ this.olDestinationRoute = getAndValidatePropFromProps('olDestinationRoute', props);
-    /** */ this.olDestinationTime = getAndValidatePropFromProps('olDestinationTime', props);
-    /** */ this.olDhLayAt = getAndValidatePropFromProps('olDhLayAt', props);
-    /** */ this.olSchedType = getAndValidatePropFromProps('olSchedType', props);
+
+export interface OvernightLinkProps extends ExtendedItemProps {
+  olOriginTripNo?: string;
+  olOriginOrigTripNo?: string;
+  olOriginPlace?: string;
+  olOriginRoute?: string;
+  olOriginTime?: string;
+  olDestinationTripNo?: string;
+  olDestinationOrigTripNo?: string;
+  olDestinationPlace?: string;
+  olDestinationRoute?: string;
+  olDestinationTime?: string;
+  olDhLayAt?: string;
+  olSchedType?: string;
+}
+
+export class OvernightLink {
+  olOriginTripNo?: string;
+  olOriginOrigTripNo?: string;
+  olOriginPlace?: string;
+  olOriginRoute?: string;
+  olOriginTime?: string;
+  olDestinationTripNo?: string;
+  olDestinationOrigTripNo?: string;
+  olDestinationPlace?: string;
+  olDestinationRoute?: string;
+  olDestinationTime?: string;
+  olDhLayAt?: string;
+  olSchedType?: string;
+  constructor(props: OvernightLinkProps) {
+    /** */ this.olInternalNumber = gavpfp('olInternalNumber', props);
+    /** */ this.olOriginTripNo = gavpfp('olOriginTripNo', props);
+    /** */ this.olOriginOrigTripNo = gavpfp('olOriginOrigTripNo', props);
+    /** */ this.olOriginPlace = gavpfp('olOriginPlace', props);
+    /** */ this.olOriginRoute = gavpfp('olOriginRoute', props);
+    /** */ this.olOriginTime = gavpfp('olOriginTime', props);
+    /** */ this.olDestinationTripNo = gavpfp('olDestinationTripNo', props);
+    /** */ this.olDestinationOrigTripNo = gavpfp('olDestinationOrigTripNo', props);
+    /** */ this.olDestinationPlace = gavpfp('olDestinationPlace', props);
+    /** */ this.olDestinationRoute = gavpfp('olDestinationRoute', props);
+    /** */ this.olDestinationTime = gavpfp('olDestinationTime', props);
+    /** */ this.olDhLayAt = gavpfp('olDhLayAt', props);
+    /** */ this.olSchedType = gavpfp('olSchedType', props);
 
     /* Children */
 
@@ -31,9 +58,9 @@ class OvernightLink {
 OvernightLink.hastusKeywords = ['overnight_link'];
 OvernightLink.hastusObject = 'overnight_link';
 
-/* Serialization utilities */
-OvernightLink.allChildClasses = getAllChildClasses(childClasses);
-OvernightLink.prototype.serializeModel = serializeThis;
-OvernightLink.parseModel = parseThis;
 
-module.exports = OvernightLink;
+OvernightLink.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default OvernightLink;

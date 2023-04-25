@@ -1,15 +1,18 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Linked Classes */
-const LoadTime = require('./LoadTime');
+
+import { LoadTime, LoadTimeProps } from "./LoadTime";
 
 const childClasses = [LoadTime];
 
-/* Class definition */
-/** @extends {Collection<LoadTime>} */
-class LoadTimesCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface LoadTimesCollectionProps extends ExtendedCollectionProps<LoadTime, LoadTimeProps> {
+}
+
+export class LoadTimesCollection extends Collection<LoadTime, LoadTimeProps> {
+  constructor(props: LoadTimesCollectionProps = {}) {
     super({
       itemName: 'LoadTime',
       ItemConstructor: LoadTime,
@@ -20,9 +23,9 @@ class LoadTimesCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-LoadTimesCollection.allChildClasses = getAllChildClasses(childClasses);
-LoadTimesCollection.prototype.serializeModel = serializeThis;
-LoadTimesCollection.parseModel = parseThis;
 
-module.exports = LoadTimesCollection;
+LoadTimesCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default LoadTimesCollection;

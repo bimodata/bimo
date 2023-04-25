@@ -1,17 +1,20 @@
 /* eslint-disable no-self-assign */
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Linked Classes */
-const RunTimeVersion = require('./RunTimeVersion');
+
+import { RunTimeVersion, RunTimeVersionProps } from "./RunTimeVersion";
 
 const childClasses = [RunTimeVersion];
 
-/* Class definition */
 
-/** @extends {Collection<RunTimeVersion>} */
-class RunTimeVersionsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface RunTimeVersionsCollectionProps extends ExtendedCollectionProps<RunTimeVersion, RunTimeVersionProps> {
+}
+
+export class RunTimeVersionsCollection extends Collection<RunTimeVersion, RunTimeVersionProps> {
+  constructor(props: RunTimeVersionsCollectionProps = {}) {
     super({
       itemName: 'RunTimeVersion',
       ItemConstructor: RunTimeVersion,
@@ -52,13 +55,13 @@ class RunTimeVersionsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
+
 RunTimeVersionsCollection.allChildClasses = getAllChildClasses(childClasses);
-RunTimeVersionsCollection.prototype.serializeModel = serializeThis;
-RunTimeVersionsCollection.parseModel = parseThis;
+
+
 
 /* I/O info */
 RunTimeVersionsCollection.defaultExportedDataDataName = `output_rtver`;
 RunTimeVersionsCollection.defaultImportDataDataName = `input_rtver`;
 
-module.exports = RunTimeVersionsCollection;
+export default RunTimeVersionsCollection;

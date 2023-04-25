@@ -1,20 +1,35 @@
-const { Item } = require('@bimo/core-utils-collection');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const VehicleSchedule = require('./VehicleSchedule');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { VehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
 
-/* Class definition */
-class VehicleUnit extends Item {
-  constructor(props) {
+
+export interface VehicleUnitProps extends ExtendedItemProps {
+  vehuInternalNumber?: string;
+  vehuIdentifierUser?: string;
+  vehuVehicleGroup?: string;
+  vehuVehicleType?: string;
+  vehuCodeRoulement?: string;
+  vehicleTask?: string;
+}
+
+export class VehicleUnit extends Item<VehicleUnit> {
+  vehuInternalNumber?: string;
+  vehuIdentifierUser?: string;
+  vehuVehicleGroup?: string;
+  vehuVehicleType?: string;
+  vehuCodeRoulement?: string;
+  vehicleTask?: string;
+  constructor(props: VehicleUnitProps) {
     super(props);
-    /** */ this.vehuInternalNumber = getAndValidatePropFromProps('vehuInternalNumber', props);
-    /** */ this.vehuIdentifierUser = getAndValidatePropFromProps('vehuIdentifierUser', props);
-    /** */ this.vehuVehicleGroup = getAndValidatePropFromProps('vehuVehicleGroup', props);
-    /** */ this.vehuVehicleType = getAndValidatePropFromProps('vehuVehicleType', props);
+    /** */ this.vehuInternalNumber = gavpfp('vehuInternalNumber', props);
+    /** */ this.vehuIdentifierUser = gavpfp('vehuIdentifierUser', props);
+    /** */ this.vehuVehicleGroup = gavpfp('vehuVehicleGroup', props);
+    /** */ this.vehuVehicleType = gavpfp('vehuVehicleType', props);
 
-    /** */ this.vehuCodeRoulement = getAndValidatePropFromProps('vehuCodeRoulement', props);
+    /** */ this.vehuCodeRoulement = gavpfp('vehuCodeRoulement', props);
 
     /* Children */
 
@@ -36,9 +51,9 @@ class VehicleUnit extends Item {
 VehicleUnit.hastusKeywords = ['vehicle_unit'];
 VehicleUnit.hastusObject = 'vehicle_unit';
 
-/* Serialization utilities */
-VehicleUnit.allChildClasses = getAllChildClasses(childClasses);
-VehicleUnit.prototype.serializeModel = serializeThis;
-VehicleUnit.parseModel = parseThis;
 
-module.exports = VehicleUnit;
+VehicleUnit.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default VehicleUnit;

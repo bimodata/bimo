@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const ConsistChange = require('./ConsistChange');
+import { ConsistChange, ConsistChangeProps } from "./ConsistChange";
 
 const childClasses = [ConsistChange];
 
-/** @extends {Collection<ConsistChange>} */
-class ConsistChangesCollection extends Collection {
-  constructor(props = {}) {
+
+export interface ConsistChangesCollectionProps extends ExtendedCollectionProps<ConsistChange, ConsistChangeProps> {
+}
+
+export class ConsistChangesCollection extends Collection<ConsistChange, ConsistChangeProps> {
+  constructor(props: ConsistChangesCollectionProps = {}) {
     super({
       itemName: 'ConsistChange',
       ItemConstructor: ConsistChange,
@@ -20,7 +23,7 @@ class ConsistChangesCollection extends Collection {
 }
 
 ConsistChangesCollection.allChildClasses = getAllChildClasses(childClasses);
-ConsistChangesCollection.prototype.serializeModel = serializeThis;
-ConsistChangesCollection.parseModel = parseThis;
 
-module.exports = ConsistChangesCollection;
+
+
+export default ConsistChangesCollection;

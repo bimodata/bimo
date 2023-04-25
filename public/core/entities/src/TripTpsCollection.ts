@@ -1,22 +1,25 @@
-/* Linked Classes */
-const TripTp = require('./TripTp');
 
-/* Serialization utilities dependencies */
+import { TripTp, TripTpProps } from "./TripTp";
+
+
 const childClasses = [TripTp];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-/** @extends {Collection<TripTp>} */
-class TripTpsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface TripTpsCollectionProps extends ExtendedCollectionProps<TripTp, TripTpProps> {
+}
+
+export class TripTpsCollection extends Collection<TripTp, TripTpProps> {
+  constructor(props: TripTpsCollectionProps = {}) {
     super({ itemName: 'TripTp', ItemConstructor: TripTp, items: props.items, parent: props.parent });
   }
 }
 
-/* Serialization utilities */
-TripTpsCollection.allChildClasses = getAllChildClasses(childClasses);
-TripTpsCollection.prototype.serializeModel = serializeThis;
-TripTpsCollection.parseModel = parseThis;
 
-module.exports = TripTpsCollection;
+TripTpsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default TripTpsCollection;

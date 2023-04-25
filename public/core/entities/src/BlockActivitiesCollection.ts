@@ -1,15 +1,18 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const BlockActivity = require('./BlockActivity');
+import { BlockActivity, BlockActivityProps } from "./BlockActivity";
 
-/* Serialization utilities dependencies */
+
 const childClasses = [BlockActivity];
 
-/* Class definition */
-/** @extends {Collection<BlockActivity>} */
-class BlockActivitiesCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface BlockActivitiesCollectionProps extends ExtendedCollectionProps<BlockActivitie, BlockActivitieProps> {
+}
+
+export class BlockActivitiesCollection extends Collection<BlockActivitie, BlockActivitieProps> {
+  constructor(props: BlockActivitiesCollectionProps = {}) {
     Object.assign(props, {
       itemName: 'BlockActivity',
       ItemConstructor: BlockActivity,
@@ -93,9 +96,9 @@ class BlockActivitiesCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-BlockActivitiesCollection.allChildClasses = getAllChildClasses(childClasses);
-BlockActivitiesCollection.prototype.serializeModel = serializeThis;
-BlockActivitiesCollection.parseModel = parseThis;
 
-module.exports = BlockActivitiesCollection;
+BlockActivitiesCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default BlockActivitiesCollection;

@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
-const TripPoint = require('./TripPoint');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { TripPoint, TripPointProps } from "./TripPoint";
 
 const childClasses = [TripPoint];
 
-/* Class definition */
-/** @extends {Collection<TripPoint>} */
-class TripPointsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface TripPointsCollectionProps extends ExtendedCollectionProps<TripPoint, TripPointProps> {
+}
+
+export class TripPointsCollection extends Collection<TripPoint, TripPointProps> {
+  constructor(props: TripPointsCollectionProps = {}) {
     super({
       itemName: 'TripPoint',
       ItemConstructor: TripPoint,
@@ -36,9 +39,9 @@ class TripPointsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-TripPointsCollection.allChildClasses = getAllChildClasses(childClasses);
-TripPointsCollection.prototype.serializeModel = serializeThis;
-TripPointsCollection.parseModel = parseThis;
 
-module.exports = TripPointsCollection;
+TripPointsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default TripPointsCollection;

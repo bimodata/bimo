@@ -1,11 +1,14 @@
-/* Linked Classes */
-const { Collection } = require('@bimo/core-utils-collection');
-const VehicleTask = require('./VehicleTask');
 
-/* Class definition */
-/** @extends {Collection<VehicleTask>} */
-class VehicleTasksCollection extends Collection {
-  constructor(props = {}) {
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { VehicleTask, VehicleTaskProps } from "./VehicleTask";
+
+
+
+export interface VehicleTasksCollectionProps extends ExtendedCollectionProps<VehicleTask, VehicleTaskProps> {
+}
+
+export class VehicleTasksCollection extends Collection<VehicleTask, VehicleTaskProps> {
+  constructor(props: VehicleTasksCollectionProps = {}) {
     super({
       itemName: 'VehicleTask',
       ItemConstructor: VehicleTask,
@@ -20,4 +23,4 @@ class VehicleTasksCollection extends Collection {
   }
 }
 
-module.exports = VehicleTasksCollection;
+export default VehicleTasksCollection;

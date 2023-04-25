@@ -1,24 +1,101 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const timeAndDate = require('@bimo/core-utils-time-and-date');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import timeAndDate from '@bimo/core-utils-time-and-date';
 
-/* Linked Classes */
-const TripTpsCollection = require('./TripTpsCollection');
-const TripPointsCollection = require('./TripPointsCollection');
+
+import { TripTpsCollection, TripTpsCollectionProps } from "./TripTpsCollection";
+import { TripPointsCollection, TripPointsCollectionProps } from "./TripPointsCollection";
 // eslint-disable-next-line no-unused-vars
-const TripPoint = require('./TripPoint');
-const TripTp = require('./TripTp');
-const TripvehgrpspecsCollection = require('./TripvehgrpspecsCollection');
-const TripOrVariant = require('./TripOrVariant');
-const BlockActivityItem = require('./BlockActivityItem');
+import { TripPoint, TripPointProps } from "./TripPoint";
+import { TripTp, TripTpProps } from "./TripTp";
+import { TripvehgrpspecsCollection, TripvehgrpspecsCollectionProps } from "./TripvehgrpspecsCollection";
+import { TripOrVariant, TripOrVariantProps } from "./TripOrVariant";
+import { BlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
 
 const childClasses = [TripTpsCollection, TripPointsCollection, TripvehgrpspecsCollection];
 
 const INTERNAL_DISTANCE_FACTOR = 10000;
 
-/* Class definition */
-/** @extends {TripOrVariant<TripPoint>} */
-class Trip extends BlockActivityItem(
+
+
+export interface TripProps extends ExtendedItemProps {
+  _bimoId?: string;
+  trpNumber?: string;
+  trpIsProtected?: string;
+  trpRoute?: string;
+  trpViaVariant?: string;
+  trpType?: string;
+  trpDirection?: string;
+  _trpPlaceStart?: string;
+  _trpPlaceEnd?: string;
+  _trpOriginalStartPlace?: string;
+  _trpOriginalEndPlace?: string;
+  trpOriginalBuildSpecPlace?: string;
+  trpTimeStart?: string;
+  trpTimeEnd?: string;
+  trpStartLayUser?: string;
+  trpEndLayUser?: string;
+  trpInternalDistance?: string;
+  trpDistance?: string;
+  trpCreator?: string;
+  trpNote?: string;
+  trpSecondNote?: string;
+  _trpIsPublic?: string;
+  trpShftMaxEarlier?: string;
+  trpShftMaxLater?: string;
+  trpInternalShftMaxEarlier?: string;
+  trpInternalShftMaxLater?: string;
+  trpIsSpecial?: string;
+  trpAvailForTravel?: string;
+  trpOperatesSun?: string;
+  trpOperatesMon?: string;
+  trpOperatesTue?: string;
+  trpOperatesWed?: string;
+  trpOperatesThu?: string;
+  trpOperatesFri?: string;
+  trpOperatesSat?: string;
+  trpEventForOir?: string;
+  trpEventStatusForOir?: string;
+  trpGarage?: string;
+  trpPattern?: string;
+  trpVehicleDisplay?: string;
+  trpBuildAt?: string;
+  trpBuildSpecPlace?: string;
+  trpBuildTime?: string;
+  trpBlockingGarage?: string;
+  trpRunTimePattern?: string;
+  trpOriginalNumber?: string;
+  _trpIntNumber?: string;
+  trpAreVehGroupSpecsFromVehcv?: string;
+  trpAreVehSpecCstrFromVehcv?: string;
+  trpRecommendedVehGroup?: string;
+  trpConsiderLoadAtStart?: string;
+  trpConsiderLoadAtEnd?: string;
+  BlockNo?: string;
+  trpNatureMouvementTechnique?: string;
+  trpUniteHoraireCouverture?: string;
+  trpTrainEas?: string;
+  trpCommentaireVoySncfDi?: string;
+  trpNumDeCourseSubstituee?: string;
+  trpNumOperation?: string;
+  trpACouvrirMr?: string;
+  trpCodeTct?: string;
+  trpEnginDeCalcul?: string;
+  trpMaterielRemorque?: string;
+  trpNumeroSecondaire?: string;
+  trpProfilDeVitesse?: string;
+  trpPrecoAo?: string;
+  trpEstEnSnu?: string;
+  trpOpReleve?: string;
+  trpNePasCommanderSillon?: string;
+  trpBesoinVf?: string;
+  tripTps?: string;
+  tripPoints?: string;
+  tripvehgrpspecs?: string;
+  _links?: string;
+}
+
+export class Trip extends BlockActivityItem(
   TripOrVariant, {
   blkActIdPropName: 'blkactTripNo',
   itemIdPropName: 'trpIntNumber',
@@ -32,98 +109,172 @@ class Trip extends BlockActivityItem(
    *
    * @param {Trip} props
    */
+  _bimoId?: string;
+  trpNumber?: string;
+  trpIsProtected?: string;
+  trpRoute?: string;
+  trpViaVariant?: string;
+  trpType?: string;
+  trpDirection?: string;
+  _trpPlaceStart?: string;
+  _trpPlaceEnd?: string;
+  _trpOriginalStartPlace?: string;
+  _trpOriginalEndPlace?: string;
+  trpOriginalBuildSpecPlace?: string;
+  trpTimeStart?: string;
+  trpTimeEnd?: string;
+  trpStartLayUser?: string;
+  trpEndLayUser?: string;
+  trpInternalDistance?: string;
+  trpDistance?: string;
+  trpCreator?: string;
+  trpNote?: string;
+  trpSecondNote?: string;
+  _trpIsPublic?: string;
+  trpShftMaxEarlier?: string;
+  trpShftMaxLater?: string;
+  trpInternalShftMaxEarlier?: string;
+  trpInternalShftMaxLater?: string;
+  trpIsSpecial?: string;
+  trpAvailForTravel?: string;
+  trpOperatesSun?: string;
+  trpOperatesMon?: string;
+  trpOperatesTue?: string;
+  trpOperatesWed?: string;
+  trpOperatesThu?: string;
+  trpOperatesFri?: string;
+  trpOperatesSat?: string;
+  trpEventForOir?: string;
+  trpEventStatusForOir?: string;
+  trpGarage?: string;
+  trpPattern?: string;
+  trpVehicleDisplay?: string;
+  trpBuildAt?: string;
+  trpBuildSpecPlace?: string;
+  trpBuildTime?: string;
+  trpBlockingGarage?: string;
+  trpRunTimePattern?: string;
+  trpOriginalNumber?: string;
+  _trpIntNumber?: string;
+  trpAreVehGroupSpecsFromVehcv?: string;
+  trpAreVehSpecCstrFromVehcv?: string;
+  trpRecommendedVehGroup?: string;
+  trpConsiderLoadAtStart?: string;
+  trpConsiderLoadAtEnd?: string;
+  BlockNo?: string;
+  trpNatureMouvementTechnique?: string;
+  trpUniteHoraireCouverture?: string;
+  trpTrainEas?: string;
+  trpCommentaireVoySncfDi?: string;
+  trpNumDeCourseSubstituee?: string;
+  trpNumOperation?: string;
+  trpACouvrirMr?: string;
+  trpCodeTct?: string;
+  trpEnginDeCalcul?: string;
+  trpMaterielRemorque?: string;
+  trpNumeroSecondaire?: string;
+  trpProfilDeVitesse?: string;
+  trpPrecoAo?: string;
+  trpEstEnSnu?: string;
+  trpOpReleve?: string;
+  trpNePasCommanderSillon?: string;
+  trpBesoinVf?: string;
+  tripTps?: string;
+  tripPoints?: string;
+  tripvehgrpspecs?: string;
+  _links?: string;
   constructor(props, tripOrVariantType = 'trip') {
     super(props, tripOrVariantType);
-    this._bimoId = getAndValidatePropFromProps('bimoId', props);
-    this.trpNumber = getAndValidatePropFromProps('trpNumber', props);
-    this.trpIsProtected = getAndValidatePropFromProps('trpIsProtected', props, `string`, `1`);
-    this.trpRoute = getAndValidatePropFromProps('trpRoute', props, `string`, 'TEMP');
-    this.trpViaVariant = getAndValidatePropFromProps('trpViaVariant', props);
+    this._bimoId = gavpfp('bimoId', props);
+    this.trpNumber = gavpfp('trpNumber', props);
+    this.trpIsProtected = gavpfp('trpIsProtected', props, `string`, `1`);
+    this.trpRoute = gavpfp('trpRoute', props, `string`, 'TEMP');
+    this.trpViaVariant = gavpfp('trpViaVariant', props);
     /** 0=In-service, 3=Out of service */
-    this.trpType = getAndValidatePropFromProps('trpType', props, 'string', '0');
-    this.trpDirection = getAndValidatePropFromProps('trpDirection', props);
-    this._trpPlaceStart = getAndValidatePropFromProps('trpPlaceStart', props, 'string', '', { altPropName: '_trpPlaceStart' });
-    this._trpPlaceEnd = getAndValidatePropFromProps('trpPlaceEnd', props, 'string', '', { altPropName: '_trpPlaceEnd' });
-    this._trpOriginalStartPlace = getAndValidatePropFromProps(
+    this.trpType = gavpfp('trpType', props, 'string', '0');
+    this.trpDirection = gavpfp('trpDirection', props);
+    this._trpPlaceStart = gavpfp('trpPlaceStart', props, 'string', '', { altPropName: '_trpPlaceStart' });
+    this._trpPlaceEnd = gavpfp('trpPlaceEnd', props, 'string', '', { altPropName: '_trpPlaceEnd' });
+    this._trpOriginalStartPlace = gavpfp(
       'trpOriginalStartPlace', props, 'string', '', { altPropName: '_trpOriginalStartPlace' },
     );
-    this._trpOriginalEndPlace = getAndValidatePropFromProps(
+    this._trpOriginalEndPlace = gavpfp(
       'trpOriginalEndPlace', props, 'string', '', { altPropName: '_trpOriginalEndPlace' },
     );
-    this.trpOriginalBuildSpecPlace = getAndValidatePropFromProps('trpOriginalBuildSpecPlace', props);
-    this.trpTimeStart = getAndValidatePropFromProps('trpTimeStart', props);
-    this.trpTimeEnd = getAndValidatePropFromProps('trpTimeEnd', props);
-    this.trpStartLayUser = getAndValidatePropFromProps('trpStartLayUser', props);
-    this.trpEndLayUser = getAndValidatePropFromProps('trpEndLayUser', props);
+    this.trpOriginalBuildSpecPlace = gavpfp('trpOriginalBuildSpecPlace', props);
+    this.trpTimeStart = gavpfp('trpTimeStart', props);
+    this.trpTimeEnd = gavpfp('trpTimeEnd', props);
+    this.trpStartLayUser = gavpfp('trpStartLayUser', props);
+    this.trpEndLayUser = gavpfp('trpEndLayUser', props);
 
     /** en décimètres */
-    this.trpInternalDistance = getAndValidatePropFromProps('trpInternalDistance', props);
-    this.trpDistance = getAndValidatePropFromProps('trpDistance', props) ?? this.trpDistance;
-    this.trpCreator = getAndValidatePropFromProps('trpCreator', props, `string`, `1`);
-    this.trpNote = getAndValidatePropFromProps('trpNote', props);
-    this.trpSecondNote = getAndValidatePropFromProps('trpSecondNote', props);
-    this._trpIsPublic = getAndValidatePropFromProps('trpIsPublic', props);
-    this.trpShftMaxEarlier = getAndValidatePropFromProps('trpShftMaxEarlier', props, `string`, `0h00`);
-    this.trpShftMaxLater = getAndValidatePropFromProps('trpShftMaxLater', props, `string`, `0h00`);
-    this.trpInternalShftMaxEarlier = getAndValidatePropFromProps('trpShftMaxEarlier', props, `string`, `0h00`);
-    this.trpInternalShftMaxLater = getAndValidatePropFromProps('trpShftMaxLater', props, `string`, `0h00`);
-    this.trpIsSpecial = getAndValidatePropFromProps('trpIsSpecial', props, `string`, `0`);
-    this.trpAvailForTravel = getAndValidatePropFromProps('trpAvailForTravel', props, `string`, `1`);
-    this.trpOperatesSun = getAndValidatePropFromProps('trpOperatesSun', props, `string`, `1`);
-    this.trpOperatesMon = getAndValidatePropFromProps('trpOperatesMon', props, `string`, `0`);
-    this.trpOperatesTue = getAndValidatePropFromProps('trpOperatesTue', props, `string`, `0`);
-    this.trpOperatesWed = getAndValidatePropFromProps('trpOperatesWed', props, `string`, `0`);
-    this.trpOperatesThu = getAndValidatePropFromProps('trpOperatesThu', props, `string`, `0`);
-    this.trpOperatesFri = getAndValidatePropFromProps('trpOperatesFri', props, `string`, `0`);
-    this.trpOperatesSat = getAndValidatePropFromProps('trpOperatesSat', props, `string`, `0`);
-    this.trpEventForOir = getAndValidatePropFromProps('trpEventForOir', props);
-    this.trpEventStatusForOir = getAndValidatePropFromProps('trpEventStatusForOir', props);
-    this.trpGarage = getAndValidatePropFromProps('trpGarage', props);
-    this.trpPattern = getAndValidatePropFromProps('trpPattern', props);
-    this.trpVehicleDisplay = getAndValidatePropFromProps('trpVehicleDisplay', props);
-    this.trpBuildAt = getAndValidatePropFromProps('trpBuildAt', props, `string`, `0`);
-    this.trpBuildSpecPlace = getAndValidatePropFromProps('trpBuildSpecPlace', props);
-    this.trpBuildTime = getAndValidatePropFromProps('trpBuildTime', props);
-    this.trpBlockingGarage = getAndValidatePropFromProps('trpBlockingGarage', props);
-    this.trpRunTimePattern = getAndValidatePropFromProps('trpRunTimePattern', props);
-    this.trpOriginalNumber = getAndValidatePropFromProps('trpOriginalNumber', props);
-    this._trpIntNumber = getAndValidatePropFromProps('trpIntNumber', props);
-    this.trpAreVehGroupSpecsFromVehcv = getAndValidatePropFromProps('trpAreVehGroupSpecsFromVehcv', props, `string`, `1`);
-    this.trpAreVehSpecCstrFromVehcv = getAndValidatePropFromProps('trpAreVehSpecCstrFromVehcv', props, `string`, `1`);
-    this.trpRecommendedVehGroup = getAndValidatePropFromProps('trpRecommendedVehGroup', props);
-    this.trpConsiderLoadAtStart = getAndValidatePropFromProps('trpConsiderLoadAtStart', props, `string`, `0`);
-    this.trpConsiderLoadAtEnd = getAndValidatePropFromProps('trpConsiderLoadAtEnd', props, `string`, `0`);
+    this.trpInternalDistance = gavpfp('trpInternalDistance', props);
+    this.trpDistance = gavpfp('trpDistance', props) ?? this.trpDistance;
+    this.trpCreator = gavpfp('trpCreator', props, `string`, `1`);
+    this.trpNote = gavpfp('trpNote', props);
+    this.trpSecondNote = gavpfp('trpSecondNote', props);
+    this._trpIsPublic = gavpfp('trpIsPublic', props);
+    this.trpShftMaxEarlier = gavpfp('trpShftMaxEarlier', props, `string`, `0h00`);
+    this.trpShftMaxLater = gavpfp('trpShftMaxLater', props, `string`, `0h00`);
+    this.trpInternalShftMaxEarlier = gavpfp('trpShftMaxEarlier', props, `string`, `0h00`);
+    this.trpInternalShftMaxLater = gavpfp('trpShftMaxLater', props, `string`, `0h00`);
+    this.trpIsSpecial = gavpfp('trpIsSpecial', props, `string`, `0`);
+    this.trpAvailForTravel = gavpfp('trpAvailForTravel', props, `string`, `1`);
+    this.trpOperatesSun = gavpfp('trpOperatesSun', props, `string`, `1`);
+    this.trpOperatesMon = gavpfp('trpOperatesMon', props, `string`, `0`);
+    this.trpOperatesTue = gavpfp('trpOperatesTue', props, `string`, `0`);
+    this.trpOperatesWed = gavpfp('trpOperatesWed', props, `string`, `0`);
+    this.trpOperatesThu = gavpfp('trpOperatesThu', props, `string`, `0`);
+    this.trpOperatesFri = gavpfp('trpOperatesFri', props, `string`, `0`);
+    this.trpOperatesSat = gavpfp('trpOperatesSat', props, `string`, `0`);
+    this.trpEventForOir = gavpfp('trpEventForOir', props);
+    this.trpEventStatusForOir = gavpfp('trpEventStatusForOir', props);
+    this.trpGarage = gavpfp('trpGarage', props);
+    this.trpPattern = gavpfp('trpPattern', props);
+    this.trpVehicleDisplay = gavpfp('trpVehicleDisplay', props);
+    this.trpBuildAt = gavpfp('trpBuildAt', props, `string`, `0`);
+    this.trpBuildSpecPlace = gavpfp('trpBuildSpecPlace', props);
+    this.trpBuildTime = gavpfp('trpBuildTime', props);
+    this.trpBlockingGarage = gavpfp('trpBlockingGarage', props);
+    this.trpRunTimePattern = gavpfp('trpRunTimePattern', props);
+    this.trpOriginalNumber = gavpfp('trpOriginalNumber', props);
+    this._trpIntNumber = gavpfp('trpIntNumber', props);
+    this.trpAreVehGroupSpecsFromVehcv = gavpfp('trpAreVehGroupSpecsFromVehcv', props, `string`, `1`);
+    this.trpAreVehSpecCstrFromVehcv = gavpfp('trpAreVehSpecCstrFromVehcv', props, `string`, `1`);
+    this.trpRecommendedVehGroup = gavpfp('trpRecommendedVehGroup', props);
+    this.trpConsiderLoadAtStart = gavpfp('trpConsiderLoadAtStart', props, `string`, `0`);
+    this.trpConsiderLoadAtEnd = gavpfp('trpConsiderLoadAtEnd', props, `string`, `0`);
     this.BlockNo = undefined; // Échanges par mail avec Mathieu M et Isabel L: il ne sert à rien, et il bug.
 
     // site-spec oscar, à déplacer vers une nouvelle classe "OscarTrip"
-    this.trpNatureMouvementTechnique = getAndValidatePropFromProps('trpNatureMouvementTechnique', props);
-    this.trpUniteHoraireCouverture = getAndValidatePropFromProps('trpUniteHoraireCouverture', props);
-    this.trpTrainEas = getAndValidatePropFromProps('trpTrainEas', props, `string`, `0`);
-    this.trpCommentaireVoySncfDi = getAndValidatePropFromProps('trpCommentaireVoySncfDi', props, `string`, ``);
+    this.trpNatureMouvementTechnique = gavpfp('trpNatureMouvementTechnique', props);
+    this.trpUniteHoraireCouverture = gavpfp('trpUniteHoraireCouverture', props);
+    this.trpTrainEas = gavpfp('trpTrainEas', props, `string`, `0`);
+    this.trpCommentaireVoySncfDi = gavpfp('trpCommentaireVoySncfDi', props, `string`, ``);
 
     // site-spec orion, à déplacer vers une nouvelle classe "OrionTrip"
-    this.trpNumDeCourseSubstituee = getAndValidatePropFromProps('trpNumDeourseSubstituee', props);
-    this.trpNumOperation = getAndValidatePropFromProps('trpNumOperation', props);
-    this.trpACouvrirMr = getAndValidatePropFromProps('trpACouvrirMr', props);
-    this.trpCodeTct = getAndValidatePropFromProps('trpCodeTct', props);
-    this.trpEnginDeCalcul = getAndValidatePropFromProps('trpEnginDeCalcul', props);
-    this.trpMaterielRemorque = getAndValidatePropFromProps('trpMaterielRemorque', props);
-    this.trpNumeroSecondaire = getAndValidatePropFromProps('trpNumeroSecondaire', props);
-    this.trpProfilDeVitesse = getAndValidatePropFromProps('trpProfilDeVitesse', props);
-    this.trpPrecoAo = getAndValidatePropFromProps('trpPrecoAo', props);
-    this.trpEstEnSnu = getAndValidatePropFromProps('trpEstEnSnu', props);
-    this.trpOpReleve = getAndValidatePropFromProps('trpOpReleve', props);
-    this.trpNePasCommanderSillon = getAndValidatePropFromProps('trpNePasCommanderSillon', props, `string`, `0`);
-    this.trpBesoinVf = getAndValidatePropFromProps('trpBesoinVf', props, `string`, `0`);
+    this.trpNumDeCourseSubstituee = gavpfp('trpNumDeourseSubstituee', props);
+    this.trpNumOperation = gavpfp('trpNumOperation', props);
+    this.trpACouvrirMr = gavpfp('trpACouvrirMr', props);
+    this.trpCodeTct = gavpfp('trpCodeTct', props);
+    this.trpEnginDeCalcul = gavpfp('trpEnginDeCalcul', props);
+    this.trpMaterielRemorque = gavpfp('trpMaterielRemorque', props);
+    this.trpNumeroSecondaire = gavpfp('trpNumeroSecondaire', props);
+    this.trpProfilDeVitesse = gavpfp('trpProfilDeVitesse', props);
+    this.trpPrecoAo = gavpfp('trpPrecoAo', props);
+    this.trpEstEnSnu = gavpfp('trpEstEnSnu', props);
+    this.trpOpReleve = gavpfp('trpOpReleve', props);
+    this.trpNePasCommanderSillon = gavpfp('trpNePasCommanderSillon', props, `string`, `0`);
+    this.trpBesoinVf = gavpfp('trpBesoinVf', props, `string`, `0`);
 
     /* Children */
-    /** @type {TripTpsCollection} */ this.tripTps = getAndValidatePropFromProps(
+    /** @type {TripTpsCollection} */ this.tripTps = gavpfp(
       'trip_tp', props, TripTpsCollection, new TripTpsCollection(), { altPropName: 'trip_tp', parent: this },
     );
-    /** @type {TripPointsCollection} */ this.tripPoints = getAndValidatePropFromProps(
+    /** @type {TripPointsCollection} */ this.tripPoints = gavpfp(
       'tripPoints', props, TripPointsCollection, new TripPointsCollection(), { altPropName: 'trip_point', parent: this },
     );
-    /** @type {TripvehgrpspecsCollection} */ this.tripvehgrpspecs = getAndValidatePropFromProps(
+    /** @type {TripvehgrpspecsCollection} */ this.tripvehgrpspecs = gavpfp(
       'tripvehgrpspecs', props, TripvehgrpspecsCollection, new TripvehgrpspecsCollection(), { altPropName: 'tripvehgrpspec', parent: this },
     );
 
@@ -391,12 +542,12 @@ class Trip extends BlockActivityItem(
 Trip.hastusKeywords = ['trip'];
 Trip.hastusObject = 'trip';
 
-/* Serialization utilities */
-Trip.allChildClasses = getAllChildClasses(childClasses);
-Trip.prototype.serializeModel = serializeThis;
-Trip.parseModel = parseThis;
 
-module.exports = Trip;
+Trip.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default Trip;
 
 function getPlaceIdFromPlaceOrString(placeOrString) {
   return typeof placeOrString === `string` ? placeOrString : placeOrString.plcIdentifier;

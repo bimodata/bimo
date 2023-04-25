@@ -1,24 +1,57 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-class SchedulingUnitDate extends Item {
-  constructor(props) {
+export interface SchedulingUnitDateProps extends ExtendedItemProps {
+  scudSchedUnitName?: string;
+  scudSchedUnitType?: string;
+  scudProdPhaseDate?: string;
+  scudApplicMethod?: string;
+  scudSpecSchedName?: string;
+  scudSpecSchedType?: string;
+  scudSpecSchedScenario?: string;
+  scudSpecSchedBooking?: string;
+  scudGetFromSource?: string;
+  scudGetFromDayRank?: string;
+  scudGetFromCalendarId?: string;
+  scudGetFromBookingId?: string;
+  scudGetFromDate?: string;
+  scudProdBookingId?: string;
+  scudProdSchedType?: string;
+}
+
+export class SchedulingUnitDate extends Item<SchedulingUnitDate> {
+  scudSchedUnitName?: string;
+  scudSchedUnitType?: string;
+  scudProdPhaseDate?: string;
+  scudApplicMethod?: string;
+  scudSpecSchedName?: string;
+  scudSpecSchedType?: string;
+  scudSpecSchedScenario?: string;
+  scudSpecSchedBooking?: string;
+  scudGetFromSource?: string;
+  scudGetFromDayRank?: string;
+  scudGetFromCalendarId?: string;
+  scudGetFromBookingId?: string;
+  scudGetFromDate?: string;
+  scudProdBookingId?: string;
+  scudProdSchedType?: string;
+  constructor(props: SchedulingUnitDateProps) {
     super(props);
-    this.scudSchedUnitName = getAndValidatePropFromProps('scudSchedUnitName', props, `string`);
-    this.scudSchedUnitType = getAndValidatePropFromProps('scudSchedUnitType', props, `string`, '1100');
-    this.scudProdPhaseDate = getAndValidatePropFromProps('scudProdPhaseDate', props, `string`, '0');
-    this.scudApplicMethod = getAndValidatePropFromProps('scudApplicMethod', props, `string`, '2');
-    this.scudSpecSchedName = getAndValidatePropFromProps('scudSpecSchedName', props, `string`);
-    this.scudSpecSchedType = getAndValidatePropFromProps('scudSpecSchedType', props);
-    this.scudSpecSchedScenario = getAndValidatePropFromProps('scudSpecSchedScenario', props);
-    this.scudSpecSchedBooking = getAndValidatePropFromProps('scudSpecSchedBooking', props, `string`);
-    this.scudGetFromSource = getAndValidatePropFromProps('scudGetFromSource', props, `string`);
-    this.scudGetFromDayRank = getAndValidatePropFromProps('scudGetFromDayRank', props, `string`);
-    this.scudGetFromCalendarId = getAndValidatePropFromProps('scudGetFromCalendarId', props);
-    this.scudGetFromBookingId = getAndValidatePropFromProps('scudGetFromBookingId', props);
-    this.scudGetFromDate = getAndValidatePropFromProps('scudGetFromDate', props);
-    this.scudProdBookingId = getAndValidatePropFromProps('scudProdBookingId', props);
-    this.scudProdSchedType = getAndValidatePropFromProps('scudProdSchedType', props);
+    this.scudSchedUnitName = gavpfp('scudSchedUnitName', props, `string`);
+    this.scudSchedUnitType = gavpfp('scudSchedUnitType', props, `string`, '1100');
+    this.scudProdPhaseDate = gavpfp('scudProdPhaseDate', props, `string`, '0');
+    this.scudApplicMethod = gavpfp('scudApplicMethod', props, `string`, '2');
+    this.scudSpecSchedName = gavpfp('scudSpecSchedName', props, `string`);
+    this.scudSpecSchedType = gavpfp('scudSpecSchedType', props);
+    this.scudSpecSchedScenario = gavpfp('scudSpecSchedScenario', props);
+    this.scudSpecSchedBooking = gavpfp('scudSpecSchedBooking', props, `string`);
+    this.scudGetFromSource = gavpfp('scudGetFromSource', props, `string`);
+    this.scudGetFromDayRank = gavpfp('scudGetFromDayRank', props, `string`);
+    this.scudGetFromCalendarId = gavpfp('scudGetFromCalendarId', props);
+    this.scudGetFromBookingId = gavpfp('scudGetFromBookingId', props);
+    this.scudGetFromDate = gavpfp('scudGetFromDate', props);
+    this.scudProdBookingId = gavpfp('scudProdBookingId', props);
+    this.scudProdSchedType = gavpfp('scudProdSchedType', props);
   }
 
   get mediumLoggingOutput() {
@@ -31,4 +64,4 @@ class SchedulingUnitDate extends Item {
   }
 }
 
-module.exports = SchedulingUnitDate;
+export default SchedulingUnitDate;

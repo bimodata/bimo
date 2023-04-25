@@ -1,18 +1,31 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 const childClasses = [];
 
 /** Une représentation logique d'un point discret du réseau. */
-class NetworkNode extends Item {
-  constructor(props) {
+export interface NetworkNodeProps extends ExtendedItemProps {
+  bimoId?: string;
+  businessId?: string;
+  coordinatesBySystemName?: string;
+  customProps?: string;
+  _sectionIds?: string;
+}
+
+export class NetworkNode extends Item<NetworkNode> {
+  bimoId?: string;
+  businessId?: string;
+  coordinatesBySystemName?: string;
+  customProps?: string;
+  _sectionIds?: string;
+  constructor(props: NetworkNodeProps) {
     super(props, 'NetworkNode');
-    this.bimoId = getAndValidatePropFromProps('bimoId', props, 'string');
-    this.businessId = getAndValidatePropFromProps('businessId', props, 'string');
-    this.coordinatesBySystemName = getAndValidatePropFromProps('coordinatesBySystemName', props, Object, {});
-    this.customProps = getAndValidatePropFromProps('customProps', props, Object, {});
-    this._sectionIds = getAndValidatePropFromProps('_sectionIds', props, Set, new Set());
+    this.bimoId = gavpfp('bimoId', props, 'string');
+    this.businessId = gavpfp('businessId', props, 'string');
+    this.coordinatesBySystemName = gavpfp('coordinatesBySystemName', props, Object, {});
+    this.customProps = gavpfp('customProps', props, Object, {});
+    this._sectionIds = gavpfp('_sectionIds', props, Set, new Set());
   }
 
   /** @type {import ('./Network')} */
@@ -109,7 +122,7 @@ class NetworkNode extends Item {
 }
 
 NetworkNode.allChildClasses = getAllChildClasses(childClasses);
-NetworkNode.prototype.serializeModel = serializeThis;
-NetworkNode.parseModel = parseThis;
 
-module.exports = NetworkNode;
+
+
+export default NetworkNode;

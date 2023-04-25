@@ -2,11 +2,22 @@
  * This class is not serializable. It is meant to be computed from an existing vehicle schedule.
  */
 
-const { Item } = require('@bimo/core-utils-collection');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-class VehicleTask extends Item {
-  constructor(props) {
+
+export interface VehicleTaskProps extends ExtendedItemProps {
+  vehicleUnit?: string;
+  blocksThatStartWithThisVehu?: string;
+  id?: string;
+  label?: string;
+}
+
+export class VehicleTask extends Item<VehicleTask> {
+  vehicleUnit?: string;
+  blocksThatStartWithThisVehu?: string;
+  id?: string;
+  label?: string;
+  constructor(props: VehicleTaskProps) {
     super(props);
     /** @type {import ('./VehicleUnit')} */
     this.vehicleUnit = props.vehicleUnit;
@@ -59,4 +70,4 @@ class VehicleTask extends Item {
   }
 }
 
-module.exports = VehicleTask;
+export default VehicleTask;

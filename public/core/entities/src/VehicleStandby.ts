@@ -1,11 +1,31 @@
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const BlockActivityItem = require('./BlockActivityItem');
+import { BlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
 
-class VehicleStandby extends BlockActivityItem(
+export interface VehicleStandbyProps extends ExtendedItemProps {
+  bimoId?: string;
+  _sdbyStandbyNo?: string;
+  _sdbyStandbyNo?: string;
+  sdbyStartTime?: string;
+  sdbyEndTime?: string;
+  sdbyPlace?: string;
+  sdbyOperateSun?: string;
+  sdbyOperateMon?: string;
+  sdbyOperateTue?: string;
+  sdbyOperateWed?: string;
+  sdbyOperateThu?: string;
+  sdbyOperateFri?: string;
+  sdbyOperateSat?: string;
+  sdbyEvent?: string;
+  sdbyEventStatus?: string;
+  sdbyComment?: string;
+  sdbyCouvertureAdcNecessaire?: string;
+}
+
+export class VehicleStandby extends BlockActivityItem(
   Item, {
   blkActIdPropName: 'blkactVehicleStandbyNo',
   itemIdPropName: 'sdbyStandbyNo',
@@ -14,26 +34,43 @@ class VehicleStandby extends BlockActivityItem(
   endTimePropName: 'sdbyEndTime',
 },
 ) {
-  constructor(props) {
+  bimoId?: string;
+  _sdbyStandbyNo?: string;
+  _sdbyStandbyNo?: string;
+  sdbyStartTime?: string;
+  sdbyEndTime?: string;
+  sdbyPlace?: string;
+  sdbyOperateSun?: string;
+  sdbyOperateMon?: string;
+  sdbyOperateTue?: string;
+  sdbyOperateWed?: string;
+  sdbyOperateThu?: string;
+  sdbyOperateFri?: string;
+  sdbyOperateSat?: string;
+  sdbyEvent?: string;
+  sdbyEventStatus?: string;
+  sdbyComment?: string;
+  sdbyCouvertureAdcNecessaire?: string;
+  constructor(props: VehicleStandbyProps) {
     super(props);
-    /** */ this.bimoId = getAndValidatePropFromProps('bimoId', props);
-    /** */ this._sdbyStandbyNo = getAndValidatePropFromProps('sdbyStandbyNo', props);
+    /** */ this.bimoId = gavpfp('bimoId', props);
+    /** */ this._sdbyStandbyNo = gavpfp('sdbyStandbyNo', props);
     if (!this._sdbyStandbyNo) this._sdbyStandbyNo = this.bimoId;
 
-    /** */ this.sdbyStartTime = getAndValidatePropFromProps('sdbyStartTime', props);
-    /** */ this.sdbyEndTime = getAndValidatePropFromProps('sdbyEndTime', props);
-    /** */ this.sdbyPlace = getAndValidatePropFromProps('sdbyPlace', props);
-    /** */ this.sdbyOperateSun = getAndValidatePropFromProps('sdbyOperateSun', props);
-    /** */ this.sdbyOperateMon = getAndValidatePropFromProps('sdbyOperateMon', props);
-    /** */ this.sdbyOperateTue = getAndValidatePropFromProps('sdbyOperateTue', props);
-    /** */ this.sdbyOperateWed = getAndValidatePropFromProps('sdbyOperateWed', props);
-    /** */ this.sdbyOperateThu = getAndValidatePropFromProps('sdbyOperateThu', props);
-    /** */ this.sdbyOperateFri = getAndValidatePropFromProps('sdbyOperateFri', props);
-    /** */ this.sdbyOperateSat = getAndValidatePropFromProps('sdbyOperateSat', props);
-    /** */ this.sdbyEvent = getAndValidatePropFromProps('sdbyEvent', props);
-    /** */ this.sdbyEventStatus = getAndValidatePropFromProps('sdbyEventStatus', props);
-    /** */ this.sdbyComment = getAndValidatePropFromProps('sdbyComment', props);
-    /** */ this.sdbyCouvertureAdcNecessaire = getAndValidatePropFromProps('sdbyCouvertureAdcNecessaire', props);
+    /** */ this.sdbyStartTime = gavpfp('sdbyStartTime', props);
+    /** */ this.sdbyEndTime = gavpfp('sdbyEndTime', props);
+    /** */ this.sdbyPlace = gavpfp('sdbyPlace', props);
+    /** */ this.sdbyOperateSun = gavpfp('sdbyOperateSun', props);
+    /** */ this.sdbyOperateMon = gavpfp('sdbyOperateMon', props);
+    /** */ this.sdbyOperateTue = gavpfp('sdbyOperateTue', props);
+    /** */ this.sdbyOperateWed = gavpfp('sdbyOperateWed', props);
+    /** */ this.sdbyOperateThu = gavpfp('sdbyOperateThu', props);
+    /** */ this.sdbyOperateFri = gavpfp('sdbyOperateFri', props);
+    /** */ this.sdbyOperateSat = gavpfp('sdbyOperateSat', props);
+    /** */ this.sdbyEvent = gavpfp('sdbyEvent', props);
+    /** */ this.sdbyEventStatus = gavpfp('sdbyEventStatus', props);
+    /** */ this.sdbyComment = gavpfp('sdbyComment', props);
+    /** */ this.sdbyCouvertureAdcNecessaire = gavpfp('sdbyCouvertureAdcNecessaire', props);
   }
 
   get sdbyStandbyNo() {
@@ -51,9 +88,9 @@ class VehicleStandby extends BlockActivityItem(
 VehicleStandby.hastusKeywords = ['vehicle_standby'];
 VehicleStandby.hastusObject = 'vehicle_standby';
 
-/* Serialization utilities */
-VehicleStandby.allChildClasses = getAllChildClasses(childClasses);
-VehicleStandby.prototype.serializeModel = serializeThis;
-VehicleStandby.parseModel = parseThis;
 
-module.exports = VehicleStandby;
+VehicleStandby.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default VehicleStandby;

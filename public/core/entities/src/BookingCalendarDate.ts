@@ -1,30 +1,35 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { cleanStringUsingRegexAndReplacePairs } = require('@bimo/core-utils-string');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { cleanStringUsingRegexAndReplacePairs } from '@bimo/core-utils-string';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const SchedulingUnitDatesCollection = require('./SchedulingUnitDatesCollection');
+import { SchedulingUnitDatesCollection, SchedulingUnitDatesCollectionProps } from "./SchedulingUnitDatesCollection";
 
 const childClasses = [SchedulingUnitDatesCollection];
 
-class BookingCalendarDate extends Item {
-  constructor(props) {
+export interface BookingCalendarDateProps extends ExtendedItemProps {
+  bcaldDate?: string;
+}
+
+export class BookingCalendarDate extends Item<BookingCalendarDate> {
+  bcaldDate?: string;
+  constructor(props: BookingCalendarDateProps) {
     super(props);
     /**
      * FORMAT DE DATE pour BookingCalendarDates : jj/mm/aaaa.
      */
-    const date = getAndValidatePropFromProps('bcaldDate', props);
+    const date = gavpfp('bcaldDate', props);
     if (date.match(/^(\d{4})-(\d{2})-(\d{2})$/)) {
       this.bcaldDate = cleanStringUsingRegexAndReplacePairs(date, [['/^(\\d{4})-(\\d{2})-(\\d{2})$/', '$3/$2/$1']]);
     }
     else {
       this.bcaldDate = date;
     }
-    this.bcaldServiceDefId = getAndValidatePropFromProps('bcaldServiceDefId', props, `string`);
+    this.bcaldServiceDefId = gavpfp('bcaldServiceDefId', props, `string`);
 
     /* Children */
     /** @type {SchedulingUnitDatesCollection} */
-    this.schedulingUnitDates = getAndValidatePropFromProps(
+    this.schedulingUnitDates = gavpfp(
       'schedulingUnitDates', props,
       SchedulingUnitDatesCollection,
       new SchedulingUnitDatesCollection(),
@@ -53,7 +58,7 @@ class BookingCalendarDate extends Item {
 }
 
 BookingCalendarDate.allChildClasses = getAllChildClasses(childClasses);
-BookingCalendarDate.prototype.serializeModel = serializeThis;
-BookingCalendarDate.parseModel = parseThis;
 
-module.exports = BookingCalendarDate;
+
+
+export default BookingCalendarDate;

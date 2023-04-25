@@ -1,14 +1,17 @@
-/* Linked Classes */
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
-const Variant = require('./Variant');
+
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { Variant, VariantProps } from "./Variant";
 
 const childClasses = [Variant];
 
-/* Class definition */
-/** @extends {Collection<Variant>} */
-class VariantsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface VariantsCollectionProps extends ExtendedCollectionProps<Variant, VariantProps> {
+}
+
+export class VariantsCollection extends Collection<Variant, VariantProps> {
+  constructor(props: VariantsCollectionProps = {}) {
     super({
       itemName: 'Variant',
       ItemConstructor: Variant,
@@ -98,9 +101,9 @@ class VariantsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-VariantsCollection.allChildClasses = getAllChildClasses(childClasses);
-VariantsCollection.prototype.serializeModel = serializeThis;
-VariantsCollection.parseModel = parseThis;
 
-module.exports = VariantsCollection;
+VariantsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default VariantsCollection;

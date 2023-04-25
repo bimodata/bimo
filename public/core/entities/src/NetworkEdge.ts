@@ -1,29 +1,46 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const { Item } = require('@bimo/core-utils-collection'); const NetworkNode = require('./NetworkNode');
+import { Item } from '@bimo/core-utils-collection'); const NetworkNode = require('./NetworkNode';
 
 const childClasses = [NetworkNode];
 
 /** Une représentation logique d'un lien entre deux points discrets du réseau */
-class NetworkEdge extends Item {
-  constructor(props) {
+export interface NetworkEdgeProps extends ExtendedItemProps {
+  bimoId?: string;
+  businessId?: string;
+  fromNode?: string;
+  toNode?: string;
+  customProps?: string;
+  geometryBySystemName?: string;
+  _sectionIds?: string;
+}
+
+export class NetworkEdge extends Item<NetworkEdge> {
+  bimoId?: string;
+  businessId?: string;
+  fromNode?: string;
+  toNode?: string;
+  customProps?: string;
+  geometryBySystemName?: string;
+  _sectionIds?: string;
+  constructor(props: NetworkEdgeProps) {
     super(props);
-    this.bimoId = getAndValidatePropFromProps('bimoId', props, 'string');
-    this.businessId = getAndValidatePropFromProps('businessId', props, 'string');
+    this.bimoId = gavpfp('bimoId', props, 'string');
+    this.businessId = gavpfp('businessId', props, 'string');
     /** @type {NetworkNode} */
-    this.fromNode = getAndValidatePropFromProps('fromNode', props, NetworkNode, null);
+    this.fromNode = gavpfp('fromNode', props, NetworkNode, null);
     /** @type {NetworkNode} */
-    this.toNode = getAndValidatePropFromProps('toNode', props, NetworkNode, null);
-    this.customProps = getAndValidatePropFromProps('customProps', props, Object, {});
+    this.toNode = gavpfp('toNode', props, NetworkNode, null);
+    this.customProps = gavpfp('customProps', props, Object, {});
 
     /**
      * Permet (optionnellement) de stocker une ou plusieurs représentations géométriques de
      * cet arc. Par convention, si aucune géométrie n'est spécifiée pour un système donné,
      * on considère que la géométrie est une droite entre les deux noeuds.
      */
-    this.geometryBySystemName = getAndValidatePropFromProps('geometryBySystemName', props, Object, {});
-    this._sectionIds = getAndValidatePropFromProps('_sectionIds', props, Set, new Set());
+    this.geometryBySystemName = gavpfp('geometryBySystemName', props, Object, {});
+    this._sectionIds = gavpfp('_sectionIds', props, Set, new Set());
   }
 
   getCoordinatesBySystemName(systemName) {
@@ -138,7 +155,7 @@ class NetworkEdge extends Item {
 }
 
 NetworkEdge.allChildClasses = getAllChildClasses(childClasses);
-NetworkEdge.prototype.serializeModel = serializeThis;
-NetworkEdge.parseModel = parseThis;
 
-module.exports = NetworkEdge;
+
+
+export default NetworkEdge;

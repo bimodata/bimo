@@ -1,11 +1,24 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-class DataFile extends Item {
-  constructor(props) {
+export interface DataFileProps extends ExtendedItemProps {
+  fileInfo?: string;
+  fileData?: string;
+  fileName?: string;
+  path?: string;
+  links?: string;
+}
+
+export class DataFile extends Item<DataFile> {
+  fileInfo?: string;
+  fileData?: string;
+  fileName?: string;
+  path?: string;
+  links?: string;
+  constructor(props: DataFileProps) {
     super(props);
-    this.fileInfo = getAndValidatePropFromProps(`fileInfo`, props);
-    this.fileData = getAndValidatePropFromProps('fileData', props);
+    this.fileInfo = gavpfp(`fileInfo`, props);
+    this.fileData = gavpfp('fileData', props);
     this.fileName = this.fileInfo.nameOrPath;
     this.path = this.fileInfo.path;
 
@@ -13,4 +26,4 @@ class DataFile extends Item {
   }
 }
 
-module.exports = DataFile;
+export default DataFile;

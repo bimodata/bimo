@@ -1,5 +1,5 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
 const childClasses = [];
 
@@ -13,18 +13,29 @@ Un même réseau peut avoir plusieurs NetworkMaps. Par exemple:
 Une network map est stockée sous la forme de plusieurs FeatureCollection geojson, contenant des
 features de type Point ou LineString. Chacune de ces features a des propriétés qui font le
 lien vers des Edges ou des Nodes, ou des sections du réseau. */
-class NetworkMap {
-  constructor(props) {
-    this.bimoId = getAndValidatePropFromProps('bimoId', props, 'string');
-    this.label = getAndValidatePropFromProps('label', props, 'string');
+export interface NetworkMapProps extends ExtendedItemProps {
+  label?: string;
+  featureCollection?: string;
+  nodesFeatureCollection?: string;
+  sectionsFeatureCollection?: string;
+}
+
+export class NetworkMap {
+  label?: string;
+  featureCollection?: string;
+  nodesFeatureCollection?: string;
+  sectionsFeatureCollection?: string;
+  constructor(props: NetworkMapProps) {
+    this.bimoId = gavpfp('bimoId', props, 'string');
+    this.label = gavpfp('label', props, 'string');
     /** @type {GeoJSON.FeatureCollection} */
-    this.featureCollection = getAndValidatePropFromProps('featureCollection', props);
+    this.featureCollection = gavpfp('featureCollection', props);
 
     /** @type {GeoJSON.FeatureCollection} */
-    this.nodesFeatureCollection = getAndValidatePropFromProps('nodesFeatureCollection', props);
+    this.nodesFeatureCollection = gavpfp('nodesFeatureCollection', props);
 
     /** @type {GeoJSON.FeatureCollection} */
-    this.sectionsFeatureCollection = getAndValidatePropFromProps('sectionsFeatureCollection', props);
+    this.sectionsFeatureCollection = gavpfp('sectionsFeatureCollection', props);
   }
 
   get shortLoggingOutput() {
@@ -37,7 +48,7 @@ class NetworkMap {
 }
 
 NetworkMap.allChildClasses = getAllChildClasses(childClasses);
-NetworkMap.prototype.serializeModel = serializeThis;
-NetworkMap.parseModel = parseThis;
 
-module.exports = NetworkMap;
+
+
+export default NetworkMap;

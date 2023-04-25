@@ -1,16 +1,23 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
-const { pick } = require('lodash');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { pick } from 'lodash';
 
 const childClasses = [];
 
-class BoundingBox extends Item {
+export interface BoundingBoxProps extends ExtendedItemProps {
+  activeCoordinatesSystemName?: string;
+  coordinatesBySystemName?: string;
+}
+
+export class BoundingBox extends Item<BoundingBox> {
+  activeCoordinatesSystemName?: string;
+  coordinatesBySystemName?: string;
   constructor(rawProps) {
     const props = Array.isArray(rawProps) ? { xMin: rawProps[0], yMin: rawProps[1], xMax: rawProps[2], yMax: rawProps[3] } : rawProps;
     super(props, 'BoundingBox');
-    this.activeCoordinatesSystemName = getAndValidatePropFromProps('activeCoordinatesSystemName', rawProps, 'string', 'default');
-    this.coordinatesBySystemName = getAndValidatePropFromProps('coordinatesBySystemName', rawProps, Object, {});
+    this.activeCoordinatesSystemName = gavpfp('activeCoordinatesSystemName', rawProps, 'string', 'default');
+    this.coordinatesBySystemName = gavpfp('coordinatesBySystemName', rawProps, Object, {});
     if (Object.keys(this.coordinatesBySystemName).length === 0) {
       this.coordinatesBySystemName.default = pick(props, ['xMin', 'xMax', 'yMin', 'yMax']);
     }
@@ -58,7 +65,7 @@ class BoundingBox extends Item {
 }
 
 BoundingBox.allChildClasses = getAllChildClasses(childClasses);
-BoundingBox.prototype.serializeModel = serializeThis;
-BoundingBox.parseModel = parseThis;
 
-module.exports = BoundingBox;
+
+
+export default BoundingBox;

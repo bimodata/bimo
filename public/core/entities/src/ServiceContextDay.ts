@@ -1,25 +1,50 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { serializeThis, parseThis } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-class ServiceContextDay extends Item {
-  constructor(props) {
+export interface ServiceContextDayProps extends ExtendedItemProps {
+  scdayWeekRank?: string;
+  scdayProdPhaseDay?: string;
+  scdayApplicMethod?: string;
+  scdaySpecSchedName?: string;
+  scdaySpecSchedType?: string;
+  scdaySpecSchedScenario?: string;
+  scdaySpecSchedBooking?: string;
+  scdayGetFromCalendarId?: string;
+  scdayGetFromBookingId?: string;
+  scdayGetFromContext?: string;
+  scdayGetFromDayRank?: string;
+}
+
+export class ServiceContextDay extends Item<ServiceContextDay> {
+  scdayWeekRank?: string;
+  scdayProdPhaseDay?: string;
+  scdayApplicMethod?: string;
+  scdaySpecSchedName?: string;
+  scdaySpecSchedType?: string;
+  scdaySpecSchedScenario?: string;
+  scdaySpecSchedBooking?: string;
+  scdayGetFromCalendarId?: string;
+  scdayGetFromBookingId?: string;
+  scdayGetFromContext?: string;
+  scdayGetFromDayRank?: string;
+  constructor(props: ServiceContextDayProps) {
     super(props);
-    this.scdayWeekRank = getAndValidatePropFromProps('scdayWeekRank', props, `string`);
-    this.scdayProdPhaseDay = getAndValidatePropFromProps('scdayProdPhaseDay', props, `string`, '0');
-    this.scdayApplicMethod = getAndValidatePropFromProps('scdayApplicMethod', props, `string`, '1');
-    this.scdaySpecSchedName = getAndValidatePropFromProps('scdaySpecSchedName', props);
-    this.scdaySpecSchedType = getAndValidatePropFromProps('scdaySpecSchedType', props, `string`);
-    this.scdaySpecSchedScenario = getAndValidatePropFromProps('scdaySpecScenario', props, `string`);
-    this.scdaySpecSchedBooking = getAndValidatePropFromProps('scdaySpecBooking', props, `string`);
-    this.scdayGetFromCalendarId = getAndValidatePropFromProps('scdayGetFromCalendarId', props, `string`);
-    this.scdayGetFromBookingId = getAndValidatePropFromProps('scdayGetFromBookingId', props, `string`);
-    this.scdayGetFromContext = getAndValidatePropFromProps('scdayGetFromContext', props, `string`);
-    this.scdayGetFromDayRank = getAndValidatePropFromProps('scdayGetFromDayRank', props, `string`);
+    this.scdayWeekRank = gavpfp('scdayWeekRank', props, `string`);
+    this.scdayProdPhaseDay = gavpfp('scdayProdPhaseDay', props, `string`, '0');
+    this.scdayApplicMethod = gavpfp('scdayApplicMethod', props, `string`, '1');
+    this.scdaySpecSchedName = gavpfp('scdaySpecSchedName', props);
+    this.scdaySpecSchedType = gavpfp('scdaySpecSchedType', props, `string`);
+    this.scdaySpecSchedScenario = gavpfp('scdaySpecScenario', props, `string`);
+    this.scdaySpecSchedBooking = gavpfp('scdaySpecBooking', props, `string`);
+    this.scdayGetFromCalendarId = gavpfp('scdayGetFromCalendarId', props, `string`);
+    this.scdayGetFromBookingId = gavpfp('scdayGetFromBookingId', props, `string`);
+    this.scdayGetFromContext = gavpfp('scdayGetFromContext', props, `string`);
+    this.scdayGetFromDayRank = gavpfp('scdayGetFromDayRank', props, `string`);
   }
 }
 
-ServiceContextDay.prototype.serializeModel = serializeThis;
-ServiceContextDay.parseModel = parseThis;
 
-module.exports = ServiceContextDay;
+
+
+export default ServiceContextDay;

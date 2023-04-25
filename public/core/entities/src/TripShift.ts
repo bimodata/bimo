@@ -1,15 +1,20 @@
-/* Linked Classes */
 
-/* Serialization utilities dependencies */
+
+
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-/* Class definition */
-class TripShift {
-  constructor(props) {
-    /** */ this.tripshiftTripNo = getAndValidatePropFromProps('tripshiftTripNo', props);
-    /** */ this.tripshiftActualShift = getAndValidatePropFromProps('tripshiftActualShift', props);
+
+export interface TripShiftProps extends ExtendedItemProps {
+  tripshiftActualShift?: string;
+}
+
+export class TripShift {
+  tripshiftActualShift?: string;
+  constructor(props: TripShiftProps) {
+    /** */ this.tripshiftTripNo = gavpfp('tripshiftTripNo', props);
+    /** */ this.tripshiftActualShift = gavpfp('tripshiftActualShift', props);
 
     /* Children */
 
@@ -20,9 +25,9 @@ class TripShift {
 TripShift.hastusKeywords = ['trip_shift'];
 TripShift.hastusObject = 'trip_shift';
 
-/* Serialization utilities */
-TripShift.allChildClasses = getAllChildClasses(childClasses);
-TripShift.prototype.serializeModel = serializeThis;
-TripShift.parseModel = parseThis;
 
-module.exports = TripShift;
+TripShift.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default TripShift;

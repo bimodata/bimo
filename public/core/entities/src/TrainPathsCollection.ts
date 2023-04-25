@@ -1,18 +1,21 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
 
-const { Collection } = require('@bimo/core-utils-collection');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const TrainPath = require('./TrainPath');
-const TrainPathsGeneralInfo = require('./TrainPathsGeneralInfo');
+import { TrainPath, TrainPathProps } from "./TrainPath";
+import { TrainPathsGeneralInfo, TrainPathsGeneralInfoProps } from "./TrainPathsGeneralInfo";
 
 const childClasses = [TrainPath, TrainPathsGeneralInfo];
 
-/** @extends {Collection<TrainPath>} */
-class TrainPathsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface TrainPathsCollectionProps extends ExtendedCollectionProps<TrainPath, TrainPathProps> {
+}
+
+export class TrainPathsCollection extends Collection<TrainPath, TrainPathProps> {
+  constructor(props: TrainPathsCollectionProps = {}) {
     super({
       itemName: 'TrainPath',
       ItemConstructor: TrainPath,
@@ -23,7 +26,7 @@ class TrainPathsCollection extends Collection {
 
     /* Unoficial Children */
     /** @type {TrainPathsGeneralInfos} */
-    this.trainPathsGeneralInfo = getAndValidatePropFromProps(
+    this.trainPathsGeneralInfo = gavpfp(
       'trainPathsGeneralInfo', props,
       TrainPathsGeneralInfo,
       new TrainPathsGeneralInfo(),
@@ -73,7 +76,7 @@ class TrainPathsCollection extends Collection {
 }
 
 TrainPathsCollection.allChildClasses = getAllChildClasses(childClasses);
-TrainPathsCollection.prototype.serializeModel = serializeThis;
-TrainPathsCollection.parseModel = parseThis;
 
-module.exports = TrainPathsCollection;
+
+
+export default TrainPathsCollection;

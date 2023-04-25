@@ -1,18 +1,21 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const NetworkMap = require('./NetworkMap');
+import { NetworkMap, NetworkMapProps } from "./NetworkMap";
 
 const childClasses = [NetworkMap];
 
-/** @extends {Collection<NetworkMap>} */
-class NetworkMapsCollection extends Collection {
+
+export interface NetworkMapsCollectionProps extends ExtendedCollectionProps<NetworkMap, NetworkMapProps> {
+}
+
+export class NetworkMapsCollection extends Collection<NetworkMap, NetworkMapProps> {
   /**
    *
    * @param {Object} props
    * @param {string} props.label
    */
-  constructor(props = {}) {
+  constructor(props: NetworkMapsCollectionProps = {}) {
     super({
       itemName: 'NetworkMap',
       ItemConstructor: NetworkMap,
@@ -26,7 +29,7 @@ class NetworkMapsCollection extends Collection {
 }
 
 NetworkMapsCollection.allChildClasses = getAllChildClasses(childClasses);
-NetworkMapsCollection.prototype.serializeModel = serializeThis;
-NetworkMapsCollection.parseModel = parseThis;
 
-module.exports = NetworkMapsCollection;
+
+
+export default NetworkMapsCollection;

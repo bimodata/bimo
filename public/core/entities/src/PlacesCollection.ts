@@ -1,12 +1,15 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
-const Place = require('./Place');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { Place, PlaceProps } from "./Place";
 
 const childClasses = [Place];
 
-/** @extends {Collection<Place>} */
-class PlacesCollection extends Collection {
-  constructor(props = {}) {
+
+export interface PlacesCollectionProps extends ExtendedCollectionProps<Place, PlaceProps> {
+}
+
+export class PlacesCollection extends Collection<Place, PlaceProps> {
+  constructor(props: PlacesCollectionProps = {}) {
     super({
       itemName: 'Place',
       ItemConstructor: Place,
@@ -53,13 +56,13 @@ class PlacesCollection extends Collection {
 
 PlacesCollection.ItemConstructor = Place;
 
-/* Serialization utilities */
+
 PlacesCollection.allChildClasses = getAllChildClasses(childClasses);
-PlacesCollection.prototype.serializeModel = serializeThis;
-PlacesCollection.parseModel = parseThis;
+
+
 
 /* I/O info */
 PlacesCollection.defaultExportedDataDataName = `output_place`;
 PlacesCollection.defaultImportDataDataName = `input_place`;
 
-module.exports = PlacesCollection;
+export default PlacesCollection;

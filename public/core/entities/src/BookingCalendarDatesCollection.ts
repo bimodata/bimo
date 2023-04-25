@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
 
-const { Collection } = require('@bimo/core-utils-collection');
-const BookingCalendarDate = require('./BookingCalendarDate');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { BookingCalendarDate, BookingCalendarDateProps } from "./BookingCalendarDate";
 
 const childClasses = [BookingCalendarDate];
 
-/** @extends {Collection<BookingCalendarDate>} */
-class BookingCalendarDatesCollection extends Collection {
-  constructor(props) {
+
+export interface BookingCalendarDatesCollectionProps extends ExtendedCollectionProps<BookingCalendarDate, BookingCalendarDateProps> {
+}
+
+export class BookingCalendarDatesCollection extends Collection<BookingCalendarDate, BookingCalendarDateProps> {
+  constructor(props: BookingCalendarDatesCollectionProps) {
     super({
       itemName: 'BookingCalendarDate',
       ItemConstructor: BookingCalendarDate,
@@ -48,7 +51,7 @@ class BookingCalendarDatesCollection extends Collection {
   }
 }
 BookingCalendarDatesCollection.allChildClasses = getAllChildClasses(childClasses);
-BookingCalendarDatesCollection.prototype.serializeModel = serializeThis;
-BookingCalendarDatesCollection.parseModel = parseThis;
 
-module.exports = BookingCalendarDatesCollection;
+
+
+export default BookingCalendarDatesCollection;

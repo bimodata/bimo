@@ -1,23 +1,44 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { serializeThis, parseThis } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-class ServiceContextInterval extends Item {
-  constructor(props) {
+export interface ServiceContextIntervalProps extends ExtendedItemProps {
+  scintStartDate?: string;
+  scintEndDate?: string;
+  scintSunday?: string;
+  scintMonday?: string;
+  scintTuesday?: string;
+  scintWednesday?: string;
+  scintThursday?: string;
+  scintFriday?: string;
+  scintSaturday?: string;
+}
+
+export class ServiceContextInterval extends Item<ServiceContextInterval> {
+  scintStartDate?: string;
+  scintEndDate?: string;
+  scintSunday?: string;
+  scintMonday?: string;
+  scintTuesday?: string;
+  scintWednesday?: string;
+  scintThursday?: string;
+  scintFriday?: string;
+  scintSaturday?: string;
+  constructor(props: ServiceContextIntervalProps) {
     super(props);
-    this.scintStartDate = getAndValidatePropFromProps('scintStartDate', props, `string`);
-    this.scintEndDate = getAndValidatePropFromProps('scintEndDate', props, `string`);
-    this.scintSunday = getAndValidatePropFromProps('scintSunday', props, `string`);
-    this.scintMonday = getAndValidatePropFromProps('scintMonday', props, `string`);
-    this.scintTuesday = getAndValidatePropFromProps('scintTuesday', props, `string`);
-    this.scintWednesday = getAndValidatePropFromProps('scintWednesday', props, `string`);
-    this.scintThursday = getAndValidatePropFromProps('scintThursday', props, `string`);
-    this.scintFriday = getAndValidatePropFromProps('scintFriday', props, `string`);
-    this.scintSaturday = getAndValidatePropFromProps('scintSaturday', props, `string`);
+    this.scintStartDate = gavpfp('scintStartDate', props, `string`);
+    this.scintEndDate = gavpfp('scintEndDate', props, `string`);
+    this.scintSunday = gavpfp('scintSunday', props, `string`);
+    this.scintMonday = gavpfp('scintMonday', props, `string`);
+    this.scintTuesday = gavpfp('scintTuesday', props, `string`);
+    this.scintWednesday = gavpfp('scintWednesday', props, `string`);
+    this.scintThursday = gavpfp('scintThursday', props, `string`);
+    this.scintFriday = gavpfp('scintFriday', props, `string`);
+    this.scintSaturday = gavpfp('scintSaturday', props, `string`);
   }
 }
 
-ServiceContextInterval.prototype.serializeModel = serializeThis;
-ServiceContextInterval.parseModel = parseThis;
 
-module.exports = ServiceContextInterval;
+
+
+export default ServiceContextInterval;

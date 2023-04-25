@@ -1,34 +1,63 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const RoutesCollection = require('./RoutesCollection');
-const VariantsCollection = require('./VariantsCollection');
-const Variant = require('./Variant');
-const VariantPointsCollection = require('./VariantPointsCollection');
-const VehicleScheduleOrRouteVersion = require('./VehicleScheduleOrRouteVersion');
-const TripOrVariantSectionsCollection = require('./TripOrVariantSectionsCollection');
+import { RoutesCollection, RoutesCollectionProps } from "./RoutesCollection";
+import { VariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
+import { Variant, VariantProps } from "./Variant";
+import { VariantPointsCollection, VariantPointsCollectionProps } from "./VariantPointsCollection";
+import { VehicleScheduleOrRouteVersion, VehicleScheduleOrRouteVersionProps } from "./VehicleScheduleOrRouteVersion";
+import { TripOrVariantSectionsCollection, TripOrVariantSectionsCollectionProps } from "./TripOrVariantSectionsCollection";
 
 const childClasses = [RoutesCollection];
 
-/** @extends {VehicleScheduleOrRouteVersion<Variant>}  */
-class RouteVersion extends VehicleScheduleOrRouteVersion {
-  constructor(props) {
+
+export interface RouteVersionProps extends ExtendedItemProps {
+  bimoId?: string;
+  rtevIdentifier?: string;
+  rtevDescription?: string;
+  rtevSchedulingUnit?: string;
+  rtevEffectiveDate?: string;
+  rtevRailInfra?: string;
+  rtevRoutesBasedOnRailLinks?: string;
+  rtevOwner?: string;
+  rtevPublicAccess?: string;
+  rtevDataGroup?: string;
+  routes?: string;
+  _cachedValueByValueKey?: string;
+  _links?: string;
+}
+
+export class RouteVersion extends VehicleScheduleOrRouteVersion {
+  bimoId?: string;
+  rtevIdentifier?: string;
+  rtevDescription?: string;
+  rtevSchedulingUnit?: string;
+  rtevEffectiveDate?: string;
+  rtevRailInfra?: string;
+  rtevRoutesBasedOnRailLinks?: string;
+  rtevOwner?: string;
+  rtevPublicAccess?: string;
+  rtevDataGroup?: string;
+  routes?: string;
+  _cachedValueByValueKey?: string;
+  _links?: string;
+  constructor(props: RouteVersionProps) {
     super(props, 'variant');
 
-    this.bimoId = getAndValidatePropFromProps('bimoId', props);
-    this.rtevIdentifier = getAndValidatePropFromProps('rtevIdentifier', props);
-    this.rtevDescription = getAndValidatePropFromProps('rtevDescription', props);
-    this.rtevSchedulingUnit = getAndValidatePropFromProps('rtevSchedulingUnit', props);
-    this.rtevEffectiveDate = getAndValidatePropFromProps('rtevEffectiveDate', props);
-    this.rtevRailInfra = getAndValidatePropFromProps('rtevRailInfra', props, 'string', '0');
-    this.rtevRoutesBasedOnRailLinks = getAndValidatePropFromProps('rtevRoutesBasedOnRailLinks', props, 'string', '0');
-    this.rtevOwner = getAndValidatePropFromProps('rtevOwner', props, 'string', 'ADMIN');
-    this.rtevPublicAccess = getAndValidatePropFromProps('rtevPublicAccess', props, 'string', '0');
-    this.rtevDataGroup = getAndValidatePropFromProps('rtevDataGroup', props);
+    this.bimoId = gavpfp('bimoId', props);
+    this.rtevIdentifier = gavpfp('rtevIdentifier', props);
+    this.rtevDescription = gavpfp('rtevDescription', props);
+    this.rtevSchedulingUnit = gavpfp('rtevSchedulingUnit', props);
+    this.rtevEffectiveDate = gavpfp('rtevEffectiveDate', props);
+    this.rtevRailInfra = gavpfp('rtevRailInfra', props, 'string', '0');
+    this.rtevRoutesBasedOnRailLinks = gavpfp('rtevRoutesBasedOnRailLinks', props, 'string', '0');
+    this.rtevOwner = gavpfp('rtevOwner', props, 'string', 'ADMIN');
+    this.rtevPublicAccess = gavpfp('rtevPublicAccess', props, 'string', '0');
+    this.rtevDataGroup = gavpfp('rtevDataGroup', props);
 
     /* Children */
     /** @type {RoutesCollection} */
-    this.routes = getAndValidatePropFromProps('routes', props, RoutesCollection, new RoutesCollection());
+    this.routes = gavpfp('routes', props, RoutesCollection, new RoutesCollection());
     this.routes.parent = this;
 
     /* Links */
@@ -147,9 +176,9 @@ class RouteVersion extends VehicleScheduleOrRouteVersion {
 RouteVersion.hastusKeywords = ['route_version'];
 RouteVersion.hastusObject = 'route_version';
 
-/* Serialization utilities */
-RouteVersion.allChildClasses = getAllChildClasses(childClasses);
-RouteVersion.prototype.serializeModel = serializeThis;
-RouteVersion.parseModel = parseThis;
 
-module.exports = RouteVersion;
+RouteVersion.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default RouteVersion;

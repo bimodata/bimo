@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 
-const { Item } = require('@bimo/core-utils-collection');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const { get, set } = require('lodash');
+import { get, set } from 'lodash';
 
 const pathByTripOrVariantPropNameByTripOrVariantType = {
   trip: {
@@ -37,11 +37,16 @@ const pathByTripOrVariantPropNameByTripOrVariantType = {
   },
 };
 
-class TripOrVariantPoint extends Item {
+export interface TripOrVariantPointProps extends ExtendedItemProps {
+  _abstract?: string;
+}
+
+export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
   /**
    * @param {Object} props
    * @param {'variant'|'trip'} tripOrVariantType
    */
+  _abstract?: string;
   constructor(props, tripOrVariantType) {
     super(props);
     this._abstract = {
@@ -185,4 +190,4 @@ class TripOrVariantPoint extends Item {
   }
 }
 
-module.exports = TripOrVariantPoint;
+export default TripOrVariantPoint;

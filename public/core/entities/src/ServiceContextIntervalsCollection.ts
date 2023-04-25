@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
 
-const { Collection } = require('@bimo/core-utils-collection');
-const ServiceContextInterval = require('./ServiceContextInterval');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { ServiceContextInterval, ServiceContextIntervalProps } from "./ServiceContextInterval";
 
 const childClasses = [ServiceContextInterval];
 
-/** @extends {Collection<ServiceContextInterval>} */
-class ServiceContextIntervalsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface ServiceContextIntervalsCollectionProps extends ExtendedCollectionProps<ServiceContextInterval, ServiceContextIntervalProps> {
+}
+
+export class ServiceContextIntervalsCollection extends Collection<ServiceContextInterval, ServiceContextIntervalProps> {
+  constructor(props: ServiceContextIntervalsCollectionProps = {}) {
     super({
       itemName: 'ServiceContextInterval',
       ItemConstructor: ServiceContextInterval,
@@ -18,7 +21,7 @@ class ServiceContextIntervalsCollection extends Collection {
 }
 
 ServiceContextIntervalsCollection.allChildClasses = getAllChildClasses(childClasses);
-ServiceContextIntervalsCollection.prototype.serializeModel = serializeThis;
-ServiceContextIntervalsCollection.parseModel = parseThis;
 
-module.exports = ServiceContextIntervalsCollection;
+
+
+export default ServiceContextIntervalsCollection;

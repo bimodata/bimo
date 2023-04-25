@@ -1,11 +1,14 @@
-/* Linked Classes */
-const { Collection } = require('@bimo/core-utils-collection');
-const BlockSection = require('./BlockSection');
 
-/* Class definition */
-/** @extends {Collection<BlockSection>} */
-class BlockSectionsCollection extends Collection {
-  constructor(props = {}) {
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { BlockSection, BlockSectionProps } from "./BlockSection";
+
+
+
+export interface BlockSectionsCollectionProps extends ExtendedCollectionProps<BlockSection, BlockSectionProps> {
+}
+
+export class BlockSectionsCollection extends Collection<BlockSection, BlockSectionProps> {
+  constructor(props: BlockSectionsCollectionProps = {}) {
     super({
       itemName: 'BlockSection',
       ItemConstructor: BlockSection,
@@ -29,4 +32,4 @@ class BlockSectionsCollection extends Collection {
   }
 }
 
-module.exports = BlockSectionsCollection;
+export default BlockSectionsCollection;

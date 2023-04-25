@@ -1,15 +1,18 @@
-/* Linked Classes */
-const VehicleUnit = require('./VehicleUnit');
 
-/* Serialization utilities dependencies */
+import { VehicleUnit, VehicleUnitProps } from "./VehicleUnit";
+
+
 const childClasses = [VehicleUnit];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-/** @extends {Collection<VehicleUnit>} */
-class VehicleUnitsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface VehicleUnitsCollectionProps extends ExtendedCollectionProps<VehicleUnit, VehicleUnitProps> {
+}
+
+export class VehicleUnitsCollection extends Collection<VehicleUnit, VehicleUnitProps> {
+  constructor(props: VehicleUnitsCollectionProps = {}) {
     Object.assign(props, {
       itemName: 'VehicleUnit',
       ItemConstructor: VehicleUnit,
@@ -20,9 +23,9 @@ class VehicleUnitsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-VehicleUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
-VehicleUnitsCollection.prototype.serializeModel = serializeThis;
-VehicleUnitsCollection.parseModel = parseThis;
 
-module.exports = VehicleUnitsCollection;
+VehicleUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default VehicleUnitsCollection;

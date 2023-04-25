@@ -1,3 +1,6 @@
+import { NetworkNode } from "./NetworkNode";
+import { NetworkEdge } from "./NetworkEdge";
+
 /**
  * A link is a helper object that makes it easier to traverse the network in a certain order
  * A node has as many adjacent links as it has edges, but on the adjacent link, we can easily
@@ -26,15 +29,12 @@
  * l(2->3).previousLink returns l(1->2)
  * There is no nextLink on l(2->3) since n3 is degree 1
  */
-class AdjacentLink {
-  constructor(startNode, endNode, edge) {
-    /** @type {import ('./NetworkNode')} */
-    this.startNode = startNode;
-    /** @type {import ('./NetworkNode')} */
-    this.endNode = endNode;
-    /** @type {import ('./NetworkEdge')} */
-    this.edge = edge;
-  }
+export class AdjacentLink {
+  constructor(
+    public startNode: NetworkNode,
+    public endNode: NetworkNode,
+    public edge: NetworkEdge
+  ) {}
 
   get network() {
     return this.edge.network;
@@ -48,16 +48,20 @@ class AdjacentLink {
   /** Works only if the end node is degree 2 - returns the end node's adjacent link that is not on the same edge
    * as the current link   */
   get nextLink() {
-    if (this.endNode.degree !== 2) throw new Error(`Invalid next link: end node is degree ${this.endNode.degree}`);
+    if (this.endNode.degree !== 2)
+      throw new Error(`Invalid next link: end node is degree ${this.endNode.degree}`);
     return this.endNode.adjacentLinks.find(({ edge }) => edge !== this.edge);
   }
 
   /** Works only if the start node is degree 2 - returns the start node's adjacent link that is not on the same edge
    * as the current link   */
   get previousLink() {
-    if (this.startNode.degree !== 2) throw new Error(`Invalid previous link: start node is degree ${this.endNode.degree}`);
+    if (this.startNode.degree !== 2)
+      throw new Error(
+        `Invalid previous link: start node is degree ${this.endNode.degree}`
+      );
     return this.startNode.adjacentLinks.find(({ edge }) => edge !== this.edge);
   }
 }
 
-module.exports = AdjacentLink;
+export default AdjacentLink;

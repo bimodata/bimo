@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const SdefSchedulingUnit = require('./SdefSchedulingUnit');
+import { SdefSchedulingUnit, SdefSchedulingUnitProps } from "./SdefSchedulingUnit";
 
 const childClasses = [SdefSchedulingUnit];
 
-/** @extends {Collection<SdefSchedulingUnit>} */
-class SdefSchedulingUnitsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface SdefSchedulingUnitsCollectionProps extends ExtendedCollectionProps<SdefSchedulingUnit, SdefSchedulingUnitProps> {
+}
+
+export class SdefSchedulingUnitsCollection extends Collection<SdefSchedulingUnit, SdefSchedulingUnitProps> {
+  constructor(props: SdefSchedulingUnitsCollectionProps = {}) {
     super({
       itemName: 'SdefSchedulingUnit',
       ItemConstructor: SdefSchedulingUnit,
@@ -22,7 +25,7 @@ class SdefSchedulingUnitsCollection extends Collection {
 SdefSchedulingUnitsCollection.ItemConstructor = SdefSchedulingUnit;
 
 SdefSchedulingUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
-SdefSchedulingUnitsCollection.prototype.serializeModel = serializeThis;
-SdefSchedulingUnitsCollection.parseModel = parseThis;
 
-module.exports = SdefSchedulingUnitsCollection;
+
+
+export default SdefSchedulingUnitsCollection;

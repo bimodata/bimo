@@ -1,15 +1,20 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { serializeThis, parseThis } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-class ServiceContextParent extends Item {
-  constructor(props) {
+export interface ServiceContextParentProps extends ExtendedItemProps {
+  sctxName?: string;
+}
+
+export class ServiceContextParent extends Item<ServiceContextParent> {
+  sctxName?: string;
+  constructor(props: ServiceContextParentProps) {
     super(props);
-    this.sctxName = getAndValidatePropFromProps('sctxName', props, `string`, 'Base');
+    this.sctxName = gavpfp('sctxName', props, `string`, 'Base');
   }
 }
 
-ServiceContextParent.prototype.serializeModel = serializeThis;
-ServiceContextParent.parseModel = parseThis;
 
-module.exports = ServiceContextParent;
+
+
+export default ServiceContextParent;

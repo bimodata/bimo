@@ -1,22 +1,25 @@
-/* Linked Classes */
-const Tripvehgrpspec = require('./Tripvehgrpspec');
 
-/* Serialization utilities dependencies */
+import { Tripvehgrpspec, TripvehgrpspecProps } from "./Tripvehgrpspec";
+
+
 const childClasses = [Tripvehgrpspec];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-/** @extends {Collection<Tripvehgrpspec>} */
-class TripvehgrpspecsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface TripvehgrpspecsCollectionProps extends ExtendedCollectionProps<Tripvehgrpspec, TripvehgrpspecProps> {
+}
+
+export class TripvehgrpspecsCollection extends Collection<Tripvehgrpspec, TripvehgrpspecProps> {
+  constructor(props: TripvehgrpspecsCollectionProps = {}) {
     super({ itemName: 'Tripvehgrpspec', ItemConstructor: Tripvehgrpspec, items: props.items, parent: props.parent });
   }
 }
 
-/* Serialization utilities */
-TripvehgrpspecsCollection.allChildClasses = getAllChildClasses(childClasses);
-TripvehgrpspecsCollection.prototype.serializeModel = serializeThis;
-TripvehgrpspecsCollection.parseModel = parseThis;
 
-module.exports = TripvehgrpspecsCollection;
+TripvehgrpspecsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default TripvehgrpspecsCollection;

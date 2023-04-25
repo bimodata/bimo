@@ -1,13 +1,16 @@
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
 
-const { Collection } = require('@bimo/core-utils-collection');
-const ServiceEvolution = require('./ServiceEvolution');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { ServiceEvolution, ServiceEvolutionProps } from "./ServiceEvolution";
 
 const childClasses = [ServiceEvolution];
 
-/** @extends {Collection<ServiceEvolution>} */
-class ServiceEvolutionsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface ServiceEvolutionsCollectionProps extends ExtendedCollectionProps<ServiceEvolution, ServiceEvolutionProps> {
+}
+
+export class ServiceEvolutionsCollection extends Collection<ServiceEvolution, ServiceEvolutionProps> {
+  constructor(props: ServiceEvolutionsCollectionProps = {}) {
     super({
       itemName: 'ServiceEvolution',
       ItemConstructor: ServiceEvolution,
@@ -18,7 +21,7 @@ class ServiceEvolutionsCollection extends Collection {
 }
 
 ServiceEvolutionsCollection.allChildClasses = getAllChildClasses(childClasses);
-ServiceEvolutionsCollection.prototype.serializeModel = serializeThis;
-ServiceEvolutionsCollection.parseModel = parseThis;
 
-module.exports = ServiceEvolutionsCollection;
+
+
+export default ServiceEvolutionsCollection;

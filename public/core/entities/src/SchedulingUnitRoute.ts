@@ -1,11 +1,16 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-class SchedulingUnitRoute extends Item {
-  constructor(props) {
+export interface SchedulingUnitRouteProps extends ExtendedItemProps {
+  rteIdentifier?: string;
+}
+
+export class SchedulingUnitRoute extends Item<SchedulingUnitRoute> {
+  rteIdentifier?: string;
+  constructor(props: SchedulingUnitRouteProps) {
     super(props);
-    this.rteIdentifier = getAndValidatePropFromProps('rteIdentifier', props, `string`);
+    this.rteIdentifier = gavpfp('rteIdentifier', props, `string`);
   }
 }
 
-module.exports = SchedulingUnitRoute;
+export default SchedulingUnitRoute;

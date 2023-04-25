@@ -1,16 +1,19 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
 
-const { Collection } = require('@bimo/core-utils-collection');
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-const TrainPathVariant = require('./TrainPathVariant');
+import { TrainPathVariant, TrainPathVariantProps } from "./TrainPathVariant";
 
 const childClasses = [TrainPathVariant];
 
-/** @extends {Collection<TrainPathVariant>} */
-class TrainPathVariantsCollection extends Collection {
-  constructor(props = {}) {
+
+export interface TrainPathVariantsCollectionProps extends ExtendedCollectionProps<TrainPathVariant, TrainPathVariantProps> {
+}
+
+export class TrainPathVariantsCollection extends Collection<TrainPathVariant, TrainPathVariantProps> {
+  constructor(props: TrainPathVariantsCollectionProps = {}) {
     super({
       itemName: 'TrainPathVariant',
       ItemConstructor: TrainPathVariant,
@@ -25,7 +28,7 @@ class TrainPathVariantsCollection extends Collection {
 }
 
 TrainPathVariantsCollection.allChildClasses = getAllChildClasses(childClasses);
-TrainPathVariantsCollection.prototype.serializeModel = serializeThis;
-TrainPathVariantsCollection.parseModel = parseThis;
 
-module.exports = TrainPathVariantsCollection;
+
+
+export default TrainPathVariantsCollection;

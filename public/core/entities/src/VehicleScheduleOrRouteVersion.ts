@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-const { Item } = require('@bimo/core-utils-collection');
-const { Collection } = require('@bimo/core-utils-collection');
-const { get } = require('lodash');
-const mapsAndSets = require('@bimo/core-utils-maps-and-sets');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { get } from 'lodash';
+import mapsAndSets from '@bimo/core-utils-maps-and-sets';
 
 const pathByTripOrVariantPropNameByTripOrVariantType = {
   trip: { tripsOrVariants: 'trips', removeTripOrVariant: 'removeTrip' },
@@ -15,11 +15,16 @@ const pathByTripOrVariantPropNameByTripOrVariantType = {
 };
 
 /** @template TripOrVariantType */
-class VehicleScheduleOrRouteVersion extends Item {
+export interface VehicleScheduleOrRouteVersionProps extends ExtendedItemProps {
+  _abstract?: string;
+}
+
+export class VehicleScheduleOrRouteVersion extends Item<VehicleScheduleOrRouteVersion> {
   /**
    * @param {Object} props
    * @param {'variant'|'trip'|'scheduledTrip'} tripOrVariantType
    */
+  _abstract?: string;
   constructor(props, tripOrVariantType) {
     super(props);
     this._abstract = {
@@ -56,4 +61,4 @@ class VehicleScheduleOrRouteVersion extends Item {
   }
 }
 
-module.exports = VehicleScheduleOrRouteVersion;
+export default VehicleScheduleOrRouteVersion;

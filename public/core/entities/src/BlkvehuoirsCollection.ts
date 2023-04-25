@@ -1,15 +1,18 @@
-/* Linked Classes */
-const Blkvehuoir = require('./Blkvehuoir');
 
-/* Serialization utilities dependencies */
+import { Blkvehuoir, BlkvehuoirProps } from "./Blkvehuoir";
+
+
 const childClasses = [Blkvehuoir];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Collection } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-/** @extends {Collection<Blkvehuoir>} */
-class BlkvehuoirsCollection extends Collection {
-  constructor(props = {}) {
+
+
+export interface BlkvehuoirsCollectionProps extends ExtendedCollectionProps<Blkvehuoir, BlkvehuoirProps> {
+}
+
+export class BlkvehuoirsCollection extends Collection<Blkvehuoir, BlkvehuoirProps> {
+  constructor(props: BlkvehuoirsCollectionProps = {}) {
     Object.assign(props, {
       itemName: 'Blkvehuoir',
       ItemConstructor: Blkvehuoir,
@@ -20,9 +23,9 @@ class BlkvehuoirsCollection extends Collection {
   }
 }
 
-/* Serialization utilities */
-BlkvehuoirsCollection.allChildClasses = getAllChildClasses(childClasses);
-BlkvehuoirsCollection.prototype.serializeModel = serializeThis;
-BlkvehuoirsCollection.parseModel = parseThis;
 
-module.exports = BlkvehuoirsCollection;
+BlkvehuoirsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default BlkvehuoirsCollection;

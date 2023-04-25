@@ -1,15 +1,20 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { serializeThis, parseThis } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-class ServiceEvolutionPeriodSchedulesBooking extends Item {
-  constructor(props) {
+export interface ServiceEvolutionPeriodSchedulesBookingProps extends ExtendedItemProps {
+  bkIdentifier?: string;
+}
+
+export class ServiceEvolutionPeriodSchedulesBooking extends Item<ServiceEvolutionPeriodSchedulesBooking> {
+  bkIdentifier?: string;
+  constructor(props: ServiceEvolutionPeriodSchedulesBookingProps) {
     super(props);
-    this.bkIdentifier = getAndValidatePropFromProps('bkIdentifier', props, `string`);
+    this.bkIdentifier = gavpfp('bkIdentifier', props, `string`);
   }
 }
 
-ServiceEvolutionPeriodSchedulesBooking.prototype.serializeModel = serializeThis;
-ServiceEvolutionPeriodSchedulesBooking.parseModel = parseThis;
 
-module.exports = ServiceEvolutionPeriodSchedulesBooking;
+
+
+export default ServiceEvolutionPeriodSchedulesBooking;

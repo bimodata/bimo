@@ -1,25 +1,30 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const TrainPathVariantsCollection = require('./TrainPathVariantsCollection');
+import { TrainPathVariantsCollection, TrainPathVariantsCollectionProps } from "./TrainPathVariantsCollection";
 
 const childClasses = [TrainPathVariantsCollection];
 
-class TrainPath extends Item {
-  constructor(props) {
+export interface TrainPathProps extends ExtendedItemProps {
+  trnpIdentifier?: string;
+}
+
+export class TrainPath extends Item<TrainPath> {
+  trnpIdentifier?: string;
+  constructor(props: TrainPathProps) {
     super(props);
 
-    this.trnpIdentifier = getAndValidatePropFromProps('trnpIdentifier', props, `string`);
+    this.trnpIdentifier = gavpfp('trnpIdentifier', props, `string`);
     if (!this.trnpIdentifier) {
       throw new Error('Pas de nom de sillon');
     }
-    this.trnpRoute = getAndValidatePropFromProps('trnpRoute', props, `string`);
-    this.trnpIsInService = getAndValidatePropFromProps('trnpIsInService', props, `string`);
+    this.trnpRoute = gavpfp('trnpRoute', props, `string`);
+    this.trnpIsInService = gavpfp('trnpIsInService', props, `string`);
 
     /* Children */
     /** @type {TrainPathVariantsCollection} */
-    this.trainPathVariants = getAndValidatePropFromProps(
+    this.trainPathVariants = gavpfp(
       'trainPathVariants', props,
       TrainPathVariantsCollection,
       new TrainPathVariantsCollection(),
@@ -33,7 +38,7 @@ class TrainPath extends Item {
 }
 
 TrainPath.allChildClasses = getAllChildClasses(childClasses);
-TrainPath.prototype.serializeModel = serializeThis;
-TrainPath.parseModel = parseThis;
 
-module.exports = TrainPath;
+
+
+export default TrainPath;

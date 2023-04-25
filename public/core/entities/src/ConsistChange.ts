@@ -1,10 +1,42 @@
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
-const BlockActivityItem = require('./BlockActivityItem');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { BlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
 
-class ConsistChange extends BlockActivityItem(
+export interface ConsistChangeProps extends ExtendedItemProps {
+  cchgActivity?: string;
+  _cchgInternalNumber?: string;
+  _cchgBuildTime?: string;
+  cchgEvent?: string;
+  cchgEventStatus?: string;
+  cchgPlaceStart?: string;
+  _cchgTimeStart?: string;
+  cchgDuration?: string;
+  cchgOnTripNo?: string;
+  cchgOrigOnTripNo?: string;
+  cchgUnitCount?: string;
+  cchgOnTrip?: string;
+  cchgIsRequired?: string;
+  cchgRelatedBlock?: string;
+  cchgRelatedBlockIntNo?: string;
+  cchgOntrpBlock?: string;
+  cchgOntrpBlockIntNo?: string;
+  cchgComment?: string;
+  cchgPosition?: string;
+  cchgTimeSpecified?: string;
+  cchgOperatesSun?: string;
+  cchgOperatesMon?: string;
+  cchgOperatesTue?: string;
+  cchgOperatesWed?: string;
+  cchgOperatesThu?: string;
+  cchgOperatesFri?: string;
+  cchgOperatesSat?: string;
+  cchgFromNote?: string;
+  cchgToNote?: string;
+}
+
+export class ConsistChange extends BlockActivityItem(
   Item, {
   blkActIdPropName: 'blkactCchgNo',
   itemIdPropName: 'cchgInternalNumber',
@@ -13,44 +45,73 @@ class ConsistChange extends BlockActivityItem(
   endTimePropName: 'cchgTimeStart', // TODO: improve this
 },
 ) {
-  constructor(props) {
+  cchgActivity?: string;
+  _cchgInternalNumber?: string;
+  _cchgBuildTime?: string;
+  cchgEvent?: string;
+  cchgEventStatus?: string;
+  cchgPlaceStart?: string;
+  _cchgTimeStart?: string;
+  cchgDuration?: string;
+  cchgOnTripNo?: string;
+  cchgOrigOnTripNo?: string;
+  cchgUnitCount?: string;
+  cchgOnTrip?: string;
+  cchgIsRequired?: string;
+  cchgRelatedBlock?: string;
+  cchgRelatedBlockIntNo?: string;
+  cchgOntrpBlock?: string;
+  cchgOntrpBlockIntNo?: string;
+  cchgComment?: string;
+  cchgPosition?: string;
+  cchgTimeSpecified?: string;
+  cchgOperatesSun?: string;
+  cchgOperatesMon?: string;
+  cchgOperatesTue?: string;
+  cchgOperatesWed?: string;
+  cchgOperatesThu?: string;
+  cchgOperatesFri?: string;
+  cchgOperatesSat?: string;
+  cchgFromNote?: string;
+  cchgToNote?: string;
+  constructor(props: ConsistChangeProps) {
     super(props);
-    this.cchgActivity = getAndValidatePropFromProps('cchgActivity', props);
-    this._cchgInternalNumber = getAndValidatePropFromProps('cchgInternalNumber', props);
-    this._cchgBuildTime = getAndValidatePropFromProps('cchgBuildTime', props);
-    this.cchgEvent = getAndValidatePropFromProps('cchgEvent', props);
-    this.cchgEventStatus = getAndValidatePropFromProps('cchgEventStatus', props);
-    this.cchgPlaceStart = getAndValidatePropFromProps('cchgPlaceStart', props);
-    this._cchgTimeStart = getAndValidatePropFromProps('cchgTimeStart', props);
-    this.cchgDuration = getAndValidatePropFromProps('cchgDuration', props);
-    this.cchgOnTripNo = getAndValidatePropFromProps('cchgOnTripNo', props);
-    this.cchgOrigOnTripNo = getAndValidatePropFromProps('cchgOrigOnTripNo', props);
-    this.cchgUnitCount = getAndValidatePropFromProps('cchgUnitCount', props);
-    this.cchgOnTrip = getAndValidatePropFromProps('cchgOnTrip', props);
-    this.cchgIsRequired = getAndValidatePropFromProps('cchgIsRequired', props, 'string', '0');
+    this.cchgActivity = gavpfp('cchgActivity', props);
+    this._cchgInternalNumber = gavpfp('cchgInternalNumber', props);
+    this._cchgBuildTime = gavpfp('cchgBuildTime', props);
+    this.cchgEvent = gavpfp('cchgEvent', props);
+    this.cchgEventStatus = gavpfp('cchgEventStatus', props);
+    this.cchgPlaceStart = gavpfp('cchgPlaceStart', props);
+    this._cchgTimeStart = gavpfp('cchgTimeStart', props);
+    this.cchgDuration = gavpfp('cchgDuration', props);
+    this.cchgOnTripNo = gavpfp('cchgOnTripNo', props);
+    this.cchgOrigOnTripNo = gavpfp('cchgOrigOnTripNo', props);
+    this.cchgUnitCount = gavpfp('cchgUnitCount', props);
+    this.cchgOnTrip = gavpfp('cchgOnTrip', props);
+    this.cchgIsRequired = gavpfp('cchgIsRequired', props, 'string', '0');
 
     /** @type {string} - WARNING: this is the blkNumber, not the blkIntNumber */
-    this.cchgRelatedBlock = getAndValidatePropFromProps('cchgRelatedBlock', props);
+    this.cchgRelatedBlock = gavpfp('cchgRelatedBlock', props);
     /** @type {string} - This is currently not exported in default OIG but we add it because it makes senses */
-    this.cchgRelatedBlockIntNo = getAndValidatePropFromProps('cchgRelatedBlockIntNo', props);
+    this.cchgRelatedBlockIntNo = gavpfp('cchgRelatedBlockIntNo', props);
 
     /** @type {string} - WARNING: this is the blkNumber, not the blkIntNumber */
-    this.cchgOntrpBlock = getAndValidatePropFromProps('cchgOntrpBlock', props);
+    this.cchgOntrpBlock = gavpfp('cchgOntrpBlock', props);
     /** @type {string} - This is currently not exported in default OIG but we add it because it makes senses */
-    this.cchgOntrpBlockIntNo = getAndValidatePropFromProps('cchgOntrpBlockIntNo', props);
+    this.cchgOntrpBlockIntNo = gavpfp('cchgOntrpBlockIntNo', props);
 
-    this.cchgComment = getAndValidatePropFromProps('cchgComment', props);
-    this.cchgPosition = getAndValidatePropFromProps('cchgPosition', props, 'string', '0');
-    this.cchgTimeSpecified = getAndValidatePropFromProps('cchgTimeSpecified', props);
-    this.cchgOperatesSun = getAndValidatePropFromProps('cchgOperatesSun', props, 'string', '1');
-    this.cchgOperatesMon = getAndValidatePropFromProps('cchgOperatesMon', props, 'string', '0');
-    this.cchgOperatesTue = getAndValidatePropFromProps('cchgOperatesTue', props, 'string', '0');
-    this.cchgOperatesWed = getAndValidatePropFromProps('cchgOperatesWed', props, 'string', '0');
-    this.cchgOperatesThu = getAndValidatePropFromProps('cchgOperatesThu', props, 'string', '0');
-    this.cchgOperatesFri = getAndValidatePropFromProps('cchgOperatesFri', props, 'string', '0');
-    this.cchgOperatesSat = getAndValidatePropFromProps('cchgOperatesSat', props, 'string', '0');
-    this.cchgFromNote = getAndValidatePropFromProps('cchgFromNote', props);
-    this.cchgToNote = getAndValidatePropFromProps('cchgToNote', props);
+    this.cchgComment = gavpfp('cchgComment', props);
+    this.cchgPosition = gavpfp('cchgPosition', props, 'string', '0');
+    this.cchgTimeSpecified = gavpfp('cchgTimeSpecified', props);
+    this.cchgOperatesSun = gavpfp('cchgOperatesSun', props, 'string', '1');
+    this.cchgOperatesMon = gavpfp('cchgOperatesMon', props, 'string', '0');
+    this.cchgOperatesTue = gavpfp('cchgOperatesTue', props, 'string', '0');
+    this.cchgOperatesWed = gavpfp('cchgOperatesWed', props, 'string', '0');
+    this.cchgOperatesThu = gavpfp('cchgOperatesThu', props, 'string', '0');
+    this.cchgOperatesFri = gavpfp('cchgOperatesFri', props, 'string', '0');
+    this.cchgOperatesSat = gavpfp('cchgOperatesSat', props, 'string', '0');
+    this.cchgFromNote = gavpfp('cchgFromNote', props);
+    this.cchgToNote = gavpfp('cchgToNote', props);
   }
 
   /** @param {import ('./Trip')} newTrip */
@@ -94,7 +155,7 @@ ConsistChange.hastusKeywords = ['consist_change'];
 ConsistChange.hastusObject = 'consist_change';
 
 ConsistChange.allChildClasses = getAllChildClasses(childClasses);
-ConsistChange.prototype.serializeModel = serializeThis;
-ConsistChange.parseModel = parseThis;
 
-module.exports = ConsistChange;
+
+
+export default ConsistChange;

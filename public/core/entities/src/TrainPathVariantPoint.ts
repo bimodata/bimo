@@ -1,24 +1,29 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 const childClasses = [];
 
-class TrainPathVariantPoint extends Item {
-  constructor(props) {
+export interface TrainPathVariantPointProps extends ExtendedItemProps {
+  trnpvptPlace?: string;
+}
+
+export class TrainPathVariantPoint extends Item<TrainPathVariantPoint> {
+  trnpvptPlace?: string;
+  constructor(props: TrainPathVariantPointProps) {
     super(props);
 
-    this.trnpvptPlace = getAndValidatePropFromProps('trnpvptPlace', props, `string`);
+    this.trnpvptPlace = gavpfp('trnpvptPlace', props, `string`);
     if (!this.trnpvptPlace) {
       throw new Error('Pas de nom de lieu');
     }
-    this.trnpvptArrivalTime = getAndValidatePropFromProps('trnpvptArrivalTime', props, `string`);
-    this.trnpvptLoadTime = getAndValidatePropFromProps('trnpvptLoadTime', props, `string`);
-    this.trnpvptNoStopping = getAndValidatePropFromProps('trnpvptNoStopping', props, `string`);
-    this.trnpvptPassMidnight = getAndValidatePropFromProps('trnpvptPassMidnight', props, `string`);
+    this.trnpvptArrivalTime = gavpfp('trnpvptArrivalTime', props, `string`);
+    this.trnpvptLoadTime = gavpfp('trnpvptLoadTime', props, `string`);
+    this.trnpvptNoStopping = gavpfp('trnpvptNoStopping', props, `string`);
+    this.trnpvptPassMidnight = gavpfp('trnpvptPassMidnight', props, `string`);
 
     // Site spec SNCF
-    this.trnpvptTypeArretGi = getAndValidatePropFromProps('trnpvptTypeArretGi', props, `string`);
+    this.trnpvptTypeArretGi = gavpfp('trnpvptTypeArretGi', props, `string`);
   }
 
   get shortLoggingOutput() {
@@ -28,7 +33,7 @@ class TrainPathVariantPoint extends Item {
 }
 
 TrainPathVariantPoint.allChildClasses = getAllChildClasses(childClasses);
-TrainPathVariantPoint.prototype.serializeModel = serializeThis;
-TrainPathVariantPoint.parseModel = parseThis;
 
-module.exports = TrainPathVariantPoint;
+
+
+export default TrainPathVariantPoint;

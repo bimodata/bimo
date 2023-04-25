@@ -1,28 +1,37 @@
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const { Item } = require('@bimo/core-utils-collection');
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const TrainPathVariantDatesCollection = require('./TrainPathVariantDatesCollection');
-const TrainPathVariantPointsCollection = require('./TrainPathVariantPointsCollection');
+import { TrainPathVariantDatesCollection, TrainPathVariantDatesCollectionProps } from "./TrainPathVariantDatesCollection";
+import { TrainPathVariantPointsCollection, TrainPathVariantPointsCollectionProps } from "./TrainPathVariantPointsCollection";
 
 const childClasses = [TrainPathVariantPointsCollection, TrainPathVariantDatesCollection];
 
-class TrainPathVariant extends Item {
-  constructor(props) {
+export interface TrainPathVariantProps extends ExtendedItemProps {
+  trnpvTrainPathRimId?: string;
+  trainPathVariantPoints?: string;
+  trainPathVariantDates?: string;
+}
+
+export class TrainPathVariant extends Item<TrainPathVariant> {
+  trnpvTrainPathRimId?: string;
+  trainPathVariantPoints?: string;
+  trainPathVariantDates?: string;
+  constructor(props: TrainPathVariantProps) {
     super(props);
 
-    this.trnpvTrainPathRimId = getAndValidatePropFromProps('trnpvTrainPathRimId', props, `string`);
+    this.trnpvTrainPathRimId = gavpfp('trnpvTrainPathRimId', props, `string`);
 
     /* Children */
     /** @type {TrainPathVariantPointsCollection} */
-    this.trainPathVariantPoints = getAndValidatePropFromProps(
+    this.trainPathVariantPoints = gavpfp(
       'trainPathVariantPoints', props,
       TrainPathVariantPointsCollection,
       new TrainPathVariantPointsCollection(),
       { altPropName: 'train_path_variant_point', parent: this },
     );
     /** @type {TrainPathVariantDatesCollection} */
-    this.trainPathVariantDates = getAndValidatePropFromProps(
+    this.trainPathVariantDates = gavpfp(
       'trainPathVariantDates', props,
       TrainPathVariantDatesCollection,
       new TrainPathVariantDatesCollection(),
@@ -48,7 +57,7 @@ class TrainPathVariant extends Item {
 }
 
 TrainPathVariant.allChildClasses = getAllChildClasses(childClasses);
-TrainPathVariant.prototype.serializeModel = serializeThis;
-TrainPathVariant.parseModel = parseThis;
 
-module.exports = TrainPathVariant;
+
+
+export default TrainPathVariant;

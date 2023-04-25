@@ -1,55 +1,128 @@
-const _ = require('lodash');
+import _ from 'lodash';
 
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
 
-const { Item } = require('@bimo/core-utils-collection');
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const VariantsCollection = require('./VariantsCollection');
+import { VariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
 
 const childClasses = [VariantsCollection];
 
-class Route extends Item {
-  constructor(props) {
+export interface RouteProps extends ExtendedItemProps {
+  bimoId?: string;
+  rteVersion?: string;
+  rteIdentifier?: string;
+  _rteDescription?: string;
+  rteDirection?: string;
+  rteServiceType?: string;
+  rteServiceMode?: string;
+  rteGarage?: string;
+  rteGroup?: string;
+  rteMainColorRgb?: string;
+  rteSecondaryColorRgb?: string;
+  rteMainColorAdjustedRgb?: string;
+  rteSecondaryColorAdjustedRgb?: string;
+  rtePubIdSpec?: string;
+  rteForPublicInfo?: string;
+  rtePublicRating?: string;
+  rteReliability?: string;
+  rtePubDir_1?: string;
+  rtePubDir_2?: string;
+  rteBasicVarDir_1?: string;
+  rteBasicVarDir_2?: string;
+  rteUrl?: string;
+  rteMainPpatDir_1?: string;
+  rteMainPpatDir_2?: string;
+  rteDriverPpat_1?: string;
+  rteDriverPpat_2?: string;
+  rtePublicPpat_1?: string;
+  rtePublicPpat_2?: string;
+  rteSchedulerPpat_1?: string;
+  rteSchedulerPpat_2?: string;
+  rteDistrict?: string;
+  rteZone?: string;
+  rteIsCancelled?: string;
+  variants?: string;
+  _links?: string;
+}
+
+export class Route extends Item<Route> {
+  bimoId?: string;
+  rteVersion?: string;
+  rteIdentifier?: string;
+  _rteDescription?: string;
+  rteDirection?: string;
+  rteServiceType?: string;
+  rteServiceMode?: string;
+  rteGarage?: string;
+  rteGroup?: string;
+  rteMainColorRgb?: string;
+  rteSecondaryColorRgb?: string;
+  rteMainColorAdjustedRgb?: string;
+  rteSecondaryColorAdjustedRgb?: string;
+  rtePubIdSpec?: string;
+  rteForPublicInfo?: string;
+  rtePublicRating?: string;
+  rteReliability?: string;
+  rtePubDir_1?: string;
+  rtePubDir_2?: string;
+  rteBasicVarDir_1?: string;
+  rteBasicVarDir_2?: string;
+  rteUrl?: string;
+  rteMainPpatDir_1?: string;
+  rteMainPpatDir_2?: string;
+  rteDriverPpat_1?: string;
+  rteDriverPpat_2?: string;
+  rtePublicPpat_1?: string;
+  rtePublicPpat_2?: string;
+  rteSchedulerPpat_1?: string;
+  rteSchedulerPpat_2?: string;
+  rteDistrict?: string;
+  rteZone?: string;
+  rteIsCancelled?: string;
+  variants?: string;
+  _links?: string;
+  constructor(props: RouteProps) {
     super(props);
 
-    this.bimoId = getAndValidatePropFromProps('bimoId', props);
-    this.rteVersion = getAndValidatePropFromProps('rteVersion', props, 'string');
-    this.rteIdentifier = getAndValidatePropFromProps('rteIdentifier', props, 'string');
-    this._rteDescription = getAndValidatePropFromProps('rteDescription', props, 'string');
-    this.rteDirection = getAndValidatePropFromProps('rteDirection', props, 'string', '1');
-    this.rteServiceType = getAndValidatePropFromProps('rteServiceType', props, 'string', '0');
-    this.rteServiceMode = getAndValidatePropFromProps('rteServiceMode', props, 'string', '3');
-    this.rteGarage = getAndValidatePropFromProps('rteGarage', props, 'string');
-    this.rteGroup = getAndValidatePropFromProps('rteGroup', props, 'string');
-    this.rteMainColorRgb = getAndValidatePropFromProps('rteMainColorRgb', props, 'string');
-    this.rteSecondaryColorRgb = getAndValidatePropFromProps('rteSecondaryColorRgb', props, 'string');
-    this.rteMainColorAdjustedRgb = getAndValidatePropFromProps('rteMainColorAdjustedRgb', props, 'string');
-    this.rteSecondaryColorAdjustedRgb = getAndValidatePropFromProps('rteSecondaryColorAdjustedRgb', props, 'string');
-    this.rtePubIdSpec = getAndValidatePropFromProps('rtePubIdSpec', props, 'string');
-    this.rteForPublicInfo = getAndValidatePropFromProps('rteForPublicInfo', props, 'string');
-    this.rtePublicRating = getAndValidatePropFromProps('rtePublicRating', props, 'string');
-    this.rteReliability = getAndValidatePropFromProps('rteReliability', props, 'string');
-    this.rtePubDir_1 = getAndValidatePropFromProps('rtePubDir_1', props, 'string');
-    this.rtePubDir_2 = getAndValidatePropFromProps('rtePubDir_2', props, 'string');
-    this.rteBasicVarDir_1 = getAndValidatePropFromProps('rteBasicVarDir_1', props, 'string');
-    this.rteBasicVarDir_2 = getAndValidatePropFromProps('rteBasicVarDir_2', props, 'string');
-    this.rteUrl = getAndValidatePropFromProps('rteUrl', props, 'string');
-    this.rteMainPpatDir_1 = getAndValidatePropFromProps('rteMainPpatDir_1', props, 'string');
-    this.rteMainPpatDir_2 = getAndValidatePropFromProps('rteMainPpatDir_2', props, 'string');
-    this.rteDriverPpat_1 = getAndValidatePropFromProps('rteDriverPpat_1', props, 'string');
-    this.rteDriverPpat_2 = getAndValidatePropFromProps('rteDriverPpat_2', props, 'string');
-    this.rtePublicPpat_1 = getAndValidatePropFromProps('rtePublicPpat_1', props, 'string');
-    this.rtePublicPpat_2 = getAndValidatePropFromProps('rtePublicPpat_2', props, 'string');
-    this.rteSchedulerPpat_1 = getAndValidatePropFromProps('rteSchedulerPpat_1', props, 'string');
-    this.rteSchedulerPpat_2 = getAndValidatePropFromProps('rteSchedulerPpat_2', props, 'string');
-    this.rteDistrict = getAndValidatePropFromProps('rteDistrict', props, 'string');
-    this.rteZone = getAndValidatePropFromProps('rteZone', props, 'string');
-    this.rteIsCancelled = getAndValidatePropFromProps('rteIsCancelled', props, 'string', '0');
+    this.bimoId = gavpfp('bimoId', props);
+    this.rteVersion = gavpfp('rteVersion', props, 'string');
+    this.rteIdentifier = gavpfp('rteIdentifier', props, 'string');
+    this._rteDescription = gavpfp('rteDescription', props, 'string');
+    this.rteDirection = gavpfp('rteDirection', props, 'string', '1');
+    this.rteServiceType = gavpfp('rteServiceType', props, 'string', '0');
+    this.rteServiceMode = gavpfp('rteServiceMode', props, 'string', '3');
+    this.rteGarage = gavpfp('rteGarage', props, 'string');
+    this.rteGroup = gavpfp('rteGroup', props, 'string');
+    this.rteMainColorRgb = gavpfp('rteMainColorRgb', props, 'string');
+    this.rteSecondaryColorRgb = gavpfp('rteSecondaryColorRgb', props, 'string');
+    this.rteMainColorAdjustedRgb = gavpfp('rteMainColorAdjustedRgb', props, 'string');
+    this.rteSecondaryColorAdjustedRgb = gavpfp('rteSecondaryColorAdjustedRgb', props, 'string');
+    this.rtePubIdSpec = gavpfp('rtePubIdSpec', props, 'string');
+    this.rteForPublicInfo = gavpfp('rteForPublicInfo', props, 'string');
+    this.rtePublicRating = gavpfp('rtePublicRating', props, 'string');
+    this.rteReliability = gavpfp('rteReliability', props, 'string');
+    this.rtePubDir_1 = gavpfp('rtePubDir_1', props, 'string');
+    this.rtePubDir_2 = gavpfp('rtePubDir_2', props, 'string');
+    this.rteBasicVarDir_1 = gavpfp('rteBasicVarDir_1', props, 'string');
+    this.rteBasicVarDir_2 = gavpfp('rteBasicVarDir_2', props, 'string');
+    this.rteUrl = gavpfp('rteUrl', props, 'string');
+    this.rteMainPpatDir_1 = gavpfp('rteMainPpatDir_1', props, 'string');
+    this.rteMainPpatDir_2 = gavpfp('rteMainPpatDir_2', props, 'string');
+    this.rteDriverPpat_1 = gavpfp('rteDriverPpat_1', props, 'string');
+    this.rteDriverPpat_2 = gavpfp('rteDriverPpat_2', props, 'string');
+    this.rtePublicPpat_1 = gavpfp('rtePublicPpat_1', props, 'string');
+    this.rtePublicPpat_2 = gavpfp('rtePublicPpat_2', props, 'string');
+    this.rteSchedulerPpat_1 = gavpfp('rteSchedulerPpat_1', props, 'string');
+    this.rteSchedulerPpat_2 = gavpfp('rteSchedulerPpat_2', props, 'string');
+    this.rteDistrict = gavpfp('rteDistrict', props, 'string');
+    this.rteZone = gavpfp('rteZone', props, 'string');
+    this.rteIsCancelled = gavpfp('rteIsCancelled', props, 'string', '0');
 
     /* Children */
     /** @type {VariantsCollection} */
-    this.variants = getAndValidatePropFromProps('variants', props, VariantsCollection,
+    this.variants = gavpfp('variants', props, VariantsCollection,
       new VariantsCollection(), { altPropName: 'variant' });
     this.variants.parent = this;
 
@@ -126,9 +199,9 @@ class Route extends Item {
 Route.hastusKeywords = ['route'];
 Route.hastusObject = 'route';
 
-/* Serialization utilities */
-Route.allChildClasses = getAllChildClasses(childClasses);
-Route.prototype.serializeModel = serializeThis;
-Route.parseModel = parseThis;
 
-module.exports = Route;
+Route.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default Route;

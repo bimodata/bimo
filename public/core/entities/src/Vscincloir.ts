@@ -1,17 +1,24 @@
-/* Linked Classes */
 
-/* Serialization utilities dependencies */
+
+
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const { Item } = require('@bimo/core-utils-collection');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-/* Class definition */
-class Vscincloir extends Item {
-  constructor(props) {
+
+export interface VscincloirProps extends ExtendedItemProps {
+  vscincloirIntKey?: string;
+  bimoId?: string;
+}
+
+export class Vscincloir extends Item<Vscincloir> {
+  vscincloirIntKey?: string;
+  bimoId?: string;
+  constructor(props: VscincloirProps) {
     super(props);
-    this.vscincloirIntKey = getAndValidatePropFromProps('vscincloirIntKey', props);
-    this.bimoId = getAndValidatePropFromProps('bimoId', props);
+    this.vscincloirIntKey = gavpfp('vscincloirIntKey', props);
+    this.bimoId = gavpfp('bimoId', props);
   }
 
   get vscsCollection() {
@@ -45,9 +52,9 @@ class Vscincloir extends Item {
 Vscincloir.hastusKeywords = ['vscincloir'];
 Vscincloir.hastusObject = 'vscincloir';
 
-/* Serialization utilities */
-Vscincloir.allChildClasses = getAllChildClasses(childClasses);
-Vscincloir.prototype.serializeModel = serializeThis;
-Vscincloir.parseModel = parseThis;
 
-module.exports = Vscincloir;
+Vscincloir.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default Vscincloir;

@@ -1,12 +1,12 @@
-/* Linked Classes */
 
-/* Serialization utilities dependencies */
+
+
 const childClasses = [];
-const { getAllChildClasses, serializeThis, parseThis } = require('@bimo/core-utils-serialization');
-const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
-const timeAndDate = require('@bimo/core-utils-time-and-date');
+import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import timeAndDate from '@bimo/core-utils-time-and-date';
 
-const TripOrVariantPoint = require('./TripOrVariantPoint');
+import { TripOrVariantPoint, TripOrVariantPointProps } from "./TripOrVariantPoint";
 
 /**
  * Propriétés de point de voyage
@@ -19,69 +19,146 @@ const TripOrVariantPoint = require('./TripOrVariantPoint');
 const TP_INTERNAL_DISTANCE_FACTOR = 10000;
 const REGULAR_INTERNAL_DISTANCE_FACTOR = 10;
 
-/* Class definition */
-class TripPoint extends TripOrVariantPoint {
+
+export interface TripPointProps extends ExtendedItemProps {
+  trpptPlace?: string;
+  trpptStop?: string;
+  trpptIsTimingPoint?: string;
+  trpptArrivalTimeUnrounded?: string;
+  trpptDepartureTimeUnrounded?: string;
+  _trpptInternalArrivalTime?: string;
+  _trpptInternalDepartureTime?: string;
+  trpptNoStopping?: string;
+  trpptInternalTpDistance?: string;
+  trpptTpDistance?: string;
+  trpptInternalDistance?: string;
+  trpptDistance?: string;
+  trpptDistrict?: string;
+  trpptZone?: string;
+  trpptTpNote?: string;
+  trpptTstpNote?: string;
+  trpptInternalAllowLoadTime?: string;
+  trpptInternalArrivalTimeDiff?: string;
+  trpptInternalDepartureTimeDiff?: string;
+  trpptDepartureTpNote?: string;
+  trpptInternalTimeFactor?: string;
+  trpptInternalPublicInfo?: string;
+  trpptInternalPathPrevPoint?: string;
+  trpptInternalPassengersMvmtRestrict?: string;
+  trpptOriginalStop?: string;
+  trpptInternalOriginalPlaceId?: string;
+  trpptInternalOriginalNoStopping?: string;
+  trpptInternalOriginalAllowLoadTime?: string;
+  trpptInternalBackwardHoldTime?: string;
+  trpptInternalForwardHoldTime?: string;
+  trpptIsRoutingPoint?: string;
+  trpptInternalLoadDistrict?: string;
+  trpptInternalLoadPlace?: string;
+  trpptInternalLoadZone?: string;
+  trpptVariantId?: string;
+  trpptCodeCs?: string;
+  trpptTypeArret?: string;
+}
+
+export class TripPoint extends TripOrVariantPoint {
   /**
    *
    * @param {TripPointProps} props - props
    */
-  constructor(props) {
+  trpptPlace?: string;
+  trpptStop?: string;
+  trpptIsTimingPoint?: string;
+  trpptArrivalTimeUnrounded?: string;
+  trpptDepartureTimeUnrounded?: string;
+  _trpptInternalArrivalTime?: string;
+  _trpptInternalDepartureTime?: string;
+  trpptNoStopping?: string;
+  trpptInternalTpDistance?: string;
+  trpptTpDistance?: string;
+  trpptInternalDistance?: string;
+  trpptDistance?: string;
+  trpptDistrict?: string;
+  trpptZone?: string;
+  trpptTpNote?: string;
+  trpptTstpNote?: string;
+  trpptInternalAllowLoadTime?: string;
+  trpptInternalArrivalTimeDiff?: string;
+  trpptInternalDepartureTimeDiff?: string;
+  trpptDepartureTpNote?: string;
+  trpptInternalTimeFactor?: string;
+  trpptInternalPublicInfo?: string;
+  trpptInternalPathPrevPoint?: string;
+  trpptInternalPassengersMvmtRestrict?: string;
+  trpptOriginalStop?: string;
+  trpptInternalOriginalPlaceId?: string;
+  trpptInternalOriginalNoStopping?: string;
+  trpptInternalOriginalAllowLoadTime?: string;
+  trpptInternalBackwardHoldTime?: string;
+  trpptInternalForwardHoldTime?: string;
+  trpptIsRoutingPoint?: string;
+  trpptInternalLoadDistrict?: string;
+  trpptInternalLoadPlace?: string;
+  trpptInternalLoadZone?: string;
+  trpptVariantId?: string;
+  trpptCodeCs?: string;
+  trpptTypeArret?: string;
+  constructor(props: TripPointProps) {
     super(props, 'trip');
-    this.trpptPlace = getAndValidatePropFromProps('trpptPlace', props);
-    this.trpptStop = getAndValidatePropFromProps('trpptStop', props);
-    this.trpptIsTimingPoint = getAndValidatePropFromProps('trpptIsTimingPoint', props, `string`, `1`);
-    this.trpptArrivalTimeUnrounded = getAndValidatePropFromProps('trpptArrivalTimeUnrounded', props);
-    this.trpptDepartureTimeUnrounded = getAndValidatePropFromProps('trpptDepartureTimeUnrounded', props);
-    this._trpptInternalArrivalTime = getAndValidatePropFromProps(
+    this.trpptPlace = gavpfp('trpptPlace', props);
+    this.trpptStop = gavpfp('trpptStop', props);
+    this.trpptIsTimingPoint = gavpfp('trpptIsTimingPoint', props, `string`, `1`);
+    this.trpptArrivalTimeUnrounded = gavpfp('trpptArrivalTimeUnrounded', props);
+    this.trpptDepartureTimeUnrounded = gavpfp('trpptDepartureTimeUnrounded', props);
+    this._trpptInternalArrivalTime = gavpfp(
       'trpptInternalArrivalTime', props, `string`, this.trpptArrivalTimeUnrounded,
     );
-    this._trpptInternalDepartureTime = getAndValidatePropFromProps(
+    this._trpptInternalDepartureTime = gavpfp(
       'trpptInternalDepartureTime', props, `string`, this.trpptDepartureTimeUnrounded,
     );
-    this.trpptNoStopping = getAndValidatePropFromProps('trpptNoStopping', props, `string`, `0`);
+    this.trpptNoStopping = gavpfp('trpptNoStopping', props, `string`, `0`);
 
     /** en décimètres */
-    this.trpptInternalTpDistance = getAndValidatePropFromProps('trpptInternalTpDistance', props);
-    this.trpptTpDistance = getAndValidatePropFromProps('trpptTpDistance', props) ?? this.trpptTpDistance;
+    this.trpptInternalTpDistance = gavpfp('trpptInternalTpDistance', props);
+    this.trpptTpDistance = gavpfp('trpptTpDistance', props) ?? this.trpptTpDistance;
 
     /** en décimètres */
-    this.trpptInternalDistance = getAndValidatePropFromProps('trpptInternalDistance', props);
-    this.trpptDistance = getAndValidatePropFromProps('trpptDistance', props) ?? this.trpptDistance;
-    this.trpptDistrict = getAndValidatePropFromProps('trpptDistrict', props);
-    this.trpptZone = getAndValidatePropFromProps('trpptZone', props);
-    this.trpptTpNote = getAndValidatePropFromProps('trpptTpNote', props);
-    this.trpptTstpNote = getAndValidatePropFromProps('trpptTstpNote', props);
-    this.trpptInternalAllowLoadTime = getAndValidatePropFromProps('trpptInternalAllowLoadTime', props, `string`, `1`);
-    this.trpptInternalArrivalTimeDiff = getAndValidatePropFromProps('trpptInternalArrivalTimeDiff', props, `string`, `0h00`);
-    this.trpptInternalDepartureTimeDiff = getAndValidatePropFromProps('trpptInternalDepartureTimeDiff', props, `string`, `0h00`);
-    this.trpptDepartureTpNote = getAndValidatePropFromProps('trpptDepartureTpNote', props);
-    this.trpptInternalTimeFactor = getAndValidatePropFromProps('trpptInternalTimeFactor', props, `string`, `1.00`);
-    this.trpptInternalPublicInfo = getAndValidatePropFromProps('trpptInternalPublicInfo', props, `string`, `1`);
-    this.trpptInternalPathPrevPoint = getAndValidatePropFromProps('trpptInternalPathPrevPoint', props);
-    this.trpptInternalPassengersMvmtRestrict = getAndValidatePropFromProps('trpptInternalPassengersMvmtRestrict', props);
-    this.trpptOriginalStop = getAndValidatePropFromProps('trpptOriginalStop', props);
-    this.trpptInternalOriginalPlaceId = getAndValidatePropFromProps('trpptInternalOriginalPlaceId', props, `string`, this.trpptPlace);
-    this.trpptInternalOriginalNoStopping = getAndValidatePropFromProps(
+    this.trpptInternalDistance = gavpfp('trpptInternalDistance', props);
+    this.trpptDistance = gavpfp('trpptDistance', props) ?? this.trpptDistance;
+    this.trpptDistrict = gavpfp('trpptDistrict', props);
+    this.trpptZone = gavpfp('trpptZone', props);
+    this.trpptTpNote = gavpfp('trpptTpNote', props);
+    this.trpptTstpNote = gavpfp('trpptTstpNote', props);
+    this.trpptInternalAllowLoadTime = gavpfp('trpptInternalAllowLoadTime', props, `string`, `1`);
+    this.trpptInternalArrivalTimeDiff = gavpfp('trpptInternalArrivalTimeDiff', props, `string`, `0h00`);
+    this.trpptInternalDepartureTimeDiff = gavpfp('trpptInternalDepartureTimeDiff', props, `string`, `0h00`);
+    this.trpptDepartureTpNote = gavpfp('trpptDepartureTpNote', props);
+    this.trpptInternalTimeFactor = gavpfp('trpptInternalTimeFactor', props, `string`, `1.00`);
+    this.trpptInternalPublicInfo = gavpfp('trpptInternalPublicInfo', props, `string`, `1`);
+    this.trpptInternalPathPrevPoint = gavpfp('trpptInternalPathPrevPoint', props);
+    this.trpptInternalPassengersMvmtRestrict = gavpfp('trpptInternalPassengersMvmtRestrict', props);
+    this.trpptOriginalStop = gavpfp('trpptOriginalStop', props);
+    this.trpptInternalOriginalPlaceId = gavpfp('trpptInternalOriginalPlaceId', props, `string`, this.trpptPlace);
+    this.trpptInternalOriginalNoStopping = gavpfp(
       'trpptInternalOriginalNoStopping', props, `string`, this.trpptNoStopping,
     );
-    this.trpptInternalOriginalAllowLoadTime = getAndValidatePropFromProps(
+    this.trpptInternalOriginalAllowLoadTime = gavpfp(
       'trpptInternalOriginalAllowLoadTime', props, `string`, this.trpptInternalAllowLoadTime,
     );
-    this.trpptInternalBackwardHoldTime = getAndValidatePropFromProps('trpptInternalBackwardHoldTime', props);
-    this.trpptInternalForwardHoldTime = getAndValidatePropFromProps('trpptInternalForwardHoldTime', props);
-    this.trpptIsRoutingPoint = getAndValidatePropFromProps('trpptIsRoutingPoint', props, `string`, `0`);
-    this.trpptInternalLoadDistrict = getAndValidatePropFromProps('trpptInternalLoadDistrict', props);
-    this.trpptInternalLoadPlace = getAndValidatePropFromProps('trpptInternalLoadPlace', props);
-    this.trpptInternalLoadZone = getAndValidatePropFromProps('trpptInternalLoadZone', props);
-    this.trpptVariantId = getAndValidatePropFromProps('trpptVariantId', props);
+    this.trpptInternalBackwardHoldTime = gavpfp('trpptInternalBackwardHoldTime', props);
+    this.trpptInternalForwardHoldTime = gavpfp('trpptInternalForwardHoldTime', props);
+    this.trpptIsRoutingPoint = gavpfp('trpptIsRoutingPoint', props, `string`, `0`);
+    this.trpptInternalLoadDistrict = gavpfp('trpptInternalLoadDistrict', props);
+    this.trpptInternalLoadPlace = gavpfp('trpptInternalLoadPlace', props);
+    this.trpptInternalLoadZone = gavpfp('trpptInternalLoadZone', props);
+    this.trpptVariantId = gavpfp('trpptVariantId', props);
 
     /**
      * ## Spécifique SNCF ## --> décision du 24/08/2022
      *
      * TODO: rendre modulaire les spécificités des exploitants ferroviaires
      */
-    this.trpptCodeCs = getAndValidatePropFromProps('trpptCodeCs', props);
-    this.trpptTypeArret = getAndValidatePropFromProps('trpptTypeArret', props);
+    this.trpptCodeCs = gavpfp('trpptCodeCs', props);
+    this.trpptTypeArret = gavpfp('trpptTypeArret', props);
   }
 
   /** en km */
@@ -235,9 +312,9 @@ class TripPoint extends TripOrVariantPoint {
 TripPoint.hastusKeywords = ['trip_point'];
 TripPoint.hastusObject = 'trip_point';
 
-/* Serialization utilities */
-TripPoint.allChildClasses = getAllChildClasses(childClasses);
-TripPoint.prototype.serializeModel = serializeThis;
-TripPoint.parseModel = parseThis;
 
-module.exports = TripPoint;
+TripPoint.allChildClasses = getAllChildClasses(childClasses);
+
+
+
+export default TripPoint;
