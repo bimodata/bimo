@@ -1,32 +1,29 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { Place, PlaceProps } from "./Place";
 
 const childClasses = [Place];
 
-
-export interface PlacesCollectionProps extends ExtendedCollectionProps<Place, PlaceProps> {
-}
+export interface PlacesCollectionProps
+  extends ExtendedCollectionProps<Place, PlaceProps> {}
 
 export class PlacesCollection extends Collection<Place, PlaceProps> {
   constructor(props: PlacesCollectionProps = {}) {
     super({
-      itemName: 'Place',
+      itemName: "Place",
       ItemConstructor: Place,
-      associationType: 'composition',
+      associationType: "composition",
       businessIdPropName: `plcIdentifier`,
       idPropName: `bimoId`,
       labelPropName: ``,
       ...props,
     });
-    this.libelle = props.libelle || props.label;
-    this.label = this.label ?? this.libelle;
   }
 
   /**
-     *
-     * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
-     */
+   *
+   * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
+   */
   static createFromOirStyleData(oirStyleData, libelle) {
     const rawPlaces = oirStyleData.place;
 
@@ -46,20 +43,17 @@ export class PlacesCollection extends Collection<Place, PlaceProps> {
   }
 
   get placesByReferencePlace() {
-    return this._getAndSetCachedValue('placesByReferencePlace', () => this.groupByProp(`plcReferencePlace`));
+    return this._getAndSetCachedValue("placesByReferencePlace", () =>
+      this.groupByProp(`plcReferencePlace`)
+    );
   }
 
   invalidatePlacesByReferencePlace() {
-    this._nullifyCachedValue('placesByReferencePlace');
+    this._nullifyCachedValue("placesByReferencePlace");
   }
 }
 
-PlacesCollection.ItemConstructor = Place;
-
-
 PlacesCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 /* I/O info */
 PlacesCollection.defaultExportedDataDataName = `output_place`;

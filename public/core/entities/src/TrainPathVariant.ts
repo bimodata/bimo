@@ -1,41 +1,49 @@
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { TrainPathVariantDatesCollection, TrainPathVariantDatesCollectionProps } from "./TrainPathVariantDatesCollection";
-import { TrainPathVariantPointsCollection, TrainPathVariantPointsCollectionProps } from "./TrainPathVariantPointsCollection";
+import {
+  TrainPathVariantDatesCollection,
+  TrainPathVariantDatesCollectionProps,
+} from "./TrainPathVariantDatesCollection";
+import {
+  TrainPathVariantPointsCollection,
+  TrainPathVariantPointsCollectionProps,
+} from "./TrainPathVariantPointsCollection";
 
 const childClasses = [TrainPathVariantPointsCollection, TrainPathVariantDatesCollection];
 
 export interface TrainPathVariantProps extends ExtendedItemProps {
   trnpvTrainPathRimId?: string;
-  trainPathVariantPoints?: string;
-  trainPathVariantDates?: string;
+  trainPathVariantPoints?: TrainPathVariantPointsCollection;
+  trainPathVariantDates?: TrainPathVariantDatesCollection;
 }
 
 export class TrainPathVariant extends Item<TrainPathVariant> {
   trnpvTrainPathRimId?: string;
-  trainPathVariantPoints?: string;
-  trainPathVariantDates?: string;
+  trainPathVariantPoints: TrainPathVariantPointsCollection;
+  trainPathVariantDates: TrainPathVariantDatesCollection;
   constructor(props: TrainPathVariantProps) {
     super(props);
 
-    this.trnpvTrainPathRimId = gavpfp('trnpvTrainPathRimId', props, `string`);
+    this.trnpvTrainPathRimId = gavpfp("trnpvTrainPathRimId", props, `string`);
 
     /* Children */
     /** @type {TrainPathVariantPointsCollection} */
     this.trainPathVariantPoints = gavpfp(
-      'trainPathVariantPoints', props,
+      "trainPathVariantPoints",
+      props,
       TrainPathVariantPointsCollection,
       new TrainPathVariantPointsCollection(),
-      { altPropName: 'train_path_variant_point', parent: this },
+      { altPropName: "train_path_variant_point", parent: this }
     );
     /** @type {TrainPathVariantDatesCollection} */
     this.trainPathVariantDates = gavpfp(
-      'trainPathVariantDates', props,
+      "trainPathVariantDates",
+      props,
       TrainPathVariantDatesCollection,
       new TrainPathVariantDatesCollection(),
-      { altPropName: 'train_path_date', parent: this },
+      { altPropName: "train_path_date", parent: this }
     );
   }
 
@@ -57,7 +65,5 @@ export class TrainPathVariant extends Item<TrainPathVariant> {
 }
 
 TrainPathVariant.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default TrainPathVariant;

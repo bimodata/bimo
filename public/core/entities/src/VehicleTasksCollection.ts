@@ -1,16 +1,13 @@
-
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { VehicleTask, VehicleTaskProps } from "./VehicleTask";
 
-
-
-export interface VehicleTasksCollectionProps extends ExtendedCollectionProps<VehicleTask, VehicleTaskProps> {
-}
+export interface VehicleTasksCollectionProps
+  extends ExtendedCollectionProps<VehicleTask, VehicleTaskProps> {}
 
 export class VehicleTasksCollection extends Collection<VehicleTask, VehicleTaskProps> {
   constructor(props: VehicleTasksCollectionProps = {}) {
     super({
-      itemName: 'VehicleTask',
+      itemName: "VehicleTask",
       ItemConstructor: VehicleTask,
       idPropName: `id`,
       labelPropName: `label`,
@@ -19,7 +16,7 @@ export class VehicleTasksCollection extends Collection<VehicleTask, VehicleTaskP
   }
 
   get mediumLoggingOutput() {
-    return this.map((vta) => `${vta.longLoggingOutput}\n`);
+    return this.map((vta) => `${vta.longLoggingOutput}`).join("\n");
   }
 }
 

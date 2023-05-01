@@ -1,17 +1,19 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { VehicleStandby, VehicleStandbyProps } from "./VehicleStandby";
 
 const childClasses = [VehicleStandby];
 
+export interface VehicleStandbysCollectionProps
+  extends ExtendedCollectionProps<VehicleStandby, VehicleStandbyProps> {}
 
-export interface VehicleStandbysCollectionProps extends ExtendedCollectionProps<VehicleStandby, VehicleStandbyProps> {
-}
-
-export class VehicleStandbysCollection extends Collection<VehicleStandby, VehicleStandbyProps> {
+export class VehicleStandbysCollection extends Collection<
+  VehicleStandby,
+  VehicleStandbyProps
+> {
   constructor(props: VehicleStandbysCollectionProps = {}) {
     super({
-      itemName: 'VehicleStandby',
+      itemName: "VehicleStandby",
       ItemConstructor: VehicleStandby,
       idPropName: `bimoId`,
       businessIdPropName: `sdbyStandbyNo`,
@@ -21,9 +23,6 @@ export class VehicleStandbysCollection extends Collection<VehicleStandby, Vehicl
   }
 }
 
-
 VehicleStandbysCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default VehicleStandbysCollection;

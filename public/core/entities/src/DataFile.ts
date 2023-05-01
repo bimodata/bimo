@@ -1,4 +1,4 @@
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 export interface DataFileProps extends ExtendedItemProps {
@@ -18,7 +18,7 @@ export class DataFile extends Item<DataFile> {
   constructor(props: DataFileProps) {
     super(props);
     this.fileInfo = gavpfp(`fileInfo`, props);
-    this.fileData = gavpfp('fileData', props);
+    this.fileData = gavpfp("fileData", props);
     this.fileName = this.fileInfo.nameOrPath;
     this.path = this.fileInfo.path;
 

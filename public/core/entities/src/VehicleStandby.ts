@@ -1,14 +1,13 @@
 const childClasses = [];
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
+import { BlockActivityItemMixin, BlockActivityItemProps } from "./BlockActivityItem";
 
 export interface VehicleStandbyProps extends ExtendedItemProps {
   bimoId?: string;
-  _sdbyStandbyNo?: string;
-  _sdbyStandbyNo?: string;
+  sdbyStandbyNo?: string;
   sdbyStartTime?: string;
   sdbyEndTime?: string;
   sdbyPlace?: string;
@@ -25,21 +24,19 @@ export interface VehicleStandbyProps extends ExtendedItemProps {
   sdbyCouvertureAdcNecessaire?: string;
 }
 
-export class VehicleStandby extends BlockActivityItem(
-  Item, {
-  blkActIdPropName: 'blkactVehicleStandbyNo',
-  itemIdPropName: 'sdbyStandbyNo',
-  placePropName: 'sdbyPlace',
-  startTimePropName: 'sdbyStartTime',
-  endTimePropName: 'sdbyEndTime',
-},
-) {
+export class VehicleStandby extends BlockActivityItemMixin<typeof VehicleStandby>(Item, {
+  blkActIdPropName: "blkactVehicleStandbyNo",
+  itemIdPropName: "sdbyStandbyNo",
+  placePropName: "sdbyPlace",
+  startTimePropName: "sdbyStartTime",
+  endTimePropName: "sdbyEndTime",
+}) {
   bimoId?: string;
   _sdbyStandbyNo?: string;
   _sdbyStandbyNo?: string;
   sdbyStartTime?: string;
   sdbyEndTime?: string;
-  sdbyPlace?: string;
+  sdbyPlace: string;
   sdbyOperateSun?: string;
   sdbyOperateMon?: string;
   sdbyOperateTue?: string;
@@ -53,24 +50,24 @@ export class VehicleStandby extends BlockActivityItem(
   sdbyCouvertureAdcNecessaire?: string;
   constructor(props: VehicleStandbyProps) {
     super(props);
-    /** */ this.bimoId = gavpfp('bimoId', props);
-    /** */ this._sdbyStandbyNo = gavpfp('sdbyStandbyNo', props);
+    this.bimoId = gavpfp("bimoId", props);
+    this._sdbyStandbyNo = gavpfp("sdbyStandbyNo", props);
     if (!this._sdbyStandbyNo) this._sdbyStandbyNo = this.bimoId;
 
-    /** */ this.sdbyStartTime = gavpfp('sdbyStartTime', props);
-    /** */ this.sdbyEndTime = gavpfp('sdbyEndTime', props);
-    /** */ this.sdbyPlace = gavpfp('sdbyPlace', props);
-    /** */ this.sdbyOperateSun = gavpfp('sdbyOperateSun', props);
-    /** */ this.sdbyOperateMon = gavpfp('sdbyOperateMon', props);
-    /** */ this.sdbyOperateTue = gavpfp('sdbyOperateTue', props);
-    /** */ this.sdbyOperateWed = gavpfp('sdbyOperateWed', props);
-    /** */ this.sdbyOperateThu = gavpfp('sdbyOperateThu', props);
-    /** */ this.sdbyOperateFri = gavpfp('sdbyOperateFri', props);
-    /** */ this.sdbyOperateSat = gavpfp('sdbyOperateSat', props);
-    /** */ this.sdbyEvent = gavpfp('sdbyEvent', props);
-    /** */ this.sdbyEventStatus = gavpfp('sdbyEventStatus', props);
-    /** */ this.sdbyComment = gavpfp('sdbyComment', props);
-    /** */ this.sdbyCouvertureAdcNecessaire = gavpfp('sdbyCouvertureAdcNecessaire', props);
+    this.sdbyStartTime = gavpfp("sdbyStartTime", props);
+    this.sdbyEndTime = gavpfp("sdbyEndTime", props);
+    this.sdbyPlace = gavpfp("sdbyPlace", props);
+    this.sdbyOperateSun = gavpfp("sdbyOperateSun", props);
+    this.sdbyOperateMon = gavpfp("sdbyOperateMon", props);
+    this.sdbyOperateTue = gavpfp("sdbyOperateTue", props);
+    this.sdbyOperateWed = gavpfp("sdbyOperateWed", props);
+    this.sdbyOperateThu = gavpfp("sdbyOperateThu", props);
+    this.sdbyOperateFri = gavpfp("sdbyOperateFri", props);
+    this.sdbyOperateSat = gavpfp("sdbyOperateSat", props);
+    this.sdbyEvent = gavpfp("sdbyEvent", props);
+    this.sdbyEventStatus = gavpfp("sdbyEventStatus", props);
+    this.sdbyComment = gavpfp("sdbyComment", props);
+    this.sdbyCouvertureAdcNecessaire = gavpfp("sdbyCouvertureAdcNecessaire", props);
   }
 
   get sdbyStandbyNo() {
@@ -85,12 +82,9 @@ export class VehicleStandby extends BlockActivityItem(
   }
 }
 
-VehicleStandby.hastusKeywords = ['vehicle_standby'];
-VehicleStandby.hastusObject = 'vehicle_standby';
-
+VehicleStandby.hastusKeywords = ["vehicle_standby"];
+VehicleStandby.hastusObject = "vehicle_standby";
 
 VehicleStandby.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default VehicleStandby;

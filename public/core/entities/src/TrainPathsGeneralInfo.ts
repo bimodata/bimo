@@ -1,5 +1,5 @@
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 const childClasses = [];
@@ -16,14 +16,16 @@ export class TrainPathsGeneralInfo extends Item<TrainPathsGeneralInfo> {
   trnpgeninfoAdministrativeYear?: string;
   constructor(props: TrainPathsGeneralInfoProps = {}) {
     super(props);
-    this.trnpgeninfoSource = gavpfp('trnpgeninfoSource', props, `string`);
-    this.trnpgeninfoImportType = gavpfp('trnpgeninfoImportType', props, `string`);
-    this.trnpgeninfoAdministrativeYear = gavpfp('trnpgeninfoAdministrativeYear', props, `string`);
+    this.trnpgeninfoSource = gavpfp("trnpgeninfoSource", props, `string`);
+    this.trnpgeninfoImportType = gavpfp("trnpgeninfoImportType", props, `string`);
+    this.trnpgeninfoAdministrativeYear = gavpfp(
+      "trnpgeninfoAdministrativeYear",
+      props,
+      `string`
+    );
   }
 }
 
 TrainPathsGeneralInfo.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default TrainPathsGeneralInfo;

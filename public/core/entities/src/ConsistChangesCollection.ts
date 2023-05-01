@@ -1,18 +1,20 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { ConsistChange, ConsistChangeProps } from "./ConsistChange";
 
 const childClasses = [ConsistChange];
 
+export interface ConsistChangesCollectionProps
+  extends ExtendedCollectionProps<ConsistChange, ConsistChangeProps> {}
 
-export interface ConsistChangesCollectionProps extends ExtendedCollectionProps<ConsistChange, ConsistChangeProps> {
-}
-
-export class ConsistChangesCollection extends Collection<ConsistChange, ConsistChangeProps> {
+export class ConsistChangesCollection extends Collection<
+  ConsistChange,
+  ConsistChangeProps
+> {
   constructor(props: ConsistChangesCollectionProps = {}) {
     super({
-      itemName: 'ConsistChange',
+      itemName: "ConsistChange",
       ItemConstructor: ConsistChange,
       idPropName: `cchgInternalNumber`,
       businessIdPropName: `cchgInternalNumber`,
@@ -23,7 +25,5 @@ export class ConsistChangesCollection extends Collection<ConsistChange, ConsistC
 }
 
 ConsistChangesCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default ConsistChangesCollection;

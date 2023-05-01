@@ -1,31 +1,53 @@
-const getAndSetIfRequired = require('@bimo/core-utils-get-and-set-if-required');
+import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
 
-const BlocksCollection = require('../BlocksCollection');
-const VehicleTasksCollection = require('../VehicleTasksCollection');
-const computeContentsOfOneVta = require('./computeContentsOfOneVta');
+import computeContentsOfOneVta from "./computeContentsOfOneVta";
 
-function computeVehicleTasksOfVsc(vsc) {
+import { VehicleSchedule } from "../VehicleSchedule";
+import { BlocksCollection } from "../BlocksCollection";
+import { VehicleTasksCollection } from "../VehicleTasksCollection";
+import { Block } from "../Block";
+import { VehicleTask } from "../VehicleTask";
+import { BlockActivity } from "../BlockActivity";
+import { BlockActivitiesCollection } from "../BlockActivitiesCollection";
+import { BlockSection } from "../BlockSection";
+import { BlockSectionsCollection } from "../BlockSectionsCollection";
+
+export interface BlocksAndActsAndSections {
+  blocks: BlocksCollection;
+  blockActivities: BlockActivitiesCollection;
+  blockSections: BlockSectionsCollection;
+}
+
+function computeVehicleTasksOfVsc(vsc: VehicleSchedule) {
   const blocksCollByVehuUniqueId = {};
-  const blocksAndActsAndSectionsByVta = new Map();
-  const setOfVtasByBlock = new Map();
-  const setOfVtasByBlockActivity = new Map();
-  const setOfBlockSectionsByBlockActivity = new Map();
+  const blocksAndActsAndSectionsByVta: Map<VehicleTask, BlocksAndActsAndSections> =
+    new Map();
+  const setOfVtasByBlock: Map<Block, Set<VehicleTask>> = new Map();
+  const setOfVtasByBlockActivity: Map<BlockActivity, Set<VehicleTask>> = new Map();
+  const setOfBlockSectionsByBlockActivity: Map<
+    BlockActivity,
+    Set<BlockSection>
+  > = new Map();
+
   vsc.blocks.forEach((block) => {
     block.sortBlockActivitiesByTime();
     block.blkvehuoirs.forEach((blkVehu) => {
       const blocksCollOfThisVehu = getAndSetIfRequired(
         blocksCollByVehuUniqueId,
-        blkVehu.VehuUniqueId,
-        new BlocksCollection({ associationType: 'aggregation' }),
+        blkVehu.vehuUniqueId,
+        new BlocksCollection({ associationType: "aggregation" })
       );
       blocksCollOfThisVehu.add(block);
     });
   });
-  const vehicleTasks = new VehicleTasksCollection({ parent: vsc });
+  const vehicleTasks: VehicleTasksCollection = new VehicleTasksCollection({
+    parent: vsc,
+  });
   vsc.vehicleUnits.forEach((vehicleUnit) => {
     const vehicleTask = vehicleTasks.createNewItem({
       vehicleUnit,
-      blocksThatStartWithThisVehu: blocksCollByVehuUniqueId[vehicleUnit.vehuInternalNumber],
+      blocksThatStartWithThisVehu:
+        blocksCollByVehuUniqueId[vehicleUnit.vehuInternalNumber],
     });
     const blocksAndActsAndSectionsOfThisVta = computeContentsOfOneVta({
       vehicleTask,
@@ -35,7 +57,13 @@ function computeVehicleTasksOfVsc(vsc) {
     });
     blocksAndActsAndSectionsByVta.set(vehicleTask, blocksAndActsAndSectionsOfThisVta);
   });
-  return { vehicleTasks, setOfVtasByBlock, setOfVtasByBlockActivity, blocksAndActsAndSectionsByVta, setOfBlockSectionsByBlockActivity };
+  return {
+    vehicleTasks,
+    setOfVtasByBlock,
+    setOfVtasByBlockActivity,
+    blocksAndActsAndSectionsByVta,
+    setOfBlockSectionsByBlockActivity,
+  };
 }
 
-module.exports = computeVehicleTasksOfVsc;
+export default computeVehicleTasksOfVsc;

@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 
-import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
+import { TripOrVariantPoint } from "./TripOrVariantPoint";
+import { TripOrVariant } from "./TripOrVariant";
 
 /**
  * Bimo specific class that represents a sub section of a trip or variant
@@ -17,17 +19,19 @@ import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
  * Initial use case: comparing the distances we have in Hastus with external distances
  * Potential future use cases: combining trips or variants to create longer itineraries
  */
-export interface TripOrVariantSectionProps extends ExtendedItemProps {
-  points?: string;
+export interface TripOrVariantSectionProps<
+  PointType extends ExtendedItem<PointType>,
+  PointProps extends ExtendedItemProps
+> extends ExtendedItemProps {
+  points: TripOrVariantPoint<PointType, PointProps>[];
 }
 
-export class TripOrVariantSection extends Item<TripOrVariantSection> {
-  /**
-   * @param {Object} props
-   * @param {import('./TripOrVariantPoint')[]} props.points
-   */
-  points?: string;
-  constructor(props: TripOrVariantSectionProps) {
+export class TripOrVariantSection<
+  PointType extends ExtendedItem<PointType>,
+  PointProps extends ExtendedItemProps
+> extends Item<TripOrVariantSection<PointType, PointProps>> {
+  points: TripOrVariantPoint<PointType, PointProps>[];
+  constructor(props: TripOrVariantSectionProps<PointType, PointProps>) {
     super(props);
     const { points } = props;
     this.points = points;
@@ -42,7 +46,13 @@ export class TripOrVariantSection extends Item<TripOrVariantSection> {
   }
 
   get totalDistance() {
-    return this.points.slice(1).reduce((previousValue, currentPoint) => previousValue + parseFloat(currentPoint.distance), 0);
+    return this.points
+      .slice(1)
+      .reduce(
+        (previousValue, currentPoint) =>
+          previousValue + parseFloat(currentPoint.distance),
+        0
+      );
   }
 
   get totalDistanceAsString() {
@@ -50,7 +60,7 @@ export class TripOrVariantSection extends Item<TripOrVariantSection> {
   }
 
   get tripOrVariant() {
-    return this.parent?.parent;
+    return this.parent && (this.parent.parent as TripOrVariant);
   }
 
   get shortLoggingOutput() {
@@ -58,11 +68,13 @@ export class TripOrVariantSection extends Item<TripOrVariantSection> {
   }
 
   get mediumLoggingOutput() {
-    return this.points.map((point) => point.placeId).join('|');
+    return this.points.map((point) => point.placeId).join("|");
   }
 
   get longLoggingOutput() {
-    return `${this.shortLoggingOutput} (de ${this.tripOrVariant.mlo}) dist: ${this.totalDistance}`;
+    return `${this.shortLoggingOutput} (de ${
+      this.tripOrVariant?.mlo ?? "__pas de voyage ou variante__"
+    }) dist: ${this.totalDistance}`;
   }
 }
 

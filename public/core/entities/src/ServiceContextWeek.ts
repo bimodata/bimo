@@ -1,8 +1,11 @@
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { ServiceContextDaysCollection, ServiceContextDaysCollectionProps } from "./ServiceContextDaysCollection";
+import {
+  ServiceContextDaysCollection,
+  ServiceContextDaysCollectionProps,
+} from "./ServiceContextDaysCollection";
 
 const childClasses = [ServiceContextDaysCollection];
 
@@ -19,27 +22,26 @@ export class ServiceContextWeek extends Item<ServiceContextWeek> {
   scwkSchedUnitType?: string;
   scwkDescription?: string;
   scwkAddedForNetEvent?: string;
-  serviceContextDays?: string;
+  serviceContextDays: ServiceContextDaysCollection;
   constructor(props: ServiceContextWeekProps) {
     super(props);
-    this.scwkSchedUnitId = gavpfp('scwkSchedUnitId', props, `string`);
-    this.scwkSchedUnitType = gavpfp('scwkSchedUnitType', props, `string`, '1100');
-    this.scwkDescription = gavpfp('scwkDescription', props, `string`);
-    this.scwkAddedForNetEvent = gavpfp('scwkAddedForNetEvent', props, 'string', '0');
+    this.scwkSchedUnitId = gavpfp("scwkSchedUnitId", props, `string`);
+    this.scwkSchedUnitType = gavpfp("scwkSchedUnitType", props, `string`, "1100");
+    this.scwkDescription = gavpfp("scwkDescription", props, `string`);
+    this.scwkAddedForNetEvent = gavpfp("scwkAddedForNetEvent", props, "string", "0");
 
     /* Children */
     /** @type {ServiceContextDaysCollection} */
     this.serviceContextDays = gavpfp(
-      'serviceContextDays', props,
+      "serviceContextDays",
+      props,
       ServiceContextDaysCollection,
       new ServiceContextDaysCollection(),
-      { altPropName: 'service_context_day', parent: this },
+      { altPropName: "service_context_day", parent: this }
     );
   }
 }
 
 ServiceContextWeek.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default ServiceContextWeek;

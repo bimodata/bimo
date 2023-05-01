@@ -1,20 +1,16 @@
-
 import { Vscincloir, VscincloirProps } from "./Vscincloir";
 
-
 const childClasses = [Vscincloir];
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-
-
-export interface VscincloirsCollectionProps extends ExtendedCollectionProps<Vscincloir, VscincloirProps> {
-}
+export interface VscincloirsCollectionProps
+  extends ExtendedCollectionProps<Vscincloir, VscincloirProps> {}
 
 export class VscincloirsCollection extends Collection<Vscincloir, VscincloirProps> {
   constructor(props: VscincloirsCollectionProps = {}) {
     super({
-      itemName: 'Vscincloir',
+      itemName: "Vscincloir",
       ItemConstructor: Vscincloir,
       items: props.items,
       idPropName: `bimoId`,
@@ -24,9 +20,6 @@ export class VscincloirsCollection extends Collection<Vscincloir, VscincloirProp
   }
 }
 
-
 VscincloirsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default VscincloirsCollection;

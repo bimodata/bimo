@@ -4,71 +4,72 @@
  */
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BlockActivitiesCollection, BlockActivitiesCollectionProps } from "./BlockActivitiesCollection";
-
+import {
+  BlockActivitiesCollection,
+  BlockActivitiesCollectionProps,
+} from "./BlockActivitiesCollection";
+import { BlockActivityProps } from "./BlockActivity";
+import BlockSectionsCollection from "./BlockSectionsCollection";
+import { VehicleTask } from "./VehicleTask";
+import { Block } from "./Block";
 
 export interface BlockSectionProps extends ExtendedItemProps {
   id?: string;
   label?: string;
-  block?: string;
-  blockActivities?: string;
+  block: Block;
+  blockActivities: BlockActivityProps[];
 }
 
 export class BlockSection extends Item<BlockSection> {
   id?: string;
   label?: string;
-  block?: string;
-  blockActivities?: string;
+  block: Block;
+  blockActivities: BlockActivitiesCollection;
+  parent: BlockSectionsCollection;
   constructor(props: BlockSectionProps) {
     super(props);
 
     this.id = props.id;
     this.label = props.label;
 
-    /** @type {import ('./Block')} */
     this.block = props.block;
 
-    this.blockActivities = new BlockActivitiesCollection(
-      { associationType: 'aggregation', items: props.blockActivities },
-    );
+    this.blockActivities = new BlockActivitiesCollection({
+      associationType: "aggregation",
+      items: props.blockActivities,
+    });
   }
 
-  /** @type {import ('./VehicleTask')} */
   get vehicleTask() {
-    return this.parent && this.parent.parent;
+    return this.parent && (this.parent.parent as VehicleTask);
   }
 
-  /** @type {import ('./VehicleSchedule')} */
   get vehicleSchedule() {
     return this.vehicleTask && this.vehicleTask.vehicleSchedule;
   }
 
-  /** @type {import ('./BlockActivity')} */
   get firstBlockActivity() {
     return this.blockActivities.first;
   }
 
-  /** @type {import ('./BlockActivity')} */
   get lastBlockActivity() {
     return this.blockActivities.last;
   }
 
   get _indexInSortedParent() {
-    if (!this.parent) return null;
+    if (!this.parent) throw new Error(`No parent !`);
     this.parent.sortByTime();
     return this.parent.indexOf(this);
   }
 
-  getNthBlockSectionFromThisOne(n) {
+  getNthBlockSectionFromThisOne(n: number) {
     return this.parent && this.parent.items[this._indexInSortedParent + n];
   }
 
-  /** @type {BlockSection} */
   get nextBlockSection() {
     return this.getNthBlockSectionFromThisOne(1);
   }
 
-  /** @type {BlockSection} */
   get previousBlockSection() {
     return this.getNthBlockSectionFromThisOne(-1);
   }

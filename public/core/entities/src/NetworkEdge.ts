@@ -1,7 +1,11 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-import { Item } from '@bimo/core-utils-collection'); const NetworkNode = require('./NetworkNode';
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+
+import { NetworkNode } from "./NetworkNode";
+import { Network } from "./Network";
+import { NetworkSection } from "./NetworkSection";
 
 const childClasses = [NetworkNode];
 
@@ -9,72 +13,71 @@ const childClasses = [NetworkNode];
 export interface NetworkEdgeProps extends ExtendedItemProps {
   bimoId?: string;
   businessId?: string;
-  fromNode?: string;
-  toNode?: string;
-  customProps?: string;
-  geometryBySystemName?: string;
-  _sectionIds?: string;
+  fromNode: NetworkNode;
+  toNode: NetworkNode;
+  geometryBySystemName?: { [systemName: string]: any };
+  sectionIds?: Set<string>;
 }
 
 export class NetworkEdge extends Item<NetworkEdge> {
   bimoId?: string;
   businessId?: string;
-  fromNode?: string;
-  toNode?: string;
-  customProps?: string;
-  geometryBySystemName?: string;
-  _sectionIds?: string;
+  fromNode: NetworkNode;
+  toNode: NetworkNode;
+  geometryBySystemName: { [systemName: string]: any } = {};
+  private _sectionIds: Set<string> = new Set();
   constructor(props: NetworkEdgeProps) {
     super(props);
-    this.bimoId = gavpfp('bimoId', props, 'string');
-    this.businessId = gavpfp('businessId', props, 'string');
-    /** @type {NetworkNode} */
-    this.fromNode = gavpfp('fromNode', props, NetworkNode, null);
-    /** @type {NetworkNode} */
-    this.toNode = gavpfp('toNode', props, NetworkNode, null);
-    this.customProps = gavpfp('customProps', props, Object, {});
+    this.bimoId = gavpfp("bimoId", props, "string");
+    this.businessId = gavpfp("businessId", props, "string");
+    this.fromNode = gavpfp("fromNode", props, NetworkNode, null);
+    this.toNode = gavpfp("toNode", props, NetworkNode, null);
 
     /**
      * Permet (optionnellement) de stocker une ou plusieurs représentations géométriques de
      * cet arc. Par convention, si aucune géométrie n'est spécifiée pour un système donné,
      * on considère que la géométrie est une droite entre les deux noeuds.
      */
-    this.geometryBySystemName = gavpfp('geometryBySystemName', props, Object, {});
-    this._sectionIds = gavpfp('_sectionIds', props, Set, new Set());
+    this.geometryBySystemName = gavpfp("geometryBySystemName", props, Object, {});
+    this._sectionIds = gavpfp("sectionIds", props, Set, new Set());
   }
 
-  getCoordinatesBySystemName(systemName) {
-    return this.geometryBySystemName[systemName]?.coordinates ?? [
-      this.fromNode.coordinatesBySystemName[systemName],
-      this.toNode.coordinatesBySystemName[systemName],
-    ];
+  getCoordinatesBySystemName(systemName: string) {
+    return (
+      this.geometryBySystemName[systemName]?.coordinates ?? [
+        this.fromNode.coordinatesBySystemName[systemName],
+        this.toNode.coordinatesBySystemName[systemName],
+      ]
+    );
   }
 
-  /** @type {import ('./NetworkSection')[]} */
   get sections() {
-    return [...this._sectionIds.values()].map((sectionId) => this.network.sections.getById(sectionId));
+    return (
+      this.network &&
+      [...this._sectionIds.values()].map((sectionId) =>
+        (this.network as Network).sections.getById(sectionId)
+      )
+    );
   }
 
-  /**
-   * @param {import ('./NetworkSection')} section
-   */
-  addSection(section) {
+  addSection(section: NetworkSection) {
     this._sectionIds.add(section.bimoId);
   }
 
-  /**
-   * @param {import ('./NetworkSection')} section
-   */
-  removeSection(section) {
+  removeSection(section: NetworkSection) {
     this._sectionIds.delete(section.bimoId);
   }
 
   get shortLoggingOutput() {
-    return `edge: ${this.businessId} (${this.fromNode && this.fromNode.shortLoggingOutput} -> ${this.toNode && this.toNode.shortLoggingOutput})`;
+    return `edge: ${this.businessId} (${
+      this.fromNode && this.fromNode.shortLoggingOutput
+    } -> ${this.toNode && this.toNode.shortLoggingOutput})`;
   }
 
   get mediumLoggingOutput() {
-    return `edge: ${this.businessId} (${this.fromNode && this.fromNode.mediumLoggingOutput} -> ${this.toNode && this.toNode.mediumLoggingOutput})`;
+    return `edge: ${this.businessId} (${
+      this.fromNode && this.fromNode.mediumLoggingOutput
+    } -> ${this.toNode && this.toNode.mediumLoggingOutput})`;
   }
 
   /** This currently uses the same key function as was used initially in "transcoRfn", to be able
@@ -82,14 +85,13 @@ export class NetworkEdge extends Item<NetworkEdge> {
    * could be changed in projects where we don't need this retrocompatibility.
    */
   get sortedNodeIdsKey() {
-    return this._getAndSetCachedValue('sortedNodeIdsKey', () => {
-      let smallNodeId;
-      let bigNodeId;
+    return this._getAndSetCachedValue("sortedNodeIdsKey", () => {
+      let smallNodeId: string;
+      let bigNodeId: string;
       if (parseInt(this.fromNode.businessId, 10) > parseInt(this.toNode.businessId, 10)) {
         smallNodeId = this.toNode.businessId;
         bigNodeId = this.fromNode.businessId;
-      }
-      else {
+      } else {
         smallNodeId = this.fromNode.businessId;
         bigNodeId = this.toNode.businessId;
       }
@@ -103,37 +105,33 @@ export class NetworkEdge extends Item<NetworkEdge> {
   }
 
   /**
-   * @param {NetworkNode} node
-   * @returns {NetworkNode} - the node of edge that is not the passed node
+   * @param node
+   * @returns - the node of edge that is not the passed node
    */
-  otherNode(node) {
+  otherNode(node: NetworkNode) {
     if (this.fromNode === node) return this.toNode;
     if (this.toNode === node) return this.fromNode;
-    throw new Error(`La node ${node.shortLoggingOutput} n'est pas liée à cette edge ${this.shortLoggingOutput}`);
+    throw new Error(
+      `La node ${node.shortLoggingOutput} n'est pas liée à cette edge ${this.shortLoggingOutput}`
+    );
   }
 
-  hasNode(node) {
-    return (this.fromNode === node || this.toNode === node);
+  hasNode(node: NetworkNode) {
+    return this.fromNode === node || this.toNode === node;
   }
 
   get isDisconnected() {
     return this.fromNode.degree === 1 && this.toNode.degree === 1;
   }
 
-  /** @type {import ('./Network')} */
   get network() {
-    return this.parent && this.parent.parent;
+    return this.parent && (this.parent.parent as Network);
   }
 
-  /**
- *
- * @param {import ('./Network')} targetNetwork
- * @param {object} [options={}]
- * @param {Boolean} [options.bringNodes=true]
- * @param {Boolean} [options.copyNodes=false]
- * @param {Boolean} [options.skipCacheUpdate=false]
- */
-  moveToNetwork(targetNetwork, options) {
+  moveToNetwork(
+    targetNetwork: Network,
+    options: { bringNodes?: boolean; copyNodes?: boolean; skipCacheUpdate?: boolean }
+  ) {
     const { bringNodes = true, copyNodes = false, skipCacheUpdate = false } = options;
     if (this.network) {
       this.network.removeEdge(this, { removeNodes: bringNodes, skipCacheUpdate });
@@ -142,11 +140,9 @@ export class NetworkEdge extends Item<NetworkEdge> {
       this.nodes.forEach((node) => {
         node.moveToNetwork(targetNetwork, { bringEdges: false, skipCacheUpdate });
       });
-    }
-    else if (copyNodes) {
+    } else if (copyNodes) {
       throw new Error(`CopyNodes option is not implemented yet`);
-    }
-    else {
+    } else {
       throw new Error(`Only bringNodes mode is implemented so far`);
       // check if appropriate nodes exist in dest network ??
     }
@@ -155,7 +151,5 @@ export class NetworkEdge extends Item<NetworkEdge> {
 }
 
 NetworkEdge.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default NetworkEdge;

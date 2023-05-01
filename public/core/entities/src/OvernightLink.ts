@@ -1,10 +1,7 @@
-
-
-
 const childClasses = [];
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
-
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 export interface OvernightLinkProps extends ExtendedItemProps {
   olOriginTripNo?: string;
@@ -21,7 +18,8 @@ export interface OvernightLinkProps extends ExtendedItemProps {
   olSchedType?: string;
 }
 
-export class OvernightLink {
+export class OvernightLink extends Item<OvernightLink> {
+  olInternalNumber?: string;
   olOriginTripNo?: string;
   olOriginOrigTripNo?: string;
   olOriginPlace?: string;
@@ -35,32 +33,26 @@ export class OvernightLink {
   olDhLayAt?: string;
   olSchedType?: string;
   constructor(props: OvernightLinkProps) {
-    /** */ this.olInternalNumber = gavpfp('olInternalNumber', props);
-    /** */ this.olOriginTripNo = gavpfp('olOriginTripNo', props);
-    /** */ this.olOriginOrigTripNo = gavpfp('olOriginOrigTripNo', props);
-    /** */ this.olOriginPlace = gavpfp('olOriginPlace', props);
-    /** */ this.olOriginRoute = gavpfp('olOriginRoute', props);
-    /** */ this.olOriginTime = gavpfp('olOriginTime', props);
-    /** */ this.olDestinationTripNo = gavpfp('olDestinationTripNo', props);
-    /** */ this.olDestinationOrigTripNo = gavpfp('olDestinationOrigTripNo', props);
-    /** */ this.olDestinationPlace = gavpfp('olDestinationPlace', props);
-    /** */ this.olDestinationRoute = gavpfp('olDestinationRoute', props);
-    /** */ this.olDestinationTime = gavpfp('olDestinationTime', props);
-    /** */ this.olDhLayAt = gavpfp('olDhLayAt', props);
-    /** */ this.olSchedType = gavpfp('olSchedType', props);
-
-    /* Children */
-
-    /* Links */
+    super(props);
+    this.olInternalNumber = gavpfp("olInternalNumber", props);
+    this.olOriginTripNo = gavpfp("olOriginTripNo", props);
+    this.olOriginOrigTripNo = gavpfp("olOriginOrigTripNo", props);
+    this.olOriginPlace = gavpfp("olOriginPlace", props);
+    this.olOriginRoute = gavpfp("olOriginRoute", props);
+    this.olOriginTime = gavpfp("olOriginTime", props);
+    this.olDestinationTripNo = gavpfp("olDestinationTripNo", props);
+    this.olDestinationOrigTripNo = gavpfp("olDestinationOrigTripNo", props);
+    this.olDestinationPlace = gavpfp("olDestinationPlace", props);
+    this.olDestinationRoute = gavpfp("olDestinationRoute", props);
+    this.olDestinationTime = gavpfp("olDestinationTime", props);
+    this.olDhLayAt = gavpfp("olDhLayAt", props);
+    this.olSchedType = gavpfp("olSchedType", props);
   }
 }
 
-OvernightLink.hastusKeywords = ['overnight_link'];
-OvernightLink.hastusObject = 'overnight_link';
-
+OvernightLink.hastusKeywords = ["overnight_link"];
+OvernightLink.hastusObject = "overnight_link";
 
 OvernightLink.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default OvernightLink;

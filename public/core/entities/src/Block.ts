@@ -12,6 +12,8 @@ import {
   BlockActivitiesCollectionProps,
 } from "./BlockActivitiesCollection";
 
+import { VehicleTask } from "./VehicleTask";
+import { VehicleUnit } from "./VehicleUnit";
 import { VehicleSchedule } from "./VehicleSchedule";
 
 const childClasses = [BlkvehuoirsCollection, BlockActivitiesCollection];
@@ -53,46 +55,44 @@ export class Block extends Item<Block> {
   blkVehicleNumber?: string;
   blkGroup?: string;
   blkIsFixed?: string;
-  blkVehUnitCount?: string;
+  blkVehUnitCount: number = 0;
   blkRelTypeStrt?: string;
   blkRelTypeEnd?: string;
   blkConsistPatternUser?: string;
   blkNumOperation?: string;
-  blkvehuoirs?: string;
-  blockActivities?: string;
+  blkvehuoirs: BlkvehuoirsCollection;
+  blockActivities: BlockActivitiesCollection;
   constructor(props: BlockProps) {
     super(props);
-    /** */ this.blkIntNumber = gavpfp("blkIntNumber", props);
-    /** */ this.blkNumber = gavpfp("blkNumber", props, "string", this.blkIntNumber);
-    /** */ this.blkRouteUser = gavpfp("blkRouteUser", props);
-    /** */ this.blkPrepOutUser = gavpfp("blkPrepOutUser", props);
-    /** */ this.blkPrepInUser = gavpfp("blkPrepInUser", props);
-    /** */ this.blkStartUpAtStationUser = gavpfp(
+    this.blkIntNumber = gavpfp("blkIntNumber", props);
+    this.blkNumber = gavpfp("blkNumber", props, "string", this.blkIntNumber);
+    this.blkRouteUser = gavpfp("blkRouteUser", props);
+    this.blkPrepOutUser = gavpfp("blkPrepOutUser", props);
+    this.blkPrepInUser = gavpfp("blkPrepInUser", props);
+    this.blkStartUpAtStationUser = gavpfp(
       "blkStartUpAtStationUser",
       props,
       `string`,
       `0`
     );
-    /** */ this.blkShutDownAtStationUser = gavpfp(
+    this.blkShutDownAtStationUser = gavpfp(
       "blkShutDownAtStationUser",
       props,
       `string`,
       `0`
     );
-    /** */ this.blkVehicleGroup = gavpfp("blkVehicleGroup", props);
-    /** */ this.blkVehicleType = gavpfp("blkVehicleType", props);
-    /** */ this.blkGarageUser = gavpfp("blkGarageUser", props);
-    /** */ this.blkVehicleNumber = gavpfp("blkVehicleNumber", props);
-    /** */ this.blkGroup = gavpfp("blkGroup", props);
-    /** */ this.blkIsFixed = gavpfp("blkIsFixed", props, `string`, `0`);
-    /** */ this.blkVehUnitCount = gavpfp("blkVehUnitCount", props);
-    /** */ this.blkRelTypeStrt = gavpfp("blkRelTypeStrt", props);
-    /** */ this.blkRelTypeEnd = gavpfp("blkRelTypeEnd", props);
-    /** */ this.blkConsistPatternUser = gavpfp("blkConsistPatternUser", props);
-    /** */ this.blkNumOperation = gavpfp("blkNumOperation", props);
+    this.blkVehicleGroup = gavpfp("blkVehicleGroup", props);
+    this.blkVehicleType = gavpfp("blkVehicleType", props);
+    this.blkGarageUser = gavpfp("blkGarageUser", props);
+    this.blkVehicleNumber = gavpfp("blkVehicleNumber", props);
+    this.blkGroup = gavpfp("blkGroup", props);
+    this.blkIsFixed = gavpfp("blkIsFixed", props, `string`, `0`);
+    this.blkVehUnitCount = gavpfp("blkVehUnitCount", props, "number", 0);
+    this.blkRelTypeStrt = gavpfp("blkRelTypeStrt", props);
+    this.blkRelTypeEnd = gavpfp("blkRelTypeEnd", props);
+    this.blkConsistPatternUser = gavpfp("blkConsistPatternUser", props);
+    this.blkNumOperation = gavpfp("blkNumOperation", props);
 
-    /* Children */
-    /** @type {BlkvehuoirsCollection} */
     this.blkvehuoirs = gavpfp(
       "blkvehuoirs",
       props,
@@ -100,7 +100,6 @@ export class Block extends Item<Block> {
       new BlkvehuoirsCollection(),
       { altPropName: "blkvehuoir", parent: this }
     );
-    /** @type {BlockActivitiesCollection} */
     this.blockActivities = gavpfp(
       "blockActivities",
       props,
@@ -110,14 +109,21 @@ export class Block extends Item<Block> {
     );
   }
 
-  /** @type {import('./VehicleTask')[]} */
   get vehicleTasks() {
-    return Array.from(this.vehicleSchedule.setOfVtasByBlock.get(this));
+    return (
+      this.vehicleSchedule &&
+      Array.from(this.vehicleSchedule.setOfVtasByBlock.get(this) as Set<VehicleTask>)
+    );
   }
 
-  get vehicleUnitsAtStart() {
-    return this.blkvehuoirs.map((blkVehuOir) =>
-      this.vehicleSchedule.vehicleUnits.getById(blkVehuOir.VehuUniqueId)
+  get vehicleUnitsAtStart(): VehicleUnit[] | undefined {
+    return (
+      this.vehicleSchedule &&
+      this.blkvehuoirs.map((blkVehuOir) => {
+        const vehu = this.vehicleSchedule?.vehicleUnits.getById(blkVehuOir.vehuUniqueId);
+        if (!vehu) throw new Error(``);
+        return;
+      })
     );
   }
 
@@ -126,11 +132,12 @@ export class Block extends Item<Block> {
   }
 
   get startTimeAsDuration() {
-    return _.minBy(this.blockActivities.items, "startTimeAsDuration").startTimeAsDuration;
+    return _.minBy(this.blockActivities.items, "startTimeAsDuration")
+      ?.startTimeAsDuration;
   }
 
   get endTimeAsDuration() {
-    return _.maxBy(this.blockActivities.items, "endTimeAsDuration").endTimeAsDuration;
+    return _.maxBy(this.blockActivities.items, "endTimeAsDuration")?.endTimeAsDuration;
   }
 
   sortBlockActivitiesByTime() {
@@ -145,7 +152,7 @@ export class Block extends Item<Block> {
     this.blkVehUnitCount += 1;
     this.blkvehuoirs.createNewItem({
       blkvehuoirRank: this.blkVehUnitCount,
-      VehuUniqueId: vehu.vehuInternalNumber,
+      vehuUniqueId: vehu.vehuInternalNumber,
     });
   }
 
@@ -164,7 +171,11 @@ export class Block extends Item<Block> {
   }
 
   get mediumLoggingOutput() {
-    return `${this.shortLoggingOutput} (vsc: ${this.vehicleSchedule.shortLoggingOutput})`;
+    return `${this.shortLoggingOutput}${
+      this.vehicleSchedule
+        ? ` (vsc: ${this.vehicleSchedule.shortLoggingOutput})`
+        : ` (no vsc)`
+    }`;
   }
 
   get longLoggingOutput() {

@@ -1,53 +1,66 @@
-const getAndSetIfRequired = require('@bimo/core-utils-get-and-set-if-required');
+import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
+import { BlockActivity } from "../BlockActivity";
+import { VehicleSchedule } from "../VehicleSchedule";
+import { BlockActivityItem } from "../BlockActivityItem";
 
-/**
- *
- * @param {import('../VehicleSchedule')} vsc
- */
-function computeActivityEntityItemsOfVsc(vsc) {
-  const activityEntityItemByBlockActivity = new Map();
+export function computeActivityEntityItemsOfVsc(vsc: VehicleSchedule) {
+  const activityEntityItemByBlockActivity: Map<BlockActivity, BlockActivityItem> =
+    new Map();
   const setOfblockActivitiesByBlockActivityEntityItem = new Map();
 
   vsc.blocks.forEach((block) => {
     block.blockActivities.forEach((blockActivity) => {
-      const collectionKey = collectionKeyByEntityClassKey[blockActivity.activityEntityClassKey];
-      const hastusIdKey = hastusIdKeyByEntityClassKey[blockActivity.activityEntityClassKey];
+      const collectionKey =
+        collectionKeyByEntityClassKey[blockActivity.activityEntityClassKey];
+      const hastusIdKey =
+        hastusIdKeyByEntityClassKey[blockActivity.activityEntityClassKey];
 
-      let activityEntityItem = vsc[collectionKey].getByBusinessId(blockActivity[hastusIdKey]);
+      let activityEntityItem = vsc[collectionKey].getByBusinessId(
+        blockActivity[hastusIdKey]
+      );
       if (!activityEntityItem) {
         const foundInOtherSchedule = vsc.vscincloirs.some((vscInclOir) => {
-          activityEntityItem = vscInclOir.vsc?.[collectionKey].getByBusinessId(blockActivity[hastusIdKey]);
+          activityEntityItem = vscInclOir.vsc?.[collectionKey].getByBusinessId(
+            blockActivity[hastusIdKey]
+          );
           return activityEntityItem;
         });
         if (!foundInOtherSchedule) {
-          throw new Error(`Impossible de trouver un ${blockActivity.activityNameByLanguageCode.fr} avec l'id ${blockActivity[hastusIdKey]} `
-            + `dans l'horaire ${vsc.shortLoggingOutput} et ses horaires inclus.`);
+          throw new Error(
+            `Impossible de trouver un ${blockActivity.activityNameByLanguageCode.fr} avec l'id ${blockActivity[hastusIdKey]} ` +
+              `dans l'horaire ${vsc.shortLoggingOutput} et ses horaires inclus.`
+          );
         }
       }
 
       const setOfBlockActivitiesOfThisEntityItem = getAndSetIfRequired(
-        setOfblockActivitiesByBlockActivityEntityItem, activityEntityItem, new Set(),
+        setOfblockActivitiesByBlockActivityEntityItem,
+        activityEntityItem,
+        new Set()
       );
       setOfBlockActivitiesOfThisEntityItem.add(blockActivity);
 
       activityEntityItemByBlockActivity.set(blockActivity, activityEntityItem);
     });
   });
-  return { setOfblockActivitiesByBlockActivityEntityItem, activityEntityItemByBlockActivity };
+  return {
+    setOfblockActivitiesByBlockActivityEntityItem,
+    activityEntityItemByBlockActivity,
+  };
 }
 
-module.exports = computeActivityEntityItemsOfVsc;
+export default computeActivityEntityItemsOfVsc;
 
 const collectionKeyByEntityClassKey = {
-  Trip: 'trips',
-  ConsistChange: 'consistChanges',
-  VehicleStandby: 'vehicleStandbys',
-  Maintenance: 'maintenances',
+  Trip: "trips",
+  ConsistChange: "consistChanges",
+  VehicleStandby: "vehicleStandbys",
+  Maintenance: "maintenances",
 };
 
 const hastusIdKeyByEntityClassKey = {
-  Trip: 'blkactTripNo',
-  ConsistChange: 'blkactCchgNo',
-  VehicleStandby: 'blkactVehicleStandbyNo',
-  Maintenance: 'blkactMaintenanceNo',
+  Trip: "blkactTripNo",
+  ConsistChange: "blkactCchgNo",
+  VehicleStandby: "blkactVehicleStandbyNo",
+  Maintenance: "blkactMaintenanceNo",
 };

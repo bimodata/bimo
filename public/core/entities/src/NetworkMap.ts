@@ -1,5 +1,7 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { FeatureCollection } from "geojson";
 
 const childClasses = [];
 
@@ -14,32 +16,30 @@ Une network map est stockée sous la forme de plusieurs FeatureCollection geojso
 features de type Point ou LineString. Chacune de ces features a des propriétés qui font le
 lien vers des Edges ou des Nodes, ou des sections du réseau. */
 export interface NetworkMapProps extends ExtendedItemProps {
+  bimoId: string;
   label?: string;
-  featureCollection?: string;
-  nodesFeatureCollection?: string;
-  sectionsFeatureCollection?: string;
+  featureCollection?: FeatureCollection;
+  nodesFeatureCollection?: FeatureCollection;
+  sectionsFeatureCollection?: FeatureCollection;
 }
 
-export class NetworkMap {
+export class NetworkMap extends Item<NetworkMap> {
+  bimoId: string;
   label?: string;
-  featureCollection?: string;
-  nodesFeatureCollection?: string;
-  sectionsFeatureCollection?: string;
+  featureCollection: FeatureCollection;
+  nodesFeatureCollection?: FeatureCollection;
+  sectionsFeatureCollection?: FeatureCollection;
   constructor(props: NetworkMapProps) {
-    this.bimoId = gavpfp('bimoId', props, 'string');
-    this.label = gavpfp('label', props, 'string');
-    /** @type {GeoJSON.FeatureCollection} */
-    this.featureCollection = gavpfp('featureCollection', props);
-
-    /** @type {GeoJSON.FeatureCollection} */
-    this.nodesFeatureCollection = gavpfp('nodesFeatureCollection', props);
-
-    /** @type {GeoJSON.FeatureCollection} */
-    this.sectionsFeatureCollection = gavpfp('sectionsFeatureCollection', props);
+    super(props);
+    this.bimoId = gavpfp("bimoId", props, "string");
+    this.label = gavpfp("label", props, "string");
+    this.featureCollection = gavpfp("featureCollection", props);
+    this.nodesFeatureCollection = gavpfp("nodesFeatureCollection", props);
+    this.sectionsFeatureCollection = gavpfp("sectionsFeatureCollection", props);
   }
 
   get shortLoggingOutput() {
-    return this.label;
+    return this.label ?? super.slo;
   }
 
   get mediumLoggingOutput() {
@@ -48,7 +48,5 @@ export class NetworkMap {
 }
 
 NetworkMap.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default NetworkMap;

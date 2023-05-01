@@ -1,29 +1,24 @@
 /* eslint-disable no-self-assign */
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-
 
 import { Booking, BookingProps } from "./Booking";
 
 const childClasses = [Booking];
 
-
-
-export interface BookingsCollectionProps extends ExtendedCollectionProps<Booking, BookingProps> {
-}
+export interface BookingsCollectionProps
+  extends ExtendedCollectionProps<Booking, BookingProps> {}
 
 export class BookingsCollection extends Collection<Booking, BookingProps> {
   constructor(props: BookingsCollectionProps = {}) {
     super({
-      itemName: 'Booking',
+      itemName: "Booking",
       ItemConstructor: Booking,
       idPropName: `bimoId`,
-      labelPropName: 'bkDescription',
+      labelPropName: "bkDescription",
       associationType: `aggregation`,
       ...props,
     });
-
-    this.libelle = props.libelle;
   }
 
   generateOirStyleData() {
@@ -31,10 +26,7 @@ export class BookingsCollection extends Collection<Booking, BookingProps> {
   }
 }
 
-
 BookingsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 /* I/O info */
 BookingsCollection.defaultExportedDataDataName = `output_booking`;

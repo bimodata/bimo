@@ -1,30 +1,30 @@
 /* eslint-disable no-unused-vars */
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { get } from 'lodash';
-import mapsAndSets from '@bimo/core-utils-maps-and-sets';
+import { get } from "lodash";
+import mapsAndSets from "@bimo/core-utils-maps-and-sets";
 
 const pathByTripOrVariantPropNameByTripOrVariantType = {
-  trip: { tripsOrVariants: 'trips', removeTripOrVariant: 'removeTrip' },
-  scheduledTrip: { tripsOrVariants: 'trips', removeTripOrVariant: 'removeTrip' },
+  trip: { tripsOrVariants: "trips", removeTripOrVariant: "removeTrip" },
+  scheduledTrip: { tripsOrVariants: "trips", removeTripOrVariant: "removeTrip" },
   variant: {
-    allPoints: 'variantPointsCollectionOfAllVariantPointsOfAllRoutes',
-    tripsOrVariants: 'variantsCollectionOfAllVariantsOfAllRoutes',
-    removeTripOrVariant: 'removeVariant',
+    allPoints: "variantPointsCollectionOfAllVariantPointsOfAllRoutes",
+    tripsOrVariants: "variantsCollectionOfAllVariantsOfAllRoutes",
+    removeTripOrVariant: "removeVariant",
   },
 };
 
 /** @template TripOrVariantType */
 export interface VehicleScheduleOrRouteVersionProps extends ExtendedItemProps {
-  _abstract?: string;
+  _abstract?: any;
 }
 
-export class VehicleScheduleOrRouteVersion extends Item<VehicleScheduleOrRouteVersion> {
+export class VehicleScheduleOrRouteVersion<ItemType, ItemProps> extends Item<ItemType> {
   /**
    * @param {Object} props
    * @param {'variant'|'trip'|'scheduledTrip'} tripOrVariantType
    */
-  _abstract?: string;
+  _abstract?: any;
   constructor(props, tripOrVariantType) {
     super(props);
     this._abstract = {
@@ -38,8 +38,7 @@ export class VehicleScheduleOrRouteVersion extends Item<VehicleScheduleOrRouteVe
     return this._abstract.tripOrVariantType;
   }
 
-  /** @type {Collection<TripOrVariantType>} */
-  get tripsOrVariants() {
+  get tripsOrVariants(): Collection<ItemType, ItemProps> {
     return get(this, this._abstract.pathByPropName.tripsOrVariants);
   }
 
@@ -47,16 +46,18 @@ export class VehicleScheduleOrRouteVersion extends Item<VehicleScheduleOrRouteVe
     return get(this, this._abstract.pathByPropName.allPoints);
   }
 
-  /**
-   * @returns {Set<string>}
-   */
-  get setOfAllPlaceIdentifiers() {
-    const allSets = this.tripsOrVariants.map((tripOrVariant) => tripOrVariant.setOfAllPlaceIdentifiers);
+  get setOfAllPlaceIdentifiers(): Set<string> {
+    const allSets = this.tripsOrVariants.map(
+      (tripOrVariant) => tripOrVariant.setOfAllPlaceIdentifiers
+    );
     return mapsAndSets.mergeSets(...allSets);
   }
 
   removeTripOrVariant(tripOrVariant) {
-    const removeFunction = get(this, this._abstract.pathByPropName.removeTripOrVariant).bind(this);
+    const removeFunction = get(
+      this,
+      this._abstract.pathByPropName.removeTripOrVariant
+    ).bind(this);
     return removeFunction(tripOrVariant);
   }
 }

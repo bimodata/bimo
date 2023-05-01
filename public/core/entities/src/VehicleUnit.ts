@@ -1,39 +1,35 @@
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 const childClasses = [];
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { VehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
-
+import { VehicleTask } from "./VehicleTask";
 
 export interface VehicleUnitProps extends ExtendedItemProps {
-  vehuInternalNumber?: string;
+  vehuInternalNumber: string;
   vehuIdentifierUser?: string;
   vehuVehicleGroup?: string;
   vehuVehicleType?: string;
   vehuCodeRoulement?: string;
-  vehicleTask?: string;
+  vehicleTask?: VehicleTask;
 }
 
 export class VehicleUnit extends Item<VehicleUnit> {
-  vehuInternalNumber?: string;
+  vehuInternalNumber: string;
   vehuIdentifierUser?: string;
   vehuVehicleGroup?: string;
   vehuVehicleType?: string;
   vehuCodeRoulement?: string;
-  vehicleTask?: string;
+  vehicleTask?: VehicleTask;
   constructor(props: VehicleUnitProps) {
     super(props);
-    /** */ this.vehuInternalNumber = gavpfp('vehuInternalNumber', props);
-    /** */ this.vehuIdentifierUser = gavpfp('vehuIdentifierUser', props);
-    /** */ this.vehuVehicleGroup = gavpfp('vehuVehicleGroup', props);
-    /** */ this.vehuVehicleType = gavpfp('vehuVehicleType', props);
+    this.vehuInternalNumber = gavpfp("vehuInternalNumber", props);
+    this.vehuIdentifierUser = gavpfp("vehuIdentifierUser", props);
+    this.vehuVehicleGroup = gavpfp("vehuVehicleGroup", props);
+    this.vehuVehicleType = gavpfp("vehuVehicleType", props);
 
-    /** */ this.vehuCodeRoulement = gavpfp('vehuCodeRoulement', props);
-
-    /* Children */
-
-    /* Links */
+    this.vehuCodeRoulement = gavpfp("vehuCodeRoulement", props);
 
     this.vehicleTask = undefined;
   }
@@ -48,12 +44,9 @@ export class VehicleUnit extends Item<VehicleUnit> {
   }
 }
 
-VehicleUnit.hastusKeywords = ['vehicle_unit'];
-VehicleUnit.hastusObject = 'vehicle_unit';
-
+VehicleUnit.hastusKeywords = ["vehicle_unit"];
+VehicleUnit.hastusObject = "vehicle_unit";
 
 VehicleUnit.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default VehicleUnit;

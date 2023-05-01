@@ -1,8 +1,8 @@
 const childClasses = [];
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
+import BlockActivityItemMixin, { BlockActivityItem } from "./BlockActivityItem";
 
 export interface ConsistChangeProps extends ExtendedItemProps {
   cchgActivity?: string;
@@ -36,21 +36,19 @@ export interface ConsistChangeProps extends ExtendedItemProps {
   cchgToNote?: string;
 }
 
-export class ConsistChange extends BlockActivityItem(
-  Item, {
-  blkActIdPropName: 'blkactCchgNo',
-  itemIdPropName: 'cchgInternalNumber',
-  placePropName: 'cchgPlaceStart',
-  startTimePropName: 'cchgTimeStart',
-  endTimePropName: 'cchgTimeStart', // TODO: improve this
-},
-) {
+export class ConsistChange extends BlockActivityItemMixin(Item, {
+  blkActIdPropName: "blkactCchgNo",
+  itemIdPropName: "cchgInternalNumber",
+  placePropName: "cchgPlaceStart",
+  startTimePropName: "cchgTimeStart",
+  endTimePropName: "cchgTimeStart", // TODO: improve this
+}) {
   cchgActivity?: string;
   _cchgInternalNumber?: string;
   _cchgBuildTime?: string;
   cchgEvent?: string;
   cchgEventStatus?: string;
-  cchgPlaceStart?: string;
+  cchgPlaceStart: string;
   _cchgTimeStart?: string;
   cchgDuration?: string;
   cchgOnTripNo?: string;
@@ -76,42 +74,42 @@ export class ConsistChange extends BlockActivityItem(
   cchgToNote?: string;
   constructor(props: ConsistChangeProps) {
     super(props);
-    this.cchgActivity = gavpfp('cchgActivity', props);
-    this._cchgInternalNumber = gavpfp('cchgInternalNumber', props);
-    this._cchgBuildTime = gavpfp('cchgBuildTime', props);
-    this.cchgEvent = gavpfp('cchgEvent', props);
-    this.cchgEventStatus = gavpfp('cchgEventStatus', props);
-    this.cchgPlaceStart = gavpfp('cchgPlaceStart', props);
-    this._cchgTimeStart = gavpfp('cchgTimeStart', props);
-    this.cchgDuration = gavpfp('cchgDuration', props);
-    this.cchgOnTripNo = gavpfp('cchgOnTripNo', props);
-    this.cchgOrigOnTripNo = gavpfp('cchgOrigOnTripNo', props);
-    this.cchgUnitCount = gavpfp('cchgUnitCount', props);
-    this.cchgOnTrip = gavpfp('cchgOnTrip', props);
-    this.cchgIsRequired = gavpfp('cchgIsRequired', props, 'string', '0');
+    this.cchgActivity = gavpfp("cchgActivity", props);
+    this._cchgInternalNumber = gavpfp("cchgInternalNumber", props);
+    this._cchgBuildTime = gavpfp("cchgBuildTime", props);
+    this.cchgEvent = gavpfp("cchgEvent", props);
+    this.cchgEventStatus = gavpfp("cchgEventStatus", props);
+    this.cchgPlaceStart = gavpfp("cchgPlaceStart", props);
+    this._cchgTimeStart = gavpfp("cchgTimeStart", props);
+    this.cchgDuration = gavpfp("cchgDuration", props);
+    this.cchgOnTripNo = gavpfp("cchgOnTripNo", props);
+    this.cchgOrigOnTripNo = gavpfp("cchgOrigOnTripNo", props);
+    this.cchgUnitCount = gavpfp("cchgUnitCount", props);
+    this.cchgOnTrip = gavpfp("cchgOnTrip", props);
+    this.cchgIsRequired = gavpfp("cchgIsRequired", props, "string", "0");
 
     /** @type {string} - WARNING: this is the blkNumber, not the blkIntNumber */
-    this.cchgRelatedBlock = gavpfp('cchgRelatedBlock', props);
+    this.cchgRelatedBlock = gavpfp("cchgRelatedBlock", props);
     /** @type {string} - This is currently not exported in default OIG but we add it because it makes senses */
-    this.cchgRelatedBlockIntNo = gavpfp('cchgRelatedBlockIntNo', props);
+    this.cchgRelatedBlockIntNo = gavpfp("cchgRelatedBlockIntNo", props);
 
     /** @type {string} - WARNING: this is the blkNumber, not the blkIntNumber */
-    this.cchgOntrpBlock = gavpfp('cchgOntrpBlock', props);
+    this.cchgOntrpBlock = gavpfp("cchgOntrpBlock", props);
     /** @type {string} - This is currently not exported in default OIG but we add it because it makes senses */
-    this.cchgOntrpBlockIntNo = gavpfp('cchgOntrpBlockIntNo', props);
+    this.cchgOntrpBlockIntNo = gavpfp("cchgOntrpBlockIntNo", props);
 
-    this.cchgComment = gavpfp('cchgComment', props);
-    this.cchgPosition = gavpfp('cchgPosition', props, 'string', '0');
-    this.cchgTimeSpecified = gavpfp('cchgTimeSpecified', props);
-    this.cchgOperatesSun = gavpfp('cchgOperatesSun', props, 'string', '1');
-    this.cchgOperatesMon = gavpfp('cchgOperatesMon', props, 'string', '0');
-    this.cchgOperatesTue = gavpfp('cchgOperatesTue', props, 'string', '0');
-    this.cchgOperatesWed = gavpfp('cchgOperatesWed', props, 'string', '0');
-    this.cchgOperatesThu = gavpfp('cchgOperatesThu', props, 'string', '0');
-    this.cchgOperatesFri = gavpfp('cchgOperatesFri', props, 'string', '0');
-    this.cchgOperatesSat = gavpfp('cchgOperatesSat', props, 'string', '0');
-    this.cchgFromNote = gavpfp('cchgFromNote', props);
-    this.cchgToNote = gavpfp('cchgToNote', props);
+    this.cchgComment = gavpfp("cchgComment", props);
+    this.cchgPosition = gavpfp("cchgPosition", props, "string", "0");
+    this.cchgTimeSpecified = gavpfp("cchgTimeSpecified", props);
+    this.cchgOperatesSun = gavpfp("cchgOperatesSun", props, "string", "1");
+    this.cchgOperatesMon = gavpfp("cchgOperatesMon", props, "string", "0");
+    this.cchgOperatesTue = gavpfp("cchgOperatesTue", props, "string", "0");
+    this.cchgOperatesWed = gavpfp("cchgOperatesWed", props, "string", "0");
+    this.cchgOperatesThu = gavpfp("cchgOperatesThu", props, "string", "0");
+    this.cchgOperatesFri = gavpfp("cchgOperatesFri", props, "string", "0");
+    this.cchgOperatesSat = gavpfp("cchgOperatesSat", props, "string", "0");
+    this.cchgFromNote = gavpfp("cchgFromNote", props);
+    this.cchgToNote = gavpfp("cchgToNote", props);
   }
 
   /** @param {import ('./Trip')} newTrip */
@@ -151,11 +149,8 @@ export class ConsistChange extends BlockActivityItem(
   }
 }
 
-ConsistChange.hastusKeywords = ['consist_change'];
-ConsistChange.hastusObject = 'consist_change';
-
+ConsistChange.hastusKeywords = ["consist_change"];
+ConsistChange.hastusObject = "consist_change";
 ConsistChange.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default ConsistChange;

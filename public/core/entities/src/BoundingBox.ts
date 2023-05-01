@@ -1,7 +1,7 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { pick } from 'lodash';
+import { pick } from "lodash";
 
 const childClasses = [];
 
@@ -10,16 +10,39 @@ export interface BoundingBoxProps extends ExtendedItemProps {
   coordinatesBySystemName?: string;
 }
 
+export interface BoundingBoxCoordinates {
+  xMin: number;
+  xMax: number;
+  yMin: number;
+  yMax: number;
+}
+
+export interface BoundingBoxCoordinatesBySystemName {
+  [systemName: string]: BoundingBoxCoordinates;
+}
+
 export class BoundingBox extends Item<BoundingBox> {
-  activeCoordinatesSystemName?: string;
-  coordinatesBySystemName?: string;
-  constructor(rawProps) {
-    const props = Array.isArray(rawProps) ? { xMin: rawProps[0], yMin: rawProps[1], xMax: rawProps[2], yMax: rawProps[3] } : rawProps;
-    super(props, 'BoundingBox');
-    this.activeCoordinatesSystemName = gavpfp('activeCoordinatesSystemName', rawProps, 'string', 'default');
-    this.coordinatesBySystemName = gavpfp('coordinatesBySystemName', rawProps, Object, {});
+  activeCoordinatesSystemName: string = "default";
+  coordinatesBySystemName: BoundingBoxCoordinatesBySystemName;
+  constructor(rawProps: [number, number, number, number] | BoundingBoxProps) {
+    const props = Array.isArray(rawProps)
+      ? { xMin: rawProps[0], yMin: rawProps[1], xMax: rawProps[2], yMax: rawProps[3] }
+      : rawProps;
+    super(props);
+    this.activeCoordinatesSystemName = gavpfp(
+      "activeCoordinatesSystemName",
+      props,
+      "string",
+      "default"
+    );
+    this.coordinatesBySystemName = gavpfp("coordinatesBySystemName", props, Object, {});
     if (Object.keys(this.coordinatesBySystemName).length === 0) {
-      this.coordinatesBySystemName.default = pick(props, ['xMin', 'xMax', 'yMin', 'yMax']);
+      this.coordinatesBySystemName.default = pick(props, [
+        "xMin",
+        "xMax",
+        "yMin",
+        "yMax",
+      ]);
     }
   }
 
@@ -65,7 +88,5 @@ export class BoundingBox extends Item<BoundingBox> {
 }
 
 BoundingBox.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default BoundingBox;

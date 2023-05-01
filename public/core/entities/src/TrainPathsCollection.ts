@@ -1,52 +1,57 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-param-reassign */
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { TrainPath, TrainPathProps } from "./TrainPath";
-import { TrainPathsGeneralInfo, TrainPathsGeneralInfoProps } from "./TrainPathsGeneralInfo";
+import {
+  TrainPathsGeneralInfo,
+  TrainPathsGeneralInfoProps,
+} from "./TrainPathsGeneralInfo";
 
 const childClasses = [TrainPath, TrainPathsGeneralInfo];
 
-
-export interface TrainPathsCollectionProps extends ExtendedCollectionProps<TrainPath, TrainPathProps> {
+export interface TrainPathsCollectionProps
+  extends ExtendedCollectionProps<TrainPath, TrainPathProps> {
+  trainPathsGeneralInfo?: TrainPathsGeneralInfo;
 }
 
 export class TrainPathsCollection extends Collection<TrainPath, TrainPathProps> {
+  trainPathsGeneralInfo: TrainPathsGeneralInfo;
   constructor(props: TrainPathsCollectionProps = {}) {
     super({
-      itemName: 'TrainPath',
+      itemName: "TrainPath",
       ItemConstructor: TrainPath,
-      associationType: 'aggregation',
-      businessIdPropName: 'trnpIdentifier',
+      associationType: "aggregation",
+      businessIdPropName: "trnpIdentifier",
       ...props,
     });
 
-    /* Unoficial Children */
-    /** @type {TrainPathsGeneralInfos} */
     this.trainPathsGeneralInfo = gavpfp(
-      'trainPathsGeneralInfo', props,
+      "trainPathsGeneralInfo",
+      props,
       TrainPathsGeneralInfo,
       new TrainPathsGeneralInfo(),
-      { altPropName: 'trnpgeninfo', parent: this },
+      { altPropName: "trnpgeninfo", parent: this }
     );
   }
 
   /**
-     *
-     * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
-     */
-  static createFromOirStyleData(oirStyleData) {
+   * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
+   */
+  static createFromOirStyleData(oirStyleData: any) {
     const rawGeneralInfos = oirStyleData.train_path_general_information;
     const rawTrainPaths = oirStyleData.train_path;
 
     if (!rawGeneralInfos || !rawTrainPaths) {
-      throw new Error(`Bad oirStyleData: could not find "train_path_general_information" or "train_path" key`);
+      throw new Error(
+        `Bad oirStyleData: could not find "train_path_general_information" or "train_path" key`
+      );
     }
     if (rawGeneralInfos.length !== 1) {
-      throw new Error(`Bad oirStyleData: there should be exactly one trainPathGeneralInfo line. Got ${rawGeneralInfos.length}`);
+      throw new Error(
+        `Bad oirStyleData: there should be exactly one trainPathGeneralInfo line. Got ${rawGeneralInfos.length}`
+      );
     }
 
     const newTrainPathsCollection = new TrainPathsCollection({
@@ -57,17 +62,24 @@ export class TrainPathsCollection extends Collection<TrainPath, TrainPathProps> 
     return newTrainPathsCollection;
   }
 
-  get self() {
-    return this;
-  }
-
+  /* eslint-disable camelcase */
+  /* eslint-disable no-param-reassign */
   generateOirStyleData() {
     const train_path = this.map((trainPath) => {
-      trainPath.train_path_variant = trainPath.trainPathVariants.map((trainPathVariant) => {
-        trainPathVariant.train_path_variant_point = trainPathVariant.trainPathVariantPoints && trainPathVariant.trainPathVariantPoints.items;
-        trainPathVariant.train_path_variant_date = trainPathVariant.trainPathVariantDates && trainPathVariant.trainPathVariantDates.items;
-        return trainPathVariant;
-      });
+      //@ts-ignore
+      trainPath.train_path_variant = trainPath.trainPathVariants.map(
+        (trainPathVariant) => {
+          //@ts-ignore
+          trainPathVariant.train_path_variant_point =
+            trainPathVariant.trainPathVariantPoints &&
+            trainPathVariant.trainPathVariantPoints.items;
+          //@ts-ignore
+          trainPathVariant.train_path_variant_date =
+            trainPathVariant.trainPathVariantDates &&
+            trainPathVariant.trainPathVariantDates.items;
+          return trainPathVariant;
+        }
+      );
       return trainPath;
     });
     const general_information = [this.trainPathsGeneralInfo];
@@ -76,7 +88,5 @@ export class TrainPathsCollection extends Collection<TrainPath, TrainPathProps> 
 }
 
 TrainPathsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default TrainPathsCollection;

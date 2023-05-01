@@ -1,19 +1,16 @@
-
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { Variant, VariantProps } from "./Variant";
 
 const childClasses = [Variant];
 
-
-
-export interface VariantsCollectionProps extends ExtendedCollectionProps<Variant, VariantProps> {
-}
+export interface VariantsCollectionProps
+  extends ExtendedCollectionProps<Variant, VariantProps> {}
 
 export class VariantsCollection extends Collection<Variant, VariantProps> {
   constructor(props: VariantsCollectionProps = {}) {
     super({
-      itemName: 'Variant',
+      itemName: "Variant",
       ItemConstructor: Variant,
       // idPropName: `bimoId`,
       businessIdPropName: `varIdentifier`,
@@ -23,10 +20,10 @@ export class VariantsCollection extends Collection<Variant, VariantProps> {
   }
 
   /**
-     *
-     * @param {PlacesCollection} placesCollection PlacesCollection to use to retrieve data about the places
-     * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by a string made of `${refPlaceOfTheVariantsOrigin}>>>${refPlaceOfTheVariantsDestination}`
-     */
+   *
+   * @param {PlacesCollection} placesCollection PlacesCollection to use to retrieve data about the places
+   * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by a string made of `${refPlaceOfTheVariantsOrigin}>>>${refPlaceOfTheVariantsDestination}`
+   */
   getVariantsByRefPlaceOD(placesCollection) {
     const variantsByRefPlaceOD = this.groupByCustomKey((variant) => {
       const firstPlace = placesCollection.getByBusinessId(variant.firstPoint.varptPlace);
@@ -56,13 +53,13 @@ export class VariantsCollection extends Collection<Variant, VariantProps> {
   // }
 
   /**
-     * Groups all the variants of the collection by route public id
-     * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by rtePubIdSpec
-     */
+   * Groups all the variants of the collection by route public id
+   * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by rtePubIdSpec
+   */
   groupByRoutePublicId() {
     const groupedVariantsByRoutePublicId = new Map();
     this.forEach((variant) => {
-      const routePublicId = variant.parent.parent.rtePubIdSpec;
+      const routePublicId = variant.route?.rtePubIdSpec;
       let groupedVariants = groupedVariantsByRoutePublicId.get(routePublicId);
       if (!groupedVariants) {
         groupedVariants = [];
@@ -74,13 +71,13 @@ export class VariantsCollection extends Collection<Variant, VariantProps> {
   }
 
   /**
-     * Groups all the variants of the collection by route id
-     * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by route id
-     */
+   * Groups all the variants of the collection by route id
+   * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by route id
+   */
   groupByRouteIdentifier() {
     const groupedVariantsByRouteIdentifier = new Map();
     this.forEach((variant) => {
-      const routeIdentifier = variant.parent.parent.rteIdentifier;
+      const routeIdentifier = variant.route?.rteIdentifier;
       let groupedVariants = groupedVariantsByRouteIdentifier.get(routeIdentifier);
       if (!groupedVariants) {
         groupedVariants = [];
@@ -92,18 +89,19 @@ export class VariantsCollection extends Collection<Variant, VariantProps> {
   }
 
   sortByPriority() {
-    this.sort((varA, varB) => parseInt(varA.varPriority, 10) - parseInt(varB.varPriority, 10));
+    this.sort(
+      (varA, varB) => parseInt(varA.varPriority, 10) - parseInt(varB.varPriority, 10)
+    );
     return this;
   }
 
   get shortLoggingOutput() {
-    return this.parent ? `varColl of ${this.parent.shortLoggingOutput}` : `orphan varColl`;
+    return this.parent
+      ? `varColl of ${this.parent.shortLoggingOutput}`
+      : `orphan varColl`;
   }
 }
 
-
 VariantsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default VariantsCollection;

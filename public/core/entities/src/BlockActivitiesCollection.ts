@@ -1,35 +1,39 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BlockActivity, BlockActivityProps } from "./BlockActivity";
-
+import { BlockActivityItem } from "./BlockActivityItem";
 
 const childClasses = [BlockActivity];
 
+export interface BlockActivitiesCollectionProps
+  extends ExtendedCollectionProps<BlockActivity, BlockActivityProps> {}
 
-
-export interface BlockActivitiesCollectionProps extends ExtendedCollectionProps<BlockActivitie, BlockActivitieProps> {
-}
-
-export class BlockActivitiesCollection extends Collection<BlockActivitie, BlockActivitieProps> {
+export class BlockActivitiesCollection extends Collection<
+  BlockActivity,
+  BlockActivityProps
+> {
   constructor(props: BlockActivitiesCollectionProps = {}) {
-    Object.assign(props, {
-      itemName: 'BlockActivity',
+    super({
+      itemName: "BlockActivity",
       ItemConstructor: BlockActivity,
       idPropName: `bimoId`,
       labelPropName: `blkactVehicleActivityTypeNo`,
+      ...props,
     });
-    super(props);
   }
 
   sortByTime() {
     try {
       this.items.sort(
-        (blkActA, blkActB) => blkActA.startTimeAsDuration.as('second') - blkActB.startTimeAsDuration.as('second'),
+        (blkActA, blkActB) =>
+          blkActA.startTimeAsDuration.as("second") -
+          blkActB.startTimeAsDuration.as("second")
       );
-    }
-    catch (error) {
-      const newError = new Error(`Error while sorting these blockActivities:\n${this.longLoggingOutput}\n${error.stack}`);
+    } catch (error) {
+      const newError = new Error(
+        `Error while sorting these blockActivities:\n${this.longLoggingOutput}\n${error.stack}`
+      );
       throw newError;
     }
   }
@@ -46,11 +50,13 @@ export class BlockActivitiesCollection extends Collection<BlockActivitie, BlockA
    * @param {Object} activity the item corresponding to the activity to add
    * typically a Trip, Maintenance, VehicleStandBy or ConsistChange
    */
-  addActivity(activity) {
-    if (activity.addToBlockActivitiesCollectionFn) return activity.addToBlockActivitiesCollectionFn(this);
+  addActivity(activity: BlockActivityItem) {
+    // if (activity.addToBlockActivitiesCollectionFn)
+    //   return activity.addToBlockActivitiesCollectionFn(this);
     const blkAct = this.createNewItem({
       blkactVehicleActivityTypeNo: activity.blkactVehicleActivityTypeNo,
-      [activity.constructor.blkActIdPropName]: activity[activity.constructor.itemIdPropName],
+      [activity.constructor.blkActIdPropName]:
+        activity[activity.constructor.itemIdPropName],
     });
     activity.addBlockActivity(blkAct);
     return blkAct;
@@ -69,7 +75,8 @@ export class BlockActivitiesCollection extends Collection<BlockActivitie, BlockA
    * typically a Trip, Maintenance, VehicleStandBy or ConsistChange
    */
   removeActivity(activity) {
-    if (activity.removeFromBlockActivitiesCollectionFn) return activity.removeFromBlockActivitiesCollectionFn(this);
+    if (activity.removeFromBlockActivitiesCollectionFn)
+      return activity.removeFromBlockActivitiesCollectionFn(this);
     this.remove(activity.blockActivity);
     activity.removeBlockActivity(activity.blockActivity);
     return null;
@@ -96,9 +103,6 @@ export class BlockActivitiesCollection extends Collection<BlockActivitie, BlockA
   }
 }
 
-
 BlockActivitiesCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default BlockActivitiesCollection;

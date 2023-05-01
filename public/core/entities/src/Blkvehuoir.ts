@@ -5,19 +5,19 @@ import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { Block } from "./Block";
 
 export interface BlkvehuoirProps extends ExtendedItemProps {
-  blkvehuoirRank?: string;
-  VehuUniqueId?: string;
+  blkvehuoirRank: number;
+  vehuUniqueId: string;
   bimoId?: string;
 }
 
 export class Blkvehuoir extends Item<Blkvehuoir> {
-  blkvehuoirRank?: string;
-  VehuUniqueId?: string;
+  blkvehuoirRank: number = 1;
+  vehuUniqueId: string;
   bimoId?: string;
   constructor(props: BlkvehuoirProps) {
     super(props);
-    this.blkvehuoirRank = gavpfp("blkvehuoirRank", props);
-    this.VehuUniqueId = gavpfp("VehuUniqueId", props);
+    this.blkvehuoirRank = gavpfp("blkvehuoirRank", props, "number", 0);
+    this.vehuUniqueId = gavpfp("vehuUniqueId", props);
     this.bimoId = gavpfp("bimoId", props);
   }
 
@@ -30,7 +30,7 @@ export class Blkvehuoir extends Item<Blkvehuoir> {
   }
 
   get vehicleUnit() {
-    return this.vehicleSchedule?.vehicleUnits.getById(this.VehuUniqueId);
+    return this.vehicleSchedule?.vehicleUnits.getById(this.vehuUniqueId);
   }
 }
 

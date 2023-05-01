@@ -1,5 +1,4 @@
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
-import { serializeThis, parseThis } from '@bimo/core-utils-serialization';
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 export interface ServiceEvolutionPeriodSchedulesBookingProps extends ExtendedItemProps {
@@ -10,11 +9,8 @@ export class ServiceEvolutionPeriodSchedulesBooking extends Item<ServiceEvolutio
   bkIdentifier?: string;
   constructor(props: ServiceEvolutionPeriodSchedulesBookingProps) {
     super(props);
-    this.bkIdentifier = gavpfp('bkIdentifier', props, `string`);
+    this.bkIdentifier = gavpfp("bkIdentifier", props, `string`);
   }
 }
-
-
-
 
 export default ServiceEvolutionPeriodSchedulesBooking;

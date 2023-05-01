@@ -1,32 +1,35 @@
 /* eslint-disable no-unused-vars */
-import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { get } from 'lodash';
-import { TripOrVariantSectionsCollection, TripOrVariantSectionsCollectionProps } from "./TripOrVariantSectionsCollection";
-import computeTripOrVariantSectionsOfTripOrVariant from './subs/computeTripOrVariantSectionsOfTripOrVariant';
+import { get } from "lodash";
+import {
+  TripOrVariantSectionsCollection,
+  TripOrVariantSectionsCollectionProps,
+} from "./TripOrVariantSectionsCollection";
+import computeTripOrVariantSectionsOfTripOrVariant from "./subs/computeTripOrVariantSectionsOfTripOrVariant";
 
 const pathByTripOrVariantPropNameByTripOrVariantType = {
   trip: {
-    points: 'tripPoints',
-    productive: 'productive',
-    direction: 'trpDirection',
-    routeId: 'trpRoute',
-    variantId: 'trpViaVariant',
+    points: "tripPoints",
+    productive: "productive",
+    direction: "trpDirection",
+    routeId: "trpRoute",
+    variantId: "trpViaVariant",
   },
   variant: {
-    points: 'variantPoints',
-    productive: 'varProductive',
-    direction: 'varDirection',
-    routeId: 'routeId',
-    indiceCompo: 'varIndiceCompo',
-    variantId: 'varIdentifier',
+    points: "variantPoints",
+    productive: "varProductive",
+    direction: "varDirection",
+    routeId: "routeId",
+    indiceCompo: "varIndiceCompo",
+    variantId: "varIdentifier",
   },
   scheduledTrip: {
-    points: 'tripPoints',
-    productive: 'productive',
-    direction: 'trpDirection',
-    routeId: 'trpRoute',
-    variantId: 'trpViaVariant',
+    points: "tripPoints",
+    productive: "productive",
+    direction: "trpDirection",
+    routeId: "trpRoute",
+    variantId: "trpViaVariant",
   },
 };
 
@@ -40,7 +43,7 @@ export class TripOrVariant extends Item<TripOrVariant> {
    * @param {Object} props
    * @param {'variant'|'trip'} tripOrVariantType
    */
-  _abstract?: string;
+  _abstract?: any;
   constructor(props, tripOrVariantType) {
     super(props);
     this._abstract = {
@@ -107,19 +110,18 @@ export class TripOrVariant extends Item<TripOrVariant> {
     return this.points.last;
   }
 
-  /** @type {String} */
-  get productive() {
+  get productive(): string {
     return get(this, this._abstract.pathByPropName.productive);
   }
 
   /** @type {PointType[]} */
   get pointsWithStopping() {
-    return this.points.pick((point) => point.noStopping === '0');
+    return this.points.pick((point) => point.noStopping === "0");
   }
 
   /** @type {PointType[]} */
   get pointsThatAreTimingPoints() {
-    return this.points.pick((point) => point.isTimingPoint === '1');
+    return this.points.pick((point) => point.isTimingPoint === "1");
   }
 
   /** @type {string} */
@@ -147,7 +149,9 @@ export class TripOrVariant extends Item<TripOrVariant> {
    * @param {import ('./Place')|string} newStartPlace
    */
   changeStartPlace(newStartPlace) {
-    throw new Error(`changeStartPlace method should be implemented in ${this.tripOrVariantType}`);
+    throw new Error(
+      `changeStartPlace method should be implemented in ${this.tripOrVariantType}`
+    );
   }
 
   /**
@@ -155,11 +159,9 @@ export class TripOrVariant extends Item<TripOrVariant> {
    * @param {import ('./Place')|string} newEndPlace
    */
   changeEndPlace(newEndPlace) {
-    throw new Error(`changeEndPlace method should be implemented in ${this.tripOrVariantType}`);
-  }
-
-  copy() {
-    throw new Error(`copy method should be implemented in ${this.tripOrVariantType}`);
+    throw new Error(
+      `changeEndPlace method should be implemented in ${this.tripOrVariantType}`
+    );
   }
 }
 

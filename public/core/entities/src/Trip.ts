@@ -1,35 +1,43 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
-import timeAndDate from '@bimo/core-utils-time-and-date';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import timeAndDate from "@bimo/core-utils-time-and-date";
 
-
+import {
+  ExtendedItemProps,
+  ExtendedItem,
+  RawOigProps,
+} from "@bimo/core-utils-collection";
 import { TripTpsCollection, TripTpsCollectionProps } from "./TripTpsCollection";
 import { TripPointsCollection, TripPointsCollectionProps } from "./TripPointsCollection";
 // eslint-disable-next-line no-unused-vars
 import { TripPoint, TripPointProps } from "./TripPoint";
 import { TripTp, TripTpProps } from "./TripTp";
-import { TripvehgrpspecsCollection, TripvehgrpspecsCollectionProps } from "./TripvehgrpspecsCollection";
+import {
+  TripvehgrpspecsCollection,
+  TripvehgrpspecsCollectionProps,
+} from "./TripvehgrpspecsCollection";
 import { TripOrVariant, TripOrVariantProps } from "./TripOrVariant";
-import { BlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
+import { BlockActivityItemMixin } from "./BlockActivityItem";
+import { BimoContext } from "@bimo/core-global-types";
+import Entity, { CustomProps } from "@bimo/core-utils-entity";
+import TripsCollection from "./TripsCollection";
 
 const childClasses = [TripTpsCollection, TripPointsCollection, TripvehgrpspecsCollection];
 
 const INTERNAL_DISTANCE_FACTOR = 10000;
 
-
-
 export interface TripProps extends ExtendedItemProps {
-  _bimoId?: string;
+  bimoId?: string;
   trpNumber?: string;
   trpIsProtected?: string;
   trpRoute?: string;
   trpViaVariant?: string;
   trpType?: string;
   trpDirection?: string;
-  _trpPlaceStart?: string;
-  _trpPlaceEnd?: string;
-  _trpOriginalStartPlace?: string;
-  _trpOriginalEndPlace?: string;
+  trpPlaceStart?: string;
+  trpPlaceEnd?: string;
+  trpOriginalStartPlace?: string;
+  trpOriginalEndPlace?: string;
   trpOriginalBuildSpecPlace?: string;
   trpTimeStart?: string;
   trpTimeEnd?: string;
@@ -40,7 +48,7 @@ export interface TripProps extends ExtendedItemProps {
   trpCreator?: string;
   trpNote?: string;
   trpSecondNote?: string;
-  _trpIsPublic?: string;
+  trpIsPublic?: string;
   trpShftMaxEarlier?: string;
   trpShftMaxLater?: string;
   trpInternalShftMaxEarlier?: string;
@@ -65,7 +73,7 @@ export interface TripProps extends ExtendedItemProps {
   trpBlockingGarage?: string;
   trpRunTimePattern?: string;
   trpOriginalNumber?: string;
-  _trpIntNumber?: string;
+  trpIntNumber?: string;
   trpAreVehGroupSpecsFromVehcv?: string;
   trpAreVehSpecCstrFromVehcv?: string;
   trpRecommendedVehGroup?: string;
@@ -95,26 +103,23 @@ export interface TripProps extends ExtendedItemProps {
   _links?: string;
 }
 
-export class Trip extends BlockActivityItem(
-  TripOrVariant, {
-  blkActIdPropName: 'blkactTripNo',
-  itemIdPropName: 'trpIntNumber',
-  startTimePropName: 'trpTimeStart',
-  endTimePropName: 'trpTimeEnd',
-  startPlacePropName: 'trpPlaceStart',
-  endPlacePropName: 'trpPlaceEnd',
-},
-) {
-  /**
-   *
-   * @param {Trip} props
-   */
-  _bimoId?: string;
-  trpNumber?: string;
+export class Trip
+  extends BlockActivityItemMixin<typeof Trip>(TripOrVariant, {
+    blkActIdPropName: "blkactTripNo",
+    itemIdPropName: "trpIntNumber",
+    startTimePropName: "trpTimeStart",
+    endTimePropName: "trpTimeEnd",
+    startPlacePropName: "trpPlaceStart",
+    endPlacePropName: "trpPlaceEnd",
+  })
+  implements ExtendedItem<Trip>
+{
+  _bimoId: string | null;
+  trpNumber: string = "";
   trpIsProtected?: string;
   trpRoute?: string;
   trpViaVariant?: string;
-  trpType?: string;
+  trpType: string = "0";
   trpDirection?: string;
   _trpPlaceStart?: string;
   _trpPlaceEnd?: string;
@@ -125,8 +130,8 @@ export class Trip extends BlockActivityItem(
   trpTimeEnd?: string;
   trpStartLayUser?: string;
   trpEndLayUser?: string;
-  trpInternalDistance?: string;
-  trpDistance?: string;
+  trpInternalDistance: string | null;
+  _trpDistance?: string;
   trpCreator?: string;
   trpNote?: string;
   trpSecondNote?: string;
@@ -155,7 +160,7 @@ export class Trip extends BlockActivityItem(
   trpBlockingGarage?: string;
   trpRunTimePattern?: string;
   trpOriginalNumber?: string;
-  _trpIntNumber?: string;
+  _trpIntNumber: string | null;
   trpAreVehGroupSpecsFromVehcv?: string;
   trpAreVehSpecCstrFromVehcv?: string;
   trpRecommendedVehGroup?: string;
@@ -179,118 +184,216 @@ export class Trip extends BlockActivityItem(
   trpOpReleve?: string;
   trpNePasCommanderSillon?: string;
   trpBesoinVf?: string;
-  tripTps?: string;
-  tripPoints?: string;
-  tripvehgrpspecs?: string;
-  _links?: string;
-  constructor(props, tripOrVariantType = 'trip') {
+  tripTps: TripTpsCollection;
+  tripPoints: TripPointsCollection;
+  tripvehgrpspecs: TripvehgrpspecsCollection;
+  parent?: TripsCollection;
+  constructor(props, tripOrVariantType = "trip") {
+    // @ts-ignore
     super(props, tripOrVariantType);
-    this._bimoId = gavpfp('bimoId', props);
-    this.trpNumber = gavpfp('trpNumber', props);
-    this.trpIsProtected = gavpfp('trpIsProtected', props, `string`, `1`);
-    this.trpRoute = gavpfp('trpRoute', props, `string`, 'TEMP');
-    this.trpViaVariant = gavpfp('trpViaVariant', props);
+    this._bimoId = gavpfp("bimoId", props);
+    this.trpNumber = gavpfp("trpNumber", props);
+    this.trpIsProtected = gavpfp("trpIsProtected", props, `string`, `1`);
+    this.trpRoute = gavpfp("trpRoute", props, `string`, "TEMP");
+    this.trpViaVariant = gavpfp("trpViaVariant", props);
     /** 0=In-service, 3=Out of service */
-    this.trpType = gavpfp('trpType', props, 'string', '0');
-    this.trpDirection = gavpfp('trpDirection', props);
-    this._trpPlaceStart = gavpfp('trpPlaceStart', props, 'string', '', { altPropName: '_trpPlaceStart' });
-    this._trpPlaceEnd = gavpfp('trpPlaceEnd', props, 'string', '', { altPropName: '_trpPlaceEnd' });
-    this._trpOriginalStartPlace = gavpfp(
-      'trpOriginalStartPlace', props, 'string', '', { altPropName: '_trpOriginalStartPlace' },
-    );
-    this._trpOriginalEndPlace = gavpfp(
-      'trpOriginalEndPlace', props, 'string', '', { altPropName: '_trpOriginalEndPlace' },
-    );
-    this.trpOriginalBuildSpecPlace = gavpfp('trpOriginalBuildSpecPlace', props);
-    this.trpTimeStart = gavpfp('trpTimeStart', props);
-    this.trpTimeEnd = gavpfp('trpTimeEnd', props);
-    this.trpStartLayUser = gavpfp('trpStartLayUser', props);
-    this.trpEndLayUser = gavpfp('trpEndLayUser', props);
+    this.trpType = gavpfp("trpType", props, "string", "0");
+    this.trpDirection = gavpfp("trpDirection", props);
+    this._trpPlaceStart = gavpfp("trpPlaceStart", props, "string", "", {
+      altPropName: "_trpPlaceStart",
+    });
+    this._trpPlaceEnd = gavpfp("trpPlaceEnd", props, "string", "", {
+      altPropName: "_trpPlaceEnd",
+    });
+    this._trpOriginalStartPlace = gavpfp("trpOriginalStartPlace", props, "string", "", {
+      altPropName: "_trpOriginalStartPlace",
+    });
+    this._trpOriginalEndPlace = gavpfp("trpOriginalEndPlace", props, "string", "", {
+      altPropName: "_trpOriginalEndPlace",
+    });
+    this.trpOriginalBuildSpecPlace = gavpfp("trpOriginalBuildSpecPlace", props);
+    this.trpTimeStart = gavpfp("trpTimeStart", props);
+    this.trpTimeEnd = gavpfp("trpTimeEnd", props);
+    this.trpStartLayUser = gavpfp("trpStartLayUser", props);
+    this.trpEndLayUser = gavpfp("trpEndLayUser", props);
 
     /** en décimètres */
-    this.trpInternalDistance = gavpfp('trpInternalDistance', props);
-    this.trpDistance = gavpfp('trpDistance', props) ?? this.trpDistance;
-    this.trpCreator = gavpfp('trpCreator', props, `string`, `1`);
-    this.trpNote = gavpfp('trpNote', props);
-    this.trpSecondNote = gavpfp('trpSecondNote', props);
-    this._trpIsPublic = gavpfp('trpIsPublic', props);
-    this.trpShftMaxEarlier = gavpfp('trpShftMaxEarlier', props, `string`, `0h00`);
-    this.trpShftMaxLater = gavpfp('trpShftMaxLater', props, `string`, `0h00`);
-    this.trpInternalShftMaxEarlier = gavpfp('trpShftMaxEarlier', props, `string`, `0h00`);
-    this.trpInternalShftMaxLater = gavpfp('trpShftMaxLater', props, `string`, `0h00`);
-    this.trpIsSpecial = gavpfp('trpIsSpecial', props, `string`, `0`);
-    this.trpAvailForTravel = gavpfp('trpAvailForTravel', props, `string`, `1`);
-    this.trpOperatesSun = gavpfp('trpOperatesSun', props, `string`, `1`);
-    this.trpOperatesMon = gavpfp('trpOperatesMon', props, `string`, `0`);
-    this.trpOperatesTue = gavpfp('trpOperatesTue', props, `string`, `0`);
-    this.trpOperatesWed = gavpfp('trpOperatesWed', props, `string`, `0`);
-    this.trpOperatesThu = gavpfp('trpOperatesThu', props, `string`, `0`);
-    this.trpOperatesFri = gavpfp('trpOperatesFri', props, `string`, `0`);
-    this.trpOperatesSat = gavpfp('trpOperatesSat', props, `string`, `0`);
-    this.trpEventForOir = gavpfp('trpEventForOir', props);
-    this.trpEventStatusForOir = gavpfp('trpEventStatusForOir', props);
-    this.trpGarage = gavpfp('trpGarage', props);
-    this.trpPattern = gavpfp('trpPattern', props);
-    this.trpVehicleDisplay = gavpfp('trpVehicleDisplay', props);
-    this.trpBuildAt = gavpfp('trpBuildAt', props, `string`, `0`);
-    this.trpBuildSpecPlace = gavpfp('trpBuildSpecPlace', props);
-    this.trpBuildTime = gavpfp('trpBuildTime', props);
-    this.trpBlockingGarage = gavpfp('trpBlockingGarage', props);
-    this.trpRunTimePattern = gavpfp('trpRunTimePattern', props);
-    this.trpOriginalNumber = gavpfp('trpOriginalNumber', props);
-    this._trpIntNumber = gavpfp('trpIntNumber', props);
-    this.trpAreVehGroupSpecsFromVehcv = gavpfp('trpAreVehGroupSpecsFromVehcv', props, `string`, `1`);
-    this.trpAreVehSpecCstrFromVehcv = gavpfp('trpAreVehSpecCstrFromVehcv', props, `string`, `1`);
-    this.trpRecommendedVehGroup = gavpfp('trpRecommendedVehGroup', props);
-    this.trpConsiderLoadAtStart = gavpfp('trpConsiderLoadAtStart', props, `string`, `0`);
-    this.trpConsiderLoadAtEnd = gavpfp('trpConsiderLoadAtEnd', props, `string`, `0`);
+    this.trpInternalDistance = gavpfp("trpInternalDistance", props);
+    this._trpDistance = gavpfp("trpDistance", props) ?? this.trpDistance;
+    this.trpCreator = gavpfp("trpCreator", props, `string`, `1`);
+    this.trpNote = gavpfp("trpNote", props);
+    this.trpSecondNote = gavpfp("trpSecondNote", props);
+    this._trpIsPublic = gavpfp("trpIsPublic", props);
+    this.trpShftMaxEarlier = gavpfp("trpShftMaxEarlier", props, `string`, `0h00`);
+    this.trpShftMaxLater = gavpfp("trpShftMaxLater", props, `string`, `0h00`);
+    this.trpInternalShftMaxEarlier = gavpfp("trpShftMaxEarlier", props, `string`, `0h00`);
+    this.trpInternalShftMaxLater = gavpfp("trpShftMaxLater", props, `string`, `0h00`);
+    this.trpIsSpecial = gavpfp("trpIsSpecial", props, `string`, `0`);
+    this.trpAvailForTravel = gavpfp("trpAvailForTravel", props, `string`, `1`);
+    this.trpOperatesSun = gavpfp("trpOperatesSun", props, `string`, `1`);
+    this.trpOperatesMon = gavpfp("trpOperatesMon", props, `string`, `0`);
+    this.trpOperatesTue = gavpfp("trpOperatesTue", props, `string`, `0`);
+    this.trpOperatesWed = gavpfp("trpOperatesWed", props, `string`, `0`);
+    this.trpOperatesThu = gavpfp("trpOperatesThu", props, `string`, `0`);
+    this.trpOperatesFri = gavpfp("trpOperatesFri", props, `string`, `0`);
+    this.trpOperatesSat = gavpfp("trpOperatesSat", props, `string`, `0`);
+    this.trpEventForOir = gavpfp("trpEventForOir", props);
+    this.trpEventStatusForOir = gavpfp("trpEventStatusForOir", props);
+    this.trpGarage = gavpfp("trpGarage", props);
+    this.trpPattern = gavpfp("trpPattern", props);
+    this.trpVehicleDisplay = gavpfp("trpVehicleDisplay", props);
+    this.trpBuildAt = gavpfp("trpBuildAt", props, `string`, `0`);
+    this.trpBuildSpecPlace = gavpfp("trpBuildSpecPlace", props);
+    this.trpBuildTime = gavpfp("trpBuildTime", props);
+    this.trpBlockingGarage = gavpfp("trpBlockingGarage", props);
+    this.trpRunTimePattern = gavpfp("trpRunTimePattern", props);
+    this.trpOriginalNumber = gavpfp("trpOriginalNumber", props);
+    this._trpIntNumber = gavpfp("trpIntNumber", props);
+    this.trpAreVehGroupSpecsFromVehcv = gavpfp(
+      "trpAreVehGroupSpecsFromVehcv",
+      props,
+      `string`,
+      `1`
+    );
+    this.trpAreVehSpecCstrFromVehcv = gavpfp(
+      "trpAreVehSpecCstrFromVehcv",
+      props,
+      `string`,
+      `1`
+    );
+    this.trpRecommendedVehGroup = gavpfp("trpRecommendedVehGroup", props);
+    this.trpConsiderLoadAtStart = gavpfp("trpConsiderLoadAtStart", props, `string`, `0`);
+    this.trpConsiderLoadAtEnd = gavpfp("trpConsiderLoadAtEnd", props, `string`, `0`);
     this.BlockNo = undefined; // Échanges par mail avec Mathieu M et Isabel L: il ne sert à rien, et il bug.
 
     // site-spec oscar, à déplacer vers une nouvelle classe "OscarTrip"
-    this.trpNatureMouvementTechnique = gavpfp('trpNatureMouvementTechnique', props);
-    this.trpUniteHoraireCouverture = gavpfp('trpUniteHoraireCouverture', props);
-    this.trpTrainEas = gavpfp('trpTrainEas', props, `string`, `0`);
-    this.trpCommentaireVoySncfDi = gavpfp('trpCommentaireVoySncfDi', props, `string`, ``);
+    this.trpNatureMouvementTechnique = gavpfp("trpNatureMouvementTechnique", props);
+    this.trpUniteHoraireCouverture = gavpfp("trpUniteHoraireCouverture", props);
+    this.trpTrainEas = gavpfp("trpTrainEas", props, `string`, `0`);
+    this.trpCommentaireVoySncfDi = gavpfp("trpCommentaireVoySncfDi", props, `string`, ``);
 
     // site-spec orion, à déplacer vers une nouvelle classe "OrionTrip"
-    this.trpNumDeCourseSubstituee = gavpfp('trpNumDeourseSubstituee', props);
-    this.trpNumOperation = gavpfp('trpNumOperation', props);
-    this.trpACouvrirMr = gavpfp('trpACouvrirMr', props);
-    this.trpCodeTct = gavpfp('trpCodeTct', props);
-    this.trpEnginDeCalcul = gavpfp('trpEnginDeCalcul', props);
-    this.trpMaterielRemorque = gavpfp('trpMaterielRemorque', props);
-    this.trpNumeroSecondaire = gavpfp('trpNumeroSecondaire', props);
-    this.trpProfilDeVitesse = gavpfp('trpProfilDeVitesse', props);
-    this.trpPrecoAo = gavpfp('trpPrecoAo', props);
-    this.trpEstEnSnu = gavpfp('trpEstEnSnu', props);
-    this.trpOpReleve = gavpfp('trpOpReleve', props);
-    this.trpNePasCommanderSillon = gavpfp('trpNePasCommanderSillon', props, `string`, `0`);
-    this.trpBesoinVf = gavpfp('trpBesoinVf', props, `string`, `0`);
+    this.trpNumDeCourseSubstituee = gavpfp("trpNumDeourseSubstituee", props);
+    this.trpNumOperation = gavpfp("trpNumOperation", props);
+    this.trpACouvrirMr = gavpfp("trpACouvrirMr", props);
+    this.trpCodeTct = gavpfp("trpCodeTct", props);
+    this.trpEnginDeCalcul = gavpfp("trpEnginDeCalcul", props);
+    this.trpMaterielRemorque = gavpfp("trpMaterielRemorque", props);
+    this.trpNumeroSecondaire = gavpfp("trpNumeroSecondaire", props);
+    this.trpProfilDeVitesse = gavpfp("trpProfilDeVitesse", props);
+    this.trpPrecoAo = gavpfp("trpPrecoAo", props);
+    this.trpEstEnSnu = gavpfp("trpEstEnSnu", props);
+    this.trpOpReleve = gavpfp("trpOpReleve", props);
+    this.trpNePasCommanderSillon = gavpfp(
+      "trpNePasCommanderSillon",
+      props,
+      `string`,
+      `0`
+    );
+    this.trpBesoinVf = gavpfp("trpBesoinVf", props, `string`, `0`);
 
     /* Children */
     /** @type {TripTpsCollection} */ this.tripTps = gavpfp(
-      'trip_tp', props, TripTpsCollection, new TripTpsCollection(), { altPropName: 'trip_tp', parent: this },
+      "trip_tp",
+      props,
+      TripTpsCollection,
+      new TripTpsCollection(),
+      { altPropName: "trip_tp", parent: this }
     );
     /** @type {TripPointsCollection} */ this.tripPoints = gavpfp(
-      'tripPoints', props, TripPointsCollection, new TripPointsCollection(), { altPropName: 'trip_point', parent: this },
+      "tripPoints",
+      props,
+      TripPointsCollection,
+      new TripPointsCollection(),
+      { altPropName: "trip_point", parent: this }
     );
     /** @type {TripvehgrpspecsCollection} */ this.tripvehgrpspecs = gavpfp(
-      'tripvehgrpspecs', props, TripvehgrpspecsCollection, new TripvehgrpspecsCollection(), { altPropName: 'tripvehgrpspec', parent: this },
+      "tripvehgrpspecs",
+      props,
+      TripvehgrpspecsCollection,
+      new TripvehgrpspecsCollection(),
+      { altPropName: "tripvehgrpspec", parent: this }
     );
-
-    this._links = {};
+  }
+  [propName: string]: any;
+  _rawOigProps: RawOigProps;
+  clone(): Trip {
+    throw new Error("Method not implemented.");
+  }
+  customProps: CustomProps;
+  label?: string | undefined;
+  serializeModel: Function;
+  get self(): this {
+    throw new Error("Method not implemented.");
+  }
+  get entityClassKey(): string {
+    throw new Error("Method not implemented.");
+  }
+  get context(): BimoContext {
+    throw new Error("Method not implemented.");
+  }
+  setCustomProp(name: string, value: any): void {
+    throw new Error("Method not implemented.");
+  }
+  replaceCustomProp(name: string, value: any): void {
+    throw new Error("Method not implemented.");
+  }
+  setOrReplaceCustomProp(name: string, value: any): void {
+    throw new Error("Method not implemented.");
+  }
+  replaceContext(newContext?: {} | undefined): void {
+    throw new Error("Method not implemented.");
+  }
+  addToContext(newContext: object): void {
+    throw new Error("Method not implemented.");
+  }
+  get slo(): string {
+    throw new Error("Method not implemented.");
+  }
+  get mlo(): string {
+    throw new Error("Method not implemented.");
+  }
+  get llo(): string {
+    throw new Error("Method not implemented.");
+  }
+  get businessLoggingOutput(): string {
+    throw new Error("Method not implemented.");
+  }
+  get blo(): string {
+    throw new Error("Method not implemented.");
+  }
+  _nullifyCachedValue(key: string): void {
+    throw new Error("Method not implemented.");
+  }
+  _getAndSetCachedValue<T>(key: string, computeValueFn: () => T): T {
+    throw new Error("Method not implemented.");
+  }
+  _getCachedValue(key: string) {
+    throw new Error("Method not implemented.");
+  }
+  _setCachedValue(key: string, value: any): void {
+    throw new Error("Method not implemented.");
+  }
+  _nullifyAllCachedValues(): void {
+    throw new Error("Method not implemented.");
   }
 
   /** en km */
-  get trpDistance() {
+  get trpDistance(): string | null {
+    if (!this.trpInternalDistance) return null;
     const valueAsNumber = parseFloat(this.trpInternalDistance);
-    return Number.isNaN(valueAsNumber) ? null : (valueAsNumber / INTERNAL_DISTANCE_FACTOR).toFixed(4);
+    return Number.isNaN(valueAsNumber)
+      ? null
+      : (valueAsNumber / INTERNAL_DISTANCE_FACTOR).toFixed(4);
   }
 
   /** en km */
-  set trpDistance(v) {
-    const valueAsNumber = parseFloat(v);
-    this.trpInternalDistance = Number.isNaN(valueAsNumber) ? null : (valueAsNumber * INTERNAL_DISTANCE_FACTOR).toFixed(0);
+  set trpDistance(v: string | number | null) {
+    const valueAsNumberOrNull = typeof v === "string" ? parseFloat(v) : v;
+    this.trpInternalDistance =
+      valueAsNumberOrNull === null || Number.isNaN(valueAsNumberOrNull)
+        ? null
+        : (valueAsNumberOrNull * INTERNAL_DISTANCE_FACTOR).toFixed(0);
   }
 
   get trpPlaceStart() {
@@ -330,10 +433,10 @@ export class Trip extends BlockActivityItem(
   }
 
   get productive() {
-    return (this.trpType === '0') ? '1' : '0';
+    return this.trpType === "0" ? "1" : "0";
   }
 
-  set trpIntNumber(v) {
+  set trpIntNumber(v: string | null) {
     if (this.parent && this.parent.invalidateItemByBusinessId) {
       this.parent.invalidateItemByBusinessId();
     }
@@ -341,7 +444,7 @@ export class Trip extends BlockActivityItem(
   }
 
   get trpIsPublic() {
-    return this._trpIsPublic ?? ((this.trpType === '0') ? '1' : '0');
+    return this._trpIsPublic ?? (this.trpType === "0" ? "1" : "0");
   }
 
   set trpIsPublic(v) {
@@ -352,7 +455,7 @@ export class Trip extends BlockActivityItem(
     return this._bimoId || this._trpIntNumber;
   }
 
-  set bimoId(v) {
+  set bimoId(v: string | null) {
     if (this.parent && this.parent.invalidateItemById) {
       this.parent.invalidateItemById();
     }
@@ -374,7 +477,7 @@ export class Trip extends BlockActivityItem(
     return activityTypeNoByTripType[this.trpType];
   }
 
-  slice(start, end) {
+  slice(start: any, end: any) {
     this.tripPoints.items = this.tripPoints.items.slice(start, end);
   }
 
@@ -388,12 +491,14 @@ export class Trip extends BlockActivityItem(
   }
 
   removeLoadTimeAtStartAndEnd() {
-    this.firstTripPoint.trpptInternalAllowLoadTime = '0';
-    this.firstTripPoint.trpptInternalOriginalAllowLoadTime = '0';
-    this.firstTripPoint.trpptInternalArrivalTime = this.firstTripPoint.trpptInternalDepartureTime;
-    this.lastTripPoint.trpptInternalAllowLoadTime = '0';
-    this.lastTripPoint.trpptInternalOriginalAllowLoadTime = '0';
-    this.lastTripPoint.trpptInternalDepartureTime = this.lastTripPoint.trpptInternalArrivalTime;
+    this.firstTripPoint.trpptInternalAllowLoadTime = "0";
+    this.firstTripPoint.trpptInternalOriginalAllowLoadTime = "0";
+    this.firstTripPoint.trpptInternalArrivalTime =
+      this.firstTripPoint.trpptInternalDepartureTime;
+    this.lastTripPoint.trpptInternalAllowLoadTime = "0";
+    this.lastTripPoint.trpptInternalOriginalAllowLoadTime = "0";
+    this.lastTripPoint.trpptInternalDepartureTime =
+      this.lastTripPoint.trpptInternalArrivalTime;
     this.setStartAndEndAttributesFromPoints();
   }
 
@@ -403,7 +508,7 @@ export class Trip extends BlockActivityItem(
   }
 
   delete() {
-    this.parent.remove(this);
+    this.parent?.remove(this);
     Object.keys(this).forEach((key) => {
       delete this[key];
     });
@@ -417,7 +522,13 @@ export class Trip extends BlockActivityItem(
    */
   copy(newInternalNumber) {
     const copiedTripPoints = this.tripPoints.map((tripPoint) => tripPoint.copy());
-    const props = { ...this, tripPoints: copiedTripPoints, trpIntNumber: newInternalNumber, parent: undefined, bimoId: undefined };
+    const props = {
+      ...this,
+      tripPoints: copiedTripPoints,
+      trpIntNumber: newInternalNumber,
+      parent: undefined,
+      bimoId: undefined,
+    };
     const copiedTrip = new Trip(props);
     copiedTrip._links.copiedFrom = this;
     return copiedTrip;
@@ -434,8 +545,10 @@ export class Trip extends BlockActivityItem(
   }
 
   get mediumLoggingOutput() {
-    return `${this.trpType}-${this.trpNumber}-${this.trpRoute}-${this.trpViaVariant}-${this.trpDirection}`
-      + `(${this.trpPlaceStart}|${this.trpTimeStart} → ${this.trpTimeEnd}|${this.trpPlaceEnd})[${this.tripPoints.length}]`;
+    return (
+      `${this.trpType}-${this.trpNumber}-${this.trpRoute}-${this.trpViaVariant}-${this.trpDirection}` +
+      `(${this.trpPlaceStart}|${this.trpTimeStart} → ${this.trpTimeEnd}|${this.trpPlaceEnd})[${this.tripPoints.length}]`
+    );
   }
 
   get longLoggingOutput() {
@@ -447,28 +560,27 @@ export class Trip extends BlockActivityItem(
     return this.trpNumber.slice(0, 3);
   }
 
-  /** @type {TripPoint} */
   get firstTripPoint() {
     return this.tripPoints.items[0];
   }
 
-  /** @type {TripPoint} */
   get lastTripPoint() {
     return this.tripPoints.items[this.tripPoints.items.length - 1];
   }
 
-  /** @type {TripTp} */
   get firstTripTimingPoint() {
     return this.tripTps.items[0];
   }
 
-  /** @type {TripTp} */
   get lastTripTimingPoint() {
     return this.tripTps.items[this.tripTps.items.length - 1];
   }
 
   get durationInSeconds() {
-    return timeAndDate.getDifferenceInSecondsBetweenTwoHastusExtendedHoursStrings(this.trpTimeStart, this.trpTimeEnd);
+    return timeAndDate.getDifferenceInSecondsBetweenTwoHastusExtendedHoursStrings(
+      this.trpTimeStart,
+      this.trpTimeEnd
+    );
   }
 
   validateTripPointTimes() {
@@ -476,22 +588,35 @@ export class Trip extends BlockActivityItem(
       try {
         if (index > 0) {
           const previousTripPoint = this.tripPoints.items[index - 1];
-          if (previousTripPoint.getTimeAsDuration(`departure`, false) > tripPoint.getTimeAsDuration('arrival', false)) {
-            throw new Error(`Arrivée avant le départ du précédent (${previousTripPoint.shortLoggingOutput})`);
+          if (
+            previousTripPoint.getTimeAsDuration(`departure`, false) >
+            tripPoint.getTimeAsDuration("arrival", false)
+          ) {
+            throw new Error(
+              `Arrivée avant le départ du précédent (${previousTripPoint.shortLoggingOutput})`
+            );
           }
         }
-        if (!tripPoint.tripPointTimesAreValid()) throw new Error(`Départ avant l'arrivée`);
-      }
-      catch (error) {
-        throw new Error(`Problème avec ${tripPoint.shortLoggingOutput}: ${error.message}`);
+        if (!tripPoint.tripPointTimesAreValid())
+          throw new Error(`Départ avant l'arrivée`);
+      } catch (error) {
+        throw new Error(
+          `Problème avec ${tripPoint.shortLoggingOutput}: ${error.message}`
+        );
       }
     });
   }
 
   getTimeDiffInSecondsBetweenTripPointIndexes(indexOfFirst, indexOfSecond) {
-    const firstAsDuration = this.tripPoints.items[indexOfFirst].getTimeAsDuration(`departure`, true);
-    const secondAsDuration = this.tripPoints.items[indexOfSecond].getTimeAsDuration(`arrival`, true);
-    return secondAsDuration.minus(firstAsDuration).as('second');
+    const firstAsDuration = this.tripPoints.items[indexOfFirst].getTimeAsDuration(
+      `departure`,
+      true
+    );
+    const secondAsDuration = this.tripPoints.items[indexOfSecond].getTimeAsDuration(
+      `arrival`,
+      true
+    );
+    return secondAsDuration.minus(firstAsDuration).as("second");
   }
 
   changeCurrentStartPlace(newStartPlace) {
@@ -504,7 +629,8 @@ export class Trip extends BlockActivityItem(
   changeOriginalStartPlace(newStartPlace) {
     const placeIdentifier = getPlaceIdFromPlaceOrString(newStartPlace);
     this._trpOriginalStartPlace = placeIdentifier;
-    if (this.firstTripPoint) this.firstTripPoint.trpptInternalOriginalPlaceId = placeIdentifier;
+    if (this.firstTripPoint)
+      this.firstTripPoint.trpptInternalOriginalPlaceId = placeIdentifier;
   }
 
   changeStartPlace(newStartPlace) {
@@ -522,7 +648,8 @@ export class Trip extends BlockActivityItem(
   changeOriginalEndPlace(newEndPlace) {
     const placeIdentifier = getPlaceIdFromPlaceOrString(newEndPlace);
     this._trpOriginalEndPlace = placeIdentifier;
-    if (this.lastTripPoint) this.lastTripPoint.trpptInternalOriginalPlaceId = placeIdentifier;
+    if (this.lastTripPoint)
+      this.lastTripPoint.trpptInternalOriginalPlaceId = placeIdentifier;
   }
 
   changeEndPlace(newEndPlace) {
@@ -539,13 +666,12 @@ export class Trip extends BlockActivityItem(
   }
 }
 
-Trip.hastusKeywords = ['trip'];
-Trip.hastusObject = 'trip';
-
-
+// @ts-ignore
+Trip.hastusKeywords = ["trip"];
+// @ts-ignore
+Trip.hastusObject = "trip";
+// @ts-ignore
 Trip.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default Trip;
 
@@ -554,6 +680,6 @@ function getPlaceIdFromPlaceOrString(placeOrString) {
 }
 
 const activityTypeNoByTripType = {
-  0: '6',
-  3: '2',
+  0: "6",
+  3: "2",
 };

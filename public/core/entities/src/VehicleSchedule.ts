@@ -1,6 +1,7 @@
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import getIteratorForValuesAtPath from "@bimo/core-utils-get-iterator-for-values-at-path";
+import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
 import { TripsCollection, TripsCollectionProps } from "./TripsCollection";
 import {
@@ -114,7 +115,10 @@ export interface VehicleScheduleProps extends ExtendedItemProps {
   _blockActivityLinksAreLoaded?: string;
 }
 
-export class VehicleSchedule extends VehicleScheduleOrRouteVersion {
+export class VehicleSchedule extends VehicleScheduleOrRouteVersion<
+  VehicleSchedule,
+  VehicleScheduleProps
+> {
   vscName?: string;
   vscScenario?: string;
   vscSchedType?: string;
@@ -155,17 +159,17 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion {
   vscBlockingValue?: string;
   vscConsiderOtherAgencies?: string;
   vscWorkingPortionVersionId?: string;
-  vscincloirs?: string;
-  networkEvents?: string;
-  vehicleUnits?: string;
-  blocks?: string;
-  vehicleStandbys?: string;
-  maintenances?: string;
-  trips?: string;
-  tripShifts?: string;
-  consistChanges?: string;
-  overnightLinks?: string;
-  _blockActivityLinksAreLoaded?: string;
+  vscincloirs: VscincloirsCollection;
+  networkEvents: NetworkEventsCollection;
+  vehicleUnits: VehicleUnitsCollection;
+  blocks: BlocksCollection;
+  vehicleStandbys: VehicleStandbysCollection;
+  maintenances: MaintenancesCollection;
+  trips: TripsCollection;
+  tripShifts: TripShiftsCollection;
+  consistChanges: ConsistChangesCollection;
+  overnightLinks: OvernightLinksCollection;
+  _blockActivityLinksAreLoaded?: boolean = false;
   constructor(props: VehicleScheduleProps) {
     super(props, "trip");
     this.vscName = gavpfp("vscName", props, `string`, `TEMP`);
@@ -283,9 +287,6 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion {
       { altPropName: "overnight_link", parent: this }
     );
     /* eslint-enable max-len */
-
-    /* Links */
-    this._blockActivityLinksAreLoaded = false;
   }
 
   get shortLoggingOutput() {
@@ -315,8 +316,7 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion {
     this.vscincloirs.remove(this.findVscInclOirForVsc(vsc));
   }
 
-  /** @type {VehicleSchedule[]} */
-  get blockingVscs() {
+  get blockingVscs(): VehicleSchedule[] {
     return this._getAndSetCachedValue("blockingVscs", () => []);
   }
 
@@ -368,22 +368,18 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion {
     );
   }
 
-  /** @type {import ('./VehicleTasksCollection')} */
   get vehicleTasks() {
     return this.computedVehicleTaskObjects.vehicleTasks;
   }
 
-  /** @type {Map<import ('./Block'), Set<import ('./VehicleTask')>>} */
   get setOfVtasByBlock() {
     return this.computedVehicleTaskObjects.setOfVtasByBlock;
   }
 
-  /** @type {Map<import ('./BlockActivity'), Set<import ('./VehicleTask')>>} */
   get setOfVtasByBlockActivity() {
     return this.computedVehicleTaskObjects.setOfVtasByBlockActivity;
   }
 
-  /** @type {Map<import ('./BlockActivity'), Set<import ('./BlockSection')>>} */
   get setOfBlockSectionsByBlockActivity() {
     return this.computedVehicleTaskObjects.setOfBlockSectionsByBlockActivity;
   }
@@ -392,13 +388,11 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion {
     return this.computedActivityEntityItemObjects.activityEntityItemByBlockActivity;
   }
 
-  /** @type {Map<Object, import ('./BlockActivity')>} */
   get setOfblockActivitiesByBlockActivityEntityItem() {
     return this.computedActivityEntityItemObjects
       .setOfblockActivitiesByBlockActivityEntityItem;
   }
 
-  /** @returns {Set<string>} */
   get setOfAllPlaceIdentifiers() {
     const setOfAllPlaceIdentifiers = super.setOfAllPlaceIdentifiers;
     this.consistChanges.forEach((cchg) =>
@@ -409,19 +403,10 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion {
     return setOfAllPlaceIdentifiers;
   }
 
-  /** @returns {string[]} */
   get arrayOfAllPlaceIdentifiers() {
     return Array.from(this.setOfAllPlaceIdentifiers);
   }
 
-  /**
-   * @typedef {Object} BlocksAndActsAndSections
-   * @property {import('./BlocksCollection')} blocks
-   * @property {import('./BlockActivitiesCollection')} blockActivities
-   * @property {Object[]} blockSections
-   */
-
-  /** @type {Map<import ('./VehicleTask'), BlocksAndActsAndSections>} */
   get blocksAndActsAndSectionsByVta() {
     return this.computedVehicleTaskObjects.blocksAndActsAndSectionsByVta;
   }
@@ -435,7 +420,7 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion {
     ];
     const unusedItemsByEntityClassKey = blockActivityCollections.reduce(
       (prevMap, collection) => {
-        prevMap.set(collection.itemName, new Set(Array.from(collection.items)));
+        prevMap.set(collection.itemName, new Set(Array.from(collection.items as any[])));
         return prevMap;
       },
       new Map()

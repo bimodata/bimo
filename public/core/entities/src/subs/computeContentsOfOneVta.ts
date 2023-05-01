@@ -1,7 +1,7 @@
-const getAndSetIfRequired = require('@bimo/core-utils-get-and-set-if-required');
-const BlocksCollection = require('../BlocksCollection');
-const BlockActivitiesCollection = require('../BlockActivitiesCollection');
-const BlockSectionsCollection = require('../BlockSectionsCollection');
+import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
+import BlocksCollection from "../BlocksCollection";
+import BlockActivitiesCollection from "../BlockActivitiesCollection";
+import BlockSectionsCollection from "../BlockSectionsCollection";
 
 /**
  * @param {Object} params
@@ -10,21 +10,31 @@ const BlockSectionsCollection = require('../BlockSectionsCollection');
  * @param {Map} params.setOfVtasByBlockActivity
  * @param {Map} params.setOfBlockSectionsByBlockActivity
  */
-function computeContentsOfOneVta({ vehicleTask, setOfVtasByBlock, setOfVtasByBlockActivity, setOfBlockSectionsByBlockActivity }) {
+function computeContentsOfOneVta({
+  vehicleTask,
+  setOfVtasByBlock,
+  setOfVtasByBlockActivity,
+  setOfBlockSectionsByBlockActivity,
+}) {
   const { vehicleSchedule, vehicleUnit } = vehicleTask;
   try {
     const blocksCollOfThisVehu = new BlocksCollection({
-      associationType: 'aggregation',
-      items: vehicleTask.blocksThatStartWithThisVehu ? vehicleTask.blocksThatStartWithThisVehu.items.slice() : [],
+      associationType: "aggregation",
+      items: vehicleTask.blocksThatStartWithThisVehu
+        ? vehicleTask.blocksThatStartWithThisVehu.items.slice()
+        : [],
     });
-    const blockActivitiesCollOfThisVehu = new BlockActivitiesCollection({ associationType: 'aggregation' });
+    const blockActivitiesCollOfThisVehu = new BlockActivitiesCollection({
+      associationType: "aggregation",
+    });
     const blockSectionsOfThisVehu = new BlockSectionsCollection({
-      associationType: 'composition',
+      associationType: "composition",
       parent: vehicleTask,
     });
 
     blocksCollOfThisVehu.sort(
-      (blkA, blkB) => blkA.startTimeAsDuration.as('second') - blkB.startTimeAsDuration.as('second'),
+      (blkA, blkB) =>
+        blkA.startTimeAsDuration.as("second") - blkB.startTimeAsDuration.as("second")
     );
     recursivelyAddBlocksAndBlockActivities({
       remainingBlocksToTreat: blocksCollOfThisVehu.items.slice(),
@@ -37,18 +47,21 @@ function computeContentsOfOneVta({ vehicleTask, setOfVtasByBlock, setOfVtasByBlo
       setOfVtasByBlockActivity,
       setOfBlockSectionsByBlockActivity,
     });
-    return { blocks: blocksCollOfThisVehu, blockActivities: blockActivitiesCollOfThisVehu, blockSections: blockSectionsOfThisVehu };
-  }
-  catch (error) {
+    return {
+      blocks: blocksCollOfThisVehu,
+      blockActivities: blockActivitiesCollOfThisVehu,
+      blockSections: blockSectionsOfThisVehu,
+    };
+  } catch (error) {
     const err = new Error(
-      `Erreur au chargement du vta du vehicleUnit ${vehicleUnit.slo} de ${vehicleSchedule.slo}: ${error.message}`,
+      `Erreur au chargement du vta du vehicleUnit ${vehicleUnit.slo} de ${vehicleSchedule.slo}: ${error.message}`
     );
     err.stack = `Re-thrown: ${err.stack}\nOriginal:${error.stack}`;
     throw err;
   }
 }
 
-module.exports = computeContentsOfOneVta;
+export default computeContentsOfOneVta;
 
 /**
  * @param {Object} args
@@ -76,7 +89,11 @@ function recursivelyAddBlocksAndBlockActivities({
   const blockToTreat = remainingBlocksToTreat.shift();
   if (!blockToTreat) return;
 
-  const setOfVtasOfBlockToTreat = getAndSetIfRequired(setOfVtasByBlock, blockToTreat, new Set());
+  const setOfVtasOfBlockToTreat = getAndSetIfRequired(
+    setOfVtasByBlock,
+    blockToTreat,
+    new Set()
+  );
   setOfVtasOfBlockToTreat.add(vehicleTask);
 
   const blockSection = blockSectionsOfThisVehu.createNewItem({ block: blockToTreat });
@@ -84,16 +101,24 @@ function recursivelyAddBlocksAndBlockActivities({
   let indexOfFirstBlkActToTreatInNextBlock = 0;
 
   /** We use .some to stop iterating early in case we find a reason to */
-  blockToTreat.blockActivities.some(((blockActivity, index) => {
+  blockToTreat.blockActivities.some((blockActivity, index) => {
     // Some block activities of this block may be irrelevant for this vta, we skip them
     if (index < indexOfFirstBlkActToTreatInThisBlock) return false;
 
     blockActivitiesCollOfThisVehu.add(blockActivity);
-    const setOfVtasOfBlkAct = getAndSetIfRequired(setOfVtasByBlockActivity, blockActivity, new Set());
+    const setOfVtasOfBlkAct = getAndSetIfRequired(
+      setOfVtasByBlockActivity,
+      blockActivity,
+      new Set()
+    );
     setOfVtasOfBlkAct.add(vehicleTask);
 
     blockSection.blockActivities.add(blockActivity);
-    const setOfBlockSectionsOfBlockActivity = getAndSetIfRequired(setOfBlockSectionsByBlockActivity, blockActivity, new Set());
+    const setOfBlockSectionsOfBlockActivity = getAndSetIfRequired(
+      setOfBlockSectionsByBlockActivity,
+      blockActivity,
+      new Set()
+    );
     setOfBlockSectionsOfBlockActivity.add(blockSection);
 
     /**
@@ -104,11 +129,11 @@ function recursivelyAddBlocksAndBlockActivities({
      * - si 14: est-ce que cette vta se poursuit avec le block long actuel, ou avec le block court ?
      * - si 15: on est sur la première activité du block, rien de spécial à faire
      */
-    if (!['12', '14'].includes(blockActivity.blkactVehicleActivityTypeNo)) {
+    if (!["12", "14"].includes(blockActivity.blkactVehicleActivityTypeNo)) {
       return false;
     }
 
-    if (blockActivity.blkactVehicleActivityTypeNo === '14') {
+    if (blockActivity.blkactVehicleActivityTypeNo === "14") {
       /** Un dételage génère des blockActivities dans deux blocks
        * - Le block courant contient un "dételer (14)" puis peut se poursuivre
        * - Un autre block commence par un "D'un dételage (15)" correspondant
@@ -116,13 +141,14 @@ function recursivelyAddBlocksAndBlockActivities({
        * block court. Le block court fait assurément déjà partie des blocksCollOfThisVehu grace au vehu_at_start
        * Si on le trouve, c'est que notre vta s'arrête ici et recommencera sur cet autre block. Sinon, on poursuit
        */
-      return (blocksCollOfThisVehu.some((blk) => (
-        blk.blockActivities.first.blkactVehicleActivityTypeNo === '15'
-        && blk.blockActivities.first.blkactCchgNo === blockActivity.blkactCchgNo
-      )));
+      return blocksCollOfThisVehu.some(
+        (blk) =>
+          blk.blockActivities.first.blkactVehicleActivityTypeNo === "15" &&
+          blk.blockActivities.first.blkactCchgNo === blockActivity.blkactCchgNo
+      );
     }
 
-    if (blockActivity.blkactVehicleActivityTypeNo === '12') {
+    if (blockActivity.blkactVehicleActivityTypeNo === "12") {
       /** Un dételage génère des blockActivities dans deux blocks
        * - Le block courant contient le "à atteler (12)" puis se termine
        * - L'autre contient un "atteler" et se poursuit
@@ -131,13 +157,17 @@ function recursivelyAddBlocksAndBlockActivities({
        * partir de quel index on ajoute ses activités */
       let foundIndex;
       const newBlockToTreat = vehicleTask.vehicleSchedule.blocks.find((block) => {
-        foundIndex = block.blockActivities
-          .findIndex((blkAct) => blkAct.blkactVehicleActivityTypeNo === '13' && blkAct.blkactCchgNo === blockActivity.blkactCchgNo);
+        foundIndex = block.blockActivities.findIndex(
+          (blkAct) =>
+            blkAct.blkactVehicleActivityTypeNo === "13" &&
+            blkAct.blkactCchgNo === blockActivity.blkactCchgNo
+        );
         return foundIndex !== -1;
       });
 
       if (newBlockToTreat) {
-        if (!blocksCollOfThisVehu.getById(newBlockToTreat)) blocksCollOfThisVehu.add(newBlockToTreat);
+        if (!blocksCollOfThisVehu.getById(newBlockToTreat))
+          blocksCollOfThisVehu.add(newBlockToTreat);
         // Mettre comme prochain à traiter
         remainingBlocksToTreat.unshift(newBlockToTreat);
         // Indiquer où commencer à traiter le prochain block
@@ -147,7 +177,7 @@ function recursivelyAddBlocksAndBlockActivities({
     }
 
     throw new Error(`It's theoretically impossible to get here`);
-  }));
+  });
 
   recursivelyAddBlocksAndBlockActivities({
     blockActivitiesCollOfThisVehu,

@@ -1,39 +1,41 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BookingCalendarDate, BookingCalendarDateProps } from "./BookingCalendarDate";
 
 const childClasses = [BookingCalendarDate];
 
+export interface BookingCalendarDatesCollectionProps
+  extends ExtendedCollectionProps<BookingCalendarDate, BookingCalendarDateProps> {}
 
-export interface BookingCalendarDatesCollectionProps extends ExtendedCollectionProps<BookingCalendarDate, BookingCalendarDateProps> {
-}
-
-export class BookingCalendarDatesCollection extends Collection<BookingCalendarDate, BookingCalendarDateProps> {
+export class BookingCalendarDatesCollection extends Collection<
+  BookingCalendarDate,
+  BookingCalendarDateProps
+> {
   constructor(props: BookingCalendarDatesCollectionProps) {
     super({
-      itemName: 'BookingCalendarDate',
+      itemName: "BookingCalendarDate",
       ItemConstructor: BookingCalendarDate,
-      associationType: 'aggregation',
-      businessIdPropName: 'bcaldDate',
+      associationType: "aggregation",
+      businessIdPropName: "bcaldDate",
       ...props,
     });
   }
 
-  getByIsoDate(isoDate, { refreshCache = false }) {
-    const bcaldsByIsoDate = this.groupByProp('dateAsIsoDateString', { refreshCache });
+  getByIsoDate(isoDate: string, { refreshCache = false } = {}) {
+    const bcaldsByIsoDate = this.groupByProp("dateAsIsoDateString", { refreshCache });
     const bcalds = bcaldsByIsoDate.get(isoDate);
     if (!bcalds) {
       return null;
     }
     if (bcalds.length > 1) {
-      throw new Error('Date répétée');
+      throw new Error("Date répétée");
     }
     return bcalds[0];
   }
 
   getByDate(date) {
-    return (this.getByBusinessId(date));
+    return this.getByBusinessId(date);
   }
 
   sortByDate() {
@@ -51,7 +53,5 @@ export class BookingCalendarDatesCollection extends Collection<BookingCalendarDa
   }
 }
 BookingCalendarDatesCollection.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default BookingCalendarDatesCollection;

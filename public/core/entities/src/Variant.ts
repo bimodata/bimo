@@ -1,12 +1,17 @@
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
 import { TripOrVariant, TripOrVariantProps } from "./TripOrVariant";
-import { VariantPointsCollection, VariantPointsCollectionProps } from "./VariantPointsCollection";
+import {
+  VariantPointsCollection,
+  VariantPointsCollectionProps,
+} from "./VariantPointsCollection";
 import { VariantPoint, VariantPointProps } from "./VariantPoint";
+import { Route } from "./Route";
+import { Place } from "./Place";
 
 const childClasses = [VariantPointsCollection];
-
 
 export interface VariantProps extends ExtendedItemProps {
   bimoId?: string;
@@ -21,60 +26,60 @@ export interface VariantProps extends ExtendedItemProps {
   varAllowDeviationFromTrackNetwork?: string;
   varNatureMouvementTechnique?: string;
   varIndiceCompo?: string;
-  variantPoints?: string;
-  _links?: string;
+  variantPoints: VariantPointsCollection;
 }
 
 export class Variant extends TripOrVariant {
   bimoId?: string;
-  varIdentifier?: string;
+  varIdentifier: string;
   varDescription?: string;
   varDirection?: string;
   varReversible?: string;
   varUsualTermin?: string;
   varDestinationNote?: string;
   varProductive?: string;
-  varPriority?: string;
+  varPriority: string;
   varAllowDeviationFromTrackNetwork?: string;
   varNatureMouvementTechnique?: string;
   varIndiceCompo?: string;
-  variantPoints?: string;
-  _links?: string;
+  variantPoints: VariantPointsCollection;
+  _links: { [linkType: string]: any } = {};
   constructor(props: VariantProps) {
-    super(props, 'variant');
-    this.bimoId = gavpfp('bimoId', props);
-    this.varIdentifier = gavpfp('varIdentifier', props);
-    this.varDescription = gavpfp('varDescription', props);
-    this.varDirection = gavpfp('varDirection', props);
-    this.varReversible = gavpfp('varReversible', props);
-    this.varUsualTermin = gavpfp('varUsualTermin', props);
-    this.varDestinationNote = gavpfp('varDestinationNote', props);
-    this.varProductive = gavpfp('varProductive', props);
-    this.varPriority = gavpfp('varPriority', props);
-    this.varAllowDeviationFromTrackNetwork = gavpfp('varAllowDeviationFromTrackNetwork', props, 'string', '0');
-
-    // Site spec à bouger vers Lauritz un jour
-    this.varNatureMouvementTechnique = gavpfp('varNatureMouvementTechnique', props);
-    this.varIndiceCompo = gavpfp('varIndiceCompo', props);
-
-    /* Children */
-    /** */ this.variantPoints = gavpfp(
-      'variantPoints', props, VariantPointsCollection, new VariantPointsCollection(), { altPropName: 'variant_point' },
+    super(props, "variant");
+    this.bimoId = gavpfp("bimoId", props);
+    this.varIdentifier = gavpfp("varIdentifier", props);
+    this.varDescription = gavpfp("varDescription", props);
+    this.varDirection = gavpfp("varDirection", props);
+    this.varReversible = gavpfp("varReversible", props);
+    this.varUsualTermin = gavpfp("varUsualTermin", props);
+    this.varDestinationNote = gavpfp("varDestinationNote", props);
+    this.varProductive = gavpfp("varProductive", props);
+    this.varPriority = gavpfp("varPriority", props);
+    this.varAllowDeviationFromTrackNetwork = gavpfp(
+      "varAllowDeviationFromTrackNetwork",
+      props,
+      "string",
+      "0"
     );
-    this.variantPoints.parent = this;
 
-    this._links = {};
+    this.variantPoints = gavpfp(
+      "variantPoints",
+      props,
+      VariantPointsCollection,
+      new VariantPointsCollection(),
+      { altPropName: "variant_point", parent: this }
+    );
   }
 
-  addLink(type, value) {
+  addLink(type: string, value: any) {
     this._links[type] = value;
   }
 
-  getLink(type) {
+  getLink(type: string) {
     return this._links[type];
   }
 
-  removeLink(type) {
+  removeLink(type: string) {
     delete this._links[type];
   }
 
@@ -83,36 +88,32 @@ export class Variant extends TripOrVariant {
     this.route.variants.remove(this);
   }
 
-  /**
-   * Creates a new instance of a variant. All variantPoints are new instances too.
-   * @param {string=} newVarIdentifier
-   * @returns {Variant}
-   */
+  /** Creates a new instance of a variant. All variantPoints are new instances too. */
   copy(newVarIdentifier = this.varIdentifier) {
     const copiedVariant = new Variant(this);
     copiedVariant.varIdentifier = newVarIdentifier;
     const copiedVariantPoints = this.variantPoints.map((varPt) => varPt.copy());
-    copiedVariant.variantPoints = new VariantPointsCollection({ items: copiedVariantPoints });
-    copiedVariant.addLink('copiedFrom', this);
+    copiedVariant.variantPoints = new VariantPointsCollection({
+      items: copiedVariantPoints,
+    });
+    copiedVariant.addLink("copiedFrom", this);
     return copiedVariant;
   }
 
-  /** @type {import ('./Route')} */
   get route() {
-    return this.parent?.parent;
+    return this.parent && (this.parent.parent as Route);
   }
 
   get routeId() {
     return this.route?.rteIdentifier;
   }
 
-  /** @type {string} key of the form '${route.rteIdentifier}|${varIdentifier}' or null if either is null    */
+  /** key of the form '${route.rteIdentifier}|${varIdentifier}' or null if either is null    */
   get routeAndVariantKey() {
     if (!this.route || !this.route.rteIdentifier || !this.varIdentifier) return null;
     return `${this.route.rteIdentifier}|${this.varIdentifier}`;
   }
 
-  /** @type {import ('./RouteVersion')} */
   get routeVersion() {
     return this.route?.routeVersion;
   }
@@ -122,7 +123,9 @@ export class Variant extends TripOrVariant {
   }
 
   get mediumLoggingOutput() {
-    return `${this.shortLoggingOutput} [${this.variantPoints.length}] route: ${this.route && this.route.shortLoggingOutput}`;
+    return `${this.shortLoggingOutput} [${this.variantPoints.length}] route: ${
+      this.route && this.route.shortLoggingOutput
+    }`;
   }
 
   get longLoggingOutput() {
@@ -134,42 +137,50 @@ export class Variant extends TripOrVariant {
   }
 
   get varIdRouteIdAndVersionId() {
-    return `${this.varIdentifier} / ${this.routeId} / ${this.routeVersion.rtevIdentifier}`;
+    return `${this.varIdentifier} / ${this.routeId} / ${
+      this.routeVersion?.rtevIdentifier ?? "no routeVersion"
+    }`;
   }
 
   get isProductive() {
-    return this.varProductive === '1';
+    return this.varProductive === "1";
   }
 
-  changeStartPlace(newStartPlace) {
-    const placeIdentifier = typeof newStartPlace === `string` ? newStartPlace : newStartPlace.plcIdentifier;
+  changeStartPlace(newStartPlace: Place | string) {
+    const placeIdentifier =
+      typeof newStartPlace === `string` ? newStartPlace : newStartPlace.plcIdentifier;
     this.firstPoint.varptPlace = placeIdentifier;
   }
 
-  changeEndPlace(newEndPlace) {
-    const placeIdentifier = typeof newEndPlace === `string` ? newEndPlace : newEndPlace.plcIdentifier;
+  changeEndPlace(newEndPlace: Place | string) {
+    const placeIdentifier =
+      typeof newEndPlace === `string` ? newEndPlace : newEndPlace.plcIdentifier;
     this.lastPoint.varptPlace = placeIdentifier;
   }
 
   /* eslint-disable no-param-reassign */
-  usesOneOfThesePlaces(listOfPlaces) {
+  usesOneOfThesePlaces(listOfPlaces: string | Set<string> | string[]) {
     if (!listOfPlaces) {
       return undefined;
     }
-    if (listOfPlaces.constructor.name !== 'Set') {
+    if (listOfPlaces.constructor.name !== "Set") {
       if (!Array.isArray(listOfPlaces)) {
-        listOfPlaces = [listOfPlaces];
+        listOfPlaces = [listOfPlaces as string];
       }
       listOfPlaces = new Set(listOfPlaces);
     }
-    return this.variantPoints.some((variantPoint) => listOfPlaces.has(variantPoint.varptPlace));
+    return this.variantPoints.some((variantPoint) =>
+      (listOfPlaces as Set<string>).has(variantPoint.varptPlace)
+    );
   }
 
-  updatePlacesAndReturnListOfChanges(newPlaceIdByOldPlaceId) {
-    if (!newPlaceIdByOldPlaceId || typeof newPlaceIdByOldPlaceId !== 'object') {
+  updatePlacesAndReturnListOfChanges(newPlaceIdByOldPlaceId: {
+    [oldPlaceId: string]: string;
+  }) {
+    if (!newPlaceIdByOldPlaceId || typeof newPlaceIdByOldPlaceId !== "object") {
       return undefined;
     }
-    const listOfChanges = [];
+    const listOfChanges: { old: string; new: string }[] = [];
     this.variantPoints.forEach((variantPoint) => {
       const newPlaceId = newPlaceIdByOldPlaceId[variantPoint.varptPlace];
       if (newPlaceId) {
@@ -182,12 +193,9 @@ export class Variant extends TripOrVariant {
   /* eslint-enable no-param-reassign */
 }
 
-Variant.hastusKeywords = ['rvariant'];
-Variant.hastusObject = 'variant';
-
+Variant.hastusKeywords = ["rvariant"];
+Variant.hastusObject = "variant";
 
 Variant.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default Variant;

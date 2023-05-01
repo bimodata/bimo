@@ -1,5 +1,5 @@
-import gavpfp from '@bimo/core-utils-get-and-validate-prop-from-props';
-import { getAllChildClasses } from '@bimo/core-utils-serialization';
+import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 const childClasses = [];
@@ -15,17 +15,15 @@ export class TrainPathVariantDate extends Item<TrainPathVariantDate> {
   constructor(props: TrainPathVariantDateProps) {
     super(props);
 
-    this.trnpdEffectiveDate = gavpfp('trnpdEffectiveDate', props, `string`);
-    this.trnpdStatusOir = gavpfp('trnpdStatusOir', props, `string`);
+    this.trnpdEffectiveDate = gavpfp("trnpdEffectiveDate", props, `string`);
+    this.trnpdStatusOir = gavpfp("trnpdStatusOir", props, `string`);
   }
 
   get shortLoggingOutput() {
-    return this.trnpdEffectiveDate;
+    return this.trnpdEffectiveDate ?? super.slo;
   }
 }
 
 TrainPathVariantDate.allChildClasses = getAllChildClasses(childClasses);
-
-
 
 export default TrainPathVariantDate;

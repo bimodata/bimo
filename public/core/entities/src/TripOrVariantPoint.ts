@@ -1,53 +1,56 @@
 /* eslint-disable class-methods-use-this */
 
-import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import {
+  Item,
+  ExtendedItem,
+  ExtendedItemProps,
+  Collection,
+} from "@bimo/core-utils-collection";
 
-import { get, set } from 'lodash';
+import { get, set } from "lodash";
+
+import { Place } from "./Place";
 
 const pathByTripOrVariantPropNameByTripOrVariantType = {
   trip: {
-    isTimingPoint: 'trpptIsTimingPoint',
-    placeId: 'placeId',
-    originalPlaceId: 'trpptInternalOriginalPlaceId',
-    variantId: 'trpptVariantId',
-    noStopping: 'trpptNoStopping',
-    allowLoadTime: 'trpptInternalAllowLoadTime',
-    tpDistance: 'trpptTpDistance',
-    distance: 'trpptDistance',
-    arrivalTime: 'trpptInternalArrivalTime',
-    departureTime: 'trpptInternalDepartureTime',
+    isTimingPoint: "trpptIsTimingPoint",
+    placeId: "placeId",
+    originalPlaceId: "trpptInternalOriginalPlaceId",
+    variantId: "trpptVariantId",
+    noStopping: "trpptNoStopping",
+    allowLoadTime: "trpptInternalAllowLoadTime",
+    tpDistance: "trpptTpDistance",
+    distance: "trpptDistance",
+    arrivalTime: "trpptInternalArrivalTime",
+    departureTime: "trpptInternalDepartureTime",
 
     // Todo: move this to a SNCF specific TripOrVariant
-    codeCs: 'trpptCodeCs',
+    codeCs: "trpptCodeCs",
   },
   variant: {
-    isTimingPoint: 'varptIsTimingPoint',
-    placeId: 'varptPlace',
-    originalPlaceId: 'originalPlaceId',
-    variantId: 'variantId',
-    noStopping: 'varptNoStopping',
-    allowLoadTime: 'varptAllowLoadTime',
-    tpDistance: 'varptTpDistance',
-    distance: 'varptDistance',
+    isTimingPoint: "varptIsTimingPoint",
+    placeId: "varptPlace",
+    originalPlaceId: "originalPlaceId",
+    variantId: "variantId",
+    noStopping: "varptNoStopping",
+    allowLoadTime: "varptAllowLoadTime",
+    tpDistance: "varptTpDistance",
+    distance: "varptDistance",
     arrivalTime: undefined,
     departureTime: undefined,
 
     // Todo: move this to a SNCF specific TripOrVariant
-    codeCs: 'varptCodeCs',
+    codeCs: "varptCodeCs",
   },
 };
 
-export interface TripOrVariantPointProps extends ExtendedItemProps {
-  _abstract?: string;
-}
-
-export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
-  /**
-   * @param {Object} props
-   * @param {'variant'|'trip'} tripOrVariantType
-   */
-  _abstract?: string;
-  constructor(props, tripOrVariantType) {
+export class TripOrVariantPoint<
+  PointType extends ExtendedItem<PointType>,
+  PointProps extends ExtendedItemProps
+> extends Item<PointType> {
+  _abstract?: any;
+  parent: Collection<PointType, PointProps>;
+  constructor(props: PointProps, tripOrVariantType: "variant" | "trip") {
     super(props);
     this._abstract = {
       /* Not sure about the "abstract" name ... the idea is just to easily tell serialieModel to ignore these keys */
@@ -56,8 +59,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     };
   }
 
-  /** @type {string} */
-  get isTimingPoint() {
+  get isTimingPoint(): string {
     return get(this, this._abstract.pathByPropName.isTimingPoint);
   }
 
@@ -65,8 +67,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.isTimingPoint, v);
   }
 
-  /** @type {string} */
-  get placeId() {
+  get placeId(): string {
     return get(this, this._abstract.pathByPropName.placeId);
   }
 
@@ -74,16 +75,20 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.placeId, v);
   }
 
-  /** @type {import ('./Place')} */
-  get place() {
-    if (!this.context?.placesCollection) throw new Error(`context.placesCollection must be set to get place on tripOrVariantPoint`);
+  get place(): Place {
+    if (!this.context?.placesCollection)
+      throw new Error(
+        `context.placesCollection must be set to get place on tripOrVariantPoint`
+      );
     const place = this.context.placesCollection.getByBusinessId(this.placeId);
-    if (!place) throw new Error(`${this.placeId} not found in ${this.context.placesCollection.slo}`);
+    if (!place)
+      throw new Error(
+        `${this.placeId} not found in ${this.context.placesCollection.slo}`
+      );
     return place;
   }
 
-  /** @type {string} */
-  get originalPlaceId() {
+  get originalPlaceId(): string | undefined {
     return get(this, this._abstract.pathByPropName.originalPlaceId);
   }
 
@@ -91,8 +96,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.originalPlaceId, v);
   }
 
-  /** @type {string} */
-  get variantId() {
+  get variantId(): string {
     return get(this, this._abstract.pathByPropName.variantId);
   }
 
@@ -100,8 +104,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.variantId, v);
   }
 
-  /** @type {string} */
-  get noStopping() {
+  get noStopping(): string {
     return get(this, this._abstract.pathByPropName.noStopping);
   }
 
@@ -109,8 +112,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.noStopping, v);
   }
 
-  /** @type {string} */
-  get allowLoadTime() {
+  get allowLoadTime(): string {
     return get(this, this._abstract.pathByPropName.allowLoadTime);
   }
 
@@ -118,8 +120,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.allowLoadTime, v);
   }
 
-  /** @type {string} */
-  get tpDistance() {
+  get tpDistance(): string {
     return get(this, this._abstract.pathByPropName.tpDistance);
   }
 
@@ -127,8 +128,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.tpDistance, v);
   }
 
-  /** @type {string} */
-  get distance() {
+  get distance(): string {
     return get(this, this._abstract.pathByPropName.distance);
   }
 
@@ -136,8 +136,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.distance, v);
   }
 
-  /** @type {string} */
-  get arrivalTime() {
+  get arrivalTime(): string {
     return get(this, this._abstract.pathByPropName.arrivalTime);
   }
 
@@ -147,8 +146,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.arrivalTime, v);
   }
 
-  /** @type {string} */
-  get departureTime() {
+  get departureTime(): string {
     return get(this, this._abstract.pathByPropName.departureTime);
   }
 
@@ -159,8 +157,7 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
   }
 
   // Todo: move this to a SNCF specific TripOrVariant
-  /** @type {string} */
-  get codeCs() {
+  get codeCs(): string {
     return get(this, this._abstract.pathByPropName.codeCs);
   }
 
@@ -169,22 +166,21 @@ export class TripOrVariantPoint extends Item<TripOrVariantPoint> {
     set(this, this._abstract.pathByPropName.codeCs, v);
   }
 
-  /** @type {number} */
   get rank() {
+    //@ts-ignore
     return this.parent.items.indexOf(this) + 1;
   }
 
-  /** @type {boolean} */
   get isFirst() {
+    //@ts-ignore
     return this.parent.first === this;
   }
 
-  /** @type {boolean} */
   get isLast() {
+    //@ts-ignore
     return this.parent.last === this;
   }
 
-  /** @type {boolean} */
   get isFirstOrLast() {
     return this.isFirst || this.isLast;
   }

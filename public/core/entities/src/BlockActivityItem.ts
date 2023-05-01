@@ -1,10 +1,34 @@
-const timeAndDate = require('@bimo/core-utils-time-and-date');
+import timeAndDate from "@bimo/core-utils-time-and-date";
+import { Item, ExtendedItem, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const BlockActivityItemMixin = (Item, {
-  blkActIdPropName, itemIdPropName,
-  startTimePropName, endTimePropName,
-  placePropName, startPlacePropName = placePropName, endPlacePropName = placePropName,
-}) => class extends Item {
+import { Trip } from "./Trip";
+import { Maintenance } from "./Maintenance";
+import { VehicleStandby } from "./VehicleStandby";
+import { ConsistChange } from "./ConsistChange";
+
+export type BlockActivityItem = Trip | Maintenance | VehicleStandby | ConsistChange;
+
+type Constructor = new (...args: any[]) => any;
+type GConstructor<T> = new (...args: any[]) => T;
+type Itemable<ItemType extends Constructor> = GConstructor<
+  ExtendedItem<InstanceType<ItemType>>
+>;
+
+// todo: make sure that switching this from arrow function to real function does not fuckup the
+// use of this in the class
+export function BlockActivityItemMixin<ItemType extends Itemable<ItemType>>(
+  Item: ItemType,
+  {
+    blkActIdPropName,
+    itemIdPropName,
+    startTimePropName,
+    endTimePropName,
+    placePropName,
+    startPlacePropName = placePropName,
+    endPlacePropName = placePropName,
+  }: any
+) {
+  return class extends Item {
     static get blkActIdPropName() {
       return blkActIdPropName;
     }
@@ -19,21 +43,31 @@ const BlockActivityItemMixin = (Item, {
     }
 
     get _setOfBlockActivities() {
-      if (!this.vehicleSchedule) throw new Error(`An item must have a vehicleSchedule when its blockActivities are accessed(${this.slo})`);
-      let setOfBlockActivities = this.vehicleSchedule.setOfblockActivitiesByBlockActivityEntityItem.get(this);
+      if (!this.vehicleSchedule)
+        throw new Error(
+          `An item must have a vehicleSchedule when its blockActivities are accessed(${this.slo})`
+        );
+      let setOfBlockActivities =
+        this.vehicleSchedule.setOfblockActivitiesByBlockActivityEntityItem.get(this);
       if (!setOfBlockActivities) {
-        const foundInBlockingVsc = this.vehicleSchedule.blockingVscs.some((blockingVsc) => {
-          setOfBlockActivities = blockingVsc.setOfblockActivitiesByBlockActivityEntityItem.get(this);
-          return setOfBlockActivities;
-        });
+        const foundInBlockingVsc = this.vehicleSchedule.blockingVscs.some(
+          (blockingVsc) => {
+            setOfBlockActivities =
+              blockingVsc.setOfblockActivitiesByBlockActivityEntityItem.get(this);
+            return setOfBlockActivities;
+          }
+        );
         if (!foundInBlockingVsc) {
           /** This is pretty weird but corresponds to a case where we don't really know what is the blocking vsc
-             * of a block activity, and we are not interested in figuring it out here. We still want the item to
-             * have a "local" memory of its block activities, and we are actually confident that if the
-             * vscs caches were reset, everything would fall back in order, but to avoid recomputing these
-             * caches too often, we use this "local cache"
-            */
-          setOfBlockActivities = this._getAndSetCachedValue('fallbackSetOfBlockActivities', () => new Set());
+           * of a block activity, and we are not interested in figuring it out here. We still want the item to
+           * have a "local" memory of its block activities, and we are actually confident that if the
+           * vscs caches were reset, everything would fall back in order, but to avoid recomputing these
+           * caches too often, we use this "local cache"
+           */
+          setOfBlockActivities = this._getAndSetCachedValue(
+            "fallbackSetOfBlockActivities",
+            () => new Set()
+          );
         }
       }
       return setOfBlockActivities;
@@ -54,9 +88,9 @@ const BlockActivityItemMixin = (Item, {
     }
 
     /**
-       * TODO: make this smarter
-       * @type {import('./BlockActivity')}
-       */
+     * TODO: make this smarter
+     * @type {import('./BlockActivity')}
+     */
     get blockActivity() {
       const blockActs = this.blockActivities;
       return (blockActs && blockActs[0]) ?? null;
@@ -85,9 +119,8 @@ const BlockActivityItemMixin = (Item, {
     }
 
     get startTimeAsDuration() {
-      return this._getAndSetCachedValue(
-        'startTimeAsDuration',
-        () => timeAndDate.hastusExtendedHoursToDuration(this.startTime),
+      return this._getAndSetCachedValue("startTimeAsDuration", () =>
+        timeAndDate.hastusExtendedHoursToDuration(this.startTime)
       );
     }
 
@@ -96,9 +129,8 @@ const BlockActivityItemMixin = (Item, {
     }
 
     get endTimeAsDuration() {
-      return this._getAndSetCachedValue(
-        'endTimeAsDuration',
-        () => timeAndDate.hastusExtendedHoursToDuration(this.endTime),
+      return this._getAndSetCachedValue("endTimeAsDuration", () =>
+        timeAndDate.hastusExtendedHoursToDuration(this.endTime)
       );
     }
 
@@ -121,14 +153,15 @@ const BlockActivityItemMixin = (Item, {
     shiftTimes(shiftInSeconds) {
       // TODO: override this on Trip to also handle tripPoints
       this[startTimePropName] = timeAndDate.durationToHastusExtendedHoursString(
-        this.startTimeAsDuration.plus({ second: shiftInSeconds }),
+        this.startTimeAsDuration.plus({ second: shiftInSeconds })
       );
       this[endTimePropName] = timeAndDate.durationToHastusExtendedHoursString(
-        this.endTimeAsDuration.plus({ second: shiftInSeconds }),
+        this.endTimeAsDuration.plus({ second: shiftInSeconds })
       );
-      this._nullifyCachedValue('startTimeAsDuration');
-      this._nullifyCachedValue('endTimeAsDuration');
+      this._nullifyCachedValue("startTimeAsDuration");
+      this._nullifyCachedValue("endTimeAsDuration");
     }
   };
+}
 
-module.exports = BlockActivityItemMixin;
+export default BlockActivityItemMixin;
