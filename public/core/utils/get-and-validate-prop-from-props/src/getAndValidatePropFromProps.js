@@ -7,7 +7,8 @@ const { camelOrPascalToSnake } = require('@bimo/core-utils-string');
  * @param {string|Object} Type
  * @param {any} defaultValue
  * @param {object} options
- * @param {string} options.altPropName
+ * @param {string=} options.altPropName
+ * @param {object=} options.parent
  */
 function getAndValidatePropFromProps(propName, props, Type = `string`, defaultValue = undefined, options = {}) {
   let rawProp = props[propName] ?? (options.altPropName && props[options.altPropName]);
