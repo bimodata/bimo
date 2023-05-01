@@ -39,7 +39,7 @@ export class Entity {
     return this.constructor.name;
   }
 
-  get context(): Object {
+  get context(): BimoContext {
     return { ...(this.parent?.context ?? {}), ...this._context };
   }
 
