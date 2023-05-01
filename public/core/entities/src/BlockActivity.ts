@@ -5,16 +5,17 @@ import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { Block } from "./Block";
 import { Trip } from "./Trip";
 import { StringByLanguageCode } from "@bimo/core-global-types";
+import BlockActivitiesCollection from "./BlockActivitiesCollection";
+import ConsistChange from "./ConsistChange";
 
 export interface BlockActivityProps extends ExtendedItemProps {
-  blkactVehicleActivityTypeNo?: string;
+  blkactVehicleActivityTypeNo: string;
   blkactTripNo?: string;
   blkactHasFixedLink?: string;
   blkactCchgNo?: string;
   blkactVehicleStandbyNo?: string;
   blkactMaintenanceNo?: string;
   bimoId?: string;
-  activityEntityClassKey?: string;
   activityNameByLanguageCode?: StringByLanguageCode;
 }
 
@@ -26,8 +27,9 @@ export class BlockActivity extends Item<BlockActivity> {
   blkactVehicleStandbyNo?: string;
   blkactMaintenanceNo?: string;
   bimoId?: string;
-  activityEntityClassKey?: string;
+  activityEntityClassKey: string;
   activityNameByLanguageCode: StringByLanguageCode;
+  declare parent?: BlockActivitiesCollection;
   constructor(props: BlockActivityProps) {
     super(props);
     this.blkactVehicleActivityTypeNo = gavpfp("blkactVehicleActivityTypeNo", props);
@@ -83,7 +85,7 @@ export class BlockActivity extends Item<BlockActivity> {
       }
     }
     if (this.activityEntityClassKey === "ConsistChange") {
-      this.activityEntityItem.setNewTrip(newTrip);
+      (this.activityEntityItem as ConsistChange).setNewTrip(newTrip);
     }
   }
 
@@ -104,27 +106,27 @@ export class BlockActivity extends Item<BlockActivity> {
   }
 
   get startTime() {
-    return this.activityEntityItem.startTime;
+    return this.activityEntityItem?.startTime;
   }
 
   get startTimeAsDuration() {
-    return this.activityEntityItem.startTimeAsDuration;
+    return this.activityEntityItem?.startTimeAsDuration;
   }
 
   get endTime() {
-    return this.activityEntityItem.endTime;
+    return this.activityEntityItem?.endTime;
   }
 
   get endTimeAsDuration() {
-    return this.activityEntityItem.endTimeAsDuration;
+    return this.activityEntityItem?.endTimeAsDuration;
   }
 
   get startPlaceId() {
-    return this.activityEntityItem.startPlaceId;
+    return this.activityEntityItem?.startPlaceId;
   }
 
   get endPlaceId() {
-    return this.activityEntityItem.endPlaceId;
+    return this.activityEntityItem?.endPlaceId;
   }
 
   get shortLoggingOutput() {
@@ -140,7 +142,7 @@ export class BlockActivity extends Item<BlockActivity> {
   }
 
   get mediumLoggingOutput() {
-    return `${this.slo} (block: ${this.block.slo})`;
+    return `${this.slo} (block: ${this.block?.slo})`;
   }
 
   get longLoggingOutput() {
@@ -148,15 +150,15 @@ export class BlockActivity extends Item<BlockActivity> {
   }
 
   improveEndPlacePrecision(morePreciseEndPlace) {
-    this.activityEntityItem.improveEndPlacePrecision(morePreciseEndPlace);
+    this.activityEntityItem?.improveEndPlacePrecision(morePreciseEndPlace);
   }
 
   improveStartPlacePrecision(morePreciseStartPlace) {
-    this.activityEntityItem.improveStartPlacePrecision(morePreciseStartPlace);
+    this.activityEntityItem?.improveStartPlacePrecision(morePreciseStartPlace);
   }
 
   shiftTimes(shiftInSeconds) {
-    this.activityEntityItem.shiftTimes(shiftInSeconds);
+    this.activityEntityItem?.shiftTimes(shiftInSeconds);
   }
 
   get _indexInSortedParent() {

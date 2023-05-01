@@ -1,6 +1,6 @@
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
-import { ExtendedItemProps } from "@bimo/core-utils-collection";
+import { ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 
 import { TripOrVariant, TripOrVariantProps } from "./TripOrVariant";
 import {
@@ -29,7 +29,7 @@ export interface VariantProps extends ExtendedItemProps {
   variantPoints: VariantPointsCollection;
 }
 
-export class Variant extends TripOrVariant {
+export class Variant extends TripOrVariant<Variant, VariantProps> {
   bimoId?: string;
   varIdentifier: string;
   varDescription?: string;

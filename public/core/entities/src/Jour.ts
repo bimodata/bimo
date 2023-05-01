@@ -6,7 +6,7 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
     FR0: "Lundi",
     FR1: "lundi",
     FR2: "lu",
-    EN1: "monday",
+    EN1: "Monday",
     EN2: "mon",
     vscSchedType: "13",
   },
@@ -15,7 +15,7 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
     FR0: "Mardi",
     FR1: "mardi",
     FR2: "ma",
-    EN1: "tuesday",
+    EN1: "Tuesday",
     EN2: "tue",
     vscSchedType: "14",
   },
@@ -24,7 +24,7 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
     FR0: "Mercredi",
     FR1: "mercredi",
     FR2: "me",
-    EN1: "wednesday",
+    EN1: "Wednesday",
     EN2: "wed",
     vscSchedType: "11",
   },
@@ -33,7 +33,7 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
     FR0: "Jeudi",
     FR1: "jeudi",
     FR2: "je",
-    EN1: "thursday",
+    EN1: "Thursday",
     EN2: "thu",
     vscSchedType: "3",
   },
@@ -42,7 +42,7 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
     FR0: "Vendredi",
     FR1: "vendredi",
     FR2: "ve",
-    EN1: "friday",
+    EN1: "Friday",
     EN2: "fri",
     vscSchedType: "4",
   },
@@ -51,7 +51,7 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
     FR0: "Samedi",
     FR1: "samedi",
     FR2: "sa",
-    EN1: "saturday",
+    EN1: "Saturday",
     EN2: "sat",
     vscSchedType: "5",
   },
@@ -60,15 +60,50 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID = {
     FR0: "Dimanche",
     FR1: "dimanche",
     FR2: "di",
-    EN1: "sunday",
+    EN1: "Sunday",
     EN2: "sun",
     vscSchedType: "6",
   },
 };
 
-export interface JourProps extends ExtendedItemProps {}
+export type JourId = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type JourFR0 =
+  | "Lundi"
+  | "Mardi"
+  | "Mercredi"
+  | "Jeudi"
+  | "Vendredi"
+  | "Samedi"
+  | "Dimanche";
+export type JourFR1 =
+  | "lundi"
+  | "mardi"
+  | "mercredi"
+  | "jeudi"
+  | "vendredi"
+  | "samedi"
+  | "dimanche";
+export type JourFR2 = "lu" | "ma" | "me" | "je" | "ve" | "sa" | "di";
+export type JourEN1 =
+  | "Monday"
+  | "Tuesday"
+  | "Wednesday"
+  | "Thursday"
+  | "Friday"
+  | "Saturday"
+  | "Sunday";
+export type JourEN2 = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
 
 export class Jour {
+  static jourByJourId: { [jourId in JourId]?: Jour };
+  static jourIdByJourValue: { [jourValue: string | number]: JourId };
+  NUM1: JourId;
+  FR0: JourFR0;
+  FR1: JourFR1;
+  FR2: JourFR2;
+  EN1: JourEN1;
+  EN2: JourEN2;
+  vscSchedType: string;
   constructor(jourValue) {
     if (jourValue instanceof Jour) {
       return jourValue;
@@ -88,7 +123,7 @@ export class Jour {
       );
     }
     if (Jour.jourByJourId[jourId]) {
-      return Jour.jourByJourId[jourId];
+      return Jour.jourByJourId[jourId] as Jour;
     }
 
     const allJourValueByKeyForThisId = ALL_JOUR_VALUE_BY_KEY_BY_ID[jourId];

@@ -18,7 +18,6 @@ const childClasses = [NetworkNodesCollection, NetworkEdgesCollection];
 export interface NetworkSectionProps extends ExtendedItemProps {
   bimoId: string;
   businessId?: string;
-  label?: string;
   nodes: NetworkNodesCollection;
   edges: NetworkEdgesCollection;
 }
@@ -26,11 +25,10 @@ export interface NetworkSectionProps extends ExtendedItemProps {
 export class NetworkSection extends Item<NetworkSection> {
   bimoId: string;
   businessId?: string;
-  label?: string;
   nodes: NetworkNodesCollection;
   edges: NetworkEdgesCollection;
   constructor(props: NetworkSectionProps) {
-    super(props, "NetworkSection");
+    super(props);
     this.bimoId = gavpfp("bimoId", props, "string");
     this.businessId = gavpfp("businessId", props, "string");
     this.label = gavpfp("label", props, "string");

@@ -7,20 +7,31 @@ const childClasses = [TripOrVariantSection];
 
 export interface TripOrVariantSectionsCollectionProps<
   PointType extends ExtendedItem<PointType>,
-  PointProps extends ExtendedItemProps
+  PointProps extends ExtendedItemProps,
+  TripOrVariantType extends ExtendedItem<TripOrVariantType>,
+  TripOrVariantProps extends ExtendedItemProps
 > extends ExtendedCollectionProps<
-    TripOrVariantSection<PointType, PointProps>,
+    TripOrVariantSection<PointType, PointProps, TripOrVariantType, TripOrVariantProps>,
     TripOrVariantSectionProps<PointType, PointProps>
   > {}
 
 export class TripOrVariantSectionsCollection<
   PointType extends ExtendedItem<PointType>,
-  PointProps extends ExtendedItemProps
+  PointProps extends ExtendedItemProps,
+  TripOrVariantType extends ExtendedItem<TripOrVariantType>,
+  TripOrVariantProps extends ExtendedItemProps
 > extends Collection<
-  TripOrVariantSection<PointType, PointProps>,
+  TripOrVariantSection<PointType, PointProps, TripOrVariantType, TripOrVariantProps>,
   TripOrVariantSectionProps<PointType, PointProps>
 > {
-  constructor(props: TripOrVariantSectionsCollectionProps<PointType, PointProps> = {}) {
+  constructor(
+    props: TripOrVariantSectionsCollectionProps<
+      PointType,
+      PointProps,
+      TripOrVariantType,
+      TripOrVariantProps
+    > = {}
+  ) {
     super({
       itemName: "TripOrVariantSection",
       ItemConstructor: TripOrVariantSection,

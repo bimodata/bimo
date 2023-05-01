@@ -3,6 +3,11 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import timeAndDate from "@bimo/core-utils-time-and-date";
 
 import {
+  hastusExtendedHoursToDuration,
+  durationToHastusExtendedHoursString,
+} from "@bimo/core-utils-time-and-date";
+
+import {
   ExtendedItemProps,
   ExtendedItem,
   RawOigProps,
@@ -17,10 +22,16 @@ import {
   TripvehgrpspecsCollectionProps,
 } from "./TripvehgrpspecsCollection";
 import { TripOrVariant, TripOrVariantProps } from "./TripOrVariant";
-import { BlockActivityItemMixin } from "./BlockActivityItem";
+import {
+  BlockActivityItem,
+  computeSetOfBlockActivitiesHelper,
+  getSingleBlockActivityHelper,
+} from "./BlockActivityItem";
+import { BlockActivity } from "./BlockActivity";
 import { BimoContext } from "@bimo/core-global-types";
 import Entity, { CustomProps } from "@bimo/core-utils-entity";
 import TripsCollection from "./TripsCollection";
+import VehicleSchedule from "./VehicleSchedule";
 
 const childClasses = [TripTpsCollection, TripPointsCollection, TripvehgrpspecsCollection];
 
@@ -104,15 +115,8 @@ export interface TripProps extends ExtendedItemProps {
 }
 
 export class Trip
-  extends BlockActivityItemMixin<typeof Trip>(TripOrVariant, {
-    blkActIdPropName: "blkactTripNo",
-    itemIdPropName: "trpIntNumber",
-    startTimePropName: "trpTimeStart",
-    endTimePropName: "trpTimeEnd",
-    startPlacePropName: "trpPlaceStart",
-    endPlacePropName: "trpPlaceEnd",
-  })
-  implements ExtendedItem<Trip>
+  extends TripOrVariant<Trip, TripProps>
+  implements BlockActivityItem<Trip>
 {
   _bimoId: string | null;
   trpNumber: string = "";
@@ -121,13 +125,13 @@ export class Trip
   trpViaVariant?: string;
   trpType: string = "0";
   trpDirection?: string;
-  _trpPlaceStart?: string;
-  _trpPlaceEnd?: string;
+  _trpPlaceStart: string;
+  _trpPlaceEnd: string;
   _trpOriginalStartPlace?: string;
   _trpOriginalEndPlace?: string;
   trpOriginalBuildSpecPlace?: string;
-  trpTimeStart?: string;
-  trpTimeEnd?: string;
+  trpTimeStart: string;
+  trpTimeEnd: string;
   trpStartLayUser?: string;
   trpEndLayUser?: string;
   trpInternalDistance: string | null;
@@ -187,7 +191,11 @@ export class Trip
   tripTps: TripTpsCollection;
   tripPoints: TripPointsCollection;
   tripvehgrpspecs: TripvehgrpspecsCollection;
-  parent?: TripsCollection;
+  declare parent?: TripsCollection;
+  _status: string;
+  _links: { [linkType: string]: any } = {};
+  static itemIdPropName = "trpIntNumber";
+  static blkActIdPropName = "blkactTripNo";
   constructor(props, tripOrVariantType = "trip") {
     // @ts-ignore
     super(props, tripOrVariantType);
@@ -314,68 +322,6 @@ export class Trip
       new TripvehgrpspecsCollection(),
       { altPropName: "tripvehgrpspec", parent: this }
     );
-  }
-  [propName: string]: any;
-  _rawOigProps: RawOigProps;
-  clone(): Trip {
-    throw new Error("Method not implemented.");
-  }
-  customProps: CustomProps;
-  label?: string | undefined;
-  serializeModel: Function;
-  get self(): this {
-    throw new Error("Method not implemented.");
-  }
-  get entityClassKey(): string {
-    throw new Error("Method not implemented.");
-  }
-  get context(): BimoContext {
-    throw new Error("Method not implemented.");
-  }
-  setCustomProp(name: string, value: any): void {
-    throw new Error("Method not implemented.");
-  }
-  replaceCustomProp(name: string, value: any): void {
-    throw new Error("Method not implemented.");
-  }
-  setOrReplaceCustomProp(name: string, value: any): void {
-    throw new Error("Method not implemented.");
-  }
-  replaceContext(newContext?: {} | undefined): void {
-    throw new Error("Method not implemented.");
-  }
-  addToContext(newContext: object): void {
-    throw new Error("Method not implemented.");
-  }
-  get slo(): string {
-    throw new Error("Method not implemented.");
-  }
-  get mlo(): string {
-    throw new Error("Method not implemented.");
-  }
-  get llo(): string {
-    throw new Error("Method not implemented.");
-  }
-  get businessLoggingOutput(): string {
-    throw new Error("Method not implemented.");
-  }
-  get blo(): string {
-    throw new Error("Method not implemented.");
-  }
-  _nullifyCachedValue(key: string): void {
-    throw new Error("Method not implemented.");
-  }
-  _getAndSetCachedValue<T>(key: string, computeValueFn: () => T): T {
-    throw new Error("Method not implemented.");
-  }
-  _getCachedValue(key: string) {
-    throw new Error("Method not implemented.");
-  }
-  _setCachedValue(key: string, value: any): void {
-    throw new Error("Method not implemented.");
-  }
-  _nullifyAllCachedValues(): void {
-    throw new Error("Method not implemented.");
   }
 
   /** en km */
@@ -664,13 +610,83 @@ export class Trip
   improveEndPlacePrecision(morePreciseEndPlace) {
     this.changeEndPlace(morePreciseEndPlace);
   }
+
+  private get setOfBlockActivities() {
+    return computeSetOfBlockActivitiesHelper<Trip>(this);
+  }
+
+  get blockActivities(): BlockActivity[] {
+    const setOfBlockActivities = this.setOfBlockActivities;
+    return setOfBlockActivities && Array.from(setOfBlockActivities);
+  }
+
+  addBlockActivity(newBlockActivity: BlockActivity) {
+    this.setOfBlockActivities.add(newBlockActivity);
+  }
+
+  removeBlockActivity(blockActivity: BlockActivity) {
+    this.setOfBlockActivities.delete(blockActivity);
+  }
+
+  get blockActivity(): BlockActivity {
+    return getSingleBlockActivityHelper<Trip>(this);
+  }
+
+  get block() {
+    return this.blockActivity?.block ?? null;
+  }
+
+  get vehicleTasks() {
+    return this.blockActivity?.vehicleTasks ?? null;
+  }
+
+  get vehicleSchedule() {
+    return (this.parent?.parent as VehicleSchedule) ?? null;
+  }
+
+  get startTime() {
+    return this.trpTimeStart;
+  }
+
+  get startTimeAsDuration() {
+    return this._getAndSetCachedValue("startTimeAsDuration", () =>
+      hastusExtendedHoursToDuration(this.startTime)
+    );
+  }
+
+  get endTime() {
+    return this.trpTimeEnd;
+  }
+
+  get endTimeAsDuration() {
+    return this._getAndSetCachedValue("endTimeAsDuration", () =>
+      hastusExtendedHoursToDuration(this.endTime)
+    );
+  }
+
+  get startPlaceId() {
+    return this.trpPlaceStart;
+  }
+
+  get endPlaceId() {
+    return this.trpPlaceEnd;
+  }
+
+  shiftTimes(shiftInSeconds: number) {
+    // TODO: also shift trip points and timing points
+    this.trpTimeStart = durationToHastusExtendedHoursString(
+      this.startTimeAsDuration.plus({ second: shiftInSeconds })
+    );
+    this.trpTimeEnd = durationToHastusExtendedHoursString(
+      this.endTimeAsDuration.plus({ second: shiftInSeconds })
+    );
+    this._nullifyCachedValue("startTimeAsDuration");
+    this._nullifyCachedValue("endTimeAsDuration");
+  }
 }
 
-// @ts-ignore
 Trip.hastusKeywords = ["trip"];
-// @ts-ignore
 Trip.hastusObject = "trip";
-// @ts-ignore
 Trip.allChildClasses = getAllChildClasses(childClasses);
 
 export default Trip;

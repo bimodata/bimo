@@ -17,7 +17,6 @@ features de type Point ou LineString. Chacune de ces features a des propriétés
 lien vers des Edges ou des Nodes, ou des sections du réseau. */
 export interface NetworkMapProps extends ExtendedItemProps {
   bimoId: string;
-  label?: string;
   featureCollection?: FeatureCollection;
   nodesFeatureCollection?: FeatureCollection;
   sectionsFeatureCollection?: FeatureCollection;
@@ -25,7 +24,6 @@ export interface NetworkMapProps extends ExtendedItemProps {
 
 export class NetworkMap extends Item<NetworkMap> {
   bimoId: string;
-  label?: string;
   featureCollection: FeatureCollection;
   nodesFeatureCollection?: FeatureCollection;
   sectionsFeatureCollection?: FeatureCollection;

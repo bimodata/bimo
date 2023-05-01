@@ -24,10 +24,7 @@ export class TripsCollection extends Collection<Trip, TripProps> {
    * @returns {Map<String, Trip[]>} a map of trips arrays, indexed by trip number
    */
   get tripsByTripNumber() {
-    if (!this._tripsByTripNumber) {
-      this._tripsByTripNumber = this.groupByProp(`trpNumber`);
-    }
-    return this._tripsByTripNumber;
+    return this.groupByProp(`trpNumber`);
   }
 
   get mediumLoggingOutput() {

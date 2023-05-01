@@ -62,9 +62,9 @@ export class Place extends Item<Place> {
   plcLastApprovedDistInter2?: string;
   plcRim?: string;
   relatedPlaces: Set<Place>;
-  parent: PlacesCollection;
-  constructor(props: PlaceProps, entityClassKey = "Place") {
-    super(props, entityClassKey);
+  declare parent?: PlacesCollection;
+  constructor(props: PlaceProps) {
+    super(props);
     this.bimoId = gavpfp("bimoId", props);
     this.plcIdentifier = gavpfp("plcIdentifier", props);
     this.plcDescription = gavpfp("plcDescription", props);
@@ -122,17 +122,17 @@ export class Place extends Item<Place> {
   /** @returns the place's reference place, or the place itself if it's a reference place, or null */
   get referencePlace(): Place | null {
     if (this.plcReferencePlace)
-      return this.parent.getByBusinessId(this.plcReferencePlace) ?? null;
+      return this.parent?.getByBusinessId(this.plcReferencePlace) ?? null;
     return this.isRefPlace ? this : null;
   }
 
   get isRefPlace(): boolean {
-    return this.parent.placesByReferencePlace.has(this.plcIdentifier);
+    return this.parent?.placesByReferencePlace.has(this.plcIdentifier) ?? false;
   }
 
   get childrenPlaces() {
     return this.isRefPlace
-      ? this.parent.placesByReferencePlace.get(this.plcIdentifier) ?? []
+      ? this.parent?.placesByReferencePlace.get(this.plcIdentifier) ?? []
       : [];
   }
 

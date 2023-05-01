@@ -28,8 +28,12 @@ export interface TripOrVariantSectionProps<
 
 export class TripOrVariantSection<
   PointType extends ExtendedItem<PointType>,
-  PointProps extends ExtendedItemProps
-> extends Item<TripOrVariantSection<PointType, PointProps>> {
+  PointProps extends ExtendedItemProps,
+  TripOrVariantType extends ExtendedItem<TripOrVariantType>,
+  TripOrVariantProps extends ExtendedItemProps
+> extends Item<
+  TripOrVariantSection<PointType, PointProps, TripOrVariantType, TripOrVariantProps>
+> {
   points: TripOrVariantPoint<PointType, PointProps>[];
   constructor(props: TripOrVariantSectionProps<PointType, PointProps>) {
     super(props);
@@ -60,7 +64,10 @@ export class TripOrVariantSection<
   }
 
   get tripOrVariant() {
-    return this.parent && (this.parent.parent as TripOrVariant);
+    return (
+      this.parent &&
+      (this.parent.parent as TripOrVariant<TripOrVariantType, TripOrVariantProps>)
+    );
   }
 
   get shortLoggingOutput() {

@@ -18,7 +18,6 @@ export class VehicleTask extends Item<VehicleTask> {
   vehicleUnit: VehicleUnit;
   blocksThatStartWithThisVehu: BlocksCollection;
   id?: string;
-  label?: string;
   constructor(props: VehicleTaskProps) {
     super(props);
     this.vehicleUnit = props.vehicleUnit;
@@ -38,32 +37,26 @@ export class VehicleTask extends Item<VehicleTask> {
 
   get longLoggingOutput() {
     return `${this.shortLoggingOutput}\n${this.blockActivities
-      .map((ba) => ba.shortLoggingOutput)
+      ?.map((ba) => ba.shortLoggingOutput)
       .join("\n")}`;
   }
 
   get businessLoggingOutput() {
     return `${this.label} (${this.vehicleUnit.vehuVehicleType})\n${this.blockActivities
-      .map((ba) => ba.shortLoggingOutput)
+      ?.map((ba) => ba.shortLoggingOutput)
       .join("\n")}`;
   }
 
-  /** @type {import ('./BlocksCollection')} */
   get blocks() {
-    return (
-      this.vehicleSchedule &&
-      this.vehicleSchedule.blocksAndActsAndSectionsByVta.get(this).blocks
-    );
+    return this.vehicleSchedule?.blocksAndActsAndSectionsByVta.get(this)?.blocks;
   }
 
-  /** @type {import ('./BlockActivitiesCollection')} */
   get blockActivities() {
-    return this.vehicleSchedule.blocksAndActsAndSectionsByVta.get(this).blockActivities;
+    return this.vehicleSchedule?.blocksAndActsAndSectionsByVta.get(this)?.blockActivities;
   }
 
-  /** @type {import ('./BlockSectionsCollection')} */
   get blockSections() {
-    return this.vehicleSchedule.blocksAndActsAndSectionsByVta.get(this).blockSections;
+    return this.vehicleSchedule?.blocksAndActsAndSectionsByVta.get(this)?.blockSections;
   }
 }
 

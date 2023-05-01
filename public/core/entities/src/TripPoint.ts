@@ -214,7 +214,7 @@ export class TripPoint extends TripOrVariantPoint<TripPoint, TripPointProps> {
   }
 
   get trpptInternalArrivalTime() {
-    return this._trpptInternalArrivalTime || this.trpptArrivalTimeUnrounded;
+    return (this._trpptInternalArrivalTime || this.trpptArrivalTimeUnrounded) as string;
   }
 
   set trpptInternalArrivalTime(v) {
@@ -222,7 +222,8 @@ export class TripPoint extends TripOrVariantPoint<TripPoint, TripPointProps> {
   }
 
   get trpptInternalDepartureTime() {
-    return this._trpptInternalDepartureTime || this.trpptDepartureTimeUnrounded;
+    return (this._trpptInternalDepartureTime ||
+      this.trpptDepartureTimeUnrounded) as string;
   }
 
   set trpptInternalDepartureTime(v) {

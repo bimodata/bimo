@@ -78,7 +78,9 @@ export class VehicleSchedulesCollection extends Collection<
     const vehicle_schedule = this.map((vehicleSchedule) => {
       //@ts-ignore
       vehicleSchedule.trip = vehicleSchedule.trips.map((trip) => {
+        //@ts-ignore
         trip.trip_point = trip.tripPoints && trip.tripPoints.items;
+        //@ts-ignore
         trip.trip_tp = trip.tripTps && trip.tripTps.items;
         return trip;
       });

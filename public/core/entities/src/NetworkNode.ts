@@ -1,6 +1,7 @@
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { NetworkNodesCollection } from "./NetworkNodesCollection";
 
 const childClasses = [];
 
@@ -17,8 +18,9 @@ export class NetworkNode extends Item<NetworkNode> {
   businessId: string;
   coordinatesBySystemName: { [systemName: string]: any } = {};
   private _sectionIds: Set<string> = new Set();
+  declare parent?: NetworkNodesCollection;
   constructor(props: NetworkNodeProps) {
-    super(props, "NetworkNode");
+    super(props);
     this.bimoId = gavpfp("bimoId", props, "string");
     this.businessId = gavpfp("businessId", props, "string");
     this.coordinatesBySystemName = gavpfp("coordinatesBySystemName", props, Object, {});
@@ -34,7 +36,7 @@ export class NetworkNode extends Item<NetworkNode> {
   /** @type {import ('./NetworkSection')[]} */
   get sections() {
     return [...this._sectionIds.values()].map((sectionId) =>
-      this.network.sections.getById(sectionId)
+      this.network?.sections.getById(sectionId)
     );
   }
 
@@ -56,7 +58,7 @@ export class NetworkNode extends Item<NetworkNode> {
   get adjacentLinks() {
     if (!this.network) return [];
     return (this.network.adjacentLinksByNode.get(this) || []).filter(
-      ({ edge }) => !this.network.deletedEdges.has(edge)
+      ({ edge }) => !this.network?.deletedEdges.has(edge)
     );
   }
 

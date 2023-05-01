@@ -39,7 +39,7 @@ export class Network extends Item<Network> {
   deletedNodes: Set<NetworkNode>;
   deletedEdges: Set<NetworkEdge>;
   constructor(props: NetworkProps) {
-    super(props, "Network");
+    super(props);
     this.bimoId = gavpfp("bimoId", props, "string");
     this.businessId = gavpfp("businessId", props, "string");
     this.label = gavpfp("label", props, "string");

@@ -2,7 +2,7 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BlockActivity, BlockActivityProps } from "./BlockActivity";
-import { BlockActivityItem } from "./BlockActivityItem";
+import { BlockActivityItem, BaseBlockActivityItem } from "./BlockActivityItem";
 
 const childClasses = [BlockActivity];
 
@@ -50,12 +50,14 @@ export class BlockActivitiesCollection extends Collection<
    * @param {Object} activity the item corresponding to the activity to add
    * typically a Trip, Maintenance, VehicleStandBy or ConsistChange
    */
-  addActivity(activity: BlockActivityItem) {
+  addActivity(activity: BlockActivityItem<BaseBlockActivityItem>) {
     // if (activity.addToBlockActivitiesCollectionFn)
     //   return activity.addToBlockActivitiesCollectionFn(this);
     const blkAct = this.createNewItem({
       blkactVehicleActivityTypeNo: activity.blkactVehicleActivityTypeNo,
+      //@ts-expect-error
       [activity.constructor.blkActIdPropName]:
+        //@ts-expect-error
         activity[activity.constructor.itemIdPropName],
     });
     activity.addBlockActivity(blkAct);

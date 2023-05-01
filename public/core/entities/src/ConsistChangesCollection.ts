@@ -2,6 +2,7 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { ConsistChange, ConsistChangeProps } from "./ConsistChange";
+import { VehicleSchedule } from "./VehicleSchedule";
 
 const childClasses = [ConsistChange];
 
@@ -12,6 +13,7 @@ export class ConsistChangesCollection extends Collection<
   ConsistChange,
   ConsistChangeProps
 > {
+  declare parent?: VehicleSchedule;
   constructor(props: ConsistChangesCollectionProps = {}) {
     super({
       itemName: "ConsistChange",

@@ -1,6 +1,7 @@
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { VehicleStandby, VehicleStandbyProps } from "./VehicleStandby";
+import { VehicleSchedule } from "./VehicleSchedule";
 
 const childClasses = [VehicleStandby];
 
@@ -11,6 +12,7 @@ export class VehicleStandbysCollection extends Collection<
   VehicleStandby,
   VehicleStandbyProps
 > {
+  declare parent?: VehicleSchedule;
   constructor(props: VehicleStandbysCollectionProps = {}) {
     super({
       itemName: "VehicleStandby",

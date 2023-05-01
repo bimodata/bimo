@@ -28,7 +28,8 @@
     "@bimo/core-utils-string": "^0.0.1",
     "@bimo/core-utils-time-and-date": "^0.0.1",
     "@types/geojson": "^7946.0.10",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "luxon": "^3.3.0"
   },
   "devDependencies": {
     "@bimo/core-services-check-and-repair-consist-changes-in-vsc": "^0.0.1",

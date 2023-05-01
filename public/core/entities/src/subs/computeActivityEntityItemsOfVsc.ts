@@ -1,11 +1,13 @@
 import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
 import { BlockActivity } from "../BlockActivity";
 import { VehicleSchedule } from "../VehicleSchedule";
-import { BlockActivityItem } from "../BlockActivityItem";
+import { BlockActivityItem, BaseBlockActivityItem } from "../BlockActivityItem";
 
 export function computeActivityEntityItemsOfVsc(vsc: VehicleSchedule) {
-  const activityEntityItemByBlockActivity: Map<BlockActivity, BlockActivityItem> =
-    new Map();
+  const activityEntityItemByBlockActivity: Map<
+    BlockActivity,
+    BlockActivityItem<BaseBlockActivityItem>
+  > = new Map();
   const setOfblockActivitiesByBlockActivityEntityItem = new Map();
 
   vsc.blocks.forEach((block) => {

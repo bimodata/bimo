@@ -35,7 +35,10 @@ export interface RouteVersionProps extends ExtendedItemProps {
   routes?: RoutesCollection;
 }
 
-export class RouteVersion extends VehicleScheduleOrRouteVersion<RouteVersion> {
+export class RouteVersion extends VehicleScheduleOrRouteVersion<
+  RouteVersion,
+  RouteVersionProps
+> {
   bimoId?: string;
   rtevIdentifier?: string;
   rtevDescription?: string;

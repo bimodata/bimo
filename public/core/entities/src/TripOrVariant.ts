@@ -38,7 +38,10 @@ export interface TripOrVariantProps extends ExtendedItemProps {
   _abstract?: string;
 }
 
-export class TripOrVariant extends Item<TripOrVariant> {
+export class TripOrVariant<
+  TripOrVariantType extends ExtendedItem<TripOrVariantType>,
+  TripOrVariantProps extends ExtendedItemProps
+> extends Item<TripOrVariantType> {
   /**
    * @param {Object} props
    * @param {'variant'|'trip'} tripOrVariantType

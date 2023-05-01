@@ -1,8 +1,20 @@
 const childClasses = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import {
+  hastusExtendedHoursToDuration,
+  durationToHastusExtendedHoursString,
+} from "@bimo/core-utils-time-and-date";
+
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import BlockActivityItemMixin, { BlockActivityItem } from "./BlockActivityItem";
+import {
+  BlockActivityItem,
+  computeSetOfBlockActivitiesHelper,
+  getSingleBlockActivityHelper,
+} from "./BlockActivityItem";
+import BlockActivity from "./BlockActivity";
+import Place from "./Place";
+import { ConsistChangesCollection } from "./ConsistChangesCollection";
 
 export interface ConsistChangeProps extends ExtendedItemProps {
   cchgActivity?: string;
@@ -36,13 +48,10 @@ export interface ConsistChangeProps extends ExtendedItemProps {
   cchgToNote?: string;
 }
 
-export class ConsistChange extends BlockActivityItemMixin(Item, {
-  blkActIdPropName: "blkactCchgNo",
-  itemIdPropName: "cchgInternalNumber",
-  placePropName: "cchgPlaceStart",
-  startTimePropName: "cchgTimeStart",
-  endTimePropName: "cchgTimeStart", // TODO: improve this
-}) {
+export class ConsistChange
+  extends Item<ConsistChange>
+  implements BlockActivityItem<ConsistChange>
+{
   cchgActivity?: string;
   _cchgInternalNumber?: string;
   _cchgBuildTime?: string;
@@ -72,6 +81,9 @@ export class ConsistChange extends BlockActivityItemMixin(Item, {
   cchgOperatesSat?: string;
   cchgFromNote?: string;
   cchgToNote?: string;
+  declare parent?: ConsistChangesCollection;
+  static blkActIdPropName = "blkactCchgNo";
+  static itemIdPropName = "cchgInternalNumber";
   constructor(props: ConsistChangeProps) {
     super(props);
     this.cchgActivity = gavpfp("cchgActivity", props);
@@ -137,7 +149,10 @@ export class ConsistChange extends BlockActivityItemMixin(Item, {
   }
 
   get cchgTimeStart() {
-    return this._cchgTimeStart || this._cchgBuildTime;
+    if (!this._cchgTimeStart && !this._cchgBuildTime) {
+      throw new Error(`cchgTimeStart or cchgBuildTime must be provided`);
+    }
+    return (this._cchgTimeStart || this._cchgBuildTime) as string;
   }
 
   set cchgTimeStart(v) {
@@ -146,6 +161,94 @@ export class ConsistChange extends BlockActivityItemMixin(Item, {
 
   get shortLoggingOutput() {
     return `${this.cchgActivity}-${this.cchgPlaceStart}-${this.cchgTimeStart}-${this.cchgOnTripNo}`;
+  }
+
+  get blkactVehicleActivityTypeNo() {
+    // throw new Error(
+    //   `A single blkactVehicleActivityTypeNo cannot be computed on consist changes`
+    // );
+    return "";
+  }
+
+  private get setOfBlockActivities() {
+    return computeSetOfBlockActivitiesHelper<ConsistChange>(this);
+  }
+
+  get blockActivities(): BlockActivity[] {
+    const setOfBlockActivities = this.setOfBlockActivities;
+    return setOfBlockActivities && Array.from(setOfBlockActivities);
+  }
+
+  addBlockActivity(newBlockActivity: BlockActivity) {
+    this.setOfBlockActivities.add(newBlockActivity);
+  }
+
+  removeBlockActivity(blockActivity: BlockActivity) {
+    this.setOfBlockActivities.delete(blockActivity);
+  }
+
+  get blockActivity(): BlockActivity {
+    return getSingleBlockActivityHelper<ConsistChange>(this);
+  }
+
+  get block() {
+    return this.blockActivity?.block ?? null;
+  }
+
+  get vehicleTasks() {
+    return this.blockActivity?.vehicleTasks ?? null;
+  }
+
+  get vehicleSchedule() {
+    return this.parent?.parent ?? null;
+  }
+
+  get startTime() {
+    return this.cchgTimeStart;
+  }
+
+  get startTimeAsDuration() {
+    return this._getAndSetCachedValue("startTimeAsDuration", () =>
+      hastusExtendedHoursToDuration(this.startTime)
+    );
+  }
+
+  // TODO: improve this
+  get endTime() {
+    return this.cchgTimeStart;
+  }
+
+  get endTimeAsDuration() {
+    return this._getAndSetCachedValue("endTimeAsDuration", () =>
+      hastusExtendedHoursToDuration(this.endTime)
+    );
+  }
+
+  get startPlaceId() {
+    return this.cchgPlaceStart;
+  }
+
+  get endPlaceId() {
+    return this.cchgPlaceStart;
+  }
+
+  improveStartPlacePrecision(morePreciseStartPlace: Place) {
+    this.cchgPlaceStart = morePreciseStartPlace.plcIdentifier;
+  }
+
+  improveEndPlacePrecision(morePreciseEndPlace: Place) {
+    this.cchgPlaceStart = morePreciseEndPlace.plcIdentifier;
+  }
+
+  shiftTimes(shiftInSeconds: number) {
+    this.cchgTimeStart = durationToHastusExtendedHoursString(
+      this.startTimeAsDuration.plus({ second: shiftInSeconds })
+    );
+    this.cchgTimeStart = durationToHastusExtendedHoursString(
+      this.endTimeAsDuration.plus({ second: shiftInSeconds })
+    );
+    this._nullifyCachedValue("startTimeAsDuration");
+    this._nullifyCachedValue("endTimeAsDuration");
   }
 }
 

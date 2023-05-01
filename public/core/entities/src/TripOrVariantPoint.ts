@@ -49,7 +49,7 @@ export class TripOrVariantPoint<
   PointProps extends ExtendedItemProps
 > extends Item<PointType> {
   _abstract?: any;
-  parent: Collection<PointType, PointProps>;
+  declare parent?: Collection<PointType, PointProps>;
   constructor(props: PointProps, tripOrVariantType: "variant" | "trip") {
     super(props);
     this._abstract = {

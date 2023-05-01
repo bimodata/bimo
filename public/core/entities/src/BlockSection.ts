@@ -15,17 +15,15 @@ import { Block } from "./Block";
 
 export interface BlockSectionProps extends ExtendedItemProps {
   id?: string;
-  label?: string;
   block: Block;
   blockActivities: BlockActivityProps[];
 }
 
 export class BlockSection extends Item<BlockSection> {
   id?: string;
-  label?: string;
   block: Block;
   blockActivities: BlockActivitiesCollection;
-  parent: BlockSectionsCollection;
+  declare parent?: BlockSectionsCollection;
   constructor(props: BlockSectionProps) {
     super(props);
 
