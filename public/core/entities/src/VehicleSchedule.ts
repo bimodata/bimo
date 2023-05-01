@@ -48,7 +48,8 @@ import { Trip, TripProps } from "./Trip";
 import computeVehicleTasksOfVsc from "./subs/computeVehicleTasksOfVsc";
 import computeActivityEntityItemsOfVsc from "./subs/computeActivityEntityItemsOfVsc";
 
-const childClasses = [
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [
   VscincloirsCollection,
   NetworkEventsCollection,
   VehicleUnitsCollection,

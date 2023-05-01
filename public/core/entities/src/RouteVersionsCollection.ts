@@ -8,7 +8,8 @@ import { VariantsCollection, VariantsCollectionProps } from "./VariantsCollectio
 import { Route } from "./Route";
 import { Variant } from "./Variant";
 
-const childClasses = [RouteVersion, RoutesCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [RouteVersion, RoutesCollection];
 
 export interface RouteVersionsCollectionProps
   extends ExtendedCollectionProps<RouteVersion, RouteVersionProps> {}

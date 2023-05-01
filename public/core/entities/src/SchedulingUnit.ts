@@ -8,7 +8,8 @@ import {
   SchedulingUnitRoutesCollectionProps,
 } from "./SchedulingUnitRoutesCollection";
 
-const childClasses = [SchedulingUnitRoutesCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [SchedulingUnitRoutesCollection];
 
 export interface SchedulingUnitProps extends ExtendedItemProps {
   scuIdentifier?: string;

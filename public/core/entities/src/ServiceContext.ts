@@ -15,7 +15,8 @@ import {
   ServiceEvolutionPeriodsCollectionProps,
 } from "./ServiceEvolutionPeriodsCollection";
 
-const childClasses = [
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [
   ServiceContextParentsCollection,
   ServiceContextIntervalsCollection,
   ServiceEvolutionPeriodsCollection,

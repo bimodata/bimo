@@ -4,7 +4,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { RunTimeVersion, RunTimeVersionProps } from "./RunTimeVersion";
 
-const childClasses = [RunTimeVersion];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [RunTimeVersion];
 
 export interface RunTimeVersionsCollectionProps
   extends ExtendedCollectionProps<RunTimeVersion, RunTimeVersionProps> {}

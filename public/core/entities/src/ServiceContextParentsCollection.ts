@@ -3,7 +3,8 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { ServiceContextParent, ServiceContextParentProps } from "./ServiceContextParent";
 
-const childClasses = [ServiceContextParent];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [ServiceContextParent];
 
 export interface ServiceContextParentsCollectionProps
   extends ExtendedCollectionProps<ServiceContextParent, ServiceContextParentProps> {}

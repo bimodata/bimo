@@ -4,7 +4,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { Booking, BookingProps } from "./Booking";
 
-const childClasses = [Booking];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [Booking];
 
 export interface BookingsCollectionProps
   extends ExtendedCollectionProps<Booking, BookingProps> {}

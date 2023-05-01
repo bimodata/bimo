@@ -3,7 +3,8 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BookingCalendarDate, BookingCalendarDateProps } from "./BookingCalendarDate";
 
-const childClasses = [BookingCalendarDate];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [BookingCalendarDate];
 
 export interface BookingCalendarDatesCollectionProps
   extends ExtendedCollectionProps<BookingCalendarDate, BookingCalendarDateProps> {}

@@ -1,4 +1,5 @@
-const childClasses = [];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";

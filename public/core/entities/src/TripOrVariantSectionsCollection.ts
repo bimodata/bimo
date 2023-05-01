@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 import { TripOrVariantSection, TripOrVariantSectionProps } from "./TripOrVariantSection";
 
-const childClasses = [TripOrVariantSection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [TripOrVariantSection];
 
 export interface TripOrVariantSectionsCollectionProps<
   PointType extends ExtendedItem<PointType>,

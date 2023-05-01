@@ -2,7 +2,8 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const childClasses = [];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [];
 
 export interface BookingProps extends ExtendedItemProps {
   bimoId?: string;

@@ -4,7 +4,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 import { BlockActivity, BlockActivityProps } from "./BlockActivity";
 import { BlockActivityItem, BaseBlockActivityItem } from "./BlockActivityItem";
 
-const childClasses = [BlockActivity];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [BlockActivity];
 
 export interface BlockActivitiesCollectionProps
   extends ExtendedCollectionProps<BlockActivity, BlockActivityProps> {}

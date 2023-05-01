@@ -1,6 +1,7 @@
 import { Vscincloir, VscincloirProps } from "./Vscincloir";
 
-const childClasses = [Vscincloir];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [Vscincloir];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 

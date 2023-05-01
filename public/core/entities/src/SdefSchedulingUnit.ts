@@ -4,7 +4,8 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { SchedulingUnit } from "./SchedulingUnit";
 
-const childClasses = [];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [];
 
 export interface SdefSchedulingUnitProps extends ExtendedItemProps {
   sdscuIdentifier?: string;

@@ -7,7 +7,8 @@ import { NetworkNode } from "./NetworkNode";
 import { Network } from "./Network";
 import { NetworkSection } from "./NetworkSection";
 
-const childClasses = [NetworkNode];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [NetworkNode];
 
 /** Une représentation logique d'un lien entre deux points discrets du réseau */
 export interface NetworkEdgeProps extends ExtendedItemProps {

@@ -1,6 +1,7 @@
 import { TripShift, TripShiftProps } from "./TripShift";
 
-const childClasses = [TripShift];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [TripShift];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 

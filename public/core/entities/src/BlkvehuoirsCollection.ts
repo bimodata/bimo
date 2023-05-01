@@ -1,6 +1,7 @@
 import { Blkvehuoir, BlkvehuoirProps } from "./Blkvehuoir";
 
-const childClasses = [Blkvehuoir];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [Blkvehuoir];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 

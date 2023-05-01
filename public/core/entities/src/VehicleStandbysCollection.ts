@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 import { VehicleStandby, VehicleStandbyProps } from "./VehicleStandby";
 import { VehicleSchedule } from "./VehicleSchedule";
 
-const childClasses = [VehicleStandby];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [VehicleStandby];
 
 export interface VehicleStandbysCollectionProps
   extends ExtendedCollectionProps<VehicleStandby, VehicleStandbyProps> {}

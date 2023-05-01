@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { Block, BlockProps } from "./Block";
 
-const childClasses = [Block];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [Block];
 
 export interface BlocksCollectionProps
   extends ExtendedCollectionProps<Block, BlockProps> {}

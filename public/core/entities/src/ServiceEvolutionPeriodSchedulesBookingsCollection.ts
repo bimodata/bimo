@@ -6,7 +6,8 @@ import {
   ServiceEvolutionPeriodSchedulesBookingProps,
 } from "./ServiceEvolutionPeriodSchedulesBooking";
 
-const childClasses = [ServiceEvolutionPeriodSchedulesBooking];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [ServiceEvolutionPeriodSchedulesBooking];
 
 export interface ServiceEvolutionPeriodSchedulesBookingsCollectionProps
   extends ExtendedCollectionProps<

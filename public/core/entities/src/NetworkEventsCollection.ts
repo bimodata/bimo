@@ -1,6 +1,7 @@
 import { NetworkEvent, NetworkEventProps } from "./NetworkEvent";
 
-const childClasses = [NetworkEvent];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [NetworkEvent];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 

@@ -19,7 +19,8 @@ import {
   TripOrVariantSectionsCollectionProps,
 } from "./TripOrVariantSectionsCollection";
 
-const childClasses = [RoutesCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [RoutesCollection];
 
 export interface RouteVersionProps extends ExtendedItemProps {
   bimoId?: string;

@@ -11,7 +11,8 @@ import { VariantPoint, VariantPointProps } from "./VariantPoint";
 import { Route } from "./Route";
 import { Place } from "./Place";
 
-const childClasses = [VariantPointsCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [VariantPointsCollection];
 
 export interface VariantProps extends ExtendedItemProps {
   bimoId?: string;

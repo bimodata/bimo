@@ -6,7 +6,8 @@ import {
   ServiceEvolutionPeriodProps,
 } from "./ServiceEvolutionPeriod";
 
-const childClasses = [ServiceEvolutionPeriod];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [ServiceEvolutionPeriod];
 
 export interface ServiceEvolutionPeriodsCollectionProps
   extends ExtendedCollectionProps<ServiceEvolutionPeriod, ServiceEvolutionPeriodProps> {}

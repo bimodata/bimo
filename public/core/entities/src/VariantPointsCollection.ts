@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { VariantPoint, VariantPointProps } from "./VariantPoint";
 
-const childClasses = [VariantPoint];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [VariantPoint];
 
 export interface VariantPointsCollectionProps
   extends ExtendedCollectionProps<VariantPoint, VariantPointProps> {}

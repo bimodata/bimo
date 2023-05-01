@@ -15,7 +15,8 @@ import {
 } from "./NetworkSectionsCollection";
 import { AdjacentLink } from "./AdjacentLink";
 
-const childClasses = [
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [
   NetworkNodesCollection,
   NetworkEdgesCollection,
   NetworkSectionsCollection,

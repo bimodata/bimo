@@ -3,7 +3,8 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { NetworkNodesCollection } from "./NetworkNodesCollection";
 
-const childClasses = [];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [];
 
 /** Une représentation logique d'un point discret du réseau. */
 export interface NetworkNodeProps extends ExtendedItemProps {

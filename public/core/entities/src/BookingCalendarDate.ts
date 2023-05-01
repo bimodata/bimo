@@ -8,7 +8,8 @@ import {
   SchedulingUnitDatesCollectionProps,
 } from "./SchedulingUnitDatesCollection";
 
-const childClasses = [SchedulingUnitDatesCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [SchedulingUnitDatesCollection];
 
 export interface BookingCalendarDateProps extends ExtendedItemProps {
   bcaldDate?: string;

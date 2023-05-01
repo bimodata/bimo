@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { ServiceDefinition, ServiceDefinitionProps } from "./ServiceDefinition";
 
-const childClasses = [ServiceDefinition];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [ServiceDefinition];
 
 export interface ServiceDefinitionsCollectionProps
   extends ExtendedCollectionProps<ServiceDefinition, ServiceDefinitionProps> {}

@@ -10,7 +10,8 @@ import {
 import { NetworkEdge } from "./NetworkEdge";
 import { NetworkNode } from "./NetworkNode";
 
-const childClasses = [NetworkNodesCollection, NetworkEdgesCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [NetworkNodesCollection, NetworkEdgesCollection];
 
 /** Un sous-ensemble de nodes et d'edges d'un network qui partagent des caractéristiques communes.
  * Par exemple un ensemble de nodes et d'edges qui forment la voie 1 entre Amiens et Beauvais.

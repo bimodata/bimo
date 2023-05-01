@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { SdefSchedulingUnit, SdefSchedulingUnitProps } from "./SdefSchedulingUnit";
 
-const childClasses = [SdefSchedulingUnit];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [SdefSchedulingUnit];
 
 export interface SdefSchedulingUnitsCollectionProps
   extends ExtendedCollectionProps<SdefSchedulingUnit, SdefSchedulingUnitProps> {}

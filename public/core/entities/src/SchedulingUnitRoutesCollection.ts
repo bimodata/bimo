@@ -2,7 +2,8 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { SchedulingUnitRoute, SchedulingUnitRouteProps } from "./SchedulingUnitRoute";
 
-const childClasses = [SchedulingUnitRoute];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [SchedulingUnitRoute];
 
 export interface SchedulingUnitRoutesCollectionProps
   extends ExtendedCollectionProps<SchedulingUnitRoute, SchedulingUnitRouteProps> {}

@@ -8,7 +8,8 @@ import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { VariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
 import { RouteVersion } from "./RouteVersion";
 
-const childClasses = [VariantsCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [VariantsCollection];
 
 export interface RouteProps extends ExtendedItemProps {
   bimoId?: string;

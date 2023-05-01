@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { NetworkMap, NetworkMapProps } from "./NetworkMap";
 
-const childClasses = [NetworkMap];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [NetworkMap];
 
 export interface NetworkMapsCollectionProps
   extends ExtendedCollectionProps<NetworkMap, NetworkMapProps> {}

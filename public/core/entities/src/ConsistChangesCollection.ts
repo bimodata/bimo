@@ -4,7 +4,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 import { ConsistChange, ConsistChangeProps } from "./ConsistChange";
 import { VehicleSchedule } from "./VehicleSchedule";
 
-const childClasses = [ConsistChange];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [ConsistChange];
 
 export interface ConsistChangesCollectionProps
   extends ExtendedCollectionProps<ConsistChange, ConsistChangeProps> {}

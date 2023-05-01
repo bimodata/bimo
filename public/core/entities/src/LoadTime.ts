@@ -2,7 +2,8 @@ import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-const childClasses = [];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [];
 
 export interface LoadTimeProps extends ExtendedItemProps {
   bimoId?: string;

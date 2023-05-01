@@ -5,7 +5,8 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { RunTimesCollection, RunTimesCollectionProps } from "./RunTimesCollection";
 import { LoadTimesCollection, LoadTimesCollectionProps } from "./LoadTimesCollection";
 
-const childClasses = [RunTimesCollection, LoadTimesCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [RunTimesCollection, LoadTimesCollection];
 
 export interface RunTimeVersionProps extends ExtendedItemProps {
   bimoId?: string;

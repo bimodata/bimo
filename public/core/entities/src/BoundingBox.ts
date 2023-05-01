@@ -3,7 +3,8 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { pick } from "lodash";
 
-const childClasses = [];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [];
 
 export interface BoundingBoxProps extends ExtendedItemProps {
   activeCoordinatesSystemName?: string;

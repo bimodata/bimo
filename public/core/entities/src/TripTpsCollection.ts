@@ -1,6 +1,7 @@
 import { TripTp, TripTpProps } from "./TripTp";
 
-const childClasses = [TripTp];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [TripTp];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 

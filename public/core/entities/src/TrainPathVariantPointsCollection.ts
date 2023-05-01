@@ -9,7 +9,8 @@ import {
   TrainPathVariantPointProps,
 } from "./TrainPathVariantPoint";
 
-const childClasses = [TrainPathVariantPoint];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [TrainPathVariantPoint];
 
 export interface TrainPathVariantPointsCollectionProps
   extends ExtendedCollectionProps<TrainPathVariantPoint, TrainPathVariantPointProps> {}

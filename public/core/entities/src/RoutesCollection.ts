@@ -1,6 +1,7 @@
 import { Route, RouteProps } from "./Route";
 
-const childClasses = [Route];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [Route];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 

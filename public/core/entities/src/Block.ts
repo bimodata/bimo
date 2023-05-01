@@ -16,7 +16,11 @@ import { VehicleTask } from "./VehicleTask";
 import { VehicleUnit } from "./VehicleUnit";
 import { VehicleSchedule } from "./VehicleSchedule";
 
-const childClasses = [BlkvehuoirsCollection, BlockActivitiesCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [
+  BlkvehuoirsCollection,
+  BlockActivitiesCollection,
+];
 
 export interface BlockProps extends ExtendedItemProps {
   blkIntNumber?: string;

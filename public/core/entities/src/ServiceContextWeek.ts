@@ -7,7 +7,8 @@ import {
   ServiceContextDaysCollectionProps,
 } from "./ServiceContextDaysCollection";
 
-const childClasses = [ServiceContextDaysCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [ServiceContextDaysCollection];
 
 export interface ServiceContextWeekProps extends ExtendedItemProps {
   scwkSchedUnitId?: string;

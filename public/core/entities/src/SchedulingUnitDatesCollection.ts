@@ -2,7 +2,8 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { SchedulingUnitDate, SchedulingUnitDateProps } from "./SchedulingUnitDate";
 
-const childClasses = [SchedulingUnitDate];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [SchedulingUnitDate];
 
 export interface SchedulingUnitDatesCollectionProps
   extends ExtendedCollectionProps<SchedulingUnitDate, SchedulingUnitDateProps> {}

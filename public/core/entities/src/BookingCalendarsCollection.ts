@@ -15,7 +15,8 @@ import {
   SchedulingUnitsCollectionProps,
 } from "./SchedulingUnitsCollection";
 
-const childClasses = [BookingCalendar];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [BookingCalendar];
 
 export interface BookingCalendarsCollectionProps
   extends ExtendedCollectionProps<BookingCalendar, BookingCalendarProps> {}

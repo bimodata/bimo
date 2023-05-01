@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { LoadTime, LoadTimeProps } from "./LoadTime";
 
-const childClasses = [LoadTime];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [LoadTime];
 
 export interface LoadTimesCollectionProps
   extends ExtendedCollectionProps<LoadTime, LoadTimeProps> {}

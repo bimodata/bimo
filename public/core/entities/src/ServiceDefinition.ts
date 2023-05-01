@@ -8,7 +8,8 @@ import {
   SdefSchedulingUnitsCollectionProps,
 } from "./SdefSchedulingUnitsCollection";
 
-const childClasses = [SdefSchedulingUnitsCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [SdefSchedulingUnitsCollection];
 
 export interface ServiceDefinitionProps extends ExtendedItemProps {
   sdefIdentifier?: string;

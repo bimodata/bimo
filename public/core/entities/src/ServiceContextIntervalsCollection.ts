@@ -6,7 +6,8 @@ import {
   ServiceContextIntervalProps,
 } from "./ServiceContextInterval";
 
-const childClasses = [ServiceContextInterval];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [ServiceContextInterval];
 
 export interface ServiceContextIntervalsCollectionProps
   extends ExtendedCollectionProps<ServiceContextInterval, ServiceContextIntervalProps> {}

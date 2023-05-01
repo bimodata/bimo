@@ -9,7 +9,8 @@ import {
   TrainPathsGeneralInfoProps,
 } from "./TrainPathsGeneralInfo";
 
-const childClasses = [TrainPath, TrainPathsGeneralInfo];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [TrainPath, TrainPathsGeneralInfo];
 
 export interface TrainPathsCollectionProps
   extends ExtendedCollectionProps<TrainPath, TrainPathProps> {

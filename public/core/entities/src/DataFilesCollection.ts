@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { DataFile, DataFileProps } from "./DataFile";
 
-const childClasses = [DataFile];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [DataFile];
 
 export interface DataFilesCollectionProps
   extends ExtendedCollectionProps<DataFile, DataFileProps> {}

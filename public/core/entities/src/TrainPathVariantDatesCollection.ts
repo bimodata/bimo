@@ -6,7 +6,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { TrainPathVariantDate, TrainPathVariantDateProps } from "./TrainPathVariantDate";
 
-const childClasses = [TrainPathVariantDate];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [TrainPathVariantDate];
 
 export interface TrainPathVariantDatesCollectionProps
   extends ExtendedCollectionProps<TrainPathVariantDate, TrainPathVariantDateProps> {}

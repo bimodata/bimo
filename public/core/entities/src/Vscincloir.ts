@@ -1,4 +1,5 @@
-const childClasses = [];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
@@ -29,13 +30,13 @@ export class Vscincloir extends Item<Vscincloir> {
     );
   }
 
-  /** @type {import ('./VehicleSchedule')} */
-  get vsc() {
+  get vsc(): VehicleSchedule | null {
     return this._getAndSetCachedValue("vsc", () => {
       const includedVsc =
         this.vscsCollection?.getById(this.vscincloirIntKey) ??
         this.context?.loadedVscs?.find(
-          (candidateVsc) => candidateVsc.vscIntId === this.vscincloirIntKey
+          (candidateVsc: VehicleSchedule) =>
+            candidateVsc.vscIntId === this.vscincloirIntKey
         );
 
       if (!includedVsc) return null;
@@ -48,11 +49,11 @@ export class Vscincloir extends Item<Vscincloir> {
   set vsc(v) {
     if (this.vsc !== null && v !== this.vsc) {
       throw new Error(
-        `${v.shortLoggingOutput} should equal ${this.vsc.shortLoggingOutput}`
+        `${v?.shortLoggingOutput} should equal ${this.vsc.shortLoggingOutput}`
       );
     }
-    if (v.vscIntId !== this.vscincloirIntKey) {
-      throw new Error(`${v.vscIntId} should equal ${this.vscincloirIntKey}`);
+    if (v?.vscIntId !== this.vscincloirIntKey) {
+      throw new Error(`${v?.vscIntId} should equal ${this.vscincloirIntKey}`);
     }
     this._setCachedValue("vsc", v);
   }

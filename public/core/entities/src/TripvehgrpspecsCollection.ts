@@ -1,6 +1,7 @@
 import { Tripvehgrpspec, TripvehgrpspecProps } from "./Tripvehgrpspec";
 
-const childClasses = [Tripvehgrpspec];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [Tripvehgrpspec];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 

@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { Trip, TripProps } from "./Trip";
 
-const childClasses = [Trip];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [Trip];
 
 export interface TripsCollectionProps extends ExtendedCollectionProps<Trip, TripProps> {}
 

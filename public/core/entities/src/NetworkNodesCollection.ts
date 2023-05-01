@@ -4,7 +4,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 import { NetworkNode, NetworkNodeProps } from "./NetworkNode";
 import { Network } from "./Network";
 
-const childClasses = [NetworkNode];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [NetworkNode];
 
 export interface NetworkNodesCollectionProps
   extends ExtendedCollectionProps<NetworkNode, NetworkNodeProps> {}

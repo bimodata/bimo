@@ -15,7 +15,8 @@ import { VehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
 import VehicleTasksCollection from "./VehicleTasksCollection";
 import TripsCollection from "./TripsCollection";
 
-const childClasses = [VehicleSchedule];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [VehicleSchedule];
 
 export interface VehicleSchedulesCollectionProps
   extends ExtendedCollectionProps<VehicleSchedule, VehicleScheduleProps> {}
@@ -180,7 +181,7 @@ export class VehicleSchedulesCollection extends Collection<
    * Ne conserve que les block_activity qui correspondent à blockActivitySelectorQuery
    * @param {Set} blockActivitySelectorQuery - Requête JQM applicable aux objets blockActivity à conserver
    */
-  filterBlockActivities(blockActivitySelectorQuery) {
+  filterBlockActivities(blockActivitySelectorQuery: any) {
     this.forEach((vechicleSchedule) => {
       vechicleSchedule.blocks.forEach((block) => {
         block.blockActivities.filter((blockActivity) =>

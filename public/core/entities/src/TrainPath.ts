@@ -7,7 +7,8 @@ import {
   TrainPathVariantsCollectionProps,
 } from "./TrainPathVariantsCollection";
 
-const childClasses = [TrainPathVariantsCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [TrainPathVariantsCollection];
 
 export interface TrainPathProps extends ExtendedItemProps {
   trnpIdentifier: string;

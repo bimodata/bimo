@@ -3,7 +3,8 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { RunTime, RunTimeProps } from "./RunTime";
 
-const childClasses = [RunTime];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [RunTime];
 
 export interface RunTimesCollectionProps
   extends ExtendedCollectionProps<RunTime, RunTimeProps> {}

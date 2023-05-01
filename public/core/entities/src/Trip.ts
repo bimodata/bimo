@@ -33,7 +33,12 @@ import Entity, { CustomProps } from "@bimo/core-utils-entity";
 import TripsCollection from "./TripsCollection";
 import VehicleSchedule from "./VehicleSchedule";
 
-const childClasses = [TripTpsCollection, TripPointsCollection, TripvehgrpspecsCollection];
+import { Entity } from "@bimo/core-utils-entity";
+const childClasses: (typeof Entity)[] = [
+  TripTpsCollection,
+  TripPointsCollection,
+  TripvehgrpspecsCollection,
+];
 
 const INTERNAL_DISTANCE_FACTOR = 10000;
 
