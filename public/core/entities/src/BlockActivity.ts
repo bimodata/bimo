@@ -8,6 +8,7 @@ import { Trip } from "./Trip";
 import { StringByLanguageCode } from "@bimo/core-global-types";
 import BlockActivitiesCollection from "./BlockActivitiesCollection";
 import ConsistChange from "./ConsistChange";
+import Place from "./Place";
 
 export interface BlockActivityProps extends ExtendedItemProps {
   blkactVehicleActivityTypeNo: string;
@@ -20,15 +21,21 @@ export interface BlockActivityProps extends ExtendedItemProps {
   activityNameByLanguageCode?: StringByLanguageCode;
 }
 
+export type BlockActivityEntityClassKey =
+  | "Trip"
+  | "ConsistChange"
+  | "VehicleStandby"
+  | "Maintenance";
+
 export class BlockActivity extends Item<BlockActivity> {
   blkactVehicleActivityTypeNo: string;
-  blkactTripNo?: string | null;
+  blkactTripNo: string;
   blkactHasFixedLink?: string;
-  blkactCchgNo?: string;
-  blkactVehicleStandbyNo?: string;
-  blkactMaintenanceNo?: string;
+  blkactCchgNo: string;
+  blkactVehicleStandbyNo: string;
+  blkactMaintenanceNo: string;
   bimoId?: string;
-  activityEntityClassKey: string;
+  activityEntityClassKey: BlockActivityEntityClassKey;
   activityNameByLanguageCode: StringByLanguageCode;
   declare parent?: BlockActivitiesCollection;
   constructor(props: BlockActivityProps) {
@@ -150,15 +157,15 @@ export class BlockActivity extends Item<BlockActivity> {
     return `${this.mlo} (vtas: ${this.vehicleTasks?.map((vta) => vta.slo).join(" / ")})`;
   }
 
-  improveEndPlacePrecision(morePreciseEndPlace) {
+  improveEndPlacePrecision(morePreciseEndPlace: Place) {
     this.activityEntityItem?.improveEndPlacePrecision(morePreciseEndPlace);
   }
 
-  improveStartPlacePrecision(morePreciseStartPlace) {
+  improveStartPlacePrecision(morePreciseStartPlace: Place) {
     this.activityEntityItem?.improveStartPlacePrecision(morePreciseStartPlace);
   }
 
-  shiftTimes(shiftInSeconds) {
+  shiftTimes(shiftInSeconds: number) {
     this.activityEntityItem?.shiftTimes(shiftInSeconds);
   }
 
@@ -168,7 +175,7 @@ export class BlockActivity extends Item<BlockActivity> {
     return this.parent.indexOf(this);
   }
 
-  getNthActivityFromThisOne(n) {
+  getNthActivityFromThisOne(n: number) {
     return this.parent && this.parent.items[this._indexInSortedParent + n];
   }
 

@@ -12,6 +12,7 @@ import { Route } from "./Route";
 import { Place } from "./Place";
 
 import { Entity } from "@bimo/core-utils-entity";
+import { BimoContext } from "@bimo/core-global-types";
 const childClasses: (typeof Entity)[] = [VariantPointsCollection];
 
 export interface VariantProps extends ExtendedItemProps {
@@ -30,7 +31,12 @@ export interface VariantProps extends ExtendedItemProps {
   variantPoints: VariantPointsCollection;
 }
 
-export class Variant extends TripOrVariant<Variant, VariantProps> {
+export class Variant extends TripOrVariant<
+  Variant,
+  VariantProps,
+  VariantPoint,
+  VariantPointProps
+> {
   bimoId?: string;
   varIdentifier: string;
   varDescription?: string;
@@ -45,8 +51,8 @@ export class Variant extends TripOrVariant<Variant, VariantProps> {
   varIndiceCompo?: string;
   variantPoints: VariantPointsCollection;
   _links: { [linkType: string]: any } = {};
-  constructor(props: VariantProps) {
-    super(props, "variant");
+  constructor(props: VariantProps, context: BimoContext) {
+    super(props, context, "variant");
     this.bimoId = gavpfp("bimoId", props);
     this.varIdentifier = gavpfp("varIdentifier", props);
     this.varDescription = gavpfp("varDescription", props);
@@ -91,7 +97,7 @@ export class Variant extends TripOrVariant<Variant, VariantProps> {
 
   /** Creates a new instance of a variant. All variantPoints are new instances too. */
   copy(newVarIdentifier = this.varIdentifier) {
-    const copiedVariant = new Variant(this);
+    const copiedVariant = new Variant(this, this.context);
     copiedVariant.varIdentifier = newVarIdentifier;
     const copiedVariantPoints = this.variantPoints.map((varPt) => varPt.copy());
     copiedVariant.variantPoints = new VariantPointsCollection({

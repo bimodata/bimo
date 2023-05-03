@@ -1,6 +1,7 @@
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { Variant, VariantProps } from "./Variant";
+import { PlacesCollection } from "./PlacesCollection";
 
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [Variant];
@@ -22,10 +23,10 @@ export class VariantsCollection extends Collection<Variant, VariantProps> {
 
   /**
    *
-   * @param {PlacesCollection} placesCollection PlacesCollection to use to retrieve data about the places
-   * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by a string made of `${refPlaceOfTheVariantsOrigin}>>>${refPlaceOfTheVariantsDestination}`
+   * @param placesCollection PlacesCollection to use to retrieve data about the places
+   * @returns a map of variants arrays, indexed by a string made of `${refPlaceOfTheVariantsOrigin}>>>${refPlaceOfTheVariantsDestination}`
    */
-  getVariantsByRefPlaceOD(placesCollection) {
+  getVariantsByRefPlaceOD(placesCollection: PlacesCollection): Map<string, Variant[]> {
     const variantsByRefPlaceOD = this.groupByCustomKey((variant) => {
       const firstPlace = placesCollection.getByBusinessId(variant.firstPoint.varptPlace);
       const lastPlace = placesCollection.getByBusinessId(variant.lastPoint.varptPlace);
@@ -55,9 +56,9 @@ export class VariantsCollection extends Collection<Variant, VariantProps> {
 
   /**
    * Groups all the variants of the collection by route public id
-   * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by rtePubIdSpec
+   * @returns a map of variants arrays, indexed by rtePubIdSpec
    */
-  groupByRoutePublicId() {
+  groupByRoutePublicId(): Map<string, Variant[]> {
     const groupedVariantsByRoutePublicId = new Map();
     this.forEach((variant) => {
       const routePublicId = variant.route?.rtePubIdSpec;
@@ -73,9 +74,9 @@ export class VariantsCollection extends Collection<Variant, VariantProps> {
 
   /**
    * Groups all the variants of the collection by route id
-   * @returns {Map<String, Variant[]>} a map of variants arrays, indexed by route id
+   * @returns a map of variants arrays, indexed by route id
    */
-  groupByRouteIdentifier() {
+  groupByRouteIdentifier(): Map<string, Variant[]> {
     const groupedVariantsByRouteIdentifier = new Map();
     this.forEach((variant) => {
       const routeIdentifier = variant.route?.rteIdentifier;

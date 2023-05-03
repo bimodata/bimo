@@ -180,8 +180,7 @@ export class Route extends Item<Route> {
   get mediumLoggingOutput() {
     return `${this.slo} (${this.variants.length} variantes)`;
   }
-
-  getVariantsThatUseOneOfThesePlaces(listOfPlaces: any) {
+  getVariantsThatUseOneOfThesePlaces(listOfPlaces: string | Set<string> | string[]) {
     if (!listOfPlaces) {
       return undefined;
     }

@@ -246,11 +246,11 @@ export class TripPoint extends TripOrVariantPoint<TripPoint, TripPointProps> {
     return this.parent.indexOf(this);
   }
 
-  getNthTripPointFromThisOne(n) {
+  getNthTripPointFromThisOne(n: number) {
     this.getNthPointFromThisOne(n);
   }
 
-  getNthPointFromThisOne(n) {
+  getNthPointFromThisOne(n: number) {
     return (this.parent && this.parent.items[this._indexInSortedParent + n]) ?? null;
   }
 

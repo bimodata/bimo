@@ -7,6 +7,9 @@ import {
   TripOrVariantSectionsCollectionProps,
 } from "./TripOrVariantSectionsCollection";
 import computeTripOrVariantSectionsOfTripOrVariant from "./subs/computeTripOrVariantSectionsOfTripOrVariant";
+import { BimoContext } from "@bimo/core-global-types";
+import { Place } from "./Place";
+import TripOrVariantPoint from "./TripOrVariantPoint";
 
 const pathByTripOrVariantPropNameByTripOrVariantType = {
   trip: {
@@ -31,24 +34,35 @@ const pathByTripOrVariantPropNameByTripOrVariantType = {
     routeId: "trpRoute",
     variantId: "trpViaVariant",
   },
+  trainPathVariant: {
+    points: "trainPathVariantPoints",
+    // TODO: complete
+  },
 };
 
-/** @template PointType */
 export interface TripOrVariantProps extends ExtendedItemProps {
   _abstract?: string;
 }
 
+export type TripOrVariantTypeEnum =
+  | "trip"
+  | "variant"
+  | "scheduledTrip"
+  | "trainPathVariant";
+
 export class TripOrVariant<
   TripOrVariantType extends ExtendedItem<TripOrVariantType>,
-  TripOrVariantProps extends ExtendedItemProps
+  TripOrVariantProps extends ExtendedItemProps,
+  PointType extends TripOrVariantPoint<PointType, PointProps>,
+  PointProps extends ExtendedItemProps
 > extends Item<TripOrVariantType> {
-  /**
-   * @param {Object} props
-   * @param {'variant'|'trip'} tripOrVariantType
-   */
   _abstract?: any;
-  constructor(props, tripOrVariantType) {
-    super(props);
+  constructor(
+    props: TripOrVariantProps,
+    context: BimoContext,
+    tripOrVariantType: TripOrVariantTypeEnum
+  ) {
+    super(props, context);
     this._abstract = {
       /* Not sure about the "abstract" name ... the idea is just to easily tell serialieModel to ignore these keys */
       tripOrVariantType,
@@ -61,11 +75,11 @@ export class TripOrVariant<
   }
 
   get veryShortOdRefPlaceLabel() {
-    return `${this.firstPoint.place.referencePlace.veryShortLabel}>${this.lastPoint.place.referencePlace.veryShortLabel}`;
+    return `${this.firstPoint.place.referencePlace?.veryShortLabel}>${this.lastPoint.place.referencePlace?.veryShortLabel}`;
   }
 
   get shortOdRefPlaceLabel() {
-    return `${this.firstPoint.place.referencePlace.shortLabel}->${this.lastPoint.place.referencePlace.shortLabel}`;
+    return `${this.firstPoint.place.referencePlace?.shortLabel}->${this.lastPoint.place.referencePlace?.shortLabel}`;
   }
 
   get shortOdTrackPlaceLabel() {
@@ -79,13 +93,21 @@ export class TripOrVariant<
     return `${this.lastPoint.placeId}${this.firstPoint.placeId}`;
   }
 
-  /** @type {TripOrVariantSectionsCollection} */
-  get sections() {
-    return computeTripOrVariantSectionsOfTripOrVariant(this);
+  get sections(): TripOrVariantSectionsCollection<
+    PointType,
+    PointProps,
+    TripOrVariantType,
+    TripOrVariantProps
+  > {
+    return computeTripOrVariantSectionsOfTripOrVariant<
+      TripOrVariantType,
+      TripOrVariantProps,
+      PointType,
+      PointProps
+    >(this);
   }
 
-  /** @type {Collection<PointType>} */
-  get points() {
+  get points(): Collection<PointType, PointProps> {
     return get(this, this._abstract.pathByPropName.points);
   }
 
@@ -93,23 +115,19 @@ export class TripOrVariant<
     return new Set(this.points.map((point) => point.placeId));
   }
 
-  /** @type {String} */
-  get startPlaceId() {
+  get startPlaceId(): string {
     return this.firstPoint.placeId;
   }
 
-  /** @type {String} */
-  get endPlaceId() {
+  get endPlaceId(): string {
     return this.lastPoint.placeId;
   }
 
-  /** @type {PointType} */
-  get firstPoint() {
+  get firstPoint(): PointType {
     return this.points.first;
   }
 
-  /** @type {PointType} */
-  get lastPoint() {
+  get lastPoint(): PointType {
     return this.points.last;
   }
 
@@ -117,51 +135,37 @@ export class TripOrVariant<
     return get(this, this._abstract.pathByPropName.productive);
   }
 
-  /** @type {PointType[]} */
-  get pointsWithStopping() {
+  get pointsWithStopping(): PointType[] {
     return this.points.pick((point) => point.noStopping === "0");
   }
 
-  /** @type {PointType[]} */
-  get pointsThatAreTimingPoints() {
+  get pointsThatAreTimingPoints(): PointType[] {
     return this.points.pick((point) => point.isTimingPoint === "1");
   }
 
-  /** @type {string} */
-  get routeId() {
+  get routeId(): string | undefined {
     return get(this, this._abstract.pathByPropName.routeId);
   }
 
-  /** @type {string} */
-  get variantId() {
+  get variantId(): string {
     return get(this, this._abstract.pathByPropName.variantId);
   }
 
-  /** @type {String} */
-  get direction() {
+  get direction(): string {
     return get(this, this._abstract.pathByPropName.direction);
   }
 
-  /** @type {String} */
-  get indiceCompo() {
+  get indiceCompo(): string {
     return get(this, this._abstract.pathByPropName.indiceCompo);
   }
 
-  /**
-   *
-   * @param {import ('./Place')|string} newStartPlace
-   */
-  changeStartPlace(newStartPlace) {
+  changeStartPlace(newStartPlace: Place | string) {
     throw new Error(
       `changeStartPlace method should be implemented in ${this.tripOrVariantType}`
     );
   }
 
-  /**
-   *
-   * @param {import ('./Place')|string} newEndPlace
-   */
-  changeEndPlace(newEndPlace) {
+  changeEndPlace(newEndPlace: Place | string) {
     throw new Error(
       `changeEndPlace method should be implemented in ${this.tripOrVariantType}`
     );

@@ -134,6 +134,6 @@ module.exports = {
   ...entityConstructorByEntityClassKey,
   exportableEntityClassKeys,
   importableEntityClassKeys,
-  resetAllEntitiesNextIds: (nextId) =>
+  resetAllEntitiesNextIds: (nextId?: number | string) =>
     resetAllEntitiesNextIds(entityConstructorByEntityClassKey, nextId),
 };

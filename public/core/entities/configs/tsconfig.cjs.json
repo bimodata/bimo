@@ -4,6 +4,6 @@
   "compilerOptions": {
     "outDir": "../dist/cjs",
     "declarationDir": "../types/cjs",
-    "noImplicitAny": false
+    "noImplicitAny": true
   }
 }

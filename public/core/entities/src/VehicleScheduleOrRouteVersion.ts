@@ -3,6 +3,7 @@ import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collecti
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { get } from "lodash";
 import mapsAndSets from "@bimo/core-utils-maps-and-sets";
+import TripOrVariant from "./TripOrVariant";
 
 const pathByTripOrVariantPropNameByTripOrVariantType = {
   trip: { tripsOrVariants: "trips", removeTripOrVariant: "removeTrip" },
@@ -52,7 +53,7 @@ export class VehicleScheduleOrRouteVersion<
     return mapsAndSets.mergeSets(...allSets);
   }
 
-  removeTripOrVariant(tripOrVariant) {
+  removeTripOrVariant(tripOrVariant: ItemType) {
     const removeFunction = get(
       this,
       this._abstract.pathByPropName.removeTripOrVariant

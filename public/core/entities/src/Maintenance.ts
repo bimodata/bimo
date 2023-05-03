@@ -47,7 +47,7 @@ export class Maintenance
   mtnEndTime: string;
   mtnPlace: string;
   mtnVehicle?: string;
-  mtnVehicleActivityId: string;
+  mtnVehicleActivityId: "PC" | "EJ";
   mtnOperateSun?: string;
   mtnOperateMon?: string;
   mtnOperateTue?: string;
@@ -192,7 +192,13 @@ Maintenance.allChildClasses = getAllChildClasses(childClasses);
 
 export default Maintenance;
 
-const activityTypeNoByMaintenanceVehicleActivityId = {
-  PC: "10000",
-  EJ: "10001",
+export type ActivityTypeNoByMaintenanceVehicleActivityId = {
+  PC: "10000";
+  EJ: "10001";
 };
+
+const activityTypeNoByMaintenanceVehicleActivityId: ActivityTypeNoByMaintenanceVehicleActivityId =
+  {
+    PC: "10000",
+    EJ: "10001",
+  };

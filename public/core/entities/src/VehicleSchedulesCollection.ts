@@ -40,16 +40,11 @@ export class VehicleSchedulesCollection extends Collection<
     this.libelle = props.libelle;
   }
 
-  /**
-   *
-   * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
-   * @returns {VehicleSchedulesCollection}
-   */
   static createFromOirStyleData(
-    oirStyleData,
-    libelle,
+    oirStyleData: any,
+    libelle: string,
     associationType: CollectionAssociationType = "composition"
-  ) {
+  ): VehicleSchedulesCollection {
     const rawVehicleSchedules = oirStyleData.vehicle_schedule;
 
     if (!rawVehicleSchedules) {
@@ -67,7 +62,7 @@ export class VehicleSchedulesCollection extends Collection<
     return `${this.libelle} - (${this.count()} vscs)`;
   }
 
-  setScenarioNumberOnAllVscs(scenarioNumber) {
+  setScenarioNumberOnAllVscs(scenarioNumber: number | string) {
     this.forEach((vsc) => {
       vsc.vscScenario = scenarioNumber.toString();
     });
@@ -153,28 +148,34 @@ export class VehicleSchedulesCollection extends Collection<
     return Array.from(this.setOfAllPlaceIdentifiers);
   }
 
-  getOrCreateVehicleScheduleByVscName(vscName, defaultPropsForNewVsc) {
+  getOrCreateVehicleScheduleByVscName(
+    vscName: string,
+    defaultPropsForNewVsc: VehicleScheduleProps
+  ) {
     defaultPropsForNewVsc = defaultPropsForNewVsc || {};
     defaultPropsForNewVsc.vscName = vscName;
     return this.getOrCreateItemByPropName(`vscName`, vscName, defaultPropsForNewVsc);
   }
 
-  getVehicleScheduleByVscName(vscName) {
+  getVehicleScheduleByVscName(vscName: string) {
     return this.getByPropName(`vscName`, vscName);
   }
 
   /**
    * Adds the vscs of the otherVscColl to this one and changes the libelle.
    * MUTATES this vscColl
-   * @param {VehicleSchedulesCollection} otherVscColl The other vscCollection to merge with this one.
-   * @return {VehicleSchedulesCollection} this modified vscColl
+   * @param otherVscColl - The other vscCollection to merge with this one.
+   * @return this modified vscColl
    */
-  mergeWithOtherVscColl(otherVscColl) {
+  mergeWithOtherVscColl(
+    otherVscColl: VehicleSchedulesCollection
+  ): VehicleSchedulesCollection {
     this._tripsCollectionOfAllTripsOfAllVscs = null;
     this.libelle = `${this.libelle} - ${otherVscColl.libelle}`;
     otherVscColl.forEach((otherCollVsc) => {
       this.add(otherCollVsc);
     });
+    return this;
   }
 
   /**

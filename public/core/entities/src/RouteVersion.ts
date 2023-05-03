@@ -5,7 +5,7 @@ import { ExtendedItemProps } from "@bimo/core-utils-collection";
 import { RoutesCollection, RoutesCollectionProps } from "./RoutesCollection";
 import { VariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
 import { Variant, VariantProps } from "./Variant";
-import { VariantPoint } from "./VariantPoint";
+import { VariantPoint, VariantPointProps } from "./VariantPoint";
 import {
   VariantPointsCollection,
   VariantPointsCollectionProps,
@@ -20,6 +20,7 @@ import {
 } from "./TripOrVariantSectionsCollection";
 
 import { Entity } from "@bimo/core-utils-entity";
+import TripOrVariantSection from "./TripOrVariantSection";
 const childClasses: (typeof Entity)[] = [RoutesCollection];
 
 export interface RouteVersionProps extends ExtendedItemProps {
@@ -90,15 +91,11 @@ export class RouteVersion extends VehicleScheduleOrRouteVersion<
 
   removeVariant(variant: Variant) {
     this.variantsCollectionOfAllVariantsOfAllRoutes.remove(variant);
-    this.getRouteById(variant.routeId)?.variants.remove(variant);
+    this.getRouteById(variant.routeId as string)?.variants.remove(variant);
   }
 
-  /**
-   * Creates a new instance of a routeVersion. All routes are new instances too.
-   * @param {string=} newRtevIdentifier
-   * @returns {RouteVersion}
-   */
-  copy(newRtevIdentifier) {
+  /** Creates a new instance of a routeVersion. All routes are new instances too. */
+  copy(newRtevIdentifier?: string) {
     const copiedRouteVersion = new RouteVersion(this);
     copiedRouteVersion.rtevIdentifier = newRtevIdentifier;
     copiedRouteVersion.routes = new RoutesCollection({
@@ -117,7 +114,7 @@ export class RouteVersion extends VehicleScheduleOrRouteVersion<
     return `${this.slo} (${this.routes.length} lignes et ${this.variantsCollectionOfAllVariantsOfAllRoutes?.length} variantes)`;
   }
 
-  getVariantsThatUseOneOfThesePlaces(listOfPlaces) {
+  getVariantsThatUseOneOfThesePlaces(listOfPlaces: string | Set<string> | string[]) {
     if (!listOfPlaces) {
       return undefined;
     }
@@ -133,7 +130,7 @@ export class RouteVersion extends VehicleScheduleOrRouteVersion<
     return variants;
   }
 
-  getRouteById(routeId) {
+  getRouteById(routeId: string) {
     return this.routes.getByPropName(`rteIdentifier`, routeId);
   }
 
@@ -167,7 +164,12 @@ export class RouteVersion extends VehicleScheduleOrRouteVersion<
   }
 
   get variantSectionsCollectionOfAllVariantsOfAllRoutes() {
-    let allVariantSections = [];
+    let allVariantSections: TripOrVariantSection<
+      VariantPoint,
+      VariantPointProps,
+      Variant,
+      VariantProps
+    >[] = [];
     this.variantsCollectionOfAllVariantsOfAllRoutes.forEach((variant) => {
       allVariantSections = allVariantSections.concat(variant.sections.items);
     });

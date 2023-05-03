@@ -1,20 +1,22 @@
 import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
-import BlocksCollection from "../BlocksCollection";
-import BlockActivitiesCollection from "../BlockActivitiesCollection";
-import BlockSectionsCollection from "../BlockSectionsCollection";
+import { BlocksCollection } from "../BlocksCollection";
+import { BlockActivitiesCollection } from "../BlockActivitiesCollection";
+import { BlockSectionsCollection } from "../BlockSectionsCollection";
+import { VehicleTask } from "../VehicleTask";
+import { Block } from "../Block";
+import { BlockActivity } from "../BlockActivity";
+import { BlockSection } from "../BlockSection";
 
-/**
- * @param {Object} params
- * @param {import ('../VehicleTask')} params.vehicleTask
- * @param {Map} params.setOfVtasByBlock
- * @param {Map} params.setOfVtasByBlockActivity
- * @param {Map} params.setOfBlockSectionsByBlockActivity
- */
 function computeContentsOfOneVta({
   vehicleTask,
   setOfVtasByBlock,
   setOfVtasByBlockActivity,
   setOfBlockSectionsByBlockActivity,
+}: {
+  vehicleTask: VehicleTask;
+  setOfVtasByBlock: Map<Block, Set<VehicleTask>>;
+  setOfVtasByBlockActivity: Map<BlockActivity, Set<VehicleTask>>;
+  setOfBlockSectionsByBlockActivity: Map<BlockActivity, Set<BlockSection>>;
 }) {
   const { vehicleSchedule, vehicleUnit } = vehicleTask;
   try {
@@ -54,7 +56,7 @@ function computeContentsOfOneVta({
     };
   } catch (error) {
     const err = new Error(
-      `Erreur au chargement du vta du vehicleUnit ${vehicleUnit.slo} de ${vehicleSchedule.slo}: ${error.message}`
+      `Erreur au chargement du vta du vehicleUnit ${vehicleUnit.slo} de ${vehicleSchedule?.slo}: ${error.message}`
     );
     err.stack = `Re-thrown: ${err.stack}\nOriginal:${error.stack}`;
     throw err;
@@ -63,18 +65,6 @@ function computeContentsOfOneVta({
 
 export default computeContentsOfOneVta;
 
-/**
- * @param {Object} args
- * @param {import ('../Block')[]} args.remainingBlocksToTreat
- * @param {number} args.indexOfFirstBlkActToTreatInThisBlock
- * @param {import ('../VehicleTask')} args.vehicleTask
- * @param {BlocksCollection} args.blocksCollOfThisVehu
- * @param {BlockActivitiesCollection} args.blockActivitiesCollOfThisVehu
- * @param {BlockSectionsCollection} args.blockSectionsOfThisVehu
- * @param {Map} args.setOfVtasByBlock
- * @param {Map} args.setOfVtasByBlockActivity
- * @param {Map} args.setOfBlockSectionsByBlockActivity
- */
 function recursivelyAddBlocksAndBlockActivities({
   remainingBlocksToTreat,
   indexOfFirstBlkActToTreatInThisBlock = 0,
@@ -85,6 +75,16 @@ function recursivelyAddBlocksAndBlockActivities({
   setOfVtasByBlock,
   setOfVtasByBlockActivity,
   setOfBlockSectionsByBlockActivity,
+}: {
+  remainingBlocksToTreat: Block[];
+  indexOfFirstBlkActToTreatInThisBlock: number;
+  vehicleTask: VehicleTask;
+  blocksCollOfThisVehu: BlocksCollection;
+  blockActivitiesCollOfThisVehu: BlockActivitiesCollection;
+  blockSectionsOfThisVehu: BlockSectionsCollection;
+  setOfVtasByBlock: Map<Block, Set<VehicleTask>>;
+  setOfVtasByBlockActivity: Map<BlockActivity, Set<VehicleTask>>;
+  setOfBlockSectionsByBlockActivity: Map<BlockActivity, Set<BlockSection>>;
 }) {
   const blockToTreat = remainingBlocksToTreat.shift();
   if (!blockToTreat) return;
@@ -155,8 +155,8 @@ function recursivelyAddBlocksAndBlockActivities({
        * Nous sommes actuellement sur le block qui se termine sec et il faut qu'on retrouve
        * l'autre pour l'ajouter dans les blocks à traiter sur cette vehu, et qu'on sache à
        * partir de quel index on ajoute ses activités */
-      let foundIndex;
-      const newBlockToTreat = vehicleTask.vehicleSchedule.blocks.find((block) => {
+      let foundIndex: number = -1;
+      const newBlockToTreat = vehicleTask.vehicleSchedule?.blocks.find((block) => {
         foundIndex = block.blockActivities.findIndex(
           (blkAct) =>
             blkAct.blkactVehicleActivityTypeNo === "13" &&

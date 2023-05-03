@@ -83,7 +83,7 @@ export class BoundingBox extends Item<BoundingBox> {
     return `${this.shortLoggingOutput} dX: ${this.dX}  dY: ${this.dY}`;
   }
 
-  setActiveCoordinatesSystemName(coordinatesSystemName) {
+  setActiveCoordinatesSystemName(coordinatesSystemName: string) {
     this.activeCoordinatesSystemName = coordinatesSystemName;
   }
 }

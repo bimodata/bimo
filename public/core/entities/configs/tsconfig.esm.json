@@ -4,6 +4,6 @@
   "compilerOptions": {
     "outDir": "../dist/esm",
     "declarationDir": "../types/esm",
-    "noImplicitAny": false
+    "noImplicitAny": true
   }
 }

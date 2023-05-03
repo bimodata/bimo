@@ -16,6 +16,7 @@ import {
 } from "./ServiceContextsCollection";
 
 import { Entity } from "@bimo/core-utils-entity";
+import { BookingCalendarDate } from "./BookingCalendarDate";
 const childClasses: (typeof Entity)[] = [
   BookingCalendarDatesCollection,
   ServiceEvolutionsCollection,
@@ -97,7 +98,7 @@ export class BookingCalendar extends Item<BookingCalendar> {
     );
   }
 
-  addBCalDate(bcalDate) {
+  addBCalDate(bcalDate: BookingCalendarDate) {
     this.bookingCalendarDates.add(bcalDate);
   }
 
