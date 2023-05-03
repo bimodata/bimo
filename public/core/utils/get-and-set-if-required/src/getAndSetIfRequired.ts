@@ -9,11 +9,7 @@ import _ from "lodash";
  * @param defaultValue The value returned if the resolved value is undefined.
  * @return Returns the resolved value.
  */
-export function getAndSetIfRequired<T>(
-  object: object,
-  path: string | string[],
-  defaultValue: T
-): T {
+export function getAndSetIfRequired<T>(object: object, path: any, defaultValue: T): T {
   if (object instanceof Map) return getAndSetIfRequiredInMap(object, path, defaultValue);
   const value = _.get(object, path, defaultValue);
   if (!_.has(object, path)) {
