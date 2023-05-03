@@ -42,14 +42,14 @@ export function computeSetOfBlockActivitiesHelper<ItemType>(
       `An item must have a vehicleSchedule when its blockActivities are accessed(${blockActivityItem.slo})`
     );
   let setOfBlockActivities: Set<BlockActivity> =
-    blockActivityItem.vehicleSchedule.setOfblockActivitiesByBlockActivityEntityItem.get(
+    blockActivityItem.vehicleSchedule.setOfBlockActivitiesByBlockActivityEntityItem.get(
       blockActivityItem
     );
   if (!setOfBlockActivities) {
     const foundInBlockingVsc = blockActivityItem.vehicleSchedule.blockingVscs.some(
       (blockingVsc) => {
         setOfBlockActivities =
-          blockingVsc.setOfblockActivitiesByBlockActivityEntityItem.get(
+          blockingVsc.setOfBlockActivitiesByBlockActivityEntityItem.get(
             blockActivityItem
           );
         return setOfBlockActivities;

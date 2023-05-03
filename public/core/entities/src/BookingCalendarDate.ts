@@ -9,6 +9,7 @@ import {
 } from "./SchedulingUnitDatesCollection";
 
 import { Entity } from "@bimo/core-utils-entity";
+import { SchedulingUnitDate } from "./SchedulingUnitDate";
 const childClasses: (typeof Entity)[] = [SchedulingUnitDatesCollection];
 
 export interface BookingCalendarDateProps extends ExtendedItemProps {
@@ -55,7 +56,7 @@ export class BookingCalendarDate extends Item<BookingCalendarDate> {
     );
   }
 
-  addSchedUnitDate(schedulingUnitDate) {
+  addSchedUnitDate(schedulingUnitDate: SchedulingUnitDate) {
     this.schedulingUnitDates.add(schedulingUnitDate);
   }
 

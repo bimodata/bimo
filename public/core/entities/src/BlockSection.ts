@@ -16,7 +16,7 @@ import { Block } from "./Block";
 export interface BlockSectionProps extends ExtendedItemProps {
   id?: string;
   block: Block;
-  blockActivities: BlockActivityProps[];
+  blockActivities?: BlockActivityProps[];
 }
 
 export class BlockSection extends Item<BlockSection> {

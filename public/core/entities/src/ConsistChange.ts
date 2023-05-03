@@ -16,6 +16,7 @@ import {
 import BlockActivity from "./BlockActivity";
 import Place from "./Place";
 import { ConsistChangesCollection } from "./ConsistChangesCollection";
+import Trip from "./Trip";
 
 export interface ConsistChangeProps extends ExtendedItemProps {
   cchgActivity?: string;
@@ -125,8 +126,9 @@ export class ConsistChange
     this.cchgToNote = gavpfp("cchgToNote", props);
   }
 
-  /** @param {import ('./Trip')} newTrip */
-  setNewTrip(newTrip) {
+  setNewTrip(newTrip: Trip) {
+    if (!newTrip.trpIntNumber)
+      throw new Error(`${newTrip.mlo} should have a trpIntNumber`);
     this.cchgOnTripNo = newTrip.trpIntNumber;
   }
 

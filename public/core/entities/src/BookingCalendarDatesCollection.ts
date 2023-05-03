@@ -35,7 +35,7 @@ export class BookingCalendarDatesCollection extends Collection<
     return bcalds[0];
   }
 
-  getByDate(date) {
+  getByDate(date: string) {
     return this.getByBusinessId(date);
   }
 

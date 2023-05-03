@@ -32,7 +32,6 @@ export class TrainPathVariant extends Item<TrainPathVariant> {
 
     this.trnpvTrainPathRimId = gavpfp("trnpvTrainPathRimId", props, `string`);
 
-    /* Children */
     /** @type {TrainPathVariantPointsCollection} */
     this.trainPathVariantPoints = gavpfp(
       "trainPathVariantPoints",

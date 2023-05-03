@@ -21,7 +21,11 @@ import {
   TripvehgrpspecsCollection,
   TripvehgrpspecsCollectionProps,
 } from "./TripvehgrpspecsCollection";
-import { TripOrVariant, TripOrVariantProps } from "./TripOrVariant";
+import {
+  TripOrVariant,
+  TripOrVariantProps,
+  TripOrVariantTypeEnum,
+} from "./TripOrVariant";
 import {
   BlockActivityItem,
   computeSetOfBlockActivitiesHelper,
@@ -29,11 +33,11 @@ import {
 } from "./BlockActivityItem";
 import { BlockActivity } from "./BlockActivity";
 import { BimoContext } from "@bimo/core-global-types";
-import Entity, { CustomProps } from "@bimo/core-utils-entity";
+import { CustomProps, Entity } from "@bimo/core-utils-entity";
 import TripsCollection from "./TripsCollection";
 import VehicleSchedule from "./VehicleSchedule";
+import Place from "./Place";
 
-import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [
   TripTpsCollection,
   TripPointsCollection,
@@ -42,13 +46,15 @@ const childClasses: (typeof Entity)[] = [
 
 const INTERNAL_DISTANCE_FACTOR = 10000;
 
+export type TripType = "0" | "3";
+
 export interface TripProps extends ExtendedItemProps {
   bimoId?: string;
   trpNumber?: string;
   trpIsProtected?: string;
   trpRoute?: string;
   trpViaVariant?: string;
-  trpType?: string;
+  trpType?: TripType;
   trpDirection?: string;
   trpPlaceStart?: string;
   trpPlaceEnd?: string;
@@ -113,14 +119,13 @@ export interface TripProps extends ExtendedItemProps {
   trpOpReleve?: string;
   trpNePasCommanderSillon?: string;
   trpBesoinVf?: string;
-  tripTps?: string;
-  tripPoints?: string;
-  tripvehgrpspecs?: string;
-  _links?: string;
+  tripTps?: TripTpsCollection;
+  tripPoints?: TripPointsCollection;
+  tripvehgrpspecs?: TripvehgrpspecsCollection;
 }
 
 export class Trip
-  extends TripOrVariant<Trip, TripProps>
+  extends TripOrVariant<Trip, TripProps, TripPoint, TripPointProps>
   implements BlockActivityItem<Trip>
 {
   _bimoId: string | null;
@@ -128,7 +133,7 @@ export class Trip
   trpIsProtected?: string;
   trpRoute?: string;
   trpViaVariant?: string;
-  trpType: string = "0";
+  trpType: TripType = "0";
   trpDirection?: string;
   _trpPlaceStart: string;
   _trpPlaceEnd: string;
@@ -201,9 +206,12 @@ export class Trip
   _links: { [linkType: string]: any } = {};
   static itemIdPropName = "trpIntNumber";
   static blkActIdPropName = "blkactTripNo";
-  constructor(props, tripOrVariantType = "trip") {
-    // @ts-ignore
-    super(props, tripOrVariantType);
+  constructor(
+    props: TripProps,
+    context: BimoContext,
+    tripOrVariantType: TripOrVariantTypeEnum = "trip"
+  ) {
+    super(props, context, tripOrVariantType);
     this._bimoId = gavpfp("bimoId", props);
     this.trpNumber = gavpfp("trpNumber", props);
     this.trpIsProtected = gavpfp("trpIsProtected", props, `string`, `1`);
@@ -453,7 +461,7 @@ export class Trip
     this.setStartAndEndAttributesFromPoints();
   }
 
-  moveToVehicleSchedule(targetVehicleSchedule) {
+  moveToVehicleSchedule(targetVehicleSchedule: VehicleSchedule) {
     if (this.parent) this.parent.remove(this);
     targetVehicleSchedule.addTrip(this);
   }
@@ -461,31 +469,28 @@ export class Trip
   delete() {
     this.parent?.remove(this);
     Object.keys(this).forEach((key) => {
+      // @ts-ignore
       delete this[key];
     });
     this._status = `deleted`;
   }
 
-  /**
-   * Creates a new instance of a trip. All trips points are new instances too. BimoId is set to undefined
-   * @param {string=} newInternalNumber
-   * @returns {Trip}
-   */
-  copy(newInternalNumber) {
+  /** Creates a new instance of a trip. All trips points are new instances too. BimoId is set to undefined */
+  copy(newInternalNumber?: string) {
     const copiedTripPoints = this.tripPoints.map((tripPoint) => tripPoint.copy());
-    const props = {
+    const props: TripProps = {
       ...this,
       tripPoints: copiedTripPoints,
       trpIntNumber: newInternalNumber,
       parent: undefined,
       bimoId: undefined,
     };
-    const copiedTrip = new Trip(props);
+    const copiedTrip = new Trip(props, this.context, this.tripOrVariantType);
     copiedTrip._links.copiedFrom = this;
     return copiedTrip;
   }
 
-  /** @type {string} key of the form '${trpRoute}|${trpViaVariant}' or null if either is null    */
+  /** key of the form '${trpRoute}|${trpViaVariant}' or null if either is null    */
   get routeAndVariantKey() {
     if (!this.trpRoute || !this.trpViaVariant) return null;
     return `${this.trpRoute}|${this.trpViaVariant}`;
@@ -506,7 +511,7 @@ export class Trip
     return `${this.mediumLoggingOutput}\n${this.tripPoints.longLoggingOutput}`;
   }
 
-  /** @type {string} the first 3 digits of the trip number */
+  /** the first 3 digits of the trip number */
   get trancheNum() {
     return this.trpNumber.slice(0, 3);
   }
@@ -558,7 +563,10 @@ export class Trip
     });
   }
 
-  getTimeDiffInSecondsBetweenTripPointIndexes(indexOfFirst, indexOfSecond) {
+  getTimeDiffInSecondsBetweenTripPointIndexes(
+    indexOfFirst: number,
+    indexOfSecond: number
+  ) {
     const firstAsDuration = this.tripPoints.items[indexOfFirst].getTimeAsDuration(
       `departure`,
       true
@@ -570,49 +578,49 @@ export class Trip
     return secondAsDuration.minus(firstAsDuration).as("second");
   }
 
-  changeCurrentStartPlace(newStartPlace) {
+  changeCurrentStartPlace(newStartPlace: Place | string) {
     const placeIdentifier = getPlaceIdFromPlaceOrString(newStartPlace);
     this._trpPlaceStart = placeIdentifier;
     if (this.firstTripPoint) this.firstTripPoint.trpptPlace = placeIdentifier;
     if (this.firstTripTimingPoint) this.firstTripTimingPoint.ttpPlace = placeIdentifier;
   }
 
-  changeOriginalStartPlace(newStartPlace) {
+  changeOriginalStartPlace(newStartPlace: Place | string) {
     const placeIdentifier = getPlaceIdFromPlaceOrString(newStartPlace);
     this._trpOriginalStartPlace = placeIdentifier;
     if (this.firstTripPoint)
       this.firstTripPoint.trpptInternalOriginalPlaceId = placeIdentifier;
   }
 
-  changeStartPlace(newStartPlace) {
+  changeStartPlace(newStartPlace: Place | string) {
     this.changeCurrentStartPlace(newStartPlace);
     this.changeOriginalStartPlace(newStartPlace);
   }
 
-  changeCurrentEndPlace(newEndPlace) {
+  changeCurrentEndPlace(newEndPlace: Place | string) {
     const placeIdentifier = getPlaceIdFromPlaceOrString(newEndPlace);
     this._trpPlaceEnd = placeIdentifier;
     if (this.lastTripPoint) this.lastTripPoint.trpptPlace = placeIdentifier;
     if (this.lastTripTimingPoint) this.lastTripTimingPoint.ttpPlace = placeIdentifier;
   }
 
-  changeOriginalEndPlace(newEndPlace) {
+  changeOriginalEndPlace(newEndPlace: Place | string) {
     const placeIdentifier = getPlaceIdFromPlaceOrString(newEndPlace);
     this._trpOriginalEndPlace = placeIdentifier;
     if (this.lastTripPoint)
       this.lastTripPoint.trpptInternalOriginalPlaceId = placeIdentifier;
   }
 
-  changeEndPlace(newEndPlace) {
+  changeEndPlace(newEndPlace: Place | string) {
     this.changeCurrentEndPlace(newEndPlace);
     this.changeOriginalEndPlace(newEndPlace);
   }
 
-  improveStartPlacePrecision(morePreciseStartPlace) {
+  improveStartPlacePrecision(morePreciseStartPlace: Place | string) {
     this.changeStartPlace(morePreciseStartPlace);
   }
 
-  improveEndPlacePrecision(morePreciseEndPlace) {
+  improveEndPlacePrecision(morePreciseEndPlace: Place | string) {
     this.changeEndPlace(morePreciseEndPlace);
   }
 
@@ -696,11 +704,11 @@ Trip.allChildClasses = getAllChildClasses(childClasses);
 
 export default Trip;
 
-function getPlaceIdFromPlaceOrString(placeOrString) {
+function getPlaceIdFromPlaceOrString(placeOrString: Place | string) {
   return typeof placeOrString === `string` ? placeOrString : placeOrString.plcIdentifier;
 }
 
-const activityTypeNoByTripType = {
-  0: "6",
-  3: "2",
+const activityTypeNoByTripType: { [tripType in TripType]: string } = {
+  "0": "6",
+  "3": "2",
 };

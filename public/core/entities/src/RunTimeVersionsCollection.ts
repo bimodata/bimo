@@ -26,9 +26,9 @@ export class RunTimeVersionsCollection extends Collection<
   }
 
   /**
-   * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
+   * @param oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
    */
-  static createFromOirStyleData(oirStyleData) {
+  static createFromOirStyleData(oirStyleData: any) {
     const rawRunTimeVersions = oirStyleData.runtime_version;
 
     if (!rawRunTimeVersions) {

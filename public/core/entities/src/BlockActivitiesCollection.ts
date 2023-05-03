@@ -5,6 +5,8 @@ import { BlockActivity, BlockActivityProps } from "./BlockActivity";
 import { BlockActivityItem, BaseBlockActivityItem } from "./BlockActivityItem";
 
 import { Entity } from "@bimo/core-utils-entity";
+import Maintenance from "./Maintenance";
+import Trip from "./Trip";
 const childClasses: (typeof Entity)[] = [BlockActivity];
 
 export interface BlockActivitiesCollectionProps
@@ -26,11 +28,12 @@ export class BlockActivitiesCollection extends Collection<
 
   sortByTime() {
     try {
-      this.items.sort(
-        (blkActA, blkActB) =>
-          blkActA.startTimeAsDuration.as("second") -
-          blkActB.startTimeAsDuration.as("second")
-      );
+      this.items.sort((blkActA, blkActB) => {
+        const timeA = blkActA.startTimeAsDuration;
+        const timeB = blkActB.startTimeAsDuration;
+        if (!timeA || !timeB) throw new Error(`Missing start time on an activity`);
+        return timeA.as("second") - timeB.as("second");
+      });
     } catch (error) {
       const newError = new Error(
         `Error while sorting these blockActivities:\n${this.longLoggingOutput}\n${error.stack}`
@@ -77,31 +80,27 @@ export class BlockActivitiesCollection extends Collection<
    * @param {Object} activity the item corresponding to the activity to add
    * typically a Trip, Maintenance, VehicleStandBy or ConsistChange
    */
-  removeActivity(activity) {
-    if (activity.removeFromBlockActivitiesCollectionFn)
-      return activity.removeFromBlockActivitiesCollectionFn(this);
+  removeActivity(activity: BlockActivityItem<BaseBlockActivityItem>): null {
+    // if (activity.removeFromBlockActivitiesCollectionFn)
+    //   return activity.removeFromBlockActivitiesCollectionFn(this);
     this.remove(activity.blockActivity);
     activity.removeBlockActivity(activity.blockActivity);
     return null;
   }
 
-  /** @param {import('@bimo-hastus/domain-entities/src/Trip')} trip */
-  addTrip(trip) {
+  addTrip(trip: Trip) {
     return this.addActivity(trip);
   }
 
-  /** @param {import('@bimo-hastus/domain-entities/src/Trip')} trip */
-  removeTrip(trip) {
+  removeTrip(trip: Trip) {
     return this.removeActivity(trip);
   }
 
-  /** @param {import('@bimo-hastus/domain-entities/src/Maintenance')} maintenance */
-  addMaintenance(maintenance) {
+  addMaintenance(maintenance: Maintenance) {
     return this.addActivity(maintenance);
   }
 
-  /** @param {import('@bimo-hastus/domain-entities/src/Maintenance')} maintenance */
-  removeMaintenance(maintenance) {
+  removeMaintenance(maintenance: Maintenance) {
     return this.removeActivity(maintenance);
   }
 }

@@ -8,7 +8,7 @@ export function computeActivityEntityItemsOfVsc(vsc: VehicleSchedule) {
     BlockActivity,
     BlockActivityItem<BaseBlockActivityItem>
   > = new Map();
-  const setOfblockActivitiesByBlockActivityEntityItem = new Map();
+  const setOfBlockActivitiesByBlockActivityEntityItem = new Map();
 
   vsc.blocks.forEach((block) => {
     block.blockActivities.forEach((blockActivity) => {
@@ -25,7 +25,7 @@ export function computeActivityEntityItemsOfVsc(vsc: VehicleSchedule) {
           activityEntityItem = vscInclOir.vsc?.[collectionKey].getByBusinessId(
             blockActivity[hastusIdKey]
           );
-          return activityEntityItem;
+          return !!activityEntityItem;
         });
         if (!foundInOtherSchedule) {
           throw new Error(
@@ -36,31 +36,52 @@ export function computeActivityEntityItemsOfVsc(vsc: VehicleSchedule) {
       }
 
       const setOfBlockActivitiesOfThisEntityItem = getAndSetIfRequired(
-        setOfblockActivitiesByBlockActivityEntityItem,
+        setOfBlockActivitiesByBlockActivityEntityItem,
         activityEntityItem,
         new Set()
       );
       setOfBlockActivitiesOfThisEntityItem.add(blockActivity);
 
+      if (!activityEntityItem) throw new Error(`Activité manquante`);
       activityEntityItemByBlockActivity.set(blockActivity, activityEntityItem);
     });
   });
   return {
-    setOfblockActivitiesByBlockActivityEntityItem,
+    setOfBlockActivitiesByBlockActivityEntityItem,
     activityEntityItemByBlockActivity,
   };
 }
 
 export default computeActivityEntityItemsOfVsc;
 
-const collectionKeyByEntityClassKey = {
+export type BlockActivityCollectionKey =
+  | "trips"
+  | "consistChanges"
+  | "vehicleStandbys"
+  | "maintenances";
+
+export type CollectionKeyByEntityClassKey = {
+  Trip: "trips";
+  ConsistChange: "consistChanges";
+  VehicleStandby: "vehicleStandbys";
+  Maintenance: "maintenances";
+};
+
+const collectionKeyByEntityClassKey: CollectionKeyByEntityClassKey = {
   Trip: "trips",
   ConsistChange: "consistChanges",
   VehicleStandby: "vehicleStandbys",
   Maintenance: "maintenances",
 };
 
-const hastusIdKeyByEntityClassKey = {
+// {[entityClassKey in BlockActivityEntityClassKey]}
+export type HastusIdKeyByEntityClassKey = {
+  Trip: "blkactTripNo";
+  ConsistChange: "blkactCchgNo";
+  VehicleStandby: "blkactVehicleStandbyNo";
+  Maintenance: "blkactMaintenanceNo";
+};
+const hastusIdKeyByEntityClassKey: HastusIdKeyByEntityClassKey = {
   Trip: "blkactTripNo",
   ConsistChange: "blkactCchgNo",
   VehicleStandby: "blkactVehicleStandbyNo",

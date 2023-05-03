@@ -1,13 +1,28 @@
 import TripOrVariantSectionsCollection from "../TripOrVariantSectionsCollection";
 import { TripOrVariant } from "../TripOrVariant";
+import { TripOrVariantPoint } from "../TripOrVariantPoint";
 import { ExtendedItem, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 function computeTripOrVariantSectionsOfTripOrVariant<
   TripOrVariantType extends ExtendedItem<TripOrVariantType>,
-  TripOrVariantProps extends ExtendedItemProps
->(tripOrVariant: TripOrVariant<TripOrVariantType, TripOrVariantProps>) {
+  TripOrVariantProps extends ExtendedItemProps,
+  PointType extends TripOrVariantPoint<PointType, PointProps>,
+  PointProps extends ExtendedItemProps
+>(
+  tripOrVariant: TripOrVariant<
+    TripOrVariantType,
+    TripOrVariantProps,
+    PointType,
+    PointProps
+  >
+) {
   try {
-    const tripOrVariantSections = new TripOrVariantSectionsCollection({
+    const tripOrVariantSections = new TripOrVariantSectionsCollection<
+      PointType,
+      PointProps,
+      TripOrVariantType,
+      TripOrVariantProps
+    >({
       associationType: "composition",
       parent: tripOrVariant,
     });

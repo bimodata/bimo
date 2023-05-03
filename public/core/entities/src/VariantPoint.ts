@@ -141,7 +141,7 @@ export class VariantPoint extends TripOrVariantPoint<VariantPoint, VariantPointP
   }
 
   get variantId() {
-    return this.variant.varIdentifier;
+    return this.variant?.varIdentifier;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -169,8 +169,13 @@ export class VariantPoint extends TripOrVariantPoint<VariantPoint, VariantPointP
     return this.parent.indexOf(this);
   }
 
-  getNthPointFromThisOne(n) {
-    return (this.parent && this.parent.items[this._indexInParent + n]) ?? null;
+  getNthPointFromThisOne(n: number) {
+    return (
+      (this.parent &&
+        this._indexInParent &&
+        this.parent.items[this._indexInParent + n]) ??
+      null
+    );
   }
 
   get nextPoint() {

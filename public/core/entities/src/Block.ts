@@ -17,6 +17,7 @@ import { VehicleUnit } from "./VehicleUnit";
 import { VehicleSchedule } from "./VehicleSchedule";
 
 import { Entity } from "@bimo/core-utils-entity";
+import Trip from "./Trip";
 const childClasses: (typeof Entity)[] = [
   BlkvehuoirsCollection,
   BlockActivitiesCollection,
@@ -36,13 +37,13 @@ export interface BlockProps extends ExtendedItemProps {
   blkVehicleNumber?: string;
   blkGroup?: string;
   blkIsFixed?: string;
-  blkVehUnitCount?: string;
+  blkVehUnitCount?: number | string;
   blkRelTypeStrt?: string;
   blkRelTypeEnd?: string;
   blkConsistPatternUser?: string;
   blkNumOperation?: string;
-  blkvehuoirs?: string;
-  blockActivities?: string;
+  blkvehuoirs?: BlkvehuoirsCollection;
+  blockActivities?: BlockActivitiesCollection;
 }
 
 export class Block extends Item<Block> {
@@ -148,11 +149,11 @@ export class Block extends Item<Block> {
     this.blockActivities.sortByTime();
   }
 
-  addTrip(trip) {
+  addTrip(trip: Trip) {
     this.blockActivities.addTrip(trip);
   }
 
-  addVehuAtStart(vehu) {
+  addVehuAtStart(vehu: VehicleUnit) {
     this.blkVehUnitCount += 1;
     this.blkvehuoirs.createNewItem({
       blkvehuoirRank: this.blkVehUnitCount,
@@ -160,11 +161,11 @@ export class Block extends Item<Block> {
     });
   }
 
-  removeTrip(trip) {
+  removeTrip(trip: Trip) {
     this.blockActivities.removeTrip(trip);
   }
 
-  addTrips(...trips) {
+  addTrips(...trips: Trip[]) {
     trips.forEach((trip) => {
       this.addTrip(trip);
     });

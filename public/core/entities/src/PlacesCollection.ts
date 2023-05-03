@@ -25,7 +25,7 @@ export class PlacesCollection extends Collection<Place, PlaceProps> {
    *
    * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
    */
-  static createFromOirStyleData(oirStyleData, libelle) {
+  static createFromOirStyleData(oirStyleData: any, libelle: string) {
     const rawPlaces = oirStyleData.place;
 
     if (!rawPlaces) {

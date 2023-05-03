@@ -36,8 +36,8 @@ const pathByTripOrVariantPropNameByTripOrVariantType = {
     allowLoadTime: "varptAllowLoadTime",
     tpDistance: "varptTpDistance",
     distance: "varptDistance",
-    arrivalTime: undefined,
-    departureTime: undefined,
+    // arrivalTime: null,
+    // departureTime: null,
 
     // Todo: move this to a SNCF specific TripOrVariant
     codeCs: "varptCodeCs",
@@ -96,7 +96,7 @@ export class TripOrVariantPoint<
     set(this, this._abstract.pathByPropName.originalPlaceId, v);
   }
 
-  get variantId(): string {
+  get variantId(): string | undefined {
     return get(this, this._abstract.pathByPropName.variantId);
   }
 

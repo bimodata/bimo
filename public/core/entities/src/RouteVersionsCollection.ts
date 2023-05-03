@@ -76,7 +76,7 @@ export class RouteVersionsCollection extends Collection<RouteVersion, RouteVersi
     return { route_version: routeVersions, route: routes };
   }
 
-  getRouteVersionByIdentifier(rtevIdentifier) {
+  getRouteVersionByIdentifier(rtevIdentifier: string) {
     return this.getByPropName(`rtevIdentifier`, rtevIdentifier);
   }
 

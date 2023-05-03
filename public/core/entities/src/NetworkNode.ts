@@ -4,6 +4,8 @@ import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { NetworkNodesCollection } from "./NetworkNodesCollection";
 
 import { Entity } from "@bimo/core-utils-entity";
+import { Network } from "./Network";
+import { NetworkSection } from "./NetworkSection";
 const childClasses: (typeof Entity)[] = [];
 
 /** Une représentation logique d'un point discret du réseau. */
@@ -29,33 +31,24 @@ export class NetworkNode extends Item<NetworkNode> {
     this._sectionIds = gavpfp("sectionIds", props, Set, new Set());
   }
 
-  /** @type {import ('./Network')} */
   get network() {
     return this.parent && this.parent.parent;
   }
 
-  /** @type {import ('./NetworkSection')[]} */
   get sections() {
     return [...this._sectionIds.values()].map((sectionId) =>
       this.network?.sections.getById(sectionId)
     );
   }
 
-  /**
-   * @param {import ('./NetworkSection')} section
-   */
-  addSection(section) {
+  addSection(section: NetworkSection) {
     this._sectionIds.add(section.bimoId);
   }
 
-  /**
-   * @param {import ('./NetworkSection')} section
-   */
-  removeSection(section) {
+  removeSection(section: NetworkSection) {
     this._sectionIds.delete(section.bimoId);
   }
 
-  /** @type {import ('./AdjacentLink')[]} */
   get adjacentLinks() {
     if (!this.network) return [];
     return (this.network.adjacentLinksByNode.get(this) || []).filter(
@@ -69,22 +62,16 @@ export class NetworkNode extends Item<NetworkNode> {
     this.network.adjacentLinksByNode.set(this, newLinks);
   }
 
-  /** @type {import ('./NetworkEdge')[]} */
   get adjacentEdges() {
     return this.adjacentLinks.map((link) => link.edge);
   }
 
-  /** @type {import ('./NetworkNode')[]} */
   get adjacentNodes() {
     return this.adjacentLinks.map((link) => link.endNode);
   }
 
-  /**
-   *
-   * @param {import ('./NetworkNode')} otherNode
-   * @returns {import ('./NetworkEdge')} the edge that leads from this node to otherNode
-   */
-  getEdgeToNode(otherNode) {
+  /** @returns the edge that leads from this node to otherNode */
+  getEdgeToNode(otherNode: NetworkNode) {
     return this.adjacentLinks.find(({ endNode }) => endNode === otherNode)?.edge;
   }
 
@@ -106,15 +93,14 @@ export class NetworkNode extends Item<NetworkNode> {
     })`;
   }
 
-  /**
-   *
-   * @param {import ('./Network')} targetNetwork
-   * @param {object} [options={}]
-   * @param {Boolean} [options.bringEdges=false]
-   * @param {Boolean} [options.copyEdges=false]
-   * @param {Boolean} [options.skipCacheUpdate=false]
-   */
-  moveToNetwork(targetNetwork, options) {
+  moveToNetwork(
+    targetNetwork: Network,
+    options: {
+      bringEdges?: boolean;
+      copyEdges?: boolean;
+      skipCacheUpdate?: boolean;
+    }
+  ) {
     const { bringEdges = false, copyEdges = false, skipCacheUpdate = false } = options;
     if (this.network) {
       this.network.removeNode(this, { removeEdges: bringEdges, skipCacheUpdate });

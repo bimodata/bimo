@@ -19,7 +19,7 @@ export interface BlocksAndActsAndSections {
 }
 
 function computeVehicleTasksOfVsc(vsc: VehicleSchedule) {
-  const blocksCollByVehuUniqueId = {};
+  const blocksCollByVehuUniqueId: { [vehuUniqueId: string]: BlocksCollection } = {};
   const blocksAndActsAndSectionsByVta: Map<VehicleTask, BlocksAndActsAndSections> =
     new Map();
   const setOfVtasByBlock: Map<Block, Set<VehicleTask>> = new Map();

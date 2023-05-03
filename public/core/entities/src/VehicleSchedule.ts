@@ -4,6 +4,7 @@ import getIteratorForValuesAtPath from "@bimo/core-utils-get-iterator-for-values
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
 import { TripsCollection, TripsCollectionProps } from "./TripsCollection";
+import { Vscincloir } from "./Vscincloir";
 import {
   VscincloirsCollection,
   VscincloirsCollectionProps,
@@ -49,6 +50,7 @@ import computeVehicleTasksOfVsc from "./subs/computeVehicleTasksOfVsc";
 import computeActivityEntityItemsOfVsc from "./subs/computeActivityEntityItemsOfVsc";
 
 import { Entity } from "@bimo/core-utils-entity";
+import { BaseBlockActivityItem } from "./BlockActivityItem";
 const childClasses: (typeof Entity)[] = [
   VscincloirsCollection,
   NetworkEventsCollection,
@@ -298,12 +300,11 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion<
     return `${this.vscName} - ${this.vscDescription} (${this.vscSchedType})\n${this.vehicleTasks.blo}`;
   }
 
-  addTrip(trip) {
+  addTrip(trip: Trip) {
     this.trips.add(trip);
   }
 
-  /** @param {VehicleSchedule} vsc */
-  addIncludedVsc(vsc) {
+  addIncludedVsc(vsc: VehicleSchedule) {
     if (vsc.vscincloirs.count() > 0) {
       throw new Error(`Impossible d'inclure un multi vsc dans un autre multi vsc.`);
     }
@@ -312,8 +313,7 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion<
     vsc.addBlockingVsc(this);
   }
 
-  /** @param {VehicleSchedule} vsc */
-  removeIncludedVsc(vsc) {
+  removeIncludedVsc(vsc: VehicleSchedule) {
     this.vscincloirs.remove(this.findVscInclOirForVsc(vsc));
   }
 
@@ -321,39 +321,32 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion<
     return this._getAndSetCachedValue("blockingVscs", () => []);
   }
 
-  /** @param {VehicleSchedule} vsc */
-  addBlockingVsc(vsc) {
+  addBlockingVsc(vsc: VehicleSchedule) {
     const currentVscs = new Set(this.blockingVscs);
     currentVscs.add(vsc);
     this._setCachedValue("blockingVscs", Array.from(currentVscs));
   }
 
-  /**
-   *
-   * @param {VehicleSchedule} vsc
-   * @returns {Vscincloir}
-   */
-  findVscInclOirForVsc(vsc) {
+  findVscInclOirForVsc(vsc: VehicleSchedule): Vscincloir {
     return this.vscincloirs.find(
       (vscInclOir) => vscInclOir.vscincloirIntKey === vsc.vscIntId
     );
   }
 
   /**
-   *
-   * @param {VehicleSchedule} vsc
-   * @returns {Boolean} true if this vsc includes the passed in vsc, false otherwise.
+   * @param vsc
+   * @returns  true if this vsc includes the passed in vsc, false otherwise.
    */
-  includesVsc(vsc) {
+  includesVsc(vsc: VehicleSchedule) {
     return !!this.findVscInclOirForVsc(vsc);
   }
 
-  removeTrip(trip) {
+  removeTrip(trip: Trip) {
     if (trip.block) trip.block.removeTrip(trip);
     this.trips.remove(trip);
   }
 
-  getTripByTripNumber(tripNumber) {
+  getTripByTripNumber(tripNumber: string) {
     return this.trips.getByPropName(`trpNumber`, tripNumber);
   }
 
@@ -389,9 +382,9 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion<
     return this.computedActivityEntityItemObjects.activityEntityItemByBlockActivity;
   }
 
-  get setOfblockActivitiesByBlockActivityEntityItem() {
+  get setOfBlockActivitiesByBlockActivityEntityItem() {
     return this.computedActivityEntityItemObjects
-      .setOfblockActivitiesByBlockActivityEntityItem;
+      .setOfBlockActivitiesByBlockActivityEntityItem;
   }
 
   get setOfAllPlaceIdentifiers() {
@@ -442,7 +435,7 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion<
     let nextBlockAct = blockActivitiesIterator.next();
     while (shouldContinue && !nextBlockAct.done) {
       /** @type {BlockActivity} */
-      const blockActivity = nextBlockAct.value;
+      const blockActivity: BlockActivity = nextBlockAct.value;
       const unusedItems = unusedItemsByEntityClassKey.get(
         blockActivity.activityEntityClassKey
       );
@@ -456,7 +449,7 @@ export class VehicleSchedule extends VehicleScheduleOrRouteVersion<
     blockActivityCollections.forEach((collection) =>
       unusedItemsByEntityClassKey
         .get(collection.itemName)
-        .forEach((item) => collection.remove(item))
+        .forEach((item: any) => collection.remove(item))
     );
   }
 }
