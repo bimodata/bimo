@@ -1,5 +1,5 @@
 function unCouplingIsInvalid(unCoupling) {
-  const blockActs = Array.from(unCoupling.vehicleSchedule.setOfblockActivitiesByBlockActivityEntityItem.get(unCoupling));
+  const blockActs = Array.from(unCoupling.vehicleSchedule.setOfBlockActivitiesByBlockActivityEntityItem.get(unCoupling));
   if (blockActs.length > 2) {
     return `More than two block activities`;
   }
