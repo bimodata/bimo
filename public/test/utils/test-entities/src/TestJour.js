@@ -104,10 +104,10 @@ Jour.jourByJourId = {};
 
 const jourIdByJourValue = {};
 Object.keys(ALL_JOUR_VALUE_BY_KEY_BY_ID).forEach((ID) => {
-  JOUR_VALUE_BY_KEY = ALL_JOUR_VALUE_BY_KEY_BY_ID[ID];
+  const JOUR_VALUE_BY_KEY = ALL_JOUR_VALUE_BY_KEY_BY_ID[ID];
   Object.keys(JOUR_VALUE_BY_KEY).forEach((KEY) => {
     const key = KEY.toString();
-    JOUR_VALUE = JOUR_VALUE_BY_KEY[key];
+    const JOUR_VALUE = JOUR_VALUE_BY_KEY[key];
     jourIdByJourValue[JOUR_VALUE] = ID;
   });
 });

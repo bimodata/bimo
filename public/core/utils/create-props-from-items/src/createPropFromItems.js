@@ -31,7 +31,7 @@ const getAndValidateItemsFromItemOrItems = require('./getAndValidateItemsFromIte
  * @param {Object} itemOrItems - the source items
  * @param {PropConfig|string|number|boolean} config - a PropConfig object or a string that will be used as a static value
  */
-function createPropFromItems(itemOrItems, config, context) {
+function createPropFromItems(itemOrItems, config, context = {}) {
   const logger = getAndAddLoggerToServiceOptions(context, { serviceName: 'createPropFromItems' });
   logger.silly(`Start of createPropFromItems with ${JSON.stringify(config)}`);
 

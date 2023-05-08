@@ -62,8 +62,8 @@ describe('createPropFromItems', () => {
           it('throws', () => {
             expect(() => createPropFromItems(items,
               { createConfig: { sourcePropPath: 'toto', sourcePropPaths: 'titi' } })).to.throw(
-              'Only one of sourcePropPath or sourcePropPaths should be defined',
-            );
+                'Only one of sourcePropPath or sourcePropPaths should be defined',
+              );
           });
         });
       });
@@ -89,9 +89,10 @@ describe('createPropFromItems', () => {
             expect(createPropFromItems(item1, {
               titi: 'tutu',
               // eslint-disable-next-line no-empty-pattern
-              createFn: ([], config, context) => `${config.titi}${context}`,
+              createFn: ([], config, context) => `${config.titi}${context.someValue}`,
             },
-            'toto')).to.eql('tututoto');
+              { someValue: 'toto' },
+            )).to.eql('tututoto');
           });
         });
         describe('works with the createFn option in propConfig when its a string and ENV allows it', () => {
@@ -114,9 +115,9 @@ describe('createPropFromItems', () => {
             expect(createPropFromItems(item1, {
               titi: 'tutu',
               // eslint-disable-next-line no-template-curly-in-string
-              createFn: '([itm], config, context) => `${config.titi}${context}`',
+              createFn: '([itm], config, context) => `${config.titi}${context.someProp}`',
             },
-            'toto')).to.eql('tututoto');
+              { someProp: 'toto' })).to.eql('tututoto');
           });
         });
         describe('works with the createConfig option in propConfig  ', () => {

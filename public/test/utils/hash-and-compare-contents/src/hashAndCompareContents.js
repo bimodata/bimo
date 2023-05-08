@@ -11,7 +11,7 @@ const { expect } = chai;
 const Path = require('path');
 
 const { fsBimo: fs, getFilesAndFoldersInFolder } = require('@bimo/core-utils-filesystem');
-const asyncForEach = require('@bimo/core-utils-async-for-each');
+const { asyncForEach } = require('@bimo/core-utils-async-for-each');
 const checksum = require('@bimo/core-utils-checksum');
 
 /**
