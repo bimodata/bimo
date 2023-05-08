@@ -36,7 +36,7 @@ function computeTripOrVariantSectionsOfTripOrVariant<
     }
 
     return tripOrVariantSections;
-  } catch (error) {
+  } catch (error: any) {
     const err = new Error(
       `Erreur dans le calcul des tripOrVariantSections de ${tripOrVariant.slo}: ${error.message}`
     );
