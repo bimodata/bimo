@@ -1,5 +1,5 @@
 const { getAndAddLoggerToServiceOptions } = require('@bimo/core-utils-logging');
-const shallowAssign = require('@bimo/core-utils-shallow-assign');
+const { shallowAssign } = require('@bimo/core-utils-shallow-assign');
 
 const createPropFromItems = require('./createPropFromItems');
 const getAndValidateItemsFromItemOrItems = require('./getAndValidateItemsFromItemOrItems');

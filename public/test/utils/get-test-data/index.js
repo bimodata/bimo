@@ -1,4 +1,4 @@
-const asyncForEach = require('@bimo/core-utils-async-for-each');
+const { asyncForEach } = require('@bimo/core-utils-async-for-each');
 const { fsBimo: fs, getFilesInFolder } = require('@bimo/core-utils-filesystem');
 const getEntityFromOirDataStringAndControlFile = require(
   '@bimo/core-services-get-entity-from-oir-data-string-and-control-file',

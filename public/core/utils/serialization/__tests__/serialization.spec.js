@@ -3,7 +3,7 @@
 
 const { expect } = require('chai');
 const { OperationPivot, SegmentPivot, Jour, OperationsPivotCollection } = require('@bimo/test-utils-test-entities');
-const asyncForEach = require('@bimo/core-utils-async-for-each');
+const { asyncForEach } = require('@bimo/core-utils-async-for-each');
 
 const { serializeModel, parseModel, serializeThis, parseThis, getAllChildClasses } = require('..');
 
@@ -63,7 +63,7 @@ describe('#serializeModel and #parseModel complete', () => {
       it('parseModel returns an object that is equivalent to the original', async () => {
         await asyncForEach(expectedResults, async (serializedModel, index) => {
           // @ts-ignore
-          instance = instances[index];
+          const instance = instances[index];
           // @ts-ignore
           expect((await parseModel(serializedModel))).to.eql(instance);
         });

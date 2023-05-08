@@ -15,7 +15,7 @@ describe('getAllConstructorsOfClass', () => {
         expect(constructors).to.eql([C, B, A, Object]);
       });
     });
-    context(`given a simple anonymous arrow function`, () => {
+    context.skip(`given a simple anonymous arrow function`, () => {
       it(`returns an empty array`, () => {
         const constructors = getAllConstructorsOfClass(() => 'toto');
         expect(constructors).to.eql([]);

@@ -1,4 +1,4 @@
-const shallowAssign = require('@bimo/core-utils-shallow-assign');
+const { shallowAssign } = require('@bimo/core-utils-shallow-assign');
 
 /**
  * TODO: use new service @bimo/core-utils-have-different-props for this ?
