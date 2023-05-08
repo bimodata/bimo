@@ -1,5 +1,7 @@
 const { camelOrPascalToSnake } = require('@bimo/core-utils-string');
 
+const returnRawTypes = ['string', 'number', 'boolean'];
+
 /**
  *
  * @param {string} propName
@@ -27,7 +29,7 @@ function getAndValidatePropFromProps(propName, props, Type = `string`, defaultVa
     }
   }
 
-  if ((Type === `string`) || (Type === 'boolean') || (rawProp instanceof Type) || rawProp === null) {
+  if (returnRawTypes.includes(Type) || rawProp === null || (rawProp instanceof Type)) {
     return rawProp;
   }
 
