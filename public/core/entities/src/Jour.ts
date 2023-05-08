@@ -7,7 +7,8 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID: { [jourId in JourId]: { [key: string]: JourVa
       FR0: "Lundi",
       FR1: "lundi",
       FR2: "lu",
-      EN1: "Monday",
+      EN0: "Monday",
+      EN1: "monday",
       EN2: "mon",
       vscSchedType: "13",
     },
@@ -16,7 +17,8 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID: { [jourId in JourId]: { [key: string]: JourVa
       FR0: "Mardi",
       FR1: "mardi",
       FR2: "ma",
-      EN1: "Tuesday",
+      EN0: "Tuesday",
+      EN1: "tuesday",
       EN2: "tue",
       vscSchedType: "14",
     },
@@ -25,7 +27,8 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID: { [jourId in JourId]: { [key: string]: JourVa
       FR0: "Mercredi",
       FR1: "mercredi",
       FR2: "me",
-      EN1: "Wednesday",
+      EN0: "Wednesday",
+      EN1: "wednesday",
       EN2: "wed",
       vscSchedType: "11",
     },
@@ -34,7 +37,8 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID: { [jourId in JourId]: { [key: string]: JourVa
       FR0: "Jeudi",
       FR1: "jeudi",
       FR2: "je",
-      EN1: "Thursday",
+      EN0: "Thursday",
+      EN1: "thursday",
       EN2: "thu",
       vscSchedType: "3",
     },
@@ -43,7 +47,8 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID: { [jourId in JourId]: { [key: string]: JourVa
       FR0: "Vendredi",
       FR1: "vendredi",
       FR2: "ve",
-      EN1: "Friday",
+      EN0: "Friday",
+      EN1: "friday",
       EN2: "fri",
       vscSchedType: "4",
     },
@@ -52,7 +57,8 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID: { [jourId in JourId]: { [key: string]: JourVa
       FR0: "Samedi",
       FR1: "samedi",
       FR2: "sa",
-      EN1: "Saturday",
+      EN0: "Saturday",
+      EN1: "saturday",
       EN2: "sat",
       vscSchedType: "5",
     },
@@ -61,7 +67,8 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID: { [jourId in JourId]: { [key: string]: JourVa
       FR0: "Dimanche",
       FR1: "dimanche",
       FR2: "di",
-      EN1: "Sunday",
+      EN0: "Sunday",
+      EN1: "sunday",
       EN2: "sun",
       vscSchedType: "6",
     },
@@ -76,16 +83,9 @@ export type JourFR0 =
   | "Vendredi"
   | "Samedi"
   | "Dimanche";
-export type JourFR1 =
-  | "lundi"
-  | "mardi"
-  | "mercredi"
-  | "jeudi"
-  | "vendredi"
-  | "samedi"
-  | "dimanche";
+export type JourFR1 = Lowercase<JourFR0>;
 export type JourFR2 = "lu" | "ma" | "me" | "je" | "ve" | "sa" | "di";
-export type JourEN1 =
+export type JourEN0 =
   | "Monday"
   | "Tuesday"
   | "Wednesday"
@@ -93,6 +93,7 @@ export type JourEN1 =
   | "Friday"
   | "Saturday"
   | "Sunday";
+export type JourEN1 = Lowercase<JourEN0>;
 export type JourEN2 = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
 export type VscSchedType = "3" | "4" | "5" | "6" | "11" | "13" | "14";
 export type JourValue =
@@ -100,6 +101,7 @@ export type JourValue =
   | JourFR0
   | JourFR1
   | JourFR2
+  | JourEN0
   | JourEN1
   | JourEN2
   | VscSchedType;
@@ -107,10 +109,13 @@ export type JourValue =
 export class Jour {
   static jourByJourId: { [jourId in JourId]?: Jour };
   static jourIdByJourValue: { [jourValue in JourValue]?: JourId };
+  static parseModel: Function;
+  serializeModel: Function;
   NUM1: JourId;
   FR0: JourFR0;
   FR1: JourFR1;
   FR2: JourFR2;
+  EN0: JourEN0;
   EN1: JourEN1;
   EN2: JourEN2;
   vscSchedType: string;
@@ -123,8 +128,8 @@ export class Jour {
       jourValue = jourValue.FR0;
     }
     // console.log(jourValue);
-    // const lowerCasedJourValue = jourValue.toString().toLowerCase();
-    const jourId = Jour.jourIdByJourValue[jourValue as JourValue];
+    const lowerCasedJourValue = jourValue.toString().toLowerCase();
+    const jourId = Jour.jourIdByJourValue[lowerCasedJourValue as JourValue];
     if (!jourId) {
       throw new Error(
         `Impossible de construire un jour à partir de cet argument: ${JSON.stringify(
@@ -180,5 +185,8 @@ Jour.jourIdByJourValue = jourIdByJourValue;
 Object.keys(ALL_JOUR_VALUE_BY_KEY_BY_ID).forEach(
   (id) => new Jour(id as unknown as JourId)
 );
+
+Jour.prototype.serializeModel = serializeThis;
+Jour.parseModel = parseThis;
 
 export default Jour;
