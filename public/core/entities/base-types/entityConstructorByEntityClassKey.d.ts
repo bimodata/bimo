@@ -223,6 +223,8 @@ export declare const entityConstructorByEntityClassKey: {
   NetworkSection: typeof NetworkSection;
   NetworkSectionsCollection: typeof NetworkSectionsCollection;
 };
+
+export type EntityConstructorByEntityClassKey = typeof entityConstructorByEntityClassKey;
 export declare const exportableEntityClassKeys: string[];
 export declare const importableEntityClassKeys: string[];
 export declare function resetAllEntitiesNextIds(nextId?: number | string): any;
