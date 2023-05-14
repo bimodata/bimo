@@ -1,14 +1,17 @@
 import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
-import { BlockActivity } from "../BlockActivity";
-import { VehicleSchedule } from "../VehicleSchedule";
+import { BimoBlockActivity } from "../BlockActivity";
+import { BimoVehicleSchedule } from "../VehicleSchedule";
 import { BlockActivityItem, BaseBlockActivityItem } from "../BlockActivityItem";
 
-export function computeActivityEntityItemsOfVsc(vsc: VehicleSchedule) {
+export function computeActivityEntityItemsOfVsc(vsc: BimoVehicleSchedule) {
   const activityEntityItemByBlockActivity: Map<
-    BlockActivity,
+    BimoBlockActivity,
     BlockActivityItem<BaseBlockActivityItem>
   > = new Map();
-  const setOfBlockActivitiesByBlockActivityEntityItem = new Map();
+  const setOfBlockActivitiesByBlockActivityEntityItem: Map<
+    BlockActivityItem<BaseBlockActivityItem>,
+    Set<BimoBlockActivity>
+  > = new Map();
 
   vsc.blocks.forEach((block) => {
     block.blockActivities.forEach((blockActivity) => {
@@ -53,6 +56,10 @@ export function computeActivityEntityItemsOfVsc(vsc: VehicleSchedule) {
 }
 
 export default computeActivityEntityItemsOfVsc;
+
+export type ComputedActivityEntityItemObjects = ReturnType<
+  typeof computeActivityEntityItemsOfVsc
+>;
 
 export type BlockActivityCollectionKey =
   | "trips"

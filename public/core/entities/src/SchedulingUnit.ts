@@ -1,15 +1,13 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { SchedulingUnit as BimoSchedulingUnit } from "../base-types/rawIndex";
+export { SchedulingUnit as BimoSchedulingUnit } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import {
-  SchedulingUnitRoutesCollection,
-  SchedulingUnitRoutesCollectionProps,
-} from "./SchedulingUnitRoutesCollection";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [SchedulingUnitRoutesCollection];
+import { BimoSchedulingUnitRoutesCollection } from "./SchedulingUnitRoutesCollection";
 
 export interface SchedulingUnitProps extends ExtendedItemProps {
   scuIdentifier?: string;
@@ -18,50 +16,56 @@ export interface SchedulingUnitProps extends ExtendedItemProps {
   scuOwner?: string;
   scuDataGroup?: string;
   scuPublicAccess?: string;
-  schedulingUnitRoutes?: string;
+  schedulingUnitRoutes?: BimoSchedulingUnitRoutesCollection;
 }
 
-export class SchedulingUnit extends Item<SchedulingUnit> {
-  scuIdentifier?: string;
-  scuType?: string;
-  scuDescription?: string;
-  scuOwner?: string;
-  scuDataGroup?: string;
-  scuPublicAccess?: string;
-  schedulingUnitRoutes?: SchedulingUnitRoutesCollection;
-  constructor(props: SchedulingUnitProps) {
-    super(props);
-    this.scuIdentifier = gavpfp("scuIdentifier", props, `string`);
-    this.scuType = gavpfp("scuType", props, `string`, "1100");
-    this.scuDescription = gavpfp(
-      "scuDescription",
-      props,
-      `string`,
-      "Générée par Lauritz"
-    );
-    this.scuOwner = gavpfp("scuOwner", props, `string`, "ADMIN");
-    this.scuDataGroup = gavpfp("scuDataGroup", props, `string`, "");
-    this.scuPublicAccess = gavpfp("scuPublicAccess", props, `string`, "1");
+export function SchedulingUnitClassFactory({
+  SchedulingUnitRoutesCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnit {
+  const childClasses: (typeof Entity)[] = [SchedulingUnitRoutesCollection];
 
-    /* Children */
-    /** @type {SchedulingUnitRoutesCollection} */
-    this.schedulingUnitRoutes = gavpfp(
-      "schedUnitRoute",
-      props,
-      SchedulingUnitRoutesCollection,
-      new SchedulingUnitRoutesCollection({}),
-      { altPropName: "sched_unit_route", parent: this }
-    );
+  class SchedulingUnit extends Item<SchedulingUnit> {
+    scuIdentifier?: string;
+    scuType?: string;
+    scuDescription?: string;
+    scuOwner?: string;
+    scuDataGroup?: string;
+    scuPublicAccess?: string;
+    schedulingUnitRoutes?: BimoSchedulingUnitRoutesCollection;
+    constructor(props: SchedulingUnitProps) {
+      super(props);
+      this.scuIdentifier = gavpfp("scuIdentifier", props, `string`);
+      this.scuType = gavpfp("scuType", props, `string`, "1100");
+      this.scuDescription = gavpfp(
+        "scuDescription",
+        props,
+        `string`,
+        "Générée par Lauritz"
+      );
+      this.scuOwner = gavpfp("scuOwner", props, `string`, "ADMIN");
+      this.scuDataGroup = gavpfp("scuDataGroup", props, `string`, "");
+      this.scuPublicAccess = gavpfp("scuPublicAccess", props, `string`, "1");
+
+      this.schedulingUnitRoutes = gavpfp(
+        "schedUnitRoute",
+        props,
+        SchedulingUnitRoutesCollection,
+        new SchedulingUnitRoutesCollection({}),
+        { altPropName: "sched_unit_route", parent: this }
+      );
+    }
+
+    get shortLoggingOutput() {
+      return `${this.scuIdentifier} - ${this.scuDescription} - ${this.scuType}`;
+    }
   }
 
-  get shortLoggingOutput() {
-    return `${this.scuIdentifier} - ${this.scuDescription} - ${this.scuType}`;
-  }
+  SchedulingUnit.hastusKeywords = ["scheduling_unit"];
+  SchedulingUnit.hastusObject = "scheduling_unit";
+
+  SchedulingUnit.allChildClasses = getAllChildClasses(childClasses);
+
+  return SchedulingUnit;
 }
 
-SchedulingUnit.hastusKeywords = ["scheduling_unit"];
-SchedulingUnit.hastusObject = "scheduling_unit";
-
-SchedulingUnit.allChildClasses = getAllChildClasses(childClasses);
-
-export default SchedulingUnit;
+export default SchedulingUnitClassFactory;

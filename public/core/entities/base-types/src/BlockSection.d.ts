@@ -9,24 +9,24 @@ import BlockSectionsCollection from "./BlockSectionsCollection";
 import { VehicleTask } from "./VehicleTask";
 import { Block } from "./Block";
 export interface BlockSectionProps extends ExtendedItemProps {
-    id?: string;
-    block: Block;
-    blockActivities?: BlockActivityProps[];
+  id?: string;
+  block: Block;
+  blockActivities?: BlockActivityProps[];
 }
 export declare class BlockSection extends Item<BlockSection> {
-    id?: string;
-    block: Block;
-    blockActivities: BlockActivitiesCollection;
-    parent?: BlockSectionsCollection;
-    constructor(props: BlockSectionProps);
-    get vehicleTask(): VehicleTask;
-    get vehicleSchedule(): import("./VehicleSchedule").VehicleSchedule;
-    get firstBlockActivity(): import("./BlockActivity").BlockActivity;
-    get lastBlockActivity(): import("./BlockActivity").BlockActivity;
-    get _indexInSortedParent(): number;
-    getNthBlockSectionFromThisOne(n: number): BlockSection;
-    get nextBlockSection(): BlockSection;
-    get previousBlockSection(): BlockSection;
-    get mediumLoggingOutput(): string;
+  id?: string;
+  block: Block;
+  blockActivities: BlockActivitiesCollection;
+  parent?: BlockSectionsCollection;
+  constructor(props: BlockSectionProps);
+  get vehicleTask(): VehicleTask | undefined;
+  get vehicleSchedule(): import("./VehicleSchedule").VehicleSchedule | undefined;
+  get firstBlockActivity(): import("./BlockActivity").BlockActivity;
+  get lastBlockActivity(): import("./BlockActivity").BlockActivity;
+  get _indexInSortedParent(): number;
+  getNthBlockSectionFromThisOne(n: number): BlockSection | undefined;
+  get nextBlockSection(): BlockSection | undefined;
+  get previousBlockSection(): BlockSection | undefined;
+  get mediumLoggingOutput(): string;
 }
 export default BlockSection;

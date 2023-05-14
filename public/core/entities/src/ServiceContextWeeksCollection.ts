@@ -1,29 +1,38 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { ServiceContextWeeksCollection as BimoServiceContextWeeksCollection } from "../base-types/rawIndex";
+export { ServiceContextWeeksCollection as BimoServiceContextWeeksCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { ServiceContextWeek, ServiceContextWeekProps } from "./ServiceContextWeek";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [ServiceContextWeek];
+import { BimoServiceContextWeek, ServiceContextWeekProps } from "./ServiceContextWeek";
 
 export interface ServiceContextWeeksCollectionProps
-  extends ExtendedCollectionProps<ServiceContextWeek, ServiceContextWeekProps> {}
+  extends ExtendedCollectionProps<BimoServiceContextWeek, ServiceContextWeekProps> {}
 
-export class ServiceContextWeeksCollection extends Collection<
+export function ServiceContextWeeksCollectionClassFactory({
   ServiceContextWeek,
-  ServiceContextWeekProps
-> {
-  constructor(props: ServiceContextWeeksCollectionProps = {}) {
-    super({
-      itemName: "ServiceContextWeek",
-      businessIdPropName: "scwkSchedUnitId",
-      ItemConstructor: ServiceContextWeek,
-      associationType: "aggregation",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoServiceContextWeeksCollection {
+  const childClasses: (typeof Entity)[] = [ServiceContextWeek];
+
+  class ServiceContextWeeksCollection extends Collection<
+    BimoServiceContextWeek,
+    ServiceContextWeekProps
+  > {
+    constructor(props: ServiceContextWeeksCollectionProps = {}) {
+      super({
+        itemName: "ServiceContextWeek",
+        businessIdPropName: "scwkSchedUnitId",
+        ItemConstructor: ServiceContextWeek,
+        associationType: "aggregation",
+        ...props,
+      });
+    }
   }
+
+  ServiceContextWeeksCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return ServiceContextWeeksCollection;
 }
 
-ServiceContextWeeksCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default ServiceContextWeeksCollection;
+export default ServiceContextWeeksCollectionClassFactory;

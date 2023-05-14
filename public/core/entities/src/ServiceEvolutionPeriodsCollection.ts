@@ -1,31 +1,43 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { ServiceEvolutionPeriodsCollection as BimoServiceEvolutionPeriodsCollection } from "../base-types/rawIndex";
+export { ServiceEvolutionPeriodsCollection as BimoServiceEvolutionPeriodsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import {
-  ServiceEvolutionPeriod,
+  BimoServiceEvolutionPeriod,
   ServiceEvolutionPeriodProps,
 } from "./ServiceEvolutionPeriod";
 
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [ServiceEvolutionPeriod];
-
 export interface ServiceEvolutionPeriodsCollectionProps
-  extends ExtendedCollectionProps<ServiceEvolutionPeriod, ServiceEvolutionPeriodProps> {}
+  extends ExtendedCollectionProps<
+    BimoServiceEvolutionPeriod,
+    ServiceEvolutionPeriodProps
+  > {}
 
-export class ServiceEvolutionPeriodsCollection extends Collection<
+export function ServiceEvolutionPeriodsCollectionClassFactory({
   ServiceEvolutionPeriod,
-  ServiceEvolutionPeriodProps
-> {
-  constructor(props: ServiceEvolutionPeriodsCollectionProps = {}) {
-    super({
-      itemName: "ServiceEvolutionPeriod",
-      ItemConstructor: ServiceEvolutionPeriod,
-      associationType: "aggregation",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoServiceEvolutionPeriodsCollection {
+  const childClasses: (typeof Entity)[] = [ServiceEvolutionPeriod];
+
+  class ServiceEvolutionPeriodsCollection extends Collection<
+    BimoServiceEvolutionPeriod,
+    ServiceEvolutionPeriodProps
+  > {
+    constructor(props: ServiceEvolutionPeriodsCollectionProps = {}) {
+      super({
+        itemName: "ServiceEvolutionPeriod",
+        ItemConstructor: ServiceEvolutionPeriod,
+        associationType: "aggregation",
+        ...props,
+      });
+    }
   }
+
+  ServiceEvolutionPeriodsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return ServiceEvolutionPeriodsCollection;
 }
 
-ServiceEvolutionPeriodsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default ServiceEvolutionPeriodsCollection;
+export default ServiceEvolutionPeriodsCollectionClassFactory;

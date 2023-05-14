@@ -1,27 +1,15 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { RouteVersion as BimoRouteVersion } from "../base-types/rawIndex";
+export { RouteVersion as BimoRouteVersion } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { RoutesCollection, RoutesCollectionProps } from "./RoutesCollection";
-import { VariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
-import { Variant, VariantProps } from "./Variant";
-import { VariantPoint, VariantPointProps } from "./VariantPoint";
-import {
-  VariantPointsCollection,
-  VariantPointsCollectionProps,
-} from "./VariantPointsCollection";
-import {
-  VehicleScheduleOrRouteVersion,
-  VehicleScheduleOrRouteVersionProps,
-} from "./VehicleScheduleOrRouteVersion";
-import {
-  TripOrVariantSectionsCollection,
-  TripOrVariantSectionsCollectionProps,
-} from "./TripOrVariantSectionsCollection";
-
-import { Entity } from "@bimo/core-utils-entity";
-import TripOrVariantSection from "./TripOrVariantSection";
-const childClasses: (typeof Entity)[] = [RoutesCollection];
+import { BimoRoutesCollection } from "./RoutesCollection";
+import { BimoVariant, VariantProps } from "./Variant";
+import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
+import { BimoTripOrVariantSection } from "./TripOrVariantSection";
 
 export interface RouteVersionProps extends ExtendedItemProps {
   bimoId?: string;
@@ -34,156 +22,173 @@ export interface RouteVersionProps extends ExtendedItemProps {
   rtevOwner?: string;
   rtevPublicAccess?: string;
   rtevDataGroup?: string;
-  routes?: RoutesCollection;
+  routes?: BimoRoutesCollection;
 }
+export function RouteVersionClassFactory({
+  RoutesCollection,
+  VariantsCollection,
+  VariantPointsCollection,
+  VehicleScheduleOrRouteVersion,
+  TripOrVariantSectionsCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoRouteVersion {
+  const childClasses: (typeof Entity)[] = [RoutesCollection];
 
-export class RouteVersion extends VehicleScheduleOrRouteVersion<
-  RouteVersion,
-  RouteVersionProps
-> {
-  bimoId?: string;
-  rtevIdentifier?: string;
-  rtevDescription?: string;
-  rtevSchedulingUnit?: string;
-  rtevEffectiveDate?: string;
-  rtevRailInfra?: string;
-  rtevRoutesBasedOnRailLinks?: string;
-  rtevOwner?: string;
-  rtevPublicAccess?: string;
-  rtevDataGroup?: string;
-  routes: RoutesCollection;
-  _links: { [linkType: string]: any } = {};
-  constructor(props: RouteVersionProps) {
-    super(props, "variant");
+  class RouteVersion extends VehicleScheduleOrRouteVersion<
+    RouteVersion,
+    RouteVersionProps
+  > {
+    bimoId?: string;
+    rtevIdentifier?: string;
+    rtevDescription?: string;
+    rtevSchedulingUnit?: string;
+    rtevEffectiveDate?: string;
+    rtevRailInfra?: string;
+    rtevRoutesBasedOnRailLinks?: string;
+    rtevOwner?: string;
+    rtevPublicAccess?: string;
+    rtevDataGroup?: string;
+    routes: BimoRoutesCollection;
+    _links: { [linkType: string]: any } = {};
+    constructor(props: RouteVersionProps) {
+      super(props, "variant");
 
-    this.bimoId = gavpfp("bimoId", props);
-    this.rtevIdentifier = gavpfp("rtevIdentifier", props);
-    this.rtevDescription = gavpfp("rtevDescription", props);
-    this.rtevSchedulingUnit = gavpfp("rtevSchedulingUnit", props);
-    this.rtevEffectiveDate = gavpfp("rtevEffectiveDate", props);
-    this.rtevRailInfra = gavpfp("rtevRailInfra", props, "string", "0");
-    this.rtevRoutesBasedOnRailLinks = gavpfp(
-      "rtevRoutesBasedOnRailLinks",
-      props,
-      "string",
-      "0"
-    );
-    this.rtevOwner = gavpfp("rtevOwner", props, "string", "ADMIN");
-    this.rtevPublicAccess = gavpfp("rtevPublicAccess", props, "string", "0");
-    this.rtevDataGroup = gavpfp("rtevDataGroup", props);
+      this.bimoId = gavpfp("bimoId", props);
+      this.rtevIdentifier = gavpfp("rtevIdentifier", props);
+      this.rtevDescription = gavpfp("rtevDescription", props);
+      this.rtevSchedulingUnit = gavpfp("rtevSchedulingUnit", props);
+      this.rtevEffectiveDate = gavpfp("rtevEffectiveDate", props);
+      this.rtevRailInfra = gavpfp("rtevRailInfra", props, "string", "0");
+      this.rtevRoutesBasedOnRailLinks = gavpfp(
+        "rtevRoutesBasedOnRailLinks",
+        props,
+        "string",
+        "0"
+      );
+      this.rtevOwner = gavpfp("rtevOwner", props, "string", "ADMIN");
+      this.rtevPublicAccess = gavpfp("rtevPublicAccess", props, "string", "0");
+      this.rtevDataGroup = gavpfp("rtevDataGroup", props);
 
-    this.routes = gavpfp("routes", props, RoutesCollection, new RoutesCollection(), {
-      parent: this,
-    });
-  }
-
-  addLink(type: string, value: any) {
-    this._links[type] = value;
-  }
-
-  getLink(type: string) {
-    return this._links[type];
-  }
-
-  removeLink(type: string) {
-    delete this._links[type];
-  }
-
-  removeVariant(variant: Variant) {
-    this.variantsCollectionOfAllVariantsOfAllRoutes.remove(variant);
-    this.getRouteById(variant.routeId as string)?.variants.remove(variant);
-  }
-
-  /** Creates a new instance of a routeVersion. All routes are new instances too. */
-  copy(newRtevIdentifier?: string) {
-    const copiedRouteVersion = new RouteVersion(this);
-    copiedRouteVersion.rtevIdentifier = newRtevIdentifier;
-    copiedRouteVersion.routes = new RoutesCollection({
-      items: this.routes.map((route) => route.copy()),
-    });
-    copiedRouteVersion.routes.parent = copiedRouteVersion;
-    copiedRouteVersion.addLink("copiedFrom", this);
-    return copiedRouteVersion;
-  }
-
-  get shortLoggingOutput() {
-    return `${this.rtevIdentifier} - ${this.rtevDescription}`;
-  }
-
-  get mediumLoggingOutput() {
-    return `${this.slo} (${this.routes.length} lignes et ${this.variantsCollectionOfAllVariantsOfAllRoutes?.length} variantes)`;
-  }
-
-  getVariantsThatUseOneOfThesePlaces(listOfPlaces: string | Set<string> | string[]) {
-    if (!listOfPlaces) {
-      return undefined;
+      this.routes = gavpfp("routes", props, RoutesCollection, new RoutesCollection(), {
+        parent: this,
+      });
     }
-    let variants: Variant[] = [];
-    this.routes.forEach((route) => {
-      const variantsOfThisRoute = route.getVariantsThatUseOneOfThesePlaces(listOfPlaces);
-      if (!variantsOfThisRoute) return;
-      variants = variants.concat(variantsOfThisRoute);
-    });
-    // variants.forEach(variant => {
-    //     console.log(`${variant.varIdentifier} ${variant.parent.parent.rteIdentifier}`)
-    // })
-    return variants;
-  }
 
-  getRouteById(routeId: string) {
-    return this.routes.getByPropName(`rteIdentifier`, routeId);
-  }
+    addLink(type: string, value: any) {
+      this._links[type] = value;
+    }
 
-  get variantsCollectionOfAllVariantsOfAllRoutes() {
-    return this._getAndSetCachedValue(
-      "variantsCollectionOfAllVariantsOfAllRoutes",
-      () => {
-        let allVariants: Variant[] = [];
-        this.routes.forEach((route) => {
-          allVariants = allVariants.concat(route.variants.items);
+    getLink(type: string) {
+      return this._links[type];
+    }
+
+    removeLink(type: string) {
+      delete this._links[type];
+    }
+
+    removeVariant(variant: BimoVariant) {
+      this.variantsCollectionOfAllVariantsOfAllRoutes.remove(variant);
+      this.getRouteById(variant.routeId as string)?.variants.remove(variant);
+    }
+
+    /** Creates a new instance of a routeVersion. All routes are new instances too. */
+    copy(newRtevIdentifier?: string) {
+      const copiedRouteVersion = new RouteVersion(this);
+      copiedRouteVersion.rtevIdentifier = newRtevIdentifier;
+      copiedRouteVersion.routes = new RoutesCollection({
+        items: this.routes.map((route) => route.copy()),
+      });
+      copiedRouteVersion.routes.parent = copiedRouteVersion;
+      copiedRouteVersion.addLink("copiedFrom", this);
+      return copiedRouteVersion;
+    }
+
+    get shortLoggingOutput() {
+      return `${this.rtevIdentifier} - ${this.rtevDescription}`;
+    }
+
+    get mediumLoggingOutput() {
+      return `${this.slo} (${this.routes.length} lignes et ${this.variantsCollectionOfAllVariantsOfAllRoutes?.length} variantes)`;
+    }
+
+    getVariantsThatUseOneOfThesePlaces(listOfPlaces: string | Set<string> | string[]) {
+      if (!listOfPlaces) {
+        return undefined;
+      }
+      let variants: BimoVariant[] = [];
+      this.routes.forEach((route) => {
+        const variantsOfThisRoute =
+          route.getVariantsThatUseOneOfThesePlaces(listOfPlaces);
+        if (!variantsOfThisRoute) return;
+        variants = variants.concat(variantsOfThisRoute);
+      });
+      // variants.forEach(variant => {
+      //     console.log(`${variant.varIdentifier} ${variant.parent.parent.rteIdentifier}`)
+      // })
+      return variants;
+    }
+
+    getRouteById(routeId: string) {
+      return this.routes.getByPropName(`rteIdentifier`, routeId);
+    }
+
+    get variantsCollectionOfAllVariantsOfAllRoutes() {
+      return this._getAndSetCachedValue(
+        "variantsCollectionOfAllVariantsOfAllRoutes",
+        () => {
+          let allVariants: BimoVariant[] = [];
+          this.routes.forEach((route) => {
+            allVariants = allVariants.concat(route.variants.items);
+          });
+          return new VariantsCollection({
+            items: allVariants,
+            associationType: `aggregation`,
+          });
+        }
+      );
+    }
+
+    get variantPointsCollectionOfAllVariantPointsOfAllRoutes() {
+      return this._getAndSetCachedValue("", () => {
+        let allPoints: BimoVariantPoint[] = [];
+        this.variantsCollectionOfAllVariantsOfAllRoutes.forEach((variant) => {
+          allPoints = allPoints.concat(variant.points.items);
         });
-        return new VariantsCollection({
-          items: allVariants,
+        return new VariantPointsCollection({
+          items: allPoints,
           associationType: `aggregation`,
         });
-      }
-    );
-  }
-
-  get variantPointsCollectionOfAllVariantPointsOfAllRoutes() {
-    return this._getAndSetCachedValue("", () => {
-      let allPoints: VariantPoint[] = [];
-      this.variantsCollectionOfAllVariantsOfAllRoutes.forEach((variant) => {
-        allPoints = allPoints.concat(variant.points.items);
       });
-      return new VariantPointsCollection({
-        items: allPoints,
+    }
+
+    get variantSectionsCollectionOfAllVariantsOfAllRoutes() {
+      let allVariantSections: BimoTripOrVariantSection<
+        BimoVariantPoint,
+        VariantPointProps,
+        BimoVariant,
+        VariantProps
+      >[] = [];
+      this.variantsCollectionOfAllVariantsOfAllRoutes.forEach((variant) => {
+        allVariantSections = allVariantSections.concat(variant.sections.items);
+      });
+
+      return new TripOrVariantSectionsCollection<
+        BimoVariantPoint,
+        VariantPointProps,
+        BimoVariant,
+        VariantProps
+      >({
+        items: allVariantSections,
         associationType: `aggregation`,
       });
-    });
+    }
   }
 
-  get variantSectionsCollectionOfAllVariantsOfAllRoutes() {
-    let allVariantSections: TripOrVariantSection<
-      VariantPoint,
-      VariantPointProps,
-      Variant,
-      VariantProps
-    >[] = [];
-    this.variantsCollectionOfAllVariantsOfAllRoutes.forEach((variant) => {
-      allVariantSections = allVariantSections.concat(variant.sections.items);
-    });
+  RouteVersion.hastusKeywords = ["route_version"];
+  RouteVersion.hastusObject = "route_version";
 
-    return new TripOrVariantSectionsCollection({
-      items: allVariantSections,
-      associationType: `aggregation`,
-    });
-  }
+  RouteVersion.allChildClasses = getAllChildClasses(childClasses);
+
+  return RouteVersion;
 }
 
-RouteVersion.hastusKeywords = ["route_version"];
-RouteVersion.hastusObject = "route_version";
-
-RouteVersion.allChildClasses = getAllChildClasses(childClasses);
-
-export default RouteVersion;
+export default RouteVersionClassFactory;

@@ -1,8 +1,11 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { TrainPathsGeneralInfo as BimoTrainPathsGeneralInfo } from "../base-types/rawIndex";
+export { TrainPathsGeneralInfo as BimoTrainPathsGeneralInfo } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 
 export interface TrainPathsGeneralInfoProps extends ExtendedItemProps {
@@ -11,22 +14,26 @@ export interface TrainPathsGeneralInfoProps extends ExtendedItemProps {
   trnpgeninfoAdministrativeYear?: string;
 }
 
-export class TrainPathsGeneralInfo extends Item<TrainPathsGeneralInfo> {
-  trnpgeninfoSource?: string;
-  trnpgeninfoImportType?: string;
-  trnpgeninfoAdministrativeYear?: string;
-  constructor(props: TrainPathsGeneralInfoProps = {}) {
-    super(props);
-    this.trnpgeninfoSource = gavpfp("trnpgeninfoSource", props, `string`);
-    this.trnpgeninfoImportType = gavpfp("trnpgeninfoImportType", props, `string`);
-    this.trnpgeninfoAdministrativeYear = gavpfp(
-      "trnpgeninfoAdministrativeYear",
-      props,
-      `string`
-    );
+export function TrainPathsGeneralInfoClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTrainPathsGeneralInfo {
+  class TrainPathsGeneralInfo extends Item<TrainPathsGeneralInfo> {
+    trnpgeninfoSource?: string;
+    trnpgeninfoImportType?: string;
+    trnpgeninfoAdministrativeYear?: string;
+    constructor(props: TrainPathsGeneralInfoProps = {}) {
+      super(props);
+      this.trnpgeninfoSource = gavpfp("trnpgeninfoSource", props, `string`);
+      this.trnpgeninfoImportType = gavpfp("trnpgeninfoImportType", props, `string`);
+      this.trnpgeninfoAdministrativeYear = gavpfp(
+        "trnpgeninfoAdministrativeYear",
+        props,
+        `string`
+      );
+    }
   }
+
+  TrainPathsGeneralInfo.allChildClasses = getAllChildClasses(childClasses);
+
+  return TrainPathsGeneralInfo;
 }
 
-TrainPathsGeneralInfo.allChildClasses = getAllChildClasses(childClasses);
-
-export default TrainPathsGeneralInfo;
+export default TrainPathsGeneralInfoClassFactory;

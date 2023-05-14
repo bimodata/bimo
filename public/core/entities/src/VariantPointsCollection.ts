@@ -1,36 +1,44 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { VariantPointsCollection as BimoVariantPointsCollection } from "../base-types/rawIndex";
+export { VariantPointsCollection as BimoVariantPointsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { VariantPoint, VariantPointProps } from "./VariantPoint";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [VariantPoint];
-
+import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
 export interface VariantPointsCollectionProps
-  extends ExtendedCollectionProps<VariantPoint, VariantPointProps> {}
+  extends ExtendedCollectionProps<BimoVariantPoint, VariantPointProps> {}
 
-export class VariantPointsCollection extends Collection<VariantPoint, VariantPointProps> {
-  constructor(props: VariantPointsCollectionProps = {}) {
-    super({
-      itemName: "VariantPoint",
-      ItemConstructor: VariantPoint,
-      items: props.items,
-      parent: props.parent,
-      associationType: props.associationType,
-    });
+export function VariantPointsCollectionClassFactory({
+  VariantPoint,
+}: EntityConstructorByEntityClassKey): typeof BimoVariantPointsCollection {
+  const childClasses: (typeof Entity)[] = [VariantPoint];
+
+  class VariantPointsCollection extends Collection<BimoVariantPoint, VariantPointProps> {
+    constructor(props: VariantPointsCollectionProps = {}) {
+      super({
+        itemName: "VariantPoint",
+        ItemConstructor: VariantPoint,
+        items: props.items,
+        parent: props.parent,
+        associationType: props.associationType,
+      });
+    }
+
+    get mediumLoggingOutput() {
+      return this.map(
+        (varPt) => `${varPt.varptPlace}${varPt.varptNoStopping === "1" ? "~" : "|"}`
+      ).join("");
+    }
+
+    get longLoggingOutput() {
+      return this.map((varPt) => varPt.shortLoggingOutput).join("\n");
+    }
   }
 
-  get mediumLoggingOutput() {
-    return this.map(
-      (varPt) => `${varPt.varptPlace}${varPt.varptNoStopping === "1" ? "~" : "|"}`
-    ).join("");
-  }
+  VariantPointsCollection.allChildClasses = getAllChildClasses(childClasses);
 
-  get longLoggingOutput() {
-    return this.map((varPt) => varPt.shortLoggingOutput).join("\n");
-  }
+  return VariantPointsCollection;
 }
 
-VariantPointsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default VariantPointsCollection;
+export default VariantPointsCollectionClassFactory;

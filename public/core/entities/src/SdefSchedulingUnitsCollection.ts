@@ -1,30 +1,39 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { SdefSchedulingUnitsCollection as BimoSdefSchedulingUnitsCollection } from "../base-types/rawIndex";
+export { SdefSchedulingUnitsCollection as BimoSdefSchedulingUnitsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { SdefSchedulingUnit, SdefSchedulingUnitProps } from "./SdefSchedulingUnit";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [SdefSchedulingUnit];
+import { BimoSdefSchedulingUnit, SdefSchedulingUnitProps } from "./SdefSchedulingUnit";
 
 export interface SdefSchedulingUnitsCollectionProps
-  extends ExtendedCollectionProps<SdefSchedulingUnit, SdefSchedulingUnitProps> {}
+  extends ExtendedCollectionProps<BimoSdefSchedulingUnit, SdefSchedulingUnitProps> {}
 
-export class SdefSchedulingUnitsCollection extends Collection<
+export function SdefSchedulingUnitsCollectionClassFactory({
   SdefSchedulingUnit,
-  SdefSchedulingUnitProps
-> {
-  constructor(props: SdefSchedulingUnitsCollectionProps = {}) {
-    super({
-      itemName: "SdefSchedulingUnit",
-      ItemConstructor: SdefSchedulingUnit,
-      // idPropName: 'sdscuIdentifier',
-      businessIdPropName: "sdscuIdentifier",
-      labelPropName: "sdscuIdentifier",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoSdefSchedulingUnitsCollection {
+  const childClasses: (typeof Entity)[] = [SdefSchedulingUnit];
+
+  class SdefSchedulingUnitsCollection extends Collection<
+    BimoSdefSchedulingUnit,
+    SdefSchedulingUnitProps
+  > {
+    constructor(props: SdefSchedulingUnitsCollectionProps = {}) {
+      super({
+        itemName: "SdefSchedulingUnit",
+        ItemConstructor: SdefSchedulingUnit,
+        // idPropName: 'sdscuIdentifier',
+        businessIdPropName: "sdscuIdentifier",
+        labelPropName: "sdscuIdentifier",
+        ...props,
+      });
+    }
   }
+
+  SdefSchedulingUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return SdefSchedulingUnitsCollection;
 }
 
-SdefSchedulingUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default SdefSchedulingUnitsCollection;
+export default SdefSchedulingUnitsCollectionClassFactory;

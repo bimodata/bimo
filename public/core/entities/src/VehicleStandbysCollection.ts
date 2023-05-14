@@ -1,31 +1,41 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { VehicleStandbysCollection as BimoVehicleStandbysCollection } from "../base-types/rawIndex";
+export { VehicleStandbysCollection as BimoVehicleStandbysCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { VehicleStandby, VehicleStandbyProps } from "./VehicleStandby";
-import { VehicleSchedule } from "./VehicleSchedule";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [VehicleStandby];
+import { BimoVehicleStandby, VehicleStandbyProps } from "./VehicleStandby";
+import { BimoVehicleSchedule } from "./VehicleSchedule";
 
 export interface VehicleStandbysCollectionProps
-  extends ExtendedCollectionProps<VehicleStandby, VehicleStandbyProps> {}
+  extends ExtendedCollectionProps<BimoVehicleStandby, VehicleStandbyProps> {}
 
-export class VehicleStandbysCollection extends Collection<
+export function VehicleStandbysCollectionClassFactory({
   VehicleStandby,
-  VehicleStandbyProps
-> {
-  declare parent?: VehicleSchedule;
-  constructor(props: VehicleStandbysCollectionProps = {}) {
-    super({
-      itemName: "VehicleStandby",
-      ItemConstructor: VehicleStandby,
-      idPropName: `bimoId`,
-      businessIdPropName: `sdbyStandbyNo`,
-      labelPropName: `sdbyComment`,
-      ...props,
-    });
+  VehicleSchedule,
+}: EntityConstructorByEntityClassKey): typeof BimoVehicleStandbysCollection {
+  const childClasses: (typeof Entity)[] = [VehicleStandby];
+
+  class VehicleStandbysCollection extends Collection<
+    BimoVehicleStandby,
+    VehicleStandbyProps
+  > {
+    declare parent?: BimoVehicleSchedule;
+    constructor(props: VehicleStandbysCollectionProps = {}) {
+      super({
+        itemName: "VehicleStandby",
+        ItemConstructor: VehicleStandby,
+        idPropName: `bimoId`,
+        businessIdPropName: `sdbyStandbyNo`,
+        labelPropName: `sdbyComment`,
+        ...props,
+      });
+    }
   }
+
+  VehicleStandbysCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return VehicleStandbysCollection;
 }
 
-VehicleStandbysCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default VehicleStandbysCollection;
+export default VehicleStandbysCollectionClassFactory;

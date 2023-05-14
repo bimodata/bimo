@@ -1,4 +1,12 @@
+export { generateEntityConstructorByEntityClassKey } from "./src/index-helpers/generateEntityConstructorByEntityClassKey";
+
+export * as DefaultClassFactoryByEntityClassKey from "./src/index-helpers/DefaultClassFactoryByEntityClassKey";
+
 export {
+  entityConstructorByEntityClassKey,
+  exportableEntityClassKeys,
+  importableEntityClassKeys,
+  resetAllEntitiesNextIds,
   Booking,
   BookingsCollection,
   RouteVersion,
@@ -30,7 +38,6 @@ export {
   Blkvehuoir,
   BlkvehuoirsCollection,
   BlockActivity,
-  BlockActivityItem,
   BlockActivitiesCollection,
   VehicleStandby,
   VehicleStandbysCollection,
@@ -110,11 +117,4 @@ export {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
-} from "./rawIndex";
-
-export {
-  entityConstructorByEntityClassKey,
-  exportableEntityClassKeys,
-  importableEntityClassKeys,
-  resetAllEntitiesNextIds,
-} from "./entityConstructorByEntityClassKey";
+} from "./src/index-helpers/entityConstructorByEntityClassKey";

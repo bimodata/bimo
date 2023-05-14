@@ -1,63 +1,72 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { PlacesCollection as BimoPlacesCollection } from "../base-types/rawIndex";
+export { PlacesCollection as BimoPlacesCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { Place, PlaceProps } from "./Place";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [Place];
+import { BimoPlace, PlaceProps } from "./Place";
 
 export interface PlacesCollectionProps
-  extends ExtendedCollectionProps<Place, PlaceProps> {}
+  extends ExtendedCollectionProps<BimoPlace, PlaceProps> {}
 
-export class PlacesCollection extends Collection<Place, PlaceProps> {
-  constructor(props: PlacesCollectionProps = {}) {
-    super({
-      itemName: "Place",
-      ItemConstructor: Place,
-      associationType: "composition",
-      businessIdPropName: `plcIdentifier`,
-      idPropName: `bimoId`,
-      labelPropName: ``,
-      ...props,
-    });
-  }
+export function PlacesCollectionClassFactory({
+  Place,
+}: EntityConstructorByEntityClassKey): typeof BimoPlacesCollection {
+  const childClasses: (typeof Entity)[] = [Place];
 
-  /**
-   *
-   * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
-   */
-  static createFromOirStyleData(oirStyleData: any, libelle: string) {
-    const rawPlaces = oirStyleData.place;
-
-    if (!rawPlaces) {
-      throw new Error(`Bad oirStyleData: could not find "place" key`);
+  class PlacesCollection extends Collection<BimoPlace, PlaceProps> {
+    constructor(props: PlacesCollectionProps = {}) {
+      super({
+        itemName: "Place",
+        ItemConstructor: Place,
+        associationType: "composition",
+        businessIdPropName: `plcIdentifier`,
+        idPropName: `bimoId`,
+        labelPropName: ``,
+        ...props,
+      });
     }
-    const newPlacesCollection = new this({ items: rawPlaces, libelle });
-    return newPlacesCollection;
+
+    /**
+     *
+     * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
+     */
+    static createFromOirStyleData(oirStyleData: any, libelle: string) {
+      const rawPlaces = oirStyleData.place;
+
+      if (!rawPlaces) {
+        throw new Error(`Bad oirStyleData: could not find "place" key`);
+      }
+      const newPlacesCollection = new this({ items: rawPlaces, libelle });
+      return newPlacesCollection;
+    }
+
+    get shortLoggingOutput() {
+      return `${this.label} (${super.shortLoggingOutput})`;
+    }
+
+    generateOirStyleData() {
+      return { place: this.items };
+    }
+
+    get placesByReferencePlace() {
+      return this._getAndSetCachedValue("placesByReferencePlace", () =>
+        this.groupByProp(`plcReferencePlace`)
+      );
+    }
+
+    invalidatePlacesByReferencePlace() {
+      this._nullifyCachedValue("placesByReferencePlace");
+    }
   }
 
-  get shortLoggingOutput() {
-    return `${this.label} (${super.shortLoggingOutput})`;
-  }
+  PlacesCollection.allChildClasses = getAllChildClasses(childClasses);
 
-  generateOirStyleData() {
-    return { place: this.items };
-  }
+  /* I/O info */
+  PlacesCollection.defaultExportedDataDataName = `output_place`;
+  PlacesCollection.defaultImportDataDataName = `input_place`;
 
-  get placesByReferencePlace() {
-    return this._getAndSetCachedValue("placesByReferencePlace", () =>
-      this.groupByProp(`plcReferencePlace`)
-    );
-  }
-
-  invalidatePlacesByReferencePlace() {
-    this._nullifyCachedValue("placesByReferencePlace");
-  }
+  return PlacesCollection;
 }
 
-PlacesCollection.allChildClasses = getAllChildClasses(childClasses);
-
-/* I/O info */
-PlacesCollection.defaultExportedDataDataName = `output_place`;
-PlacesCollection.defaultImportDataDataName = `input_place`;
-
-export default PlacesCollection;
+export default PlacesCollectionClassFactory;

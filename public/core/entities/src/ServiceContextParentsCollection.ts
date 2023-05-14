@@ -1,28 +1,39 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { ServiceContextParentsCollection as BimoServiceContextParentsCollection } from "../base-types/rawIndex";
+export { ServiceContextParentsCollection as BimoServiceContextParentsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { ServiceContextParent, ServiceContextParentProps } from "./ServiceContextParent";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [ServiceContextParent];
-
+import {
+  BimoServiceContextParent,
+  ServiceContextParentProps,
+} from "./ServiceContextParent";
 export interface ServiceContextParentsCollectionProps
-  extends ExtendedCollectionProps<ServiceContextParent, ServiceContextParentProps> {}
+  extends ExtendedCollectionProps<BimoServiceContextParent, ServiceContextParentProps> {}
 
-export class ServiceContextParentsCollection extends Collection<
+export function ServiceContextParentsCollectionClassFactory({
   ServiceContextParent,
-  ServiceContextParentProps
-> {
-  constructor(props: ServiceContextParentsCollectionProps = {}) {
-    super({
-      itemName: "ServiceContextParent",
-      ItemConstructor: ServiceContextParent,
-      associationType: "aggregation",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoServiceContextParentsCollection {
+  const childClasses: (typeof Entity)[] = [ServiceContextParent];
+
+  class ServiceContextParentsCollection extends Collection<
+    BimoServiceContextParent,
+    ServiceContextParentProps
+  > {
+    constructor(props: ServiceContextParentsCollectionProps = {}) {
+      super({
+        itemName: "ServiceContextParent",
+        ItemConstructor: ServiceContextParent,
+        associationType: "aggregation",
+        ...props,
+      });
+    }
   }
+
+  ServiceContextParentsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return ServiceContextParentsCollection;
 }
 
-ServiceContextParentsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default ServiceContextParentsCollection;
+export default ServiceContextParentsCollectionClassFactory;

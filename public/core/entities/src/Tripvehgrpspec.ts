@@ -1,3 +1,6 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { Tripvehgrpspec as BimoTripvehgrpspec } from "../base-types/rawIndex";
+export { Tripvehgrpspec as BimoTripvehgrpspec } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -10,21 +13,25 @@ export interface TripvehgrpspecProps extends ExtendedItemProps {
   tripvehgrpspecPriority?: string;
 }
 
-export class Tripvehgrpspec extends Item<Tripvehgrpspec> {
-  tripvehgrpspecVehGroup: string;
-  tripvehgrpspecReqType?: string;
-  tripvehgrpspecPriority?: string;
-  constructor(props: TripvehgrpspecProps) {
-    super(props);
-    this.tripvehgrpspecVehGroup = gavpfp("tripvehgrpspecVehGroup", props);
-    this.tripvehgrpspecReqType = gavpfp("tripvehgrpspecReqType", props);
-    this.tripvehgrpspecPriority = gavpfp("tripvehgrpspecPriority", props);
+export function TripvehgrpspecClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTripvehgrpspec {
+  class Tripvehgrpspec extends Item<Tripvehgrpspec> {
+    tripvehgrpspecVehGroup: string;
+    tripvehgrpspecReqType?: string;
+    tripvehgrpspecPriority?: string;
+    constructor(props: TripvehgrpspecProps) {
+      super(props);
+      this.tripvehgrpspecVehGroup = gavpfp("tripvehgrpspecVehGroup", props);
+      this.tripvehgrpspecReqType = gavpfp("tripvehgrpspecReqType", props);
+      this.tripvehgrpspecPriority = gavpfp("tripvehgrpspecPriority", props);
+    }
   }
+
+  Tripvehgrpspec.hastusKeywords = ["tripvehgroupspec"];
+  Tripvehgrpspec.hastusObject = "tripvehgrpspec";
+
+  Tripvehgrpspec.allChildClasses = getAllChildClasses(childClasses);
+
+  return Tripvehgrpspec;
 }
 
-Tripvehgrpspec.hastusKeywords = ["tripvehgroupspec"];
-Tripvehgrpspec.hastusObject = "tripvehgrpspec";
-
-Tripvehgrpspec.allChildClasses = getAllChildClasses(childClasses);
-
-export default Tripvehgrpspec;
+export default TripvehgrpspecClassFactory;

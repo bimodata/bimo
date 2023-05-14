@@ -29,18 +29,18 @@ import { NetworkEdge } from "./NetworkEdge";
  * There is no nextLink on l(2->3) since n3 is degree 1
  */
 export declare class AdjacentLink {
-    startNode: NetworkNode;
-    endNode: NetworkNode;
-    edge: NetworkEdge;
-    constructor(startNode: NetworkNode, endNode: NetworkNode, edge: NetworkEdge);
-    get network(): import("./Network").Network;
-    /** Should probably be renamed oppositeLink */
-    get reverseLink(): AdjacentLink;
-    /** Works only if the end node is degree 2 - returns the end node's adjacent link that is not on the same edge
-     * as the current link   */
-    get nextLink(): AdjacentLink;
-    /** Works only if the start node is degree 2 - returns the start node's adjacent link that is not on the same edge
-     * as the current link   */
-    get previousLink(): AdjacentLink;
+  startNode: NetworkNode;
+  endNode: NetworkNode;
+  edge: NetworkEdge;
+  constructor(startNode: NetworkNode, endNode: NetworkNode, edge: NetworkEdge);
+  get network(): import("./Network").Network;
+  /** Should probably be renamed oppositeLink */
+  get reverseLink(): AdjacentLink | undefined;
+  /** Works only if the end node is degree 2 - returns the end node's adjacent link that is not on the same edge
+   * as the current link   */
+  get nextLink(): AdjacentLink | undefined;
+  /** Works only if the start node is degree 2 - returns the start node's adjacent link that is not on the same edge
+   * as the current link   */
+  get previousLink(): AdjacentLink | undefined;
 }
 export default AdjacentLink;

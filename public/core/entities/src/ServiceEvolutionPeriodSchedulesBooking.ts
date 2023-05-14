@@ -1,3 +1,6 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { ServiceEvolutionPeriodSchedulesBooking as BimoServiceEvolutionPeriodSchedulesBooking } from "../base-types/rawIndex";
+export { ServiceEvolutionPeriodSchedulesBooking as BimoServiceEvolutionPeriodSchedulesBooking } from "../base-types/rawIndex";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
@@ -5,12 +8,16 @@ export interface ServiceEvolutionPeriodSchedulesBookingProps extends ExtendedIte
   bkIdentifier?: string;
 }
 
-export class ServiceEvolutionPeriodSchedulesBooking extends Item<ServiceEvolutionPeriodSchedulesBooking> {
-  bkIdentifier?: string;
-  constructor(props: ServiceEvolutionPeriodSchedulesBookingProps) {
-    super(props);
-    this.bkIdentifier = gavpfp("bkIdentifier", props, `string`);
+export function ServiceEvolutionPeriodSchedulesBookingClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoServiceEvolutionPeriodSchedulesBooking {
+  class ServiceEvolutionPeriodSchedulesBooking extends Item<ServiceEvolutionPeriodSchedulesBooking> {
+    bkIdentifier?: string;
+    constructor(props: ServiceEvolutionPeriodSchedulesBookingProps) {
+      super(props);
+      this.bkIdentifier = gavpfp("bkIdentifier", props, `string`);
+    }
   }
+
+  return ServiceEvolutionPeriodSchedulesBooking;
 }
 
-export default ServiceEvolutionPeriodSchedulesBooking;
+export default ServiceEvolutionPeriodSchedulesBookingClassFactory;

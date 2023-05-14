@@ -1,28 +1,37 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { ServiceContextsCollection as BimoServiceContextsCollection } from "../base-types/rawIndex";
+export { ServiceContextsCollection as BimoServiceContextsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { ServiceContext, ServiceContextProps } from "./ServiceContext";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [ServiceContext];
+import { BimoServiceContext, ServiceContextProps } from "./ServiceContext";
 
 export interface ServiceContextsCollectionProps
-  extends ExtendedCollectionProps<ServiceContext, ServiceContextProps> {}
+  extends ExtendedCollectionProps<BimoServiceContext, ServiceContextProps> {}
 
-export class ServiceContextsCollection extends Collection<
+export function ServiceContextsCollectionClassFactory({
   ServiceContext,
-  ServiceContextProps
-> {
-  constructor(props: ServiceContextsCollectionProps = {}) {
-    super({
-      itemName: "ServiceContext",
-      ItemConstructor: ServiceContext,
-      associationType: "aggregation",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoServiceContextsCollection {
+  const childClasses: (typeof Entity)[] = [ServiceContext];
+
+  class ServiceContextsCollection extends Collection<
+    BimoServiceContext,
+    ServiceContextProps
+  > {
+    constructor(props: ServiceContextsCollectionProps = {}) {
+      super({
+        itemName: "ServiceContext",
+        ItemConstructor: ServiceContext,
+        associationType: "aggregation",
+        ...props,
+      });
+    }
   }
+
+  ServiceContextsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return ServiceContextsCollection;
 }
 
-ServiceContextsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default ServiceContextsCollection;
+export default ServiceContextsCollectionClassFactory;

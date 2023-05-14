@@ -1,58 +1,67 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { BookingCalendarDatesCollection as BimoBookingCalendarDatesCollection } from "../base-types/rawIndex";
+export { BookingCalendarDatesCollection as BimoBookingCalendarDatesCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BookingCalendarDate, BookingCalendarDateProps } from "./BookingCalendarDate";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [BookingCalendarDate];
+import { BimoBookingCalendarDate, BookingCalendarDateProps } from "./BookingCalendarDate";
 
 export interface BookingCalendarDatesCollectionProps
-  extends ExtendedCollectionProps<BookingCalendarDate, BookingCalendarDateProps> {}
+  extends ExtendedCollectionProps<BimoBookingCalendarDate, BookingCalendarDateProps> {}
 
-export class BookingCalendarDatesCollection extends Collection<
+export function BookingCalendarDatesCollectionClassFactory({
   BookingCalendarDate,
-  BookingCalendarDateProps
-> {
-  constructor(props: BookingCalendarDatesCollectionProps) {
-    super({
-      itemName: "BookingCalendarDate",
-      ItemConstructor: BookingCalendarDate,
-      associationType: "aggregation",
-      businessIdPropName: "bcaldDate",
-      ...props,
-    });
-  }
+}: EntityConstructorByEntityClassKey): typeof BimoBookingCalendarDatesCollection {
+  const childClasses: (typeof Entity)[] = [BookingCalendarDate];
 
-  getByIsoDate(isoDate: string, { refreshCache = false } = {}) {
-    const bcaldsByIsoDate = this.groupByProp("dateAsIsoDateString", { refreshCache });
-    const bcalds = bcaldsByIsoDate.get(isoDate);
-    if (!bcalds) {
-      return null;
+  class BookingCalendarDatesCollection extends Collection<
+    BimoBookingCalendarDate,
+    BookingCalendarDateProps
+  > {
+    constructor(props: BookingCalendarDatesCollectionProps) {
+      super({
+        itemName: "BookingCalendarDate",
+        ItemConstructor: BookingCalendarDate,
+        associationType: "aggregation",
+        businessIdPropName: "bcaldDate",
+        ...props,
+      });
     }
-    if (bcalds.length > 1) {
-      throw new Error("Date répétée");
+
+    getByIsoDate(isoDate: string, { refreshCache = false } = {}) {
+      const bcaldsByIsoDate = this.groupByProp("dateAsIsoDateString", { refreshCache });
+      const bcalds = bcaldsByIsoDate.get(isoDate);
+      if (!bcalds) {
+        return null;
+      }
+      if (bcalds.length > 1) {
+        throw new Error("Date répétée");
+      }
+      return bcalds[0];
     }
-    return bcalds[0];
-  }
 
-  getByDate(date: string) {
-    return this.getByBusinessId(date);
-  }
+    getByDate(date: string) {
+      return this.getByBusinessId(date);
+    }
 
-  sortByDate() {
-    this.sort((a, b) => (a.dateAsIsoDateString > b.dateAsIsoDateString ? 1 : -1));
-  }
+    sortByDate() {
+      this.sort((a, b) => (a.dateAsIsoDateString > b.dateAsIsoDateString ? 1 : -1));
+    }
 
-  get first() {
-    this.sortByDate();
-    return this.items[0];
-  }
+    get first() {
+      this.sortByDate();
+      return this.items[0];
+    }
 
-  get last() {
-    this.sortByDate();
-    return this.items[this.items.length - 1];
+    get last() {
+      this.sortByDate();
+      return this.items[this.items.length - 1];
+    }
   }
+  BookingCalendarDatesCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return BookingCalendarDatesCollection;
 }
-BookingCalendarDatesCollection.allChildClasses = getAllChildClasses(childClasses);
 
-export default BookingCalendarDatesCollection;
+export default BookingCalendarDatesCollectionClassFactory;

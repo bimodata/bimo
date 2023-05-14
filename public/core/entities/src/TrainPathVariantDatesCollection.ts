@@ -1,35 +1,41 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-param-reassign */
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { TrainPathVariantDatesCollection as BimoTrainPathVariantDatesCollection } from "../base-types/rawIndex";
+export { TrainPathVariantDatesCollection as BimoTrainPathVariantDatesCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { TrainPathVariantDate, TrainPathVariantDateProps } from "./TrainPathVariantDate";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [TrainPathVariantDate];
+import {
+  BimoTrainPathVariantDate,
+  TrainPathVariantDateProps,
+} from "./TrainPathVariantDate";
 
 export interface TrainPathVariantDatesCollectionProps
-  extends ExtendedCollectionProps<TrainPathVariantDate, TrainPathVariantDateProps> {}
+  extends ExtendedCollectionProps<BimoTrainPathVariantDate, TrainPathVariantDateProps> {}
 
-export class TrainPathVariantDatesCollection extends Collection<
+export function TrainPathVariantDatesCollectionClassFactory({
   TrainPathVariantDate,
-  TrainPathVariantDateProps
-> {
-  constructor(props: TrainPathVariantDatesCollectionProps = {}) {
-    super({
-      itemName: "TrainPathVariantDate",
-      ItemConstructor: TrainPathVariantDate,
-      associationType: "aggregation",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantDatesCollection {
+  const childClasses: (typeof Entity)[] = [TrainPathVariantDate];
+
+  class TrainPathVariantDatesCollection extends Collection<
+    BimoTrainPathVariantDate,
+    TrainPathVariantDateProps
+  > {
+    constructor(props: TrainPathVariantDatesCollectionProps = {}) {
+      super({
+        itemName: "TrainPathVariantDate",
+        ItemConstructor: TrainPathVariantDate,
+        associationType: "aggregation",
+        ...props,
+      });
+    }
   }
 
-  get self() {
-    return this;
-  }
+  TrainPathVariantDatesCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return TrainPathVariantDatesCollection;
 }
 
-TrainPathVariantDatesCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default TrainPathVariantDatesCollection;
+export default TrainPathVariantDatesCollectionClassFactory;

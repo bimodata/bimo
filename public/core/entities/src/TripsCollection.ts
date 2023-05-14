@@ -1,38 +1,48 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { TripsCollection as BimoTripsCollection } from "../base-types/rawIndex";
+export { TripsCollection as BimoTripsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { Trip, TripProps } from "./Trip";
+import { BimoTrip, TripProps } from "./Trip";
 
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [Trip];
+export interface TripsCollectionProps
+  extends ExtendedCollectionProps<BimoTrip, TripProps> {}
 
-export interface TripsCollectionProps extends ExtendedCollectionProps<Trip, TripProps> {}
+export function TripsCollectionClassFactory({
+  Trip,
+}: EntityConstructorByEntityClassKey): typeof BimoTripsCollection {
+  const childClasses: any[] = [Trip];
 
-export class TripsCollection extends Collection<Trip, TripProps> {
-  constructor(props: TripsCollectionProps = {}) {
-    super({
-      itemName: "Trip",
-      ItemConstructor: Trip,
-      idPropName: `bimoId`,
-      businessIdPropName: `trpIntNumber`,
-      labelPropName: `shortLoggingOutput`,
-      ...props,
-    });
+  class TripsCollection extends Collection<BimoTrip, TripProps> {
+    constructor(props: TripsCollectionProps = {}) {
+      super({
+        itemName: "Trip",
+        ItemConstructor: Trip,
+        idPropName: `bimoId`,
+        businessIdPropName: `trpIntNumber`,
+        labelPropName: `shortLoggingOutput`,
+        ...props,
+      });
+    }
+
+    /**
+     * Groups all the trips of the collection by trip number
+     * @returns {Map<String, Trip[]>} a map of trips arrays, indexed by trip number
+     */
+    get tripsByTripNumber() {
+      return this.groupByProp(`trpNumber`);
+    }
+
+    get mediumLoggingOutput() {
+      return this.map((trip) => trip.shortLoggingOutput).join("\n");
+    }
   }
 
-  /**
-   * Groups all the trips of the collection by trip number
-   * @returns {Map<String, Trip[]>} a map of trips arrays, indexed by trip number
-   */
-  get tripsByTripNumber() {
-    return this.groupByProp(`trpNumber`);
-  }
+  TripsCollection.allChildClasses = getAllChildClasses(childClasses);
 
-  get mediumLoggingOutput() {
-    return this.map((trip) => trip.shortLoggingOutput).join("\n");
-  }
+  return TripsCollection;
 }
 
-TripsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default TripsCollection;
+export default TripsCollectionClassFactory;

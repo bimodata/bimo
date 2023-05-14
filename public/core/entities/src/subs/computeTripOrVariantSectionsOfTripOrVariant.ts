@@ -1,20 +1,21 @@
-import TripOrVariantSectionsCollection from "../TripOrVariantSectionsCollection";
-import { TripOrVariant } from "../TripOrVariant";
-import { TripOrVariantPoint } from "../TripOrVariantPoint";
+import { BimoTripOrVariant } from "../TripOrVariant";
+import { BimoTripOrVariantPoint } from "../TripOrVariantPoint";
 import { ExtendedItem, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { EntityConstructorByEntityClassKey } from "../../base-types/entityConstructorByEntityClassKey";
 
 function computeTripOrVariantSectionsOfTripOrVariant<
   TripOrVariantType extends ExtendedItem<TripOrVariantType>,
   TripOrVariantProps extends ExtendedItemProps,
-  PointType extends TripOrVariantPoint<PointType, PointProps>,
+  PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
   PointProps extends ExtendedItemProps
 >(
-  tripOrVariant: TripOrVariant<
+  tripOrVariant: BimoTripOrVariant<
     TripOrVariantType,
     TripOrVariantProps,
     PointType,
     PointProps
-  >
+  >,
+  { TripOrVariantSectionsCollection }: EntityConstructorByEntityClassKey
 ) {
   try {
     const tripOrVariantSections = new TripOrVariantSectionsCollection<

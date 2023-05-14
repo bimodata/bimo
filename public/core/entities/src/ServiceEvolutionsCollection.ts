@@ -1,28 +1,37 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { ServiceEvolutionsCollection as BimoServiceEvolutionsCollection } from "../base-types/rawIndex";
+export { ServiceEvolutionsCollection as BimoServiceEvolutionsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { ServiceEvolution, ServiceEvolutionProps } from "./ServiceEvolution";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [ServiceEvolution];
+import { BimoServiceEvolution, ServiceEvolutionProps } from "./ServiceEvolution";
 
 export interface ServiceEvolutionsCollectionProps
-  extends ExtendedCollectionProps<ServiceEvolution, ServiceEvolutionProps> {}
+  extends ExtendedCollectionProps<BimoServiceEvolution, ServiceEvolutionProps> {}
 
-export class ServiceEvolutionsCollection extends Collection<
+export function ServiceEvolutionsCollectionClassFactory({
   ServiceEvolution,
-  ServiceEvolutionProps
-> {
-  constructor(props: ServiceEvolutionsCollectionProps = {}) {
-    super({
-      itemName: "ServiceEvolution",
-      ItemConstructor: ServiceEvolution,
-      associationType: "aggregation",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoServiceEvolutionsCollection {
+  const childClasses: (typeof Entity)[] = [ServiceEvolution];
+
+  class ServiceEvolutionsCollection extends Collection<
+    BimoServiceEvolution,
+    ServiceEvolutionProps
+  > {
+    constructor(props: ServiceEvolutionsCollectionProps = {}) {
+      super({
+        itemName: "ServiceEvolution",
+        ItemConstructor: ServiceEvolution,
+        associationType: "aggregation",
+        ...props,
+      });
+    }
   }
+
+  ServiceEvolutionsCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return ServiceEvolutionsCollection;
 }
 
-ServiceEvolutionsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default ServiceEvolutionsCollection;
+export default ServiceEvolutionsCollectionClassFactory;

@@ -1,28 +1,37 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { NetworksCollection as BimoNetworksCollection } from "../base-types/rawIndex";
+export { NetworksCollection as BimoNetworksCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { Network, NetworkProps } from "./Network";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [Network];
+import { BimoNetwork, NetworkProps } from "./Network";
 
 export interface NetworksCollectionProps
-  extends ExtendedCollectionProps<Network, NetworkProps> {}
+  extends ExtendedCollectionProps<BimoNetwork, NetworkProps> {}
 
-export class NetworksCollection extends Collection<Network, NetworkProps> {
-  constructor(props: NetworksCollectionProps = {}) {
-    super({
-      itemName: "Network",
-      ItemConstructor: Network,
-      idPropName: "bimoId",
-      businessIdPropName: "businessId",
-      labelPropName: "label",
-      associationType: "aggregation",
-      ...props,
-    });
+export function NetworksCollectionClassFactory({
+  Network,
+}: EntityConstructorByEntityClassKey): typeof BimoNetworksCollection {
+  const childClasses: (typeof Entity)[] = [Network];
+
+  class NetworksCollection extends Collection<BimoNetwork, NetworkProps> {
+    constructor(props: NetworksCollectionProps = {}) {
+      super({
+        itemName: "Network",
+        ItemConstructor: Network,
+        idPropName: "bimoId",
+        businessIdPropName: "businessId",
+        labelPropName: "label",
+        associationType: "aggregation",
+        ...props,
+      });
+    }
   }
+
+  NetworksCollection.allChildClasses = getAllChildClasses(childClasses);
+
+  return NetworksCollection;
 }
 
-NetworksCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default NetworksCollection;
+export default NetworksCollectionClassFactory;

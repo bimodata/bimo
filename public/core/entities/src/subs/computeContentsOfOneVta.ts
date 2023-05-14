@@ -1,23 +1,31 @@
 import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
-import { BlocksCollection } from "../BlocksCollection";
-import { BlockActivitiesCollection } from "../BlockActivitiesCollection";
-import { BlockSectionsCollection } from "../BlockSectionsCollection";
-import { VehicleTask } from "../VehicleTask";
-import { Block } from "../Block";
-import { BlockActivity } from "../BlockActivity";
-import { BlockSection } from "../BlockSection";
+import { BimoBlocksCollection } from "../BlocksCollection";
+import { BimoBlockActivitiesCollection } from "../BlockActivitiesCollection";
+import { BimoBlockSectionsCollection } from "../BlockSectionsCollection";
+import { BimoVehicleTask } from "../VehicleTask";
+import { BimoBlock } from "../Block";
+import { BimoBlockActivity } from "../BlockActivity";
+import { BimoBlockSection } from "../BlockSection";
+import { EntityConstructorByEntityClassKey } from "../../base-types/entityConstructorByEntityClassKey";
 
-function computeContentsOfOneVta({
-  vehicleTask,
-  setOfVtasByBlock,
-  setOfVtasByBlockActivity,
-  setOfBlockSectionsByBlockActivity,
-}: {
-  vehicleTask: VehicleTask;
-  setOfVtasByBlock: Map<Block, Set<VehicleTask>>;
-  setOfVtasByBlockActivity: Map<BlockActivity, Set<VehicleTask>>;
-  setOfBlockSectionsByBlockActivity: Map<BlockActivity, Set<BlockSection>>;
-}) {
+function computeContentsOfOneVta(
+  {
+    vehicleTask,
+    setOfVtasByBlock,
+    setOfVtasByBlockActivity,
+    setOfBlockSectionsByBlockActivity,
+  }: {
+    vehicleTask: BimoVehicleTask;
+    setOfVtasByBlock: Map<BimoBlock, Set<BimoVehicleTask>>;
+    setOfVtasByBlockActivity: Map<BimoBlockActivity, Set<BimoVehicleTask>>;
+    setOfBlockSectionsByBlockActivity: Map<BimoBlockActivity, Set<BimoBlockSection>>;
+  },
+  {
+    BlocksCollection,
+    BlockActivitiesCollection,
+    BlockSectionsCollection,
+  }: EntityConstructorByEntityClassKey
+) {
   const { vehicleSchedule, vehicleUnit } = vehicleTask;
   try {
     const blocksCollOfThisVehu = new BlocksCollection({
@@ -34,10 +42,12 @@ function computeContentsOfOneVta({
       parent: vehicleTask,
     });
 
-    blocksCollOfThisVehu.sort(
-      (blkA, blkB) =>
-        blkA.startTimeAsDuration.as("second") - blkB.startTimeAsDuration.as("second")
-    );
+    blocksCollOfThisVehu.sort((blkA, blkB) => {
+      const startA = blkA.startTimeAsDuration;
+      const startB = blkB.startTimeAsDuration;
+      if (!startA || !startB) throw new Error(`Invalid data`);
+      return startA.as("second") - startB.as("second");
+    });
     recursivelyAddBlocksAndBlockActivities({
       remainingBlocksToTreat: blocksCollOfThisVehu.items.slice(),
       indexOfFirstBlkActToTreatInThisBlock: 0,
@@ -76,15 +86,15 @@ function recursivelyAddBlocksAndBlockActivities({
   setOfVtasByBlockActivity,
   setOfBlockSectionsByBlockActivity,
 }: {
-  remainingBlocksToTreat: Block[];
+  remainingBlocksToTreat: BimoBlock[];
   indexOfFirstBlkActToTreatInThisBlock: number;
-  vehicleTask: VehicleTask;
-  blocksCollOfThisVehu: BlocksCollection;
-  blockActivitiesCollOfThisVehu: BlockActivitiesCollection;
-  blockSectionsOfThisVehu: BlockSectionsCollection;
-  setOfVtasByBlock: Map<Block, Set<VehicleTask>>;
-  setOfVtasByBlockActivity: Map<BlockActivity, Set<VehicleTask>>;
-  setOfBlockSectionsByBlockActivity: Map<BlockActivity, Set<BlockSection>>;
+  vehicleTask: BimoVehicleTask;
+  blocksCollOfThisVehu: BimoBlocksCollection;
+  blockActivitiesCollOfThisVehu: BimoBlockActivitiesCollection;
+  blockSectionsOfThisVehu: BimoBlockSectionsCollection;
+  setOfVtasByBlock: Map<BimoBlock, Set<BimoVehicleTask>>;
+  setOfVtasByBlockActivity: Map<BimoBlockActivity, Set<BimoVehicleTask>>;
+  setOfBlockSectionsByBlockActivity: Map<BimoBlockActivity, Set<BimoBlockSection>>;
 }) {
   const blockToTreat = remainingBlocksToTreat.shift();
   if (!blockToTreat) return;
