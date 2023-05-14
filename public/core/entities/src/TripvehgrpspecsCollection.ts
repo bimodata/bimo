@@ -1,27 +1,36 @@
-import { Tripvehgrpspec, TripvehgrpspecProps } from "./Tripvehgrpspec";
-
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { TripvehgrpspecsCollection as BimoTripvehgrpspecsCollection } from "../base-types/rawIndex";
+export { TripvehgrpspecsCollection as BimoTripvehgrpspecsCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [Tripvehgrpspec];
-import { getAllChildClasses } from "@bimo/core-utils-serialization";
-import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-
-export interface TripvehgrpspecsCollectionProps
-  extends ExtendedCollectionProps<Tripvehgrpspec, TripvehgrpspecProps> {}
-
-export class TripvehgrpspecsCollection extends Collection<
+import { BimoTripvehgrpspec, TripvehgrpspecProps } from "./Tripvehgrpspec";
+export function TripvehgrpspecsCollectionClassFactory({
   Tripvehgrpspec,
-  TripvehgrpspecProps
-> {
-  constructor(props: TripvehgrpspecsCollectionProps = {}) {
-    super({
-      itemName: "Tripvehgrpspec",
-      ItemConstructor: Tripvehgrpspec,
-      items: props.items,
-      parent: props.parent,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoTripvehgrpspecsCollection{
+  
+  const childClasses: (typeof Entity)[] = [Tripvehgrpspec];
+  import { getAllChildClasses } from "@bimo/core-utils-serialization";
+  import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+  
+  export interface TripvehgrpspecsCollectionProps
+  extends ExtendedCollectionProps<BimoTripvehgrpspec, TripvehgrpspecProps> {}
+  
+ class TripvehgrpspecsCollection extends Collection<
+    Tripvehgrpspec,
+    TripvehgrpspecProps
+  > {
+    constructor(props: TripvehgrpspecsCollectionProps = {}) {
+      super({
+        itemName: "Tripvehgrpspec",
+        ItemConstructor: Tripvehgrpspec,
+        items: props.items,
+        parent: props.parent,
+      });
+    }
   }
+  
+  TripvehgrpspecsCollection.allChildClasses = getAllChildClasses(childClasses);
+  
+  return TripvehgrpspecsCollection
 }
 
-TripvehgrpspecsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default TripvehgrpspecsCollection;
+export default TripvehgrpspecsCollectionClassFactory

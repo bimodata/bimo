@@ -1,10 +1,10 @@
 import { Duration } from "luxon";
+import { Item } from "@bimo/core-utils-collection";
 import { Place } from "./Place";
 import { Block } from "./Block";
 import { BlockActivity } from "./BlockActivity";
 import { VehicleTask } from "./VehicleTask";
 import { VehicleSchedule } from "./VehicleSchedule";
-import { Item } from "@bimo/core-utils-collection";
 import { Trip } from "./Trip";
 import { Maintenance } from "./Maintenance";
 import { VehicleStandby } from "./VehicleStandby";

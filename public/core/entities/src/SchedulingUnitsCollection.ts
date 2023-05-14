@@ -1,30 +1,39 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { SchedulingUnitsCollection as BimoSchedulingUnitsCollection } from "../base-types/rawIndex";
+export { SchedulingUnitsCollection as BimoSchedulingUnitsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { SchedulingUnit, SchedulingUnitProps } from "./SchedulingUnit";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [SchedulingUnit];
-
-export interface SchedulingUnitsCollectionProps
-  extends ExtendedCollectionProps<SchedulingUnit, SchedulingUnitProps> {}
-
-export class SchedulingUnitsCollection extends Collection<
+import { BimoSchedulingUnit, SchedulingUnitProps } from "./SchedulingUnit";
+export function SchedulingUnitsCollectionClassFactory({
   SchedulingUnit,
-  SchedulingUnitProps
-> {
-  constructor(props: SchedulingUnitsCollectionProps = {}) {
-    super({
-      itemName: "SchedulingUnit",
-      ItemConstructor: SchedulingUnit,
-      // idPropName: 'scuIdentifier',
-      businessIdPropName: "scuIdentifier",
-      labelPropName: "slo",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnitsCollection{
+  
+  const childClasses: (typeof Entity)[] = [SchedulingUnit];
+  
+  export interface SchedulingUnitsCollectionProps
+  extends ExtendedCollectionProps<BimoSchedulingUnit, SchedulingUnitProps> {}
+  
+ class SchedulingUnitsCollection extends Collection<
+    SchedulingUnit,
+    SchedulingUnitProps
+  > {
+    constructor(props: SchedulingUnitsCollectionProps = {}) {
+      super({
+        itemName: "SchedulingUnit",
+        ItemConstructor: SchedulingUnit,
+        // idPropName: 'scuIdentifier',
+        businessIdPropName: "scuIdentifier",
+        labelPropName: "slo",
+        ...props,
+      });
+    }
   }
+  
+  SchedulingUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
+  
+  return SchedulingUnitsCollection
 }
 
-SchedulingUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default SchedulingUnitsCollection;
+export default SchedulingUnitsCollectionClassFactory

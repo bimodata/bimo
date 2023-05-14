@@ -1,3 +1,7 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { ServiceEvolutionPeriodSchedulesBookingsCollection as BimoServiceEvolutionPeriodSchedulesBookingsCollection } from "../base-types/rawIndex";
+export { ServiceEvolutionPeriodSchedulesBookingsCollection as BimoServiceEvolutionPeriodSchedulesBookingsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
@@ -6,7 +10,6 @@ import {
   ServiceEvolutionPeriodSchedulesBookingProps,
 } from "./ServiceEvolutionPeriodSchedulesBooking";
 
-import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [ServiceEvolutionPeriodSchedulesBooking];
 
 export interface ServiceEvolutionPeriodSchedulesBookingsCollectionProps
@@ -15,21 +18,25 @@ export interface ServiceEvolutionPeriodSchedulesBookingsCollectionProps
     ServiceEvolutionPeriodSchedulesBookingProps
   > {}
 
-export class ServiceEvolutionPeriodSchedulesBookingsCollection extends Collection<
-  ServiceEvolutionPeriodSchedulesBooking,
-  ServiceEvolutionPeriodSchedulesBookingProps
-> {
-  constructor(props: ServiceEvolutionPeriodSchedulesBookingsCollectionProps = {}) {
-    super({
-      itemName: "ServiceEvolutionPeriodSchedulesBooking",
-      ItemConstructor: ServiceEvolutionPeriodSchedulesBooking,
-      associationType: "aggregation",
-      ...props,
-    });
+export function ServiceEvolutionPeriodSchedulesBookingsCollectionClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceEvolutionPeriodSchedulesBookingsCollection{
+ class ServiceEvolutionPeriodSchedulesBookingsCollection extends Collection<
+    ServiceEvolutionPeriodSchedulesBooking,
+    ServiceEvolutionPeriodSchedulesBookingProps
+  > {
+    constructor(props: ServiceEvolutionPeriodSchedulesBookingsCollectionProps = {}) {
+      super({
+        itemName: "ServiceEvolutionPeriodSchedulesBooking",
+        ItemConstructor: ServiceEvolutionPeriodSchedulesBooking,
+        associationType: "aggregation",
+        ...props,
+      });
+    }
   }
+  
+  ServiceEvolutionPeriodSchedulesBookingsCollection.allChildClasses =
+    getAllChildClasses(childClasses);
+  
+  return ServiceEvolutionPeriodSchedulesBookingsCollection
 }
 
-ServiceEvolutionPeriodSchedulesBookingsCollection.allChildClasses =
-  getAllChildClasses(childClasses);
-
-export default ServiceEvolutionPeriodSchedulesBookingsCollection;
+export default ServiceEvolutionPeriodSchedulesBookingsCollectionClassFactory

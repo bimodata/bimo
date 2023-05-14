@@ -1,9 +1,12 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { NetworkMap as BimoNetworkMap } from "../base-types/rawIndex";
+export { NetworkMap as BimoNetworkMap } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { FeatureCollection } from "geojson";
 
-import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 
 /** Une représentation physique d'un réseau ou d'une partie d'un réseau.
@@ -23,29 +26,33 @@ export interface NetworkMapProps extends ExtendedItemProps {
   sectionsFeatureCollection?: FeatureCollection;
 }
 
-export class NetworkMap extends Item<NetworkMap> {
-  bimoId: string;
-  featureCollection: FeatureCollection;
-  nodesFeatureCollection?: FeatureCollection;
-  sectionsFeatureCollection?: FeatureCollection;
-  constructor(props: NetworkMapProps) {
-    super(props);
-    this.bimoId = gavpfp("bimoId", props, "string");
-    this.label = gavpfp("label", props, "string");
-    this.featureCollection = gavpfp("featureCollection", props);
-    this.nodesFeatureCollection = gavpfp("nodesFeatureCollection", props);
-    this.sectionsFeatureCollection = gavpfp("sectionsFeatureCollection", props);
+export function NetworkMapClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoNetworkMap{
+ class NetworkMap extends Item<NetworkMap> {
+    bimoId: string;
+    featureCollection: FeatureCollection;
+    nodesFeatureCollection?: FeatureCollection;
+    sectionsFeatureCollection?: FeatureCollection;
+    constructor(props: NetworkMapProps) {
+      super(props);
+      this.bimoId = gavpfp("bimoId", props, "string");
+      this.label = gavpfp("label", props, "string");
+      this.featureCollection = gavpfp("featureCollection", props);
+      this.nodesFeatureCollection = gavpfp("nodesFeatureCollection", props);
+      this.sectionsFeatureCollection = gavpfp("sectionsFeatureCollection", props);
+    }
+  
+    get shortLoggingOutput() {
+      return this.label ?? super.slo;
+    }
+  
+    get mediumLoggingOutput() {
+      return `${this.shortLoggingOutput}: ${this.featureCollection.features.length} segments`;
+    }
   }
-
-  get shortLoggingOutput() {
-    return this.label ?? super.slo;
-  }
-
-  get mediumLoggingOutput() {
-    return `${this.shortLoggingOutput}: ${this.featureCollection.features.length} segments`;
-  }
+  
+  NetworkMap.allChildClasses = getAllChildClasses(childClasses);
+  
+  return NetworkMap
 }
 
-NetworkMap.allChildClasses = getAllChildClasses(childClasses);
-
-export default NetworkMap;
+export default NetworkMapClassFactory

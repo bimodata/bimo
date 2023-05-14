@@ -1,3 +1,6 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { TripShift as BimoTripShift } from "../base-types/rawIndex";
+export { TripShift as BimoTripShift } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -9,19 +12,23 @@ export interface TripShiftProps extends ExtendedItemProps {
   tripshiftActualShift?: string;
 }
 
-export class TripShift extends Item<TripShift> {
-  tripshiftTripNo: string;
-  tripshiftActualShift?: string;
-  constructor(props: TripShiftProps) {
-    super(props);
-    this.tripshiftTripNo = gavpfp("tripshiftTripNo", props);
-    this.tripshiftActualShift = gavpfp("tripshiftActualShift", props);
+export function TripShiftClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoTripShift{
+ class TripShift extends Item<TripShift> {
+    tripshiftTripNo: string;
+    tripshiftActualShift?: string;
+    constructor(props: TripShiftProps) {
+      super(props);
+      this.tripshiftTripNo = gavpfp("tripshiftTripNo", props);
+      this.tripshiftActualShift = gavpfp("tripshiftActualShift", props);
+    }
   }
+  
+  TripShift.hastusKeywords = ["trip_shift"];
+  TripShift.hastusObject = "trip_shift";
+  
+  TripShift.allChildClasses = getAllChildClasses(childClasses);
+  
+  return TripShift
 }
 
-TripShift.hastusKeywords = ["trip_shift"];
-TripShift.hastusObject = "trip_shift";
-
-TripShift.allChildClasses = getAllChildClasses(childClasses);
-
-export default TripShift;
+export default TripShiftClassFactory

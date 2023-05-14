@@ -1,28 +1,37 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { BlocksCollection as BimoBlocksCollection } from "../base-types/rawIndex";
+export { BlocksCollection as BimoBlocksCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { Block, BlockProps } from "./Block";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [Block];
-
-export interface BlocksCollectionProps
-  extends ExtendedCollectionProps<Block, BlockProps> {}
-
-export class BlocksCollection extends Collection<Block, BlockProps> {
-  constructor(props: BlocksCollectionProps = {}) {
-    super({
-      itemName: "Block",
-      ItemConstructor: Block,
-      items: props.items,
-      parent: props.parent,
-      idPropName: `blkIntNumber`,
-      labelPropName: `blkNumber`,
-      associationType: props.associationType,
-    });
+import { BimoBlock, BlockProps } from "./Block";
+export function BlocksCollectionClassFactory({
+  Block,
+}: EntityConstructorByEntityClassKey): typeof BimoBlocksCollection{
+  
+  const childClasses: (typeof Entity)[] = [Block];
+  
+  export interface BlocksCollectionProps
+  extends ExtendedCollectionProps<BimoBlock, BlockProps> {}
+  
+ class BlocksCollection extends Collection<BimoBlock, BlockProps> {
+    constructor(props: BlocksCollectionProps = {}) {
+      super({
+        itemName: "Block",
+        ItemConstructor: Block,
+        items: props.items,
+        parent: props.parent,
+        idPropName: `blkIntNumber`,
+        labelPropName: `blkNumber`,
+        associationType: props.associationType,
+      });
+    }
   }
+  
+  BlocksCollection.allChildClasses = getAllChildClasses(childClasses);
+  
+  return BlocksCollection
 }
 
-BlocksCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default BlocksCollection;
+export default BlocksCollectionClassFactory

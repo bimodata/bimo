@@ -1,35 +1,44 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { TrainPathVariantsCollection as BimoTrainPathVariantsCollection } from "../base-types/rawIndex";
+export { TrainPathVariantsCollection as BimoTrainPathVariantsCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { TrainPathVariant, TrainPathVariantProps } from "./TrainPathVariant";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [TrainPathVariant];
-
-export interface TrainPathVariantsCollectionProps
-  extends ExtendedCollectionProps<TrainPathVariant, TrainPathVariantProps> {}
-
-export class TrainPathVariantsCollection extends Collection<
+import { BimoTrainPathVariant, TrainPathVariantProps } from "./TrainPathVariant";
+export function TrainPathVariantsCollectionClassFactory({
   TrainPathVariant,
-  TrainPathVariantProps
-> {
-  constructor(props: TrainPathVariantsCollectionProps = {}) {
-    super({
-      itemName: "TrainPathVariant",
-      ItemConstructor: TrainPathVariant,
-      associationType: "composition",
-      ...props,
-    });
+}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantsCollection{
+  
+  const childClasses: (typeof Entity)[] = [TrainPathVariant];
+  
+  export interface TrainPathVariantsCollectionProps
+  extends ExtendedCollectionProps<BimoTrainPathVariant, TrainPathVariantProps> {}
+  
+ class TrainPathVariantsCollection extends Collection<
+    TrainPathVariant,
+    TrainPathVariantProps
+  > {
+    constructor(props: TrainPathVariantsCollectionProps = {}) {
+      super({
+        itemName: "TrainPathVariant",
+        ItemConstructor: TrainPathVariant,
+        associationType: "composition",
+        ...props,
+      });
+    }
+  
+    get self() {
+      return this;
+    }
   }
-
-  get self() {
-    return this;
-  }
+  
+  TrainPathVariantsCollection.allChildClasses = getAllChildClasses(childClasses);
+  
+  return TrainPathVariantsCollection
 }
 
-TrainPathVariantsCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default TrainPathVariantsCollection;
+export default TrainPathVariantsCollectionClassFactory

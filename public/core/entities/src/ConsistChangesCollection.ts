@@ -1,32 +1,42 @@
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
+import { ConsistChangesCollection as BimoConsistChangesCollection } from "../base-types/rawIndex";
+export { ConsistChangesCollection as BimoConsistChangesCollection } from "../base-types/rawIndex";
+import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { ConsistChange, ConsistChangeProps } from "./ConsistChange";
-import { VehicleSchedule } from "./VehicleSchedule";
-
-import { Entity } from "@bimo/core-utils-entity";
-const childClasses: (typeof Entity)[] = [ConsistChange];
-
-export interface ConsistChangesCollectionProps
-  extends ExtendedCollectionProps<ConsistChange, ConsistChangeProps> {}
-
-export class ConsistChangesCollection extends Collection<
+import { BimoConsistChange, ConsistChangeProps } from "./ConsistChange";
+import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
+export function ConsistChangesCollectionClassFactory({
   ConsistChange,
-  ConsistChangeProps
-> {
-  declare parent?: VehicleSchedule;
-  constructor(props: ConsistChangesCollectionProps = {}) {
-    super({
-      itemName: "ConsistChange",
-      ItemConstructor: ConsistChange,
-      idPropName: `cchgInternalNumber`,
-      businessIdPropName: `cchgInternalNumber`,
-      labelPropName: ``,
-      ...props,
-    });
+  VehicleSchedule,
+}: EntityConstructorByEntityClassKey): typeof BimoConsistChangesCollection{
+  
+  const childClasses: (typeof Entity)[] = [ConsistChange];
+  
+  export interface ConsistChangesCollectionProps
+  extends ExtendedCollectionProps<BimoConsistChange, ConsistChangeProps> {}
+  
+ class ConsistChangesCollection extends Collection<
+    ConsistChange,
+    ConsistChangeProps
+  > {
+    declare parent?: VehicleSchedule;
+    constructor(props: ConsistChangesCollectionProps = {}) {
+      super({
+        itemName: "ConsistChange",
+        ItemConstructor: ConsistChange,
+        idPropName: `cchgInternalNumber`,
+        businessIdPropName: `cchgInternalNumber`,
+        labelPropName: ``,
+        ...props,
+      });
+    }
   }
+  
+  ConsistChangesCollection.allChildClasses = getAllChildClasses(childClasses);
+  
+  return ConsistChangesCollection
 }
 
-ConsistChangesCollection.allChildClasses = getAllChildClasses(childClasses);
-
-export default ConsistChangesCollection;
+export default ConsistChangesCollectionClassFactory
