@@ -5,11 +5,15 @@ import { TrainPathVariantDatesCollection } from "./TrainPathVariantDatesCollecti
 import { TrainPathVariantPointsCollection } from "./TrainPathVariantPointsCollection";
 export interface TrainPathVariantProps extends ExtendedItemProps {
   trnpvTrainPathRimId?: string;
+  trnpvDateOffset?: string;
+  trnpvInternalNumber?: string;
   trainPathVariantPoints?: TrainPathVariantPointsCollection;
   trainPathVariantDates?: TrainPathVariantDatesCollection;
 }
 export declare class TrainPathVariant extends Item<TrainPathVariant> {
   trnpvTrainPathRimId?: string;
+  trnpvDateOffset?: string;
+  trnpvInternalNumber?: string;
   trainPathVariantPoints: TrainPathVariantPointsCollection;
   trainPathVariantDates: TrainPathVariantDatesCollection;
   constructor(props: TrainPathVariantProps, context: BimoContext);

@@ -17,6 +17,8 @@ import { BimoContext } from "@bimo/core-global-types";
 
 export interface TrainPathVariantProps extends ExtendedItemProps {
   trnpvTrainPathRimId?: string;
+  trnpvDateOffset?: string;
+  trnpvInternalNumber?: string;
   trainPathVariantPoints?: BimoTrainPathVariantPointsCollection;
   trainPathVariantDates?: BimoTrainPathVariantDatesCollection;
 }
@@ -37,12 +39,16 @@ export function TrainPathVariantClassFactory({
     TrainPathVariantPointProps
   > {
     trnpvTrainPathRimId?: string;
+    trnpvDateOffset?: string;
+    trnpvInternalNumber?: string;
     trainPathVariantPoints: BimoTrainPathVariantPointsCollection;
     trainPathVariantDates: BimoTrainPathVariantDatesCollection;
     constructor(props: TrainPathVariantProps, context: BimoContext) {
       super(props, context, "trainPathVariant");
 
       this.trnpvTrainPathRimId = gavpfp("trnpvTrainPathRimId", props, `string`);
+      this.trnpvDateOffset = gavpfp("trnpvDateOffset", props, `string`);
+      this.trnpvInternalNumber = gavpfp("trnpvInternalNumber", props, `string`);
 
       /** @type {TrainPathVariantPointsCollection} */
       this.trainPathVariantPoints = gavpfp(
