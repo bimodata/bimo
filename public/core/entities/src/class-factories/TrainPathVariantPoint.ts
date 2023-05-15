@@ -59,6 +59,7 @@ export function TrainPathVariantPointClassFactory({
     }
 
     get departureTime(): string {
+      if (!this.trnpvptLoadTime) return this.arrivalTime;
       return durationToHastusExtendedHoursString(
         this.getTimeAsDuration("arrival", false).plus(
           hastusHoursAndMinutesToDuration(this.trnpvptLoadTime)
