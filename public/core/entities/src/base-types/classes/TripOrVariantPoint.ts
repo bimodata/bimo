@@ -6,6 +6,7 @@ import {
 } from "@bimo/core-utils-collection";
 import { Place } from "./Place";
 import { Duration } from "luxon";
+import { TripOrVariantTypeEnum } from "./TripOrVariant";
 
 export declare class TripOrVariantPoint<
   PointType extends ExtendedItem<PointType>,
@@ -13,7 +14,7 @@ export declare class TripOrVariantPoint<
 > extends Item<PointType> {
   _abstract?: any;
   parent?: Collection<PointType, PointProps>;
-  constructor(props: PointProps, tripOrVariantType: "variant" | "trip");
+  constructor(props: PointProps, tripOrVariantType: TripOrVariantTypeEnum);
   get isTimingPoint(): string;
   set isTimingPoint(v: string);
   get placeId(): string;

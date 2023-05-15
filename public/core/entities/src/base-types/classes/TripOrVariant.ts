@@ -41,7 +41,7 @@ export declare class TripOrVariant<
   get endPlaceId(): string;
   get firstPoint(): PointType;
   get lastPoint(): PointType;
-  get productive(): string;
+  get productive(): string | undefined;
   get pointsWithStopping(): PointType[];
   get pointsThatAreTimingPoints(): PointType[];
   get routeId(): string | undefined;

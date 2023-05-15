@@ -15,6 +15,7 @@ import { Duration } from "luxon";
 import { get, set } from "lodash";
 
 import { BimoPlace } from "./Place";
+import { TripOrVariantTypeEnum } from "./TripOrVariant";
 export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTripOrVariantPoint {
   const pathByTripOrVariantPropNameByTripOrVariantType = {
     trip: {
@@ -47,6 +48,18 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
       // Todo: move this to a SNCF specific TripOrVariant
       codeCs: "varptCodeCs",
     },
+    trainPathVariant: {
+      isTimingPoint: "isTimingPoint",
+      placeId: "trnpvptPlace",
+      originalPlaceId: "trnpvptPlace",
+      variantId: undefined,
+      noStopping: "trnpvptNoStopping",
+      allowLoadTime: "allowLoadTime",
+      tpDistance: undefined,
+      distance: undefined,
+      arrivalTime: "arrivalTime",
+      departureTime: "departureTime",
+    },
   };
 
   class TripOrVariantPoint<
@@ -55,7 +68,7 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
   > extends Item<PointType> {
     _abstract?: any;
     declare parent?: Collection<PointType, PointProps>;
-    constructor(props: PointProps, tripOrVariantType: "variant" | "trip") {
+    constructor(props: PointProps, tripOrVariantType: TripOrVariantTypeEnum) {
       super(props);
       this._abstract = {
         /* Not sure about the "abstract" name ... the idea is just to easily tell serialieModel to ignore these keys */

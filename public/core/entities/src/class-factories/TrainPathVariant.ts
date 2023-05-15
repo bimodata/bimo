@@ -6,8 +6,14 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
+import { BimoTrainPath } from "./TrainPath";
 import { BimoTrainPathVariantDatesCollection } from "./TrainPathVariantDatesCollection";
 import { BimoTrainPathVariantPointsCollection } from "./TrainPathVariantPointsCollection";
+import {
+  BimoTrainPathVariantPoint,
+  TrainPathVariantPointProps,
+} from "./TrainPathVariantPoint";
+import { BimoContext } from "@bimo/core-global-types";
 
 export interface TrainPathVariantProps extends ExtendedItemProps {
   trnpvTrainPathRimId?: string;
@@ -18,17 +24,23 @@ export interface TrainPathVariantProps extends ExtendedItemProps {
 export function TrainPathVariantClassFactory({
   TrainPathVariantPointsCollection,
   TrainPathVariantDatesCollection,
+  TripOrVariant,
 }: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariant {
   const childClasses: (typeof Entity)[] = [
     TrainPathVariantPointsCollection,
     TrainPathVariantDatesCollection,
   ];
-  class TrainPathVariant extends Item<TrainPathVariant> {
+  class TrainPathVariant extends TripOrVariant<
+    TrainPathVariant,
+    TrainPathVariantProps,
+    BimoTrainPathVariantPoint,
+    TrainPathVariantPointProps
+  > {
     trnpvTrainPathRimId?: string;
     trainPathVariantPoints: BimoTrainPathVariantPointsCollection;
     trainPathVariantDates: BimoTrainPathVariantDatesCollection;
-    constructor(props: TrainPathVariantProps) {
-      super(props);
+    constructor(props: TrainPathVariantProps, context: BimoContext) {
+      super(props, context, "trainPathVariant");
 
       this.trnpvTrainPathRimId = gavpfp("trnpvTrainPathRimId", props, `string`);
 
@@ -48,6 +60,18 @@ export function TrainPathVariantClassFactory({
         new TrainPathVariantDatesCollection(),
         { altPropName: "train_path_date", parent: this }
       );
+    }
+
+    get trainPath() {
+      return this.parent && (this.parent.parent as BimoTrainPath);
+    }
+
+    get productive() {
+      return this.trainPath?.trnpIsInService;
+    }
+
+    get routeId() {
+      return this.trainPath?.trnpRoute;
     }
 
     get shortLoggingOutput() {

@@ -4,7 +4,12 @@ export { TrainPathVariantPoint as BimoTrainPathVariantPoint } from "../base-type
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
-import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { ExtendedItemProps } from "@bimo/core-utils-collection";
+import {
+  hastusMinutesAndSecondsToDuration,
+  addTimeObjectToHastusExtendedHoursString,
+  durationToHastusExtendedHoursString,
+} from "@bimo/core-utils-time-and-date";
 
 export interface TrainPathVariantPointProps extends ExtendedItemProps {
   trnpvptPlace: string;
@@ -14,17 +19,22 @@ export interface TrainPathVariantPointProps extends ExtendedItemProps {
   trnpvptPassMidnight?: string;
 }
 
-export function TrainPathVariantPointClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantPoint {
+export function TrainPathVariantPointClassFactory({
+  TripOrVariantPoint,
+}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantPoint {
   const childClasses: (typeof Entity)[] = [];
 
-  class TrainPathVariantPoint extends Item<TrainPathVariantPoint> {
+  class TrainPathVariantPoint extends TripOrVariantPoint<
+    TrainPathVariantPoint,
+    TrainPathVariantPointProps
+  > {
     trnpvptPlace: string;
-    trnpvptArrivalTime?: string;
+    trnpvptArrivalTime: string;
     trnpvptLoadTime?: string;
     trnpvptNoStopping?: string;
     trnpvptPassMidnight?: string;
     constructor(props: TrainPathVariantPointProps) {
-      super(props);
+      super(props, "trainPathVariant");
 
       this.trnpvptPlace = gavpfp("trnpvptPlace", props, `string`);
       this.trnpvptArrivalTime = gavpfp("trnpvptArrivalTime", props, `string`);
@@ -38,6 +48,32 @@ export function TrainPathVariantPointClassFactory({}: EntityConstructorByEntityC
         `${this.trnpvptPlace} (A:${this.trnpvptArrivalTime},` +
         ` L:${this.trnpvptLoadTime}, noStopping:${this.trnpvptNoStopping}, passMidnight:${this.trnpvptPassMidnight})`
       );
+    }
+
+    /** In Hastus extended hours format */
+    get arrivalTime(): string {
+      if (this.trnpvptPassMidnight === "0") return this.trnpvptArrivalTime;
+      return addTimeObjectToHastusExtendedHoursString(this.trnpvptArrivalTime, {
+        hours: 24,
+      });
+    }
+
+    get departureTime(): string {
+      return durationToHastusExtendedHoursString(
+        this.getTimeAsDuration("arrival", false).plus(
+          hastusMinutesAndSecondsToDuration(this.trnpvptLoadTime)
+        )
+      );
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    get isTimingPoint() {
+      return "1";
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    get allowLoadTime() {
+      return "1";
     }
   }
 

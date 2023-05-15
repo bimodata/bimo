@@ -47,7 +47,10 @@ export function TripOrVariantClassFactory(
     },
     trainPathVariant: {
       points: "trainPathVariantPoints",
-      // TODO: complete
+      productive: "productive",
+      direction: undefined,
+      routeId: "routeId",
+      variantId: undefined,
     },
   };
 
