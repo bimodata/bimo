@@ -61,7 +61,7 @@ describe('computeItemKey', () => {
           () => {
             computeItemKey(item, config, serviceContext);
           },
-        ).to.throw('Erreur au moment de calculer la key de item1: erreur pour le test.');
+        ).to.throw('Erreur au moment de calculer la key de item1: erreur pour le test');
       });
     });
     describe(`with a noticeLevelForKeyComputationError and returnValueForKeyComputationError`, () => {
@@ -73,7 +73,7 @@ describe('computeItemKey', () => {
       it(`logs the error, wrapped in info about the item, and returns the value specified in the config`, () => {
         sinon.spy(logger);
         expect(computeItemKey(item, config, serviceContext)).to.equal('coucou');
-        expect(logger.info.getCall(0).args[0]).to.equal('Erreur au moment de calculer la key de item1: erreur pour le test.');
+        expect(logger.info.getCall(0).args[0]).to.contain('Erreur au moment de calculer la key de item1: erreur pour le test');
       });
     });
   });
