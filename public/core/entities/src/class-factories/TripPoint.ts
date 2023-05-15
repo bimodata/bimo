@@ -5,7 +5,6 @@ import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
-import timeAndDate from "@bimo/core-utils-time-and-date";
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 
 import { BimoTripOrVariantPoint } from "./TripOrVariantPoint";
@@ -291,42 +290,6 @@ export function TripPointClassFactory({
 
     removeFromTrip() {
       this.parent?.remove(this);
-    }
-
-    /**
-     *
-     * @param {'departure'|'arrival'} [departureOrArrival='departure']
-     * @param {Boolean} [allowFallback=true]
-     */
-    getTimeAsDuration(departureOrArrival = `departure`, allowFallback = true) {
-      let mainValue;
-      let fallBackValue;
-      if (departureOrArrival === `departure`) {
-        mainValue = this.trpptInternalDepartureTime;
-        fallBackValue = this.trpptInternalArrivalTime;
-      } else if (departureOrArrival === `arrival`) {
-        mainValue = this.trpptInternalArrivalTime;
-        fallBackValue = this.trpptInternalDepartureTime;
-      } else {
-        throw new Error(
-          `departureOrArrival should equal "departure" or "arrival". Got ${departureOrArrival}`
-        );
-      }
-      const finalValue = allowFallback ? mainValue || fallBackValue : mainValue;
-      return timeAndDate.hastusExtendedHoursToDuration(finalValue);
-    }
-
-    get stopDurationInSeconds() {
-      return this.getTimeAsDuration("departure")
-        .minus(this.getTimeAsDuration("arrival"))
-        .as("second");
-    }
-
-    tripPointTimesAreValid() {
-      const isValid =
-        this.getTimeAsDuration(`departure`, false) >=
-        this.getTimeAsDuration(`arrival`, false);
-      return isValid;
     }
 
     get shortLoggingOutput() {

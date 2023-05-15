@@ -9,6 +9,9 @@ import {
   Collection,
 } from "@bimo/core-utils-collection";
 
+import timeAndDate from "@bimo/core-utils-time-and-date";
+import { Duration } from "luxon";
+
 import { get, set } from "lodash";
 
 import { BimoPlace } from "./Place";
@@ -185,6 +188,40 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
 
     get isFirstOrLast() {
       return this.isFirst || this.isLast;
+    }
+
+    getTimeAsDuration(
+      departureOrArrival: "departure" | "arrival" = `departure`,
+      allowFallback: boolean = true
+    ): Duration {
+      let mainValue: string;
+      let fallBackValue: string | false;
+      if (departureOrArrival === `departure`) {
+        mainValue = this.departureTime;
+        fallBackValue = allowFallback && this.arrivalTime;
+      } else if (departureOrArrival === `arrival`) {
+        mainValue = this.arrivalTime;
+        fallBackValue = allowFallback && this.departureTime;
+      } else {
+        throw new Error(
+          `departureOrArrival should equal "departure" or "arrival". Got ${departureOrArrival}`
+        );
+      }
+      const finalValue = allowFallback ? mainValue || fallBackValue : mainValue;
+      return timeAndDate.hastusExtendedHoursToDuration(finalValue);
+    }
+
+    get stopDurationInSeconds() {
+      return this.getTimeAsDuration("departure")
+        .minus(this.getTimeAsDuration("arrival"))
+        .as("second");
+    }
+
+    timesAreValid() {
+      const isValid =
+        this.getTimeAsDuration(`departure`, false) >=
+        this.getTimeAsDuration(`arrival`, false);
+      return isValid;
     }
   }
 

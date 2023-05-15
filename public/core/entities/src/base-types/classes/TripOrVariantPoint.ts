@@ -5,6 +5,8 @@ import {
   Collection,
 } from "@bimo/core-utils-collection";
 import { Place } from "./Place";
+import { Duration } from "luxon";
+
 export declare class TripOrVariantPoint<
   PointType extends ExtendedItem<PointType>,
   PointProps extends ExtendedItemProps
@@ -39,4 +41,10 @@ export declare class TripOrVariantPoint<
   get isFirst(): boolean;
   get isLast(): boolean;
   get isFirstOrLast(): boolean;
+  getTimeAsDuration(
+    departureOrArrival?: "departure" | "arrival",
+    allowFallback?: boolean
+  ): Duration;
+  get stopDurationInSeconds(): number;
+  timesAreValid(): boolean;
 }

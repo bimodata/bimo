@@ -99,14 +99,6 @@ export declare class TripPoint extends TripOrVariantPoint<TripPoint, TripPointPr
   get previousPoint(): TripPoint;
   copy(): TripPoint;
   removeFromTrip(): void;
-  /**
-   *
-   * @param {'departure'|'arrival'} [departureOrArrival='departure']
-   * @param {Boolean} [allowFallback=true]
-   */
-  getTimeAsDuration(departureOrArrival?: string, allowFallback?: boolean): any;
-  get stopDurationInSeconds(): any;
-  tripPointTimesAreValid(): boolean;
   get shortLoggingOutput(): string;
   get placeId(): string;
   set placeId(v: string);

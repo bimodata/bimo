@@ -576,8 +576,7 @@ export function TripClassFactory({
               );
             }
           }
-          if (!tripPoint.tripPointTimesAreValid())
-            throw new Error(`Départ avant l'arrivée`);
+          if (!tripPoint.timesAreValid()) throw new Error(`Départ avant l'arrivée`);
         } catch (error) {
           throw new Error(
             `Problème avec ${tripPoint.shortLoggingOutput}: ${error.message}`
