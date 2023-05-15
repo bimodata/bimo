@@ -20,6 +20,7 @@
     "@bimo/core-utils-async-for-each": "^0.0.1",
     "@bimo/core-utils-entity": "^0.0.1",
     "@bimo/core-utils-partition": "^0.0.1",
+    "@bimo/core-utils-shallow-assign": "^0.0.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
