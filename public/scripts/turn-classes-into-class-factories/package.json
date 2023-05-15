@@ -7,8 +7,6 @@
   "author": "Gaël Haméon",
   "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
-    "@bimo-scripts/generate-classes-common": "^0.0.1",
-    "@bimo/core-utils-control-file-and-csv-data-parser": "^0.0.1",
     "@bimo/core-utils-filesystem": "^0.0.1",
     "@bimo/core-utils-string": "^0.0.1",
     "fs-extra": "^10.0.1"
