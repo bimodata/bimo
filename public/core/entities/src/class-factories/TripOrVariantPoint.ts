@@ -33,6 +33,21 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
       // Todo: move this to a SNCF specific TripOrVariant
       codeCs: "trpptCodeCs",
     },
+    scheduledTrip: {
+      isTimingPoint: "trpptIsTimingPoint",
+      placeId: "placeId",
+      originalPlaceId: "trpptInternalOriginalPlaceId",
+      variantId: "trpptVariantId",
+      noStopping: "trpptNoStopping",
+      allowLoadTime: "trpptInternalAllowLoadTime",
+      tpDistance: "trpptTpDistance",
+      distance: "trpptDistance",
+      arrivalTime: "trpptInternalArrivalTime",
+      departureTime: "trpptInternalDepartureTime",
+
+      // Todo: move this to a SNCF specific TripOrVariant
+      codeCs: "trpptCodeCs",
+    },
     variant: {
       isTimingPoint: "varptIsTimingPoint",
       placeId: "varptPlace",
@@ -52,11 +67,11 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
       isTimingPoint: "isTimingPoint",
       placeId: "trnpvptPlace",
       originalPlaceId: "trnpvptPlace",
-      variantId: undefined,
+      // variantId: undefined,
       noStopping: "trnpvptNoStopping",
       allowLoadTime: "allowLoadTime",
-      tpDistance: undefined,
-      distance: undefined,
+      // tpDistance: undefined,
+      // distance: undefined,
       arrivalTime: "arrivalTime",
       departureTime: "departureTime",
     },
