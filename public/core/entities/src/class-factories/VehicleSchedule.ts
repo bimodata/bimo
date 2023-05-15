@@ -23,10 +23,10 @@ import { BimoBlockActivity } from "./BlockActivity";
 import { BimoTrip } from "./Trip";
 import computeVehicleTasksOfVsc, {
   ComputedVehicleTaskObjects,
-} from "./subs/computeVehicleTasksOfVsc";
+} from "../subs/computeVehicleTasksOfVsc";
 import computeActivityEntityItemsOfVsc, {
   ComputedActivityEntityItemObjects,
-} from "./subs/computeActivityEntityItemsOfVsc";
+} from "../subs/computeActivityEntityItemsOfVsc";
 
 export interface VehicleScheduleProps extends ExtendedItemProps {
   vscName?: string;

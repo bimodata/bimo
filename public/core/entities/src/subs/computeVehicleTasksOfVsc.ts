@@ -2,19 +2,19 @@ import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
 
 import computeContentsOfOneVta from "./computeContentsOfOneVta";
 
-import { BimoVehicleSchedule } from "../VehicleSchedule";
-import { BimoBlocksCollection } from "../BlocksCollection";
-import { BimoVehicleTasksCollection } from "../VehicleTasksCollection";
-import { BimoBlock } from "../Block";
-import { BimoVehicleTask } from "../VehicleTask";
-import { BimoBlockActivity } from "../BlockActivity";
-import { BimoBlockActivitiesCollection } from "../BlockActivitiesCollection";
-import { BimoBlockSection } from "../BlockSection";
-import { BimoBlockSectionsCollection } from "../BlockSectionsCollection";
+import { BimoVehicleSchedule } from "../class-factories/VehicleSchedule";
+import { BimoBlocksCollection } from "../class-factories/BlocksCollection";
+import { BimoVehicleTasksCollection } from "../class-factories/VehicleTasksCollection";
+import { BimoBlock } from "../class-factories/Block";
+import { BimoVehicleTask } from "../class-factories/VehicleTask";
+import { BimoBlockActivity } from "../class-factories/BlockActivity";
+import { BimoBlockActivitiesCollection } from "../class-factories/BlockActivitiesCollection";
+import { BimoBlockSection } from "../class-factories/BlockSection";
+import { BimoBlockSectionsCollection } from "../class-factories/BlockSectionsCollection";
 import {
   entityConstructorByEntityClassKey,
   EntityConstructorByEntityClassKey,
-} from "../../base-types/entityConstructorByEntityClassKey";
+} from "../base-types/entityConstructorByEntityClassKey";
 
 export interface BlocksAndActsAndSections {
   blocks: BimoBlocksCollection;

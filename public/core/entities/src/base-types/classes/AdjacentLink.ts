@@ -33,7 +33,7 @@ export declare class AdjacentLink {
   endNode: NetworkNode;
   edge: NetworkEdge;
   constructor(startNode: NetworkNode, endNode: NetworkNode, edge: NetworkEdge);
-  get network(): import("./Network").Network;
+  get network(): import("./Network").Network | undefined;
   /** Should probably be renamed oppositeLink */
   get reverseLink(): AdjacentLink | undefined;
   /** Works only if the end node is degree 2 - returns the end node's adjacent link that is not on the same edge
