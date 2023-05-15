@@ -11,14 +11,18 @@ const childClasses: (typeof Entity)[] = [];
 export interface TrainPathVariantDateProps extends ExtendedItemProps {
   trnpdDate?: string;
   trnpdEffectiveDate?: string;
+  trnpdStatus?: string;
   trnpdStatusOir?: string;
+  trnpdIsCanceledOrInfeasible?: string;
 }
 
 export function TrainPathVariantDateClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantDate {
   class TrainPathVariantDate extends Item<TrainPathVariantDate> {
     trnpdDate?: string;
     trnpdEffectiveDate?: string;
-    trnpdStatusOir?: string;
+    trnpdStatus?: string;
+    _trnpdStatusOir?: string;
+    trnpdIsCanceledOrInfeasible?: string;
     constructor(props: TrainPathVariantDateProps) {
       super(props);
       /**
@@ -26,7 +30,29 @@ export function TrainPathVariantDateClassFactory({}: EntityConstructorByEntityCl
        * and the info from the variant when one is not provided. */
       this.trnpdDate = gavpfp("trnpdDate", props, `string`);
       this.trnpdEffectiveDate = gavpfp("trnpdEffectiveDate", props, `string`);
-      this.trnpdStatusOir = gavpfp("trnpdStatusOir", props, `string`);
+      this.trnpdStatus = gavpfp("trnpdStatus", props, `string`);
+      this._trnpdStatusOir = gavpfp("trnpdStatusOir", props, `string`);
+      this.trnpdIsCanceledOrInfeasible = gavpfp(
+        "trnpdIsCanceledOrInfeasible",
+        props,
+        `string`
+      );
+    }
+
+    get trnpdStatusOir() {
+      if (this.trnpdIsCanceledOrInfeasible === "1") return "50";
+      if (this._trnpdStatusOir) return this._trnpdStatusOir;
+      return this.trnpdStatus;
+    }
+
+    set trnpdStatusOir(v) {
+      if (v === "50") {
+        this.trnpdIsCanceledOrInfeasible = "1";
+      } else {
+        this.trnpdIsCanceledOrInfeasible = "0";
+        this.trnpdStatus = v;
+      }
+      this._trnpdStatusOir = v;
     }
 
     get shortLoggingOutput() {
