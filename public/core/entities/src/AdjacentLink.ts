@@ -1,13 +1,9 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { AdjacentLink as BimoAdjacentLink } from "../base-types/rawIndex";
 export { AdjacentLink as BimoAdjacentLink } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
-import { BimoNetworkNode, NetworkNodeProps } from "./NetworkNode";
-import { BimoNetworkEdge, NetworkEdgeProps } from "./NetworkEdge";
-export function AdjacentLinkClassFactory({
-  NetworkNode,
-  NetworkEdge,
-}: EntityConstructorByEntityClassKey): typeof BimoAdjacentLink {
+import { BimoNetworkNode } from "./NetworkNode";
+import { BimoNetworkEdge } from "./NetworkEdge";
+export function AdjacentLinkClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoAdjacentLink {
   /**
    * A link is a helper object that makes it easier to traverse the network in a certain order
    * A node has as many adjacent links as it has edges, but on the adjacent link, we can easily

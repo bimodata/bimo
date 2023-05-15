@@ -11,20 +11,18 @@ import { BimoRoutesCollection, RoutesCollectionProps } from "./RoutesCollection"
 import { BimoVariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
 import { BimoRoute, RouteProps } from "./Route";
 import { BimoVariant, VariantProps } from "./Variant";
+
+export interface RouteVersionsCollectionProps
+  extends ExtendedCollectionProps<BimoRouteVersion, RouteVersionProps> {}
+
 export function RouteVersionsCollectionClassFactory({
   RouteVersion,
   RoutesCollection,
   VariantsCollection,
-  Route,
-  Variant,
-}: EntityConstructorByEntityClassKey): typeof BimoRouteVersionsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoRouteVersionsCollection {
   const childClasses: (typeof Entity)[] = [RouteVersion, RoutesCollection];
-  
-  export interface RouteVersionsCollectionProps
-  extends ExtendedCollectionProps<BimoRouteVersion, RouteVersionProps> {}
-  
- class RouteVersionsCollection extends Collection<BimoRouteVersion, RouteVersionProps> {
+
+  class RouteVersionsCollection extends Collection<BimoRouteVersion, RouteVersionProps> {
     constructor(props: RouteVersionsCollectionProps = {}) {
       super({
         itemName: "RouteVersion",
@@ -36,21 +34,21 @@ export function RouteVersionsCollectionClassFactory({
         ...props,
       });
     }
-  
+
     /**
      * @param - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
      */
     static createFromOirStyleData(oirStyleData: any) {
       const rawRouteVersions = oirStyleData.route_version;
       const rawRoutes = oirStyleData.route;
-  
+
       if (!rawRouteVersions) {
         throw new Error(`Bad oirStyleData: could not find "route_version" key`);
       }
       const newRouteVersionsCollection = new RouteVersionsCollection({
         items: rawRouteVersions,
       });
-  
+
       if (!rawRoutes) {
         throw new Error(`Bad oirStyleData: could not find "route" key`);
       }
@@ -65,10 +63,10 @@ export function RouteVersionsCollectionClassFactory({
       });
       return newRouteVersionsCollection;
     }
-  
+
     generateOirStyleData() {
-      let routes: Route[] = [];
-      const routeVersions: RouteVersion[] = [];
+      let routes: BimoRoute[] = [];
+      const routeVersions: BimoRouteVersion[] = [];
       this.forEach((routeVersion) => {
         routeVersions.push(routeVersion);
         routes = routes.concat(
@@ -85,21 +83,22 @@ export function RouteVersionsCollectionClassFactory({
       });
       return { route_version: routeVersions, route: routes };
     }
-  
+
     getRouteVersionByIdentifier(rtevIdentifier: string) {
       return this.getByPropName(`rtevIdentifier`, rtevIdentifier);
     }
-  
-    /** @type {VariantsCollection} */
+
     get variantsCollectionOfAllVariantsOfAllRoutes() {
       return this._getAndSetCachedValue(
         "variantsCollectionOfAllVariantsOfAllRoutes",
         () => {
-          let allVariants: Variant[] = [];
+          let allVariants: BimoVariant[] = [];
           this.forEach((routeVersion) => {
-            allVariants = allVariants.concat(
-              routeVersion.variantsCollectionOfAllVariantsOfAllRoutes.items
-            );
+            const variantsCollOfThisRouteVersion =
+              routeVersion.variantsCollectionOfAllVariantsOfAllRoutes;
+            if (variantsCollOfThisRouteVersion) {
+              allVariants = allVariants.concat(variantsCollOfThisRouteVersion.items);
+            }
           });
           return new VariantsCollection({
             items: allVariants,
@@ -109,14 +108,14 @@ export function RouteVersionsCollectionClassFactory({
       );
     }
   }
-  
+
   RouteVersionsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
+
   /* I/O info */
   RouteVersionsCollection.defaultExportedDataDataName = `output_rtever`;
   RouteVersionsCollection.defaultImportDataDataName = `input_rtever`;
-  
-  return RouteVersionsCollection
+
+  return RouteVersionsCollection;
 }
 
-export default RouteVersionsCollectionClassFactory
+export default RouteVersionsCollectionClassFactory;

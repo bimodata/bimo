@@ -4,33 +4,43 @@ export { TripOrVariantSectionsCollection as BimoTripOrVariantSectionsCollection 
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
-import { BimoTripOrVariantSection, TripOrVariantSectionProps } from "./TripOrVariantSection";
-import { BimoTripOrVariantPoint, TripOrVariantPointProps } from "./TripOrVariantPoint";
+import { ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
+import {
+  BimoTripOrVariantSection,
+  TripOrVariantSectionProps,
+} from "./TripOrVariantSection";
+import { BimoTripOrVariantPoint } from "./TripOrVariantPoint";
+export interface TripOrVariantSectionsCollectionProps<
+  PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
+  PointProps extends ExtendedItemProps,
+  TripOrVariantType extends ExtendedItem<TripOrVariantType>,
+  TripOrVariantProps extends ExtendedItemProps
+> extends ExtendedCollectionProps<
+    BimoTripOrVariantSection<
+      PointType,
+      PointProps,
+      TripOrVariantType,
+      TripOrVariantProps
+    >,
+    TripOrVariantSectionProps<PointType, PointProps>
+  > {}
 export function TripOrVariantSectionsCollectionClassFactory({
   TripOrVariantSection,
-  TripOrVariantPoint,
-}: EntityConstructorByEntityClassKey): typeof BimoTripOrVariantSectionsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoTripOrVariantSectionsCollection {
   const childClasses: (typeof Entity)[] = [TripOrVariantSection];
-  
-  export interface TripOrVariantSectionsCollectionProps<
-    PointType extends TripOrVariantPoint<PointType, PointProps>,
-    PointProps extends ExtendedItemProps,
-    TripOrVariantType extends ExtendedItem<TripOrVariantType>,
-    TripOrVariantProps extends ExtendedItemProps
-  > extends ExtendedCollectionProps<
-      TripOrVariantSection<PointType, PointProps, TripOrVariantType, TripOrVariantProps>,
-      TripOrVariantSectionProps<PointType, PointProps>
-    > {}
-  
- class TripOrVariantSectionsCollection<
-    PointType extends TripOrVariantPoint<PointType, PointProps>,
+
+  class TripOrVariantSectionsCollection<
+    PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
     PointProps extends ExtendedItemProps,
     TripOrVariantType extends ExtendedItem<TripOrVariantType>,
     TripOrVariantProps extends ExtendedItemProps
   > extends Collection<
-    TripOrVariantSection<PointType, PointProps, TripOrVariantType, TripOrVariantProps>,
+    BimoTripOrVariantSection<
+      PointType,
+      PointProps,
+      TripOrVariantType,
+      TripOrVariantProps
+    >,
     TripOrVariantSectionProps<PointType, PointProps>
   > {
     constructor(
@@ -48,10 +58,10 @@ export function TripOrVariantSectionsCollectionClassFactory({
       });
     }
   }
-  
+
   TripOrVariantSectionsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TripOrVariantSectionsCollection
+
+  return TripOrVariantSectionsCollection;
 }
 
-export default TripOrVariantSectionsCollectionClassFactory
+export default TripOrVariantSectionsCollectionClassFactory;

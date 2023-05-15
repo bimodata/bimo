@@ -18,38 +18,41 @@ import {
 } from "./BlockActivityItem";
 import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
 import { BimoPlace, PlaceProps } from "./Place";
-import { BimoVehicleStandbysCollection, VehicleStandbysCollectionProps } from "./VehicleStandbysCollection";
+import {
+  BimoVehicleStandbysCollection,
+  VehicleStandbysCollectionProps,
+} from "./VehicleStandbysCollection";
+
+export interface VehicleStandbyProps extends ExtendedItemProps {
+  bimoId?: string;
+  sdbyStandbyNo?: string;
+  sdbyStartTime?: string;
+  sdbyEndTime?: string;
+  sdbyPlace?: string;
+  sdbyOperateSun?: string;
+  sdbyOperateMon?: string;
+  sdbyOperateTue?: string;
+  sdbyOperateWed?: string;
+  sdbyOperateThu?: string;
+  sdbyOperateFri?: string;
+  sdbyOperateSat?: string;
+  sdbyEvent?: string;
+  sdbyEventStatus?: string;
+  sdbyComment?: string;
+  sdbyCouvertureAdcNecessaire?: string;
+}
+
 export function VehicleStandbyClassFactory({
   BlockActivity,
   Place,
   VehicleStandbysCollection,
-}: EntityConstructorByEntityClassKey): typeof BimoVehicleStandby{
-  
-  export interface VehicleStandbyProps extends ExtendedItemProps {
-    bimoId?: string;
-    sdbyStandbyNo?: string;
-    sdbyStartTime?: string;
-    sdbyEndTime?: string;
-    sdbyPlace?: string;
-    sdbyOperateSun?: string;
-    sdbyOperateMon?: string;
-    sdbyOperateTue?: string;
-    sdbyOperateWed?: string;
-    sdbyOperateThu?: string;
-    sdbyOperateFri?: string;
-    sdbyOperateSat?: string;
-    sdbyEvent?: string;
-    sdbyEventStatus?: string;
-    sdbyComment?: string;
-    sdbyCouvertureAdcNecessaire?: string;
-  }
-  
- class VehicleStandby
+}: EntityConstructorByEntityClassKey): typeof BimoVehicleStandby {
+  class VehicleStandby
     extends Item<VehicleStandby>
     implements BlockActivityItem<VehicleStandby>
   {
     bimoId?: string;
-    _sdbyStandbyNo?: string;
+    _sdbyStandbyNo: string;
     sdbyStartTime: string;
     sdbyEndTime: string;
     sdbyPlace: string;
@@ -64,15 +67,15 @@ export function VehicleStandbyClassFactory({
     sdbyEventStatus?: string;
     sdbyComment?: string;
     sdbyCouvertureAdcNecessaire?: string;
-    declare parent?: VehicleStandbysCollection;
+    declare parent?: BimoVehicleStandbysCollection;
     static itemIdPropName = "sdbyStandbyNo";
     static blkActIdPropName = "blkactVehicleStandbyNo";
     constructor(props: VehicleStandbyProps) {
       super(props);
       this.bimoId = gavpfp("bimoId", props);
       this._sdbyStandbyNo = gavpfp("sdbyStandbyNo", props);
-      if (!this._sdbyStandbyNo) this._sdbyStandbyNo = this.bimoId;
-  
+      if (!this._sdbyStandbyNo) this._sdbyStandbyNo = this.bimoId as string;
+
       this.sdbyStartTime = gavpfp("sdbyStartTime", props);
       this.sdbyEndTime = gavpfp("sdbyEndTime", props);
       this.sdbyPlace = gavpfp("sdbyPlace", props);
@@ -88,91 +91,91 @@ export function VehicleStandbyClassFactory({
       this.sdbyComment = gavpfp("sdbyComment", props);
       this.sdbyCouvertureAdcNecessaire = gavpfp("sdbyCouvertureAdcNecessaire", props);
     }
-  
+
     get sdbyStandbyNo() {
       return this._sdbyStandbyNo;
     }
-  
+
     set sdbyStandbyNo(v) {
       if (this.parent && this.parent.invalidateItemByBusinessId) {
         this.parent.invalidateItemByBusinessId();
       }
       this._sdbyStandbyNo = v;
     }
-  
+
     get blkactVehicleActivityTypeNo() {
       return "";
     }
-  
-    private get setOfBlockActivities() {
+
+    get setOfBlockActivities() {
       return computeSetOfBlockActivitiesHelper<VehicleStandby>(this);
     }
-  
-    get blockActivities(): BlockActivity[] {
+
+    get blockActivities(): BimoBlockActivity[] {
       const setOfBlockActivities = this.setOfBlockActivities;
       return setOfBlockActivities && Array.from(setOfBlockActivities);
     }
-  
-    addBlockActivity(newBlockActivity: BlockActivity) {
+
+    addBlockActivity(newBlockActivity: BimoBlockActivity) {
       this.setOfBlockActivities.add(newBlockActivity);
     }
-  
-    removeBlockActivity(blockActivity: BlockActivity) {
+
+    removeBlockActivity(blockActivity: BimoBlockActivity) {
       this.setOfBlockActivities.delete(blockActivity);
     }
-  
-    get blockActivity(): BlockActivity {
+
+    get blockActivity(): BimoBlockActivity {
       return getSingleBlockActivityHelper<VehicleStandby>(this);
     }
-  
+
     get block() {
       return this.blockActivity?.block ?? null;
     }
-  
+
     get vehicleTasks() {
       return this.blockActivity?.vehicleTasks ?? null;
     }
-  
+
     get vehicleSchedule() {
       return this.parent?.parent ?? null;
     }
-  
+
     get startTime() {
       return this.sdbyStartTime;
     }
-  
+
     get startTimeAsDuration() {
       return this._getAndSetCachedValue("startTimeAsDuration", () =>
         hastusExtendedHoursToDuration(this.startTime)
       );
     }
-  
+
     get endTime() {
       return this.sdbyEndTime;
     }
-  
+
     get endTimeAsDuration() {
       return this._getAndSetCachedValue("endTimeAsDuration", () =>
         hastusExtendedHoursToDuration(this.endTime)
       );
     }
-  
+
     get startPlaceId() {
       return this.sdbyPlace;
     }
-  
+
     get endPlaceId() {
       return this.sdbyPlace;
     }
-  
-    improveStartPlacePrecision(morePreciseStartPlace: Place) {
+
+    improveStartPlacePrecision(morePreciseStartPlace: BimoPlace) {
       this.sdbyPlace = morePreciseStartPlace.plcIdentifier;
     }
-  
-    improveEndPlacePrecision(morePreciseEndPlace: Place) {
+
+    improveEndPlacePrecision(morePreciseEndPlace: BimoPlace) {
       this.sdbyPlace = morePreciseEndPlace.plcIdentifier;
     }
-  
+
     shiftTimes(shiftInSeconds: number) {
       this.sdbyStartTime = durationToHastusExtendedHoursString(
         this.startTimeAsDuration.plus({ second: shiftInSeconds })
@@ -184,13 +187,13 @@ export function VehicleStandbyClassFactory({
       this._nullifyCachedValue("endTimeAsDuration");
     }
   }
-  
+
   VehicleStandby.hastusKeywords = ["vehicle_standby"];
   VehicleStandby.hastusObject = "vehicle_standby";
-  
+
   VehicleStandby.allChildClasses = getAllChildClasses(childClasses);
-  
-  return VehicleStandby
+
+  return VehicleStandby;
 }
 
-export default VehicleStandbyClassFactory
+export default VehicleStandbyClassFactory;

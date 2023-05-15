@@ -6,17 +6,17 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoSchedulingUnit, SchedulingUnitProps } from "./SchedulingUnit";
+
+export interface SchedulingUnitsCollectionProps
+  extends ExtendedCollectionProps<BimoSchedulingUnit, SchedulingUnitProps> {}
+
 export function SchedulingUnitsCollectionClassFactory({
   SchedulingUnit,
-}: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnitsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnitsCollection {
   const childClasses: (typeof Entity)[] = [SchedulingUnit];
-  
-  export interface SchedulingUnitsCollectionProps
-  extends ExtendedCollectionProps<BimoSchedulingUnit, SchedulingUnitProps> {}
-  
- class SchedulingUnitsCollection extends Collection<
-    SchedulingUnit,
+
+  class SchedulingUnitsCollection extends Collection<
+    BimoSchedulingUnit,
     SchedulingUnitProps
   > {
     constructor(props: SchedulingUnitsCollectionProps = {}) {
@@ -30,10 +30,10 @@ export function SchedulingUnitsCollectionClassFactory({
       });
     }
   }
-  
+
   SchedulingUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return SchedulingUnitsCollection
+
+  return SchedulingUnitsCollection;
 }
 
-export default SchedulingUnitsCollectionClassFactory
+export default SchedulingUnitsCollectionClassFactory;

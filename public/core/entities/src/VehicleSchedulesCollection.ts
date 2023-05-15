@@ -2,8 +2,6 @@ import { EntityConstructorByEntityClassKey } from "../base-types/entityConstruct
 import { VehicleSchedulesCollection as BimoVehicleSchedulesCollection } from "../base-types/rawIndex";
 export { VehicleSchedulesCollection as BimoVehicleSchedulesCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-self-assign */
 
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import {
@@ -15,21 +13,19 @@ import { evaluateItemQuery } from "@bimo/core-utils-evaluate-item-query";
 import mapsAndSets from "@bimo/core-utils-maps-and-sets";
 
 import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
-import { BimoVehicleTasksCollection, VehicleTasksCollectionProps } from "./VehicleTasksCollection";
-import { BimoTripsCollection, TripsCollectionProps } from "./TripsCollection";
+
+export interface VehicleSchedulesCollectionProps
+  extends ExtendedCollectionProps<BimoVehicleSchedule, VehicleScheduleProps> {}
+
 export function VehicleSchedulesCollectionClassFactory({
   VehicleSchedule,
   VehicleTasksCollection,
   TripsCollection,
-}: EntityConstructorByEntityClassKey): typeof BimoVehicleSchedulesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoVehicleSchedulesCollection {
   const childClasses: (typeof Entity)[] = [VehicleSchedule];
-  
-  export interface VehicleSchedulesCollectionProps
-  extends ExtendedCollectionProps<BimoVehicleSchedule, VehicleScheduleProps> {}
-  
- class VehicleSchedulesCollection extends Collection<
-    VehicleSchedule,
+
+  class VehicleSchedulesCollection extends Collection<
+    BimoVehicleSchedule,
     VehicleScheduleProps
   > {
     libelle: string;
@@ -46,14 +42,14 @@ export function VehicleSchedulesCollectionClassFactory({
       });
       this.libelle = props.libelle;
     }
-  
+
     static createFromOirStyleData(
       oirStyleData: any,
       libelle: string,
       associationType: CollectionAssociationType = "composition"
     ): VehicleSchedulesCollection {
       const rawVehicleSchedules = oirStyleData.vehicle_schedule;
-  
+
       if (!rawVehicleSchedules) {
         throw new Error(`Bad oirStyleData: could not find "vehicle_schedule" key`);
       }
@@ -64,17 +60,17 @@ export function VehicleSchedulesCollectionClassFactory({
       });
       return newVehicleSchedulesCollection;
     }
-  
+
     get shortLoggingOutput() {
       return `${this.libelle} - (${this.count()} vscs)`;
     }
-  
+
     setScenarioNumberOnAllVscs(scenarioNumber: number | string) {
       this.forEach((vsc) => {
         vsc.vscScenario = scenarioNumber.toString();
       });
     }
-  
+
     generateOirStyleData() {
       // this should disappear: OIG/OIR to JSON should take care of this.
       // eslint-disable-next-line camelcase
@@ -115,13 +111,12 @@ export function VehicleSchedulesCollectionClassFactory({
         vehicleSchedule.consist_change = vehicleSchedule.consistChanges.items;
         //@ts-ignore
         vehicleSchedule.overnight_link = vehicleSchedule.overnightLinks.items;
-  
+
         return vehicleSchedule;
       });
       return { vehicle_schedule };
     }
-  
-    /** @type {TripsCollection} */
+
     get tripsCollectionOfAllTripsOfAllVscs() {
       return this._getAndSetCachedValue(
         "tripsCollectionOfAllTripsOfAllVscs",
@@ -132,8 +127,7 @@ export function VehicleSchedulesCollectionClassFactory({
           })
       );
     }
-  
-    /** @type {VehicleTasksCollection} */
+
     get vehicleTasksCollectionOfAllVscs() {
       return this._getAndSetCachedValue(
         "vehicleTasksCollectionOfAllVscs",
@@ -144,17 +138,16 @@ export function VehicleSchedulesCollectionClassFactory({
           })
       );
     }
-  
-    /** @type {Set<string>} */
+
     get setOfAllPlaceIdentifiers() {
       const allSets = this.map((vsc) => vsc.setOfAllPlaceIdentifiers);
       return mapsAndSets.mergeSets(...allSets);
     }
-  
+
     get arrayOfAllPlaceIdentifiers() {
       return Array.from(this.setOfAllPlaceIdentifiers);
     }
-  
+
     getOrCreateVehicleScheduleByVscName(
       vscName: string,
       defaultPropsForNewVsc: VehicleScheduleProps
@@ -163,11 +156,11 @@ export function VehicleSchedulesCollectionClassFactory({
       defaultPropsForNewVsc.vscName = vscName;
       return this.getOrCreateItemByPropName(`vscName`, vscName, defaultPropsForNewVsc);
     }
-  
+
     getVehicleScheduleByVscName(vscName: string) {
       return this.getByPropName(`vscName`, vscName);
     }
-  
+
     /**
      * Adds the vscs of the otherVscColl to this one and changes the libelle.
      * MUTATES this vscColl
@@ -184,10 +177,10 @@ export function VehicleSchedulesCollectionClassFactory({
       });
       return this;
     }
-  
+
     /**
      * Ne conserve que les block_activity qui correspondent à blockActivitySelectorQuery
-     * @param {Set} blockActivitySelectorQuery - Requête JQM applicable aux objets blockActivity à conserver
+     * @param blockActivitySelectorQuery - Requête JQM applicable aux objets blockActivity à conserver
      */
     filterBlockActivities(blockActivitySelectorQuery: any) {
       this.forEach((vechicleSchedule) => {
@@ -199,19 +192,19 @@ export function VehicleSchedulesCollectionClassFactory({
       });
       this.removeUnusedBlockActivities();
     }
-  
+
     removeUnusedBlockActivities() {
       this.forEach((vsc) => vsc.removeUnusedBlockActivities());
     }
   }
-  
+
   VehicleSchedulesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
+
   /* I/O info */
   VehicleSchedulesCollection.defaultExportedDataDataName = `output_vsc`;
   VehicleSchedulesCollection.defaultImportDataDataName = `input_vsc`;
-  
-  return VehicleSchedulesCollection
+
+  return VehicleSchedulesCollection;
 }
 
-export default VehicleSchedulesCollectionClassFactory
+export default VehicleSchedulesCollectionClassFactory;

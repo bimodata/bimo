@@ -1,9 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { ServiceContextDay as BimoServiceContextDay } from "../base-types/rawIndex";
 export { ServiceContextDay as BimoServiceContextDay } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
-import { serializeThis, parseThis } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 export interface ServiceContextDayProps extends ExtendedItemProps {
@@ -20,8 +18,8 @@ export interface ServiceContextDayProps extends ExtendedItemProps {
   scdayGetFromDayRank?: string;
 }
 
-export function ServiceContextDayClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceContextDay{
- class ServiceContextDay extends Item<ServiceContextDay> {
+export function ServiceContextDayClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoServiceContextDay {
+  class ServiceContextDay extends Item<ServiceContextDay> {
     scdayWeekRank?: string;
     scdayProdPhaseDay?: string;
     scdayApplicMethod?: string;
@@ -48,8 +46,8 @@ export function ServiceContextDayClassFactory(entityConstructorByEntityClassKey:
       this.scdayGetFromDayRank = gavpfp("scdayGetFromDayRank", props, `string`);
     }
   }
-  
-  return ServiceContextDay
+
+  return ServiceContextDay;
 }
 
-export default ServiceContextDayClassFactory
+export default ServiceContextDayClassFactory;

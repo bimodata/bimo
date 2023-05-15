@@ -6,16 +6,16 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoDataFile, DataFileProps } from "./DataFile";
+
+export interface DataFilesCollectionProps
+  extends ExtendedCollectionProps<BimoDataFile, DataFileProps> {}
+
 export function DataFilesCollectionClassFactory({
   DataFile,
-}: EntityConstructorByEntityClassKey): typeof BimoDataFilesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoDataFilesCollection {
   const childClasses: (typeof Entity)[] = [DataFile];
-  
-  export interface DataFilesCollectionProps
-  extends ExtendedCollectionProps<BimoDataFile, DataFileProps> {}
-  
- class DataFilesCollection extends Collection<BimoDataFile, DataFileProps> {
+
+  class DataFilesCollection extends Collection<BimoDataFile, DataFileProps> {
     constructor(props: DataFilesCollectionProps = {}) {
       super({
         itemName: "DataFile",
@@ -28,10 +28,10 @@ export function DataFilesCollectionClassFactory({
       });
     }
   }
-  
+
   DataFilesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return DataFilesCollection
+
+  return DataFilesCollection;
 }
 
-export default DataFilesCollectionClassFactory
+export default DataFilesCollectionClassFactory;

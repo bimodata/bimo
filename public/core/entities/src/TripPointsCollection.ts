@@ -5,16 +5,15 @@ import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BimoTripPoint, TripPointProps } from "./TripPoint";
+export interface TripPointsCollectionProps
+  extends ExtendedCollectionProps<BimoTripPoint, TripPointProps> {}
+
 export function TripPointsCollectionClassFactory({
   TripPoint,
-}: EntityConstructorByEntityClassKey): typeof BimoTripPointsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoTripPointsCollection {
   const childClasses: (typeof Entity)[] = [TripPoint];
-  
-  export interface TripPointsCollectionProps
-  extends ExtendedCollectionProps<BimoTripPoint, TripPointProps> {}
-  
- class TripPointsCollection extends Collection<BimoTripPoint, TripPointProps> {
+
+  class TripPointsCollection extends Collection<BimoTripPoint, TripPointProps> {
     constructor(props: TripPointsCollectionProps = {}) {
       super({
         itemName: "TripPoint",
@@ -22,7 +21,7 @@ export function TripPointsCollectionClassFactory({
         ...props,
       });
     }
-  
+
     sortByTime() {
       try {
         this.items.sort(
@@ -37,19 +36,21 @@ export function TripPointsCollectionClassFactory({
         throw newError;
       }
     }
-  
+
     get mediumLoggingOutput() {
-      return this.map((pt) => `${pt.placeId}${pt.noStopping === "1" ? "~" : "|"}`).join("");
+      return this.map((pt) => `${pt.placeId}${pt.noStopping === "1" ? "~" : "|"}`).join(
+        ""
+      );
     }
-  
+
     get longLoggingOutput() {
       return this.map((pt) => pt.shortLoggingOutput).join("\n");
     }
   }
-  
+
   TripPointsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TripPointsCollection
+
+  return TripPointsCollection;
 }
 
-export default TripPointsCollectionClassFactory
+export default TripPointsCollectionClassFactory;

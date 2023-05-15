@@ -6,19 +6,8 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import {
-  ServiceEvolutionPeriodSchedulesBookingsCollection,
-  ServiceEvolutionPeriodSchedulesBookingsCollectionProps,
-} from "./ServiceEvolutionPeriodSchedulesBookingsCollection";
-import {
-  ServiceContextWeeksCollection,
-  ServiceContextWeeksCollectionProps,
-} from "./ServiceContextWeeksCollection";
-
-const childClasses: (typeof Entity)[] = [
-  ServiceEvolutionPeriodSchedulesBookingsCollection,
-  ServiceContextWeeksCollection,
-];
+import { BimoServiceEvolutionPeriodSchedulesBookingsCollection } from "./ServiceEvolutionPeriodSchedulesBookingsCollection";
+import { BimoServiceContextWeeksCollection } from "./ServiceContextWeeksCollection";
 
 export interface ServiceEvolutionPeriodProps extends ExtendedItemProps {
   sevopStartDate?: string;
@@ -27,19 +16,24 @@ export interface ServiceEvolutionPeriodProps extends ExtendedItemProps {
   serviceContextWeeks?: string;
 }
 
-export function ServiceEvolutionPeriodClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceEvolutionPeriod{
- class ServiceEvolutionPeriod extends Item<ServiceEvolutionPeriod> {
+export function ServiceEvolutionPeriodClassFactory({
+  ServiceEvolutionPeriodSchedulesBookingsCollection,
+  ServiceContextWeeksCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoServiceEvolutionPeriod {
+  const childClasses: (typeof Entity)[] = [
+    ServiceEvolutionPeriodSchedulesBookingsCollection,
+    ServiceContextWeeksCollection,
+  ];
+  class ServiceEvolutionPeriod extends Item<ServiceEvolutionPeriod> {
     sevopStartDate?: string;
     sevopServiceDefId?: string;
-    serviceEvolutionPeriodSchedulesBookings: ServiceEvolutionPeriodSchedulesBookingsCollection;
-    serviceContextWeeks: ServiceContextWeeksCollection;
+    serviceEvolutionPeriodSchedulesBookings: BimoServiceEvolutionPeriodSchedulesBookingsCollection;
+    serviceContextWeeks: BimoServiceContextWeeksCollection;
     constructor(props: ServiceEvolutionPeriodProps) {
       super(props);
       this.sevopStartDate = gavpfp("sevopStartDate", props, `string`);
       this.sevopServiceDefId = gavpfp("sevopServiceDefId", props, `string`);
-  
-      /* Children */
-      /** @type {ServiceEvolutionPeriodSchedulesBookingsCollection} */
+
       this.serviceEvolutionPeriodSchedulesBookings = gavpfp(
         "serviceEvolutionPeriodSchedulesBookings",
         props,
@@ -47,8 +41,7 @@ export function ServiceEvolutionPeriodClassFactory(entityConstructorByEntityClas
         new ServiceEvolutionPeriodSchedulesBookingsCollection(),
         { altPropName: "service_evolution_period_schedules_booking", parent: this }
       );
-  
-      /** @type {ServiceContextWeeksCollection} */
+
       this.serviceContextWeeks = gavpfp(
         "serviceContextWeeks",
         props,
@@ -58,10 +51,10 @@ export function ServiceEvolutionPeriodClassFactory(entityConstructorByEntityClas
       );
     }
   }
-  
+
   ServiceEvolutionPeriod.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ServiceEvolutionPeriod
+
+  return ServiceEvolutionPeriod;
 }
 
-export default ServiceEvolutionPeriodClassFactory
+export default ServiceEvolutionPeriodClassFactory;

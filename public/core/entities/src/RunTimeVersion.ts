@@ -6,16 +6,31 @@ import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-import { BimoRunTimesCollection, RunTimesCollectionProps } from "./RunTimesCollection";
-import { BimoLoadTimesCollection, LoadTimesCollectionProps } from "./LoadTimesCollection";
+import { BimoRunTimesCollection } from "./RunTimesCollection";
+import { BimoLoadTimesCollection } from "./LoadTimesCollection";
+
+export interface RunTimeVersionProps extends ExtendedItemProps {
+  bimoId?: string;
+  rtvIdentifier?: string;
+  rtvDescription?: string;
+  rtvScheduleType?: string;
+  rtvSchedulingUnit?: string;
+  rtvEffectiveDate?: string;
+  rtvOwner?: string;
+  rtvPublicAccess?: string;
+  rtvDataGroup?: string;
+  rtvAllowsMapBasedRunTimes?: string;
+  rtvMapBasedRunTimeFactor?: string;
+  runTimes?: BimoRunTimesCollection;
+  loadTimes?: BimoLoadTimesCollection;
+}
 export function RunTimeVersionClassFactory({
   RunTimesCollection,
   LoadTimesCollection,
-}: EntityConstructorByEntityClassKey): typeof BimoRunTimeVersion{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoRunTimeVersion {
   const childClasses: (typeof Entity)[] = [RunTimesCollection, LoadTimesCollection];
-  
-  export interface RunTimeVersionProps extends ExtendedItemProps {
+
+  class RunTimeVersion extends Item<RunTimeVersion> {
     bimoId?: string;
     rtvIdentifier?: string;
     rtvDescription?: string;
@@ -27,24 +42,8 @@ export function RunTimeVersionClassFactory({
     rtvDataGroup?: string;
     rtvAllowsMapBasedRunTimes?: string;
     rtvMapBasedRunTimeFactor?: string;
-    runTimes?: RunTimesCollection;
-    loadTimes?: LoadTimesCollection;
-  }
-  
- class RunTimeVersion extends Item<RunTimeVersion> {
-    bimoId?: string;
-    rtvIdentifier?: string;
-    rtvDescription?: string;
-    rtvScheduleType?: string;
-    rtvSchedulingUnit?: string;
-    rtvEffectiveDate?: string;
-    rtvOwner?: string;
-    rtvPublicAccess?: string;
-    rtvDataGroup?: string;
-    rtvAllowsMapBasedRunTimes?: string;
-    rtvMapBasedRunTimeFactor?: string;
-    runTimes: RunTimesCollection;
-    loadTimes: LoadTimesCollection;
+    runTimes: BimoRunTimesCollection;
+    loadTimes: BimoLoadTimesCollection;
     constructor(props: RunTimeVersionProps) {
       super(props);
       /** We can't use rtevIdentifier: it has a functional meaning */
@@ -69,7 +68,7 @@ export function RunTimeVersionClassFactory({
         `string`,
         `1`
       );
-  
+
       this.runTimes = gavpfp(
         "runTimes",
         props,
@@ -77,7 +76,7 @@ export function RunTimeVersionClassFactory({
         new RunTimesCollection(),
         { altPropName: "run_time", parent: this }
       );
-  
+
       /** @type {LoadTimesCollection} */
       this.loadTimes = gavpfp(
         "loadTimes",
@@ -87,7 +86,7 @@ export function RunTimeVersionClassFactory({
         { altPropName: "load_time", parent: this }
       );
     }
-  
+
     /** Creates a new instance of a runTimeVersion. All runtimes are new instances too. */
     copy(newRtvIdentifier: string | undefined) {
       const copiedRunTimeVersion = new RunTimeVersion(this);
@@ -97,18 +96,18 @@ export function RunTimeVersionClassFactory({
       });
       return copiedRunTimeVersion;
     }
-  
+
     get shortLoggingOutput() {
       return `${this.rtvIdentifier} - ${this.rtvDescription}`;
     }
   }
-  
+
   RunTimeVersion.hastusKeywords = ["runtime_version"];
   RunTimeVersion.hastusObject = "runtime_version";
-  
+
   RunTimeVersion.allChildClasses = getAllChildClasses(childClasses);
-  
-  return RunTimeVersion
+
+  return RunTimeVersion;
 }
 
-export default RunTimeVersionClassFactory
+export default RunTimeVersionClassFactory;

@@ -6,12 +6,7 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import {
-  ServiceContextDaysCollection,
-  ServiceContextDaysCollectionProps,
-} from "./ServiceContextDaysCollection";
-
-const childClasses: (typeof Entity)[] = [ServiceContextDaysCollection];
+import { BimoServiceContextDaysCollection } from "./ServiceContextDaysCollection";
 
 export interface ServiceContextWeekProps extends ExtendedItemProps {
   scwkSchedUnitId?: string;
@@ -21,22 +16,24 @@ export interface ServiceContextWeekProps extends ExtendedItemProps {
   serviceContextDays?: string;
 }
 
-export function ServiceContextWeekClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceContextWeek{
- class ServiceContextWeek extends Item<ServiceContextWeek> {
+export function ServiceContextWeekClassFactory({
+  ServiceContextDaysCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoServiceContextWeek {
+  const childClasses: (typeof Entity)[] = [ServiceContextDaysCollection];
+
+  class ServiceContextWeek extends Item<ServiceContextWeek> {
     scwkSchedUnitId?: string;
     scwkSchedUnitType?: string;
     scwkDescription?: string;
     scwkAddedForNetEvent?: string;
-    serviceContextDays: ServiceContextDaysCollection;
+    serviceContextDays: BimoServiceContextDaysCollection;
     constructor(props: ServiceContextWeekProps) {
       super(props);
       this.scwkSchedUnitId = gavpfp("scwkSchedUnitId", props, `string`);
       this.scwkSchedUnitType = gavpfp("scwkSchedUnitType", props, `string`, "1100");
       this.scwkDescription = gavpfp("scwkDescription", props, `string`);
       this.scwkAddedForNetEvent = gavpfp("scwkAddedForNetEvent", props, "string", "0");
-  
-      /* Children */
-      /** @type {ServiceContextDaysCollection} */
+
       this.serviceContextDays = gavpfp(
         "serviceContextDays",
         props,
@@ -46,10 +43,10 @@ export function ServiceContextWeekClassFactory(entityConstructorByEntityClassKey
       );
     }
   }
-  
+
   ServiceContextWeek.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ServiceContextWeek
+
+  return ServiceContextWeek;
 }
 
-export default ServiceContextWeekClassFactory
+export default ServiceContextWeekClassFactory;

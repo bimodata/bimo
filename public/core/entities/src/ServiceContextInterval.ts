@@ -1,9 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { ServiceContextInterval as BimoServiceContextInterval } from "../base-types/rawIndex";
 export { ServiceContextInterval as BimoServiceContextInterval } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
-import { serializeThis, parseThis } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 export interface ServiceContextIntervalProps extends ExtendedItemProps {
@@ -18,8 +16,8 @@ export interface ServiceContextIntervalProps extends ExtendedItemProps {
   scintSaturday?: string;
 }
 
-export function ServiceContextIntervalClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceContextInterval{
- class ServiceContextInterval extends Item<ServiceContextInterval> {
+export function ServiceContextIntervalClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoServiceContextInterval {
+  class ServiceContextInterval extends Item<ServiceContextInterval> {
     scintStartDate?: string;
     scintEndDate?: string;
     scintSunday?: string;
@@ -42,8 +40,8 @@ export function ServiceContextIntervalClassFactory(entityConstructorByEntityClas
       this.scintSaturday = gavpfp("scintSaturday", props, `string`);
     }
   }
-  
-  return ServiceContextInterval
+
+  return ServiceContextInterval;
 }
 
-export default ServiceContextIntervalClassFactory
+export default ServiceContextIntervalClassFactory;

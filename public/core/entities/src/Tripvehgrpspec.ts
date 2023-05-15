@@ -13,8 +13,8 @@ export interface TripvehgrpspecProps extends ExtendedItemProps {
   tripvehgrpspecPriority?: string;
 }
 
-export function TripvehgrpspecClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoTripvehgrpspec{
- class Tripvehgrpspec extends Item<Tripvehgrpspec> {
+export function TripvehgrpspecClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTripvehgrpspec {
+  class Tripvehgrpspec extends Item<Tripvehgrpspec> {
     tripvehgrpspecVehGroup: string;
     tripvehgrpspecReqType?: string;
     tripvehgrpspecPriority?: string;
@@ -25,13 +25,13 @@ export function TripvehgrpspecClassFactory(entityConstructorByEntityClassKey: En
       this.tripvehgrpspecPriority = gavpfp("tripvehgrpspecPriority", props);
     }
   }
-  
+
   Tripvehgrpspec.hastusKeywords = ["tripvehgroupspec"];
   Tripvehgrpspec.hastusObject = "tripvehgrpspec";
-  
+
   Tripvehgrpspec.allChildClasses = getAllChildClasses(childClasses);
-  
-  return Tripvehgrpspec
+
+  return Tripvehgrpspec;
 }
 
-export default TripvehgrpspecClassFactory
+export default TripvehgrpspecClassFactory;

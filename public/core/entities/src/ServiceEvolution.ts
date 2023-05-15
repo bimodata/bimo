@@ -1,7 +1,6 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { ServiceEvolution as BimoServiceEvolution } from "../base-types/rawIndex";
 export { ServiceEvolution as BimoServiceEvolution } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
@@ -14,8 +13,8 @@ export interface ServiceEvolutionProps extends ExtendedItemProps {
   sevoUserStamp?: string;
 }
 
-export function ServiceEvolutionClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceEvolution{
- class ServiceEvolution extends Item<ServiceEvolution> {
+export function ServiceEvolutionClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoServiceEvolution {
+  class ServiceEvolution extends Item<ServiceEvolution> {
     sevoStartDate?: string;
     sevoDisplayName?: string;
     sevoDescription?: string;
@@ -32,8 +31,8 @@ export function ServiceEvolutionClassFactory(entityConstructorByEntityClassKey: 
       this.sevoUserStamp = gavpfp("sevoUserStamp", props, "string");
     }
   }
-  
-  return ServiceEvolution
+
+  return ServiceEvolution;
 }
 
-export default ServiceEvolutionClassFactory
+export default ServiceEvolutionClassFactory;

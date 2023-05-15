@@ -3,19 +3,20 @@ import { OvernightLinksCollection as BimoOvernightLinksCollection } from "../bas
 export { OvernightLinksCollection as BimoOvernightLinksCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { BimoOvernightLink, OvernightLinkProps } from "./OvernightLink";
+
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+
+export interface OvernightLinksCollectionProps
+  extends ExtendedCollectionProps<BimoOvernightLink, OvernightLinkProps> {}
+
 export function OvernightLinksCollectionClassFactory({
   OvernightLink,
-}: EntityConstructorByEntityClassKey): typeof BimoOvernightLinksCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoOvernightLinksCollection {
   const childClasses: (typeof Entity)[] = [OvernightLink];
-  import { getAllChildClasses } from "@bimo/core-utils-serialization";
-  import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-  
-  export interface OvernightLinksCollectionProps
-  extends ExtendedCollectionProps<BimoOvernightLink, OvernightLinkProps> {}
-  
- class OvernightLinksCollection extends Collection<
-    OvernightLink,
+
+  class OvernightLinksCollection extends Collection<
+    BimoOvernightLink,
     OvernightLinkProps
   > {
     constructor(props: OvernightLinksCollectionProps = {}) {
@@ -27,10 +28,10 @@ export function OvernightLinksCollectionClassFactory({
       });
     }
   }
-  
+
   OvernightLinksCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return OvernightLinksCollection
+
+  return OvernightLinksCollection;
 }
 
-export default OvernightLinksCollectionClassFactory
+export default OvernightLinksCollectionClassFactory;

@@ -16,8 +16,8 @@ export interface TrainPathVariantPointProps extends ExtendedItemProps {
   trnpvptPassMidnight?: string;
 }
 
-export function TrainPathVariantPointClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantPoint{
- class TrainPathVariantPoint extends Item<TrainPathVariantPoint> {
+export function TrainPathVariantPointClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantPoint {
+  class TrainPathVariantPoint extends Item<TrainPathVariantPoint> {
     trnpvptPlace: string;
     trnpvptArrivalTime?: string;
     trnpvptLoadTime?: string;
@@ -25,14 +25,14 @@ export function TrainPathVariantPointClassFactory(entityConstructorByEntityClass
     trnpvptPassMidnight?: string;
     constructor(props: TrainPathVariantPointProps) {
       super(props);
-  
+
       this.trnpvptPlace = gavpfp("trnpvptPlace", props, `string`);
       this.trnpvptArrivalTime = gavpfp("trnpvptArrivalTime", props, `string`);
       this.trnpvptLoadTime = gavpfp("trnpvptLoadTime", props, `string`);
       this.trnpvptNoStopping = gavpfp("trnpvptNoStopping", props, `string`);
       this.trnpvptPassMidnight = gavpfp("trnpvptPassMidnight", props, `string`);
     }
-  
+
     get shortLoggingOutput() {
       return (
         `${this.trnpvptPlace} (A:${this.trnpvptArrivalTime},` +
@@ -40,10 +40,10 @@ export function TrainPathVariantPointClassFactory(entityConstructorByEntityClass
       );
     }
   }
-  
+
   TrainPathVariantPoint.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TrainPathVariantPoint
+
+  return TrainPathVariantPoint;
 }
 
-export default TrainPathVariantPointClassFactory
+export default TrainPathVariantPointClassFactory;

@@ -3,19 +3,19 @@ import { TripvehgrpspecsCollection as BimoTripvehgrpspecsCollection } from "../b
 export { TripvehgrpspecsCollection as BimoTripvehgrpspecsCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { BimoTripvehgrpspec, TripvehgrpspecProps } from "./Tripvehgrpspec";
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+
+export interface TripvehgrpspecsCollectionProps
+  extends ExtendedCollectionProps<BimoTripvehgrpspec, TripvehgrpspecProps> {}
+
 export function TripvehgrpspecsCollectionClassFactory({
   Tripvehgrpspec,
-}: EntityConstructorByEntityClassKey): typeof BimoTripvehgrpspecsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoTripvehgrpspecsCollection {
   const childClasses: (typeof Entity)[] = [Tripvehgrpspec];
-  import { getAllChildClasses } from "@bimo/core-utils-serialization";
-  import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-  
-  export interface TripvehgrpspecsCollectionProps
-  extends ExtendedCollectionProps<BimoTripvehgrpspec, TripvehgrpspecProps> {}
-  
- class TripvehgrpspecsCollection extends Collection<
-    Tripvehgrpspec,
+
+  class TripvehgrpspecsCollection extends Collection<
+    BimoTripvehgrpspec,
     TripvehgrpspecProps
   > {
     constructor(props: TripvehgrpspecsCollectionProps = {}) {
@@ -27,10 +27,10 @@ export function TripvehgrpspecsCollectionClassFactory({
       });
     }
   }
-  
+
   TripvehgrpspecsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TripvehgrpspecsCollection
+
+  return TripvehgrpspecsCollection;
 }
 
-export default TripvehgrpspecsCollectionClassFactory
+export default TripvehgrpspecsCollectionClassFactory;

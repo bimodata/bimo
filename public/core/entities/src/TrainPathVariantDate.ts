@@ -13,25 +13,25 @@ export interface TrainPathVariantDateProps extends ExtendedItemProps {
   trnpdStatusOir?: string;
 }
 
-export function TrainPathVariantDateClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantDate{
- class TrainPathVariantDate extends Item<TrainPathVariantDate> {
+export function TrainPathVariantDateClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantDate {
+  class TrainPathVariantDate extends Item<TrainPathVariantDate> {
     trnpdEffectiveDate?: string;
     trnpdStatusOir?: string;
     constructor(props: TrainPathVariantDateProps) {
       super(props);
-  
+
       this.trnpdEffectiveDate = gavpfp("trnpdEffectiveDate", props, `string`);
       this.trnpdStatusOir = gavpfp("trnpdStatusOir", props, `string`);
     }
-  
+
     get shortLoggingOutput() {
       return this.trnpdEffectiveDate ?? super.slo;
     }
   }
-  
+
   TrainPathVariantDate.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TrainPathVariantDate
+
+  return TrainPathVariantDate;
 }
 
-export default TrainPathVariantDateClassFactory
+export default TrainPathVariantDateClassFactory;

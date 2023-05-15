@@ -4,6 +4,7 @@ import {
   RouteVersion,
   RouteVersionsCollection,
   Route,
+  RoutesCollection,
   Variant,
   VariantsCollection,
   VariantPoint,
@@ -61,6 +62,8 @@ import {
   BookingCalendarDatesCollection,
   SchedulingUnitDate,
   SchedulingUnitDatesCollection,
+  SchedulingUnitRoute,
+  SchedulingUnitRoutesCollection,
   ServiceContext,
   ServiceContextsCollection,
   ServiceContextDay,
@@ -117,6 +120,7 @@ export declare const entityConstructorByEntityClassKey: {
   RouteVersion: typeof RouteVersion;
   RouteVersionsCollection: typeof RouteVersionsCollection;
   Route: typeof Route;
+  RoutesCollection: typeof RoutesCollection;
   Variant: typeof Variant;
   VariantsCollection: typeof VariantsCollection;
   VariantPoint: typeof VariantPoint;
@@ -172,6 +176,8 @@ export declare const entityConstructorByEntityClassKey: {
   BookingCalendarsCollection: typeof BookingCalendarsCollection;
   BookingCalendarDate: typeof BookingCalendarDate;
   BookingCalendarDatesCollection: typeof BookingCalendarDatesCollection;
+  SchedulingUnitRoute: typeof SchedulingUnitRoute;
+  SchedulingUnitRoutesCollection: typeof SchedulingUnitRoutesCollection;
   SchedulingUnitDate: typeof SchedulingUnitDate;
   SchedulingUnitDatesCollection: typeof SchedulingUnitDatesCollection;
   ServiceContext: typeof ServiceContext;

@@ -1,6 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { RunTime as BimoRunTime } from "../base-types/rawIndex";
 export { RunTime as BimoRunTime } from "../base-types/rawIndex";
+import { RunTimeVersion as BimoRunTimeVersion } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -21,8 +22,10 @@ export interface RunTimeProps extends ExtendedItemProps {
   rtDetourId?: string;
 }
 
-export function RunTimeClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoRunTime{
- class RunTime extends Item<RunTime> {
+export function RunTimeClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoRunTime {
+  class RunTime extends Item<RunTime> {
     bimoId?: string;
     rtStartPlaceId?: string;
     rtEndPlaceId?: string;
@@ -46,20 +49,20 @@ export function RunTimeClassFactory(entityConstructorByEntityClassKey: EntityCon
       this.rtNetworkEventId = gavpfp("rtNetworkEventId", props, `string`);
       this.rtDetourId = gavpfp("rtDetourId", props, `string`);
     }
-  
+
     copy() {
       const copiedItem = new RunTime(this);
       return copiedItem;
     }
-  
+
     get runTimeVersion() {
-      return this.parent && this.parent.parent;
+      return this.parent && (this.parent.parent as BimoRunTimeVersion);
     }
-  
+
     get od() {
       return `${this.rtStartPlaceId} -> ${this.rtEndPlaceId}`;
     }
-  
+
     /** @type {string} key made of all attributes except the runtime */
     get key() {
       return (
@@ -67,7 +70,7 @@ export function RunTimeClassFactory(entityConstructorByEntityClassKey: EntityCon
         `|${this.rtRouteId}|${this.rtVariantId}|${this.rtNetworkEventId}|${this.rtDetourId}`
       );
     }
-  
+
     /** @type {string} key made of all attributes including the runtime */
     get keyWithTime() {
       return (
@@ -75,18 +78,18 @@ export function RunTimeClassFactory(entityConstructorByEntityClassKey: EntityCon
         `|${this.rtRouteId}|${this.rtVariantId}|${this.rtNetworkEventId}|${this.rtDetourId}:${this.rtRunTime}`
       );
     }
-  
+
     get shortLoggingOutput() {
       return `${this.rtStartPlaceId} -> ${this.rtEndPlaceId} (${this.rtRouteId}|${this.rtVariantId}) : ${this.rtRunTime}`;
     }
   }
-  
+
   RunTime.hastusKeywords = ["runtime"];
   RunTime.hastusObject = "run_time";
-  
+
   RunTime.allChildClasses = getAllChildClasses(childClasses);
-  
-  return RunTime
+
+  return RunTime;
 }
 
-export default RunTimeClassFactory
+export default RunTimeClassFactory;

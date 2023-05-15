@@ -6,26 +6,25 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import {
-  TrainPathVariantsCollection,
-  TrainPathVariantsCollectionProps,
-} from "./TrainPathVariantsCollection";
-
-const childClasses: (typeof Entity)[] = [TrainPathVariantsCollection];
+import { BimoTrainPathVariantsCollection } from "./TrainPathVariantsCollection";
 
 export interface TrainPathProps extends ExtendedItemProps {
   trnpIdentifier: string;
   trnpRoute?: string;
   trnpIsInService?: string;
-  trainPathVariants?: TrainPathVariantsCollection;
+  trainPathVariants?: BimoTrainPathVariantsCollection;
 }
 
-export function TrainPathClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoTrainPath{
- class TrainPath extends Item<TrainPath> {
+export function TrainPathClassFactory({
+  TrainPathVariantsCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoTrainPath {
+  const childClasses: (typeof Entity)[] = [TrainPathVariantsCollection];
+
+  class TrainPath extends Item<TrainPath> {
     trnpIdentifier: string;
     trnpRoute?: string;
     trnpIsInService?: string;
-    trainPathVariants: TrainPathVariantsCollection;
+    trainPathVariants: BimoTrainPathVariantsCollection;
     constructor(props: TrainPathProps) {
       super(props);
       this.trnpIdentifier = gavpfp("trnpIdentifier", props, `string`);
@@ -39,15 +38,15 @@ export function TrainPathClassFactory(entityConstructorByEntityClassKey: EntityC
         { altPropName: "train_path_variant", parent: this }
       );
     }
-  
+
     get shortLoggingOutput() {
       return `${this.trnpIdentifier}-(${this.trnpRoute}|${this.trnpIsInService})`;
     }
   }
-  
+
   TrainPath.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TrainPath
+
+  return TrainPath;
 }
 
-export default TrainPathClassFactory
+export default TrainPathClassFactory;

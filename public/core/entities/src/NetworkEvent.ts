@@ -11,21 +11,23 @@ export interface NetworkEventProps extends ExtendedItemProps {
   nevtIdentifier: string;
 }
 
-export function NetworkEventClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoNetworkEvent{
- class NetworkEvent extends Item<NetworkEvent> {
+export function NetworkEventClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoNetworkEvent {
+  class NetworkEvent extends Item<NetworkEvent> {
     nevtIdentifier: string;
     constructor(props: NetworkEventProps) {
       super(props);
       this.nevtIdentifier = gavpfp("nevtIdentifier", props);
     }
   }
-  
+
   NetworkEvent.hastusKeywords = ["network_event"];
   NetworkEvent.hastusObject = "network_event";
-  
+
   NetworkEvent.allChildClasses = getAllChildClasses(childClasses);
-  
-  return NetworkEvent
+
+  return NetworkEvent;
 }
 
-export default NetworkEventClassFactory
+export default NetworkEventClassFactory;

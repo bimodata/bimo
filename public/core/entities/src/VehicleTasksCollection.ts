@@ -1,17 +1,16 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { VehicleTasksCollection as BimoVehicleTasksCollection } from "../base-types/rawIndex";
 export { VehicleTasksCollection as BimoVehicleTasksCollection } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BimoVehicleTask, VehicleTaskProps } from "./VehicleTask";
+
+export interface VehicleTasksCollectionProps
+  extends ExtendedCollectionProps<BimoVehicleTask, VehicleTaskProps> {}
+
 export function VehicleTasksCollectionClassFactory({
   VehicleTask,
-}: EntityConstructorByEntityClassKey): typeof BimoVehicleTasksCollection{
-  
-  export interface VehicleTasksCollectionProps
-  extends ExtendedCollectionProps<BimoVehicleTask, VehicleTaskProps> {}
-  
- class VehicleTasksCollection extends Collection<BimoVehicleTask, VehicleTaskProps> {
+}: EntityConstructorByEntityClassKey): typeof BimoVehicleTasksCollection {
+  class VehicleTasksCollection extends Collection<BimoVehicleTask, VehicleTaskProps> {
     constructor(props: VehicleTasksCollectionProps = {}) {
       super({
         itemName: "VehicleTask",
@@ -21,13 +20,13 @@ export function VehicleTasksCollectionClassFactory({
         ...props,
       });
     }
-  
+
     get mediumLoggingOutput() {
       return this.map((vta) => `${vta.longLoggingOutput}`).join("\n");
     }
   }
-  
-  return VehicleTasksCollection
+
+  return VehicleTasksCollection;
 }
 
-export default VehicleTasksCollectionClassFactory
+export default VehicleTasksCollectionClassFactory;

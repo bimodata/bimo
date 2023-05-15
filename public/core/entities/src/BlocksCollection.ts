@@ -6,16 +6,16 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoBlock, BlockProps } from "./Block";
+
+export interface BlocksCollectionProps
+  extends ExtendedCollectionProps<BimoBlock, BlockProps> {}
+
 export function BlocksCollectionClassFactory({
   Block,
-}: EntityConstructorByEntityClassKey): typeof BimoBlocksCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoBlocksCollection {
   const childClasses: (typeof Entity)[] = [Block];
-  
-  export interface BlocksCollectionProps
-  extends ExtendedCollectionProps<BimoBlock, BlockProps> {}
-  
- class BlocksCollection extends Collection<BimoBlock, BlockProps> {
+
+  class BlocksCollection extends Collection<BimoBlock, BlockProps> {
     constructor(props: BlocksCollectionProps = {}) {
       super({
         itemName: "Block",
@@ -28,10 +28,10 @@ export function BlocksCollectionClassFactory({
       });
     }
   }
-  
+
   BlocksCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return BlocksCollection
+
+  return BlocksCollection;
 }
 
-export default BlocksCollectionClassFactory
+export default BlocksCollectionClassFactory;

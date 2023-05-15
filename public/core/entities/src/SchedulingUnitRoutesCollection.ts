@@ -5,17 +5,17 @@ import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BimoSchedulingUnitRoute, SchedulingUnitRouteProps } from "./SchedulingUnitRoute";
+
+export interface SchedulingUnitRoutesCollectionProps
+  extends ExtendedCollectionProps<BimoSchedulingUnitRoute, SchedulingUnitRouteProps> {}
+
 export function SchedulingUnitRoutesCollectionClassFactory({
   SchedulingUnitRoute,
-}: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnitRoutesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnitRoutesCollection {
   const childClasses: (typeof Entity)[] = [SchedulingUnitRoute];
-  
-  export interface SchedulingUnitRoutesCollectionProps
-  extends ExtendedCollectionProps<BimoSchedulingUnitRoute, SchedulingUnitRouteProps> {}
-  
- class SchedulingUnitRoutesCollection extends Collection<
-    SchedulingUnitRoute,
+
+  class SchedulingUnitRoutesCollection extends Collection<
+    BimoSchedulingUnitRoute,
     SchedulingUnitRouteProps
   > {
     constructor(props: SchedulingUnitRoutesCollectionProps) {
@@ -28,10 +28,10 @@ export function SchedulingUnitRoutesCollectionClassFactory({
       });
     }
   }
-  
+
   SchedulingUnitRoutesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return SchedulingUnitRoutesCollection
+
+  return SchedulingUnitRoutesCollection;
 }
 
-export default SchedulingUnitRoutesCollectionClassFactory
+export default SchedulingUnitRoutesCollectionClassFactory;

@@ -22,8 +22,10 @@ export interface OvernightLinkProps extends ExtendedItemProps {
   olSchedType?: string;
 }
 
-export function OvernightLinkClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoOvernightLink{
- class OvernightLink extends Item<OvernightLink> {
+export function OvernightLinkClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoOvernightLink {
+  class OvernightLink extends Item<OvernightLink> {
     olInternalNumber?: string;
     olOriginTripNo?: string;
     olOriginOrigTripNo?: string;
@@ -54,13 +56,13 @@ export function OvernightLinkClassFactory(entityConstructorByEntityClassKey: Ent
       this.olSchedType = gavpfp("olSchedType", props);
     }
   }
-  
+
   OvernightLink.hastusKeywords = ["overnight_link"];
   OvernightLink.hastusObject = "overnight_link";
-  
+
   OvernightLink.allChildClasses = getAllChildClasses(childClasses);
-  
-  return OvernightLink
+
+  return OvernightLink;
 }
 
-export default OvernightLinkClassFactory
+export default OvernightLinkClassFactory;

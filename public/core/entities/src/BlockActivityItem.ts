@@ -1,34 +1,38 @@
 import { Duration } from "luxon";
 import { Item } from "@bimo/core-utils-collection";
-import { Place } from "./Place";
-import { Block } from "./Block";
-import { BlockActivity } from "./BlockActivity";
-import { VehicleTask } from "./VehicleTask";
-import { VehicleSchedule } from "./VehicleSchedule";
-import { Trip } from "./Trip";
-import { Maintenance } from "./Maintenance";
-import { VehicleStandby } from "./VehicleStandby";
-import { ConsistChange } from "./ConsistChange";
+import { BimoPlace } from "./Place";
+import { BimoBlock } from "./Block";
+import { BimoBlockActivity } from "./BlockActivity";
+import { BimoVehicleTask } from "./VehicleTask";
+import { BimoVehicleSchedule } from "./VehicleSchedule";
+import { BimoTrip } from "./Trip";
+import { BimoMaintenance } from "./Maintenance";
+import { BimoVehicleStandby } from "./VehicleStandby";
+import { BimoConsistChange } from "./ConsistChange";
 
-export type BaseBlockActivityItem = Trip | Maintenance | VehicleStandby | ConsistChange;
+export type BaseBlockActivityItem =
+  | BimoTrip
+  | BimoMaintenance
+  | BimoVehicleStandby
+  | BimoConsistChange;
 
 export interface BlockActivityItem<ItemType> extends Item<ItemType> {
   blkactVehicleActivityTypeNo: string;
-  blockActivities: BlockActivity[];
-  addBlockActivity: (newBlockActivity: BlockActivity) => void;
-  removeBlockActivity: (blockActivity: BlockActivity) => void;
-  blockActivity: BlockActivity;
-  vehicleTasks: VehicleTask[] | null;
-  block: Block | null;
-  vehicleSchedule: VehicleSchedule | null;
+  blockActivities: BimoBlockActivity[];
+  addBlockActivity: (newBlockActivity: BimoBlockActivity) => void;
+  removeBlockActivity: (blockActivity: BimoBlockActivity) => void;
+  blockActivity: BimoBlockActivity;
+  vehicleTasks: BimoVehicleTask[] | null;
+  block: BimoBlock | null;
+  vehicleSchedule: BimoVehicleSchedule | null;
   startTime: string;
   startTimeAsDuration: Duration;
   endTime: string;
   endTimeAsDuration: Duration;
   startPlaceId: string;
   endPlaceId: string;
-  improveStartPlacePrecision: (morePreciseStartPlace: Place) => void;
-  improveEndPlacePrecision: (morePreciseEndPlace: Place) => void;
+  improveStartPlacePrecision: (morePreciseStartPlace: BimoPlace) => void;
+  improveEndPlacePrecision: (morePreciseEndPlace: BimoPlace) => void;
   shiftTimes: (shiftInSeconds: number) => void;
 }
 
@@ -41,7 +45,7 @@ export function computeSetOfBlockActivitiesHelper<ItemType>(
     throw new Error(
       `An item must have a vehicleSchedule when its blockActivities are accessed(${blockActivityItem.slo})`
     );
-  let setOfBlockActivities: Set<BlockActivity> =
+  let setOfBlockActivities: Set<BimoBlockActivity> =
     blockActivityItem.vehicleSchedule.setOfBlockActivitiesByBlockActivityEntityItem.get(
       blockActivityItem
     );

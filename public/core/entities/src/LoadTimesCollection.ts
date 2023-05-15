@@ -6,16 +6,15 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoLoadTime, LoadTimeProps } from "./LoadTime";
+export interface LoadTimesCollectionProps
+  extends ExtendedCollectionProps<BimoLoadTime, LoadTimeProps> {}
+
 export function LoadTimesCollectionClassFactory({
   LoadTime,
-}: EntityConstructorByEntityClassKey): typeof BimoLoadTimesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoLoadTimesCollection {
   const childClasses: (typeof Entity)[] = [LoadTime];
-  
-  export interface LoadTimesCollectionProps
-  extends ExtendedCollectionProps<BimoLoadTime, LoadTimeProps> {}
-  
- class LoadTimesCollection extends Collection<BimoLoadTime, LoadTimeProps> {
+
+  class LoadTimesCollection extends Collection<BimoLoadTime, LoadTimeProps> {
     constructor(props: LoadTimesCollectionProps = {}) {
       super({
         itemName: "LoadTime",
@@ -26,10 +25,10 @@ export function LoadTimesCollectionClassFactory({
       });
     }
   }
-  
+
   LoadTimesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return LoadTimesCollection
+
+  return LoadTimesCollection;
 }
 
-export default LoadTimesCollectionClassFactory
+export default LoadTimesCollectionClassFactory;

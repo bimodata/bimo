@@ -7,18 +7,17 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 
 import { BimoNetworkNode, NetworkNodeProps } from "./NetworkNode";
 import { BimoNetwork, NetworkProps } from "./Network";
+
+export interface NetworkNodesCollectionProps
+  extends ExtendedCollectionProps<BimoNetworkNode, NetworkNodeProps> {}
+
 export function NetworkNodesCollectionClassFactory({
   NetworkNode,
-  Network,
-}: EntityConstructorByEntityClassKey): typeof BimoNetworkNodesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoNetworkNodesCollection {
   const childClasses: (typeof Entity)[] = [NetworkNode];
-  
-  export interface NetworkNodesCollectionProps
-  extends ExtendedCollectionProps<BimoNetworkNode, NetworkNodeProps> {}
-  
- class NetworkNodesCollection extends Collection<BimoNetworkNode, NetworkNodeProps> {
-    declare parent?: Network;
+
+  class NetworkNodesCollection extends Collection<BimoNetworkNode, NetworkNodeProps> {
+    declare parent?: BimoNetwork;
     constructor(props: NetworkNodesCollectionProps = {}) {
       super({
         itemName: "NetworkNode",
@@ -31,10 +30,10 @@ export function NetworkNodesCollectionClassFactory({
       });
     }
   }
-  
+
   NetworkNodesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return NetworkNodesCollection
+
+  return NetworkNodesCollection;
 }
 
-export default NetworkNodesCollectionClassFactory
+export default NetworkNodesCollectionClassFactory;

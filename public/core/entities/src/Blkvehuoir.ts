@@ -6,7 +6,7 @@ const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoBlock, BlockProps } from "./Block";
+import { BimoBlock } from "./Block";
 export interface BlkvehuoirProps extends ExtendedItemProps {
   blkvehuoirRank: number;
   vehuUniqueId: string;

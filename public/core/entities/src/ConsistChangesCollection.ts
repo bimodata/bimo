@@ -6,22 +6,20 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoConsistChange, ConsistChangeProps } from "./ConsistChange";
-import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
+import { BimoVehicleSchedule } from "./VehicleSchedule";
+export interface ConsistChangesCollectionProps
+  extends ExtendedCollectionProps<BimoConsistChange, ConsistChangeProps> {}
+
 export function ConsistChangesCollectionClassFactory({
   ConsistChange,
-  VehicleSchedule,
-}: EntityConstructorByEntityClassKey): typeof BimoConsistChangesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoConsistChangesCollection {
   const childClasses: (typeof Entity)[] = [ConsistChange];
-  
-  export interface ConsistChangesCollectionProps
-  extends ExtendedCollectionProps<BimoConsistChange, ConsistChangeProps> {}
-  
- class ConsistChangesCollection extends Collection<
-    ConsistChange,
+
+  class ConsistChangesCollection extends Collection<
+    BimoConsistChange,
     ConsistChangeProps
   > {
-    declare parent?: VehicleSchedule;
+    declare parent?: BimoVehicleSchedule;
     constructor(props: ConsistChangesCollectionProps = {}) {
       super({
         itemName: "ConsistChange",
@@ -33,10 +31,10 @@ export function ConsistChangesCollectionClassFactory({
       });
     }
   }
-  
+
   ConsistChangesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ConsistChangesCollection
+
+  return ConsistChangesCollection;
 }
 
-export default ConsistChangesCollectionClassFactory
+export default ConsistChangesCollectionClassFactory;

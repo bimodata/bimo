@@ -6,16 +6,16 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoRunTime, RunTimeProps } from "./RunTime";
+
+export interface RunTimesCollectionProps
+  extends ExtendedCollectionProps<BimoRunTime, RunTimeProps> {}
+
 export function RunTimesCollectionClassFactory({
   RunTime,
-}: EntityConstructorByEntityClassKey): typeof BimoRunTimesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoRunTimesCollection {
   const childClasses: (typeof Entity)[] = [RunTime];
-  
-  export interface RunTimesCollectionProps
-  extends ExtendedCollectionProps<BimoRunTime, RunTimeProps> {}
-  
- class RunTimesCollection extends Collection<BimoRunTime, RunTimeProps> {
+
+  class RunTimesCollection extends Collection<BimoRunTime, RunTimeProps> {
     constructor(props: RunTimesCollectionProps = {}) {
       super({
         itemName: "RunTime",
@@ -26,10 +26,10 @@ export function RunTimesCollectionClassFactory({
       });
     }
   }
-  
+
   RunTimesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return RunTimesCollection
+
+  return RunTimesCollection;
 }
 
-export default RunTimesCollectionClassFactory
+export default RunTimesCollectionClassFactory;

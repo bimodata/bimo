@@ -14,8 +14,8 @@ export interface TrainPathsGeneralInfoProps extends ExtendedItemProps {
   trnpgeninfoAdministrativeYear?: string;
 }
 
-export function TrainPathsGeneralInfoClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoTrainPathsGeneralInfo{
- class TrainPathsGeneralInfo extends Item<TrainPathsGeneralInfo> {
+export function TrainPathsGeneralInfoClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTrainPathsGeneralInfo {
+  class TrainPathsGeneralInfo extends Item<TrainPathsGeneralInfo> {
     trnpgeninfoSource?: string;
     trnpgeninfoImportType?: string;
     trnpgeninfoAdministrativeYear?: string;
@@ -30,10 +30,10 @@ export function TrainPathsGeneralInfoClassFactory(entityConstructorByEntityClass
       );
     }
   }
-  
+
   TrainPathsGeneralInfo.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TrainPathsGeneralInfo
+
+  return TrainPathsGeneralInfo;
 }
 
-export default TrainPathsGeneralInfoClassFactory
+export default TrainPathsGeneralInfoClassFactory;

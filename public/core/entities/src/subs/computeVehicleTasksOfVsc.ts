@@ -2,31 +2,41 @@ import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
 
 import computeContentsOfOneVta from "./computeContentsOfOneVta";
 
-import { VehicleSchedule } from "../VehicleSchedule";
-import { BlocksCollection } from "../BlocksCollection";
-import { VehicleTasksCollection } from "../VehicleTasksCollection";
-import { Block } from "../Block";
-import { VehicleTask } from "../VehicleTask";
-import { BlockActivity } from "../BlockActivity";
-import { BlockActivitiesCollection } from "../BlockActivitiesCollection";
-import { BlockSection } from "../BlockSection";
-import { BlockSectionsCollection } from "../BlockSectionsCollection";
+import { BimoVehicleSchedule } from "../VehicleSchedule";
+import { BimoBlocksCollection } from "../BlocksCollection";
+import { BimoVehicleTasksCollection } from "../VehicleTasksCollection";
+import { BimoBlock } from "../Block";
+import { BimoVehicleTask } from "../VehicleTask";
+import { BimoBlockActivity } from "../BlockActivity";
+import { BimoBlockActivitiesCollection } from "../BlockActivitiesCollection";
+import { BimoBlockSection } from "../BlockSection";
+import { BimoBlockSectionsCollection } from "../BlockSectionsCollection";
+import {
+  entityConstructorByEntityClassKey,
+  EntityConstructorByEntityClassKey,
+} from "../../base-types/entityConstructorByEntityClassKey";
 
 export interface BlocksAndActsAndSections {
-  blocks: BlocksCollection;
-  blockActivities: BlockActivitiesCollection;
-  blockSections: BlockSectionsCollection;
+  blocks: BimoBlocksCollection;
+  blockActivities: BimoBlockActivitiesCollection;
+  blockSections: BimoBlockSectionsCollection;
 }
 
-function computeVehicleTasksOfVsc(vsc: VehicleSchedule) {
-  const blocksCollByVehuUniqueId: { [vehuUniqueId: string]: BlocksCollection } = {};
-  const blocksAndActsAndSectionsByVta: Map<VehicleTask, BlocksAndActsAndSections> =
+function computeVehicleTasksOfVsc(
+  vsc: BimoVehicleSchedule,
+  { BlocksCollection, VehicleTasksCollection }: EntityConstructorByEntityClassKey
+) {
+  const blocksCollByVehuUniqueId: { [vehuUniqueId: string]: BimoBlocksCollection } = {};
+  const blocksAndActsAndSectionsByVta: Map<BimoVehicleTask, BlocksAndActsAndSections> =
     new Map();
-  const setOfVtasByBlock: Map<Block, Set<VehicleTask>> = new Map();
-  const setOfVtasByBlockActivity: Map<BlockActivity, Set<VehicleTask>> = new Map();
+  const setOfVtasByBlock: Map<BimoBlock, Set<BimoVehicleTask>> = new Map();
+  const setOfVtasByBlockActivity: Map<
+    BimoBlockActivity,
+    Set<BimoVehicleTask>
+  > = new Map();
   const setOfBlockSectionsByBlockActivity: Map<
-    BlockActivity,
-    Set<BlockSection>
+    BimoBlockActivity,
+    Set<BimoBlockSection>
   > = new Map();
 
   vsc.blocks.forEach((block) => {
@@ -40,7 +50,7 @@ function computeVehicleTasksOfVsc(vsc: VehicleSchedule) {
       blocksCollOfThisVehu.add(block);
     });
   });
-  const vehicleTasks: VehicleTasksCollection = new VehicleTasksCollection({
+  const vehicleTasks: BimoVehicleTasksCollection = new VehicleTasksCollection({
     parent: vsc,
   });
   vsc.vehicleUnits.forEach((vehicleUnit) => {
@@ -49,12 +59,15 @@ function computeVehicleTasksOfVsc(vsc: VehicleSchedule) {
       blocksThatStartWithThisVehu:
         blocksCollByVehuUniqueId[vehicleUnit.vehuInternalNumber],
     });
-    const blocksAndActsAndSectionsOfThisVta = computeContentsOfOneVta({
-      vehicleTask,
-      setOfVtasByBlock,
-      setOfVtasByBlockActivity,
-      setOfBlockSectionsByBlockActivity,
-    });
+    const blocksAndActsAndSectionsOfThisVta = computeContentsOfOneVta(
+      {
+        vehicleTask,
+        setOfVtasByBlock,
+        setOfVtasByBlockActivity,
+        setOfBlockSectionsByBlockActivity,
+      },
+      entityConstructorByEntityClassKey
+    );
     blocksAndActsAndSectionsByVta.set(vehicleTask, blocksAndActsAndSectionsOfThisVta);
   });
   return {
@@ -65,5 +78,7 @@ function computeVehicleTasksOfVsc(vsc: VehicleSchedule) {
     setOfBlockSectionsByBlockActivity,
   };
 }
+
+export type ComputedVehicleTaskObjects = ReturnType<typeof computeVehicleTasksOfVsc>;
 
 export default computeVehicleTasksOfVsc;

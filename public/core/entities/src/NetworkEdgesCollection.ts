@@ -6,19 +6,18 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoNetworkEdge, NetworkEdgeProps } from "./NetworkEdge";
-import { BimoNetwork, NetworkProps } from "./Network";
+import { BimoNetwork } from "./Network";
+
+export interface NetworkEdgesCollectionProps
+  extends ExtendedCollectionProps<BimoNetworkEdge, NetworkEdgeProps> {}
+
 export function NetworkEdgesCollectionClassFactory({
   NetworkEdge,
-  Network,
-}: EntityConstructorByEntityClassKey): typeof BimoNetworkEdgesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoNetworkEdgesCollection {
   const childClasses: (typeof Entity)[] = [NetworkEdge];
-  
-  export interface NetworkEdgesCollectionProps
-  extends ExtendedCollectionProps<BimoNetworkEdge, NetworkEdgeProps> {}
-  
- class NetworkEdgesCollection extends Collection<BimoNetworkEdge, NetworkEdgeProps> {
-    declare parent?: Network;
+
+  class NetworkEdgesCollection extends Collection<BimoNetworkEdge, NetworkEdgeProps> {
+    declare parent?: BimoNetwork;
     constructor(props: NetworkEdgesCollectionProps = {}) {
       super({
         itemName: "NetworkEdge",
@@ -31,10 +30,10 @@ export function NetworkEdgesCollectionClassFactory({
       });
     }
   }
-  
+
   NetworkEdgesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return NetworkEdgesCollection
+
+  return NetworkEdgesCollection;
 }
 
-export default NetworkEdgesCollectionClassFactory
+export default NetworkEdgesCollectionClassFactory;

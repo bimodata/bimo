@@ -5,18 +5,17 @@ import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BimoVariant, VariantProps } from "./Variant";
-import { BimoPlacesCollection, PlacesCollectionProps } from "./PlacesCollection";
+import { BimoPlacesCollection } from "./PlacesCollection";
+
+export interface VariantsCollectionProps
+  extends ExtendedCollectionProps<BimoVariant, VariantProps> {}
+
 export function VariantsCollectionClassFactory({
   Variant,
-  PlacesCollection,
-}: EntityConstructorByEntityClassKey): typeof BimoVariantsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoVariantsCollection {
   const childClasses: (typeof Entity)[] = [Variant];
-  
-  export interface VariantsCollectionProps
-  extends ExtendedCollectionProps<BimoVariant, VariantProps> {}
-  
- class VariantsCollection extends Collection<BimoVariant, VariantProps> {
+
+  class VariantsCollection extends Collection<BimoVariant, VariantProps> {
     constructor(props: VariantsCollectionProps = {}) {
       super({
         itemName: "Variant",
@@ -27,45 +26,49 @@ export function VariantsCollectionClassFactory({
         ...props,
       });
     }
-  
+
     /**
      *
      * @param placesCollection PlacesCollection to use to retrieve data about the places
      * @returns a map of variants arrays, indexed by a string made of `${refPlaceOfTheVariantsOrigin}>>>${refPlaceOfTheVariantsDestination}`
      */
-    getVariantsByRefPlaceOD(placesCollection: PlacesCollection): Map<string, Variant[]> {
+    getVariantsByRefPlaceOD(
+      placesCollection: BimoPlacesCollection
+    ): Map<string, BimoVariant[]> {
       const variantsByRefPlaceOD = this.groupByCustomKey((variant) => {
-        const firstPlace = placesCollection.getByBusinessId(variant.firstPoint.varptPlace);
+        const firstPlace = placesCollection.getByBusinessId(
+          variant.firstPoint.varptPlace
+        );
         const lastPlace = placesCollection.getByBusinessId(variant.lastPoint.varptPlace);
-  
+
         if (!firstPlace || !lastPlace) {
           return `errors`;
         }
-  
+
         const firstRefPlaceId = firstPlace.plcReferencePlace || firstPlace.plcIdentifier;
         const lastRefPlaceId = lastPlace.plcReferencePlace || lastPlace.plcIdentifier;
-  
+
         return `${firstRefPlaceId}>>>${lastRefPlaceId}`;
       });
       return variantsByRefPlaceOD;
     }
-  
+
     // /** @type {Map<String, Variant[]>} a map of variants arrays, indexed by a string made of `${refPlaceOfTheVariantsOrigin}>>>${refPlaceOfTheVariantsDestination}` */
     // get variantsByRefPlaceOD() {
     //     if (!this._cachedObjectByObjectName._variantsByRefPlaceOD) {
     //         this._cachedObjectByObjectName._variantsByRefPlaceOD = this.groupByCustomKey((variant) => {
-  
+
     //         });
-  
+
     //     }
     //     return this._cachedObjectByObjectName._variantsByRefPlaceOD;
     // }
-  
+
     /**
      * Groups all the variants of the collection by route public id
      * @returns a map of variants arrays, indexed by rtePubIdSpec
      */
-    groupByRoutePublicId(): Map<string, Variant[]> {
+    groupByRoutePublicId(): Map<string, BimoVariant[]> {
       const groupedVariantsByRoutePublicId = new Map();
       this.forEach((variant) => {
         const routePublicId = variant.route?.rtePubIdSpec;
@@ -78,12 +81,12 @@ export function VariantsCollectionClassFactory({
       });
       return groupedVariantsByRoutePublicId;
     }
-  
+
     /**
      * Groups all the variants of the collection by route id
      * @returns a map of variants arrays, indexed by route id
      */
-    groupByRouteIdentifier(): Map<string, Variant[]> {
+    groupByRouteIdentifier(): Map<string, BimoVariant[]> {
       const groupedVariantsByRouteIdentifier = new Map();
       this.forEach((variant) => {
         const routeIdentifier = variant.route?.rteIdentifier;
@@ -96,24 +99,24 @@ export function VariantsCollectionClassFactory({
       });
       return groupedVariantsByRouteIdentifier;
     }
-  
+
     sortByPriority() {
       this.sort(
         (varA, varB) => parseInt(varA.varPriority, 10) - parseInt(varB.varPriority, 10)
       );
       return this;
     }
-  
+
     get shortLoggingOutput() {
       return this.parent
         ? `varColl of ${this.parent.shortLoggingOutput}`
         : `orphan varColl`;
     }
   }
-  
+
   VariantsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return VariantsCollection
+
+  return VariantsCollection;
 }
 
-export default VariantsCollectionClassFactory
+export default VariantsCollectionClassFactory;

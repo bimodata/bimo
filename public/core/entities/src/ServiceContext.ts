@@ -6,24 +6,9 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import {
-  ServiceContextParentsCollection,
-  ServiceContextParentsCollectionProps,
-} from "./ServiceContextParentsCollection";
-import {
-  ServiceContextIntervalsCollection,
-  ServiceContextIntervalsCollectionProps,
-} from "./ServiceContextIntervalsCollection";
-import {
-  ServiceEvolutionPeriodsCollection,
-  ServiceEvolutionPeriodsCollectionProps,
-} from "./ServiceEvolutionPeriodsCollection";
-
-const childClasses: (typeof Entity)[] = [
-  ServiceContextParentsCollection,
-  ServiceContextIntervalsCollection,
-  ServiceEvolutionPeriodsCollection,
-];
+import { BimoServiceContextParentsCollection } from "./ServiceContextParentsCollection";
+import { BimoServiceContextIntervalsCollection } from "./ServiceContextIntervalsCollection";
+import { BimoServiceEvolutionPeriodsCollection } from "./ServiceEvolutionPeriodsCollection";
 
 export interface ServiceContextProps extends ExtendedItemProps {
   sctxName?: string;
@@ -45,8 +30,17 @@ export interface ServiceContextProps extends ExtendedItemProps {
   serviceEvolutionPeriods?: string;
 }
 
-export function ServiceContextClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceContext{
- class ServiceContext extends Item<ServiceContext> {
+export function ServiceContextClassFactory({
+  ServiceContextParentsCollection,
+  ServiceContextIntervalsCollection,
+  ServiceEvolutionPeriodsCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoServiceContext {
+  const childClasses: (typeof Entity)[] = [
+    ServiceContextParentsCollection,
+    ServiceContextIntervalsCollection,
+    ServiceEvolutionPeriodsCollection,
+  ];
+  class ServiceContext extends Item<ServiceContext> {
     sctxName?: string;
     sctxUserCreated?: string;
     sctxIsMainBase?: string;
@@ -61,9 +55,9 @@ export function ServiceContextClassFactory(entityConstructorByEntityClassKey: En
     sctxNetworkEventRelated?: string;
     sctxOwner?: string;
     sctxPublicAccess?: string;
-    serviceContextParents: ServiceContextParentsCollection;
-    serviceContextIntervals: ServiceContextIntervalsCollection;
-    serviceEvolutionPeriods: ServiceEvolutionPeriodsCollection;
+    serviceContextParents: BimoServiceContextParentsCollection;
+    serviceContextIntervals: BimoServiceContextIntervalsCollection;
+    serviceEvolutionPeriods: BimoServiceEvolutionPeriodsCollection;
     constructor(props: ServiceContextProps) {
       super(props);
       this.sctxName = gavpfp("sctxName", props, `string`, "Base");
@@ -80,9 +74,7 @@ export function ServiceContextClassFactory(entityConstructorByEntityClassKey: En
       this.sctxNetworkEventRelated = gavpfp("sctxNetworkEventRelated", props);
       this.sctxOwner = gavpfp("sctxOwner", props, "string", "ADMIN");
       this.sctxPublicAccess = gavpfp("sctxPublicAccess", props, "string", "1");
-  
-      /* Children */
-      /** @type {ServiceContextParentsCollection} */
+
       this.serviceContextParents = gavpfp(
         "serviceContextParents",
         props,
@@ -90,8 +82,7 @@ export function ServiceContextClassFactory(entityConstructorByEntityClassKey: En
         new ServiceContextParentsCollection(),
         { altPropName: "service_context_parent", parent: this }
       );
-  
-      /** @type {ServiceContextIntervalsCollection} */
+
       this.serviceContextIntervals = gavpfp(
         "serviceContextIntervals",
         props,
@@ -99,8 +90,7 @@ export function ServiceContextClassFactory(entityConstructorByEntityClassKey: En
         new ServiceContextIntervalsCollection(),
         { altPropName: "service_context_interval", parent: this }
       );
-  
-      /** @type {ServiceEvolutionPeriodsCollection} */
+
       this.serviceEvolutionPeriods = gavpfp(
         "serviceEvolutionPeriods",
         props,
@@ -110,10 +100,10 @@ export function ServiceContextClassFactory(entityConstructorByEntityClassKey: En
       );
     }
   }
-  
+
   ServiceContext.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ServiceContext
+
+  return ServiceContext;
 }
 
-export default ServiceContextClassFactory
+export default ServiceContextClassFactory;

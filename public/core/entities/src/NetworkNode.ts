@@ -6,12 +6,10 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import {
-  BimoNetworkNodesCollection,
-  NetworkNodesCollectionProps,
-} from "./NetworkNodesCollection";
-import { BimoNetwork, NetworkProps } from "./Network";
-import { BimoNetworkSection, NetworkSectionProps } from "./NetworkSection";
+import { BimoAdjacentLink } from "./AdjacentLink";
+import { BimoNetworkNodesCollection } from "./NetworkNodesCollection";
+import { BimoNetwork } from "./Network";
+import { BimoNetworkSection } from "./NetworkSection";
 
 /** Une représentation logique d'un point discret du réseau. */
 export interface NetworkNodeProps extends ExtendedItemProps {
@@ -21,19 +19,15 @@ export interface NetworkNodeProps extends ExtendedItemProps {
   sectionIds?: Set<string>;
 }
 
-export function NetworkNodeClassFactory({
-  NetworkNodesCollection,
-  Network,
-  NetworkSection,
-}: EntityConstructorByEntityClassKey): typeof BimoNetworkNode {
+export function NetworkNodeClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoNetworkNode {
   const childClasses: (typeof Entity)[] = [];
 
   class NetworkNode extends Item<NetworkNode> {
     bimoId: string;
     businessId: string;
     coordinatesBySystemName: { [systemName: string]: any } = {};
-    private _sectionIds: Set<string> = new Set();
-    declare parent?: NetworkNodesCollection;
+    _sectionIds: Set<string> = new Set();
+    declare parent?: BimoNetworkNodesCollection;
     constructor(props: NetworkNodeProps) {
       super(props);
       this.bimoId = gavpfp("bimoId", props, "string");
@@ -53,15 +47,15 @@ export function NetworkNodeClassFactory({
       );
     }
 
-    addSection(section: NetworkSection) {
+    addSection(section: BimoNetworkSection) {
       this._sectionIds.add(section.bimoId);
     }
 
-    removeSection(section: NetworkSection) {
+    removeSection(section: BimoNetworkSection) {
       this._sectionIds.delete(section.bimoId);
     }
 
-    get adjacentLinks() {
+    get adjacentLinks(): BimoAdjacentLink[] {
       if (!this.network) return [];
       return (this.network.adjacentLinksByNode.get(this) || []).filter(
         ({ edge }) => !this.network?.deletedEdges.has(edge)
@@ -106,7 +100,7 @@ export function NetworkNodeClassFactory({
     }
 
     moveToNetwork(
-      targetNetwork: Network,
+      targetNetwork: BimoNetwork,
       options: {
         bringEdges?: boolean;
         copyEdges?: boolean;

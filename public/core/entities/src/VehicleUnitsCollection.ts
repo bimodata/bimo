@@ -3,17 +3,18 @@ import { VehicleUnitsCollection as BimoVehicleUnitsCollection } from "../base-ty
 export { VehicleUnitsCollection as BimoVehicleUnitsCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { BimoVehicleUnit, VehicleUnitProps } from "./VehicleUnit";
+
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+
+export interface VehicleUnitsCollectionProps
+  extends ExtendedCollectionProps<BimoVehicleUnit, VehicleUnitProps> {}
+
 export function VehicleUnitsCollectionClassFactory({
   VehicleUnit,
-}: EntityConstructorByEntityClassKey): typeof BimoVehicleUnitsCollection{
-  import { getAllChildClasses } from "@bimo/core-utils-serialization";
-  import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+}: EntityConstructorByEntityClassKey): typeof BimoVehicleUnitsCollection {
   const childClasses: (typeof Entity)[] = [VehicleUnit];
-  
-  export interface VehicleUnitsCollectionProps
-  extends ExtendedCollectionProps<BimoVehicleUnit, VehicleUnitProps> {}
-  
- class VehicleUnitsCollection extends Collection<BimoVehicleUnit, VehicleUnitProps> {
+  class VehicleUnitsCollection extends Collection<BimoVehicleUnit, VehicleUnitProps> {
     constructor(props: VehicleUnitsCollectionProps = {}) {
       super({
         itemName: "VehicleUnit",
@@ -24,10 +25,10 @@ export function VehicleUnitsCollectionClassFactory({
       });
     }
   }
-  
+
   VehicleUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return VehicleUnitsCollection
+
+  return VehicleUnitsCollection;
 }
 
-export default VehicleUnitsCollectionClassFactory
+export default VehicleUnitsCollectionClassFactory;

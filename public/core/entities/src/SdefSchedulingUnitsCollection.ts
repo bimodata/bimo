@@ -6,17 +6,17 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoSdefSchedulingUnit, SdefSchedulingUnitProps } from "./SdefSchedulingUnit";
+
+export interface SdefSchedulingUnitsCollectionProps
+  extends ExtendedCollectionProps<BimoSdefSchedulingUnit, SdefSchedulingUnitProps> {}
+
 export function SdefSchedulingUnitsCollectionClassFactory({
   SdefSchedulingUnit,
-}: EntityConstructorByEntityClassKey): typeof BimoSdefSchedulingUnitsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoSdefSchedulingUnitsCollection {
   const childClasses: (typeof Entity)[] = [SdefSchedulingUnit];
-  
-  export interface SdefSchedulingUnitsCollectionProps
-  extends ExtendedCollectionProps<BimoSdefSchedulingUnit, SdefSchedulingUnitProps> {}
-  
- class SdefSchedulingUnitsCollection extends Collection<
-    SdefSchedulingUnit,
+
+  class SdefSchedulingUnitsCollection extends Collection<
+    BimoSdefSchedulingUnit,
     SdefSchedulingUnitProps
   > {
     constructor(props: SdefSchedulingUnitsCollectionProps = {}) {
@@ -30,10 +30,10 @@ export function SdefSchedulingUnitsCollectionClassFactory({
       });
     }
   }
-  
+
   SdefSchedulingUnitsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return SdefSchedulingUnitsCollection
+
+  return SdefSchedulingUnitsCollection;
 }
 
-export default SdefSchedulingUnitsCollectionClassFactory
+export default SdefSchedulingUnitsCollectionClassFactory;

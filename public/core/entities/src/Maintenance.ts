@@ -16,39 +16,30 @@ import {
   computeSetOfBlockActivitiesHelper,
   getSingleBlockActivityHelper,
 } from "./BlockActivityItem";
-import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
-import { BimoPlace, PlaceProps } from "./Place";
-import { BimoMaintenancesCollection, MaintenancesCollectionProps } from "./MaintenancesCollection";
-export function MaintenanceClassFactory({
-  BlockActivity,
-  Place,
-  MaintenancesCollection,
-}: EntityConstructorByEntityClassKey): typeof BimoMaintenance{
-  
-  export interface MaintenanceProps extends ExtendedItemProps {
-    bimoId?: string;
-    mtnInternalNumber?: string;
-    mtnStartTime?: string;
-    mtnEndTime?: string;
-    mtnPlace?: string;
-    mtnVehicle?: string;
-    mtnVehicleActivityId?: string;
-    mtnOperateSun?: string;
-    mtnOperateMon?: string;
-    mtnOperateTue?: string;
-    mtnOperateWed?: string;
-    mtnOperateThu?: string;
-    mtnOperateFri?: string;
-    mtnOperateSat?: string;
-    mtnEvent?: string;
-    mtnEventStatus?: string;
-    mtnComment?: string;
-  }
-  
- class Maintenance
-    extends Item<Maintenance>
-    implements BlockActivityItem<Maintenance>
-  {
+import { BimoBlockActivity } from "./BlockActivity";
+import { BimoPlace } from "./Place";
+import { BimoMaintenancesCollection } from "./MaintenancesCollection";
+export interface MaintenanceProps extends ExtendedItemProps {
+  bimoId?: string;
+  mtnInternalNumber?: string;
+  mtnStartTime?: string;
+  mtnEndTime?: string;
+  mtnPlace?: string;
+  mtnVehicle?: string;
+  mtnVehicleActivityId?: string;
+  mtnOperateSun?: string;
+  mtnOperateMon?: string;
+  mtnOperateTue?: string;
+  mtnOperateWed?: string;
+  mtnOperateThu?: string;
+  mtnOperateFri?: string;
+  mtnOperateSat?: string;
+  mtnEvent?: string;
+  mtnEventStatus?: string;
+  mtnComment?: string;
+}
+export function MaintenanceClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoMaintenance {
+  class Maintenance extends Item<Maintenance> implements BlockActivityItem<Maintenance> {
     bimoId?: string;
     _mtnInternalNumber?: string;
     mtnStartTime: string;
@@ -66,16 +57,16 @@ export function MaintenanceClassFactory({
     mtnEvent?: string;
     mtnEventStatus?: string;
     mtnComment?: string;
-    declare parent?: MaintenancesCollection;
+    declare parent?: BimoMaintenancesCollection;
     static itemIdPropName = "mtnInternalNumber";
     static blkActIdPropName = "blkactMaintenanceNo";
-  
+
     constructor(props: MaintenanceProps) {
       super(props);
       this.bimoId = gavpfp("bimoId", props);
       this._mtnInternalNumber = gavpfp("mtnInternalNumber", props);
       if (!this._mtnInternalNumber) this._mtnInternalNumber = this.bimoId;
-  
+
       this.mtnStartTime = gavpfp("mtnStartTime", props);
       this.mtnEndTime = gavpfp("mtnEndTime", props);
       this.mtnPlace = gavpfp("mtnPlace", props);
@@ -92,95 +83,95 @@ export function MaintenanceClassFactory({
       this.mtnEventStatus = gavpfp("mtnEventStatus", props);
       this.mtnComment = gavpfp("mtnComment", props);
     }
-  
+
     get mtnInternalNumber() {
       return this._mtnInternalNumber;
     }
-  
+
     set mtnInternalNumber(v) {
       if (this.parent && this.parent.invalidateItemByBusinessId) {
         this.parent.invalidateItemByBusinessId();
       }
       this._mtnInternalNumber = v;
     }
-  
+
     get shortLoggingOutput() {
       return `[${this.mtnVehicleActivityId}]-${this.mtnPlace}-(${this.mtnStartTime}=>${this.mtnEndTime})`;
     }
-  
+
     get blkactVehicleActivityTypeNo() {
       return activityTypeNoByMaintenanceVehicleActivityId[this.mtnVehicleActivityId];
     }
-  
-    private get setOfBlockActivities() {
+
+    get setOfBlockActivities() {
       return computeSetOfBlockActivitiesHelper<Maintenance>(this);
     }
-  
-    get blockActivities(): BlockActivity[] {
+
+    get blockActivities(): BimoBlockActivity[] {
       const setOfBlockActivities = this.setOfBlockActivities;
       return setOfBlockActivities && Array.from(setOfBlockActivities);
     }
-  
-    addBlockActivity(newBlockActivity: BlockActivity) {
+
+    addBlockActivity(newBlockActivity: BimoBlockActivity) {
       this.setOfBlockActivities.add(newBlockActivity);
     }
-  
-    removeBlockActivity(blockActivity: BlockActivity) {
+
+    removeBlockActivity(blockActivity: BimoBlockActivity) {
       this.setOfBlockActivities.delete(blockActivity);
     }
-  
-    get blockActivity(): BlockActivity {
+
+    get blockActivity(): BimoBlockActivity {
       return getSingleBlockActivityHelper<Maintenance>(this);
     }
-  
+
     get block() {
       return this.blockActivity?.block ?? null;
     }
-  
+
     get vehicleTasks() {
       return this.blockActivity?.vehicleTasks ?? null;
     }
-  
+
     get vehicleSchedule() {
       return this.parent?.parent ?? null;
     }
-  
+
     get startTime() {
       return this.mtnStartTime;
     }
-  
+
     get startTimeAsDuration() {
       return this._getAndSetCachedValue("startTimeAsDuration", () =>
         hastusExtendedHoursToDuration(this.startTime)
       );
     }
-  
+
     get endTime() {
       return this.mtnEndTime;
     }
-  
+
     get endTimeAsDuration() {
       return this._getAndSetCachedValue("endTimeAsDuration", () =>
         hastusExtendedHoursToDuration(this.endTime)
       );
     }
-  
+
     get startPlaceId() {
       return this.mtnPlace;
     }
-  
+
     get endPlaceId() {
       return this.mtnPlace;
     }
-  
-    improveStartPlacePrecision(morePreciseStartPlace: Place) {
+
+    improveStartPlacePrecision(morePreciseStartPlace: BimoPlace) {
       this.mtnPlace = morePreciseStartPlace.plcIdentifier;
     }
-  
-    improveEndPlacePrecision(morePreciseEndPlace: Place) {
+
+    improveEndPlacePrecision(morePreciseEndPlace: BimoPlace) {
       this.mtnPlace = morePreciseEndPlace.plcIdentifier;
     }
-  
+
     shiftTimes(shiftInSeconds: number) {
       this.mtnStartTime = durationToHastusExtendedHoursString(
         this.startTimeAsDuration.plus({ second: shiftInSeconds })
@@ -192,13 +183,13 @@ export function MaintenanceClassFactory({
       this._nullifyCachedValue("endTimeAsDuration");
     }
   }
-  
+
   Maintenance.hastusKeywords = ["maintenance"];
   Maintenance.hastusObject = "maintenance";
-  
+
   Maintenance.allChildClasses = getAllChildClasses(childClasses);
-  
-  return Maintenance
+
+  return Maintenance;
 }
 
 export type ActivityTypeNoByMaintenanceVehicleActivityId = {
@@ -212,4 +203,4 @@ const activityTypeNoByMaintenanceVehicleActivityId: ActivityTypeNoByMaintenanceV
     EJ: "10001",
   };
 
-export default MaintenanceClassFactory
+export default MaintenanceClassFactory;

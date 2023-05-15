@@ -6,7 +6,6 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import timeAndDate from "@bimo/core-utils-time-and-date";
 import { BimoContext } from "@bimo/core-global-types";
-import { CustomProps, Entity } from "@bimo/core-utils-entity";
 
 import {
   hastusExtendedHoursToDuration,
@@ -19,19 +18,100 @@ import {
   RawOigProps,
 } from "@bimo/core-utils-collection";
 
-import { BimoTripTpsCollection, TripTpsCollectionProps } from "./TripTpsCollection";
-import { BimoTripPointsCollection, TripPointsCollectionProps } from "./TripPointsCollection";
+import { BimoTripTpsCollection } from "./TripTpsCollection";
+import { BimoTripPointsCollection } from "./TripPointsCollection";
 import { BimoTripPoint, TripPointProps } from "./TripPoint";
 import { BimoTripTp, TripTpProps } from "./TripTp";
-import { BimoTripvehgrpspecsCollection, TripvehgrpspecsCollectionProps } from "./TripvehgrpspecsCollection";
-import { BimoTripOrVariant, TripOrVariantProps } from "./TripOrVariant";
-import { BimoBlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
-import { BimoBlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
-import { BimoBlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
+import { BimoTripvehgrpspecsCollection } from "./TripvehgrpspecsCollection";
+import { BimoTripOrVariant, TripOrVariantTypeEnum } from "./TripOrVariant";
+import {
+  BlockActivityItem,
+  computeSetOfBlockActivitiesHelper,
+  getSingleBlockActivityHelper,
+} from "./BlockActivityItem";
 import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
-import { BimoTripsCollection, TripsCollectionProps } from "./TripsCollection";
+import { BimoTripsCollection } from "./TripsCollection";
 import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
 import { BimoPlace, PlaceProps } from "./Place";
+
+export type TripType = "0" | "3";
+
+export interface TripProps extends ExtendedItemProps {
+  bimoId?: string;
+  trpNumber?: string;
+  trpIsProtected?: string;
+  trpRoute?: string;
+  trpViaVariant?: string;
+  trpType?: TripType;
+  trpDirection?: string;
+  trpPlaceStart?: string;
+  trpPlaceEnd?: string;
+  trpOriginalStartPlace?: string;
+  trpOriginalEndPlace?: string;
+  trpOriginalBuildSpecPlace?: string;
+  trpTimeStart?: string;
+  trpTimeEnd?: string;
+  trpStartLayUser?: string;
+  trpEndLayUser?: string;
+  trpInternalDistance?: string;
+  trpDistance?: string;
+  trpCreator?: string;
+  trpNote?: string;
+  trpSecondNote?: string;
+  trpIsPublic?: string;
+  trpShftMaxEarlier?: string;
+  trpShftMaxLater?: string;
+  trpInternalShftMaxEarlier?: string;
+  trpInternalShftMaxLater?: string;
+  trpIsSpecial?: string;
+  trpAvailForTravel?: string;
+  trpOperatesSun?: string;
+  trpOperatesMon?: string;
+  trpOperatesTue?: string;
+  trpOperatesWed?: string;
+  trpOperatesThu?: string;
+  trpOperatesFri?: string;
+  trpOperatesSat?: string;
+  trpEventForOir?: string;
+  trpEventStatusForOir?: string;
+  trpGarage?: string;
+  trpPattern?: string;
+  trpVehicleDisplay?: string;
+  trpBuildAt?: string;
+  trpBuildSpecPlace?: string;
+  trpBuildTime?: string;
+  trpBlockingGarage?: string;
+  trpRunTimePattern?: string;
+  trpOriginalNumber?: string;
+  trpIntNumber?: string;
+  trpAreVehGroupSpecsFromVehcv?: string;
+  trpAreVehSpecCstrFromVehcv?: string;
+  trpRecommendedVehGroup?: string;
+  trpConsiderLoadAtStart?: string;
+  trpConsiderLoadAtEnd?: string;
+  BlockNo?: string;
+  trpNatureMouvementTechnique?: string;
+  trpUniteHoraireCouverture?: string;
+  trpTrainEas?: string;
+  trpCommentaireVoySncfDi?: string;
+  trpNumDeCourseSubstituee?: string;
+  trpNumOperation?: string;
+  trpACouvrirMr?: string;
+  trpCodeTct?: string;
+  trpEnginDeCalcul?: string;
+  trpMaterielRemorque?: string;
+  trpNumeroSecondaire?: string;
+  trpProfilDeVitesse?: string;
+  trpPrecoAo?: string;
+  trpEstEnSnu?: string;
+  trpOpReleve?: string;
+  trpNePasCommanderSillon?: string;
+  trpBesoinVf?: string;
+  tripTps?: BimoTripTpsCollection;
+  tripPoints?: BimoTripPointsCollection;
+  tripvehgrpspecs?: BimoTripvehgrpspecsCollection;
+}
+
 export function TripClassFactory({
   TripTpsCollection,
   TripPointsCollection,
@@ -39,103 +119,21 @@ export function TripClassFactory({
   TripTp,
   TripvehgrpspecsCollection,
   TripOrVariant,
-  BlockActivityItem,
-  BlockActivityItem,
-  BlockActivityItem,
   BlockActivity,
   TripsCollection,
   VehicleSchedule,
   Place,
-}: EntityConstructorByEntityClassKey): typeof BimoTrip{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoTrip {
   const childClasses: (typeof Entity)[] = [
     TripTpsCollection,
     TripPointsCollection,
     TripvehgrpspecsCollection,
   ];
-  
+
   const INTERNAL_DISTANCE_FACTOR = 10000;
-  
-  export type TripType = "0" | "3";
-  
-  export interface TripProps extends ExtendedItemProps {
-    bimoId?: string;
-    trpNumber?: string;
-    trpIsProtected?: string;
-    trpRoute?: string;
-    trpViaVariant?: string;
-    trpType?: TripType;
-    trpDirection?: string;
-    trpPlaceStart?: string;
-    trpPlaceEnd?: string;
-    trpOriginalStartPlace?: string;
-    trpOriginalEndPlace?: string;
-    trpOriginalBuildSpecPlace?: string;
-    trpTimeStart?: string;
-    trpTimeEnd?: string;
-    trpStartLayUser?: string;
-    trpEndLayUser?: string;
-    trpInternalDistance?: string;
-    trpDistance?: string;
-    trpCreator?: string;
-    trpNote?: string;
-    trpSecondNote?: string;
-    trpIsPublic?: string;
-    trpShftMaxEarlier?: string;
-    trpShftMaxLater?: string;
-    trpInternalShftMaxEarlier?: string;
-    trpInternalShftMaxLater?: string;
-    trpIsSpecial?: string;
-    trpAvailForTravel?: string;
-    trpOperatesSun?: string;
-    trpOperatesMon?: string;
-    trpOperatesTue?: string;
-    trpOperatesWed?: string;
-    trpOperatesThu?: string;
-    trpOperatesFri?: string;
-    trpOperatesSat?: string;
-    trpEventForOir?: string;
-    trpEventStatusForOir?: string;
-    trpGarage?: string;
-    trpPattern?: string;
-    trpVehicleDisplay?: string;
-    trpBuildAt?: string;
-    trpBuildSpecPlace?: string;
-    trpBuildTime?: string;
-    trpBlockingGarage?: string;
-    trpRunTimePattern?: string;
-    trpOriginalNumber?: string;
-    trpIntNumber?: string;
-    trpAreVehGroupSpecsFromVehcv?: string;
-    trpAreVehSpecCstrFromVehcv?: string;
-    trpRecommendedVehGroup?: string;
-    trpConsiderLoadAtStart?: string;
-    trpConsiderLoadAtEnd?: string;
-    BlockNo?: string;
-    trpNatureMouvementTechnique?: string;
-    trpUniteHoraireCouverture?: string;
-    trpTrainEas?: string;
-    trpCommentaireVoySncfDi?: string;
-    trpNumDeCourseSubstituee?: string;
-    trpNumOperation?: string;
-    trpACouvrirMr?: string;
-    trpCodeTct?: string;
-    trpEnginDeCalcul?: string;
-    trpMaterielRemorque?: string;
-    trpNumeroSecondaire?: string;
-    trpProfilDeVitesse?: string;
-    trpPrecoAo?: string;
-    trpEstEnSnu?: string;
-    trpOpReleve?: string;
-    trpNePasCommanderSillon?: string;
-    trpBesoinVf?: string;
-    tripTps?: TripTpsCollection;
-    tripPoints?: TripPointsCollection;
-    tripvehgrpspecs?: TripvehgrpspecsCollection;
-  }
-  
- class Trip
-    extends TripOrVariant<Trip, TripProps, TripPoint, TripPointProps>
+
+  class Trip
+    extends TripOrVariant<Trip, TripProps, BimoTripPoint, TripPointProps>
     implements BlockActivityItem<Trip>
   {
     _bimoId: string | null;
@@ -147,8 +145,8 @@ export function TripClassFactory({
     trpDirection?: string;
     _trpPlaceStart: string;
     _trpPlaceEnd: string;
-    _trpOriginalStartPlace?: string;
-    _trpOriginalEndPlace?: string;
+    _trpOriginalStartPlace: string;
+    _trpOriginalEndPlace: string;
     trpOriginalBuildSpecPlace?: string;
     trpTimeStart: string;
     trpTimeEnd: string;
@@ -208,10 +206,10 @@ export function TripClassFactory({
     trpOpReleve?: string;
     trpNePasCommanderSillon?: string;
     trpBesoinVf?: string;
-    tripTps: TripTpsCollection;
-    tripPoints: TripPointsCollection;
-    tripvehgrpspecs: TripvehgrpspecsCollection;
-    declare parent?: TripsCollection;
+    tripTps: BimoTripTpsCollection;
+    tripPoints: BimoTripPointsCollection;
+    tripvehgrpspecs: BimoTripvehgrpspecsCollection;
+    declare parent?: BimoTripsCollection;
     _status: string;
     _links: { [linkType: string]: any } = {};
     static itemIdPropName = "trpIntNumber";
@@ -247,7 +245,7 @@ export function TripClassFactory({
       this.trpTimeEnd = gavpfp("trpTimeEnd", props);
       this.trpStartLayUser = gavpfp("trpStartLayUser", props);
       this.trpEndLayUser = gavpfp("trpEndLayUser", props);
-  
+
       /** en décimètres */
       this.trpInternalDistance = gavpfp("trpInternalDistance", props);
       this._trpDistance = gavpfp("trpDistance", props) ?? this.trpDistance;
@@ -257,7 +255,12 @@ export function TripClassFactory({
       this._trpIsPublic = gavpfp("trpIsPublic", props);
       this.trpShftMaxEarlier = gavpfp("trpShftMaxEarlier", props, `string`, `0h00`);
       this.trpShftMaxLater = gavpfp("trpShftMaxLater", props, `string`, `0h00`);
-      this.trpInternalShftMaxEarlier = gavpfp("trpShftMaxEarlier", props, `string`, `0h00`);
+      this.trpInternalShftMaxEarlier = gavpfp(
+        "trpShftMaxEarlier",
+        props,
+        `string`,
+        `0h00`
+      );
       this.trpInternalShftMaxLater = gavpfp("trpShftMaxLater", props, `string`, `0h00`);
       this.trpIsSpecial = gavpfp("trpIsSpecial", props, `string`, `0`);
       this.trpAvailForTravel = gavpfp("trpAvailForTravel", props, `string`, `1`);
@@ -293,16 +296,26 @@ export function TripClassFactory({
         `1`
       );
       this.trpRecommendedVehGroup = gavpfp("trpRecommendedVehGroup", props);
-      this.trpConsiderLoadAtStart = gavpfp("trpConsiderLoadAtStart", props, `string`, `0`);
+      this.trpConsiderLoadAtStart = gavpfp(
+        "trpConsiderLoadAtStart",
+        props,
+        `string`,
+        `0`
+      );
       this.trpConsiderLoadAtEnd = gavpfp("trpConsiderLoadAtEnd", props, `string`, `0`);
       this.BlockNo = undefined; // Échanges par mail avec Mathieu M et Isabel L: il ne sert à rien, et il bug.
-  
+
       // site-spec oscar, à déplacer vers une nouvelle classe "OscarTrip"
       this.trpNatureMouvementTechnique = gavpfp("trpNatureMouvementTechnique", props);
       this.trpUniteHoraireCouverture = gavpfp("trpUniteHoraireCouverture", props);
       this.trpTrainEas = gavpfp("trpTrainEas", props, `string`, `0`);
-      this.trpCommentaireVoySncfDi = gavpfp("trpCommentaireVoySncfDi", props, `string`, ``);
-  
+      this.trpCommentaireVoySncfDi = gavpfp(
+        "trpCommentaireVoySncfDi",
+        props,
+        `string`,
+        ``
+      );
+
       // site-spec orion, à déplacer vers une nouvelle classe "OrionTrip"
       this.trpNumDeCourseSubstituee = gavpfp("trpNumDeourseSubstituee", props);
       this.trpNumOperation = gavpfp("trpNumOperation", props);
@@ -322,7 +335,7 @@ export function TripClassFactory({
         `0`
       );
       this.trpBesoinVf = gavpfp("trpBesoinVf", props, `string`, `0`);
-  
+
       /* Children */
       /** @type {TripTpsCollection} */ this.tripTps = gavpfp(
         "trip_tp",
@@ -346,7 +359,7 @@ export function TripClassFactory({
         { altPropName: "tripvehgrpspec", parent: this }
       );
     }
-  
+
     /** en km */
     get trpDistance(): string | null {
       if (!this.trpInternalDistance) return null;
@@ -355,7 +368,7 @@ export function TripClassFactory({
         ? null
         : (valueAsNumber / INTERNAL_DISTANCE_FACTOR).toFixed(4);
     }
-  
+
     /** en km */
     set trpDistance(v: string | number | null) {
       const valueAsNumberOrNull = typeof v === "string" ? parseFloat(v) : v;
@@ -364,73 +377,73 @@ export function TripClassFactory({
           ? null
           : (valueAsNumberOrNull * INTERNAL_DISTANCE_FACTOR).toFixed(0);
     }
-  
+
     get trpPlaceStart() {
       return this._trpPlaceStart;
     }
-  
+
     get trpPlaceEnd() {
       return this._trpPlaceEnd;
     }
-  
+
     set trpPlaceStart(v) {
       this.changeCurrentStartPlace(v);
     }
-  
+
     set trpPlaceEnd(v) {
       this.changeCurrentEndPlace(v);
     }
-  
+
     get trpOriginalStartPlace() {
       return this._trpOriginalStartPlace;
     }
-  
+
     get trpOriginalEndPlace() {
       return this._trpOriginalEndPlace;
     }
-  
-    set trpOriginalStartPlace(v) {
+
+    set trpOriginalStartPlace(v: string) {
       this.changeOriginalStartPlace(v);
     }
-  
-    set trpOriginalEndPlace(v) {
+
+    set trpOriginalEndPlace(v: string) {
       this.changeOriginalEndPlace(v);
     }
-  
+
     get trpIntNumber() {
       return this._trpIntNumber || this._bimoId || null;
     }
-  
+
     get productive() {
       return this.trpType === "0" ? "1" : "0";
     }
-  
+
     set trpIntNumber(v: string | null) {
       if (this.parent && this.parent.invalidateItemByBusinessId) {
         this.parent.invalidateItemByBusinessId();
       }
       this._trpIntNumber = v;
     }
-  
+
     get trpIsPublic() {
       return this._trpIsPublic ?? (this.trpType === "0" ? "1" : "0");
     }
-  
+
     set trpIsPublic(v) {
       this._trpIsPublic = v;
     }
-  
+
     get bimoId() {
       return this._bimoId || this._trpIntNumber;
     }
-  
+
     set bimoId(v: string | null) {
       if (this.parent && this.parent.invalidateItemById) {
         this.parent.invalidateItemById();
       }
       this._bimoId = v;
     }
-  
+
     /**
      * For trip, we should override this and make it handle more complex cases
      * For example, a trip from a "weekday" schedule
@@ -441,15 +454,15 @@ export function TripClassFactory({
     get blockActivity() {}
     set blockActivity(v) {}
      */
-  
+
     get blkactVehicleActivityTypeNo() {
       return activityTypeNoByTripType[this.trpType];
     }
-  
+
     slice(start: any, end: any) {
       this.tripPoints.items = this.tripPoints.items.slice(start, end);
     }
-  
+
     setStartAndEndAttributesFromPoints() {
       this.trpPlaceStart = this.firstTripPoint.trpptPlace;
       this.trpOriginalStartPlace = this.trpPlaceStart;
@@ -458,7 +471,7 @@ export function TripClassFactory({
       this.trpTimeStart = this.firstTripPoint.trpptInternalDepartureTime;
       this.trpTimeEnd = this.lastTripPoint.trpptInternalArrivalTime;
     }
-  
+
     removeLoadTimeAtStartAndEnd() {
       this.firstTripPoint.trpptInternalAllowLoadTime = "0";
       this.firstTripPoint.trpptInternalOriginalAllowLoadTime = "0";
@@ -470,12 +483,12 @@ export function TripClassFactory({
         this.lastTripPoint.trpptInternalArrivalTime;
       this.setStartAndEndAttributesFromPoints();
     }
-  
-    moveToVehicleSchedule(targetVehicleSchedule: VehicleSchedule) {
+
+    moveToVehicleSchedule(targetVehicleSchedule: BimoVehicleSchedule) {
       if (this.parent) this.parent.remove(this);
       targetVehicleSchedule.addTrip(this);
     }
-  
+
     delete() {
       this.parent?.remove(this);
       Object.keys(this).forEach((key) => {
@@ -484,7 +497,7 @@ export function TripClassFactory({
       });
       this._status = `deleted`;
     }
-  
+
     /** Creates a new instance of a trip. All trips points are new instances too. BimoId is set to undefined */
     copy(newInternalNumber?: string) {
       const copiedTripPoints = this.tripPoints.map((tripPoint) => tripPoint.copy());
@@ -499,56 +512,56 @@ export function TripClassFactory({
       copiedTrip._links.copiedFrom = this;
       return copiedTrip;
     }
-  
+
     /** key of the form '${trpRoute}|${trpViaVariant}' or null if either is null    */
     get routeAndVariantKey() {
       if (!this.trpRoute || !this.trpViaVariant) return null;
       return `${this.trpRoute}|${this.trpViaVariant}`;
     }
-  
+
     get shortLoggingOutput() {
       return `${this.trpNumber}-(${this.trpPlaceStart}|${this.trpTimeStart} → ${this.trpTimeEnd}|${this.trpPlaceEnd})`;
     }
-  
+
     get mediumLoggingOutput() {
       return (
         `${this.trpType}-${this.trpNumber}-${this.trpRoute}-${this.trpViaVariant}-${this.trpDirection}` +
         `(${this.trpPlaceStart}|${this.trpTimeStart} → ${this.trpTimeEnd}|${this.trpPlaceEnd})[${this.tripPoints.length}]`
       );
     }
-  
+
     get longLoggingOutput() {
       return `${this.mediumLoggingOutput}\n${this.tripPoints.longLoggingOutput}`;
     }
-  
+
     /** the first 3 digits of the trip number */
     get trancheNum() {
       return this.trpNumber.slice(0, 3);
     }
-  
+
     get firstTripPoint() {
       return this.tripPoints.items[0];
     }
-  
+
     get lastTripPoint() {
       return this.tripPoints.items[this.tripPoints.items.length - 1];
     }
-  
+
     get firstTripTimingPoint() {
       return this.tripTps.items[0];
     }
-  
+
     get lastTripTimingPoint() {
       return this.tripTps.items[this.tripTps.items.length - 1];
     }
-  
+
     get durationInSeconds() {
       return timeAndDate.getDifferenceInSecondsBetweenTwoHastusExtendedHoursStrings(
         this.trpTimeStart,
         this.trpTimeEnd
       );
     }
-  
+
     validateTripPointTimes() {
       this.tripPoints.forEach((tripPoint, index) => {
         try {
@@ -572,7 +585,7 @@ export function TripClassFactory({
         }
       });
     }
-  
+
     getTimeDiffInSecondsBetweenTripPointIndexes(
       indexOfFirst: number,
       indexOfSecond: number
@@ -587,114 +600,114 @@ export function TripClassFactory({
       );
       return secondAsDuration.minus(firstAsDuration).as("second");
     }
-  
-    changeCurrentStartPlace(newStartPlace: Place | string) {
+
+    changeCurrentStartPlace(newStartPlace: BimoPlace | string) {
       const placeIdentifier = getPlaceIdFromPlaceOrString(newStartPlace);
       this._trpPlaceStart = placeIdentifier;
       if (this.firstTripPoint) this.firstTripPoint.trpptPlace = placeIdentifier;
       if (this.firstTripTimingPoint) this.firstTripTimingPoint.ttpPlace = placeIdentifier;
     }
-  
-    changeOriginalStartPlace(newStartPlace: Place | string) {
+
+    changeOriginalStartPlace(newStartPlace: BimoPlace | string) {
       const placeIdentifier = getPlaceIdFromPlaceOrString(newStartPlace);
       this._trpOriginalStartPlace = placeIdentifier;
       if (this.firstTripPoint)
         this.firstTripPoint.trpptInternalOriginalPlaceId = placeIdentifier;
     }
-  
-    changeStartPlace(newStartPlace: Place | string) {
+
+    changeStartPlace(newStartPlace: BimoPlace | string) {
       this.changeCurrentStartPlace(newStartPlace);
       this.changeOriginalStartPlace(newStartPlace);
     }
-  
-    changeCurrentEndPlace(newEndPlace: Place | string) {
+
+    changeCurrentEndPlace(newEndPlace: BimoPlace | string) {
       const placeIdentifier = getPlaceIdFromPlaceOrString(newEndPlace);
       this._trpPlaceEnd = placeIdentifier;
       if (this.lastTripPoint) this.lastTripPoint.trpptPlace = placeIdentifier;
       if (this.lastTripTimingPoint) this.lastTripTimingPoint.ttpPlace = placeIdentifier;
     }
-  
-    changeOriginalEndPlace(newEndPlace: Place | string) {
+
+    changeOriginalEndPlace(newEndPlace: BimoPlace | string) {
       const placeIdentifier = getPlaceIdFromPlaceOrString(newEndPlace);
       this._trpOriginalEndPlace = placeIdentifier;
       if (this.lastTripPoint)
         this.lastTripPoint.trpptInternalOriginalPlaceId = placeIdentifier;
     }
-  
-    changeEndPlace(newEndPlace: Place | string) {
+
+    changeEndPlace(newEndPlace: BimoPlace | string) {
       this.changeCurrentEndPlace(newEndPlace);
       this.changeOriginalEndPlace(newEndPlace);
     }
-  
-    improveStartPlacePrecision(morePreciseStartPlace: Place | string) {
+
+    improveStartPlacePrecision(morePreciseStartPlace: BimoPlace | string) {
       this.changeStartPlace(morePreciseStartPlace);
     }
-  
-    improveEndPlacePrecision(morePreciseEndPlace: Place | string) {
+
+    improveEndPlacePrecision(morePreciseEndPlace: BimoPlace | string) {
       this.changeEndPlace(morePreciseEndPlace);
     }
-  
-    private get setOfBlockActivities() {
+
+    get setOfBlockActivities() {
       return computeSetOfBlockActivitiesHelper<Trip>(this);
     }
-  
-    get blockActivities(): BlockActivity[] {
+
+    get blockActivities(): BimoBlockActivity[] {
       const setOfBlockActivities = this.setOfBlockActivities;
       return setOfBlockActivities && Array.from(setOfBlockActivities);
     }
-  
-    addBlockActivity(newBlockActivity: BlockActivity) {
+
+    addBlockActivity(newBlockActivity: BimoBlockActivity) {
       this.setOfBlockActivities.add(newBlockActivity);
     }
-  
-    removeBlockActivity(blockActivity: BlockActivity) {
+
+    removeBlockActivity(blockActivity: BimoBlockActivity) {
       this.setOfBlockActivities.delete(blockActivity);
     }
-  
-    get blockActivity(): BlockActivity {
+
+    get blockActivity(): BimoBlockActivity {
       return getSingleBlockActivityHelper<Trip>(this);
     }
-  
+
     get block() {
       return this.blockActivity?.block ?? null;
     }
-  
+
     get vehicleTasks() {
       return this.blockActivity?.vehicleTasks ?? null;
     }
-  
+
     get vehicleSchedule() {
-      return (this.parent?.parent as VehicleSchedule) ?? null;
+      return (this.parent?.parent as BimoVehicleSchedule) ?? null;
     }
-  
+
     get startTime() {
       return this.trpTimeStart;
     }
-  
+
     get startTimeAsDuration() {
       return this._getAndSetCachedValue("startTimeAsDuration", () =>
         hastusExtendedHoursToDuration(this.startTime)
       );
     }
-  
+
     get endTime() {
       return this.trpTimeEnd;
     }
-  
+
     get endTimeAsDuration() {
       return this._getAndSetCachedValue("endTimeAsDuration", () =>
         hastusExtendedHoursToDuration(this.endTime)
       );
     }
-  
+
     get startPlaceId() {
       return this.trpPlaceStart;
     }
-  
+
     get endPlaceId() {
       return this.trpPlaceEnd;
     }
-  
+
     shiftTimes(shiftInSeconds: number) {
       // TODO: also shift trip points and timing points
       this.trpTimeStart = durationToHastusExtendedHoursString(
@@ -707,15 +720,15 @@ export function TripClassFactory({
       this._nullifyCachedValue("endTimeAsDuration");
     }
   }
-  
+
   Trip.hastusKeywords = ["trip"];
   Trip.hastusObject = "trip";
   Trip.allChildClasses = getAllChildClasses(childClasses);
-  
-  return Trip
+
+  return Trip;
 }
 
-function getPlaceIdFromPlaceOrString(placeOrString: Place | string) {
+function getPlaceIdFromPlaceOrString(placeOrString: BimoPlace | string) {
   return typeof placeOrString === `string` ? placeOrString : placeOrString.plcIdentifier;
 }
 
@@ -724,4 +737,4 @@ const activityTypeNoByTripType: { [tripType in TripType]: string } = {
   "3": "2",
 };
 
-export default TripClassFactory
+export default TripClassFactory;

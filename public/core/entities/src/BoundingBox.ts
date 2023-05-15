@@ -25,8 +25,10 @@ export interface BoundingBoxCoordinatesBySystemName {
   [systemName: string]: BoundingBoxCoordinates;
 }
 
-export function BoundingBoxClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoBoundingBox{
- class BoundingBox extends Item<BoundingBox> {
+export function BoundingBoxClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoBoundingBox {
+  class BoundingBox extends Item<BoundingBox> {
     activeCoordinatesSystemName: string = "default";
     coordinatesBySystemName: BoundingBoxCoordinatesBySystemName;
     constructor(rawProps: [number, number, number, number] | BoundingBoxProps) {
@@ -50,51 +52,51 @@ export function BoundingBoxClassFactory(entityConstructorByEntityClassKey: Entit
         ]);
       }
     }
-  
+
     get xMin() {
       return this.coordinatesBySystemName[this.activeCoordinatesSystemName].xMin;
     }
-  
+
     get yMin() {
       return this.coordinatesBySystemName[this.activeCoordinatesSystemName].yMin;
     }
-  
+
     get xMax() {
       return this.coordinatesBySystemName[this.activeCoordinatesSystemName].xMax;
     }
-  
+
     get yMax() {
       return this.coordinatesBySystemName[this.activeCoordinatesSystemName].yMax;
     }
-  
+
     get dX() {
       return this.xMax - this.xMin;
     }
-  
+
     get dY() {
       return this.yMax - this.yMin;
     }
-  
+
     get mapshaperStyleString() {
       return `${this.xMin},${this.yMin},${this.xMax},${this.yMax}`;
     }
-  
+
     get shortLoggingOutput() {
       return `bbox: ${this.mapshaperStyleString}`;
     }
-  
+
     get mediumLoggingOutput() {
       return `${this.shortLoggingOutput} dX: ${this.dX}  dY: ${this.dY}`;
     }
-  
+
     setActiveCoordinatesSystemName(coordinatesSystemName: string) {
       this.activeCoordinatesSystemName = coordinatesSystemName;
     }
   }
-  
+
   BoundingBox.allChildClasses = getAllChildClasses(childClasses);
-  
-  return BoundingBox
+
+  return BoundingBox;
 }
 
-export default BoundingBoxClassFactory
+export default BoundingBoxClassFactory;

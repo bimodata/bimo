@@ -6,17 +6,17 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoNetworkSection, NetworkSectionProps } from "./NetworkSection";
+
+export interface NetworkSectionsCollectionProps
+  extends ExtendedCollectionProps<BimoNetworkSection, NetworkSectionProps> {}
+
 export function NetworkSectionsCollectionClassFactory({
   NetworkSection,
-}: EntityConstructorByEntityClassKey): typeof BimoNetworkSectionsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoNetworkSectionsCollection {
   const childClasses: (typeof Entity)[] = [NetworkSection];
-  
-  export interface NetworkSectionsCollectionProps
-  extends ExtendedCollectionProps<BimoNetworkSection, NetworkSectionProps> {}
-  
- class NetworkSectionsCollection extends Collection<
-    NetworkSection,
+
+  class NetworkSectionsCollection extends Collection<
+    BimoNetworkSection,
     NetworkSectionProps
   > {
     constructor(props: NetworkSectionsCollectionProps = {}) {
@@ -31,10 +31,10 @@ export function NetworkSectionsCollectionClassFactory({
       });
     }
   }
-  
+
   NetworkSectionsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return NetworkSectionsCollection
+
+  return NetworkSectionsCollection;
 }
 
-export default NetworkSectionsCollectionClassFactory
+export default NetworkSectionsCollectionClassFactory;

@@ -16,55 +16,49 @@ import {
   computeSetOfBlockActivitiesHelper,
   getSingleBlockActivityHelper,
 } from "./BlockActivityItem";
-import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
-import { BimoPlace, PlaceProps } from "./Place";
-import { BimoConsistChangesCollection, ConsistChangesCollectionProps } from "./ConsistChangesCollection";
-import { BimoTrip, TripProps } from "./Trip";
-export function ConsistChangeClassFactory({
-  BlockActivity,
-  Place,
-  ConsistChangesCollection,
-  Trip,
-}: EntityConstructorByEntityClassKey): typeof BimoConsistChange{
-  
-  export interface ConsistChangeProps extends ExtendedItemProps {
-    cchgActivity?: string;
-    _cchgInternalNumber?: string;
-    _cchgBuildTime?: string;
-    cchgEvent?: string;
-    cchgEventStatus?: string;
-    cchgPlaceStart?: string;
-    _cchgTimeStart?: string;
-    cchgDuration?: string;
-    cchgOnTripNo?: string;
-    cchgOrigOnTripNo?: string;
-    cchgUnitCount?: string;
-    cchgOnTrip?: string;
-    cchgIsRequired?: string;
-    cchgRelatedBlock?: string;
-    cchgRelatedBlockIntNo?: string;
-    cchgOntrpBlock?: string;
-    cchgOntrpBlockIntNo?: string;
-    cchgComment?: string;
-    cchgPosition?: string;
-    cchgTimeSpecified?: string;
-    cchgOperatesSun?: string;
-    cchgOperatesMon?: string;
-    cchgOperatesTue?: string;
-    cchgOperatesWed?: string;
-    cchgOperatesThu?: string;
-    cchgOperatesFri?: string;
-    cchgOperatesSat?: string;
-    cchgFromNote?: string;
-    cchgToNote?: string;
-  }
-  
- class ConsistChange
+import { BimoBlockActivity } from "./BlockActivity";
+import { BimoPlace } from "./Place";
+import { BimoConsistChangesCollection } from "./ConsistChangesCollection";
+import { BimoTrip } from "./Trip";
+
+export interface ConsistChangeProps extends ExtendedItemProps {
+  cchgActivity?: string;
+  _cchgInternalNumber?: string;
+  _cchgBuildTime?: string;
+  cchgEvent?: string;
+  cchgEventStatus?: string;
+  cchgPlaceStart?: string;
+  _cchgTimeStart?: string;
+  cchgDuration?: string;
+  cchgOnTripNo?: string;
+  cchgOrigOnTripNo?: string;
+  cchgUnitCount?: string;
+  cchgOnTrip?: string;
+  cchgIsRequired?: string;
+  cchgRelatedBlock?: string;
+  cchgRelatedBlockIntNo?: string;
+  cchgOntrpBlock?: string;
+  cchgOntrpBlockIntNo?: string;
+  cchgComment?: string;
+  cchgPosition?: string;
+  cchgTimeSpecified?: string;
+  cchgOperatesSun?: string;
+  cchgOperatesMon?: string;
+  cchgOperatesTue?: string;
+  cchgOperatesWed?: string;
+  cchgOperatesThu?: string;
+  cchgOperatesFri?: string;
+  cchgOperatesSat?: string;
+  cchgFromNote?: string;
+  cchgToNote?: string;
+}
+export function ConsistChangeClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoConsistChange {
+  class ConsistChange
     extends Item<ConsistChange>
     implements BlockActivityItem<ConsistChange>
   {
     cchgActivity?: string;
-    _cchgInternalNumber?: string;
+    _cchgInternalNumber: string;
     _cchgBuildTime?: string;
     cchgEvent?: string;
     cchgEventStatus?: string;
@@ -92,7 +86,7 @@ export function ConsistChangeClassFactory({
     cchgOperatesSat?: string;
     cchgFromNote?: string;
     cchgToNote?: string;
-    declare parent?: ConsistChangesCollection;
+    declare parent?: BimoConsistChangesCollection;
     static blkActIdPropName = "blkactCchgNo";
     static itemIdPropName = "cchgInternalNumber";
     constructor(props: ConsistChangeProps) {
@@ -110,17 +104,17 @@ export function ConsistChangeClassFactory({
       this.cchgUnitCount = gavpfp("cchgUnitCount", props);
       this.cchgOnTrip = gavpfp("cchgOnTrip", props);
       this.cchgIsRequired = gavpfp("cchgIsRequired", props, "string", "0");
-  
+
       /** @type {string} - WARNING: this is the blkNumber, not the blkIntNumber */
       this.cchgRelatedBlock = gavpfp("cchgRelatedBlock", props);
       /** @type {string} - This is currently not exported in default OIG but we add it because it makes senses */
       this.cchgRelatedBlockIntNo = gavpfp("cchgRelatedBlockIntNo", props);
-  
+
       /** @type {string} - WARNING: this is the blkNumber, not the blkIntNumber */
       this.cchgOntrpBlock = gavpfp("cchgOntrpBlock", props);
       /** @type {string} - This is currently not exported in default OIG but we add it because it makes senses */
       this.cchgOntrpBlockIntNo = gavpfp("cchgOntrpBlockIntNo", props);
-  
+
       this.cchgComment = gavpfp("cchgComment", props);
       this.cchgPosition = gavpfp("cchgPosition", props, "string", "0");
       this.cchgTimeSpecified = gavpfp("cchgTimeSpecified", props);
@@ -134,124 +128,124 @@ export function ConsistChangeClassFactory({
       this.cchgFromNote = gavpfp("cchgFromNote", props);
       this.cchgToNote = gavpfp("cchgToNote", props);
     }
-  
-    setNewTrip(newTrip: Trip) {
+
+    setNewTrip(newTrip: BimoTrip) {
       if (!newTrip.trpIntNumber)
         throw new Error(`${newTrip.mlo} should have a trpIntNumber`);
       this.cchgOnTripNo = newTrip.trpIntNumber;
     }
-  
+
     get cchgInternalNumber() {
       return this._cchgInternalNumber;
     }
-  
+
     set cchgInternalNumber(v) {
       if (this.parent && this.parent.invalidateItemByBusinessId) {
         this.parent.invalidateItemByBusinessId();
       }
       this._cchgInternalNumber = v;
     }
-  
+
     get cchgBuildTime() {
       return this._cchgBuildTime || this._cchgTimeStart;
     }
-  
+
     set cchgBuildTime(v) {
       this._cchgBuildTime = v;
     }
-  
+
     get cchgTimeStart() {
       if (!this._cchgTimeStart && !this._cchgBuildTime) {
         throw new Error(`cchgTimeStart or cchgBuildTime must be provided`);
       }
       return (this._cchgTimeStart || this._cchgBuildTime) as string;
     }
-  
+
     set cchgTimeStart(v) {
       this._cchgTimeStart = v;
     }
-  
+
     get shortLoggingOutput() {
       return `${this.cchgActivity}-${this.cchgPlaceStart}-${this.cchgTimeStart}-${this.cchgOnTripNo}`;
     }
-  
+
     get blkactVehicleActivityTypeNo() {
       // throw new Error(
       //   `A single blkactVehicleActivityTypeNo cannot be computed on consist changes`
       // );
       return "";
     }
-  
-    private get setOfBlockActivities() {
+
+    get setOfBlockActivities() {
       return computeSetOfBlockActivitiesHelper<ConsistChange>(this);
     }
-  
-    get blockActivities(): BlockActivity[] {
+
+    get blockActivities(): BimoBlockActivity[] {
       const setOfBlockActivities = this.setOfBlockActivities;
       return setOfBlockActivities && Array.from(setOfBlockActivities);
     }
-  
-    addBlockActivity(newBlockActivity: BlockActivity) {
+
+    addBlockActivity(newBlockActivity: BimoBlockActivity) {
       this.setOfBlockActivities.add(newBlockActivity);
     }
-  
-    removeBlockActivity(blockActivity: BlockActivity) {
+
+    removeBlockActivity(blockActivity: BimoBlockActivity) {
       this.setOfBlockActivities.delete(blockActivity);
     }
-  
-    get blockActivity(): BlockActivity {
+
+    get blockActivity(): BimoBlockActivity {
       return getSingleBlockActivityHelper<ConsistChange>(this);
     }
-  
+
     get block() {
       return this.blockActivity?.block ?? null;
     }
-  
+
     get vehicleTasks() {
       return this.blockActivity?.vehicleTasks ?? null;
     }
-  
+
     get vehicleSchedule() {
       return this.parent?.parent ?? null;
     }
-  
+
     get startTime() {
       return this.cchgTimeStart;
     }
-  
+
     get startTimeAsDuration() {
       return this._getAndSetCachedValue("startTimeAsDuration", () =>
         hastusExtendedHoursToDuration(this.startTime)
       );
     }
-  
+
     // TODO: improve this
     get endTime() {
       return this.cchgTimeStart;
     }
-  
+
     get endTimeAsDuration() {
       return this._getAndSetCachedValue("endTimeAsDuration", () =>
         hastusExtendedHoursToDuration(this.endTime)
       );
     }
-  
+
     get startPlaceId() {
       return this.cchgPlaceStart;
     }
-  
+
     get endPlaceId() {
       return this.cchgPlaceStart;
     }
-  
-    improveStartPlacePrecision(morePreciseStartPlace: Place) {
+
+    improveStartPlacePrecision(morePreciseStartPlace: BimoPlace) {
       this.cchgPlaceStart = morePreciseStartPlace.plcIdentifier;
     }
-  
-    improveEndPlacePrecision(morePreciseEndPlace: Place) {
+
+    improveEndPlacePrecision(morePreciseEndPlace: BimoPlace) {
       this.cchgPlaceStart = morePreciseEndPlace.plcIdentifier;
     }
-  
+
     shiftTimes(shiftInSeconds: number) {
       this.cchgTimeStart = durationToHastusExtendedHoursString(
         this.startTimeAsDuration.plus({ second: shiftInSeconds })
@@ -263,12 +257,12 @@ export function ConsistChangeClassFactory({
       this._nullifyCachedValue("endTimeAsDuration");
     }
   }
-  
+
   ConsistChange.hastusKeywords = ["consist_change"];
   ConsistChange.hastusObject = "consist_change";
   ConsistChange.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ConsistChange
+
+  return ConsistChange;
 }
 
-export default ConsistChangeClassFactory
+export default ConsistChangeClassFactory;

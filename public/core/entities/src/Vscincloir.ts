@@ -6,19 +6,14 @@ const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
-import { BimoVehicleSchedulesCollection, VehicleSchedulesCollectionProps } from "./VehicleSchedulesCollection";
-export function VscincloirClassFactory({
-  VehicleSchedule,
-  VehicleSchedulesCollection,
-}: EntityConstructorByEntityClassKey): typeof BimoVscincloir{
-  
-  export interface VscincloirProps extends ExtendedItemProps {
-    vscincloirIntKey?: string;
-    bimoId?: string;
-  }
-  
- class Vscincloir extends Item<Vscincloir> {
+import { BimoVehicleSchedule } from "./VehicleSchedule";
+import { BimoVehicleSchedulesCollection } from "./VehicleSchedulesCollection";
+export interface VscincloirProps extends ExtendedItemProps {
+  vscincloirIntKey?: string;
+  bimoId?: string;
+}
+export function VscincloirClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoVscincloir {
+  class Vscincloir extends Item<Vscincloir> {
     vscincloirIntKey: string;
     bimoId?: string;
     constructor(props: VscincloirProps) {
@@ -26,33 +21,34 @@ export function VscincloirClassFactory({
       this.vscincloirIntKey = gavpfp("vscincloirIntKey", props);
       this.bimoId = gavpfp("bimoId", props);
     }
-  
+
     get vehicleSchedule() {
-      return this.parent && (this.parent.parent as unknown as VehicleSchedule);
+      return this.parent && (this.parent.parent as unknown as BimoVehicleSchedule);
     }
-  
+
     get vscsCollection() {
       return (
-        this.vehicleSchedule && (this.vehicleSchedule.parent as VehicleSchedulesCollection)
+        this.vehicleSchedule &&
+        (this.vehicleSchedule.parent as BimoVehicleSchedulesCollection)
       );
     }
-  
-    get vsc(): VehicleSchedule | null {
+
+    get vsc(): BimoVehicleSchedule | null {
       return this._getAndSetCachedValue("vsc", () => {
         const includedVsc =
           this.vscsCollection?.getById(this.vscincloirIntKey) ??
           this.context?.loadedVscs?.find(
-            (candidateVsc: VehicleSchedule) =>
+            (candidateVsc: BimoVehicleSchedule) =>
               candidateVsc.vscIntId === this.vscincloirIntKey
           );
-  
+
         if (!includedVsc) return null;
-  
+
         includedVsc.addBlockingVsc(this.vehicleSchedule);
         return includedVsc;
       });
     }
-  
+
     set vsc(v) {
       if (this.vsc !== null && v !== this.vsc) {
         throw new Error(
@@ -65,13 +61,13 @@ export function VscincloirClassFactory({
       this._setCachedValue("vsc", v);
     }
   }
-  
+
   Vscincloir.hastusKeywords = ["vscincloir"];
   Vscincloir.hastusObject = "vscincloir";
-  
+
   Vscincloir.allChildClasses = getAllChildClasses(childClasses);
-  
-  return Vscincloir
+
+  return Vscincloir;
 }
 
-export default VscincloirClassFactory
+export default VscincloirClassFactory;

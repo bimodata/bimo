@@ -15,8 +15,8 @@ import { BimoNetworkSection, NetworkSectionProps } from "./NetworkSection";
 export interface NetworkEdgeProps extends ExtendedItemProps {
   bimoId?: string;
   businessId?: string;
-  fromNode: NetworkNode;
-  toNode: NetworkNode;
+  fromNode: BimoNetworkNode;
+  toNode: BimoNetworkNode;
   geometryBySystemName?: { [systemName: string]: any };
   sectionIds?: Set<string>;
 }
@@ -30,10 +30,10 @@ export function NetworkEdgeClassFactory({
   class NetworkEdge extends Item<NetworkEdge> {
     bimoId?: string;
     businessId?: string;
-    fromNode: NetworkNode;
-    toNode: NetworkNode;
+    fromNode: BimoNetworkNode;
+    toNode: BimoNetworkNode;
     geometryBySystemName: { [systemName: string]: any } = {};
-    private _sectionIds: Set<string> = new Set();
+    _sectionIds: Set<string> = new Set();
     constructor(props: NetworkEdgeProps) {
       super(props);
       this.bimoId = gavpfp("bimoId", props, "string");
@@ -63,16 +63,16 @@ export function NetworkEdgeClassFactory({
       return (
         this.network &&
         [...this._sectionIds.values()].map((sectionId) =>
-          (this.network as Network).sections.getById(sectionId)
+          (this.network as BimoNetwork).sections.getById(sectionId)
         )
       );
     }
 
-    addSection(section: NetworkSection) {
+    addSection(section: BimoNetworkSection) {
       this._sectionIds.add(section.bimoId);
     }
 
-    removeSection(section: NetworkSection) {
+    removeSection(section: BimoNetworkSection) {
       this._sectionIds.delete(section.bimoId);
     }
 
@@ -118,7 +118,7 @@ export function NetworkEdgeClassFactory({
      * @param node
      * @returns - the node of edge that is not the passed node
      */
-    otherNode(node: NetworkNode) {
+    otherNode(node: BimoNetworkNode) {
       if (this.fromNode === node) return this.toNode;
       if (this.toNode === node) return this.fromNode;
       throw new Error(
@@ -126,7 +126,7 @@ export function NetworkEdgeClassFactory({
       );
     }
 
-    hasNode(node: NetworkNode) {
+    hasNode(node: BimoNetworkNode) {
       return this.fromNode === node || this.toNode === node;
     }
 
@@ -135,11 +135,11 @@ export function NetworkEdgeClassFactory({
     }
 
     get network() {
-      return this.parent && (this.parent.parent as Network);
+      return this.parent && (this.parent.parent as BimoNetwork);
     }
 
     moveToNetwork(
-      targetNetwork: Network,
+      targetNetwork: BimoNetwork,
       options: { bringNodes?: boolean; copyNodes?: boolean; skipCacheUpdate?: boolean }
     ) {
       const { bringNodes = true, copyNodes = false, skipCacheUpdate = false } = options;

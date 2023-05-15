@@ -6,16 +6,15 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
+export interface VariantPointsCollectionProps
+  extends ExtendedCollectionProps<BimoVariantPoint, VariantPointProps> {}
+
 export function VariantPointsCollectionClassFactory({
   VariantPoint,
-}: EntityConstructorByEntityClassKey): typeof BimoVariantPointsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoVariantPointsCollection {
   const childClasses: (typeof Entity)[] = [VariantPoint];
-  
-  export interface VariantPointsCollectionProps
-  extends ExtendedCollectionProps<BimoVariantPoint, VariantPointProps> {}
-  
- class VariantPointsCollection extends Collection<BimoVariantPoint, VariantPointProps> {
+
+  class VariantPointsCollection extends Collection<BimoVariantPoint, VariantPointProps> {
     constructor(props: VariantPointsCollectionProps = {}) {
       super({
         itemName: "VariantPoint",
@@ -25,21 +24,21 @@ export function VariantPointsCollectionClassFactory({
         associationType: props.associationType,
       });
     }
-  
+
     get mediumLoggingOutput() {
       return this.map(
         (varPt) => `${varPt.varptPlace}${varPt.varptNoStopping === "1" ? "~" : "|"}`
       ).join("");
     }
-  
+
     get longLoggingOutput() {
       return this.map((varPt) => varPt.shortLoggingOutput).join("\n");
     }
   }
-  
+
   VariantPointsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return VariantPointsCollection
+
+  return VariantPointsCollection;
 }
 
-export default VariantPointsCollectionClassFactory
+export default VariantPointsCollectionClassFactory;

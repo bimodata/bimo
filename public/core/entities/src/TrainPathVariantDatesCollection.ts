@@ -2,24 +2,25 @@ import { EntityConstructorByEntityClassKey } from "../base-types/entityConstruct
 import { TrainPathVariantDatesCollection as BimoTrainPathVariantDatesCollection } from "../base-types/rawIndex";
 export { TrainPathVariantDatesCollection as BimoTrainPathVariantDatesCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
-/* eslint-disable camelcase */
-/* eslint-disable no-param-reassign */
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoTrainPathVariantDate, TrainPathVariantDateProps } from "./TrainPathVariantDate";
+import {
+  BimoTrainPathVariantDate,
+  TrainPathVariantDateProps,
+} from "./TrainPathVariantDate";
+
+export interface TrainPathVariantDatesCollectionProps
+  extends ExtendedCollectionProps<BimoTrainPathVariantDate, TrainPathVariantDateProps> {}
+
 export function TrainPathVariantDatesCollectionClassFactory({
   TrainPathVariantDate,
-}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantDatesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantDatesCollection {
   const childClasses: (typeof Entity)[] = [TrainPathVariantDate];
-  
-  export interface TrainPathVariantDatesCollectionProps
-  extends ExtendedCollectionProps<BimoTrainPathVariantDate, TrainPathVariantDateProps> {}
-  
- class TrainPathVariantDatesCollection extends Collection<
-    TrainPathVariantDate,
+
+  class TrainPathVariantDatesCollection extends Collection<
+    BimoTrainPathVariantDate,
     TrainPathVariantDateProps
   > {
     constructor(props: TrainPathVariantDatesCollectionProps = {}) {
@@ -30,15 +31,11 @@ export function TrainPathVariantDatesCollectionClassFactory({
         ...props,
       });
     }
-  
-    get self() {
-      return this;
-    }
   }
-  
+
   TrainPathVariantDatesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TrainPathVariantDatesCollection
+
+  return TrainPathVariantDatesCollection;
 }
 
-export default TrainPathVariantDatesCollectionClassFactory
+export default TrainPathVariantDatesCollectionClassFactory;

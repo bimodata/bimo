@@ -7,12 +7,7 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import {
-  SdefSchedulingUnitsCollection,
-  SdefSchedulingUnitsCollectionProps,
-} from "./SdefSchedulingUnitsCollection";
-
-const childClasses: (typeof Entity)[] = [SdefSchedulingUnitsCollection];
+import { BimoSdefSchedulingUnitsCollection } from "./SdefSchedulingUnitsCollection";
 
 export interface ServiceDefinitionProps extends ExtendedItemProps {
   sdefIdentifier?: string;
@@ -23,14 +18,18 @@ export interface ServiceDefinitionProps extends ExtendedItemProps {
   schedulingUnits?: string;
 }
 
-export function ServiceDefinitionClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceDefinition{
- class ServiceDefinition extends Item<ServiceDefinition> {
+export function ServiceDefinitionClassFactory({
+  SdefSchedulingUnitsCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoServiceDefinition {
+  const childClasses: (typeof Entity)[] = [SdefSchedulingUnitsCollection];
+
+  class ServiceDefinition extends Item<ServiceDefinition> {
     sdefIdentifier?: string;
     sdefDescription?: string;
     sdefOwner?: string;
     sdefDataGroup?: string;
     sdefPublicAccess?: string;
-    schedulingUnits: SdefSchedulingUnitsCollection;
+    schedulingUnits: BimoSdefSchedulingUnitsCollection;
     constructor(props: ServiceDefinitionProps) {
       super(props);
       this.sdefIdentifier = gavpfp("sdefIdentifier", props, `string`);
@@ -43,7 +42,7 @@ export function ServiceDefinitionClassFactory(entityConstructorByEntityClassKey:
       this.sdefOwner = gavpfp("sdefOwner", props, `string`, "ADMIN");
       this.sdefDataGroup = gavpfp("sdefDataGroup", props, `string`);
       this.sdefPublicAccess = gavpfp("sdefPublicAccess", props, `string`, "1");
-  
+
       /* Children */
       /** @type {SdefSchedulingUnitsCollection} */
       this.schedulingUnits = gavpfp(
@@ -54,18 +53,18 @@ export function ServiceDefinitionClassFactory(entityConstructorByEntityClassKey:
         { altPropName: "sdef_scheduling_unit", parent: this }
       );
     }
-  
+
     get shortLoggingOutput() {
       return `${this.sdefIdentifier} - ${this.sdefDescription}`;
     }
   }
-  
+
   ServiceDefinition.hastusKeywords = ["service_definition"];
   ServiceDefinition.hastusObject = "service_definition";
-  
+
   ServiceDefinition.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ServiceDefinition
+
+  return ServiceDefinition;
 }
 
-export default ServiceDefinitionClassFactory
+export default ServiceDefinitionClassFactory;

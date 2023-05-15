@@ -3,18 +3,19 @@ import { TripTpsCollection as BimoTripTpsCollection } from "../base-types/rawInd
 export { TripTpsCollection as BimoTripTpsCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { BimoTripTp, TripTpProps } from "./TripTp";
+
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+
+export interface TripTpsCollectionProps
+  extends ExtendedCollectionProps<BimoTripTp, TripTpProps> {}
+
 export function TripTpsCollectionClassFactory({
   TripTp,
-}: EntityConstructorByEntityClassKey): typeof BimoTripTpsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoTripTpsCollection {
   const childClasses: (typeof Entity)[] = [TripTp];
-  import { getAllChildClasses } from "@bimo/core-utils-serialization";
-  import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-  
-  export interface TripTpsCollectionProps
-  extends ExtendedCollectionProps<BimoTripTp, TripTpProps> {}
-  
- class TripTpsCollection extends Collection<BimoTripTp, TripTpProps> {
+
+  class TripTpsCollection extends Collection<BimoTripTp, TripTpProps> {
     constructor(props: TripTpsCollectionProps = {}) {
       super({
         itemName: "TripTp",
@@ -24,10 +25,10 @@ export function TripTpsCollectionClassFactory({
       });
     }
   }
-  
+
   TripTpsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TripTpsCollection
+
+  return TripTpsCollection;
 }
 
-export default TripTpsCollectionClassFactory
+export default TripTpsCollectionClassFactory;

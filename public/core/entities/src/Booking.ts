@@ -18,8 +18,10 @@ export interface BookingProps extends ExtendedItemProps {
   bkTrainPathAdministrativeYear?: string;
 }
 
-export function BookingClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoBooking{
- class Booking extends Item<Booking> {
+export function BookingClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoBooking {
+  class Booking extends Item<Booking> {
     bimoId?: string;
     bkIdentifier?: string;
     bkDescription?: string;
@@ -42,13 +44,13 @@ export function BookingClassFactory(entityConstructorByEntityClassKey: EntityCon
       );
     }
   }
-  
+
   Booking.hastusKeywords = ["booking"];
   Booking.hastusObject = "booking";
-  
+
   Booking.allChildClasses = getAllChildClasses(childClasses);
-  
-  return Booking
+
+  return Booking;
 }
 
-export default BookingClassFactory
+export default BookingClassFactory;

@@ -7,44 +7,98 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import getIteratorForValuesAtPath from "@bimo/core-utils-get-iterator-for-values-at-path";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoTripsCollection, TripsCollectionProps } from "./TripsCollection";
-import { BimoVscincloir, VscincloirProps } from "./Vscincloir";
-import { BimoVscincloirsCollection, VscincloirsCollectionProps } from "./VscincloirsCollection";
-import { BimoNetworkEventsCollection, NetworkEventsCollectionProps } from "./NetworkEventsCollection";
-import { BimoVehicleUnitsCollection, VehicleUnitsCollectionProps } from "./VehicleUnitsCollection";
-import { BimoBlocksCollection, BlocksCollectionProps } from "./BlocksCollection";
-import { BimoVehicleStandbysCollection, VehicleStandbysCollectionProps } from "./VehicleStandbysCollection";
-import { BimoMaintenancesCollection, MaintenancesCollectionProps } from "./MaintenancesCollection";
-import { BimoTripShiftsCollection, TripShiftsCollectionProps } from "./TripShiftsCollection";
-import { BimoConsistChangesCollection, ConsistChangesCollectionProps } from "./ConsistChangesCollection";
-import { BimoOvernightLinksCollection, OvernightLinksCollectionProps } from "./OvernightLinksCollection";
-import { BimoVehicleTasksCollection, VehicleTasksCollectionProps } from "./VehicleTasksCollection";
-import { BimoVehicleScheduleOrRouteVersion, VehicleScheduleOrRouteVersionProps } from "./VehicleScheduleOrRouteVersion";
-import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
-import { BimoTrip, TripProps } from "./Trip";
-import { BimoBlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
-export function VehicleScheduleClassFactory({
-  TripsCollection,
-  Vscincloir,
-  VscincloirsCollection,
-  NetworkEventsCollection,
-  VehicleUnitsCollection,
-  BlocksCollection,
-  VehicleStandbysCollection,
-  MaintenancesCollection,
-  TripShiftsCollection,
-  ConsistChangesCollection,
-  OvernightLinksCollection,
-  VehicleTasksCollection,
-  VehicleScheduleOrRouteVersion,
-  BlockActivity,
-  Trip,
-  BlockActivityItem,
-}: EntityConstructorByEntityClassKey): typeof BimoVehicleSchedule{
-  
-  import computeVehicleTasksOfVsc from "./subs/computeVehicleTasksOfVsc";
-  import computeActivityEntityItemsOfVsc from "./subs/computeActivityEntityItemsOfVsc";
-  
+import { BimoTripsCollection } from "./TripsCollection";
+import { BimoVscincloir } from "./Vscincloir";
+import { BimoVscincloirsCollection } from "./VscincloirsCollection";
+import { BimoNetworkEventsCollection } from "./NetworkEventsCollection";
+import { BimoVehicleUnitsCollection } from "./VehicleUnitsCollection";
+import { BimoBlocksCollection } from "./BlocksCollection";
+import { BimoVehicleStandbysCollection } from "./VehicleStandbysCollection";
+import { BimoMaintenancesCollection } from "./MaintenancesCollection";
+import { BimoTripShiftsCollection } from "./TripShiftsCollection";
+import { BimoConsistChangesCollection } from "./ConsistChangesCollection";
+import { BimoOvernightLinksCollection } from "./OvernightLinksCollection";
+
+import { BimoBlockActivity } from "./BlockActivity";
+import { BimoTrip } from "./Trip";
+import computeVehicleTasksOfVsc, {
+  ComputedVehicleTaskObjects,
+} from "./subs/computeVehicleTasksOfVsc";
+import computeActivityEntityItemsOfVsc, {
+  ComputedActivityEntityItemObjects,
+} from "./subs/computeActivityEntityItemsOfVsc";
+
+export interface VehicleScheduleProps extends ExtendedItemProps {
+  vscName?: string;
+  vscScenario?: string;
+  vscSchedType?: string;
+  vscBooking?: string;
+  vscDescription?: string;
+  vscSchedUnit?: string;
+  vscMainRoute?: string;
+  vscServiceCtxId?: string;
+  vscOwner?: string;
+  vscPublicAccess?: string;
+  vscProdPhase?: string;
+  vscPlacePattern_1?: string;
+  vscPlacePattern_2?: string;
+  vscKeyTimingPoint_1?: string;
+  vscKeyTimingPoint_2?: string;
+  vscRteverId?: string;
+  vscRtverId?: string;
+  vscDtverId?: string;
+  vscDeadheadIntUse?: string;
+  vscGarageUsageVersion?: string;
+  vscParverId?: string;
+  vscCvtverId?: string;
+  vscVehicleActivityVersion?: string;
+  vscVehicleCoverageVersion?: string;
+  vscLayoverDefaultVersionId?: string;
+  vscServiceGuidelineVersionId?: string;
+  vscReliefOpportunityVersionId?: string;
+  vscNetworkConstraintVersion?: string;
+  vscPassengerLoadVersionId?: string;
+  vscMeetBuilderVersionId?: string;
+  vscCompositeHeadwayVersionId?: string;
+  vscVehActReqVersionId?: string;
+  vscPlanningMode?: string;
+  vscIntId?: string;
+  vscDatetimeStamp?: string;
+  vscUserStamp?: string;
+  vscBlockingAtt?: string;
+  vscBlockingValue?: string;
+  vscConsiderOtherAgencies?: string;
+  vscWorkingPortionVersionId?: string;
+  vscincloirs?: BimoVscincloirsCollection;
+  networkEvents?: BimoNetworkEventsCollection;
+  vehicleUnits?: BimoVehicleUnitsCollection;
+  blocks?: BimoBlocksCollection;
+  vehicleStandbys?: BimoVehicleStandbysCollection;
+  maintenances?: BimoMaintenancesCollection;
+  trips?: BimoTripsCollection;
+  tripShifts?: BimoTripShiftsCollection;
+  consistChanges?: BimoConsistChangesCollection;
+  overnightLinks?: BimoOvernightLinksCollection;
+  _blockActivityLinksAreLoaded?: string;
+}
+
+export function VehicleScheduleClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoVehicleSchedule {
+  const {
+    TripsCollection,
+    VscincloirsCollection,
+    NetworkEventsCollection,
+    VehicleUnitsCollection,
+    BlocksCollection,
+    VehicleStandbysCollection,
+    MaintenancesCollection,
+    TripShiftsCollection,
+    ConsistChangesCollection,
+    OvernightLinksCollection,
+    VehicleTasksCollection,
+    VehicleScheduleOrRouteVersion,
+  } = entityConstructorByEntityClassKey;
   const childClasses: (typeof Entity)[] = [
     VscincloirsCollection,
     NetworkEventsCollection,
@@ -57,62 +111,8 @@ export function VehicleScheduleClassFactory({
     ConsistChangesCollection,
     OvernightLinksCollection,
   ];
-  
-  export interface VehicleScheduleProps extends ExtendedItemProps {
-    vscName?: string;
-    vscScenario?: string;
-    vscSchedType?: string;
-    vscBooking?: string;
-    vscDescription?: string;
-    vscSchedUnit?: string;
-    vscMainRoute?: string;
-    vscServiceCtxId?: string;
-    vscOwner?: string;
-    vscPublicAccess?: string;
-    vscProdPhase?: string;
-    vscPlacePattern_1?: string;
-    vscPlacePattern_2?: string;
-    vscKeyTimingPoint_1?: string;
-    vscKeyTimingPoint_2?: string;
-    vscRteverId?: string;
-    vscRtverId?: string;
-    vscDtverId?: string;
-    vscDeadheadIntUse?: string;
-    vscGarageUsageVersion?: string;
-    vscParverId?: string;
-    vscCvtverId?: string;
-    vscVehicleActivityVersion?: string;
-    vscVehicleCoverageVersion?: string;
-    vscLayoverDefaultVersionId?: string;
-    vscServiceGuidelineVersionId?: string;
-    vscReliefOpportunityVersionId?: string;
-    vscNetworkConstraintVersion?: string;
-    vscPassengerLoadVersionId?: string;
-    vscMeetBuilderVersionId?: string;
-    vscCompositeHeadwayVersionId?: string;
-    vscVehActReqVersionId?: string;
-    vscPlanningMode?: string;
-    vscIntId?: string;
-    vscDatetimeStamp?: string;
-    vscUserStamp?: string;
-    vscBlockingAtt?: string;
-    vscBlockingValue?: string;
-    vscConsiderOtherAgencies?: string;
-    vscWorkingPortionVersionId?: string;
-    vscincloirs?: string;
-    networkEvents?: string;
-    vehicleUnits?: VehicleUnitsCollection;
-    blocks?: string;
-    vehicleStandbys?: string;
-    maintenances?: string;
-    trips?: string;
-    tripShifts?: string;
-    consistChanges?: string;
-    overnightLinks?: string;
-    _blockActivityLinksAreLoaded?: string;
-  }
-  
- class VehicleSchedule extends VehicleScheduleOrRouteVersion<
+
+  class VehicleSchedule extends VehicleScheduleOrRouteVersion<
     VehicleSchedule,
     VehicleScheduleProps
   > {
@@ -156,16 +156,16 @@ export function VehicleScheduleClassFactory({
     vscBlockingValue?: string;
     vscConsiderOtherAgencies?: string;
     vscWorkingPortionVersionId?: string;
-    vscincloirs: VscincloirsCollection;
-    networkEvents: NetworkEventsCollection;
-    vehicleUnits: VehicleUnitsCollection;
-    blocks: BlocksCollection;
-    vehicleStandbys: VehicleStandbysCollection;
-    maintenances: MaintenancesCollection;
-    trips: TripsCollection;
-    tripShifts: TripShiftsCollection;
-    consistChanges: ConsistChangesCollection;
-    overnightLinks: OvernightLinksCollection;
+    vscincloirs: BimoVscincloirsCollection;
+    networkEvents: BimoNetworkEventsCollection;
+    vehicleUnits: BimoVehicleUnitsCollection;
+    blocks: BimoBlocksCollection;
+    vehicleStandbys: BimoVehicleStandbysCollection;
+    maintenances: BimoMaintenancesCollection;
+    trips: BimoTripsCollection;
+    tripShifts: BimoTripShiftsCollection;
+    consistChanges: BimoConsistChangesCollection;
+    overnightLinks: BimoOvernightLinksCollection;
     _blockActivityLinksAreLoaded?: boolean = false;
     constructor(props: VehicleScheduleProps) {
       super(props, "trip");
@@ -209,7 +209,7 @@ export function VehicleScheduleClassFactory({
       this.vscBlockingValue = gavpfp("vscBlockingValue", props);
       this.vscConsiderOtherAgencies = gavpfp("vscConsiderOtherAgencies", props);
       this.vscWorkingPortionVersionId = gavpfp("vscWorkingPortionVersionId", props);
-  
+
       /* Children */
       /* eslint-disable max-len */
       /** @type {VscincloirsCollection} */
@@ -285,48 +285,50 @@ export function VehicleScheduleClassFactory({
       );
       /* eslint-enable max-len */
     }
-  
+
     get shortLoggingOutput() {
       return `${this.vscIntId}: ${this.vscName} - ${this.vscDescription} (${this.vscSchedType})`;
     }
-  
+
     get businessLoggingOutput() {
       return `${this.vscName} - ${this.vscDescription} (${this.vscSchedType})\n${this.vehicleTasks.blo}`;
     }
-  
-    addTrip(trip: Trip) {
+
+    addTrip(trip: BimoTrip) {
       this.trips.add(trip);
     }
-  
+
     addIncludedVsc(vsc: VehicleSchedule) {
       if (vsc.vscincloirs.count() > 0) {
         throw new Error(`Impossible d'inclure un multi vsc dans un autre multi vsc.`);
       }
-      const vscInclOir = this.vscincloirs.createNewItem({ vscincloirIntKey: vsc.vscIntId });
+      const vscInclOir = this.vscincloirs.createNewItem({
+        vscincloirIntKey: vsc.vscIntId,
+      });
       vscInclOir.vsc = vsc;
       vsc.addBlockingVsc(this);
     }
-  
+
     removeIncludedVsc(vsc: VehicleSchedule) {
       this.vscincloirs.remove(this.findVscInclOirForVsc(vsc));
     }
-  
+
     get blockingVscs(): VehicleSchedule[] {
       return this._getAndSetCachedValue("blockingVscs", () => []);
     }
-  
+
     addBlockingVsc(vsc: VehicleSchedule) {
       const currentVscs = new Set(this.blockingVscs);
       currentVscs.add(vsc);
       this._setCachedValue("blockingVscs", Array.from(currentVscs));
     }
-  
-    findVscInclOirForVsc(vsc: VehicleSchedule): Vscincloir {
+
+    findVscInclOirForVsc(vsc: VehicleSchedule): BimoVscincloir {
       return this.vscincloirs.find(
         (vscInclOir) => vscInclOir.vscincloirIntKey === vsc.vscIntId
       );
     }
-  
+
     /**
      * @param vsc
      * @returns  true if this vsc includes the passed in vsc, false otherwise.
@@ -334,71 +336,73 @@ export function VehicleScheduleClassFactory({
     includesVsc(vsc: VehicleSchedule) {
       return !!this.findVscInclOirForVsc(vsc);
     }
-  
-    removeTrip(trip: Trip) {
+
+    removeTrip(trip: BimoTrip) {
       if (trip.block) trip.block.removeTrip(trip);
       this.trips.remove(trip);
     }
-  
+
     getTripByTripNumber(tripNumber: string) {
       return this.trips.getByPropName(`trpNumber`, tripNumber);
     }
-  
-    get computedVehicleTaskObjects() {
+
+    get computedVehicleTaskObjects(): ComputedVehicleTaskObjects {
       return this._getAndSetCachedValue("computedVehicleTaskObjects", () =>
-        computeVehicleTasksOfVsc(this)
+        computeVehicleTasksOfVsc(this, entityConstructorByEntityClassKey)
       );
     }
-  
-    get computedActivityEntityItemObjects() {
+
+    get computedActivityEntityItemObjects(): ComputedActivityEntityItemObjects {
       return this._getAndSetCachedValue("computedActivityEntityItemObjects", () =>
         computeActivityEntityItemsOfVsc(this)
       );
     }
-  
+
     get vehicleTasks() {
       return this.computedVehicleTaskObjects.vehicleTasks;
     }
-  
+
     get setOfVtasByBlock() {
       return this.computedVehicleTaskObjects.setOfVtasByBlock;
     }
-  
+
     get setOfVtasByBlockActivity() {
       return this.computedVehicleTaskObjects.setOfVtasByBlockActivity;
     }
-  
+
     get setOfBlockSectionsByBlockActivity() {
       return this.computedVehicleTaskObjects.setOfBlockSectionsByBlockActivity;
     }
-  
+
     get activityEntityItemByBlockActivity() {
       return this.computedActivityEntityItemObjects.activityEntityItemByBlockActivity;
     }
-  
+
     get setOfBlockActivitiesByBlockActivityEntityItem() {
       return this.computedActivityEntityItemObjects
         .setOfBlockActivitiesByBlockActivityEntityItem;
     }
-  
+
     get setOfAllPlaceIdentifiers() {
       const setOfAllPlaceIdentifiers = super.setOfAllPlaceIdentifiers;
       this.consistChanges.forEach((cchg) =>
         setOfAllPlaceIdentifiers.add(cchg.cchgPlaceStart)
       );
-      this.vehicleStandbys.forEach((sdby) => setOfAllPlaceIdentifiers.add(sdby.sdbyPlace));
+      this.vehicleStandbys.forEach((sdby) =>
+        setOfAllPlaceIdentifiers.add(sdby.sdbyPlace)
+      );
       this.maintenances.forEach((mtn) => setOfAllPlaceIdentifiers.add(mtn.mtnPlace));
       return setOfAllPlaceIdentifiers;
     }
-  
+
     get arrayOfAllPlaceIdentifiers() {
       return Array.from(this.setOfAllPlaceIdentifiers);
     }
-  
+
     get blocksAndActsAndSectionsByVta() {
       return this.computedVehicleTaskObjects.blocksAndActsAndSectionsByVta;
     }
-  
+
     removeUnusedBlockActivities() {
       const blockActivityCollections = [
         this.maintenances,
@@ -408,28 +412,30 @@ export function VehicleScheduleClassFactory({
       ];
       const unusedItemsByEntityClassKey = blockActivityCollections.reduce(
         (prevMap, collection) => {
-          prevMap.set(collection.itemName, new Set(Array.from(collection.items as any[])));
+          prevMap.set(
+            collection.itemName,
+            new Set(Array.from(collection.items as any[]))
+          );
           return prevMap;
         },
         new Map()
       );
-  
+
       const getShouldContinue = () =>
         [...unusedItemsByEntityClassKey.values()].some(
           (unusedItemsSet) => unusedItemsSet.size > 0
         );
-  
+
       const blockActivitiesIterator = getIteratorForValuesAtPath(
         this,
         "blocks.items.blockActivities.items"
       );
-  
+
       let shouldContinue = getShouldContinue();
-  
+
       let nextBlockAct = blockActivitiesIterator.next();
       while (shouldContinue && !nextBlockAct.done) {
-        /** @type {BlockActivity} */
-        const blockActivity: BlockActivity = nextBlockAct.value;
+        const blockActivity: BimoBlockActivity = nextBlockAct.value;
         const unusedItems = unusedItemsByEntityClassKey.get(
           blockActivity.activityEntityClassKey
         );
@@ -439,7 +445,7 @@ export function VehicleScheduleClassFactory({
         }
         nextBlockAct = blockActivitiesIterator.next();
       }
-  
+
       blockActivityCollections.forEach((collection) =>
         unusedItemsByEntityClassKey
           .get(collection.itemName)
@@ -447,13 +453,13 @@ export function VehicleScheduleClassFactory({
       );
     }
   }
-  
+
   VehicleSchedule.hastusKeywords = ["vehicle_schedule"];
   VehicleSchedule.hastusObject = "vehicle_schedule";
-  
+
   VehicleSchedule.allChildClasses = getAllChildClasses(childClasses);
-  
-  return VehicleSchedule
+
+  return VehicleSchedule;
 }
 
-export default VehicleScheduleClassFactory
+export default VehicleScheduleClassFactory;

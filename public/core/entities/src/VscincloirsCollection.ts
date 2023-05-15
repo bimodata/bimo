@@ -3,18 +3,19 @@ import { VscincloirsCollection as BimoVscincloirsCollection } from "../base-type
 export { VscincloirsCollection as BimoVscincloirsCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { BimoVscincloir, VscincloirProps } from "./Vscincloir";
+
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+
+export interface VscincloirsCollectionProps
+  extends ExtendedCollectionProps<BimoVscincloir, VscincloirProps> {}
+
 export function VscincloirsCollectionClassFactory({
   Vscincloir,
-}: EntityConstructorByEntityClassKey): typeof BimoVscincloirsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoVscincloirsCollection {
   const childClasses: (typeof Entity)[] = [Vscincloir];
-  import { getAllChildClasses } from "@bimo/core-utils-serialization";
-  import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-  
-  export interface VscincloirsCollectionProps
-  extends ExtendedCollectionProps<BimoVscincloir, VscincloirProps> {}
-  
- class VscincloirsCollection extends Collection<BimoVscincloir, VscincloirProps> {
+
+  class VscincloirsCollection extends Collection<BimoVscincloir, VscincloirProps> {
     constructor(props: VscincloirsCollectionProps = {}) {
       super({
         itemName: "Vscincloir",
@@ -26,10 +27,10 @@ export function VscincloirsCollectionClassFactory({
       });
     }
   }
-  
+
   VscincloirsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return VscincloirsCollection
+
+  return VscincloirsCollection;
 }
 
-export default VscincloirsCollectionClassFactory
+export default VscincloirsCollectionClassFactory;

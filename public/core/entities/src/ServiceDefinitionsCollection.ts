@@ -6,17 +6,17 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoServiceDefinition, ServiceDefinitionProps } from "./ServiceDefinition";
+
+export interface ServiceDefinitionsCollectionProps
+  extends ExtendedCollectionProps<BimoServiceDefinition, ServiceDefinitionProps> {}
+
 export function ServiceDefinitionsCollectionClassFactory({
   ServiceDefinition,
-}: EntityConstructorByEntityClassKey): typeof BimoServiceDefinitionsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoServiceDefinitionsCollection {
   const childClasses: (typeof Entity)[] = [ServiceDefinition];
-  
-  export interface ServiceDefinitionsCollectionProps
-  extends ExtendedCollectionProps<BimoServiceDefinition, ServiceDefinitionProps> {}
-  
- class ServiceDefinitionsCollection extends Collection<
-    ServiceDefinition,
+
+  class ServiceDefinitionsCollection extends Collection<
+    BimoServiceDefinition,
     ServiceDefinitionProps
   > {
     constructor(props: ServiceDefinitionsCollectionProps = {}) {
@@ -30,10 +30,10 @@ export function ServiceDefinitionsCollectionClassFactory({
       });
     }
   }
-  
+
   ServiceDefinitionsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ServiceDefinitionsCollection
+
+  return ServiceDefinitionsCollection;
 }
 
-export default ServiceDefinitionsCollectionClassFactory
+export default ServiceDefinitionsCollectionClassFactory;

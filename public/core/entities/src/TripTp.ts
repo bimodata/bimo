@@ -20,8 +20,8 @@ export interface TripTpProps extends ExtendedItemProps {
   ttpIsLoading?: string;
 }
 
-export function TripTpClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoTripTp{
- class TripTp extends Item<TripTp> {
+export function TripTpClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTripTp {
+  class TripTp extends Item<TripTp> {
     ttpPlace?: string;
     ttpPassingTime?: string;
     ttpRunTimeDiff?: string;
@@ -46,13 +46,13 @@ export function TripTpClassFactory(entityConstructorByEntityClassKey: EntityCons
       this.ttpIsLoading = gavpfp("ttpIsLoading", props);
     }
   }
-  
+
   TripTp.hastusKeywords = ["trip_tp"];
   TripTp.hastusObject = "trip_tp";
-  
+
   TripTp.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TripTp
+
+  return TripTp;
 }
 
-export default TripTpClassFactory
+export default TripTpClassFactory;

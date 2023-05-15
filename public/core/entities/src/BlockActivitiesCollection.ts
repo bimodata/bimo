@@ -6,23 +6,21 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
-import { BimoMaintenance, MaintenanceProps } from "./Maintenance";
-import { BimoTrip, TripProps } from "./Trip";
-import { BimoBlockActivityItem, BlockActivityItemProps } from "./BlockActivityItem";
+import { BimoMaintenance } from "./Maintenance";
+import { BimoTrip } from "./Trip";
+import { BlockActivityItem, BaseBlockActivityItem } from "./BlockActivityItem";
+export interface BlockActivitiesCollectionProps
+  extends ExtendedCollectionProps<BimoBlockActivity, BlockActivityProps> {}
+
 export function BlockActivitiesCollectionClassFactory({
   BlockActivity,
   Maintenance,
   Trip,
-  BlockActivityItem,
-}: EntityConstructorByEntityClassKey): typeof BimoBlockActivitiesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoBlockActivitiesCollection {
   const childClasses: (typeof Entity)[] = [BlockActivity];
-  
-  export interface BlockActivitiesCollectionProps
-  extends ExtendedCollectionProps<BimoBlockActivity, BlockActivityProps> {}
-  
- class BlockActivitiesCollection extends Collection<
-    BlockActivity,
+
+  class BlockActivitiesCollection extends Collection<
+    BimoBlockActivity,
     BlockActivityProps
   > {
     constructor(props: BlockActivitiesCollectionProps = {}) {
@@ -34,7 +32,7 @@ export function BlockActivitiesCollectionClassFactory({
         ...props,
       });
     }
-  
+
     sortByTime() {
       try {
         this.items.sort((blkActA, blkActB) => {
@@ -50,7 +48,7 @@ export function BlockActivitiesCollectionClassFactory({
         throw newError;
       }
     }
-  
+
     /**
      * We first check for a addToBlockActivitiesCollectionFn
      * This allows activities to change the way they should be added to a blocksCollection
@@ -76,7 +74,7 @@ export function BlockActivitiesCollectionClassFactory({
       activity.addBlockActivity(blkAct);
       return blkAct;
     }
-  
+
     /**
      * We first check for a removeFromBlockActivitiesCollectionFn
      * This allows activities to change the way they should be removed from a blocksCollection
@@ -96,27 +94,27 @@ export function BlockActivitiesCollectionClassFactory({
       activity.removeBlockActivity(activity.blockActivity);
       return null;
     }
-  
-    addTrip(trip: Trip) {
+
+    addTrip(trip: BimoTrip) {
       return this.addActivity(trip);
     }
-  
-    removeTrip(trip: Trip) {
+
+    removeTrip(trip: BimoTrip) {
       return this.removeActivity(trip);
     }
-  
-    addMaintenance(maintenance: Maintenance) {
+
+    addMaintenance(maintenance: BimoMaintenance) {
       return this.addActivity(maintenance);
     }
-  
-    removeMaintenance(maintenance: Maintenance) {
+
+    removeMaintenance(maintenance: BimoMaintenance) {
       return this.removeActivity(maintenance);
     }
   }
-  
+
   BlockActivitiesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return BlockActivitiesCollection
+
+  return BlockActivitiesCollection;
 }
 
-export default BlockActivitiesCollectionClassFactory
+export default BlockActivitiesCollectionClassFactory;

@@ -6,21 +6,22 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import {
-  ServiceEvolutionPeriodSchedulesBooking,
+  BimoServiceEvolutionPeriodSchedulesBooking,
   ServiceEvolutionPeriodSchedulesBookingProps,
 } from "./ServiceEvolutionPeriodSchedulesBooking";
 
-const childClasses: (typeof Entity)[] = [ServiceEvolutionPeriodSchedulesBooking];
-
 export interface ServiceEvolutionPeriodSchedulesBookingsCollectionProps
   extends ExtendedCollectionProps<
-    ServiceEvolutionPeriodSchedulesBooking,
+    BimoServiceEvolutionPeriodSchedulesBooking,
     ServiceEvolutionPeriodSchedulesBookingProps
   > {}
 
-export function ServiceEvolutionPeriodSchedulesBookingsCollectionClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceEvolutionPeriodSchedulesBookingsCollection{
- class ServiceEvolutionPeriodSchedulesBookingsCollection extends Collection<
-    ServiceEvolutionPeriodSchedulesBooking,
+export function ServiceEvolutionPeriodSchedulesBookingsCollectionClassFactory({
+  ServiceEvolutionPeriodSchedulesBooking,
+}: EntityConstructorByEntityClassKey): typeof BimoServiceEvolutionPeriodSchedulesBookingsCollection {
+  const childClasses: (typeof Entity)[] = [ServiceEvolutionPeriodSchedulesBooking];
+  class ServiceEvolutionPeriodSchedulesBookingsCollection extends Collection<
+    BimoServiceEvolutionPeriodSchedulesBooking,
     ServiceEvolutionPeriodSchedulesBookingProps
   > {
     constructor(props: ServiceEvolutionPeriodSchedulesBookingsCollectionProps = {}) {
@@ -32,11 +33,11 @@ export function ServiceEvolutionPeriodSchedulesBookingsCollectionClassFactory(en
       });
     }
   }
-  
+
   ServiceEvolutionPeriodSchedulesBookingsCollection.allChildClasses =
     getAllChildClasses(childClasses);
-  
-  return ServiceEvolutionPeriodSchedulesBookingsCollection
+
+  return ServiceEvolutionPeriodSchedulesBookingsCollection;
 }
 
-export default ServiceEvolutionPeriodSchedulesBookingsCollectionClassFactory
+export default ServiceEvolutionPeriodSchedulesBookingsCollectionClassFactory;

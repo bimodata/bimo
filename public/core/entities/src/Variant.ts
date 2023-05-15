@@ -8,40 +8,42 @@ import { ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 import { BimoContext } from "@bimo/core-global-types";
 
 import { BimoTripOrVariant, TripOrVariantProps } from "./TripOrVariant";
-import { BimoVariantPointsCollection, VariantPointsCollectionProps } from "./VariantPointsCollection";
+import {
+  BimoVariantPointsCollection,
+  VariantPointsCollectionProps,
+} from "./VariantPointsCollection";
 import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
 import { BimoRoute, RouteProps } from "./Route";
 import { BimoPlace, PlaceProps } from "./Place";
+
+export interface VariantProps extends ExtendedItemProps {
+  bimoId?: string;
+  varIdentifier?: string;
+  varDescription?: string;
+  varDirection?: string;
+  varReversible?: string;
+  varUsualTermin?: string;
+  varDestinationNote?: string;
+  varProductive?: string;
+  varPriority?: string;
+  varAllowDeviationFromTrackNetwork?: string;
+  varNatureMouvementTechnique?: string;
+  varIndiceCompo?: string;
+  variantPoints: BimoVariantPointsCollection;
+}
 export function VariantClassFactory({
   TripOrVariant,
   VariantPointsCollection,
   VariantPoint,
   Route,
   Place,
-}: EntityConstructorByEntityClassKey): typeof BimoVariant{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoVariant {
   const childClasses: (typeof Entity)[] = [VariantPointsCollection];
-  
-  export interface VariantProps extends ExtendedItemProps {
-    bimoId?: string;
-    varIdentifier?: string;
-    varDescription?: string;
-    varDirection?: string;
-    varReversible?: string;
-    varUsualTermin?: string;
-    varDestinationNote?: string;
-    varProductive?: string;
-    varPriority?: string;
-    varAllowDeviationFromTrackNetwork?: string;
-    varNatureMouvementTechnique?: string;
-    varIndiceCompo?: string;
-    variantPoints: VariantPointsCollection;
-  }
-  
- class Variant extends TripOrVariant<
+
+  class Variant extends TripOrVariant<
     Variant,
     VariantProps,
-    VariantPoint,
+    BimoVariantPoint,
     VariantPointProps
   > {
     bimoId?: string;
@@ -56,7 +58,7 @@ export function VariantClassFactory({
     varAllowDeviationFromTrackNetwork?: string;
     varNatureMouvementTechnique?: string;
     varIndiceCompo?: string;
-    variantPoints: VariantPointsCollection;
+    variantPoints: BimoVariantPointsCollection;
     _links: { [linkType: string]: any } = {};
     constructor(props: VariantProps, context: BimoContext) {
       super(props, context, "variant");
@@ -75,7 +77,7 @@ export function VariantClassFactory({
         "string",
         "0"
       );
-  
+
       this.variantPoints = gavpfp(
         "variantPoints",
         props,
@@ -84,24 +86,24 @@ export function VariantClassFactory({
         { altPropName: "variant_point", parent: this }
       );
     }
-  
+
     addLink(type: string, value: any) {
       this._links[type] = value;
     }
-  
+
     getLink(type: string) {
       return this._links[type];
     }
-  
+
     removeLink(type: string) {
       delete this._links[type];
     }
-  
+
     removeFromCurrentRoute() {
       if (!this.route) return;
       this.route.variants.remove(this);
     }
-  
+
     /** Creates a new instance of a variant. All variantPoints are new instances too. */
     copy(newVarIdentifier = this.varIdentifier) {
       const copiedVariant = new Variant(this, this.context);
@@ -113,65 +115,65 @@ export function VariantClassFactory({
       copiedVariant.addLink("copiedFrom", this);
       return copiedVariant;
     }
-  
+
     get route() {
-      return this.parent && (this.parent.parent as Route);
+      return this.parent && (this.parent.parent as BimoRoute);
     }
-  
+
     get routeId() {
       return this.route?.rteIdentifier;
     }
-  
+
     /** key of the form '${route.rteIdentifier}|${varIdentifier}' or null if either is null    */
     get routeAndVariantKey() {
       if (!this.route || !this.route.rteIdentifier || !this.varIdentifier) return null;
       return `${this.route.rteIdentifier}|${this.varIdentifier}`;
     }
-  
+
     get routeVersion() {
       return this.route?.routeVersion;
     }
-  
+
     get shortLoggingOutput() {
       return `${this.varIdentifier} (${this.varDescription}) {${this.varDirection}}`;
     }
-  
+
     get mediumLoggingOutput() {
       return `${this.shortLoggingOutput} [${this.variantPoints.length}] route: ${
         this.route && this.route.shortLoggingOutput
       }`;
     }
-  
+
     get longLoggingOutput() {
       return `${this.mediumLoggingOutput} ${this.variantPoints.mediumLoggingOutput}`;
     }
-  
+
     get veryLongLoggingOutput() {
       return `${this.mediumLoggingOutput}\n${this.variantPoints.longLoggingOutput}`;
     }
-  
+
     get varIdRouteIdAndVersionId() {
       return `${this.varIdentifier} / ${this.routeId} / ${
         this.routeVersion?.rtevIdentifier ?? "no routeVersion"
       }`;
     }
-  
+
     get isProductive() {
       return this.varProductive === "1";
     }
-  
-    changeStartPlace(newStartPlace: Place | string) {
+
+    changeStartPlace(newStartPlace: BimoPlace | string) {
       const placeIdentifier =
         typeof newStartPlace === `string` ? newStartPlace : newStartPlace.plcIdentifier;
       this.firstPoint.varptPlace = placeIdentifier;
     }
-  
-    changeEndPlace(newEndPlace: Place | string) {
+
+    changeEndPlace(newEndPlace: BimoPlace | string) {
       const placeIdentifier =
         typeof newEndPlace === `string` ? newEndPlace : newEndPlace.plcIdentifier;
       this.lastPoint.varptPlace = placeIdentifier;
     }
-  
+
     /* eslint-disable no-param-reassign */
     usesOneOfThesePlaces(listOfPlaces: string | Set<string> | string[]) {
       if (!listOfPlaces) {
@@ -187,7 +189,7 @@ export function VariantClassFactory({
         (listOfPlaces as Set<string>).has(variantPoint.varptPlace)
       );
     }
-  
+
     updatePlacesAndReturnListOfChanges(newPlaceIdByOldPlaceId: {
       [oldPlaceId: string]: string;
     }) {
@@ -206,13 +208,13 @@ export function VariantClassFactory({
     }
     /* eslint-enable no-param-reassign */
   }
-  
+
   Variant.hastusKeywords = ["rvariant"];
   Variant.hastusObject = "variant";
-  
+
   Variant.allChildClasses = getAllChildClasses(childClasses);
-  
-  return Variant
+
+  return Variant;
 }
 
-export default VariantClassFactory
+export default VariantClassFactory;

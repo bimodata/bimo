@@ -6,25 +6,22 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-
 import { BimoTrainPath, TrainPathProps } from "./TrainPath";
+import { BimoTrainPathsGeneralInfo } from "./TrainPathsGeneralInfo";
+
+export interface TrainPathsCollectionProps
+  extends ExtendedCollectionProps<BimoTrainPath, TrainPathProps> {
+  trainPathsGeneralInfo?: BimoTrainPathsGeneralInfo;
+}
+
 export function TrainPathsCollectionClassFactory({
   TrainPath,
-}: EntityConstructorByEntityClassKey): typeof BimoTrainPathsCollection{
-  import {
-    TrainPathsGeneralInfo,
-    TrainPathsGeneralInfoProps,
-  } from "./TrainPathsGeneralInfo";
-  
+  TrainPathsGeneralInfo,
+}: EntityConstructorByEntityClassKey): typeof BimoTrainPathsCollection {
   const childClasses: (typeof Entity)[] = [TrainPath, TrainPathsGeneralInfo];
-  
-  export interface TrainPathsCollectionProps
-  extends ExtendedCollectionProps<BimoTrainPath, TrainPathProps> {
-    trainPathsGeneralInfo?: TrainPathsGeneralInfo;
-  }
-  
- class TrainPathsCollection extends Collection<BimoTrainPath, TrainPathProps> {
-    trainPathsGeneralInfo: TrainPathsGeneralInfo;
+
+  class TrainPathsCollection extends Collection<BimoTrainPath, TrainPathProps> {
+    trainPathsGeneralInfo: BimoTrainPathsGeneralInfo;
     constructor(props: TrainPathsCollectionProps = {}) {
       super({
         itemName: "TrainPath",
@@ -33,7 +30,7 @@ export function TrainPathsCollectionClassFactory({
         businessIdPropName: "trnpIdentifier",
         ...props,
       });
-  
+
       this.trainPathsGeneralInfo = gavpfp(
         "trainPathsGeneralInfo",
         props,
@@ -42,14 +39,14 @@ export function TrainPathsCollectionClassFactory({
         { altPropName: "trnpgeninfo", parent: this }
       );
     }
-  
+
     /**
      * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
      */
     static createFromOirStyleData(oirStyleData: any) {
       const rawGeneralInfos = oirStyleData.train_path_general_information;
       const rawTrainPaths = oirStyleData.train_path;
-  
+
       if (!rawGeneralInfos || !rawTrainPaths) {
         throw new Error(
           `Bad oirStyleData: could not find "train_path_general_information" or "train_path" key`
@@ -60,15 +57,15 @@ export function TrainPathsCollectionClassFactory({
           `Bad oirStyleData: there should be exactly one trainPathGeneralInfo line. Got ${rawGeneralInfos.length}`
         );
       }
-  
+
       const newTrainPathsCollection = new TrainPathsCollection({
         trainPathsGeneralInfo: rawGeneralInfos[0],
         items: rawTrainPaths,
       });
-  
+
       return newTrainPathsCollection;
     }
-  
+
     /* eslint-disable camelcase */
     /* eslint-disable no-param-reassign */
     generateOirStyleData() {
@@ -93,10 +90,10 @@ export function TrainPathsCollectionClassFactory({
       return { general_information, train_path };
     }
   }
-  
+
   TrainPathsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TrainPathsCollection
+
+  return TrainPathsCollection;
 }
 
-export default TrainPathsCollectionClassFactory
+export default TrainPathsCollectionClassFactory;

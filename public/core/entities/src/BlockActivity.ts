@@ -8,37 +8,38 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { StringByLanguageCode } from "@bimo/core-global-types";
 
-import { BimoBlock, BlockProps } from "./Block";
-import { BimoTrip, TripProps } from "./Trip";
-import { BimoBlockActivitiesCollection, BlockActivitiesCollectionProps } from "./BlockActivitiesCollection";
-import { BimoConsistChange, ConsistChangeProps } from "./ConsistChange";
-import { BimoPlace, PlaceProps } from "./Place";
+import { BimoBlock } from "./Block";
+import { BimoTrip } from "./Trip";
+import { BimoBlockActivitiesCollection } from "./BlockActivitiesCollection";
+import { BimoConsistChange } from "./ConsistChange";
+import { BimoVehicleTask } from "./VehicleTask";
+import { BimoPlace } from "./Place";
+import BlockActivityItem, { BaseBlockActivityItem } from "./BlockActivityItem";
+import { BimoBlockSection } from "./BlockSection";
+export interface BlockActivityProps extends ExtendedItemProps {
+  blkactVehicleActivityTypeNo: string;
+  blkactTripNo?: string;
+  blkactHasFixedLink?: string;
+  blkactCchgNo?: string;
+  blkactVehicleStandbyNo?: string;
+  blkactMaintenanceNo?: string;
+  bimoId?: string;
+  activityNameByLanguageCode?: StringByLanguageCode;
+}
+
+export type BlockActivityEntityClassKey =
+  | "Trip"
+  | "ConsistChange"
+  | "VehicleStandby"
+  | "Maintenance";
 export function BlockActivityClassFactory({
   Block,
   Trip,
   BlockActivitiesCollection,
   ConsistChange,
   Place,
-}: EntityConstructorByEntityClassKey): typeof BimoBlockActivity{
-  
-  export interface BlockActivityProps extends ExtendedItemProps {
-    blkactVehicleActivityTypeNo: string;
-    blkactTripNo?: string;
-    blkactHasFixedLink?: string;
-    blkactCchgNo?: string;
-    blkactVehicleStandbyNo?: string;
-    blkactMaintenanceNo?: string;
-    bimoId?: string;
-    activityNameByLanguageCode?: StringByLanguageCode;
-  }
-  
-  export type BlockActivityEntityClassKey =
-    | "Trip"
-    | "ConsistChange"
-    | "VehicleStandby"
-    | "Maintenance";
-  
- class BlockActivity extends Item<BlockActivity> {
+}: EntityConstructorByEntityClassKey): typeof BimoBlockActivity {
+  class BlockActivity extends Item<BlockActivity> {
     blkactVehicleActivityTypeNo: string;
     blkactTripNo: string;
     blkactHasFixedLink?: string;
@@ -48,7 +49,7 @@ export function BlockActivityClassFactory({
     bimoId?: string;
     activityEntityClassKey: BlockActivityEntityClassKey;
     activityNameByLanguageCode: StringByLanguageCode;
-    declare parent?: BlockActivitiesCollection;
+    declare parent?: BimoBlockActivitiesCollection;
     constructor(props: BlockActivityProps) {
       super(props);
       this.blkactVehicleActivityTypeNo = gavpfp("blkactVehicleActivityTypeNo", props);
@@ -57,11 +58,9 @@ export function BlockActivityClassFactory({
       this.blkactCchgNo = gavpfp("blkactCchgNo", props);
       this.blkactVehicleStandbyNo = gavpfp("blkactVehicleStandbyNo", props);
       this.blkactMaintenanceNo = gavpfp("blkactMaintenanceNo", props);
-      /** Doesn't exist in hastus but we create it for consistency */ this.bimoId = gavpfp(
-        "bimoId",
-        props
-      );
-  
+      /** Doesn't exist in hastus but we create it for consistency */ this.bimoId =
+        gavpfp("bimoId", props);
+
       if (this.blkactTripNo) {
         this.activityEntityClassKey = `Trip`;
         this.activityNameByLanguageCode = { fr: "Voyage" };
@@ -78,133 +77,139 @@ export function BlockActivityClassFactory({
         throw new Error(`Unknown block activity`);
       }
     }
-  
+
     get block() {
-      return this.parent && (this.parent.parent as Block);
+      return this.parent && (this.parent.parent as BimoBlock);
     }
-  
-    get vehicleTasks() {
+
+    get vehicleTasks(): BimoVehicleTask[] | undefined {
       const setOfVtas =
         this.vehicleSchedule && this.vehicleSchedule.setOfVtasByBlockActivity.get(this);
       return setOfVtas && Array.from(setOfVtas);
     }
-  
-    get blockSections() {
+
+    get blockSections(): BimoBlockSection[] | undefined {
       const setOfBlockSections =
         this.vehicleSchedule &&
         this.vehicleSchedule.setOfBlockSectionsByBlockActivity.get(this);
       return setOfBlockSections && Array.from(setOfBlockSections);
     }
-  
-    setNewTrip(newTrip: Trip) {
+
+    setNewTrip(newTrip: BimoTrip) {
       if (this.activityEntityClassKey === "Trip") {
-        this.blkactTripNo = newTrip.trpIntNumber;
+        this.blkactTripNo = newTrip.trpIntNumber as string;
         if (this.vehicleSchedule) {
           this.vehicleSchedule.activityEntityItemByBlockActivity.set(this, newTrip);
         }
       }
       if (this.activityEntityClassKey === "ConsistChange") {
-        (this.activityEntityItem as ConsistChange).setNewTrip(newTrip);
+        (this.activityEntityItem as BimoConsistChange).setNewTrip(newTrip);
       }
     }
-  
+
     get vehicleSchedule() {
       return this.block && this.block.vehicleSchedule;
     }
-  
-    get activityEntityItem() {
+
+    get activityEntityItem(): BlockActivityItem<BaseBlockActivityItem> | undefined {
       return (
         this.vehicleSchedule &&
         this.vehicleSchedule.activityEntityItemByBlockActivity.get(this)
       );
     }
-  
+
     // eslint-disable-next-line class-methods-use-this
     set activityEntityItem(v) {
       throw new Error(`Should not set ActivityEntityItem`);
     }
-  
+
     get startTime() {
       return this.activityEntityItem?.startTime;
     }
-  
+
     get startTimeAsDuration() {
       return this.activityEntityItem?.startTimeAsDuration;
     }
-  
+
     get endTime() {
       return this.activityEntityItem?.endTime;
     }
-  
+
     get endTimeAsDuration() {
       return this.activityEntityItem?.endTimeAsDuration;
     }
-  
+
     get startPlaceId() {
       return this.activityEntityItem?.startPlaceId;
     }
-  
+
     get endPlaceId() {
       return this.activityEntityItem?.endPlaceId;
     }
-  
-    get shortLoggingOutput() {
+
+    get shortLoggingOutput(): string {
       try {
-        return `${this.activityNameByLanguageCode && this.activityNameByLanguageCode.fr} (${
-          this.blkactVehicleActivityTypeNo
-        }) - ${this.activityEntityItem && this.activityEntityItem.shortLoggingOutput}`;
+        return `${
+          this.activityNameByLanguageCode && this.activityNameByLanguageCode.fr
+        } (${this.blkactVehicleActivityTypeNo}) - ${
+          this.activityEntityItem && this.activityEntityItem.shortLoggingOutput
+        }`;
       } catch (error) {
-        return `${this.activityNameByLanguageCode && this.activityNameByLanguageCode.fr} (${
-          this.blkactVehicleActivityTypeNo
-        }) // ${this.blkactTripNo} // ${this.bimoId}`;
+        return `${
+          this.activityNameByLanguageCode && this.activityNameByLanguageCode.fr
+        } (${this.blkactVehicleActivityTypeNo}) // ${this.blkactTripNo} // ${
+          this.bimoId
+        }`;
       }
     }
-  
+
     get mediumLoggingOutput() {
       return `${this.slo} (block: ${this.block?.slo})`;
     }
-  
+
     get longLoggingOutput() {
-      return `${this.mlo} (vtas: ${this.vehicleTasks?.map((vta) => vta.slo).join(" / ")})`;
+      return `${this.mlo} (vtas: ${this.vehicleTasks
+        ?.map((vta) => vta.slo)
+        .join(" / ")})`;
     }
-  
-    improveEndPlacePrecision(morePreciseEndPlace: Place) {
+
+    improveEndPlacePrecision(morePreciseEndPlace: BimoPlace) {
       this.activityEntityItem?.improveEndPlacePrecision(morePreciseEndPlace);
     }
-  
-    improveStartPlacePrecision(morePreciseStartPlace: Place) {
+
+    improveStartPlacePrecision(morePreciseStartPlace: BimoPlace) {
       this.activityEntityItem?.improveStartPlacePrecision(morePreciseStartPlace);
     }
-  
+
     shiftTimes(shiftInSeconds: number) {
       this.activityEntityItem?.shiftTimes(shiftInSeconds);
     }
-  
-    get _indexInSortedParent() {
-      if (!this.parent) return null;
+
+    get _indexInSortedParent(): number {
+      if (!this.parent) throw new Error(`No parent !`);
       this.parent.sortByTime();
       return this.parent.indexOf(this);
     }
-  
+
     getNthActivityFromThisOne(n: number) {
       return this.parent && this.parent.items[this._indexInSortedParent + n];
     }
-  
+
     get nextBlockActivity() {
       return this.getNthActivityFromThisOne(1);
     }
-  
+
     get previousBlockActivity() {
       return this.getNthActivityFromThisOne(-1);
     }
   }
-  
+
   BlockActivity.hastusKeywords = ["block_activity"];
   BlockActivity.hastusObject = "block_activity";
-  
+
   BlockActivity.allChildClasses = getAllChildClasses(childClasses);
-  
-  return BlockActivity
+
+  return BlockActivity;
 }
 
-export default BlockActivityClassFactory
+export default BlockActivityClassFactory;

@@ -6,18 +6,22 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import {
-  ServiceContextInterval,
+  BimoServiceContextInterval,
   ServiceContextIntervalProps,
 } from "./ServiceContextInterval";
 
-const childClasses: (typeof Entity)[] = [ServiceContextInterval];
-
 export interface ServiceContextIntervalsCollectionProps
-  extends ExtendedCollectionProps<BimoServiceContextInterval, ServiceContextIntervalProps> {}
+  extends ExtendedCollectionProps<
+    BimoServiceContextInterval,
+    ServiceContextIntervalProps
+  > {}
 
-export function ServiceContextIntervalsCollectionClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoServiceContextIntervalsCollection{
- class ServiceContextIntervalsCollection extends Collection<
-    ServiceContextInterval,
+export function ServiceContextIntervalsCollectionClassFactory({
+  ServiceContextInterval,
+}: EntityConstructorByEntityClassKey): typeof BimoServiceContextIntervalsCollection {
+  const childClasses: (typeof Entity)[] = [ServiceContextInterval];
+  class ServiceContextIntervalsCollection extends Collection<
+    BimoServiceContextInterval,
     ServiceContextIntervalProps
   > {
     constructor(props: ServiceContextIntervalsCollectionProps = {}) {
@@ -29,10 +33,10 @@ export function ServiceContextIntervalsCollectionClassFactory(entityConstructorB
       });
     }
   }
-  
+
   ServiceContextIntervalsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ServiceContextIntervalsCollection
+
+  return ServiceContextIntervalsCollection;
 }
 
-export default ServiceContextIntervalsCollectionClassFactory
+export default ServiceContextIntervalsCollectionClassFactory;

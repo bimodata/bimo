@@ -1,7 +1,6 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { DataFile as BimoDataFile } from "../base-types/rawIndex";
 export { DataFile as BimoDataFile } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
@@ -16,8 +15,10 @@ export interface DataFileProps extends ExtendedItemProps {
   fileData: string;
 }
 
-export function DataFileClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoDataFile{
- class DataFile extends Item<DataFile> {
+export function DataFileClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoDataFile {
+  class DataFile extends Item<DataFile> {
     fileInfo: BimoFileInfo;
     fileData: string;
     fileName: string;
@@ -30,8 +31,8 @@ export function DataFileClassFactory(entityConstructorByEntityClassKey: EntityCo
       this.path = this.fileInfo.path;
     }
   }
-  
-  return DataFile
+
+  return DataFile;
 }
 
-export default DataFileClassFactory
+export default DataFileClassFactory;

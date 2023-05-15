@@ -3,18 +3,19 @@ import { TripShiftsCollection as BimoTripShiftsCollection } from "../base-types/
 export { TripShiftsCollection as BimoTripShiftsCollection } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { BimoTripShift, TripShiftProps } from "./TripShift";
+
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
+import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+
+export interface TripShiftsCollectionProps
+  extends ExtendedCollectionProps<BimoTripShift, TripShiftProps> {}
+
 export function TripShiftsCollectionClassFactory({
   TripShift,
-}: EntityConstructorByEntityClassKey): typeof BimoTripShiftsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoTripShiftsCollection {
   const childClasses: (typeof Entity)[] = [TripShift];
-  import { getAllChildClasses } from "@bimo/core-utils-serialization";
-  import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-  
-  export interface TripShiftsCollectionProps
-  extends ExtendedCollectionProps<BimoTripShift, TripShiftProps> {}
-  
- class TripShiftsCollection extends Collection<BimoTripShift, TripShiftProps> {
+
+  class TripShiftsCollection extends Collection<BimoTripShift, TripShiftProps> {
     constructor(props: TripShiftsCollectionProps = {}) {
       super({
         itemName: "TripShift",
@@ -24,10 +25,10 @@ export function TripShiftsCollectionClassFactory({
       });
     }
   }
-  
+
   TripShiftsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TripShiftsCollection
+
+  return TripShiftsCollection;
 }
 
-export default TripShiftsCollectionClassFactory
+export default TripShiftsCollectionClassFactory;

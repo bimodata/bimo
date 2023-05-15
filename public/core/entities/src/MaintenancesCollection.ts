@@ -5,19 +5,18 @@ import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BimoMaintenance, MaintenanceProps } from "./Maintenance";
-import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
+import { BimoVehicleSchedule } from "./VehicleSchedule";
+
+export interface MaintenancesCollectionProps
+  extends ExtendedCollectionProps<BimoMaintenance, MaintenanceProps> {}
+
 export function MaintenancesCollectionClassFactory({
   Maintenance,
-  VehicleSchedule,
-}: EntityConstructorByEntityClassKey): typeof BimoMaintenancesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoMaintenancesCollection {
   const childClasses: (typeof Entity)[] = [Maintenance];
-  
-  export interface MaintenancesCollectionProps
-  extends ExtendedCollectionProps<BimoMaintenance, MaintenanceProps> {}
-  
- class MaintenancesCollection extends Collection<BimoMaintenance, MaintenanceProps> {
-    declare parent?: VehicleSchedule;
+
+  class MaintenancesCollection extends Collection<BimoMaintenance, MaintenanceProps> {
+    declare parent?: BimoVehicleSchedule;
     constructor(props: MaintenancesCollectionProps = {}) {
       super({
         itemName: "Maintenance",
@@ -29,10 +28,10 @@ export function MaintenancesCollectionClassFactory({
       });
     }
   }
-  
+
   MaintenancesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return MaintenancesCollection
+
+  return MaintenancesCollection;
 }
 
-export default MaintenancesCollectionClassFactory
+export default MaintenancesCollectionClassFactory;

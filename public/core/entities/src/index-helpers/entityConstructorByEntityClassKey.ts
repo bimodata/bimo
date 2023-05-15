@@ -1,4 +1,33 @@
-import {
+import { generateEntityConstructorByEntityClassKey } from "./generateEntityConstructorByEntityClassKey";
+
+export const entityConstructorByEntityClassKey =
+  generateEntityConstructorByEntityClassKey({});
+
+export const exportableEntityClassKeys = Object.keys(
+  entityConstructorByEntityClassKey
+).filter(
+  (entityClassKey) =>
+    //@ts-ignore
+    entityConstructorByEntityClassKey[entityClassKey].defaultExportedDataDataName
+);
+
+export const importableEntityClassKeys = Object.keys(
+  entityConstructorByEntityClassKey
+).filter(
+  (entityClassKey) =>
+    //@ts-ignore
+    entityConstructorByEntityClassKey[entityClassKey].defaultImportDataDataName
+);
+
+import rawResetAllEntitiesNextIds from "@bimo/core-utils-reset-all-entities-next-ids";
+
+export function resetAllEntitiesNextIds(nextId?: number | string) {
+  return rawResetAllEntitiesNextIds(entityConstructorByEntityClassKey, nextId);
+}
+
+export default entityConstructorByEntityClassKey;
+
+const {
   Booking,
   BookingsCollection,
   RouteVersion,
@@ -30,7 +59,6 @@ import {
   Blkvehuoir,
   BlkvehuoirsCollection,
   BlockActivity,
-  BlockActivityItem,
   BlockActivitiesCollection,
   VehicleStandby,
   VehicleStandbysCollection,
@@ -110,9 +138,9 @@ import {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
-} from "./rawIndex";
+} = entityConstructorByEntityClassKey;
 
-export const entityConstructorByEntityClassKey = {
+export {
   Booking,
   BookingsCollection,
   RouteVersion,
@@ -224,25 +252,3 @@ export const entityConstructorByEntityClassKey = {
   NetworkSection,
   NetworkSectionsCollection,
 };
-
-export const exportableEntityClassKeys = Object.keys(
-  entityConstructorByEntityClassKey
-).filter(
-  (entityClassKey) =>
-    //@ts-ignore
-    entityConstructorByEntityClassKey[entityClassKey].defaultExportedDataDataName
-);
-
-export const importableEntityClassKeys = Object.keys(
-  entityConstructorByEntityClassKey
-).filter(
-  (entityClassKey) =>
-    //@ts-ignore
-    entityConstructorByEntityClassKey[entityClassKey].defaultImportDataDataName
-);
-
-import rawResetAllEntitiesNextIds from "@bimo/core-utils-reset-all-entities-next-ids";
-
-export function resetAllEntitiesNextIds(nextId?: number | string) {
-  return rawResetAllEntitiesNextIds(entityConstructorByEntityClassKey, nextId);
-}

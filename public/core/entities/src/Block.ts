@@ -7,12 +7,36 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoBlkvehuoirsCollection, BlkvehuoirsCollectionProps } from "./BlkvehuoirsCollection";
-import { BimoBlockActivitiesCollection, BlockActivitiesCollectionProps } from "./BlockActivitiesCollection";
-import { BimoVehicleTask, VehicleTaskProps } from "./VehicleTask";
-import { BimoVehicleUnit, VehicleUnitProps } from "./VehicleUnit";
-import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
-import { BimoTrip, TripProps } from "./Trip";
+import { BimoBlkvehuoirsCollection } from "./BlkvehuoirsCollection";
+import { BimoBlockActivitiesCollection } from "./BlockActivitiesCollection";
+import { BimoVehicleTask } from "./VehicleTask";
+import { BimoVehicleUnit } from "./VehicleUnit";
+import { BimoVehicleSchedule } from "./VehicleSchedule";
+import { BimoTrip } from "./Trip";
+
+export interface BlockProps extends ExtendedItemProps {
+  blkIntNumber?: string;
+  blkNumber?: string;
+  blkRouteUser?: string;
+  blkPrepOutUser?: string;
+  blkPrepInUser?: string;
+  blkStartUpAtStationUser?: string;
+  blkShutDownAtStationUser?: string;
+  blkVehicleGroup?: string;
+  blkVehicleType?: string;
+  blkGarageUser?: string;
+  blkVehicleNumber?: string;
+  blkGroup?: string;
+  blkIsFixed?: string;
+  blkVehUnitCount?: number | string;
+  blkRelTypeStrt?: string;
+  blkRelTypeEnd?: string;
+  blkConsistPatternUser?: string;
+  blkNumOperation?: string;
+  blkvehuoirs?: BimoBlkvehuoirsCollection;
+  blockActivities?: BimoBlockActivitiesCollection;
+}
+
 export function BlockClassFactory({
   BlkvehuoirsCollection,
   BlockActivitiesCollection,
@@ -20,37 +44,13 @@ export function BlockClassFactory({
   VehicleUnit,
   VehicleSchedule,
   Trip,
-}: EntityConstructorByEntityClassKey): typeof BimoBlock{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoBlock {
   const childClasses: (typeof Entity)[] = [
     BlkvehuoirsCollection,
     BlockActivitiesCollection,
   ];
-  
-  export interface BlockProps extends ExtendedItemProps {
-    blkIntNumber?: string;
-    blkNumber?: string;
-    blkRouteUser?: string;
-    blkPrepOutUser?: string;
-    blkPrepInUser?: string;
-    blkStartUpAtStationUser?: string;
-    blkShutDownAtStationUser?: string;
-    blkVehicleGroup?: string;
-    blkVehicleType?: string;
-    blkGarageUser?: string;
-    blkVehicleNumber?: string;
-    blkGroup?: string;
-    blkIsFixed?: string;
-    blkVehUnitCount?: number | string;
-    blkRelTypeStrt?: string;
-    blkRelTypeEnd?: string;
-    blkConsistPatternUser?: string;
-    blkNumOperation?: string;
-    blkvehuoirs?: BlkvehuoirsCollection;
-    blockActivities?: BlockActivitiesCollection;
-  }
-  
- class Block extends Item<Block> {
+
+  class Block extends Item<Block> {
     blkIntNumber?: string;
     blkNumber?: string;
     blkRouteUser?: string;
@@ -69,8 +69,8 @@ export function BlockClassFactory({
     blkRelTypeEnd?: string;
     blkConsistPatternUser?: string;
     blkNumOperation?: string;
-    blkvehuoirs: BlkvehuoirsCollection;
-    blockActivities: BlockActivitiesCollection;
+    blkvehuoirs: BimoBlkvehuoirsCollection;
+    blockActivities: BimoBlockActivitiesCollection;
     constructor(props: BlockProps) {
       super(props);
       this.blkIntNumber = gavpfp("blkIntNumber", props);
@@ -101,7 +101,7 @@ export function BlockClassFactory({
       this.blkRelTypeEnd = gavpfp("blkRelTypeEnd", props);
       this.blkConsistPatternUser = gavpfp("blkConsistPatternUser", props);
       this.blkNumOperation = gavpfp("blkNumOperation", props);
-  
+
       this.blkvehuoirs = gavpfp(
         "blkvehuoirs",
         props,
@@ -117,68 +117,72 @@ export function BlockClassFactory({
         { altPropName: "block_activity", parent: this }
       );
     }
-  
-    get vehicleTasks() {
+
+    get vehicleTasks(): BimoVehicleTask[] | undefined {
       return (
         this.vehicleSchedule &&
-        Array.from(this.vehicleSchedule.setOfVtasByBlock.get(this) as Set<VehicleTask>)
+        Array.from(
+          this.vehicleSchedule.setOfVtasByBlock.get(this) as Set<BimoVehicleTask>
+        )
       );
     }
-  
-    get vehicleUnitsAtStart(): VehicleUnit[] | undefined {
+
+    get vehicleUnitsAtStart(): BimoVehicleUnit[] | undefined {
       return (
         this.vehicleSchedule &&
         this.blkvehuoirs.map((blkVehuOir) => {
-          const vehu = this.vehicleSchedule?.vehicleUnits.getById(blkVehuOir.vehuUniqueId);
+          const vehu = this.vehicleSchedule?.vehicleUnits.getById(
+            blkVehuOir.vehuUniqueId
+          );
           if (!vehu) throw new Error(``);
           return;
         })
       );
     }
-  
+
     get vehicleSchedule() {
-      return this.parent && (this.parent.parent as VehicleSchedule);
+      return this.parent && (this.parent.parent as BimoVehicleSchedule);
     }
-  
+
     get startTimeAsDuration() {
       return _.minBy(this.blockActivities.items, "startTimeAsDuration")
         ?.startTimeAsDuration;
     }
-  
+
     get endTimeAsDuration() {
       return _.maxBy(this.blockActivities.items, "endTimeAsDuration")?.endTimeAsDuration;
     }
-  
+
     sortBlockActivitiesByTime() {
       this.blockActivities.sortByTime();
     }
-  
-    addTrip(trip: Trip) {
+
+    addTrip(trip: BimoTrip) {
       this.blockActivities.addTrip(trip);
     }
-  
-    addVehuAtStart(vehu: VehicleUnit) {
+
+    addVehuAtStart(vehu: BimoVehicleUnit) {
       this.blkVehUnitCount += 1;
       this.blkvehuoirs.createNewItem({
         blkvehuoirRank: this.blkVehUnitCount,
         vehuUniqueId: vehu.vehuInternalNumber,
       });
     }
-  
-    removeTrip(trip: Trip) {
+
+    removeTrip(trip: BimoTrip) {
       this.blockActivities.removeTrip(trip);
     }
-  
-    addTrips(...trips: Trip[]) {
+
+    addTrips(...trips: BimoTrip[]) {
       trips.forEach((trip) => {
         this.addTrip(trip);
       });
     }
-  
+
     get shortLoggingOutput() {
       return `${this.blkNumber}-[${this.blockActivities.length}]`;
     }
-  
+
     get mediumLoggingOutput() {
       return `${this.shortLoggingOutput}${
         this.vehicleSchedule
@@ -186,18 +190,18 @@ export function BlockClassFactory({
           : ` (no vsc)`
       }`;
     }
-  
+
     get longLoggingOutput() {
       return `${this.mediumLoggingOutput}\n${this.blockActivities.longLoggingOutput}`;
     }
   }
-  
+
   Block.hastusKeywords = ["block"];
   Block.hastusObject = "block";
-  
+
   Block.allChildClasses = getAllChildClasses(childClasses);
-  
-  return Block
+
+  return Block;
 }
 
-export default BlockClassFactory
+export default BlockClassFactory;

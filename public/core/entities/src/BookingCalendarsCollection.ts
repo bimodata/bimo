@@ -8,33 +8,34 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoBookingsCollection, BookingsCollectionProps } from "./BookingsCollection";
+import { BimoBookingsCollection } from "./BookingsCollection";
 import { BimoBookingCalendar, BookingCalendarProps } from "./BookingCalendar";
+
+import { BimoServiceDefinitionsCollection } from "./ServiceDefinitionsCollection";
+import { BimoSchedulingUnitsCollection } from "./SchedulingUnitsCollection";
+
+export interface BookingCalendarsCollectionProps
+  extends ExtendedCollectionProps<BimoBookingCalendar, BookingCalendarProps> {}
 export function BookingCalendarsCollectionClassFactory({
   BookingsCollection,
   BookingCalendar,
-}: EntityConstructorByEntityClassKey): typeof BimoBookingCalendarsCollection{
-  import {
-    ServiceDefinitionsCollection,
-    ServiceDefinitionsCollectionProps,
-  } from "./ServiceDefinitionsCollection";
-  import {
-    SchedulingUnitsCollection,
-    SchedulingUnitsCollectionProps,
-  } from "./SchedulingUnitsCollection";
-  
-  const childClasses: (typeof Entity)[] = [BookingCalendar];
-  
-  export interface BookingCalendarsCollectionProps
-  extends ExtendedCollectionProps<BimoBookingCalendar, BookingCalendarProps> {}
-  
- class BookingCalendarsCollection extends Collection<
+  ServiceDefinitionsCollection,
+  SchedulingUnitsCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoBookingCalendarsCollection {
+  const childClasses: (typeof Entity)[] = [
+    BookingsCollection,
     BookingCalendar,
+    ServiceDefinitionsCollection,
+    SchedulingUnitsCollection,
+  ];
+
+  class BookingCalendarsCollection extends Collection<
+    BimoBookingCalendar,
     BookingCalendarProps
   > {
-    serviceDefinitions: ServiceDefinitionsCollection;
-    schedulingUnits: SchedulingUnitsCollection;
-    bookings: BookingsCollection;
+    serviceDefinitions: BimoServiceDefinitionsCollection;
+    schedulingUnits: BimoSchedulingUnitsCollection;
+    bookings: BimoBookingsCollection;
     constructor(props: BookingCalendarsCollectionProps = {}) {
       super({
         itemName: "BookingCalendar",
@@ -42,7 +43,7 @@ export function BookingCalendarsCollectionClassFactory({
         associationType: "aggregation",
         ...props,
       });
-  
+
       this.serviceDefinitions = gavpfp(
         "serviceDefinition",
         props,
@@ -50,7 +51,7 @@ export function BookingCalendarsCollectionClassFactory({
         new ServiceDefinitionsCollection(),
         { altPropName: "service_definition", parent: this }
       );
-  
+
       /** @type {SchedulingUnitsCollection} */
       this.schedulingUnits = gavpfp(
         "schedulingUnit",
@@ -59,7 +60,7 @@ export function BookingCalendarsCollectionClassFactory({
         new SchedulingUnitsCollection(),
         { altPropName: "scheduling_unit", parent: this }
       );
-  
+
       /** @type {BookingsCollection} */
       this.bookings = gavpfp(
         "booking",
@@ -69,7 +70,7 @@ export function BookingCalendarsCollectionClassFactory({
         { altPropName: "booking", parent: this }
       );
     }
-  
+
     generateOirStyleData() {
       const booking_calendar = this.map((bookingCalendar) => {
         //@ts-ignore
@@ -120,10 +121,10 @@ export function BookingCalendarsCollectionClassFactory({
             return serviceContext;
           }
         );
-  
+
         return bookingCalendar;
       });
-  
+
       const service_definition = this.serviceDefinitions.map((sdef) => {
         //@ts-ignore
         sdef.sdef_scheduling_unit = sdef.schedulingUnits.map((sdefSchedUnit) => {
@@ -133,22 +134,22 @@ export function BookingCalendarsCollectionClassFactory({
         });
         return sdef;
       });
-  
+
       const booking = this.bookings.items;
-  
+
       const scheduling_unit = this.schedulingUnits.map((schedUnit) => {
         //@ts-ignore
         schedUnit.sched_unit_route = schedUnit.schedulingUnitRoutes?.items;
         return schedUnit;
       });
-  
+
       return { booking_calendar, service_definition, scheduling_unit, booking };
     }
   }
-  
+
   BookingCalendarsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return BookingCalendarsCollection
+
+  return BookingCalendarsCollection;
 }
 
-export default BookingCalendarsCollectionClassFactory
+export default BookingCalendarsCollectionClassFactory;

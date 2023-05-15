@@ -6,17 +6,17 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BimoBookingCalendarDate, BookingCalendarDateProps } from "./BookingCalendarDate";
+
+export interface BookingCalendarDatesCollectionProps
+  extends ExtendedCollectionProps<BimoBookingCalendarDate, BookingCalendarDateProps> {}
+
 export function BookingCalendarDatesCollectionClassFactory({
   BookingCalendarDate,
-}: EntityConstructorByEntityClassKey): typeof BimoBookingCalendarDatesCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoBookingCalendarDatesCollection {
   const childClasses: (typeof Entity)[] = [BookingCalendarDate];
-  
-  export interface BookingCalendarDatesCollectionProps
-  extends ExtendedCollectionProps<BimoBookingCalendarDate, BookingCalendarDateProps> {}
-  
- class BookingCalendarDatesCollection extends Collection<
-    BookingCalendarDate,
+
+  class BookingCalendarDatesCollection extends Collection<
+    BimoBookingCalendarDate,
     BookingCalendarDateProps
   > {
     constructor(props: BookingCalendarDatesCollectionProps) {
@@ -28,7 +28,7 @@ export function BookingCalendarDatesCollectionClassFactory({
         ...props,
       });
     }
-  
+
     getByIsoDate(isoDate: string, { refreshCache = false } = {}) {
       const bcaldsByIsoDate = this.groupByProp("dateAsIsoDateString", { refreshCache });
       const bcalds = bcaldsByIsoDate.get(isoDate);
@@ -40,28 +40,28 @@ export function BookingCalendarDatesCollectionClassFactory({
       }
       return bcalds[0];
     }
-  
+
     getByDate(date: string) {
       return this.getByBusinessId(date);
     }
-  
+
     sortByDate() {
       this.sort((a, b) => (a.dateAsIsoDateString > b.dateAsIsoDateString ? 1 : -1));
     }
-  
+
     get first() {
       this.sortByDate();
       return this.items[0];
     }
-  
+
     get last() {
       this.sortByDate();
       return this.items[this.items.length - 1];
     }
   }
   BookingCalendarDatesCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return BookingCalendarDatesCollection
+
+  return BookingCalendarDatesCollection;
 }
 
-export default BookingCalendarDatesCollectionClassFactory
+export default BookingCalendarDatesCollectionClassFactory;

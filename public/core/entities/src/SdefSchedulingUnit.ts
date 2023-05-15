@@ -6,14 +6,26 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoSchedulingUnit, SchedulingUnitProps } from "./SchedulingUnit";
+import { BimoSchedulingUnit } from "./SchedulingUnit";
+
+export interface SdefSchedulingUnitProps extends ExtendedItemProps {
+  sdscuIdentifier?: string;
+  sdscuType?: string;
+  sdscuInclSunday?: string;
+  sdscuInclMonday?: string;
+  sdscuInclTuesday?: string;
+  sdscuInclWednesday?: string;
+  sdscuInclThursday?: string;
+  sdscuInclFriday?: string;
+  sdscuInclSaturday?: string;
+  includedSchedulingUnits?: BimoSchedulingUnit[];
+}
 export function SdefSchedulingUnitClassFactory({
   SchedulingUnit,
-}: EntityConstructorByEntityClassKey): typeof BimoSdefSchedulingUnit{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoSdefSchedulingUnit {
   const childClasses: (typeof Entity)[] = [];
-  
-  export interface SdefSchedulingUnitProps extends ExtendedItemProps {
+
+  class SdefSchedulingUnit extends Item<SdefSchedulingUnit> {
     sdscuIdentifier?: string;
     sdscuType?: string;
     sdscuInclSunday?: string;
@@ -23,20 +35,7 @@ export function SdefSchedulingUnitClassFactory({
     sdscuInclThursday?: string;
     sdscuInclFriday?: string;
     sdscuInclSaturday?: string;
-    includedSchedulingUnits?: SchedulingUnit[];
-  }
-  
- class SdefSchedulingUnit extends Item<SdefSchedulingUnit> {
-    sdscuIdentifier?: string;
-    sdscuType?: string;
-    sdscuInclSunday?: string;
-    sdscuInclMonday?: string;
-    sdscuInclTuesday?: string;
-    sdscuInclWednesday?: string;
-    sdscuInclThursday?: string;
-    sdscuInclFriday?: string;
-    sdscuInclSaturday?: string;
-    includedSchedulingUnits: SchedulingUnit[] = [];
+    includedSchedulingUnits: BimoSchedulingUnit[] = [];
     constructor(props: SdefSchedulingUnitProps) {
       super(props);
       this.sdscuIdentifier = gavpfp("sdscuIdentifier", props, `string`);
@@ -50,13 +49,13 @@ export function SdefSchedulingUnitClassFactory({
       this.sdscuInclSaturday = gavpfp("sdscuInclSaturday", props, `string`, "1");
     }
   }
-  
+
   SdefSchedulingUnit.hastusKeywords = ["sdef_scheduling_unit_incl"];
   SdefSchedulingUnit.hastusObject = "sdef_scheduling_unit";
-  
+
   SdefSchedulingUnit.allChildClasses = getAllChildClasses(childClasses);
-  
-  return SdefSchedulingUnit
+
+  return SdefSchedulingUnit;
 }
 
-export default SdefSchedulingUnitClassFactory
+export default SdefSchedulingUnitClassFactory;

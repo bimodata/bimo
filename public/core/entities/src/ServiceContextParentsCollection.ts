@@ -5,18 +5,20 @@ import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoServiceContextParent, ServiceContextParentProps } from "./ServiceContextParent";
+import {
+  BimoServiceContextParent,
+  ServiceContextParentProps,
+} from "./ServiceContextParent";
+export interface ServiceContextParentsCollectionProps
+  extends ExtendedCollectionProps<BimoServiceContextParent, ServiceContextParentProps> {}
+
 export function ServiceContextParentsCollectionClassFactory({
   ServiceContextParent,
-}: EntityConstructorByEntityClassKey): typeof BimoServiceContextParentsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoServiceContextParentsCollection {
   const childClasses: (typeof Entity)[] = [ServiceContextParent];
-  
-  export interface ServiceContextParentsCollectionProps
-  extends ExtendedCollectionProps<BimoServiceContextParent, ServiceContextParentProps> {}
-  
- class ServiceContextParentsCollection extends Collection<
-    ServiceContextParent,
+
+  class ServiceContextParentsCollection extends Collection<
+    BimoServiceContextParent,
     ServiceContextParentProps
   > {
     constructor(props: ServiceContextParentsCollectionProps = {}) {
@@ -28,10 +30,10 @@ export function ServiceContextParentsCollectionClassFactory({
       });
     }
   }
-  
+
   ServiceContextParentsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ServiceContextParentsCollection
+
+  return ServiceContextParentsCollection;
 }
 
-export default ServiceContextParentsCollectionClassFactory
+export default ServiceContextParentsCollectionClassFactory;

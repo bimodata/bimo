@@ -6,17 +6,16 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BimoServiceContextDay, ServiceContextDayProps } from "./ServiceContextDay";
+export interface ServiceContextDaysCollectionProps
+  extends ExtendedCollectionProps<BimoServiceContextDay, ServiceContextDayProps> {}
+
 export function ServiceContextDaysCollectionClassFactory({
   ServiceContextDay,
-}: EntityConstructorByEntityClassKey): typeof BimoServiceContextDaysCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoServiceContextDaysCollection {
   const childClasses: (typeof Entity)[] = [ServiceContextDay];
-  
-  export interface ServiceContextDaysCollectionProps
-  extends ExtendedCollectionProps<BimoServiceContextDay, ServiceContextDayProps> {}
-  
- class ServiceContextDaysCollection extends Collection<
-    ServiceContextDay,
+
+  class ServiceContextDaysCollection extends Collection<
+    BimoServiceContextDay,
     ServiceContextDayProps
   > {
     constructor(props: ServiceContextDaysCollectionProps = {}) {
@@ -28,10 +27,10 @@ export function ServiceContextDaysCollectionClassFactory({
       });
     }
   }
-  
+
   ServiceContextDaysCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return ServiceContextDaysCollection
+
+  return ServiceContextDaysCollection;
 }
 
-export default ServiceContextDaysCollectionClassFactory
+export default ServiceContextDaysCollectionClassFactory;

@@ -1,7 +1,6 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { SchedulingUnitDate as BimoSchedulingUnitDate } from "../base-types/rawIndex";
 export { SchedulingUnitDate as BimoSchedulingUnitDate } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
@@ -23,8 +22,8 @@ export interface SchedulingUnitDateProps extends ExtendedItemProps {
   scudProdSchedType?: string;
 }
 
-export function SchedulingUnitDateClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnitDate{
- class SchedulingUnitDate extends Item<SchedulingUnitDate> {
+export function SchedulingUnitDateClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnitDate {
+  class SchedulingUnitDate extends Item<SchedulingUnitDate> {
     scudSchedUnitName?: string;
     scudSchedUnitType?: string;
     scudProdPhaseDate?: string;
@@ -58,20 +57,20 @@ export function SchedulingUnitDateClassFactory(entityConstructorByEntityClassKey
       this.scudProdBookingId = gavpfp("scudProdBookingId", props);
       this.scudProdSchedType = gavpfp("scudProdSchedType", props);
     }
-  
+
     get mediumLoggingOutput() {
       return (
         `${this.scudSchedUnitName} (${this.scudApplicMethod}) :` +
         `${this.scudSpecSchedName} - ${this.scudSpecSchedType} ${this.scudSpecSchedScenario} `
       );
     }
-  
+
     get shortLoggingOutput() {
       return `${this.scudSchedUnitName} (${this.scudApplicMethod})`;
     }
   }
-  
-  return SchedulingUnitDate
+
+  return SchedulingUnitDate;
 }
 
-export default SchedulingUnitDateClassFactory
+export default SchedulingUnitDateClassFactory;

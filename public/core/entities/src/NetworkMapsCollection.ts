@@ -6,16 +6,15 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoNetworkMap, NetworkMapProps } from "./NetworkMap";
+export interface NetworkMapsCollectionProps
+  extends ExtendedCollectionProps<BimoNetworkMap, NetworkMapProps> {}
+
 export function NetworkMapsCollectionClassFactory({
   NetworkMap,
-}: EntityConstructorByEntityClassKey): typeof BimoNetworkMapsCollection{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoNetworkMapsCollection {
   const childClasses: (typeof Entity)[] = [NetworkMap];
-  
-  export interface NetworkMapsCollectionProps
-  extends ExtendedCollectionProps<BimoNetworkMap, NetworkMapProps> {}
-  
- class NetworkMapsCollection extends Collection<BimoNetworkMap, NetworkMapProps> {
+
+  class NetworkMapsCollection extends Collection<BimoNetworkMap, NetworkMapProps> {
     /**
      *
      * @param {Object} props
@@ -33,10 +32,10 @@ export function NetworkMapsCollectionClassFactory({
       });
     }
   }
-  
+
   NetworkMapsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return NetworkMapsCollection
+
+  return NetworkMapsCollection;
 }
 
-export default NetworkMapsCollectionClassFactory
+export default NetworkMapsCollectionClassFactory;

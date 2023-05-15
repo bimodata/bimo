@@ -8,57 +8,56 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import timeAndDate from "@bimo/core-utils-time-and-date";
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 
-import { BimoTripOrVariantPoint, TripOrVariantPointProps } from "./TripOrVariantPoint";
-import { BimoTripPointsCollection, TripPointsCollectionProps } from "./TripPointsCollection";
+import { BimoTripOrVariantPoint } from "./TripOrVariantPoint";
+import { BimoTripPointsCollection } from "./TripPointsCollection";
 import { BimoTrip, TripProps } from "./Trip";
+
+export interface TripPointProps extends ExtendedItemProps {
+  trpptPlace?: string;
+  trpptStop?: string;
+  trpptIsTimingPoint?: string;
+  trpptArrivalTimeUnrounded?: string;
+  trpptDepartureTimeUnrounded?: string;
+  trpptInternalArrivalTime?: string;
+  trpptInternalDepartureTime?: string;
+  trpptNoStopping?: string;
+  trpptInternalTpDistance?: string | null;
+  trpptInternalDistance?: string | null;
+  trpptTpDistance?: string | null;
+  trpptDistance?: string | null;
+  trpptDistrict?: string;
+  trpptZone?: string;
+  trpptTpNote?: string;
+  trpptTstpNote?: string;
+  trpptInternalAllowLoadTime?: string;
+  trpptInternalArrivalTimeDiff?: string;
+  trpptInternalDepartureTimeDiff?: string;
+  trpptDepartureTpNote?: string;
+  trpptInternalTimeFactor?: string;
+  trpptInternalPublicInfo?: string;
+  trpptInternalPathPrevPoint?: string;
+  trpptInternalPassengersMvmtRestrict?: string;
+  trpptOriginalStop?: string;
+  trpptInternalOriginalPlaceId?: string;
+  trpptInternalOriginalNoStopping?: string;
+  trpptInternalOriginalAllowLoadTime?: string;
+  trpptInternalBackwardHoldTime?: string;
+  trpptInternalForwardHoldTime?: string;
+  trpptIsRoutingPoint?: string;
+  trpptInternalLoadDistrict?: string;
+  trpptInternalLoadPlace?: string;
+  trpptInternalLoadZone?: string;
+  trpptVariantId?: string;
+}
 export function TripPointClassFactory({
   TripOrVariantPoint,
   TripPointsCollection,
   Trip,
-}: EntityConstructorByEntityClassKey): typeof BimoTripPoint{
-  
+}: EntityConstructorByEntityClassKey): typeof BimoTripPoint {
   const TP_INTERNAL_DISTANCE_FACTOR = 10000;
   const REGULAR_INTERNAL_DISTANCE_FACTOR = 10;
-  
-  export interface TripPointProps extends ExtendedItemProps {
-    trpptPlace?: string;
-    trpptStop?: string;
-    trpptIsTimingPoint?: string;
-    trpptArrivalTimeUnrounded?: string;
-    trpptDepartureTimeUnrounded?: string;
-    trpptInternalArrivalTime?: string;
-    trpptInternalDepartureTime?: string;
-    trpptNoStopping?: string;
-    trpptInternalTpDistance?: string | null;
-    trpptInternalDistance?: string | null;
-    trpptTpDistance?: string | null;
-    trpptDistance?: string | null;
-    trpptDistrict?: string;
-    trpptZone?: string;
-    trpptTpNote?: string;
-    trpptTstpNote?: string;
-    trpptInternalAllowLoadTime?: string;
-    trpptInternalArrivalTimeDiff?: string;
-    trpptInternalDepartureTimeDiff?: string;
-    trpptDepartureTpNote?: string;
-    trpptInternalTimeFactor?: string;
-    trpptInternalPublicInfo?: string;
-    trpptInternalPathPrevPoint?: string;
-    trpptInternalPassengersMvmtRestrict?: string;
-    trpptOriginalStop?: string;
-    trpptInternalOriginalPlaceId?: string;
-    trpptInternalOriginalNoStopping?: string;
-    trpptInternalOriginalAllowLoadTime?: string;
-    trpptInternalBackwardHoldTime?: string;
-    trpptInternalForwardHoldTime?: string;
-    trpptIsRoutingPoint?: string;
-    trpptInternalLoadDistrict?: string;
-    trpptInternalLoadPlace?: string;
-    trpptInternalLoadZone?: string;
-    trpptVariantId?: string;
-  }
-  
- class TripPoint extends TripOrVariantPoint<TripPoint, TripPointProps> {
+
+  class TripPoint extends TripOrVariantPoint<TripPoint, TripPointProps> {
     trpptPlace: string;
     trpptStop?: string;
     trpptIsTimingPoint?: string;
@@ -82,7 +81,7 @@ export function TripPointClassFactory({
     trpptInternalPathPrevPoint?: string;
     trpptInternalPassengersMvmtRestrict?: string;
     trpptOriginalStop?: string;
-    trpptInternalOriginalPlaceId?: string;
+    trpptInternalOriginalPlaceId: string;
     trpptInternalOriginalNoStopping?: string;
     trpptInternalOriginalAllowLoadTime?: string;
     trpptInternalBackwardHoldTime?: string;
@@ -114,11 +113,11 @@ export function TripPointClassFactory({
         this.trpptDepartureTimeUnrounded
       );
       this.trpptNoStopping = gavpfp("trpptNoStopping", props, `string`, `0`);
-  
+
       /** en décimètres */
       this.trpptInternalTpDistance = gavpfp("trpptInternalTpDistance", props);
       this.trpptTpDistance = gavpfp("trpptTpDistance", props) ?? this.trpptTpDistance;
-  
+
       /** en décimètres */
       this.trpptInternalDistance = gavpfp("trpptInternalDistance", props);
       this.trpptDistance = gavpfp("trpptDistance", props) ?? this.trpptDistance;
@@ -189,7 +188,7 @@ export function TripPointClassFactory({
       this.trpptInternalLoadZone = gavpfp("trpptInternalLoadZone", props);
       this.trpptVariantId = gavpfp("trpptVariantId", props);
     }
-  
+
     /** en km */
     get trpptTpDistance() {
       const valueAsNumber = parseFloat(this.trpptInternalTpDistance as string);
@@ -197,7 +196,7 @@ export function TripPointClassFactory({
         ? null
         : (valueAsNumber / TP_INTERNAL_DISTANCE_FACTOR).toFixed(4);
     }
-  
+
     /** en km */
     set trpptTpDistance(v) {
       const valueAsNumber = parseFloat(v as string);
@@ -205,7 +204,7 @@ export function TripPointClassFactory({
         ? null
         : (valueAsNumber * TP_INTERNAL_DISTANCE_FACTOR).toFixed(0);
     }
-  
+
     /** en m */
     get trpptDistance() {
       const valueAsNumber = parseFloat(this.trpptInternalDistance as string);
@@ -213,7 +212,7 @@ export function TripPointClassFactory({
         ? null
         : (valueAsNumber / REGULAR_INTERNAL_DISTANCE_FACTOR).toFixed(2);
     }
-  
+
     /** en m */
     set trpptDistance(v) {
       const valueAsNumber = parseFloat(v as string);
@@ -221,73 +220,79 @@ export function TripPointClassFactory({
         ? null
         : (valueAsNumber * REGULAR_INTERNAL_DISTANCE_FACTOR).toFixed(0);
     }
-  
+
     get trpptInternalArrivalTime() {
       return (this._trpptInternalArrivalTime || this.trpptArrivalTimeUnrounded) as string;
     }
-  
+
     set trpptInternalArrivalTime(v) {
       this._trpptInternalArrivalTime = v;
     }
-  
+
     get trpptInternalDepartureTime() {
       return (this._trpptInternalDepartureTime ||
         this.trpptDepartureTimeUnrounded) as string;
     }
-  
+
     set trpptInternalDepartureTime(v) {
       this._trpptInternalDepartureTime = v;
     }
-  
+
     /** @type {Boolean} */
     get isStopping() {
       return this.trpptNoStopping === "0";
     }
-  
+
     get trip() {
-      return this.parent && (this.parent.parent as unknown as Trip);
+      return this.parent && (this.parent.parent as unknown as BimoTrip);
     }
-  
+
     get _indexInSortedParent() {
       if (!this.parent) return null;
-      (this.parent as TripPointsCollection).sortByTime();
+      (this.parent as BimoTripPointsCollection).sortByTime();
       return this.parent.indexOf(this);
     }
-  
+
     getNthTripPointFromThisOne(n: number) {
       this.getNthPointFromThisOne(n);
     }
-  
+
     getNthPointFromThisOne(n: number) {
-      return (this.parent && this.parent.items[this._indexInSortedParent + n]) ?? null;
+      const indexInSortedParent = this._indexInSortedParent;
+      return (
+        (this.parent &&
+          indexInSortedParent &&
+          this.parent.items[indexInSortedParent + n]) ??
+        null
+      );
     }
-  
+
     get nextTripPoint() {
       return this.nextPoint;
     }
-  
+
     get nextPoint() {
       return this.getNthPointFromThisOne(1);
     }
-  
+
     get previousTripPoint() {
       return this.previousPoint;
     }
-  
+
     get previousPoint() {
       return this.getNthPointFromThisOne(-1);
     }
-  
+
     copy() {
       const copiedItem = new TripPoint(this);
       copiedItem.parent = this.parent;
       return copiedItem;
     }
-  
+
     removeFromTrip() {
-      this.parent.remove(this);
+      this.parent?.remove(this);
     }
-  
+
     /**
      *
      * @param {'departure'|'arrival'} [departureOrArrival='departure']
@@ -310,54 +315,54 @@ export function TripPointClassFactory({
       const finalValue = allowFallback ? mainValue || fallBackValue : mainValue;
       return timeAndDate.hastusExtendedHoursToDuration(finalValue);
     }
-  
+
     get stopDurationInSeconds() {
       return this.getTimeAsDuration("departure")
         .minus(this.getTimeAsDuration("arrival"))
         .as("second");
     }
-  
+
     tripPointTimesAreValid() {
       const isValid =
         this.getTimeAsDuration(`departure`, false) >=
         this.getTimeAsDuration(`arrival`, false);
       return isValid;
     }
-  
+
     get shortLoggingOutput() {
       return (
         `${this.trpptPlace}(A:${this.trpptInternalArrivalTime},` +
         ` D:${this.trpptInternalDepartureTime}, noStopping:${this.trpptNoStopping})`
       );
     }
-  
+
     get placeId() {
       return this.trpptPlace;
     }
-  
+
     set placeId(v) {
-      if (this === this.trip.firstTripPoint) this.trip.changeCurrentStartPlace(v);
-      else if (this === this.trip.lastTripPoint) this.trip.changeCurrentEndPlace(v);
+      if (this === this.trip?.firstTripPoint) this.trip.changeCurrentStartPlace(v);
+      else if (this === this.trip?.lastTripPoint) this.trip.changeCurrentEndPlace(v);
       else this.trpptPlace = v;
     }
-  
+
     get originalPlaceId() {
       return this.trpptInternalOriginalPlaceId;
     }
-  
-    set originalPlaceId(v) {
-      if (this === this.trip.firstTripPoint) this.trip.changeOriginalStartPlace(v);
-      else if (this === this.trip.lastTripPoint) this.trip.changeOriginalEndPlace(v);
+
+    set originalPlaceId(v: string) {
+      if (this === this.trip?.firstTripPoint) this.trip.changeOriginalStartPlace(v);
+      else if (this === this.trip?.lastTripPoint) this.trip.changeOriginalEndPlace(v);
       else this.trpptInternalOriginalPlaceId = v;
     }
   }
-  
+
   TripPoint.hastusKeywords = ["trip_point"];
   TripPoint.hastusObject = "trip_point";
-  
+
   TripPoint.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TripPoint
+
+  return TripPoint;
 }
 
-export default TripPointClassFactory
+export default TripPointClassFactory;

@@ -22,8 +22,8 @@ export interface LoadTimeProps extends ExtendedItemProps {
   ltDetourId?: string;
 }
 
-export function LoadTimeClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoLoadTime{
- class LoadTime extends Item<LoadTime> {
+export function LoadTimeClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoLoadTime {
+  class LoadTime extends Item<LoadTime> {
     bimoId?: string;
     ltPlaceId?: string;
     ltLoadPlaceId?: string;
@@ -49,7 +49,7 @@ export function LoadTimeClassFactory(entityConstructorByEntityClassKey: EntityCo
       this.ltNetworkEventId = gavpfp("ltNetworkEventId", props, `string`);
       this.ltDetourId = gavpfp("ltDetourId", props, `string`);
     }
-  
+
     /** @type {string} key made of all attributes except the loadtime */
     get key() {
       return (
@@ -57,7 +57,7 @@ export function LoadTimeClassFactory(entityConstructorByEntityClassKey: EntityCo
         `|${this.ltRouteId}|${this.ltVariantId}|${this.ltNetworkEventId}|${this.ltDetourId}`
       );
     }
-  
+
     /** @type {string} key made of all attributes including the loadtime */
     get keyWithTime() {
       return (
@@ -66,13 +66,13 @@ export function LoadTimeClassFactory(entityConstructorByEntityClassKey: EntityCo
       );
     }
   }
-  
+
   LoadTime.hastusKeywords = ["loadtime"];
   LoadTime.hastusObject = "load_time";
-  
+
   LoadTime.allChildClasses = getAllChildClasses(childClasses);
-  
-  return LoadTime
+
+  return LoadTime;
 }
 
-export default LoadTimeClassFactory
+export default LoadTimeClassFactory;

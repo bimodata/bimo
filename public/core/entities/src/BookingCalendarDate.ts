@@ -7,27 +7,24 @@ import { cleanStringUsingRegexAndReplacePairs } from "@bimo/core-utils-string";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import {
-  SchedulingUnitDatesCollection,
-  SchedulingUnitDatesCollectionProps,
-} from "./SchedulingUnitDatesCollection";
+import { BimoSchedulingUnitDatesCollection } from "./SchedulingUnitDatesCollection";
 
-import { BimoSchedulingUnitDate, SchedulingUnitDateProps } from "./SchedulingUnitDate";
+import { BimoSchedulingUnitDate } from "./SchedulingUnitDate";
+
+export interface BookingCalendarDateProps extends ExtendedItemProps {
+  bcaldDate?: string;
+  bcaldServiceDefId?: string;
+  schedulingUnitDates?: string;
+}
 export function BookingCalendarDateClassFactory({
-  SchedulingUnitDate,
-}: EntityConstructorByEntityClassKey): typeof BimoBookingCalendarDate{
+  SchedulingUnitDatesCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoBookingCalendarDate {
   const childClasses: (typeof Entity)[] = [SchedulingUnitDatesCollection];
-  
-  export interface BookingCalendarDateProps extends ExtendedItemProps {
+
+  class BookingCalendarDate extends Item<BookingCalendarDate> {
     bcaldDate?: string;
     bcaldServiceDefId?: string;
-    schedulingUnitDates?: string;
-  }
-  
- class BookingCalendarDate extends Item<BookingCalendarDate> {
-    bcaldDate?: string;
-    bcaldServiceDefId?: string;
-    schedulingUnitDates: SchedulingUnitDatesCollection;
+    schedulingUnitDates: BimoSchedulingUnitDatesCollection;
     constructor(props: BookingCalendarDateProps) {
       super(props);
       /**
@@ -42,7 +39,7 @@ export function BookingCalendarDateClassFactory({
         this.bcaldDate = date;
       }
       this.bcaldServiceDefId = gavpfp("bcaldServiceDefId", props, `string`);
-  
+
       /* Children */
       /** @type {SchedulingUnitDatesCollection} */
       this.schedulingUnitDates = gavpfp(
@@ -53,7 +50,7 @@ export function BookingCalendarDateClassFactory({
         { altPropName: "scheduling_unit_date", parent: this }
       );
     }
-  
+
     get dateAsIsoDateString() {
       return this._getAndSetCachedValue("dateAsIsoDateString", () =>
         cleanStringUsingRegexAndReplacePairs(this.bcaldDate, [
@@ -61,23 +58,23 @@ export function BookingCalendarDateClassFactory({
         ])
       );
     }
-  
-    addSchedUnitDate(schedulingUnitDate: SchedulingUnitDate) {
+
+    addSchedUnitDate(schedulingUnitDate: BimoSchedulingUnitDate) {
       this.schedulingUnitDates.add(schedulingUnitDate);
     }
-  
+
     get mediumLoggingOutput() {
       return `${this.bcaldDate} (${this.bcaldServiceDefId}) - (${this.schedulingUnitDates.length} scheduling units)`;
     }
-  
+
     get shortLoggingOutput() {
       return `${this.bcaldDate}`;
     }
   }
-  
+
   BookingCalendarDate.allChildClasses = getAllChildClasses(childClasses);
-  
-  return BookingCalendarDate
+
+  return BookingCalendarDate;
 }
 
-export default BookingCalendarDateClassFactory
+export default BookingCalendarDateClassFactory;

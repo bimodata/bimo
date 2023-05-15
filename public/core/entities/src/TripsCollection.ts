@@ -6,15 +6,16 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoTrip, TripProps } from "./Trip";
+
+export interface TripsCollectionProps
+  extends ExtendedCollectionProps<BimoTrip, TripProps> {}
+
 export function TripsCollectionClassFactory({
   Trip,
-}: EntityConstructorByEntityClassKey): typeof BimoTripsCollection{
-  
-  const childClasses: (typeof Entity)[] = [Trip];
-  
-export interface TripsCollectionProps extends ExtendedCollectionProps<BimoTrip, TripProps> {}
-  
- class TripsCollection extends Collection<BimoTrip, TripProps> {
+}: EntityConstructorByEntityClassKey): typeof BimoTripsCollection {
+  const childClasses: any[] = [Trip];
+
+  class TripsCollection extends Collection<BimoTrip, TripProps> {
     constructor(props: TripsCollectionProps = {}) {
       super({
         itemName: "Trip",
@@ -25,7 +26,7 @@ export interface TripsCollectionProps extends ExtendedCollectionProps<BimoTrip, 
         ...props,
       });
     }
-  
+
     /**
      * Groups all the trips of the collection by trip number
      * @returns {Map<String, Trip[]>} a map of trips arrays, indexed by trip number
@@ -33,15 +34,15 @@ export interface TripsCollectionProps extends ExtendedCollectionProps<BimoTrip, 
     get tripsByTripNumber() {
       return this.groupByProp(`trpNumber`);
     }
-  
+
     get mediumLoggingOutput() {
       return this.map((trip) => trip.shortLoggingOutput).join("\n");
     }
   }
-  
+
   TripsCollection.allChildClasses = getAllChildClasses(childClasses);
-  
-  return TripsCollection
+
+  return TripsCollection;
 }
 
-export default TripsCollectionClassFactory
+export default TripsCollectionClassFactory;

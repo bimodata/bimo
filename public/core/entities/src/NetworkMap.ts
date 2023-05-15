@@ -26,8 +26,10 @@ export interface NetworkMapProps extends ExtendedItemProps {
   sectionsFeatureCollection?: FeatureCollection;
 }
 
-export function NetworkMapClassFactory(entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey): typeof BimoNetworkMap{
- class NetworkMap extends Item<NetworkMap> {
+export function NetworkMapClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoNetworkMap {
+  class NetworkMap extends Item<NetworkMap> {
     bimoId: string;
     featureCollection: FeatureCollection;
     nodesFeatureCollection?: FeatureCollection;
@@ -40,19 +42,19 @@ export function NetworkMapClassFactory(entityConstructorByEntityClassKey: Entity
       this.nodesFeatureCollection = gavpfp("nodesFeatureCollection", props);
       this.sectionsFeatureCollection = gavpfp("sectionsFeatureCollection", props);
     }
-  
+
     get shortLoggingOutput() {
       return this.label ?? super.slo;
     }
-  
+
     get mediumLoggingOutput() {
       return `${this.shortLoggingOutput}: ${this.featureCollection.features.length} segments`;
     }
   }
-  
+
   NetworkMap.allChildClasses = getAllChildClasses(childClasses);
-  
-  return NetworkMap
+
+  return NetworkMap;
 }
 
-export default NetworkMapClassFactory
+export default NetworkMapClassFactory;

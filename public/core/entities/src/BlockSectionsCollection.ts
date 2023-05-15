@@ -1,17 +1,16 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { BlockSectionsCollection as BimoBlockSectionsCollection } from "../base-types/rawIndex";
 export { BlockSectionsCollection as BimoBlockSectionsCollection } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BimoBlockSection, BlockSectionProps } from "./BlockSection";
+
+export interface BlockSectionsCollectionProps
+  extends ExtendedCollectionProps<BimoBlockSection, BlockSectionProps> {}
+
 export function BlockSectionsCollectionClassFactory({
   BlockSection,
-}: EntityConstructorByEntityClassKey): typeof BimoBlockSectionsCollection{
-  
-  export interface BlockSectionsCollectionProps
-  extends ExtendedCollectionProps<BimoBlockSection, BlockSectionProps> {}
-  
- class BlockSectionsCollection extends Collection<BimoBlockSection, BlockSectionProps> {
+}: EntityConstructorByEntityClassKey): typeof BimoBlockSectionsCollection {
+  class BlockSectionsCollection extends Collection<BimoBlockSection, BlockSectionProps> {
     constructor(props: BlockSectionsCollectionProps = {}) {
       super({
         itemName: "BlockSection",
@@ -21,7 +20,7 @@ export function BlockSectionsCollectionClassFactory({
         ...props,
       });
     }
-  
+
     sortByTime() {
       try {
         this.items.sort(
@@ -37,8 +36,8 @@ export function BlockSectionsCollectionClassFactory({
       }
     }
   }
-  
-  return BlockSectionsCollection
+
+  return BlockSectionsCollection;
 }
 
-export default BlockSectionsCollectionClassFactory
+export default BlockSectionsCollectionClassFactory;

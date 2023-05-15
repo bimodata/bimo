@@ -1,24 +1,27 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { TripOrVariant as BimoTripOrVariant } from "../base-types/rawIndex";
 export { TripOrVariant as BimoTripOrVariant } from "../base-types/rawIndex";
-import { Entity } from "@bimo/core-utils-entity";
-/* eslint-disable no-unused-vars */
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
-import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
+import { Collection } from "@bimo/core-utils-collection";
 import { get } from "lodash";
-import {
-  TripOrVariantSectionsCollection,
-  TripOrVariantSectionsCollectionProps,
-} from "./TripOrVariantSectionsCollection";
+import { BimoTripOrVariantSectionsCollection } from "./TripOrVariantSectionsCollection";
 import computeTripOrVariantSectionsOfTripOrVariant from "./subs/computeTripOrVariantSectionsOfTripOrVariant";
 import { BimoContext } from "@bimo/core-global-types";
-import { BimoPlace, PlaceProps } from "./Place";
-import { BimoTripOrVariantPoint, TripOrVariantPointProps } from "./TripOrVariantPoint";
-export function TripOrVariantClassFactory({
-  Place,
-  TripOrVariantPoint,
-}: EntityConstructorByEntityClassKey): typeof BimoTripOrVariant{
-  
+import { BimoPlace } from "./Place";
+import { BimoTripOrVariantPoint } from "./TripOrVariantPoint";
+
+export interface TripOrVariantProps extends ExtendedItemProps {
+  _abstract?: string;
+}
+
+export type TripOrVariantTypeEnum =
+  | "trip"
+  | "variant"
+  | "scheduledTrip"
+  | "trainPathVariant";
+export function TripOrVariantClassFactory(
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+): typeof BimoTripOrVariant {
   const pathByTripOrVariantPropNameByTripOrVariantType = {
     trip: {
       points: "tripPoints",
@@ -47,21 +50,11 @@ export function TripOrVariantClassFactory({
       // TODO: complete
     },
   };
-  
-  export interface TripOrVariantProps extends ExtendedItemProps {
-    _abstract?: string;
-  }
-  
-  export type TripOrVariantTypeEnum =
-    | "trip"
-    | "variant"
-    | "scheduledTrip"
-    | "trainPathVariant";
-  
- class TripOrVariant<
+
+  class TripOrVariant<
     TripOrVariantType extends ExtendedItem<TripOrVariantType>,
     TripOrVariantProps extends ExtendedItemProps,
-    PointType extends TripOrVariantPoint<PointType, PointProps>,
+    PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
     PointProps extends ExtendedItemProps
   > extends Item<TripOrVariantType> {
     _abstract?: any;
@@ -77,31 +70,31 @@ export function TripOrVariantClassFactory({
         pathByPropName: pathByTripOrVariantPropNameByTripOrVariantType[tripOrVariantType],
       };
     }
-  
+
     get tripOrVariantType() {
       return this._abstract.tripOrVariantType;
     }
-  
+
     get veryShortOdRefPlaceLabel() {
       return `${this.firstPoint.place.referencePlace?.veryShortLabel}>${this.lastPoint.place.referencePlace?.veryShortLabel}`;
     }
-  
+
     get shortOdRefPlaceLabel() {
       return `${this.firstPoint.place.referencePlace?.shortLabel}->${this.lastPoint.place.referencePlace?.shortLabel}`;
     }
-  
+
     get shortOdTrackPlaceLabel() {
       return `${this.firstPoint.place.shortLabel} -> ${this.lastPoint.place.shortLabel}`;
     }
-  
+
     get sortedOdPlaceIdsString() {
       if (this.firstPoint.placeId < this.lastPoint.placeId) {
         return `${this.firstPoint.placeId}${this.lastPoint.placeId}`;
       }
       return `${this.lastPoint.placeId}${this.firstPoint.placeId}`;
     }
-  
-    get sections(): TripOrVariantSectionsCollection<
+
+    get sections(): BimoTripOrVariantSectionsCollection<
       PointType,
       PointProps,
       TripOrVariantType,
@@ -112,75 +105,75 @@ export function TripOrVariantClassFactory({
         TripOrVariantProps,
         PointType,
         PointProps
-      >(this);
+      >(this, entityConstructorByEntityClassKey);
     }
-  
+
     get points(): Collection<PointType, PointProps> {
       return get(this, this._abstract.pathByPropName.points);
     }
-  
+
     get setOfAllPlaceIdentifiers() {
       return new Set(this.points.map((point) => point.placeId));
     }
-  
+
     get startPlaceId(): string {
       return this.firstPoint.placeId;
     }
-  
+
     get endPlaceId(): string {
       return this.lastPoint.placeId;
     }
-  
+
     get firstPoint(): PointType {
       return this.points.first;
     }
-  
+
     get lastPoint(): PointType {
       return this.points.last;
     }
-  
+
     get productive(): string {
       return get(this, this._abstract.pathByPropName.productive);
     }
-  
+
     get pointsWithStopping(): PointType[] {
       return this.points.pick((point) => point.noStopping === "0");
     }
-  
+
     get pointsThatAreTimingPoints(): PointType[] {
       return this.points.pick((point) => point.isTimingPoint === "1");
     }
-  
+
     get routeId(): string | undefined {
       return get(this, this._abstract.pathByPropName.routeId);
     }
-  
+
     get variantId(): string {
       return get(this, this._abstract.pathByPropName.variantId);
     }
-  
+
     get direction(): string {
       return get(this, this._abstract.pathByPropName.direction);
     }
-  
+
     get indiceCompo(): string {
       return get(this, this._abstract.pathByPropName.indiceCompo);
     }
-  
-    changeStartPlace(newStartPlace: Place | string) {
+
+    changeStartPlace(newStartPlace: BimoPlace | string) {
       throw new Error(
         `changeStartPlace method should be implemented in ${this.tripOrVariantType}`
       );
     }
-  
-    changeEndPlace(newEndPlace: Place | string) {
+
+    changeEndPlace(newEndPlace: BimoPlace | string) {
       throw new Error(
         `changeEndPlace method should be implemented in ${this.tripOrVariantType}`
       );
     }
   }
-  
-  return TripOrVariant
+
+  return TripOrVariant;
 }
 
-export default TripOrVariantClassFactory
+export default TripOrVariantClassFactory;
