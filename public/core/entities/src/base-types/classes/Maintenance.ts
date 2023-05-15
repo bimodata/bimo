@@ -1,7 +1,7 @@
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { BlockActivityItem } from "./BlockActivityItem";
-import BlockActivity from "./BlockActivity";
-import Place from "./Place";
+import { BlockActivity } from "./BlockActivity";
+import { Place } from "./Place";
 import { MaintenancesCollection } from "./MaintenancesCollection";
 export interface MaintenanceProps extends ExtendedItemProps {
   bimoId?: string;
@@ -69,7 +69,6 @@ export declare class Maintenance
   improveEndPlacePrecision(morePreciseEndPlace: Place): void;
   shiftTimes(shiftInSeconds: number): void;
 }
-export default Maintenance;
 export type ActivityTypeNoByMaintenanceVehicleActivityId = {
   PC: "10000";
   EJ: "10001";

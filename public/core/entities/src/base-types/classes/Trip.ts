@@ -8,9 +8,9 @@ import { TripOrVariant, TripOrVariantTypeEnum } from "./TripOrVariant";
 import { BlockActivityItem } from "./BlockActivityItem";
 import { BlockActivity } from "./BlockActivity";
 import { BimoContext } from "@bimo/core-global-types";
-import TripsCollection from "./TripsCollection";
-import VehicleSchedule from "./VehicleSchedule";
-import Place from "./Place";
+import { TripsCollection } from "./TripsCollection";
+import { VehicleSchedule } from "./VehicleSchedule";
+import { Place } from "./Place";
 export type TripType = "0" | "3";
 export interface TripProps extends ExtendedItemProps {
   bimoId?: string;
@@ -254,4 +254,3 @@ export declare class Trip
   get endPlaceId(): string;
   shiftTimes(shiftInSeconds: number): void;
 }
-export default Trip;

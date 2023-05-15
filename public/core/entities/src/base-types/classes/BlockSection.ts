@@ -5,7 +5,7 @@
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { BlockActivitiesCollection } from "./BlockActivitiesCollection";
 import { BlockActivityProps } from "./BlockActivity";
-import BlockSectionsCollection from "./BlockSectionsCollection";
+import { BlockSectionsCollection } from "./BlockSectionsCollection";
 import { VehicleTask } from "./VehicleTask";
 import { Block } from "./Block";
 export interface BlockSectionProps extends ExtendedItemProps {
@@ -29,4 +29,3 @@ export declare class BlockSection extends Item<BlockSection> {
   get previousBlockSection(): BlockSection | undefined;
   get mediumLoggingOutput(): string;
 }
-export default BlockSection;

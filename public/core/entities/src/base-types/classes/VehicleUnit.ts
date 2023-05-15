@@ -21,4 +21,3 @@ export declare class VehicleUnit extends Item<VehicleUnit> {
   get shortLoggingOutput(): string;
   get vehicleSchedule(): VehicleSchedule | undefined;
 }
-export default VehicleUnit;

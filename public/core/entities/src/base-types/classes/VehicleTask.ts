@@ -27,4 +27,3 @@ export declare class VehicleTask extends Item<VehicleTask> {
   get blockActivities(): BlockActivitiesCollection | undefined;
   get blockSections(): BlockSectionsCollection | undefined;
 }
-export default VehicleTask;

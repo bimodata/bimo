@@ -200,4 +200,3 @@ export declare class VehicleSchedule extends VehicleScheduleOrRouteVersion<
   >;
   removeUnusedBlockActivities(): void;
 }
-export default VehicleSchedule;

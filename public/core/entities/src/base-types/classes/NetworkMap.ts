@@ -11,18 +11,17 @@ Une network map est stockée sous la forme de plusieurs FeatureCollection geojso
 features de type Point ou LineString. Chacune de ces features a des propriétés qui font le
 lien vers des Edges ou des Nodes, ou des sections du réseau. */
 export interface NetworkMapProps extends ExtendedItemProps {
-    bimoId: string;
-    featureCollection?: FeatureCollection;
-    nodesFeatureCollection?: FeatureCollection;
-    sectionsFeatureCollection?: FeatureCollection;
+  bimoId: string;
+  featureCollection?: FeatureCollection;
+  nodesFeatureCollection?: FeatureCollection;
+  sectionsFeatureCollection?: FeatureCollection;
 }
 export declare class NetworkMap extends Item<NetworkMap> {
-    bimoId: string;
-    featureCollection: FeatureCollection;
-    nodesFeatureCollection?: FeatureCollection;
-    sectionsFeatureCollection?: FeatureCollection;
-    constructor(props: NetworkMapProps);
-    get shortLoggingOutput(): string;
-    get mediumLoggingOutput(): string;
+  bimoId: string;
+  featureCollection: FeatureCollection;
+  nodesFeatureCollection?: FeatureCollection;
+  sectionsFeatureCollection?: FeatureCollection;
+  constructor(props: NetworkMapProps);
+  get shortLoggingOutput(): string;
+  get mediumLoggingOutput(): string;
 }
-export default NetworkMap;

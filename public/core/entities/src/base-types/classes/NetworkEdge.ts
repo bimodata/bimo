@@ -52,4 +52,3 @@ export declare class NetworkEdge extends Item<NetworkEdge> {
     }
   ): void;
 }
-export default NetworkEdge;

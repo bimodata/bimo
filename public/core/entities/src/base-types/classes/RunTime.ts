@@ -33,4 +33,3 @@ export declare class RunTime extends Item<RunTime> {
   get keyWithTime(): string;
   get shortLoggingOutput(): string;
 }
-export default RunTime;
