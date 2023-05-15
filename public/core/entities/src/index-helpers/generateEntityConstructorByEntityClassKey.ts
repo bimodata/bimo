@@ -4,15 +4,15 @@ import { EntityConstructorByEntityClassKey } from "../base-types/entityConstruct
 export function generateEntityConstructorByEntityClassKey({
   CustomClassFactoryByEntityClassKey = {},
 }: any = {}): EntityConstructorByEntityClassKey {
-  const entityConstructorByEntityClassKey: any = Object.fromEntries(
-    Object.entries(DefaultClassFactoryByEntityClassKey).map(
-      ([entityClassKey, DefaultClassFactory]) => {
-        const ClassFactory =
-          CustomClassFactoryByEntityClassKey[entityClassKey] ?? DefaultClassFactory;
-        return [entityClassKey, ClassFactory(entityConstructorByEntityClassKey)];
-      }
-    )
+  const entityConstructorByEntityClassKey: any = {};
+  Object.entries(DefaultClassFactoryByEntityClassKey).forEach(
+    ([entityClassKey, DefaultClassFactory]) => {
+      const ClassFactory =
+        CustomClassFactoryByEntityClassKey[entityClassKey] ?? DefaultClassFactory;
+      entityConstructorByEntityClassKey[entityClassKey] = ClassFactory(
+        entityConstructorByEntityClassKey
+      );
+    }
   );
-
   return entityConstructorByEntityClassKey;
 }

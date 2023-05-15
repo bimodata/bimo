@@ -100,7 +100,6 @@ export * from "./classes/TripOrVariantSectionsCollection";
 export * from "./classes/BoundingBox";
 export * from "./classes/DataFile";
 export * from "./classes/DataFilesCollection";
-export * from "./classes/Jour";
 export * from "./classes/AdjacentLink";
 export * from "./classes/NetworkMap";
 export * from "./classes/NetworkMapsCollection";

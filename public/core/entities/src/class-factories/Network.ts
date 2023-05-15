@@ -240,16 +240,12 @@ export function NetworkClassFactory({
     }
 
     get mermaidString() {
-      return `\`\`\`mermaid
-  flowchart LR
-  ${this.edges
-    .map((edge) => `${edge.fromNode.businessId} --- ${edge.toNode.businessId}`)
-    .join("\n")}
-  ${this.nodes
-    .pick((node) => node.degree === 0)
-    .map((node) => `${node.businessId}`)
-    .join("\n")}
-  \`\`\``;
+      return `\`\`\`mermaid\nflowchart LR\n${this.edges
+        .map((edge) => `${edge.fromNode.businessId} --- ${edge.toNode.businessId}`)
+        .join("\n")}\n${this.nodes
+        .pick((node) => node.degree === 0)
+        .map((node) => `${node.businessId}`)
+        .join("\n")}\n\`\`\``;
     }
   }
 

@@ -100,7 +100,6 @@ import {
   BoundingBox,
   DataFile,
   DataFilesCollection,
-  Jour,
   AdjacentLink,
   NetworkMap,
   NetworkMapsCollection,
@@ -216,7 +215,6 @@ export declare const entityConstructorByEntityClassKey: {
   BoundingBox: typeof BoundingBox;
   DataFile: typeof DataFile;
   DataFilesCollection: typeof DataFilesCollection;
-  Jour: typeof Jour;
   AdjacentLink: typeof AdjacentLink;
   NetworkMap: typeof NetworkMap;
   NetworkMapsCollection: typeof NetworkMapsCollection;

@@ -32,9 +32,9 @@ export function BookingCalendarClassFactory({
   ServiceContextsCollection,
 }: EntityConstructorByEntityClassKey): typeof BimoBookingCalendar {
   const childClasses: (typeof Entity)[] = [
-    BimoBookingCalendarDatesCollection,
-    BimoServiceEvolutionsCollection,
-    BimoServiceContextsCollection,
+    BookingCalendarDatesCollection,
+    ServiceEvolutionsCollection,
+    ServiceContextsCollection,
   ];
 
   class BookingCalendar extends Item<BookingCalendar> {

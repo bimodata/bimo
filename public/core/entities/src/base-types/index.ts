@@ -98,7 +98,6 @@ export {
   BoundingBox,
   DataFile,
   DataFilesCollection,
-  Jour,
   AdjacentLink,
   NetworkMap,
   NetworkMapsCollection,
