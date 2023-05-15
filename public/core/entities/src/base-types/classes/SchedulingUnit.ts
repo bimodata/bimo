@@ -20,4 +20,3 @@ export declare class SchedulingUnit extends Item<SchedulingUnit> {
   constructor(props: SchedulingUnitProps);
   get shortLoggingOutput(): string;
 }
-export default SchedulingUnit;

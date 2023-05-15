@@ -74,4 +74,3 @@ export declare class Variant extends TripOrVariant<
       }[]
     | undefined;
 }
-export default Variant;

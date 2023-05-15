@@ -71,4 +71,3 @@ export declare class Place extends Item<Place> {
   get mapZone(): string | null;
   resetRelatedPlaces(): void;
 }
-export default Place;

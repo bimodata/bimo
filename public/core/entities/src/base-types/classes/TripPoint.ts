@@ -113,4 +113,3 @@ export declare class TripPoint extends TripOrVariantPoint<TripPoint, TripPointPr
   get originalPlaceId(): string | undefined;
   set originalPlaceId(v: string | undefined);
 }
-export default TripPoint;

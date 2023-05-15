@@ -20,4 +20,3 @@ export declare class BookingCalendarDatesCollection extends Collection<
   get first(): BookingCalendarDate;
   get last(): BookingCalendarDate;
 }
-export default BookingCalendarDatesCollection;

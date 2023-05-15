@@ -1,9 +1,9 @@
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { BlockActivityItem } from "./BlockActivityItem";
-import BlockActivity from "./BlockActivity";
-import Place from "./Place";
+import { BlockActivity } from "./BlockActivity";
+import { Place } from "./Place";
 import { ConsistChangesCollection } from "./ConsistChangesCollection";
-import Trip from "./Trip";
+import { Trip } from "./Trip";
 export interface ConsistChangeProps extends ExtendedItemProps {
   cchgActivity?: string;
   _cchgInternalNumber?: string;
@@ -99,4 +99,3 @@ export declare class ConsistChange
   improveEndPlacePrecision(morePreciseEndPlace: Place): void;
   shiftTimes(shiftInSeconds: number): void;
 }
-export default ConsistChange;

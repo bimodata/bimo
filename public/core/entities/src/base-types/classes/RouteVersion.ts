@@ -61,4 +61,3 @@ export declare class RouteVersion extends VehicleScheduleOrRouteVersion<
     VariantProps
   >;
 }
-export default RouteVersion;

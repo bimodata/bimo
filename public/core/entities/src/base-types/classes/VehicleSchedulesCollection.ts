@@ -4,8 +4,8 @@ import {
   CollectionAssociationType,
 } from "@bimo/core-utils-collection";
 import { VehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
-import VehicleTasksCollection from "./VehicleTasksCollection";
-import TripsCollection from "./TripsCollection";
+import { VehicleTasksCollection } from "./VehicleTasksCollection";
+import { TripsCollection } from "./TripsCollection";
 export interface VehicleSchedulesCollectionProps
   extends ExtendedCollectionProps<VehicleSchedule, VehicleScheduleProps> {}
 export declare class VehicleSchedulesCollection extends Collection<
@@ -54,4 +54,3 @@ export declare class VehicleSchedulesCollection extends Collection<
   filterBlockActivities(blockActivitySelectorQuery: any): void;
   removeUnusedBlockActivities(): void;
 }
-export default VehicleSchedulesCollection;

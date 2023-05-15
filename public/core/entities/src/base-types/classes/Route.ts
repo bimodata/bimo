@@ -93,4 +93,3 @@ export declare class Route extends Item<Route> {
   getVariantById(variantId: any): import("./Variant").Variant | undefined;
   get routeVersion(): RouteVersion | undefined;
 }
-export default Route;

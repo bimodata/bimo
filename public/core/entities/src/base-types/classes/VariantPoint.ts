@@ -78,4 +78,3 @@ export declare class VariantPoint extends TripOrVariantPoint<
   get nextPoint(): VariantPoint;
   get previousPoint(): VariantPoint;
 }
-export default VariantPoint;

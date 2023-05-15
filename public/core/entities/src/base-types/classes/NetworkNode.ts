@@ -41,4 +41,3 @@ export declare class NetworkNode extends Item<NetworkNode> {
     }
   ): void;
 }
-export default NetworkNode;

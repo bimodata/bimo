@@ -7,24 +7,28 @@ import { NetworkNode } from "./NetworkNode";
  * Par exemple un ensemble de nodes et d'edges qui forment la voie 1 entre Amiens et Beauvais.
  */
 export interface NetworkSectionProps extends ExtendedItemProps {
-    bimoId: string;
-    businessId?: string;
-    nodes: NetworkNodesCollection;
-    edges: NetworkEdgesCollection;
+  bimoId: string;
+  businessId?: string;
+  nodes: NetworkNodesCollection;
+  edges: NetworkEdgesCollection;
 }
 export declare class NetworkSection extends Item<NetworkSection> {
-    bimoId: string;
-    businessId?: string;
-    nodes: NetworkNodesCollection;
-    edges: NetworkEdgesCollection;
-    constructor(props: NetworkSectionProps);
-    get shortLoggingOutput(): string;
-    get mediumLoggingOutput(): string;
-    hasEdge(edge: NetworkEdge): boolean;
-    addEdge(edge: NetworkEdge, { addNodes }?: {
-        addNodes?: boolean;
-    }): void;
-    addNode(node: NetworkNode): void;
-    hasNode(node: NetworkNode): boolean;
+  bimoId: string;
+  businessId?: string;
+  nodes: NetworkNodesCollection;
+  edges: NetworkEdgesCollection;
+  constructor(props: NetworkSectionProps);
+  get shortLoggingOutput(): string;
+  get mediumLoggingOutput(): string;
+  hasEdge(edge: NetworkEdge): boolean;
+  addEdge(
+    edge: NetworkEdge,
+    {
+      addNodes,
+    }?: {
+      addNodes?: boolean;
+    }
+  ): void;
+  addNode(node: NetworkNode): void;
+  hasNode(node: NetworkNode): boolean;
 }
-export default NetworkSection;

@@ -2,8 +2,8 @@ import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { Block } from "./Block";
 import { Trip } from "./Trip";
 import { StringByLanguageCode } from "@bimo/core-global-types";
-import BlockActivitiesCollection from "./BlockActivitiesCollection";
-import Place from "./Place";
+import { BlockActivitiesCollection } from "./BlockActivitiesCollection";
+import { Place } from "./Place";
 export interface BlockActivityProps extends ExtendedItemProps {
   blkactVehicleActivityTypeNo: string;
   blkactTripNo?: string;
@@ -65,4 +65,3 @@ export declare class BlockActivity extends Item<BlockActivity> {
   get nextBlockActivity(): BlockActivity | undefined;
   get previousBlockActivity(): BlockActivity | undefined;
 }
-export default BlockActivity;

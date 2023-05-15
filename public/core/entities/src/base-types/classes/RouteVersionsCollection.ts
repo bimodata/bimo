@@ -20,4 +20,3 @@ export declare class RouteVersionsCollection extends Collection<
   getRouteVersionByIdentifier(rtevIdentifier: string): RouteVersion | undefined;
   get variantsCollectionOfAllVariantsOfAllRoutes(): VariantsCollection;
 }
-export default RouteVersionsCollection;

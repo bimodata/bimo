@@ -14,4 +14,3 @@ export declare class Blkvehuoir extends Item<Blkvehuoir> {
   get vehicleSchedule(): import("./VehicleSchedule").VehicleSchedule | undefined;
   get vehicleUnit(): import("./VehicleUnit").VehicleUnit | undefined;
 }
-export default Blkvehuoir;

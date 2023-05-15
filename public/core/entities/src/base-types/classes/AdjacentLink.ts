@@ -43,4 +43,3 @@ export declare class AdjacentLink {
    * as the current link   */
   get previousLink(): AdjacentLink | undefined;
 }
-export default AdjacentLink;

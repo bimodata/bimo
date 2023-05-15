@@ -4,7 +4,7 @@ import { BlockActivitiesCollection } from "./BlockActivitiesCollection";
 import { VehicleTask } from "./VehicleTask";
 import { VehicleUnit } from "./VehicleUnit";
 import { VehicleSchedule } from "./VehicleSchedule";
-import Trip from "./Trip";
+import { Trip } from "./Trip";
 export interface BlockProps extends ExtendedItemProps {
   blkIntNumber?: string;
   blkNumber?: string;
@@ -63,4 +63,3 @@ export declare class Block extends Item<Block> {
   get mediumLoggingOutput(): string;
   get longLoggingOutput(): string;
 }
-export default Block;

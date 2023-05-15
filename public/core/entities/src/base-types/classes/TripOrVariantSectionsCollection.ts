@@ -29,4 +29,3 @@ export declare class TripOrVariantSectionsCollection<
     >
   );
 }
-export default TripOrVariantSectionsCollection;

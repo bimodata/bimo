@@ -43,4 +43,3 @@ export declare class TripOrVariantSection<
   get mediumLoggingOutput(): string;
   get longLoggingOutput(): string;
 }
-export default TripOrVariantSection;
