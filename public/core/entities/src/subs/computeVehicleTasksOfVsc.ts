@@ -11,10 +11,7 @@ import { BimoBlockActivity } from "../class-factories/BlockActivity";
 import { BimoBlockActivitiesCollection } from "../class-factories/BlockActivitiesCollection";
 import { BimoBlockSection } from "../class-factories/BlockSection";
 import { BimoBlockSectionsCollection } from "../class-factories/BlockSectionsCollection";
-import {
-  entityConstructorByEntityClassKey,
-  EntityConstructorByEntityClassKey,
-} from "../base-types/entityConstructorByEntityClassKey";
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 
 export interface BlocksAndActsAndSections {
   blocks: BimoBlocksCollection;
@@ -24,8 +21,9 @@ export interface BlocksAndActsAndSections {
 
 function computeVehicleTasksOfVsc(
   vsc: BimoVehicleSchedule,
-  { BlocksCollection, VehicleTasksCollection }: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
 ) {
+  const { BlocksCollection, VehicleTasksCollection } = entityConstructorByEntityClassKey;
   const blocksCollByVehuUniqueId: { [vehuUniqueId: string]: BimoBlocksCollection } = {};
   const blocksAndActsAndSectionsByVta: Map<BimoVehicleTask, BlocksAndActsAndSections> =
     new Map();

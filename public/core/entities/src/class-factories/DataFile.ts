@@ -2,6 +2,7 @@ import { EntityConstructorByEntityClassKey } from "../base-types/entityConstruct
 import { DataFile as BimoDataFile } from "../base-types/rawIndex";
 export { DataFile as BimoDataFile } from "../base-types/rawIndex";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
+import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 export interface BimoFileInfo {
@@ -32,6 +33,7 @@ export function DataFileClassFactory(
     }
   }
 
+  DataFile.allChildClasses = getAllChildClasses([]);
   return DataFile;
 }
 

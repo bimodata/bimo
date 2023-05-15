@@ -105,7 +105,6 @@ export {
   BoundingBox,
   DataFile,
   DataFilesCollection,
-  Jour,
   AdjacentLink,
   NetworkMap,
   NetworkMapsCollection,
@@ -118,3 +117,5 @@ export {
   NetworkSection,
   NetworkSectionsCollection,
 } from "./src/index-helpers/entityConstructorByEntityClassKey";
+
+export { Jour } from "./src/jour/Jour";

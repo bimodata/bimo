@@ -14,7 +14,9 @@ export interface BlockSectionProps extends ExtendedItemProps {
   block: BimoBlock;
   blockActivities?: BlockActivityProps[];
 }
-export function BlockSectionClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoBlockSection {
+export function BlockSectionClassFactory({
+  BlockActivitiesCollection,
+}: EntityConstructorByEntityClassKey): typeof BimoBlockSection {
   /**
    * This class is not serializable. It is meant to be computed from an existing vehicle schedule.
    * A block section is a section of a block that is operated by a specific vehicle unit
@@ -32,7 +34,7 @@ export function BlockSectionClassFactory({}: EntityConstructorByEntityClassKey):
 
       this.block = props.block;
 
-      this.blockActivities = new BimoBlockActivitiesCollection({
+      this.blockActivities = new BlockActivitiesCollection({
         associationType: "aggregation",
         items: props.blockActivities,
       });
