@@ -6,8 +6,6 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-const childClasses: (typeof Entity)[] = [];
-
 export interface TrainPathVariantPointProps extends ExtendedItemProps {
   trnpvptPlace: string;
   trnpvptArrivalTime?: string;
@@ -17,6 +15,8 @@ export interface TrainPathVariantPointProps extends ExtendedItemProps {
 }
 
 export function TrainPathVariantPointClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTrainPathVariantPoint {
+  const childClasses: (typeof Entity)[] = [];
+
   class TrainPathVariantPoint extends Item<TrainPathVariantPoint> {
     trnpvptPlace: string;
     trnpvptArrivalTime?: string;
