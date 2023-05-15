@@ -5,6 +5,7 @@ import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
+import { BimoTrainPathVariant } from "./TrainPathVariant";
 
 const childClasses: (typeof Entity)[] = [];
 
@@ -39,6 +40,10 @@ export function TrainPathVariantDateClassFactory({}: EntityConstructorByEntityCl
       );
     }
 
+    get trainPathVariant() {
+      return this.parent && (this.parent.parent as BimoTrainPathVariant);
+    }
+
     get trnpdStatusOir() {
       if (this.trnpdIsCanceledOrInfeasible === "1") return "50";
       if (this._trnpdStatusOir) return this._trnpdStatusOir;
@@ -57,6 +62,10 @@ export function TrainPathVariantDateClassFactory({}: EntityConstructorByEntityCl
 
     get shortLoggingOutput() {
       return this.trnpdEffectiveDate ?? super.slo;
+    }
+
+    get isCanceled() {
+      return this.trnpdStatusOir === "50";
     }
   }
 

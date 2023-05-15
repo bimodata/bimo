@@ -27,7 +27,7 @@ export function TrainPathVariantDatesCollectionClassFactory({
       super({
         itemName: "TrainPathVariantDate",
         ItemConstructor: TrainPathVariantDate,
-        associationType: "aggregation",
+        associationType: "composition",
         ...props,
       });
     }

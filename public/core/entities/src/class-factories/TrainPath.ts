@@ -7,6 +7,7 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 import { BimoTrainPathVariantsCollection } from "./TrainPathVariantsCollection";
+import { BimoTrainPathVariantDate } from "./TrainPathVariantDate";
 
 export interface TrainPathProps extends ExtendedItemProps {
   trnpIdentifier: string;
@@ -17,6 +18,7 @@ export interface TrainPathProps extends ExtendedItemProps {
 
 export function TrainPathClassFactory({
   TrainPathVariantsCollection,
+  TrainPathVariantDatesCollection,
 }: EntityConstructorByEntityClassKey): typeof BimoTrainPath {
   const childClasses: (typeof Entity)[] = [TrainPathVariantsCollection];
 
@@ -41,6 +43,21 @@ export function TrainPathClassFactory({
 
     get shortLoggingOutput() {
       return `${this.trnpIdentifier}-(${this.trnpRoute}|${this.trnpIsInService})`;
+    }
+
+    get allTrainPathDates() {
+      return this._getAndSetCachedValue("allTrainPathDates", () => {
+        let allTrainPathDates: BimoTrainPathVariantDate[] = [];
+        this.trainPathVariants.forEach((trainPathVariant) => {
+          allTrainPathDates = allTrainPathDates.concat(
+            trainPathVariant.trainPathVariantDates.items
+          );
+        });
+        return new TrainPathVariantDatesCollection({
+          items: allTrainPathDates,
+          associationType: `aggregation`,
+        });
+      });
     }
   }
 
