@@ -6,7 +6,7 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 import {
-  hastusMinutesAndSecondsToDuration,
+  hastusHoursAndMinutesToDuration,
   addTimeObjectToHastusExtendedHoursString,
   durationToHastusExtendedHoursString,
 } from "@bimo/core-utils-time-and-date";
@@ -61,7 +61,7 @@ export function TrainPathVariantPointClassFactory({
     get departureTime(): string {
       return durationToHastusExtendedHoursString(
         this.getTimeAsDuration("arrival", false).plus(
-          hastusMinutesAndSecondsToDuration(this.trnpvptLoadTime)
+          hastusHoursAndMinutesToDuration(this.trnpvptLoadTime)
         )
       );
     }
