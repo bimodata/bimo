@@ -1,12 +1,12 @@
 import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
-import { BimoBlocksCollection } from "../BlocksCollection";
-import { BimoBlockActivitiesCollection } from "../BlockActivitiesCollection";
-import { BimoBlockSectionsCollection } from "../BlockSectionsCollection";
-import { BimoVehicleTask } from "../VehicleTask";
-import { BimoBlock } from "../Block";
-import { BimoBlockActivity } from "../BlockActivity";
-import { BimoBlockSection } from "../BlockSection";
-import { EntityConstructorByEntityClassKey } from "../../base-types/entityConstructorByEntityClassKey";
+import { BimoBlocksCollection } from "../class-factories/BlocksCollection";
+import { BimoBlockActivitiesCollection } from "../class-factories/BlockActivitiesCollection";
+import { BimoBlockSectionsCollection } from "../class-factories/BlockSectionsCollection";
+import { BimoVehicleTask } from "../class-factories/VehicleTask";
+import { BimoBlock } from "../class-factories/Block";
+import { BimoBlockActivity } from "../class-factories/BlockActivity";
+import { BimoBlockSection } from "../class-factories/BlockSection";
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 
 function computeContentsOfOneVta(
   {

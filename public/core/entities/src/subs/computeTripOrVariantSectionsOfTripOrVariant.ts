@@ -1,7 +1,7 @@
-import { BimoTripOrVariant } from "../TripOrVariant";
-import { BimoTripOrVariantPoint } from "../TripOrVariantPoint";
+import { BimoTripOrVariant } from "../class-factories/TripOrVariant";
+import { BimoTripOrVariantPoint } from "../class-factories/TripOrVariantPoint";
 import { ExtendedItem, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { EntityConstructorByEntityClassKey } from "../../base-types/entityConstructorByEntityClassKey";
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 
 function computeTripOrVariantSectionsOfTripOrVariant<
   TripOrVariantType extends ExtendedItem<TripOrVariantType>,

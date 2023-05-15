@@ -5,7 +5,7 @@ import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collecti
 import { Collection } from "@bimo/core-utils-collection";
 import { get } from "lodash";
 import { BimoTripOrVariantSectionsCollection } from "./TripOrVariantSectionsCollection";
-import computeTripOrVariantSectionsOfTripOrVariant from "./subs/computeTripOrVariantSectionsOfTripOrVariant";
+import computeTripOrVariantSectionsOfTripOrVariant from "../subs/computeTripOrVariantSectionsOfTripOrVariant";
 import { BimoContext } from "@bimo/core-global-types";
 import { BimoPlace } from "./Place";
 import { BimoTripOrVariantPoint } from "./TripOrVariantPoint";

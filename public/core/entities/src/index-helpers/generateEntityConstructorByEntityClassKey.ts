@@ -1,5 +1,5 @@
 import { DefaultClassFactoryByEntityClassKey } from "./DefaultClassFactoryByEntityClassKey";
-import { EntityConstructorByEntityClassKey } from "../../base-types/entityConstructorByEntityClassKey";
+import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 
 export function generateEntityConstructorByEntityClassKey({
   CustomClassFactoryByEntityClassKey = {},
