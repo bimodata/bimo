@@ -1,6 +1,5 @@
-import { expect } from 'chai';
-
-import { shallowAssign } from '..';
+const { expect } = require('chai');
+const { shallowAssign } = require('..');
 
 describe('shallowAssign', () => {
   context('when source or target are not objects', () => {
