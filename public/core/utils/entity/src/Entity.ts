@@ -18,7 +18,7 @@ export class Entity {
   label?: string;
   private _context: BimoContext;
   private _cachedValueByValueKey: { [key: string]: any };
-  static parseModel: Function;
+  static parseModel: Function | undefined;
   static allChildClasses?: Set<Entity>;
   serializeModel: Function;
 
