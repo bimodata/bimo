@@ -134,8 +134,11 @@ export function BlockClassFactory({
           const vehu = this.vehicleSchedule?.vehicleUnits.getById(
             blkVehuOir.vehuUniqueId
           );
-          if (!vehu) throw new Error(``);
-          return;
+          if (!vehu)
+            throw new Error(
+              `Could not find vehicule unit with id ${blkVehuOir.vehuUniqueId}`
+            );
+          return vehu;
         })
       );
     }
