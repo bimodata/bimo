@@ -108,7 +108,6 @@ export declare class Trip
   trpStartLayUser?: string;
   trpEndLayUser?: string;
   trpInternalDistance: string | null;
-  _trpDistance?: string;
   trpCreator?: string;
   trpNote?: string;
   trpSecondNote?: string;

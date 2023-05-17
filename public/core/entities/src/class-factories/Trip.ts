@@ -153,7 +153,6 @@ export function TripClassFactory({
     trpStartLayUser?: string;
     trpEndLayUser?: string;
     trpInternalDistance: string | null;
-    _trpDistance?: string;
     trpCreator?: string;
     trpNote?: string;
     trpSecondNote?: string;
@@ -248,7 +247,7 @@ export function TripClassFactory({
 
       /** en décimètres */
       this.trpInternalDistance = gavpfp("trpInternalDistance", props);
-      this._trpDistance = gavpfp("trpDistance", props) ?? this.trpDistance;
+      this.trpDistance = gavpfp("trpDistance", props) ?? this.trpDistance;
       this.trpCreator = gavpfp("trpCreator", props, `string`, `1`);
       this.trpNote = gavpfp("trpNote", props);
       this.trpSecondNote = gavpfp("trpSecondNote", props);
