@@ -135,6 +135,7 @@ export declare class VehicleSchedule extends VehicleScheduleOrRouteVersion<
   constructor(props: VehicleScheduleProps);
   get shortLoggingOutput(): string;
   get businessLoggingOutput(): string;
+  get businessKey(): string;
   addTrip(trip: Trip): void;
   addIncludedVsc(vsc: VehicleSchedule): void;
   removeIncludedVsc(vsc: VehicleSchedule): void;
