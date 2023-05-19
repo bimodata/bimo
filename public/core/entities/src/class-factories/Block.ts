@@ -183,7 +183,9 @@ export function BlockClassFactory({
     }
 
     get shortLoggingOutput() {
-      return `${this.blkNumber}-[${this.blockActivities.length}]`;
+      return `${this.blkNumber}-(${this.vehicleUnitsAtStart
+        ?.map((vehu) => vehu.vehuIdentifierUser)
+        .join(", ")})-[${this.blockActivities.length}]`;
     }
 
     get mediumLoggingOutput() {
