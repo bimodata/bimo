@@ -170,7 +170,8 @@ export function RouteClassFactory({
 
     /** Creates a new instance of a route. All variants are new instances too.*/
     copy(newRteIdentifier: string | undefined = this.rteIdentifier): Route {
-      const copiedRoute = new Route(this);
+      // @ts-ignore
+      const copiedRoute = new this.constructor(this);
       copiedRoute.rteIdentifier = newRteIdentifier;
       const copiedVariants = this.variants.map((variant) => variant.copy());
       copiedRoute.variants = new VariantsCollection({ items: copiedVariants });

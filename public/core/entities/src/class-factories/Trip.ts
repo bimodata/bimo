@@ -12,27 +12,22 @@ import {
   durationToHastusExtendedHoursString,
 } from "@bimo/core-utils-time-and-date";
 
-import {
-  ExtendedItemProps,
-  ExtendedItem,
-  RawOigProps,
-} from "@bimo/core-utils-collection";
+import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
 import { BimoTripTpsCollection } from "./TripTpsCollection";
 import { BimoTripPointsCollection } from "./TripPointsCollection";
 import { BimoTripPoint, TripPointProps } from "./TripPoint";
-import { BimoTripTp, TripTpProps } from "./TripTp";
 import { BimoTripvehgrpspecsCollection } from "./TripvehgrpspecsCollection";
-import { BimoTripOrVariant, TripOrVariantTypeEnum } from "./TripOrVariant";
+import { TripOrVariantTypeEnum } from "./TripOrVariant";
 import {
   BlockActivityItem,
   computeSetOfBlockActivitiesHelper,
   getSingleBlockActivityHelper,
 } from "./BlockActivityItem";
-import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
+import { BimoBlockActivity } from "./BlockActivity";
 import { BimoTripsCollection } from "./TripsCollection";
-import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
-import { BimoPlace, PlaceProps } from "./Place";
+import { BimoVehicleSchedule } from "./VehicleSchedule";
+import { BimoPlace } from "./Place";
 
 export type TripType = "0" | "3";
 
@@ -90,22 +85,6 @@ export interface TripProps extends ExtendedItemProps {
   trpConsiderLoadAtStart?: string;
   trpConsiderLoadAtEnd?: string;
   BlockNo?: string;
-  trpNatureMouvementTechnique?: string;
-  trpUniteHoraireCouverture?: string;
-  trpTrainEas?: string;
-  trpCommentaireVoySncfDi?: string;
-  trpNumDeCourseSubstituee?: string;
-  trpNumOperation?: string;
-  trpACouvrirMr?: string;
-  trpCodeTct?: string;
-  trpEnginDeCalcul?: string;
-  trpMaterielRemorque?: string;
-  trpNumeroSecondaire?: string;
-  trpProfilDeVitesse?: string;
-  trpPrecoAo?: string;
-  trpEstEnSnu?: string;
-  trpOpReleve?: string;
-  trpNePasCommanderSillon?: string;
   trpBesoinVf?: string;
   tripTps?: BimoTripTpsCollection;
   tripPoints?: BimoTripPointsCollection;
@@ -453,7 +432,17 @@ export function TripClassFactory({
         parent: undefined,
         bimoId: undefined,
       };
-      const copiedTrip = new Trip(props, this.context, this.tripOrVariantType);
+
+      /**
+       * Make sure the copy is created using the same constructor  as this instance, which is not necessarily
+       * the plain Trip constructor
+       */
+      // @ts-ignore
+      const copiedTrip = new this.constructor(
+        props,
+        this.context,
+        this.tripOrVariantType
+      );
       copiedTrip._links.copiedFrom = this;
       return copiedTrip;
     }

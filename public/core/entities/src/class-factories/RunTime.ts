@@ -51,7 +51,8 @@ export function RunTimeClassFactory(
     }
 
     copy() {
-      const copiedItem = new RunTime(this);
+      // @ts-ignore
+      const copiedItem = new this.constructor(this);
       return copiedItem;
     }
 

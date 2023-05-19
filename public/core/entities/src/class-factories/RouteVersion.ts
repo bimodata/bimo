@@ -92,7 +92,8 @@ export function RouteVersionClassFactory({
 
     /** Creates a new instance of a routeVersion. All routes are new instances too. */
     copy(newRtevIdentifier?: string) {
-      const copiedRouteVersion = new RouteVersion(this);
+      // @ts-ignore
+      const copiedRouteVersion = new this.constructor(this);
       copiedRouteVersion.rtevIdentifier = newRtevIdentifier;
       copiedRouteVersion.routes = new RoutesCollection({
         items: this.routes.map((route) => route.copy()),

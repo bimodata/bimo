@@ -97,7 +97,8 @@ export function VariantPointClassFactory({
     }
 
     copy() {
-      const copiedItem = new VariantPoint(this);
+      // @ts-ignore
+      const copiedItem = new this.constructor(this);
       return copiedItem;
     }
 

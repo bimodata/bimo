@@ -89,7 +89,8 @@ export function RunTimeVersionClassFactory({
 
     /** Creates a new instance of a runTimeVersion. All runtimes are new instances too. */
     copy(newRtvIdentifier: string | undefined) {
-      const copiedRunTimeVersion = new RunTimeVersion(this);
+      // @ts-ignore
+      const copiedRunTimeVersion = new this.constructor(this);
       copiedRunTimeVersion.rtvIdentifier = newRtvIdentifier;
       copiedRunTimeVersion.runTimes = new RunTimesCollection({
         items: this.runTimes.map((runTime) => runTime.copy()),

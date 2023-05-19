@@ -273,7 +273,8 @@ export function TripPointClassFactory({
     }
 
     copy() {
-      const copiedItem = new TripPoint(this);
+      // @ts-ignore
+      const copiedItem = new this.constructor(this);
       copiedItem.parent = this.parent;
       return copiedItem;
     }

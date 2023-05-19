@@ -95,7 +95,8 @@ export function VariantClassFactory({
 
     /** Creates a new instance of a variant. All variantPoints are new instances too. */
     copy(newVarIdentifier = this.varIdentifier) {
-      const copiedVariant = new Variant(this, this.context);
+      // @ts-ignore
+      const copiedVariant = new this.constructor(this, this.context);
       copiedVariant.varIdentifier = newVarIdentifier;
       const copiedVariantPoints = this.variantPoints.map((varPt) => varPt.copy());
       copiedVariant.variantPoints = new VariantPointsCollection({
