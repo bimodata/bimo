@@ -28,13 +28,9 @@ export interface VariantPointProps extends ExtendedItemProps {
   varptAllowLoadTime?: string;
   varptTpDistance?: string;
   varptDistance?: string;
-  varptCodeCs?: string;
-  varptTypeArret?: string;
-  varptNaturePointDeCommutation?: string;
 }
 export function VariantPointClassFactory({
   TripOrVariantPoint,
-  Variant,
 }: EntityConstructorByEntityClassKey): typeof BimoVariantPoint {
   class VariantPoint extends TripOrVariantPoint<VariantPoint, VariantPointProps> {
     /**
@@ -59,9 +55,6 @@ export function VariantPointClassFactory({
     varptAllowLoadTime?: string;
     varptTpDistance?: string;
     varptDistance?: string;
-    varptCodeCs?: string;
-    varptTypeArret?: string;
-    varptNaturePointDeCommutation?: string;
     constructor(props: VariantPointProps) {
       super(props, "variant");
       this.varptIsTimingPoint = gavpfp("varptIsTimingPoint", props, "string", "1");
@@ -97,15 +90,6 @@ export function VariantPointClassFactory({
 
       /** en mètres */
       this.varptDistance = gavpfp("varptDistance", props, "string");
-
-      /**
-       * ## Spécifique SNCF ## --> décision du 24/08/2022
-       *
-       * TODO: rendre modulaire les spécificités des exploitants ferroviaires
-       */
-      this.varptCodeCs = gavpfp("varptCodeCs", props);
-      this.varptTypeArret = gavpfp("varptTypeArret", props);
-      this.varptNaturePointDeCommutation = gavpfp("varptNaturePointDeCommutation", props);
     }
 
     get variant() {

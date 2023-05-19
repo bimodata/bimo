@@ -115,14 +115,8 @@ export interface TripProps extends ExtendedItemProps {
 export function TripClassFactory({
   TripTpsCollection,
   TripPointsCollection,
-  TripPoint,
-  TripTp,
   TripvehgrpspecsCollection,
   TripOrVariant,
-  BlockActivity,
-  TripsCollection,
-  VehicleSchedule,
-  Place,
 }: EntityConstructorByEntityClassKey): typeof BimoTrip {
   const childClasses: (typeof Entity)[] = [
     TripTpsCollection,
@@ -188,23 +182,6 @@ export function TripClassFactory({
     trpConsiderLoadAtStart?: string;
     trpConsiderLoadAtEnd?: string;
     BlockNo?: string;
-    trpNatureMouvementTechnique?: string;
-    trpUniteHoraireCouverture?: string;
-    trpTrainEas?: string;
-    trpCommentaireVoySncfDi?: string;
-    trpNumDeCourseSubstituee?: string;
-    trpNumOperation?: string;
-    trpACouvrirMr?: string;
-    trpCodeTct?: string;
-    trpEnginDeCalcul?: string;
-    trpMaterielRemorque?: string;
-    trpNumeroSecondaire?: string;
-    trpProfilDeVitesse?: string;
-    trpPrecoAo?: string;
-    trpEstEnSnu?: string;
-    trpOpReleve?: string;
-    trpNePasCommanderSillon?: string;
-    trpBesoinVf?: string;
     tripTps: BimoTripTpsCollection;
     tripPoints: BimoTripPointsCollection;
     tripvehgrpspecs: BimoTripvehgrpspecsCollection;
@@ -303,37 +280,6 @@ export function TripClassFactory({
       );
       this.trpConsiderLoadAtEnd = gavpfp("trpConsiderLoadAtEnd", props, `string`, `0`);
       this.BlockNo = undefined; // Échanges par mail avec Mathieu M et Isabel L: il ne sert à rien, et il bug.
-
-      // site-spec oscar, à déplacer vers une nouvelle classe "OscarTrip"
-      this.trpNatureMouvementTechnique = gavpfp("trpNatureMouvementTechnique", props);
-      this.trpUniteHoraireCouverture = gavpfp("trpUniteHoraireCouverture", props);
-      this.trpTrainEas = gavpfp("trpTrainEas", props, `string`, `0`);
-      this.trpCommentaireVoySncfDi = gavpfp(
-        "trpCommentaireVoySncfDi",
-        props,
-        `string`,
-        ``
-      );
-
-      // site-spec orion, à déplacer vers une nouvelle classe "OrionTrip"
-      this.trpNumDeCourseSubstituee = gavpfp("trpNumDeourseSubstituee", props);
-      this.trpNumOperation = gavpfp("trpNumOperation", props);
-      this.trpACouvrirMr = gavpfp("trpACouvrirMr", props);
-      this.trpCodeTct = gavpfp("trpCodeTct", props);
-      this.trpEnginDeCalcul = gavpfp("trpEnginDeCalcul", props);
-      this.trpMaterielRemorque = gavpfp("trpMaterielRemorque", props);
-      this.trpNumeroSecondaire = gavpfp("trpNumeroSecondaire", props);
-      this.trpProfilDeVitesse = gavpfp("trpProfilDeVitesse", props);
-      this.trpPrecoAo = gavpfp("trpPrecoAo", props);
-      this.trpEstEnSnu = gavpfp("trpEstEnSnu", props);
-      this.trpOpReleve = gavpfp("trpOpReleve", props);
-      this.trpNePasCommanderSillon = gavpfp(
-        "trpNePasCommanderSillon",
-        props,
-        `string`,
-        `0`
-      );
-      this.trpBesoinVf = gavpfp("trpBesoinVf", props, `string`, `0`);
 
       /* Children */
       /** @type {TripTpsCollection} */ this.tripTps = gavpfp(

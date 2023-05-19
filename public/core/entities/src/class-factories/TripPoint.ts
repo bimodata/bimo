@@ -5,11 +5,10 @@ import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
-import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
+import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoTripOrVariantPoint } from "./TripOrVariantPoint";
 import { BimoTripPointsCollection } from "./TripPointsCollection";
-import { BimoTrip, TripProps } from "./Trip";
+import { BimoTrip } from "./Trip";
 
 export interface TripPointProps extends ExtendedItemProps {
   trpptPlace?: string;
@@ -50,8 +49,6 @@ export interface TripPointProps extends ExtendedItemProps {
 }
 export function TripPointClassFactory({
   TripOrVariantPoint,
-  TripPointsCollection,
-  Trip,
 }: EntityConstructorByEntityClassKey): typeof BimoTripPoint {
   const TP_INTERNAL_DISTANCE_FACTOR = 10000;
   const REGULAR_INTERNAL_DISTANCE_FACTOR = 10;
@@ -90,8 +87,6 @@ export function TripPointClassFactory({
     trpptInternalLoadPlace?: string;
     trpptInternalLoadZone?: string;
     trpptVariantId?: string;
-    trpptCodeCs?: string;
-    trpptTypeArret?: string;
     constructor(props: TripPointProps) {
       super(props, "trip");
       this.trpptPlace = gavpfp("trpptPlace", props);

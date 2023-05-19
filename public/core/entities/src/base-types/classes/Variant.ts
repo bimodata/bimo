@@ -16,8 +16,6 @@ export interface VariantProps extends ExtendedItemProps {
   varProductive?: string;
   varPriority?: string;
   varAllowDeviationFromTrackNetwork?: string;
-  varNatureMouvementTechnique?: string;
-  varIndiceCompo?: string;
   variantPoints: VariantPointsCollection;
 }
 export declare class Variant extends TripOrVariant<
@@ -36,8 +34,6 @@ export declare class Variant extends TripOrVariant<
   varProductive?: string;
   varPriority: string;
   varAllowDeviationFromTrackNetwork?: string;
-  varNatureMouvementTechnique?: string;
-  varIndiceCompo?: string;
   variantPoints: VariantPointsCollection;
   _links: {
     [linkType: string]: any;

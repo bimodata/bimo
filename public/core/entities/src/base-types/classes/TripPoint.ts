@@ -72,8 +72,6 @@ export declare class TripPoint extends TripOrVariantPoint<TripPoint, TripPointPr
   trpptInternalLoadPlace?: string;
   trpptInternalLoadZone?: string;
   trpptVariantId?: string;
-  trpptCodeCs?: string;
-  trpptTypeArret?: string;
   constructor(props: TripPointProps);
   /** en km */
   get trpptTpDistance(): string | null;

@@ -27,9 +27,6 @@ export interface VariantPointProps extends ExtendedItemProps {
   varptAllowLoadTime?: string;
   varptTpDistance?: string;
   varptDistance?: string;
-  varptCodeCs?: string;
-  varptTypeArret?: string;
-  varptNaturePointDeCommutation?: string;
 }
 export declare class VariantPoint extends TripOrVariantPoint<
   VariantPoint,
@@ -57,9 +54,6 @@ export declare class VariantPoint extends TripOrVariantPoint<
   varptAllowLoadTime?: string;
   varptTpDistance?: string;
   varptDistance?: string;
-  varptCodeCs?: string;
-  varptTypeArret?: string;
-  varptNaturePointDeCommutation?: string;
   constructor(props: VariantPointProps);
   get variant(): Variant | undefined;
   copy(): VariantPoint;

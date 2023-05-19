@@ -4,17 +4,13 @@ export { Variant as BimoVariant } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
-import { ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
+import { ExtendedItemProps } from "@bimo/core-utils-collection";
 import { BimoContext } from "@bimo/core-global-types";
 
-import { BimoTripOrVariant, TripOrVariantProps } from "./TripOrVariant";
-import {
-  BimoVariantPointsCollection,
-  VariantPointsCollectionProps,
-} from "./VariantPointsCollection";
+import { BimoVariantPointsCollection } from "./VariantPointsCollection";
 import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
-import { BimoRoute, RouteProps } from "./Route";
-import { BimoPlace, PlaceProps } from "./Place";
+import { BimoRoute } from "./Route";
+import { BimoPlace } from "./Place";
 
 export interface VariantProps extends ExtendedItemProps {
   bimoId?: string;
@@ -27,16 +23,11 @@ export interface VariantProps extends ExtendedItemProps {
   varProductive?: string;
   varPriority?: string;
   varAllowDeviationFromTrackNetwork?: string;
-  varNatureMouvementTechnique?: string;
-  varIndiceCompo?: string;
   variantPoints: BimoVariantPointsCollection;
 }
 export function VariantClassFactory({
   TripOrVariant,
   VariantPointsCollection,
-  VariantPoint,
-  Route,
-  Place,
 }: EntityConstructorByEntityClassKey): typeof BimoVariant {
   const childClasses: (typeof Entity)[] = [VariantPointsCollection];
 
@@ -56,8 +47,6 @@ export function VariantClassFactory({
     varProductive?: string;
     varPriority: string;
     varAllowDeviationFromTrackNetwork?: string;
-    varNatureMouvementTechnique?: string;
-    varIndiceCompo?: string;
     variantPoints: BimoVariantPointsCollection;
     _links: { [linkType: string]: any } = {};
     constructor(props: VariantProps, context: BimoContext) {
