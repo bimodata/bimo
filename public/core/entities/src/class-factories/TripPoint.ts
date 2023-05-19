@@ -242,7 +242,7 @@ export function TripPointClassFactory({
     }
 
     get _indexInSortedParent() {
-      if (!this.parent) return null;
+      if (!this.parent) throw new Error(`No parent !`);
       (this.parent as BimoTripPointsCollection).sortByTime();
       return this.parent.indexOf(this);
     }
@@ -253,12 +253,7 @@ export function TripPointClassFactory({
 
     getNthPointFromThisOne(n: number) {
       const indexInSortedParent = this._indexInSortedParent;
-      return (
-        (this.parent &&
-          indexInSortedParent &&
-          this.parent.items[indexInSortedParent + n]) ??
-        null
-      );
+      return (this.parent && this.parent.items[indexInSortedParent + n]) ?? null;
     }
 
     get nextTripPoint() {

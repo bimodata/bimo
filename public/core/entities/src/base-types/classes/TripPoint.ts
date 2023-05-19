@@ -88,7 +88,7 @@ export declare class TripPoint extends TripOrVariantPoint<TripPoint, TripPointPr
   /** @type {Boolean} */
   get isStopping(): boolean;
   get trip(): Trip | undefined;
-  get _indexInSortedParent(): number | null;
+  get _indexInSortedParent(): number;
   getNthTripPointFromThisOne(n: number): void;
   getNthPointFromThisOne(n: number): TripPoint;
   get nextTripPoint(): TripPoint;
