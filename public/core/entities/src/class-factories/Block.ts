@@ -32,7 +32,6 @@ export interface BlockProps extends ExtendedItemProps {
   blkRelTypeStrt?: string;
   blkRelTypeEnd?: string;
   blkConsistPatternUser?: string;
-  blkNumOperation?: string;
   blkvehuoirs?: BimoBlkvehuoirsCollection;
   blockActivities?: BimoBlockActivitiesCollection;
 }
@@ -68,7 +67,6 @@ export function BlockClassFactory({
     blkRelTypeStrt?: string;
     blkRelTypeEnd?: string;
     blkConsistPatternUser?: string;
-    blkNumOperation?: string;
     blkvehuoirs: BimoBlkvehuoirsCollection;
     blockActivities: BimoBlockActivitiesCollection;
     constructor(props: BlockProps) {
@@ -100,7 +98,6 @@ export function BlockClassFactory({
       this.blkRelTypeStrt = gavpfp("blkRelTypeStrt", props);
       this.blkRelTypeEnd = gavpfp("blkRelTypeEnd", props);
       this.blkConsistPatternUser = gavpfp("blkConsistPatternUser", props);
-      this.blkNumOperation = gavpfp("blkNumOperation", props);
 
       this.blkvehuoirs = gavpfp(
         "blkvehuoirs",

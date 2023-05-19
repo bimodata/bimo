@@ -23,7 +23,6 @@ export interface BlockProps extends ExtendedItemProps {
   blkRelTypeStrt?: string;
   blkRelTypeEnd?: string;
   blkConsistPatternUser?: string;
-  blkNumOperation?: string;
   blkvehuoirs?: BlkvehuoirsCollection;
   blockActivities?: BlockActivitiesCollection;
 }
@@ -45,7 +44,6 @@ export declare class Block extends Item<Block> {
   blkRelTypeStrt?: string;
   blkRelTypeEnd?: string;
   blkConsistPatternUser?: string;
-  blkNumOperation?: string;
   blkvehuoirs: BlkvehuoirsCollection;
   blockActivities: BlockActivitiesCollection;
   constructor(props: BlockProps);
