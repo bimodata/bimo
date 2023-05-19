@@ -12,13 +12,12 @@ export declare class VehicleSchedulesCollection extends Collection<
   VehicleSchedule,
   VehicleScheduleProps
 > {
-  libelle: string;
   links: any[];
   _tripsCollectionOfAllTripsOfAllVscs: any;
   constructor(props?: VehicleSchedulesCollectionProps);
   static createFromOirStyleData(
     oirStyleData: any,
-    libelle: string,
+    label: string,
     associationType?: CollectionAssociationType
   ): VehicleSchedulesCollection;
   get shortLoggingOutput(): string;
@@ -39,7 +38,7 @@ export declare class VehicleSchedulesCollection extends Collection<
   ): VehicleSchedule;
   getVehicleScheduleByVscName(vscName: string): VehicleSchedule | undefined;
   /**
-   * Adds the vscs of the otherVscColl to this one and changes the libelle.
+   * Adds the vscs of the otherVscColl to this one and changes the label.
    * MUTATES this vscColl
    * @param otherVscColl - The other vscCollection to merge with this one.
    * @return this modified vscColl

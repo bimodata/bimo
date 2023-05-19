@@ -31,13 +31,13 @@ export function PlacesCollectionClassFactory({
      *
      * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
      */
-    static createFromOirStyleData(oirStyleData: any, libelle: string) {
+    static createFromOirStyleData(oirStyleData: any, label: string) {
       const rawPlaces = oirStyleData.place;
 
       if (!rawPlaces) {
         throw new Error(`Bad oirStyleData: could not find "place" key`);
       }
-      const newPlacesCollection = new this({ items: rawPlaces, libelle });
+      const newPlacesCollection = new this({ items: rawPlaces, label });
       return newPlacesCollection;
     }
 

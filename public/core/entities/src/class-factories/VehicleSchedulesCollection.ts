@@ -28,7 +28,6 @@ export function VehicleSchedulesCollectionClassFactory({
     BimoVehicleSchedule,
     VehicleScheduleProps
   > {
-    libelle: string;
     links: any[] = [];
     _tripsCollectionOfAllTripsOfAllVscs: any = null;
     constructor(props: VehicleSchedulesCollectionProps = {}) {
@@ -40,12 +39,11 @@ export function VehicleSchedulesCollectionClassFactory({
         labelPropName: `vscDescription`,
         ...props,
       });
-      this.libelle = props.libelle;
     }
 
     static createFromOirStyleData(
       oirStyleData: any,
-      libelle: string,
+      label: string,
       associationType: CollectionAssociationType = "composition"
     ): VehicleSchedulesCollection {
       const rawVehicleSchedules = oirStyleData.vehicle_schedule;
@@ -55,14 +53,14 @@ export function VehicleSchedulesCollectionClassFactory({
       }
       const newVehicleSchedulesCollection = new VehicleSchedulesCollection({
         items: rawVehicleSchedules,
-        libelle,
+        label,
         associationType,
       });
       return newVehicleSchedulesCollection;
     }
 
     get shortLoggingOutput() {
-      return `${this.libelle} - (${this.count()} vscs)`;
+      return `${this.label} - (${this.count()} vscs)`;
     }
 
     setScenarioNumberOnAllVscs(scenarioNumber: number | string) {
@@ -162,7 +160,7 @@ export function VehicleSchedulesCollectionClassFactory({
     }
 
     /**
-     * Adds the vscs of the otherVscColl to this one and changes the libelle.
+     * Adds the vscs of the otherVscColl to this one and changes the label.
      * MUTATES this vscColl
      * @param otherVscColl - The other vscCollection to merge with this one.
      * @return this modified vscColl
@@ -171,7 +169,7 @@ export function VehicleSchedulesCollectionClassFactory({
       otherVscColl: VehicleSchedulesCollection
     ): VehicleSchedulesCollection {
       this._tripsCollectionOfAllTripsOfAllVscs = null;
-      this.libelle = `${this.libelle} - ${otherVscColl.libelle}`;
+      this.label = `${this.label} - ${otherVscColl.label}`;
       otherVscColl.forEach((otherCollVsc) => {
         this.add(otherCollVsc);
       });

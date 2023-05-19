@@ -20,7 +20,7 @@
             "_id": "1"
           }
         ],
-        "libelle": "input.txt",
+        "label": "input.txt",
         "_tripsCollectionOfAllTripsOfAllVscs": null,
         "links": []
       }

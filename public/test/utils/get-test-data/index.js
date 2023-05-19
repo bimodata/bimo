@@ -71,7 +71,7 @@ async function getEntityFromOirDataAtPath(sourcePath, EntityConstructor, options
       oirControlFile: { fileData: oirFile },
       EntityConstructor,
     });
-    newEntity.libelle = file.name;
+    newEntity.label = file.name;
     if (!multipleEntitiesMode) foundUniqueDataFile = true;
     entities.push(newEntity);
   });

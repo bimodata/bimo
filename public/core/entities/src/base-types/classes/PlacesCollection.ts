@@ -8,7 +8,7 @@ export declare class PlacesCollection extends Collection<Place, PlaceProps> {
    *
    * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
    */
-  static createFromOirStyleData(oirStyleData: any, libelle: string): PlacesCollection;
+  static createFromOirStyleData(oirStyleData: any, label: string): PlacesCollection;
   get shortLoggingOutput(): string;
   generateOirStyleData(): {
     place: Place[];

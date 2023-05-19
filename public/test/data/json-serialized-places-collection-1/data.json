@@ -55,7 +55,7 @@
             "_id": "11"
           }
         ],
-        "libelle": "simple places collection",
+        "label": "simple places collection",
         "_placesByReferencePlace": null,
         "id": "simple_places_collection"
       }

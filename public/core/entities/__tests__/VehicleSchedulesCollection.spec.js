@@ -23,8 +23,8 @@ describe('Domain :: VehicleSchedulesCollection', () => {
       it('returns a VehicleSchedulesCollection', () => {
         expect(newVehicleSchedulesCollection).to.be.instanceOf(VehicleSchedulesCollection);
       });
-      it('applies the "libelle"', () => {
-        expect(newVehicleSchedulesCollection.libelle).to.equal(`Données de test`);
+      it('applies the "label"', () => {
+        expect(newVehicleSchedulesCollection.label).to.equal(`Données de test`);
       });
       it('creates a vehicle schedule item for each vehicle schedule line in the data', () => {
         expect(newVehicleSchedulesCollection.count()).to.equal(oirStyleData.vehicle_schedule.length);

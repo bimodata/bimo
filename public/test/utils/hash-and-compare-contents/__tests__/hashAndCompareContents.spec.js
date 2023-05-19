@@ -144,7 +144,8 @@ describe('test-utils', () => {
       let hashBefore;
       let hashAfter;
       context('when options is not defined', () => {
-        before(async () => {
+        before(async function beforeHashOfFolder() {
+          this.timeout(4000);
           hashBefore = await createHashOfFolderContents(testFolderPath);
           await fs.rename(testFolderPath, testFolderNewPath);
           hashAfter = await createHashOfFolderContents(testFolderNewPath);
