@@ -74,6 +74,9 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
       // distance: undefined,
       arrivalTime: "arrivalTime",
       departureTime: "departureTime",
+
+      // Todo: move this to a SNCF specific TripOrVariant
+      codeCs: "trnpvptCodeCs",
     },
   };
 
