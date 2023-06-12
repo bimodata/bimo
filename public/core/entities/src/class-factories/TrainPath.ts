@@ -13,6 +13,7 @@ export interface TrainPathProps extends ExtendedItemProps {
   trnpIdentifier: string;
   trnpRoute?: string;
   trnpIsInService?: string;
+  trnpSchedUnit?: string;
   trainPathVariants?: BimoTrainPathVariantsCollection;
 }
 
@@ -26,12 +27,14 @@ export function TrainPathClassFactory({
     trnpIdentifier: string;
     trnpRoute?: string;
     trnpIsInService?: string;
+    trnpSchedUnit?: string;
     trainPathVariants: BimoTrainPathVariantsCollection;
     constructor(props: TrainPathProps) {
       super(props);
       this.trnpIdentifier = gavpfp("trnpIdentifier", props, `string`);
       this.trnpRoute = gavpfp("trnpRoute", props, `string`);
       this.trnpIsInService = gavpfp("trnpIsInService", props, `string`);
+      this.trnpSchedUnit = gavpfp("trnpSchedUnit", props, `string`);
       this.trainPathVariants = gavpfp(
         "trainPathVariants",
         props,

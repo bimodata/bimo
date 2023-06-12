@@ -5,12 +5,14 @@ export interface TrainPathProps extends ExtendedItemProps {
   trnpIdentifier: string;
   trnpRoute?: string;
   trnpIsInService?: string;
+  trnpSchedUnit?: string;
   trainPathVariants?: TrainPathVariantsCollection;
 }
 export declare class TrainPath extends Item<TrainPath> {
   trnpIdentifier: string;
   trnpRoute?: string;
   trnpIsInService?: string;
+  trnpSchedUnit?: string;
   trainPathVariants: TrainPathVariantsCollection;
   constructor(props: TrainPathProps);
   get shortLoggingOutput(): string;
