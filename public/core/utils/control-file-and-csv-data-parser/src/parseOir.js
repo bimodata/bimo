@@ -1,6 +1,7 @@
 const { getStupidLogger } = require('@bimo/core-utils-logging');
 
 const each = require('lodash/each');
+const camelCase = require('lodash/camelCase');
 
 const DEFAULT_SEPARATOR = ';';
 
@@ -194,7 +195,7 @@ function parseNonLineBlocksString(nonLineBlocksString) {
 
   while ((itemResult = itemMatcher.exec(nonLineBlocksString)) !== null) {
     items.push({
-      name: _convertItemNamesToCamel ? snakeToCamel(itemResult[1]) : itemResult[1],
+      name: _convertItemNamesToCamel ? camelCase(itemResult[1]) : itemResult[1],
       special: itemResult[2],
     });
     logger.trace(`Found item: ${itemResult[1]}`);
@@ -204,8 +205,4 @@ function parseNonLineBlocksString(nonLineBlocksString) {
     throw new Error(`Could not match an item in the following string. Check OIR syntax.\n${nonLineBlocksString}`);
   }
   return { keyword, ignore, objectType, items };
-}
-
-function snakeToCamel(snakeString) {
-  return snakeString.replace(/([_][a-z])/ig, (lodashAndLetter) => lodashAndLetter.toUpperCase().replace('_', ''));
 }
