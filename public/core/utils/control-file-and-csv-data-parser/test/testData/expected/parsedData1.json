@@ -8,8 +8,8 @@
       "fakeItem5": "fakeValue5-1",
       "fakeItem6": "fakeValue6-1",
       "fakeItem7": "fakeValue7-1",
-      "fakeItem8": "fakeValue8-1",
-      "fakeItem9": "fakeValue9-1",
+      "fake_item_8": "fakeValue8-1",
+      "fake_item_9": "fakeValue9-1",
       "toto": []
     },
     {
@@ -20,8 +20,8 @@
       "fakeItem5": "fakeValue5-2",
       "fakeItem6": "fakeValue6-2",
       "fakeItem7": "fakeValue7-2",
-      "fakeItem8": "fakeValue8-2",
-      "fakeItem9": "fakeValue9-2",
+      "fake_item_8": "fakeValue8-2",
+      "fake_item_9": "fakeValue9-2",
       "toto": [
         {
           "1": "11",
@@ -62,8 +62,8 @@
       "fakeItem5": "fakeValue5-3",
       "fakeItem6": "fakeValue6-3",
       "fakeItem7": "fakeValue7-3",
-      "fakeItem8": "fakeValue8-3",
-      "fakeItem9": "fakeValue9-3",
+      "fake_item_8": "fakeValue8-3",
+      "fake_item_9": "fakeValue9-3",
       "toto": []
     }
   ],

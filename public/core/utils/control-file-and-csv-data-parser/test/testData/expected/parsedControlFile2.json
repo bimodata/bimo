@@ -15,7 +15,7 @@
       "items": [
         { "name": "fakeItem4" },
         { "name": "fakeItem2" },
-        { "name": "fakeItem8" },
+        { "name": "fake_item_8" },
         { "name": "fakeItem6" },
         { "name": "fakeItem4" }
       ],

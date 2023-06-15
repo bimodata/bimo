@@ -27,7 +27,7 @@ describe('control-file-and-csv-data-parser', () => {
       let expected1;
       let expected2;
       before(async () => {
-        const parser1 = new Parser(dataFile, controlFile1, undefined, logger);
+        const parser1 = new Parser(dataFile, controlFile1, { convertItemNamesToCamel: true }, logger);
         const parser2 = new Parser(dataFile, controlFile2, undefined, logger);
 
         await parser1.init();
