@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 /**
  *
- * @param {[string|undefined[], string|undefined[]]} lists
+ * @param {[string[]|undefined[], string[]|undefined[]]} lists
  * @param {MatchTwoListsOfStringsConfig} config
  * @param {*} context
  */
