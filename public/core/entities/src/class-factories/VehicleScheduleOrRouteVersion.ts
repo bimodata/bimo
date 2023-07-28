@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleScheduleOrRouteVersion as BimoVehicleScheduleOrRouteVersion } from "../base-types/rawIndex";
+import {
+  VariantPointsCollection,
+  VehicleScheduleOrRouteVersion as BimoVehicleScheduleOrRouteVersion,
+} from "../base-types/rawIndex";
 export { VehicleScheduleOrRouteVersion as BimoVehicleScheduleOrRouteVersion } from "../base-types/rawIndex";
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 import { Collection } from "@bimo/core-utils-collection";
@@ -44,7 +47,7 @@ export function VehicleScheduleOrRouteVersionClassFactory({}: EntityConstructorB
       return get(this, this._abstract.pathByPropName.tripsOrVariants);
     }
 
-    get allPoints() {
+    get allPoints(): VariantPointsCollection {
       return get(this, this._abstract.pathByPropName.allPoints);
     }
 

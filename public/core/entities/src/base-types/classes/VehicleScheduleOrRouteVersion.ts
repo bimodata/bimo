@@ -1,5 +1,6 @@
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 import { Collection } from "@bimo/core-utils-collection";
+import { VariantPointsCollection } from "./VariantPointsCollection";
 export interface VehicleScheduleOrRouteVersionProps extends ExtendedItemProps {}
 export declare class VehicleScheduleOrRouteVersion<
   ItemType extends ExtendedItem<ItemType>,
@@ -12,7 +13,7 @@ export declare class VehicleScheduleOrRouteVersion<
   );
   get tripOrVariantType(): any;
   get tripsOrVariants(): Collection<ItemType, ItemProps>;
-  get allPoints(): this[any];
+  get allPoints(): VariantPointsCollection;
   get setOfAllPlaceIdentifiers(): Set<string>;
   removeTripOrVariant(tripOrVariant: ItemType): any;
 }
