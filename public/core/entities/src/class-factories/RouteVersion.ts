@@ -10,6 +10,7 @@ import { BimoRoutesCollection } from "./RoutesCollection";
 import { BimoVariant, VariantProps } from "./Variant";
 import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
 import { BimoTripOrVariantSection } from "./TripOrVariantSection";
+import { BimoVariantItinerary } from "./VariantItinerary";
 
 export interface RouteVersionProps extends ExtendedItemProps {
   bimoId?: string;
@@ -28,6 +29,7 @@ export function RouteVersionClassFactory({
   RoutesCollection,
   VariantsCollection,
   VariantPointsCollection,
+  VariantItinerariesCollection,
   VehicleScheduleOrRouteVersion,
   TripOrVariantSectionsCollection,
 }: EntityConstructorByEntityClassKey): typeof BimoRouteVersion {
@@ -149,16 +151,34 @@ export function RouteVersionClassFactory({
     }
 
     get variantPointsCollectionOfAllVariantPointsOfAllRoutes() {
-      return this._getAndSetCachedValue("", () => {
-        let allPoints: BimoVariantPoint[] = [];
-        this.variantsCollectionOfAllVariantsOfAllRoutes.forEach((variant) => {
-          allPoints = allPoints.concat(variant.points.items);
-        });
-        return new VariantPointsCollection({
-          items: allPoints,
-          associationType: `aggregation`,
-        });
-      });
+      return this._getAndSetCachedValue(
+        "variantPointsCollectionOfAllVariantPointsOfAllRoutes",
+        () => {
+          let allPoints: BimoVariantPoint[] = [];
+          this.variantsCollectionOfAllVariantsOfAllRoutes.forEach((variant) => {
+            allPoints = allPoints.concat(variant.points.items);
+          });
+          return new VariantPointsCollection({
+            items: allPoints,
+            associationType: `aggregation`,
+          });
+        }
+      );
+    }
+    get variantItinerariesCollectionOfAllItinerariesOfAllRoutes() {
+      return this._getAndSetCachedValue(
+        "variantItinerariesCollectionOfAllItinerariesOfAllRoutes",
+        () => {
+          let allItineraries: BimoVariantItinerary[] = [];
+          this.variantsCollectionOfAllVariantsOfAllRoutes.forEach((variant) => {
+            allItineraries = allItineraries.concat(variant.variantItineraries.items);
+          });
+          return new VariantItinerariesCollection({
+            items: allItineraries,
+            associationType: `aggregation`,
+          });
+        }
+      );
     }
 
     get variantSectionsCollectionOfAllVariantsOfAllRoutes() {

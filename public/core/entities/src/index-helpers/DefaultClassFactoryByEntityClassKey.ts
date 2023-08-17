@@ -6,6 +6,10 @@ import {
   RouteClassFactory,
   VariantClassFactory,
   VariantsCollectionClassFactory,
+  VariantItineraryClassFactory,
+  VariantItinerariesCollectionClassFactory,
+  ItinerarySegmentClassFactory,
+  ItinerarySegmentsCollectionClassFactory,
   VariantPointClassFactory,
   VariantPointsCollectionClassFactory,
   VehicleScheduleClassFactory,
@@ -122,6 +126,12 @@ export const DefaultClassFactoryByEntityClassKey = {
 
   VariantPoint: VariantPointClassFactory,
   VariantPointsCollection: VariantPointsCollectionClassFactory,
+
+  ItinerarySegment: ItinerarySegmentClassFactory,
+  ItinerarySegmentsCollection: ItinerarySegmentsCollectionClassFactory,
+
+  VariantItinerary: VariantItineraryClassFactory,
+  VariantItinerariesCollection: VariantItinerariesCollectionClassFactory,
 
   TripOrVariant: TripOrVariantClassFactory,
 

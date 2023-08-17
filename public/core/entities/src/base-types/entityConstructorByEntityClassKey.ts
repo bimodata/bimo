@@ -9,6 +9,10 @@ import {
   VariantsCollection,
   VariantPoint,
   VariantPointsCollection,
+  VariantItinerary,
+  VariantItinerariesCollection,
+  ItinerarySegment,
+  ItinerarySegmentsCollection,
   VehicleSchedule,
   VehicleScheduleOrRouteVersion,
   Trip,
@@ -124,6 +128,10 @@ export declare const entityConstructorByEntityClassKey: {
   VariantsCollection: typeof VariantsCollection;
   VariantPoint: typeof VariantPoint;
   VariantPointsCollection: typeof VariantPointsCollection;
+  VariantItinerary: typeof VariantItinerary;
+  VariantItinerariesCollection: typeof VariantItinerariesCollection;
+  ItinerarySegment: typeof ItinerarySegment;
+  ItinerarySegmentsCollection: typeof ItinerarySegmentsCollection;
   VehicleSchedule: typeof VehicleSchedule;
   VehicleScheduleOrRouteVersion: typeof VehicleScheduleOrRouteVersion;
   Trip: typeof Trip;

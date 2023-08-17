@@ -11,6 +11,7 @@ import { BimoVariantPointsCollection } from "./VariantPointsCollection";
 import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
 import { BimoRoute } from "./Route";
 import { BimoPlace } from "./Place";
+import { BimoVariantItinerariesCollection } from "./VariantItinerariesCollection";
 
 export interface VariantProps extends ExtendedItemProps {
   bimoId?: string;
@@ -24,12 +25,17 @@ export interface VariantProps extends ExtendedItemProps {
   varPriority?: string;
   varAllowDeviationFromTrackNetwork?: string;
   variantPoints: BimoVariantPointsCollection;
+  variantItineraries: BimoVariantItinerariesCollection;
 }
 export function VariantClassFactory({
   TripOrVariant,
   VariantPointsCollection,
+  VariantItinerariesCollection,
 }: EntityConstructorByEntityClassKey): typeof BimoVariant {
-  const childClasses: (typeof Entity)[] = [VariantPointsCollection];
+  const childClasses: (typeof Entity)[] = [
+    VariantPointsCollection,
+    VariantItinerariesCollection,
+  ];
 
   class Variant extends TripOrVariant<
     Variant,
@@ -48,6 +54,7 @@ export function VariantClassFactory({
     varPriority: string;
     varAllowDeviationFromTrackNetwork?: string;
     variantPoints: BimoVariantPointsCollection;
+    variantItineraries: BimoVariantItinerariesCollection;
     _links: { [linkType: string]: any } = {};
     constructor(props: VariantProps, context: BimoContext) {
       super(props, context, "variant");
@@ -73,6 +80,14 @@ export function VariantClassFactory({
         VariantPointsCollection,
         new VariantPointsCollection(),
         { altPropName: "variant_point", parent: this }
+      );
+
+      this.variantItineraries = gavpfp(
+        "variantItineraries",
+        props,
+        VariantItinerariesCollection,
+        new VariantItinerariesCollection(),
+        { altPropName: "variant_itinerary", parent: this }
       );
     }
 

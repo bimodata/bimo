@@ -75,6 +75,14 @@ export function RouteVersionsCollectionClassFactory({
             route.rvariant = route.variants.map((variant) => {
               // @ts-ignore
               variant.rvpoint = variant.variantPoints.items;
+              // @ts-ignore
+              variant.variant_itinerary = variant.variantItineraries.map(
+                (varItinerary) => {
+                  // @ts-ignore
+                  varItinerary.itinerary_segment = varItinerary.itinerarySegments.items;
+                  return varItinerary;
+                }
+              );
               return variant;
             });
             return route;

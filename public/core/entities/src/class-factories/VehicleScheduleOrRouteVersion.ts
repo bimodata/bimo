@@ -1,5 +1,6 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import {
+  VariantItinerariesCollection,
   VariantPointsCollection,
   VehicleScheduleOrRouteVersion as BimoVehicleScheduleOrRouteVersion,
 } from "../base-types/rawIndex";
@@ -19,6 +20,7 @@ export function VehicleScheduleOrRouteVersionClassFactory({}: EntityConstructorB
       allPoints: "variantPointsCollectionOfAllVariantPointsOfAllRoutes",
       tripsOrVariants: "variantsCollectionOfAllVariantsOfAllRoutes",
       removeTripOrVariant: "removeVariant",
+      allItineraries: "variantItinerariesCollectionOfAllItinerariesOfAllRoutes",
     },
   };
 
@@ -49,6 +51,10 @@ export function VehicleScheduleOrRouteVersionClassFactory({}: EntityConstructorB
 
     get allPoints(): VariantPointsCollection {
       return get(this, this._abstract.pathByPropName.allPoints);
+    }
+
+    get allItineraries(): VariantItinerariesCollection {
+      return get(this, this._abstract.pathByPropName.allItineraries);
     }
 
     get setOfAllPlaceIdentifiers(): Set<string> {

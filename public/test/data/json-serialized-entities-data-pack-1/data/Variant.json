@@ -21,6 +21,10 @@
         "variantPoints": {
           "_type": "VariantPointsCollection",
           "_id": "1"
+        },
+        "variantItineraries": {
+          "_type": "VariantItinerariesCollection",
+          "_id": "1"
         }
       }
     },
@@ -51,7 +55,8 @@
       "24": {},
       "25": {},
       "26": {},
-      "27": {}
+      "27": {},
+      "28": {}
     },
     "VariantPointsCollection": {
       "1": {
@@ -569,6 +574,21 @@
         "_varptPublicInfo": "1",
         "varptRoutingPoint": "0",
         "varptAllowLoadTime": "1"
+      }
+    },
+    "VariantItinerariesCollection": {
+      "1": {
+        "parent": {
+          "_type": "Variant",
+          "_id": "1"
+        },
+        "customProps": {
+          "_type": "Object",
+          "_id": "28"
+        },
+        "itemName": "VariantItinerary",
+        "associationType": "composition",
+        "items": []
       }
     }
   }

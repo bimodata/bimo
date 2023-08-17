@@ -1,6 +1,7 @@
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 import { TripOrVariant } from "./TripOrVariant";
 import { VariantPointsCollection } from "./VariantPointsCollection";
+import { VariantItinerariesCollection } from "./VariantItinerariesCollection";
 import { VariantPoint, VariantPointProps } from "./VariantPoint";
 import { Route } from "./Route";
 import { Place } from "./Place";
@@ -17,6 +18,7 @@ export interface VariantProps extends ExtendedItemProps {
   varPriority?: string;
   varAllowDeviationFromTrackNetwork?: string;
   variantPoints: VariantPointsCollection;
+  variantItineraries: VariantItinerariesCollection;
 }
 export declare class Variant extends TripOrVariant<
   Variant,
@@ -35,6 +37,7 @@ export declare class Variant extends TripOrVariant<
   varPriority: string;
   varAllowDeviationFromTrackNetwork?: string;
   variantPoints: VariantPointsCollection;
+  variantItineraries: VariantItinerariesCollection;
   _links: {
     [linkType: string]: any;
   };
