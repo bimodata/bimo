@@ -13,7 +13,7 @@ import { VehicleSchedule } from "./VehicleSchedule";
 import { Place } from "./Place";
 export type TripType = "0" | "3";
 export interface TripProps extends ExtendedItemProps {
-  bimoId?: string;
+  bimoId: string | null;
   trpNumber?: string;
   trpIsProtected?: string;
   trpRoute?: string;
@@ -29,8 +29,8 @@ export interface TripProps extends ExtendedItemProps {
   trpTimeEnd?: string;
   trpStartLayUser?: string;
   trpEndLayUser?: string;
-  trpInternalDistance?: string;
-  trpDistance?: string;
+  trpInternalDistance: string | null;
+  trpDistance: string | null;
   trpCreator?: string;
   trpNote?: string;
   trpSecondNote?: string;
@@ -59,7 +59,7 @@ export interface TripProps extends ExtendedItemProps {
   trpBlockingGarage?: string;
   trpRunTimePattern?: string;
   trpOriginalNumber?: string;
-  trpIntNumber?: string;
+  trpIntNumber: string | null;
   trpAreVehGroupSpecsFromVehcv?: string;
   trpAreVehSpecCstrFromVehcv?: string;
   trpRecommendedVehGroup?: string;
