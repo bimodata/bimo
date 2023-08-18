@@ -159,7 +159,7 @@ function recursivelyAddBlocksAndBlockActivities({
     }
 
     if (blockActivity.blkactVehicleActivityTypeNo === "12") {
-      /** Un dételage génère des blockActivities dans deux blocks
+      /** Un attelage génère des blockActivities dans deux blocks
        * - Le block courant contient le "à atteler (12)" puis se termine
        * - L'autre contient un "atteler" et se poursuit
        * Nous sommes actuellement sur le block qui se termine sec et il faut qu'on retrouve
@@ -183,10 +183,17 @@ function recursivelyAddBlocksAndBlockActivities({
         // Indiquer où commencer à traiter le prochain block
         indexOfFirstBlkActToTreatInNextBlock = foundIndex;
         return true;
+      } else {
+        throw new Error(
+          `Impossible de trouver l'activité "13-atteler" correspondant à l'activité "12-À atteler" ci-dessous:\n` +
+            `${blockActivity.mlo}`
+        );
       }
     }
 
-    throw new Error(`It's theoretically impossible to get here`);
+    throw new Error(
+      `blkactVehicleActivityTypeNo = ${blockActivity.blkactVehicleActivityTypeNo} but was not matched in the ifs above ???`
+    );
   });
 
   recursivelyAddBlocksAndBlockActivities({
