@@ -1,3 +1,9 @@
+/**
+ *
+ * @param {import('@bimo/core-entities').ConsistChange} coupling
+ * @param {*} invalidMessage
+ * @returns
+ */
 function createBlockActsForInvalidCoupling(coupling, invalidMessage) {
   switch (invalidMessage) {
     case 'No "Atteler"':
@@ -7,7 +13,7 @@ function createBlockActsForInvalidCoupling(coupling, invalidMessage) {
     default:
       throw new Error(`"${invalidMessage}" case is not supported yet`);
   }
-  const trip = coupling.vehicleSchedule.trips.getByBusinessId(coupling.cchgOnTripNo);
+  const trip = coupling.vehicleSchedule?.tripsAndIncludedTrips.getByBusinessId(coupling.cchgOnTripNo);
   if (!trip) throw new Error(`Could not find trip for ${coupling.llo}`);
   const blockAct = trip.block.blockActivities.createNewItem({
     blkactVehicleActivityTypeNo: '13',
