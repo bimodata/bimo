@@ -321,6 +321,10 @@ export function VehicleScheduleClassFactory(
       return this._getAndSetCachedValue("blockingVscs", () => []);
     }
 
+    get includedVscs(): VehicleSchedule[] {
+      return this.vscincloirs.map((vscInclOir) => vscInclOir.vsc);
+    }
+
     addBlockingVsc(vsc: VehicleSchedule) {
       const currentVscs = new Set(this.blockingVscs);
       currentVscs.add(vsc);
@@ -360,6 +364,19 @@ export function VehicleScheduleClassFactory(
       return this._getAndSetCachedValue("computedActivityEntityItemObjects", () =>
         computeActivityEntityItemsOfVsc(this)
       );
+    }
+
+    get tripsAndIncludedTrips(): BimoTripsCollection {
+      return this._getAndSetCachedValue("tripsAndIncludedTrips", () => {
+        const allTrips = [...this.trips.items];
+        this.includedVscs.forEach((vsc) => {
+          allTrips.push(...vsc.trips.items);
+        });
+        return new TripsCollection({
+          associationType: "aggregation",
+          items: allTrips,
+        });
+      });
     }
 
     get vehicleTasks() {

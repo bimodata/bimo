@@ -140,6 +140,7 @@ export declare class VehicleSchedule extends VehicleScheduleOrRouteVersion<
   addIncludedVsc(vsc: VehicleSchedule): void;
   removeIncludedVsc(vsc: VehicleSchedule): void;
   get blockingVscs(): VehicleSchedule[];
+  get includedVscs(): VehicleSchedule[];
   addBlockingVsc(vsc: VehicleSchedule): void;
   findVscInclOirForVsc(vsc: VehicleSchedule): Vscincloir;
   /**
@@ -175,6 +176,7 @@ export declare class VehicleSchedule extends VehicleScheduleOrRouteVersion<
       import("./BlockActivityItem").BlockActivityItem<BaseBlockActivityItem>
     >;
   };
+  get tripsAndIncludedTrips(): TripsCollection;
   get vehicleTasks(): VehicleTasksCollection;
   get setOfVtasByBlock(): Map<
     import("./Block").Block,
