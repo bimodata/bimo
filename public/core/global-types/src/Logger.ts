@@ -2,7 +2,7 @@ export interface LogFunction {
   (message: string, type?: string): void;
 }
 export interface LogProgressFunction {
-  (message: string, type: string, percentage: number): void;
+  (message: string, type?: string, percentage?: number): void;
 }
 
 export type LogLevel =
@@ -33,11 +33,7 @@ export interface Logger {
   logWarning?: LogFunction;
   logError?: LogFunction;
   throw: (message: string) => never;
-  logOrThrow: (
-    level: LogLevel | "throw",
-    message: string,
-    type?: string
-  ) => void | never;
+  logOrThrow: (level: LogLevel | "throw", message: string, type?: string) => void | never;
   logNotice: (params: {
     level: LogLevel | "throw";
     message: string;
