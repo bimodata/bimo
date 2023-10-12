@@ -17,22 +17,36 @@ function computeItemKey(item, config, context = {}) {
     paths = path && [path],
     noticeLevelForKeyComputationError = 'throw',
     returnValueForKeyComputationError = undefined,
+    parseAsInt = false,
+    parseAsFloat = false,
+    considerNanAsError = true,
   } = config;
-  if (paths) return computeBasedOnPaths(item, { ...config, paths });
-
-  let computeFnToUse = computeFn;
-  if (modeKey) {
+  let computeFnToUse;
+  if (paths) {
+    computeFnToUse = () => computeBasedOnPaths(item, { ...config, paths });
+  }
+  else if (modeKey) {
     logger.trace(`Will try to compute according to this modeKey: ${modeKey}`);
     const computeFnForThisModeKey = computeFnByModeKey[modeKey];
     if (!computeFnForThisModeKey) throw new Error(`Mode key inconnu: ${modeKey}`);
     computeFnToUse = computeFnForThisModeKey;
   }
+  else {
+    computeFnToUse = computeFn;
+  }
 
   if (!computeFnToUse) throw new Error(`Un modeKey ou une computeFn doivent être fournis`);
 
   try {
-    const key = computeFnToUse(item, config, context);
-    return key;
+    const rawKey = computeFnToUse(item, config, context);
+    let parsedKey = rawKey;
+    if (parseAsFloat) parsedKey = parseFloat(parsedKey);
+    if (parseAsInt) parsedKey = parseInt(parsedKey, 10);
+    if (considerNanAsError && Number.isNaN(parsedKey)) {
+      throw new Error(`La conversion de la clé "${rawKey}" en nombre a échoué`);
+    }
+
+    return parsedKey;
   }
   catch (error) {
     logger[noticeLevelForKeyComputationError](

@@ -44,9 +44,22 @@ describe('computeItemKey', () => {
       expect(computeItemKey(item, { paths: ['a', 'b', 'c', 'c.d'], separator: '/' }, serviceContext)).to.equal('1/2/{"d":4,"e":5}/4');
     });
   });
+  describe('when config asks for parsing', () => {
+    const item = {
+      a: 1,
+      b: 2,
+      c: { d: 4, e: 5 },
+    };
+    it('is concatenates the paths, in order, with separator between (default sep = |', () => {
+      expect(computeItemKey(item, { paths: ['a', 'b'], separator: '', parseAsInt: true }, serviceContext)).to.equal(12);
+      expect(computeItemKey(item, { paths: ['a', 'b'], separator: '.', parseAsInt: true }, serviceContext)).to.equal(1);
+      expect(computeItemKey(item, { paths: ['a', 'b'], separator: '.', parseAsFloat: true }, serviceContext)).to.equal(1.2);
+    });
+  });
   describe('when key computation throws an error', () => {
     const item = {
       shortLoggingOutput: 'item1',
+      someTextValue: 'bonjour',
       a: 1,
       b: 2,
       c: { d: 4, e: 5 },
@@ -74,6 +87,20 @@ describe('computeItemKey', () => {
         sinon.spy(logger);
         expect(computeItemKey(item, config, serviceContext)).to.equal('coucou');
         expect(logger.info.getCall(0).args[0]).to.contain('Erreur au moment de calculer la key de item1: erreur pour le test');
+      });
+    });
+    describe(`with a noticeLevelForKeyComputationError and returnValueForKeyComputationError, and a parsing error`, () => {
+      const config = {
+        path: 'someTextValue',
+        parseAsInt: true,
+        noticeLevelForKeyComputationError: 'info',
+        returnValueForKeyComputationError: 'coucou',
+      };
+      it(`logs the error, wrapped in info about the item, and returns the value specified in the config`, () => {
+        sinon.spy(logger);
+        expect(computeItemKey(item, config, serviceContext)).to.equal('coucou');
+        expect(logger.info.getCall(0).args[0])
+          .to.contain('Erreur au moment de calculer la key de item1: La conversion de la clé "bonjour" en nombre a échoué');
       });
     });
   });
