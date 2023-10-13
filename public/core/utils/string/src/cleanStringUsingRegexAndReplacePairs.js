@@ -6,14 +6,14 @@ const getRegexFromStringifedRegex = require('./getRegexFromStringifedRegex');
 
 /**
  *
- * @param {string} stringToClean - string to clean
+ * @param {any} stringToClean - string to clean
  * @param {string[][]} regexAndReplacePairs - array of [stringified regex, replacer] tuples
  * @param {object} [options={}]
  * @returns {string} the cleaned string
  */
 function cleanStringUsingRegexAndReplacePairs(stringToClean, regexAndReplacePairs, options) {
   const logger = options && getAndAddLoggerToServiceOptions(options, { serviceName: 'cleanStringUsingRegexs' });
-  if (!regexAndReplacePairs) return stringToClean;
+  if (!regexAndReplacePairs || [undefined, null].includes(stringToClean)) return stringToClean;
   let cleanedString = stringToClean.toString();
 
   if (logger) logger.silly(`Will use these regexAndReplacePairs: ${inspect(regexAndReplacePairs)}`);

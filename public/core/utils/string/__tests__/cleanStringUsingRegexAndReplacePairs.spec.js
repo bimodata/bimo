@@ -61,4 +61,10 @@ describe(`# cleanStringUsingRegexs`, () => {
       ])).to.throw();
     });
   });
+  context(`when given null or undefined`, () => {
+    it(`returns the initial value`, () => {
+      expect(cleanStringUsingRegexAndReplacePairs(null, [])).to.equal(null);
+      expect(cleanStringUsingRegexAndReplacePairs(undefined, [])).to.equal(undefined);
+    });
+  });
 });
