@@ -14,7 +14,7 @@ const placeIdPropByConstructor = new Map([
  * @param {Place|string|TripOrVariantPoint} placeLike - the object from which to retrieve a place
  * @param {PlacesCollection=} placesCollection - placesCollection to use
  * @param {any=} options - @see ServiceOptions
- * @return {Place}
+ * @return {import('@bimo/core-entities').Place}
  */
 function retrievePlace(placeLike, placesCollection, options) {
   const logger = getAndAddLoggerToServiceOptions(options, { serviceName: `retrievePlace` });
