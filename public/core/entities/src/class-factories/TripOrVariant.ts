@@ -29,6 +29,7 @@ export function TripOrVariantClassFactory(
       direction: "trpDirection",
       routeId: "trpRoute",
       variantId: "trpViaVariant",
+      indiceCompo: "trpCodeCompo",
     },
     variant: {
       points: "variantPoints",
@@ -44,6 +45,7 @@ export function TripOrVariantClassFactory(
       direction: "trpDirection",
       routeId: "trpRoute",
       variantId: "trpViaVariant",
+      indiceCompo: "trpCodeCompo",
     },
     trainPathVariant: {
       points: "trainPathVariantPoints",
