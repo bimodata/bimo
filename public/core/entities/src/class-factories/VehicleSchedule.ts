@@ -290,6 +290,10 @@ export function VehicleScheduleClassFactory(
       return `${this.vscIntId}: ${this.vscName} - ${this.vscDescription} (${this.vscSchedType})`;
     }
 
+    get mediumLoggingOutput() {
+      return `${this.shortLoggingOutput} | ${this.trips.length} trips | ${this.blocks.length} blocks`;
+    }
+
     get businessLoggingOutput() {
       return `${this.vscName} - ${this.vscDescription} (${this.vscSchedType})\n${this.vehicleTasks.blo}`;
     }
