@@ -167,6 +167,17 @@ export function VariantClassFactory({
       return this.varProductive === "1";
     }
 
+    /** en  km*/
+    get totalDistance() {
+      return (
+        this.points.reduce(
+          (previousValue, currentPoint) =>
+            previousValue + parseFloat(currentPoint.distance),
+          0
+        ) / 1000
+      );
+    }
+
     changeStartPlace(newStartPlace: BimoPlace | string) {
       const placeIdentifier =
         typeof newStartPlace === `string` ? newStartPlace : newStartPlace.plcIdentifier;

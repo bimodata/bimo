@@ -30,6 +30,7 @@ export function TripOrVariantClassFactory(
       routeId: "trpRoute",
       variantId: "trpViaVariant",
       indiceCompo: "trpCodeCompo",
+      distance: "trpDistance",
     },
     variant: {
       points: "variantPoints",
@@ -38,6 +39,7 @@ export function TripOrVariantClassFactory(
       routeId: "routeId",
       indiceCompo: "varIndiceCompo",
       variantId: "varIdentifier",
+      distance: "totalDistance",
     },
     scheduledTrip: {
       points: "tripPoints",
@@ -46,6 +48,7 @@ export function TripOrVariantClassFactory(
       routeId: "trpRoute",
       variantId: "trpViaVariant",
       indiceCompo: "trpCodeCompo",
+      distance: "trpDistance",
     },
     trainPathVariant: {
       points: "trainPathVariantPoints",
@@ -163,6 +166,10 @@ export function TripOrVariantClassFactory(
 
     get indiceCompo(): string {
       return get(this, this._abstract.pathByPropName.indiceCompo);
+    }
+
+    get distance(): string {
+      return get(this, this._abstract.pathByPropName.distance);
     }
 
     changeStartPlace(newStartPlace: BimoPlace | string) {
