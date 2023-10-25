@@ -183,6 +183,7 @@ export declare class Trip
   get shortLoggingOutput(): string;
   get mediumLoggingOutput(): string;
   get longLoggingOutput(): string;
+  get veryLongLoggingOutput(): string;
   /** the first 3 digits of the trip number */
   get trancheNum(): string;
   get firstTripPoint(): TripPoint;

@@ -465,7 +465,11 @@ export function TripClassFactory({
     }
 
     get longLoggingOutput() {
-      return `${this.mediumLoggingOutput}\n${this.tripPoints.mediumLoggingOutput}`;
+      return `${this.mediumLoggingOutput} ${this.tripPoints.mediumLoggingOutput}`;
+    }
+
+    get veryLongLoggingOutput() {
+      return `${this.mediumLoggingOutput}\n${this.tripPoints.longLoggingOutput}`;
     }
 
     /** the first 3 digits of the trip number */
