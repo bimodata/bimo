@@ -13,7 +13,8 @@ const getDurationFromStringUsingRegexps = require('..');
 function itGivesTheExpectedResult(item, config, serviceContext, expectedResult) {
   it(`gives the expected result`, () => {
     const result = getDurationFromStringUsingRegexps(item, config, serviceContext);
-    expect(result.toString()).to.equal(expectedResult);
+    const parsedResult = [null, undefined].includes(result) ? result : result.toString();
+    expect(parsedResult).to.equal(expectedResult);
   });
 }
 
@@ -60,6 +61,18 @@ const testDataByTestSuiteName = {
     item: '',
     config: terGrandEstLuxembourgConfig,
     expectedResult: ``,
+    serviceContext,
+  },
+  undefined: {
+    item: undefined,
+    config: terGrandEstLuxembourgConfig,
+    expectedResult: undefined,
+    serviceContext,
+  },
+  null: {
+    item: null,
+    config: terGrandEstLuxembourgConfig,
+    expectedResult: null,
     serviceContext,
   },
 };

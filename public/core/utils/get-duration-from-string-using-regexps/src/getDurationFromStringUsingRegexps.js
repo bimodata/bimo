@@ -16,6 +16,10 @@ const defaultLogLevelByDurationComponent = {
  */
 function getDurationFromStringUsingRegexps(sourceString, config, context) {
   const logger = getAndAddLoggerToServiceOptions(context, { serviceName: `getDurationFromStringUsingRegexps` });
+  if (typeof sourceString !== 'string') {
+    logger.trace(`Returning sourceString as is when it is not a string`);
+    return sourceString;
+  }
   if (sourceString === '') {
     logger.trace(`Returning '' when sourceString is ''`);
     return '';
