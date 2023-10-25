@@ -12,7 +12,7 @@ When working with times without dates, there is no easy way of knowing that the 
 
 Some time formats, like the Hastus extended hours format, solve this by allowing the use of more than 24 hours in a day. The 00h05 would then be noted as 24:05.
 
-Therefore, when converting a single time from a given format to the Hastus extended hours format (or any other format that accounts for day differences), the client that calls `convertTime` might want to adjust the duration.
+Therefore, when converting a single time from a given format to the Hastus extended hours format (or any other format that accounts for day differences), the client who calls `convertTime` might want to adjust the duration.
 
 `convertTime` provides two mechanisms for that.
 They can be used individually, or combined.
@@ -38,3 +38,7 @@ You could have a rule that says that any time before 03:00 should be considered 
 `lowerBoundDuration` is made for that: when it is set, it will ensure that the return value is never smaller than the lowerBoundDuration, and automatically add 1 day to the duration.
 
 When converting times of a trip, setting lowerBoundDuration to the start time of the trip should do the trick. For complex cases, like trips that span more than 24 hours, you could also set it to the time of the previous trip point.
+
+## Other uses of `durationAdjustementObject`
+
+Feel free to use `durationAdjustmentObject` for other uses, such as manually handling some timezone or daylight savings time conversions.
