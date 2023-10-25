@@ -87,6 +87,7 @@ describe('computeItemKey', () => {
         sinon.spy(logger);
         expect(computeItemKey(item, config, serviceContext)).to.equal('coucou');
         expect(logger.info.getCall(0).args[0]).to.contain('Erreur au moment de calculer la key de item1: erreur pour le test');
+        sinon.restore();
       });
     });
     describe(`with a noticeLevelForKeyComputationError and returnValueForKeyComputationError, and a parsing error`, () => {
@@ -101,6 +102,7 @@ describe('computeItemKey', () => {
         expect(computeItemKey(item, config, serviceContext)).to.equal('coucou');
         expect(logger.info.getCall(0).args[0])
           .to.contain('Erreur au moment de calculer la key de item1: La conversion de la clé "bonjour" en nombre a échoué');
+        sinon.restore();
       });
     });
   });
