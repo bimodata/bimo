@@ -62,11 +62,17 @@ function hastusExtendedHoursToJsDate(hastusExtendedHoursString) {
   return hastusExtendedHoursToDateTime(hastusExtendedHoursString).toJSDate();
 }
 
+const durationByIsoTimeStringCache = {};
 function isoTimeStringToDuration(isoTimeString) {
+  const cachedValue = durationByIsoTimeStringCache[isoTimeString];
+  if (cachedValue) return cachedValue;
+
   // Locking the date, otherwise, when executed on a day of timechange, it didn't work
   const dt = DateTime.fromISO(`2020-01-01T${isoTimeString}`);
   if (!dt.isValid) throw Error(dt.invalidExplanation);
-  return dt.diff(dt.startOf('day'));
+  const newValue = dt.diff(dt.startOf('day'));
+  durationByIsoTimeStringCache[isoTimeString] = newValue;
+  return newValue;
 }
 
 /**
