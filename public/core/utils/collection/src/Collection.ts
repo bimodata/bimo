@@ -465,18 +465,31 @@ export class Collection<
   }
 
   groupByCustomKey(
-    customKeyCreationFunction: (item: ItemType) => string
+    customKeyCreationFunction: (item: ItemType) => string,
+    { refreshCache = true } = {}
   ): Map<any, ItemType[]> {
-    const groupedItemsByCustomKey = new Map();
-    this.items.forEach((item) => {
-      const customKey = customKeyCreationFunction(item);
-      let groupedItems = groupedItemsByCustomKey.get(customKey);
-      if (!groupedItems) {
-        groupedItems = [];
-        groupedItemsByCustomKey.set(customKey, groupedItems);
-      }
-      groupedItems.push(item);
-    });
+    const groupedItemsByCustomKeyByCustomKeyCreationFunction = this._getAndSetCachedValue(
+      "groupedItemsByCustomKeyByCustomKeyCreationFunction",
+      () => new Map()
+    );
+    let groupedItemsByCustomKey: Map<any, ItemType[]> =
+      groupedItemsByCustomKeyByCustomKeyCreationFunction.get(customKeyCreationFunction);
+    if (!groupedItemsByCustomKey || refreshCache) {
+      groupedItemsByCustomKey = new Map();
+      this.items.forEach((item) => {
+        const customKey = customKeyCreationFunction(item);
+        let groupedItems = groupedItemsByCustomKey.get(customKey);
+        if (!groupedItems) {
+          groupedItems = [];
+          groupedItemsByCustomKey.set(customKey, groupedItems);
+        }
+        groupedItems.push(item);
+      });
+      groupedItemsByCustomKeyByCustomKeyCreationFunction.set(
+        customKeyCreationFunction,
+        groupedItemsByCustomKey
+      );
+    }
     return groupedItemsByCustomKey;
   }
 
