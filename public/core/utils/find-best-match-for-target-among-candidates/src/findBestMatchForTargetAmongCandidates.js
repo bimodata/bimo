@@ -13,11 +13,19 @@ const { retrieveCandidatesArrayToUse } = require('./retrieveCandidatesArrayToUse
  * @param {Collection<CandidateType>|CandidateType[]} targetAndCandidates.candidates
  * @param {FindBestMatchForTargetAmongCandidatesConfig} config
  * @param {Object} context
- * @returns {CandidateType}
+ * @returns {CandidateType|null}
  */
 function findBestMatchForTargetAmongCandidates({ target, candidates: rawCandidates } = {}, config, context = {}) {
   const logger = getAndAddLoggerToServiceOptions(context, { serviceName: `findBestMatchForTargetAmongCandidates` });
-  if (!target || !rawCandidates) return null;
+  logger.trace(`Start of findBestMatchForTargetAmongCandidates`);
+  if (!target) {
+    logger.trace(`No target - returning null`);
+    return null;
+  }
+  if (!rawCandidates) {
+    logger.trace(`No candidates - returning null`);
+    return null;
+  }
   const {
     iterationConfigs = [{}], noticeLevelForGlobalNoMatch = 'trace',
     createMessageForGlobalNoMatch = () => `No match found after all ${iterationConfigs.length} iterations. Will return null.`,
@@ -35,6 +43,8 @@ function findBestMatchForTargetAmongCandidates({ target, candidates: rawCandidat
       createMessageForNoMatch = () => `No match found in iteration ${iterationName}. Will try next iteration.`,
       createNoticeForMatch, createNoticeForNoMatch,
     } = iterationConfig;
+
+    logger.trace(`Starting iteration # ${iterationIndex} ${iterationName}`);
 
     /** @type {CandidateType[]} */
     let candidates;
