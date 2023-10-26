@@ -26,13 +26,14 @@ function retrieveCandidatesArrayToUse({ target, candidates }, config, context = 
     ? { modeKey: config }
     : config;
 
-  const { modeKey, refreshCache = false } = unShortHandedConfig;
+  const { modeKey } = unShortHandedConfig;
   const modeKeyRelatedConfig = predefinedCandidatesFilteringConfigByKey[modeKey] ?? {};
 
   const {
     getKeyFromTargetConfig,
     groupCandidatesByConfig,
     filterPredicate,
+    refreshCache = false,
   } = { ...modeKeyRelatedConfig, ...unShortHandedConfig };
   if (!((getKeyFromTargetConfig && groupCandidatesByConfig) || filterPredicate)) {
     throw new Error(`Invalid config and/or options: ${JSON.stringify(config)}`);
@@ -64,7 +65,7 @@ function retrieveCandidatesArrayToUse({ target, candidates }, config, context = 
   }
   else if (typeof groupCandidatesByConfig === 'function') {
     const customKeyCreationFunction = (item) => groupCandidatesByConfig(item, target, config, context);
-    groupedCandidatesByKey = candidatesCollection.groupByCustomKey(customKeyCreationFunction);
+    groupedCandidatesByKey = candidatesCollection.groupByCustomKey(customKeyCreationFunction, { refreshCache });
   }
   else {
     throw new Error(`Invalid config: ${JSON.stringify(groupCandidatesByConfig)}`);
