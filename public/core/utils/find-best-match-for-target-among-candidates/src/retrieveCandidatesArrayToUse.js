@@ -34,6 +34,7 @@ function retrieveCandidatesArrayToUse({ target, candidates }, config, context = 
     groupCandidatesByConfig,
     filterPredicate,
     refreshCache = false,
+    doNotMutateGroupByCustomKeyFunction = false,
   } = { ...modeKeyRelatedConfig, ...unShortHandedConfig };
   if (!((getKeyFromTargetConfig && groupCandidatesByConfig) || filterPredicate)) {
     throw new Error(`Invalid config and/or options: ${JSON.stringify(config)}`);
@@ -64,12 +65,28 @@ function retrieveCandidatesArrayToUse({ target, candidates }, config, context = 
     groupedCandidatesByKey = candidatesCollection.groupByProp(groupCandidatesByConfig, { refreshCache });
   }
   else if (typeof groupCandidatesByConfig === 'function') {
-    const customKeyCreationFunction = (item) => groupCandidatesByConfig(item, target, config, context);
-    groupedCandidatesByKey = candidatesCollection.groupByCustomKey(customKeyCreationFunction, { refreshCache });
+    /** There are two cases here:
+     * Case 1: Your groupByCustomKey function needs the target - the grouping of the candidates will
+     *         vary depending on the target, and the groups must be computed for each target any ways
+     *         We cannot cache anything. We pass the function wrapped in a closure with the target, config
+     *         and context, so that the function can use these.
+     *
+     * Case 2: Your groupByCustomKey function does not need the target. We do not need to recompute groups
+     *         for each target. We want to take advantage of the caching. We pass the function as is
+     *         without adding the target, config and context since we don't need them and they would prevent
+     *         the caching.
+     */
+    const functionToUse = doNotMutateGroupByCustomKeyFunction
+      ? groupCandidatesByConfig
+      : (item) => groupCandidatesByConfig(item, target, config, context);
+
+    groupedCandidatesByKey = candidatesCollection.groupByCustomKey(functionToUse, { refreshCache });
   }
   else {
     throw new Error(`Invalid config: ${JSON.stringify(groupCandidatesByConfig)}`);
   }
+
+  logger.trace(`Candidates have been grouped by keys. Got ${groupedCandidatesByKey.size} keys. Will try to find this key: ${key}`);
 
   const candidatesToUse = groupedCandidatesByKey.get(key);
   if (!candidatesToUse) {
