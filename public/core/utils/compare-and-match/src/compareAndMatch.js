@@ -7,17 +7,17 @@ exports.levenshtein = levenshtein;
  * @param {Object} target - the object you want to match
  * @param {Object[]} candidatesList - the list of candidate objects
  * @param {Object} [config={}] - some options for the function
- * @param {Object} [context={}] - some options for the function
- * @param {Object=} context.logger - a logger object
- * @param {Function=} options.keyFunction - a function that takes the object and returns
+ * @param {Function=} config.keyFunction - a function that takes the object and returns
  * the string that should be used as a key for this object
- * @param {Function=} options.distanceFunction - a function that takes a target object,
+ * @param {Function=} config.distanceFunction - a function that takes a target object,
  * a candidate object and returns the distance between the two
- * @param {Number=} options.maxDistance - the maximum acceptable distance. Return null if
+ * @param {Number=} config.maxDistance - the maximum acceptable distance. Return null if
  *  no candidates are under or equal to this distance
- * @param {Boolean=} options.detailedResults - if true, returns an object that contains the best match,
+ * @param {Boolean=} config.detailedResults - if true, returns an object that contains the best match,
  *  an array of matches that are under the maxDistance, and and an array of all candidates and their distances.
  *  This options disables early exit.
+ * @param {Object} [context={}] - some options for the function
+ * @param {Object=} context.logger - a logger object
  * @returns {Object} the best match, or a complex object with lots of info if options.detailedResults = true
  */
 function getBestMatchToTargetFromCandidatesList(target, candidatesList, config = {}, context = {}) {
