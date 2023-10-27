@@ -7,10 +7,10 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
 import { BimoRouteVersion, RouteVersionProps } from "./RouteVersion";
-import { BimoRoutesCollection, RoutesCollectionProps } from "./RoutesCollection";
-import { BimoVariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
-import { BimoRoute, RouteProps } from "./Route";
+import { BimoRoute } from "./Route";
 import { BimoVariant, VariantProps } from "./Variant";
+import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
+import { BimoTripOrVariantSection } from "./TripOrVariantSection";
 
 export interface RouteVersionsCollectionProps
   extends ExtendedCollectionProps<BimoRouteVersion, RouteVersionProps> {}
@@ -19,6 +19,7 @@ export function RouteVersionsCollectionClassFactory({
   RouteVersion,
   RoutesCollection,
   VariantsCollection,
+  TripOrVariantSectionsCollection,
 }: EntityConstructorByEntityClassKey): typeof BimoRouteVersionsCollection {
   const childClasses: (typeof Entity)[] = [RouteVersion, RoutesCollection];
 
@@ -110,6 +111,33 @@ export function RouteVersionsCollectionClassFactory({
           });
           return new VariantsCollection({
             items: allVariants,
+            associationType: `aggregation`,
+          });
+        }
+      );
+    }
+
+    get variantSectionsCollectionOfAllVariantsOfAllRoutes() {
+      return this._getAndSetCachedValue(
+        "variantSectionsCollectionOfAllVariantsOfAllRoutes",
+        () => {
+          let allVariantSections: BimoTripOrVariantSection<
+            BimoVariantPoint,
+            VariantPointProps,
+            BimoVariant,
+            VariantProps
+          >[] = [];
+          this.forEach((routeVersion) => {
+            const variantSectionsCollOfThisRouteVersion =
+              routeVersion.variantSectionsCollectionOfAllVariantsOfAllRoutes;
+            if (variantSectionsCollOfThisRouteVersion) {
+              allVariantSections = allVariantSections.concat(
+                variantSectionsCollOfThisRouteVersion.items
+              );
+            }
+          });
+          return new TripOrVariantSectionsCollection({
+            items: allVariantSections,
             associationType: `aggregation`,
           });
         }

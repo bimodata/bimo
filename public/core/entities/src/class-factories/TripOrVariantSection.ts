@@ -47,8 +47,16 @@ export function TripOrVariantSectionClassFactory({}: EntityConstructorByEntityCl
       return this.points[0];
     }
 
+    get firstPoint() {
+      return this.startPoint;
+    }
+
     get endPoint() {
       return this.points[this.points.length - 1];
+    }
+
+    get lastPoint() {
+      return this.endPoint;
     }
 
     get totalDistance() {
