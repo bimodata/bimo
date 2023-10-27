@@ -123,6 +123,8 @@ export const DefaultClassFactoryByEntityClassKey = {
   DataFilesCollection: DataFilesCollectionClassFactory,
 
   TripOrVariantPoint: TripOrVariantPointClassFactory,
+  TripOrVariantSection: TripOrVariantSectionClassFactory,
+  TripOrVariantSectionsCollection: TripOrVariantSectionsCollectionClassFactory,
 
   VariantPoint: VariantPointClassFactory,
   VariantPointsCollection: VariantPointsCollectionClassFactory,
@@ -257,9 +259,6 @@ export const DefaultClassFactoryByEntityClassKey = {
   TrainPathsCollection: TrainPathsCollectionClassFactory,
 
   BookingCalendarsCollection: BookingCalendarsCollectionClassFactory,
-
-  TripOrVariantSection: TripOrVariantSectionClassFactory,
-  TripOrVariantSectionsCollection: TripOrVariantSectionsCollectionClassFactory,
 
   NetworkNode: NetworkNodeClassFactory,
   NetworkNodesCollection: NetworkNodesCollectionClassFactory,
