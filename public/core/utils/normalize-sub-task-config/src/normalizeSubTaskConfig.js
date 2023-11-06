@@ -1,4 +1,5 @@
 /**
+ * See README.md
  * @param {object} subTaskConfig
  */
 function normalizeSubTaskConfig(subTaskConfig) {
@@ -12,8 +13,13 @@ function normalizeSubTaskConfig(subTaskConfig) {
 
         const normalizedSourceConfigs = sourceConfigs.map((rawSourceConfig) => {
           const unShortHandedSourceConfig = typeof rawSourceConfig === 'string' ? { defaultValue: rawSourceConfig } : rawSourceConfig;
-          const fallBackMode = Array.isArray(unShortHandedSourceConfig.fallBackMode);
-          return fallBackMode ? unShortHandedSourceConfig : { fallBackMode: [unShortHandedSourceConfig] };
+          if (Array.isArray(unShortHandedSourceConfig?.fallBackMode)) {
+            return unShortHandedSourceConfig;
+          }
+          if (!unShortHandedSourceConfig) {
+            return { fallBackMode: [] };
+          }
+          return { fallBackMode: [unShortHandedSourceConfig] };
         });
         return [executeArgName, { arrayMode, normalizedSourceConfigs }];
       }),
