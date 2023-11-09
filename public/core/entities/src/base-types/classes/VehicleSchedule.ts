@@ -18,6 +18,7 @@ import { BaseBlockActivityItem } from "./BlockActivityItem";
 
 import { BlockActivitiesCollection } from "./BlockActivitiesCollection";
 import { BlockSectionsCollection } from "./BlockSectionsCollection";
+import { SchedulingUnitDatesCollection } from "./SchedulingUnitDatesCollection";
 
 export interface BlocksAndActsAndSections {
   blocks: BlocksCollection;
@@ -75,6 +76,7 @@ export interface VehicleScheduleProps extends ExtendedItemProps {
   tripShifts?: TripShiftsCollection;
   consistChanges?: ConsistChangesCollection;
   overnightLinks?: OvernightLinksCollection;
+  schedulingUnitDates?: SchedulingUnitDatesCollection;
   _blockActivityLinksAreLoaded?: string;
 }
 export declare class VehicleSchedule extends VehicleScheduleOrRouteVersion<
@@ -131,6 +133,7 @@ export declare class VehicleSchedule extends VehicleScheduleOrRouteVersion<
   tripShifts: TripShiftsCollection;
   consistChanges: ConsistChangesCollection;
   overnightLinks: OvernightLinksCollection;
+  schedulingUnitDates: SchedulingUnitDatesCollection;
   _blockActivityLinksAreLoaded?: boolean;
   constructor(props: VehicleScheduleProps);
   get shortLoggingOutput(): string;

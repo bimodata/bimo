@@ -1,5 +1,6 @@
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 export interface SchedulingUnitDateProps extends ExtendedItemProps {
+  scudDate?: string;
   scudSchedUnitName?: string;
   scudSchedUnitType?: string;
   scudProdPhaseDate?: string;
@@ -17,6 +18,7 @@ export interface SchedulingUnitDateProps extends ExtendedItemProps {
   scudProdSchedType?: string;
 }
 export declare class SchedulingUnitDate extends Item<SchedulingUnitDate> {
+  scudDate?: string;
   scudSchedUnitName?: string;
   scudSchedUnitType?: string;
   scudProdPhaseDate?: string;

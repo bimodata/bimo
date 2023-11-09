@@ -27,6 +27,7 @@ import computeVehicleTasksOfVsc, {
 import computeActivityEntityItemsOfVsc, {
   ComputedActivityEntityItemObjects,
 } from "../subs/computeActivityEntityItemsOfVsc";
+import { BimoSchedulingUnitDatesCollection } from "./SchedulingUnitDatesCollection";
 
 export interface VehicleScheduleProps extends ExtendedItemProps {
   vscName?: string;
@@ -98,6 +99,7 @@ export function VehicleScheduleClassFactory(
     OvernightLinksCollection,
     VehicleTasksCollection,
     VehicleScheduleOrRouteVersion,
+    SchedulingUnitDatesCollection,
   } = entityConstructorByEntityClassKey;
   const childClasses: (typeof Entity)[] = [
     VscincloirsCollection,
@@ -110,6 +112,7 @@ export function VehicleScheduleClassFactory(
     TripShiftsCollection,
     ConsistChangesCollection,
     OvernightLinksCollection,
+    SchedulingUnitDatesCollection,
   ];
 
   class VehicleSchedule extends VehicleScheduleOrRouteVersion<
@@ -166,6 +169,7 @@ export function VehicleScheduleClassFactory(
     tripShifts: BimoTripShiftsCollection;
     consistChanges: BimoConsistChangesCollection;
     overnightLinks: BimoOvernightLinksCollection;
+    schedulingUnitDates: BimoSchedulingUnitDatesCollection;
     _blockActivityLinksAreLoaded?: boolean = false;
     constructor(props: VehicleScheduleProps) {
       super(props, "trip");
@@ -282,6 +286,13 @@ export function VehicleScheduleClassFactory(
         OvernightLinksCollection,
         new OvernightLinksCollection(),
         { altPropName: "overnight_link", parent: this }
+      );
+      this.schedulingUnitDates = gavpfp(
+        "schedulingUnitDates",
+        props,
+        SchedulingUnitDatesCollection,
+        new SchedulingUnitDatesCollection({}),
+        { altPropName: "scheduling_unit_date", parent: this }
       );
       /* eslint-enable max-len */
     }

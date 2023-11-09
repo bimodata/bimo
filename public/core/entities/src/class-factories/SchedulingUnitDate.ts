@@ -5,6 +5,7 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
 export interface SchedulingUnitDateProps extends ExtendedItemProps {
+  scudDate?: string;
   scudSchedUnitName?: string;
   scudSchedUnitType?: string;
   scudProdPhaseDate?: string;
@@ -24,6 +25,7 @@ export interface SchedulingUnitDateProps extends ExtendedItemProps {
 
 export function SchedulingUnitDateClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoSchedulingUnitDate {
   class SchedulingUnitDate extends Item<SchedulingUnitDate> {
+    scudDate?: string;
     scudSchedUnitName?: string;
     scudSchedUnitType?: string;
     scudProdPhaseDate?: string;
@@ -41,6 +43,7 @@ export function SchedulingUnitDateClassFactory({}: EntityConstructorByEntityClas
     scudProdSchedType?: string;
     constructor(props: SchedulingUnitDateProps) {
       super(props);
+      this.scudDate = gavpfp("scudDate", props, `string`);
       this.scudSchedUnitName = gavpfp("scudSchedUnitName", props, `string`);
       this.scudSchedUnitType = gavpfp("scudSchedUnitType", props, `string`, "1100");
       this.scudProdPhaseDate = gavpfp("scudProdPhaseDate", props, `string`, "0");

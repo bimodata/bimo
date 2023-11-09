@@ -189,6 +189,9 @@ export const DefaultClassFactoryByEntityClassKey = {
   BlockSection: BlockSectionClassFactory,
   BlockSectionsCollection: BlockSectionsCollectionClassFactory,
 
+  SchedulingUnitDate: SchedulingUnitDateClassFactory,
+  SchedulingUnitDatesCollection: SchedulingUnitDatesCollectionClassFactory,
+
   VehicleSchedule: VehicleScheduleClassFactory,
   VehicleSchedulesCollection: VehicleSchedulesCollectionClassFactory,
 
@@ -203,9 +206,6 @@ export const DefaultClassFactoryByEntityClassKey = {
   BookingsCollection: BookingsCollectionClassFactory,
   Place: PlaceClassFactory,
   PlacesCollection: PlacesCollectionClassFactory,
-
-  SchedulingUnitDate: SchedulingUnitDateClassFactory,
-  SchedulingUnitDatesCollection: SchedulingUnitDatesCollectionClassFactory,
 
   BookingCalendarDate: BookingCalendarDateClassFactory,
   BookingCalendarDatesCollection: BookingCalendarDatesCollectionClassFactory,
