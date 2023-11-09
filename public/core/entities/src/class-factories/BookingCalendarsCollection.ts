@@ -70,6 +70,24 @@ export function BookingCalendarsCollectionClassFactory({
         { altPropName: "booking", parent: this }
       );
     }
+    /**
+     * @param - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
+     */
+    static createFromOirStyleData(oirStyleData: any) {
+      const rawCalendars = oirStyleData.booking_calendar;
+      // const rawBookings = oirStyleData.booking;
+      // const rawSchedulingUnits = oirStyleData.scheduling_unit;
+      // const rawServiceDefinitions = oirStyleData.service_definition;
+
+      if (!rawCalendars) {
+        throw new Error(`Bad oirStyleData: could not find "booking_calendar" key`);
+      }
+      const newCalendarsCollection = new BookingCalendarsCollection({
+        items: rawCalendars,
+      });
+
+      return newCalendarsCollection;
+    }
 
     generateOirStyleData() {
       const booking_calendar = this.map((bookingCalendar) => {
