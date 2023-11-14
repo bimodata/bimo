@@ -21,7 +21,7 @@ const LineByLineReader = require('line-by-line');
  * @param {Object} context
  * @returns {AsyncIterator}
  */
-async function* getAsyncIteratorForLinesOfFile(filePath, config, context) {
+async function* getAsyncIteratorForLinesOfFile(filePath, config = {}, context = {}) {
   const logger = getAndAddLoggerToServiceOptions(context);
 
   const {
