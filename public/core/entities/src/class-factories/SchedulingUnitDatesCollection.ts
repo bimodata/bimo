@@ -23,7 +23,7 @@ export function SchedulingUnitDatesCollectionClassFactory({
         itemName: "SchedulingUnitDate",
         ItemConstructor: SchedulingUnitDate,
         associationType: "aggregation",
-        idPropName: "scudSchedUnitName",
+        // idPropName: "scudSchedUnitName",
         ...props,
       });
     }

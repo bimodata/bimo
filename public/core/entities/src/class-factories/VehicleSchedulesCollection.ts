@@ -109,6 +109,8 @@ export function VehicleSchedulesCollectionClassFactory({
         vehicleSchedule.consist_change = vehicleSchedule.consistChanges.items;
         //@ts-ignore
         vehicleSchedule.overnight_link = vehicleSchedule.overnightLinks.items;
+        //@ts-ignore
+        vehicleSchedule.scheduling_unit_date = vehicleSchedule.schedulingUnitDates.items;
 
         return vehicleSchedule;
       });
