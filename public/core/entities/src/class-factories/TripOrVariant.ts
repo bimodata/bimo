@@ -84,7 +84,9 @@ export function TripOrVariantClassFactory(
     }
 
     get veryShortOdRefPlaceLabel() {
-      return `${this.firstPoint.place.referencePlace?.veryShortLabel}>${this.lastPoint.place.referencePlace?.veryShortLabel}`;
+      return `${
+        (this.firstPoint.place.referencePlace ?? this.firstPoint.place)?.veryShortLabel
+      }>${(this.lastPoint.place.referencePlace ?? this.lastPoint.place)?.veryShortLabel}`;
     }
 
     get shortOdRefPlaceLabel() {
