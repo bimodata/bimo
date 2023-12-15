@@ -54,6 +54,10 @@ import {
   RunTimeVersionsCollection,
   RunTime,
   RunTimesCollection,
+  PortionWorkingVersion,
+  PortionWorkingVersionsCollection,
+  PortionWorking,
+  PortionWorkingsCollection,
   LoadTime,
   LoadTimesCollection,
   VehicleTask,
@@ -173,6 +177,10 @@ export declare const entityConstructorByEntityClassKey: {
   RunTimeVersionsCollection: typeof RunTimeVersionsCollection;
   RunTime: typeof RunTime;
   RunTimesCollection: typeof RunTimesCollection;
+  PortionWorkingVersion: typeof PortionWorkingVersion;
+  PortionWorkingVersionsCollection: typeof PortionWorkingVersionsCollection;
+  PortionWorking: typeof PortionWorking;
+  PortionWorkingsCollection: typeof PortionWorkingsCollection;
   LoadTime: typeof LoadTime;
   LoadTimesCollection: typeof LoadTimesCollection;
   VehicleTask: typeof VehicleTask;

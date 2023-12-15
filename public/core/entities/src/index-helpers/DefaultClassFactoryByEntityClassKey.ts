@@ -53,6 +53,10 @@ import {
   RunTimeVersionsCollectionClassFactory,
   RunTimeClassFactory,
   RunTimesCollectionClassFactory,
+  PortionWorkingVersionClassFactory,
+  PortionWorkingVersionsCollectionClassFactory,
+  PortionWorkingClassFactory,
+  PortionWorkingsCollectionClassFactory,
   LoadTimeClassFactory,
   LoadTimesCollectionClassFactory,
   VehicleTaskClassFactory,
@@ -191,6 +195,11 @@ export const DefaultClassFactoryByEntityClassKey = {
 
   SchedulingUnitDate: SchedulingUnitDateClassFactory,
   SchedulingUnitDatesCollection: SchedulingUnitDatesCollectionClassFactory,
+
+  PortionWorking: PortionWorkingClassFactory,
+  PortionWorkingsCollection: PortionWorkingsCollectionClassFactory,
+  PortionWorkingVersion: PortionWorkingVersionClassFactory,
+  PortionWorkingVersionsCollection: PortionWorkingVersionsCollectionClassFactory,
 
   VehicleSchedule: VehicleScheduleClassFactory,
   VehicleSchedulesCollection: VehicleSchedulesCollectionClassFactory,

@@ -51,6 +51,7 @@ module.exports = function (oirStyleDataByKeyword, parsedControlFile, EOL = `\r\n
 };
 
 const createHastusStyleCsvForOneObject = function (oirStyleData, ouputLines, lineInfo, separator = '|', logger) {
+  if (!lineInfo) return [];
   const values = lineInfo.ignore ? [] : [lineInfo.keyword];
   lineInfo.items.forEach((item) => {
     logger.trace(`ajout de l'item ${item.name}`);
