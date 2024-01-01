@@ -74,6 +74,16 @@ const ALL_JOUR_VALUE_BY_KEY_BY_ID: { [jourId in JourId]: { [key: string]: JourVa
     },
   };
 
+const jourIdByVscSchedType: { [vscSchedType in VscSchedType]: JourId } = {
+  13: 1,
+  14: 2,
+  11: 3,
+  3: 4,
+  4: 5,
+  5: 6,
+  6: 7,
+};
+
 export type JourId = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export type JourFR0 =
   | "Lundi"
@@ -119,13 +129,19 @@ export class Jour {
   EN1: JourEN1;
   EN2: JourEN2;
   vscSchedType: string;
-  constructor(jourValue: Jour | JourValue | { FR0: JourFR0 }) {
+  constructor(
+    jourValue: Jour | JourValue | { FR0?: JourFR0; vscSchedType?: VscSchedType }
+  ) {
     if (jourValue instanceof Jour) {
       return jourValue;
     }
     // console.log(jourValue);
-    if (typeof jourValue === "object" && typeof jourValue.FR0 === "string") {
-      jourValue = jourValue.FR0;
+    if (typeof jourValue === "object") {
+      if (typeof jourValue.FR0 === "string") {
+        jourValue = jourValue.FR0;
+      } else if (typeof jourValue.vscSchedType === "string") {
+        jourValue = jourIdByVscSchedType[jourValue.vscSchedType];
+      }
     }
     // console.log(jourValue);
     const lowerCasedJourValue = jourValue.toString().toLowerCase();
