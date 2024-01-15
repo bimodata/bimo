@@ -79,7 +79,10 @@ async function createHashOfFolderContents(rootFolderPath, options = {}) {
   const baseName = path.basename(rootFolderPath);
   const filesAndFolders = (await getFilesAndFoldersInFolder(rootFolderPath, { addFullPath: includeFullPaths }))
     .sort((a, b) => (a.name > b.name ? 1 : -1));
-  const namesAndProps = JSON.stringify(filesAndFolders);
+  const namesAndProps = JSON.stringify(filesAndFolders, ((key, value) => {
+    if (!includeFullPaths && ['path', 'parentPath', 'fullPath'].includes(key)) return undefined;
+    return value;
+  }));
   const hashesOfContents = [];
   await asyncForEach(filesAndFolders, async (fileOrFolder) => {
     let hash;

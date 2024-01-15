@@ -7,6 +7,7 @@ const { fsBimo: fs } = require('@bimo/core-utils-filesystem');
 const { createHashOfFolderContents } = require('..');
 
 const logger = getStupidLogger();
+const verboseMode = false;
 
 const PATH_TO_TEST_DATA_ROOT = Path.join(__dirname, 'testData');
 
@@ -157,9 +158,9 @@ describe('test-utils', () => {
       });
       context('when options.includeRootFolderName = true or options is not defined', () => {
         before(async () => {
-          hashBefore = await createHashOfFolderContents(testFolderPath, { includeRootFolderName: true });
+          hashBefore = await createHashOfFolderContents(testFolderPath, { includeRootFolderName: true, verboseMode });
           await fs.rename(testFolderPath, testFolderNewPath);
-          hashAfter = await createHashOfFolderContents(testFolderNewPath, { includeRootFolderName: true });
+          hashAfter = await createHashOfFolderContents(testFolderNewPath, { includeRootFolderName: true, verboseMode });
           await fs.rename(testFolderNewPath, testFolderPath);
         });
         it('returns a different hash each time', () => {
@@ -168,9 +169,9 @@ describe('test-utils', () => {
       });
       context('when options.includeRootFolderName = false', () => {
         before(async () => {
-          hashBefore = await createHashOfFolderContents(testFolderPath, { includeRootFolderName: false });
+          hashBefore = await createHashOfFolderContents(testFolderPath, { includeRootFolderName: false, verboseMode });
           await fs.rename(testFolderPath, testFolderNewPath);
-          hashAfter = await createHashOfFolderContents(testFolderNewPath, { includeRootFolderName: false });
+          hashAfter = await createHashOfFolderContents(testFolderNewPath, { includeRootFolderName: false, verboseMode });
           await fs.rename(testFolderNewPath, testFolderPath);
         });
         it('returns the same hash', () => {

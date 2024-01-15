@@ -15,7 +15,7 @@ const { Dirent } = require('fs-extra');
  * @property {function} isFIFO(): boolean;
  * @property {function} isSocket(): boolean;
  * @property {string} name: string;
- * @property {string} fullPath
+ * @property {string} fullPath: string; // TODO:decide if this is still usefull with node18 native path or parentPath props
  */
 
 /**
@@ -23,7 +23,8 @@ const { Dirent } = require('fs-extra');
  * @param {string} folderPath
  * @param {object} [options={}]
  * @param {boolean} [options.addFullPath=true]
- *
+ * TODO: Review the addFullPath option. In node v18, then v21, path and parentPath have been added
+ * to the Node Dirent Object
  * @returns {Promise<BimoDirent[]>}
  */
 async function getFilesAndFoldersInFolder(folderPath, options = {}) {
