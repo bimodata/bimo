@@ -12,6 +12,7 @@ const {
   arrayOfIsoDateStringsFromStartAndEndIsoDateStrings,
   numberOfSecondsToHastusExtendedHoursString,
   isoDateStringToHastusDateString,
+  getDifferenceInDaysBetweenTwoIsoDateStrings,
   Duration,
   DateTime,
 } = require('..');
@@ -206,6 +207,13 @@ describe('timeAndDate utils', () => {
       it(`throws an error`, () => {
         expect(() => numberOfSecondsToHastusExtendedHoursString(129601)).to.throw(`La valeur 36:00;01 dépasse`);
       });
+    });
+  });
+
+  describe(`#getDifferenceInDaysBetweenTwoIsoDateStrings`, () => {
+    it(`works even when there is a changement d'heure`, () => {
+      expect(getDifferenceInDaysBetweenTwoIsoDateStrings('2023-10-29', '2023-10-30')).to.equal(1);
+      expect(getDifferenceInDaysBetweenTwoIsoDateStrings('2023-10-29', '2023-11-02')).to.equal(4);
     });
   });
 

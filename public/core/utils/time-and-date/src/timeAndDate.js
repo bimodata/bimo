@@ -97,6 +97,12 @@ function getDifferenceInSecondsBetweenTwoHastusExtendedHoursStrings(timeString1,
   return duration2.as('seconds') - duration1.as('seconds');
 }
 
+function getDifferenceInDaysBetweenTwoIsoDateStrings(isoDateString1, isoDateString2) {
+  return DateTime.fromISO(isoDateString2, { zone: 'utc' })
+    .diff(DateTime.fromISO(isoDateString1, { zone: 'utc' }))
+    .as('days');
+}
+
 function getDifferenceInSecondsBetweenTwoHastusMinutesAndSecondsStrings(timeString1, timeString2) {
   const duration1 = hastusMinutesAndSecondsToDuration(timeString1);
   const duration2 = hastusMinutesAndSecondsToDuration(timeString2);
@@ -194,3 +200,4 @@ exports.hastusExtendedHoursToJsDate = hastusExtendedHoursToJsDate;
 exports.START_OF_OPERATING_DAY = START_OF_OPERATING_DAY;
 exports.END_OF_OPERATING_DAY = END_OF_OPERATING_DAY;
 exports.isoDateStringToHastusDateString = isoDateStringToHastusDateString;
+exports.getDifferenceInDaysBetweenTwoIsoDateStrings = getDifferenceInDaysBetweenTwoIsoDateStrings;
