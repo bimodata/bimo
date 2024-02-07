@@ -15,7 +15,7 @@
   "devDependencies": {
     "@bimo/test-utils-get-test-data": "^0.0.1",
     "chai": "^4.4.1",
-    "mocha": "^9.2.2",
+    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "sinon": "^17.0.1"
   },
