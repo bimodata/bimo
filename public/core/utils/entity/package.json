@@ -44,7 +44,7 @@
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.0.2"
+    "typescript": "~5.0.2"
   },
   "homepage": "https://bimodata.com/",
   "bugs": "https://github.com/bimodata/bimo/issues",
