@@ -215,6 +215,10 @@ describe('timeAndDate utils', () => {
       expect(getDifferenceInDaysBetweenTwoIsoDateStrings('2023-10-29', '2023-10-30')).to.equal(1);
       expect(getDifferenceInDaysBetweenTwoIsoDateStrings('2023-10-29', '2023-11-02')).to.equal(4);
     });
+    it(`returns negative values if the second date is before the first`, () => {
+      expect(getDifferenceInDaysBetweenTwoIsoDateStrings('2023-10-30', '2023-10-29')).to.equal(-1);
+      expect(getDifferenceInDaysBetweenTwoIsoDateStrings('2023-11-02', '2023-10-29')).to.equal(-4);
+    });
   });
 
   describe(`issue #124`, () => {
