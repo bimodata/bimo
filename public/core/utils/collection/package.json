@@ -24,15 +24,15 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.11",
+    "@types/chai": "^4.3.12",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.17",
+    "@types/node": "^20.11.24",
     "chai": "^4.4.1",
     "mocha": "^10.3.0",
     "nyc": "^15.1.0",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "type-fest": "^4.10.2",
+    "type-fest": "^4.11.1",
     "typescript": "~5.0.2"
   },
   "homepage": "https://bimodata.com/",
