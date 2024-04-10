@@ -33,15 +33,15 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.202",
+    "@types/lodash": "^4.17.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.12",
+    "@types/chai": "^4.3.14",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.11.24",
+    "@types/node": "^20.12.7",
     "chai": "^4.4.1",
-    "mocha": "^10.3.0",
+    "mocha": "^10.4.0",
     "nyc": "^15.1.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.0.2"
