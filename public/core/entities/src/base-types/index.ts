@@ -109,6 +109,10 @@ export {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
+  PassengerLoadTrip,
+  PassengerLoadTripsCollection,
+  PassengerLoadVersion,
+  PassengerLoadVersionsCollection,
 } from "./rawIndex";
 
 export {

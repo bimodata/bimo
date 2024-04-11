@@ -148,6 +148,10 @@ const {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
+  PassengerLoadTrip, 
+  PassengerLoadTripsCollection, 
+  PassengerLoadVersion, 
+  PassengerLoadVersionsCollection, 
 } = entityConstructorByEntityClassKey;
 
 export {
@@ -271,4 +275,8 @@ export {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
+  PassengerLoadTrip, 
+  PassengerLoadTripsCollection, 
+  PassengerLoadVersion, 
+  PassengerLoadVersionsCollection, 
 };

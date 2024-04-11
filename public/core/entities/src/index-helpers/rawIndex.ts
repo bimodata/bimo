@@ -119,3 +119,7 @@ export * from "../class-factories/Network";
 export * from "../class-factories/NetworksCollection";
 export * from "../class-factories/NetworkSection";
 export * from "../class-factories/NetworkSectionsCollection";
+export * from "../class-factories/PassengerLoadTrip";
+export * from "../class-factories/PassengerLoadTripsCollection";
+export * from "../class-factories/PassengerLoadVersion";
+export * from "../class-factories/PassengerLoadVersionsCollection";

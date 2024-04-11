@@ -119,6 +119,10 @@ import {
   RoutesCollectionClassFactory,
   SchedulingUnitRouteClassFactory,
   SchedulingUnitRoutesCollectionClassFactory,
+  PassengerLoadTripClassFactory,
+  PassengerLoadTripsCollectionClassFactory,
+  PassengerLoadVersionClassFactory,
+  PassengerLoadVersionsCollectionClassFactory,
 } from "./rawIndex";
 
 export const DefaultClassFactoryByEntityClassKey = {
@@ -281,4 +285,9 @@ export const DefaultClassFactoryByEntityClassKey = {
   NetworkMapsCollection: NetworkMapsCollectionClassFactory,
   Network: NetworkClassFactory,
   NetworksCollection: NetworksCollectionClassFactory,
+
+  PassengerLoadTrip: PassengerLoadTripClassFactory,
+  PassengerLoadTripsCollection: PassengerLoadTripsCollectionClassFactory,
+  PassengerLoadVersion: PassengerLoadVersionClassFactory,
+  PassengerLoadVersionsCollection: PassengerLoadVersionsCollectionClassFactory,
 };

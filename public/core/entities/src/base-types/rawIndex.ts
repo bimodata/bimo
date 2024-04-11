@@ -119,3 +119,7 @@ export * from "./classes/Network";
 export * from "./classes/NetworksCollection";
 export * from "./classes/NetworkSection";
 export * from "./classes/NetworkSectionsCollection";
+export * from "./classes/PassengerLoadTrip";
+export * from "./classes/PassengerLoadTripsCollection";
+export * from "./classes/PassengerLoadVersion";
+export * from "./classes/PassengerLoadVersionsCollection";

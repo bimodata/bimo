@@ -119,6 +119,10 @@ import {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
+  PassengerLoadTrip,
+  PassengerLoadTripsCollection,
+  PassengerLoadVersion,
+  PassengerLoadVersionsCollection,
 } from "./rawIndex";
 
 export declare const entityConstructorByEntityClassKey: {
@@ -242,6 +246,10 @@ export declare const entityConstructorByEntityClassKey: {
   NetworksCollection: typeof NetworksCollection;
   NetworkSection: typeof NetworkSection;
   NetworkSectionsCollection: typeof NetworkSectionsCollection;
+  PassengerLoadTrip: typeof PassengerLoadTrip;
+  PassengerLoadTripsCollection: typeof PassengerLoadTripsCollection;
+  PassengerLoadVersion: typeof PassengerLoadVersion;
+  PassengerLoadVersionsCollection: typeof PassengerLoadVersionsCollection;
 };
 
 export type EntityConstructorByEntityClassKey = typeof entityConstructorByEntityClassKey;
