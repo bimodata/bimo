@@ -12,6 +12,7 @@ export {
   RouteVersion,
   RouteVersionsCollection,
   Route,
+  RoutesCollection,
   Variant,
   VariantsCollection,
   VariantPoint,
@@ -120,6 +121,16 @@ export {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
+  PassengerLoadTrip, 
+  PassengerLoadTripsCollection,
+  PassengerLoadVersion,
+  PassengerLoadVersionsCollection,
+  ItinerarySegment, 
+  ItinerarySegmentsCollection,
+  SchedulingUnitRoute,
+  SchedulingUnitRoutesCollection,
+  VariantItinerary,
+  VariantItinerariesCollection,
 } from "./src/index-helpers/entityConstructorByEntityClassKey";
 
 export { Jour } from "./src/jour/Jour";
