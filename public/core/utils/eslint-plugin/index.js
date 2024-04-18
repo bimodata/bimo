@@ -13,6 +13,11 @@ module.exports = {
     node: true,
     mocha: true,
   },
+  languageOptions: {
+    globals: {
+      cy: "readonly"
+    }
+  },
   rules: {
     quotes: ['error', 'single', { allowTemplateLiterals: true }], // because I often end up converting strings to templates
     'linebreak-style': ['off'], // Because autocrlf and stuff is unmanageable on the SNCF PC ...
