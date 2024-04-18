@@ -38,8 +38,10 @@ module.exports = {
 
     'import/no-extraneous-dependencies': ['error', {
       devDependencies: [
-        '**/scripts/*.js', '**/core/ui/**',
-        '**/*.test.js', '**/*.spec.js'],
+        '**/scripts/*.js', 'ui/**',
+        '**/data/**',
+        '**/__tests__/**', '**/*.test.js', '**/*.spec.js',
+      ],
     }],
     'prefer-destructuring': ['off'], // Because in some cases it's easier to document for intellisense
   },
