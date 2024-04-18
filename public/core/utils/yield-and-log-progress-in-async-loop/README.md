@@ -1,6 +1,6 @@
 # `@bimo/core-utils-yield-and-log-progress-in-async-loop`
 
-When you loop over a large number of objects and perform operations on them in a syncrhonous manner, in a single-threaded setup, everything freezes until the loop is over.
+When you loop over a large number of objects and perform operations on them in a synchronous manner, in a single-threaded setup, everything freezes until the loop is over.
 
 When you want to avoid this, you can convert your loop to an async loop (using `@bimo/core-utils-async-for-each`) and use `@bimo/core-utils-yield-and-log-progress-in-async-loop` to periodically yield the thread back to other needs, and log progress.
 
