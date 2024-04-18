@@ -7,7 +7,7 @@ module.exports = {
     'eslint-config-airbnb-base',
   ],
   parserOptions:
-    { ecmaVersion: 2020 },
+    { ecmaVersion: 'latest' },
   env: {
     commonjs: true,
     node: true,
