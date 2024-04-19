@@ -67,7 +67,7 @@ export interface TripProps extends ExtendedItemProps {
   trpConsiderLoadAtEnd?: string;
   BlockNo?: string;
   tripTps?: TripTpsCollection;
-  tripPoints?: TripPointsCollection;
+  tripPoints?: TripPointsCollection | TripPointProps[];
   tripvehgrpspecs?: TripvehgrpspecsCollection;
 }
 export declare class Trip
@@ -138,8 +138,8 @@ export declare class Trip
   static blkActIdPropName: string;
   constructor(
     props: TripProps,
-    context: BimoContext,
-    tripOrVariantType: TripOrVariantTypeEnum
+    context?: BimoContext,
+    tripOrVariantType?: TripOrVariantTypeEnum
   );
   /** en km */
   get trpDistance(): string | null;

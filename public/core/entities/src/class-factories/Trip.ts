@@ -87,7 +87,7 @@ export interface TripProps extends ExtendedItemProps {
   BlockNo?: string;
   trpBesoinVf?: string;
   tripTps?: BimoTripTpsCollection;
-  tripPoints?: BimoTripPointsCollection;
+  tripPoints?: BimoTripPointsCollection | TripPointProps[];
   tripvehgrpspecs?: BimoTripvehgrpspecsCollection;
 }
 
@@ -171,7 +171,7 @@ export function TripClassFactory({
     static blkActIdPropName = "blkactTripNo";
     constructor(
       props: TripProps,
-      context: BimoContext,
+      context: BimoContext = {},
       tripOrVariantType: TripOrVariantTypeEnum = "trip"
     ) {
       super(props, context, tripOrVariantType);

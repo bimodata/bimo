@@ -1,6 +1,92 @@
 # `@bimo/core-entities`
 
-# ESM does not work !
+This package holds the implementation of the entities that constitute the Bimo [Entity-relationship model](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model).
+
+In other projects, what we call an _Entity_ here is often called a _Model_.
+
+Anyway, an entity or model or class or object or whatever is a type of thing that we want to be able to represent with data, and want to be able to manipulate through services provided by our software.
+
+In our case, we want to represent and manipulate public transit scheduling data: we need to manipulate trips, trip points, vehicles, places ... so we created entities for all of that, and you will find them in this package !
+
+## Usage
+
+You can create very low level entities if you want:
+
+```javascript
+const { TripPoint } = require("@bimo/core-entities");
+
+const myTripPoint = new TripPoint({
+  trpptPlace: "Southmost Station",
+  trpptInternalArrivalTime: "06:00",
+  trpptInternalDepartureTime: "06:40",
+});
+
+console.log(myTripPoint.stopDurationInSeconds); // 120
+```
+
+... but that's probably not the most useful.
+
+Higher level entities will let you create their children easily:
+
+```javascript
+const myTrip = new Trip({
+  trpNumber: "1234",
+  tripPoints: [
+    {
+      trpptPlace: "South Station",
+      trpptInternalArrivalTime: "07:00",
+      trpptInternalDepartureTime: "07:02",
+    },
+    {
+      trpptPlace: "Grand Central",
+      trpptInternalArrivalTime: "07:15",
+      trpptInternalDepartureTime: "07:16",
+    },
+    {
+      trpptPlace: "North Station",
+      trpptInternalArrivalTime: "07:25",
+      trpptInternalDepartureTime: "07:30",
+    },
+  ],
+});
+
+myTrip.setStartAndEndAttributesFromPoints();
+
+console.log(myTrip.shortLoggingOutput); // 1234-(South Station|07:00 → 07:25|North Station)
+console.log(myTrip.durationInSeconds); // 1500
+```
+
+You can also add lower level entities that you created separately and create new ones:
+
+```javascript
+myTrip.tripPoints.add(myTripPoint);
+myTrip.tripPoints.createNewItem({
+  trpptPlace: "Northmost Station",
+  trpptInternalArrivalTime: "08:00",
+  trpptInternalDepartureTime: "08:05",
+});
+```
+
+And there are many methods available on all the entities.
+
+```javascript
+myTrip.setStartAndEndAttributesFromPoints();
+console.log(myTrip.shortLoggingOutput); // 1234-(South Station|07:00 → 08:00|Northmost Station)
+myTrip.validateTripPointTimes(); // Error: Problème avec Southmost Station(A:06:00, D:06:02, noStopping:0): Arrivée avant le départ du précédent (North Station(A:07:25, D:07:25, noStopping:0))
+
+myTrip.tripPoints.sortByTime();
+myTrip.setStartAndEndAttributesFromPoints();
+console.log(myTrip.shortLoggingOutput); // 1234-(Southmost Station|06:02 → 08:00|Northmost Station)
+myTrip.validateTripPointTimes(); // No error
+```
+
+## Documentation
+
+Extensive documentation of entities' attributes and methods is unfortunately not available as of now ... If you would like to help create it, any contribution is greatly appreciated !
+
+In the meantime, looking at the source code is your best option.
+
+## The Class Factory Pattern
 
 I used to be happy documenting types in JSDOC until I switched the entities to the "ClassFactory" pattern.
 
@@ -40,13 +126,22 @@ import { Route as BimoRoute, Place as BimoPlace, ... } from "../base-types/index
 
 They are only used in type annotations, and point to files that contain only type declarations. (And that should probably be suffixed as _.d.ts rather than _.ts, I'm not exactly sure why they are not).
 
-Right now, the compiler does not seem to understand that this should all be stripped at compilation, and we and up with references to empty files.
+Right now, the typescript compiler does not seem to understand that this should all be stripped at compilation, and we and up with references to empty files.
 
 And when the UI imports the ESM version of the entities, and later tries to compile, it does not like that.
 
 So right now, I disabled the ESM compilation of the entities, and pointed the "import" to CJS, and it seems to work.
 
-## VehicleSchedule vs VehicleSchedulesCollection vs VscInclOir
+## Old Typescript issue
+
+https://github.com/microsoft/TypeScript/issues/38484
+
+
+# ESM does not work !
+
+## Thoughts about specific entities / groupes of entities
+
+### VehicleSchedule vs VehicleSchedulesCollection vs VscInclOir
 
 Dans le modèle Hastus (ou plutôt dans les modèle Hastus tel qu'exposé dans les OIG/OIR), un vsc peut en inclure d'autre via les "vscInclOir". On y stock un identifiant correspondant au vscInternalNumber d'un autre vsc du même fichier.
 
