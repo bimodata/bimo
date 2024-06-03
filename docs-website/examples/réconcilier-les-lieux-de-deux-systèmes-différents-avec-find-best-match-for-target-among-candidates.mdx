@@ -1,0 +1,405 @@
+---
+slug: 'réconcilier-les-lieux-de-deux-systèmes-différents-avec-find-best-match-for-target-among-candidates'
+title: 'Réconcilier les lieux de deux systèmes différents'
+lead: "Le service Bimo `findBestMatchForTargetAmongCandidates` permet de trouver la meilleure association entre des objets par un système d'itérations successives."
+date: '2022-12-13'
+authors: [gael]
+tags: [findBestMatchForTargetAmongCandidates, lieux]
+---
+
+import DescriptionProbleme from '../mdx-snippets/description-probleme-must-hastus/fr.mdx';
+
+Le service Bimo `findBestMatchForTargetAmongCandidates` permet de trouver la meilleure association entre des objets par un système d'itérations successives. Voici quelques exemples d'utilisations de ce service:
+
+- Trouver la variante (ou le _voyage modèle_) qui correspond le mieux à un voyage importé d'un système maison pour ensuite enrichir ce voyage avec les infos de la variante (ou du _voyage modèle_)
+- Réconcilier des listes de lieux sur la base de libellés qui varient légèrement. Par exemple: "Paris Nord" vs "Gare du Nord"
+- Trouver le noeud ou l'arc qui correspond le mieux à un lieu dans un graphe représentant le réseau
+- ...
+
+Chacune de ces utilisations est un peu abstraite et difficile à décrire en une phrase ... n'hésitez pas à laisser un commentaire si vous aimeriez en savoir plus sur l'une d'entre elles.
+
+Dans cet article, nous allons nous intéresser à une utilisation relativement simple de ce service:
+
+- Trouver le lieu Hastus qui correspond le mieux à un lieu en provenance d'un système maison
+
+## Problème
+
+{/* Le problème est le même que celui décrit dans <ArticleLink slug="extraire-automatiquement-des-images-de-plans-de-voies-à-partir-de-la-cartographie-hastus">cet article</ArticleLink>, mais on s'intéresse ici à une autre partie de la solution. */}
+
+<DescriptionProbleme />
+
+Le service `findBestMatchForTargetAmongCandidates` est parfait pour répondre à ce type de problème.
+
+## Aperçu des données
+
+### Données du système maison
+
+Le seul élément "standard" dans ces données est le code UIC8 de la gare. Ensuite, on trouve des id incrémentaux pour chaque voie, mais en y regardant de plus près, on se rend compte qu'une même voie semble pouvoir exister avec plusieurs ID. Dans les exemples de données ci-dessous, les id 1 et 2 semblent tous deux désigner la voie B de Bellegarde, l'une dans le sens Culoz vers Genève et l'inverse pour l'autre.
+
+On trouve par ailleurs deux champs contenant:
+
+- le libellé "infra" de la voie (celui utilisé par les agents SNCF Réseau)
+- le libellé "commercial" de la voie (celui utilisé par les agents commerciaux et les passagers)
+
+Par exemple, dans les données ci-dessous, on voit qu'à Libourne, la voie qui est connue comme voie B pour les passagers semble être connue comme voie 2 pour les agents SNCF Réseau. Mais on voit également que dans certains cas, le libellé commercial a été répété entre parenthèses dans le champ du libellé infra, et inversement.
+
+En synthèse, ces données ne sont pas particulièrement propres: elles ont été saisies manuellement par des utilisateurs variés dans un système où ils pouvaient saisir ce qu'ils voulaient dans un champ texte libre. Un nettoyage va s'imposer.
+
+<details>
+
+<summary>Cliquez ici pour un aperçu des données</summary>
+
+| idVoie | uic8     | libGare          | libInfraVoie | libCommVoie |
+| :----- | :------- | :--------------- | :----------- | :---------- |
+| 1      | 87745000 | Bellegarde (Ain) | B (CUZ>GCO)  | B (CUZ>GCO) |
+| 2      | 87745000 | Bellegarde (Ain) | B (GCO>CUZ)  | B (GCO>CUZ) |
+| 3      | 87745000 | Bellegarde (Ain) | A(CUZ>GCO    | A (CUZ>GCO) |
+| 4      | 87745000 | Bellegarde (Ain) | 1H           | 1           |
+| 5      | 87745000 | Bellegarde (Ain) | G            | G           |
+| 6      | 87745000 | Bellegarde (Ain) | E (GCO>CUZ)  | E (GCO>CUZ) |
+| 7      | 87745000 | Bellegarde (Ain) |              | C (CUZ>GCO) |
+| 8      | 87745000 | Bellegarde (Ain) | C (GCO>CUZ)  | C (GCO>CUZ) |
+| 9      | 87745000 | Bellegarde (Ain) |              | A (GCO>CUZ) |
+| 10     | 87745000 | Bellegarde (Ain) | E (CUZ>GCO)  | E (CUZ>GCO) |
+| 11     | 87745000 | Bellegarde (Ain) | 2H           | 2           |
+| 12     | 87584052 | Libourne         | 2(B)         | B(2)        |
+| 13     | 87584052 | Libourne         | 1            | C(1)        |
+| 14     | 87584052 | Libourne         | 2(B)         | B (2)       |
+| 15     | 87584052 | Libourne         | 4(A)         | A(4)        |
+| 16     | 87584052 | Libourne         | 3            | D(3)        |
+| 17     | 87584052 | Libourne         | 3            | D(3)        |
+| 18     | 87584052 | Libourne         | 3            | D(3)        |
+| 19     | 87584052 | Libourne         | 1            | C(1)        |
+| 20     | 87584052 | Libourne         | 1            | C(1)        |
+| 21     | 87584052 | Libourne         | 4            | A           |
+| 22     | 87584052 | Libourne         | 2            | B           |
+| 23     | 87584052 | Libourne         | 2            | B           |
+| 24     | 87741439 | Lépin-le-Lac     | D            | B (Direct)  |
+| 25     | 87741439 | Lépin-le-Lac     | E            | A (Evi)     |
+
+</details>
+
+### Données de l'environnement Hastus
+
+La plupart des attributs qui nous intéressent ici sont en réalité spécifiques à la version SNCF d'Hastus. Les attributs `Code Réseau`, `Code Immuable` et `Code Chantier` ont été créés pour stocker les codes UIC de la gare à laquelle correspond chaque lieu. Le code UIC8 disponible dans les données du système maison correspond donc aux deux derniers caractères du code réseau, accolés au code immuable.
+
+Les attributs `Id Voie Agathe` et `Libellé Voie Agathe` donnent des indications sur le nom des voies, mais encore une fois, ne sont pas standardisés.
+
+<details>
+
+<summary>Cliquez ici pour un aperçu des données</summary>
+
+| plcIdentifier | plcDescription                     | plcCodeReseau | plcCodeImmuable | plcCodeChantier | plcIdVoieAgathe | plcLibelleVoieAgathe |
+| :------------ | :--------------------------------- | :------------ | :-------------- | :-------------- | :-------------- | :------------------- |
+| LI1           | Libourne/BV - V1                   | 0087          | 584052          | BV              | 1               | V1                   |
+| LI2           | Libourne/BV - V2                   | 0087          | 584052          | BV              | 2               | V2                   |
+| LI3           | Libourne/BV - 3                    | 0087          | 584052          | BV              | 3               | 3                    |
+| LI4           | Libourne/BV - 4                    | 0087          | 584052          | BV              | 4               | 4                    |
+| LI5           | Libourne/BV - 5                    | 0087          | 584052          | BV              | 5               | 5                    |
+| LPLd          | Lépin-le-Lac-La Bauche/00 - UNIQUE | 0087          | 741439          | 00              | UNIQUE          | D                    |
+| LPLe          | Lépin-le-Lac-La Bauche/00 - E      | 0087          | 741439          | 00              | EVIT            | E                    |
+| BGD1          | Bellegarde (Ain)/BV - V1           | 0087          | 745000          | BV              | V1              | V1                   |
+| BGD1h         | Bellegarde (Ain)/BV - V1H          | 0087          | 745000          | BV              | V1H             | V1H                  |
+| BGD2h         | Bellegarde (Ain)/BV - V2H          | 0087          | 745000          | BV              | V2H             | V2H                  |
+| BGD5          | Bellegarde (Ain)/BV - V5           | 0087          | 745000          | BV              | V5              | V5                   |
+| BGDa          | Bellegarde (Ain)/BV - A            | 0087          | 745000          | BV              | A               | A                    |
+| BGDb          | Bellegarde (Ain)/BV - B            | 0087          | 745000          | BV              | B               | B                    |
+| BGDe-         | Bellegarde (Ain)/BV - VE-          | 0087          | 745000          | BV              | VE-             | E                    |
+| BGDfi         | Bellegarde (Ain)/BV - FI           | 0087          | 745000          | BV              | FI              | FI                   |
+| BGDg          | Bellegarde (Ain)/BV - V2           | 0087          | 745000          | BV              | V2              | VG                   |
+
+</details>
+
+## Principe du traitement
+
+Étant donné qu'une même voie peut exister sous plusieurs ID dans le système maison, mais pas dans Hastus, on va itérer sur les voies du système maison, et tenter de trouver pour chacune la meilleure voie Hastus possible. Plusieurs voies du système maison pourront donc être associées à la même voie Hastus. Mais certaines voies Hastus pourraient n'être associées à aucune voie du système maison. Dans notre cas, les _cibles_ sont donc les voies du système maison et les _candidats_ sont les lieux Hastus.
+
+:::note
+  `findBestMatchForTargetAmongCandidates`, comme son nom l'indique, trouve une
+  correspondance pour __une *cible*__ parmi __plusieurs *candidats*__ et n'est
+  pas approprié pour les cas où on souhaite des correspondances strictes _un
+  pour un_ entre deux listes. Il faut alors utiliser d'autres services, comme
+  `matchTwoListsOfString`, ou utiliser `findBestMatchForTargetAmongCandidates`
+  mais ajouter de la logique autour pour retirer les candidats de la liste à
+  mesure qu'ils sont associés aux cibles.
+:::
+
+Pour une _cible_ donnée, la liste de _candidats_ sera constituée des lieux Hastus qui ont le même code UIC8 que la cible. Dans cette liste de candidat, on va alors essayer d'en trouver un qui a le même _nom de voie_ que la cible. Mais comme on l'a vu précédemment, le _nom de voie_ n'est pas standard, et dans beaucoup de cas, les noms de voies devront être nettoyés si on veut qu'ils correspondent entre eux.
+
+C'est ici que le mécanisme itératif de `findBestMatchForTargetAmongCandidates` sera utile.
+
+## Concepts de `findBestMatchForTargetAmongCandidates`
+
+Ci-dessous, un résumé du README de `findBestMatchForTargetAmongCandidates` (auquel vous devriez vous référer pour plus de détails) avec la traduction des concepts pour notre cas précis.
+
+### Principe de fonctionnement
+
+On essaie en plusieurs itérations de trouver la meilleure correspondance pour une _cible_ parmi plusieurs _candidats_.
+
+À chaque itération, on passe par deux phases:
+
+1. Réduire la liste de candiats
+2. Calculer une _distance_ entre la _cible_ et chaque _candidat_, et déclarer un _bestMatch_ si les _critères_ sont atteints
+
+Ces principes donnent beaucoup de flexibilité et permettent d'ajuster rapidement et facilement les critères afin d'optimiser la performance et la qualité des correspondances. Par exemple:
+
+- on défini une première itération très stricte, qui cible une liste réduite de candidats, avec un calcul de distance simple pour abattre rapidement une grosse partie du travail
+- dans les itérations suivantes, on peut se permettre de cibler plus de candidats et d'avoir des critères plus complexes, car on sait qu'elle ne seront exécutées que sur les quelques cibles restantes
+- si ça n'a toujours pas suffi, on peut faire des tentatives carrément loufoques dans les dernières itérations, quitte à traiter avec un grain de sel les résultats obtenus dans celles-ci
+
+### `target` et `candidates`
+
+La `target` ou _cible_ est l'objet pour lequel on recherche une correspondance parmi plusieurs `candidates` ou _candidats_.
+
+Dans notre cas, la _cible_ sera une voie du système maison et les _candidats_ seront les lieux Hastus.
+
+### Phase 1 : Réduire la liste de candidats
+
+Les options pour cette phase sont définies sous la clé `candidatesFilteringConfig` de la configuration globale.
+Si cette clé n'est pas définie, tous les candidats sont utilisés. Si la clef est définie, les candidats sont filtrés dans deux sous-phases.
+
+#### Phase 1A: filterPredicate
+
+Cette phase est utile pour éliminer des candidats sur la base de critères fixes, qui ne varient pas en fonction de la cible.
+
+Elle n'est pas utilisée dans notre cas car nos filtres fixes sont les mêmes pour toutes les itérations, donc nous les appliquons une fois pour toute dans le script avant même de rentrer dans `findBestMatchForTargetAmongCandidates`
+
+#### Phase 1B: regrouper les candidats et conserver le groupe qui correspond à une clef calculée sur la cible
+
+Cette phase permet de ne conserver que les candidats qui ont une caractéristique commune avec la cible.
+
+D'abord, on regroupe tous les candidats sur la base de cette caractéristique. Ensuite, on calcule (si nécessaire) la valeur de cette caractéristique pour la cible, et on ne conserve que les candidats qui ont la même valeur que la cible.
+
+Dans notre cas, la caractéristique commune qui nous intéresse est le code UIC8. On va regrouper les lieux Hastus par code UIC8 et ne considérer que ceux qui ont le même que la voie maison.
+
+### Phase 2 : trouver le meilleur candidat parmi ceux qui restent
+
+Les options pour cette phase sont définies sous la clé `getBestMatchConfig` de la configuration globale. Plusieurs options de configuration existent, mais les deux plus importantes sont `distanceFunction` et `maxDistance`
+
+`distanceFunction` est une fonction qui doit calculer une _distance_ entre la cible et le candidat. Pour un candidat qui correspond parfaitement à la cible, `distanceFunction` devrait renvoyer `0`. Moins le candidat correspond à la cible, plus la valeur renvoyée par `distanceFunction` devrait être grande.
+
+Si aucun des candidats n'a une valeur de `0`, alors c'est le candidat qui a la plus petite valeur qui est considéré comme la meilleure correspondance, à condition que cette valeur soit inférieure à la valeur définie dans `maxDistance`
+
+Dans notre cas, on ne va pas utiliser ce mécanisme à son plein potentiel. Notre `distanceFunction` va simplement comparer les libellés de voie, après les avoir plus ou moins nettoyés. Si elle trouve une correspondance exacte entre libellés de voies nettoyés, elle va renvoyer `0`. Sinon, elle va renvoyer +infini, et il faudra passer au candidat suivant, puis à l'itération suivante le cas échéant.
+
+## Étapes de nettoyage
+
+À chaque itération, on fait les 4 comparaisons possibles:
+
+- Libellé Infra vs Id Voie
+- Libellé Commercial vs Id voie
+- Libellé Infra vs Libellé Voie
+- Libellé Commercial vs Libellé Voie
+
+On considère qu'un lieu Hastus correspond à la voie maison dès que les valeurs sont les mêmes pour une des comparaison.
+
+À chaque fois, on applique des "nettoyages" aux valeurs de la cible et des candidats avant de les comparer.
+
+À chaque itération, on ajoute des "nettoyages" en plus de ceux faits aux itérations précédentes. Par exemple:
+
+1. mettre tout en minuscules
+2. retirer les "V" ou "v" au début des libellés
+3. retirer tout texte entre parenthèses
+4. transformer UNIQUE en U, BIS en B, TER en T
+5. retirer les espaces au milieu des libellés
+
+## Mise en oeuvre
+
+Ci-dessous, un aperçu commenté de la fonction qui utilise `findBestMatchForTargetAmongCandidates` dans le script.
+
+```javascript title="getBestMatchResultByExternalTrack.js"
+/** Les utilitaires ci-dessous seront brièvement décrits quand ils seront
+ * utilisés dans le code */
+const findBestMatch = require('@bimo/core-utils-find-best-match-for-target-among-candidates');
+const {
+  cleanStringUsingRegexAndReplacePairs,
+} = require('@bimo/core-utils-string');
+const matchTwoListsOfStrings = require('@bimo/core-utils-match-two-lists-of-strings');
+const { countBy } = require('lodash');
+
+/** Cette fonction est appellée par le script, qui s'est chargé par ailleurs
+ * - de charger les voies maisons et d'en faire un array d'objets
+ *   (externalTracks)
+ * - de charger et pré-filtrer le jeu de lieux Hastus (placesCollection)
+ */
+function getBestMatchResultByExternalTrack(
+  externalTracks,
+  placesCollection,
+  logger
+) {
+  /** Dans notre cas, on va filtrer les lieux de la même manière pour toutes les
+   * itérations. On définit donc une seule fois candidatesFilteringConfig
+   * Mais gardez en tête qu'on peut parfaitement le faire varier à chaque
+   * itération quand c'est utile.
+   */
+  const candidatesFilteringConfig = {
+    /** La target est la voie maison, qui possède directement une clé 'uic8' */
+    getKeyFromTargetConfig: 'uic8',
+    /** Il n'y a pas directement de clé équivalent sur les lieux Hastus,
+     * on la fabrique à la volée avec la fonction ci-dessous */
+    groupCandidatesByConfig: (place) =>
+      `${place.plcCodeReseau.substr(-2)}${place.plcCodeImmuable}`,
+  };
+
+  /** La "distanceFunction" varie à chaque itération, mais elle a toujours la
+   * même forme. On va donc créer une "distanceFunctionFactory": une fonction
+   * qui retourne une fonction.
+   * À chaque itération, on va appeler la factory en lui passant des
+   * regexAndReplacePairs plus ou moins complexes pour transformer les strings.
+   * On obtiendra alors une "distanceFunction" classique qui transforme les
+   * strings, puis les compare, et retourne 0 s'il y a un match, +infini sinon.
+   * */
+  const distanceFunctionFactory =
+    (regexAndReplacePairs) => (externalTrackPlace, hastusPlace) => {
+      /** Pour simplifier les manipulations, on regroupe les strings qui nous intéressent */
+      const rawExternalStrings = [
+        externalTrackPlace.libInfraVoie,
+        externalTrackPlace.libCommVoie,
+      ];
+      const rawHastusStrings = [
+        hastusPlace.plcIdVoieAgathe,
+        hastusPlace.plcLibelleVoieAgathe,
+      ];
+
+      /** cleanStringUsingRegexAndReplacePairs applique successivement des
+       * expressions régulières à une string pour la nettoyer */
+      const cleanExternalStrings = rawExternalStrings.map((s) =>
+        cleanStringUsingRegexAndReplacePairs(
+          s,
+          regexAndReplacePairs
+        ).toLowerCase()
+      );
+      const cleanHastusStrings = rawHastusStrings.map((s) =>
+        cleanStringUsingRegexAndReplacePairs(
+          s,
+          regexAndReplacePairs
+        ).toLowerCase()
+      );
+
+      /** En l'utilisant avec l'option { returnOnFirstMatch: true }
+       * matchTwoListsOfStrings permet de savoir rapidement s'il y a une
+       * correspondance exacte entre n'importe quelles 2 strings de deux
+       * listes  */
+      const { matched } = matchTwoListsOfStrings(
+        [cleanExternalStrings, cleanHastusStrings],
+        { returnOnFirstMatch: true }
+      );
+
+      return matched.length === 0 ? Number.POSITIVE_INFINITY : 0;
+    };
+
+  /**On stockera les résultats dans cette variable */
+  const bestMatchResultByExternalTrack = new Map();
+
+  /** Les regexAndReplacePairs ci-dessous vont permettre de nettoyer les
+   * strings. Si besoin de plus de détails sur le fonctionnement des
+   * regex, n'hésitez pas à laisser un commentaire sous cet article */
+  const removeVRegexAndReplacePair = ['/^[vV](.+)$/', '$1'];
+  const removeParenthesisRegexAndReplacePair = [
+    '/(\\w+).*(\\(.+\\))/gim',
+    '$1',
+  ];
+  const transformUniqueIntoU = ['/^UNIQUE$/i', 'U'];
+  const transformBisIntoB = ['/BIS/i', 'B'];
+  const transformTerIntoT = ['/TER/i', 'T'];
+  const removeSpaces = ['/ /g', ''];
+
+  externalTracks.forEach((externalTrack) => {
+    /** Noter que findBestMatch... accepte les candidates sous la forme d'un
+     * array ou d'une collection. La collection est préférable car permet de
+     * profiter du cache pour améliorer la performance */
+    const bestMatchResult = findBestMatch(
+      { target: externalTrack, candidates: placesCollection },
+      {
+        iterationConfigs: [
+          {
+            iterationName: '1 = tout mettre en minuscule',
+            candidatesFilteringConfig /** Voir ligne 25 */,
+            getBestMatchConfig: {
+              detailedResults: true,
+              distanceFunction: distanceFunctionFactory([
+                /**Aucun nettoyage particulier pour cette itération */
+              ]),
+              maxDistance: 1,
+            },
+          },
+          {
+            iterationName:
+              '2 = 1 + retrait des "V" ou "v" au début des noms de voies',
+            candidatesFilteringConfig,
+            getBestMatchConfig: {
+              detailedResults: true,
+              distanceFunction: distanceFunctionFactory([
+                removeVRegexAndReplacePair,
+              ]),
+              maxDistance: 1,
+            },
+          },
+          {
+            iterationName: '3 = 2 + retrait du texte entre parenthèses',
+            candidatesFilteringConfig,
+            getBestMatchConfig: {
+              detailedResults: true,
+              distanceFunction: distanceFunctionFactory([
+                removeVRegexAndReplacePair,
+                removeParenthesisRegexAndReplacePair,
+              ]),
+              maxDistance: 1,
+            },
+          },
+          {
+            iterationName: '4 = 3 + transfo UNIQUE > U, BIS > B, TER > T',
+            candidatesFilteringConfig,
+            getBestMatchConfig: {
+              detailedResults: true,
+              distanceFunction: distanceFunctionFactory([
+                removeVRegexAndReplacePair,
+                removeParenthesisRegexAndReplacePair,
+                transformUniqueIntoU,
+                transformBisIntoB,
+                transformTerIntoT,
+              ]),
+              maxDistance: 1,
+            },
+          },
+          {
+            iterationName: '5 = 4 + retrait des espaces',
+            candidatesFilteringConfig,
+            getBestMatchConfig: {
+              detailedResults: true,
+              distanceFunction: distanceFunctionFactory([
+                removeVRegexAndReplacePair,
+                removeParenthesisRegexAndReplacePair,
+                transformUniqueIntoU,
+                transformBisIntoB,
+                transformTerIntoT,
+                removeSpaces,
+              ]),
+              maxDistance: 1,
+            },
+          },
+        ],
+      }
+    );
+    bestMatchResultByExternalTrack.set(externalTrack, bestMatchResult);
+  });
+
+  /** on laisse ce petit exemple de rapport minimaliste pour montrer que les
+   * résultats incluent des infos sur l'itération qui a produit le match */
+  const numberOfMatchesByIteration = countBy(
+    Array.from(bestMatchResultByExternalTrack.values()),
+    'indexOfIterationThatMatched'
+  );
+  logger.info(JSON.stringify(numberOfMatchesByIteration));
+
+  return bestMatchResultByExternalTrack;
+}
+
+module.exports = getBestMatchResultByExternalTrack;
+```
+
+## Conclusion
+
+Même si cet exemple ne tire pas profit de toute la puissance de `findBestMatchForTargetAmongCandidates` il illustre bien _l'expressivité_ rendue possible grâce au système des itérations.
+
+En quelques dizaines de lignes de code, on met en place une structure qui permet ensuite de s'amuser facilement avec les données, en ajoutant simplement de nouvelles itérations, mais en conservant beaucoup de puissance et de flexibilité.

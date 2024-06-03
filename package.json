@@ -4,7 +4,8 @@
   "author": "Gaël Haméon <gael.hameon@gmail.com>",
   "license": "LGPL-3.0-or-later",
   "workspaces": [
-    "public/**"
+    "public/**",
+    "docs-website"
   ],
   "scripts": {
     "build:all": "yarn workspaces foreach -A -v -t run build",

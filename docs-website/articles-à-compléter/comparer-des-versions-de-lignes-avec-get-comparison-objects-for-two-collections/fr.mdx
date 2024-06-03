@@ -1,0 +1,82 @@
+---
+slug: 'comparer-des-versions-de-lignes-avec-get-comparison-objects-for-two-collections'
+language: 'fr'
+title: 'Comparer des versions de lignes avec getComparisonObjectsForTwoCollections'
+lead: "Une démonstration de la facilité avec laquelle on peut créer des outils puissants à l'aide des utilitaires génériques très configurables de Bimo."
+creationDate: '2022-11-22T11:25:36.973Z'
+author: Gaël Haméon
+orignalLanguage: 'fr'
+translator: 'n/a'
+draft: true
+---
+
+## Le besoin: comparer des versions de lignes Hastus
+
+L'un des premiers objets de paramétrage qu'on découvre dans un projet d'implantation Hastus est la version de lignes. C'est dans la (ou les) version(s) de lignes qu'on défini la structure de notre réseau. Pour une société de transport qui n'a jamais utilisé Hastus, en particulier dans le ferroviaire, la définition des versions de lignes peut être assez complexe: il y a plusieurs décisions à prendre, sur plusieurs aspects et chaque option a des avantages et inconvénients.
+
+Par exemple:
+
+- Niveau de modélisation de l'infrastructure
+
+  - Devrions-nous nous appuyer sur le module géo ? Sur les liens ferroviaires ? Sur rien du tout ?
+  - Devrions nous définir nos variantes à la maille des voies et quais, ou rester à la maille des gares ?
+
+- Découpage du réseau
+
+  - Devrions-nous avoir une seule version de ligne pour l'ensemble du périmètre de notre réseau, ou découper en plusieurs versions de lignes
+  - Devrions nous faire correspondre l'objet "ligne" d'Hastus à nos lignes commerciales ? À nos "axes production" ?
+
+- Construction des variantes
+  - Devrions nous inclure dans les variantes les points de passage sans arrêt ? Tous ? Une partie ?
+  - ...
+
+Pour répondre à ces questions, la meilleure solution reste de tester plusieurs scénarios. Bimo peut évidemment être d'une grande aide pour cette phase de tests (voir notamment <ArticleLink slug="générer-des-versions-de-lignes-à-partir-de-données-existantes">Cet article</ArticleLink>) mais nous nous intéressons aujourd'hui à un autre aspect de cette problématique.
+
+Après avoir fait beaucoup de tests, on se retrouve avec plusieurs version de lignes plus ou moins équivalentes, parfois réparties entre plusieurs environnements, dont certaines sont plus complètes que d'autres en ce qui concerne un certain aspect, mais moins pour un autre aspect ...
+
+<details>
+
+<summary>Cliquez pour des exemples</summary>
+
+On avait une version 1 qui contenait 2 lignes A et B et 5 variantes pour chaque ligne. Pour tester l'effet d'insérer les points de passage sans arrêt dans les variantes, on a copié cette version en une version 2 dans laquelle on a inséré les points de passage sans arrêt.
+
+Plus tard, on a souhaité faire des tests sur l'offre de l'année prochaine, pendant laquelle on va ouvrir une 3e ligne C et où on va transférer une partie des variantes de la ligne B vers cette ligne C. On a fait ces manipulations dans la version 2, mais pas dans la version 1.
+
+En parallèle, on crée un nouvel attribut spécifique sur les points de variantes pour marquer le point de commutation entre traction thermique et traction électrique, pour les lignes concernées. On renseigne ces informations sur la version 1 (mais pas sur la version 2)
+
+Finalement, à l'issue des tests, on conclu que l'insertion des points de passage sans arrêt est contre-productive. Que faire alors pour avoir une version de ligne à jour contenant:
+
+- les infos sur les points de commutation
+- la ligne C
+- pas de points d'arrêt
+  ...
+
+</details>
+
+Pour savoir où on en est, il est utile de pouvoir comparer les version de lignes entre elles, idéalement en paramétrant les critères de comparaison.
+
+Les outils de comparaison d'horaires de véhicules et d'habillages d'Hastus sont un bon exemple de ce qu'on pourrait souhaiter, en termes de paramétrages des critères de comparaison. Malheureusement, au moment d'écrire ces lignes, leur équivalent pour les versions de lignes n'existe pas ... mais cet article va nous montrer comment on peut très rapidement créer une V0 d'un outil de comparaison de versions de lignes à partir des services génériques Bimo.
+
+(Exemple avec Transilien - récupérer des choses de je ne sais plus où)
+
+TODO:extraire éléments de la vidéo ??
+
+## La solution: un script bimo basé sur 2 services génériques
+
+## Parler de getComparisonObjectsForTwoCollections
+
+## Parler de comment on l'applique à notre cas
+
+## Parler de computeTripOrVariantKey et en particulier de configurableKeyFunction
+
+## Dire que dans notre cas, certaines choses n'étaient pas présentes dans configurableKeyFunction, mais magie open source: on les ajoute en 2 secondes
+
+## En 2 heures: j'ai un super utilitaire de comparaison de versions de lignes
+
+(faire un exemple avec un config set en plusieurs steps ??)
+
+(faire un autre article pour la bidouille de modifyItemProps ??)
+
+(faire de la pub pour bimo-ui en montrant la version pourrie en script vs la version UI ?)
+
+https://github.com/gaelhameon/lauritz/pull/42

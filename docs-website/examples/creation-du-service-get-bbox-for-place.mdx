@@ -1,0 +1,428 @@
+---
+slug: 'creation-du-service-get-bbox-for-place'
+title: 'Créer un nouveau service Bimo'
+lead: "Un exemple du processus de création d'un nouveau service Bimo."
+date: '2022-11-28'
+authors: [gael]
+tags: [cartographie, lieux, getBboxForPlace]
+---
+
+
+Dans [Extraire automatiquement des images de plans de voies à partir de la cartographie Hastus](./extraire-automatiquement-des-images-de-plans-de-voies-à-partir-de-la-cartographie-hastus/#automatisation), on a eu besoin de créer un nouveau service. Nous allons voir comment cela se passe dans cet article.
+
+## Initialiser le service
+
+Nous sommes petit à petit en train de migrer vers l'outil [nx](https://nx.dev/) pour gérer le repo bimo. Idéalement, nous utiliserions donc un [générateur](https://nx.dev/recipes/generators#generators) pour initialiser un nouveau service.
+
+Mais pour le moment, nous allons simplement faire un copier coller d'un service existant.
+
+Ensuite, afin d'avoir du code bien documenté et testé, on commence toujours par rédiger le README et les tests.
+
+## Rédiger le README
+
+On veut donc un service qui reçoit un lieu, des paramètres, et retourne une "Bounding Box". Mais qu'est-ce qu'une bounding box ? Pour le cas d'usage qui nous pousse à créer ce service, on va vouloir passer les coordonnées sous forme de string `xmin,ymin,xmax,ymax` à une commande mapshaper, mais ce serait dommage de s'enfermer dans ce format.
+
+On va donc créer une nouvelle classe, qui nous permettra facilement de créer des bbox à partir de plusieurs sources ou formats de données, puis de les exprimer sous plusieurs formes, notamment sous forme de string mapshaper. On ne va pas s'y attarder ici, mais le code est disponible ci-dessous:
+
+```javascript title="BoundingBox.js"
+const {
+  getAllChildClasses,
+  serializeThis,
+  parseThis,
+} = require('@bimo/core-utils-serialization');
+const getAndValidatePropFromProps = require('@bimo/core-utils-get-and-validate-prop-from-props');
+const Item = require('@bimo/core-utils-item');
+const { pick } = require('lodash');
+
+const childClasses = [];
+
+class BoundingBox extends Item {
+  constructor(rawProps) {
+    const props = Array.isArray(rawProps)
+      ? {
+          xMin: rawProps[0],
+          yMin: rawProps[1],
+          xMax: rawProps[2],
+          yMax: rawProps[3],
+        }
+      : rawProps;
+    super(props, 'BoundingBox');
+    this.activeCoordinatesSystemName = getAndValidatePropFromProps(
+      'activeCoordinatesSystemName',
+      rawProps,
+      'string',
+      'default'
+    );
+    this.coordinatesBySystemName = getAndValidatePropFromProps(
+      'coordinatesBySystemName',
+      rawProps,
+      Object,
+      {}
+    );
+    if (Object.keys(this.coordinatesBySystemName).length === 0) {
+      this.coordinatesBySystemName.default = pick(props, [
+        'xMin',
+        'xMax',
+        'yMin',
+        'yMax',
+      ]);
+    }
+  }
+
+  get xMin() {
+    return this.coordinatesBySystemName[this.activeCoordinatesSystemName].xMin;
+  }
+
+  get yMin() {
+    return this.coordinatesBySystemName[this.activeCoordinatesSystemName].yMin;
+  }
+
+  get xMax() {
+    return this.coordinatesBySystemName[this.activeCoordinatesSystemName].xMax;
+  }
+
+  get yMax() {
+    return this.coordinatesBySystemName[this.activeCoordinatesSystemName].yMax;
+  }
+
+  get dX() {
+    return this.xMax - this.xMin;
+  }
+
+  get dY() {
+    return this.yMax - this.yMin;
+  }
+
+  get mapshaperStyleString() {
+    return `${this.xMin},${this.yMin},${this.xMax},${this.yMax}`;
+  }
+
+  get shortLoggingOutput() {
+    return `bbox: ${this.mapshaperStyleString}`;
+  }
+
+  get mediumLoggingOutput() {
+    return `${this.shortLoggingOutput} dX: ${this.dX}  dY: ${this.dY}`;
+  }
+
+  setActiveCoordinatesSystemName(coordinatesSystemName) {
+    this.activeCoordinatesSystemName = coordinatesSystemName;
+  }
+}
+
+BoundingBox.allChildClasses = getAllChildClasses(childClasses);
+BoundingBox.prototype.serializeModel = serializeThis;
+BoundingBox.parseModel = parseThis;
+
+module.exports = BoundingBox;
+```
+
+Par ailleurs, toujours pour notre cas d'usage initial, on va vouloir élargir un peu la bounding box autour des coordonnées des lieux. Il faudrait donc que le service soit paramétrable et qu'on puisse spécifier les marges à prendre autour des lieux.
+
+On a donc maintenant une définition claire des objets manipulés par notre service: il reçoit un lieu et des paramètres, et retourne une "Bounding Box".
+
+On va décrire ceci dans le README, et donner des exemples de code qui utiliseraient ce service:
+
+```markdown title="README.md" collapsedNumberOfLines=10
+# `@bimo/core-services-get-bbox-for-place`
+
+Returns a bounding box for a place, according to various parameters.
+
+Most importantly, if the place is a reference place, this will look at the coordinates of all places associated to this place, and return a bounding box that includes all these places, with a default padding of 100 units unless otherwise specified.
+
+## Usage
+```
+
+(La partie ci-dessous est incluse dans le README mais on la sépare ici pour qu'elle soit plus lisible)
+
+```javascript title="README.md"
+const { PlacesCollection } = require('@bimo/core-entities');
+
+const placesCollection = new PlacesCollection({
+  items: [
+    { plcIdentifier: 'A' },
+    {
+      plcIdentifier: 'A1',
+      plcReferencePlace: 'A',
+      locaLocMethod: '5',
+      locaXCoord: '20',
+      locaYCoord: '20',
+    },
+    {
+      plcIdentifier: 'A2',
+      plcReferencePlace: 'A',
+      locaLocMethod: '5',
+      locaXCoord: '0',
+      locaYCoord: '0',
+    },
+  ],
+});
+
+const getBboxForPlace = require('@bimo/core-services-get-bbox-for-place');
+
+const placeA = placesCollection.getByBusinessId('A');
+const bBox1 = getBboxForPlace(placeA, { padding: 10 }, { placesCollection });
+console.log(typeof bBox1);
+// BoundingBox
+
+console.log(bBox1.mapshaperStyleString);
+// "-10,-10,30,30"
+
+const bBox2 = getBboxForPlace(
+  placeA,
+  {
+    xPadding: 10,
+    yMinPadding: 5,
+    yMaxPadding: 0,
+  },
+  { placesCollection }
+);
+
+const { xMin, yMin, xMax, yMax } = bBox2;
+console.log({ xMin, yMin, xMax, yMax });
+// { xMin: -10, yMin: -5, xMax: 30, yMax: 20 }
+```
+
+Voilà, on a maintenant des exemples concrets de comment on voudrait que ce service soit utilisé. On va partir de ça pour rédiger des tests.
+
+## Rédiger les tests
+
+D'abord, on prépare des données de test, dans un fichier "prepareData.js":
+
+```javascript title="prepareData.js"
+const { PlacesCollection } = require('@bimo/core-entities');
+const deepFreeze = require('deep-freeze-es6');
+
+module.exports = () => {
+  let placesCollection = new PlacesCollection({
+    items: [
+      { plcIdentifier: 'A' },
+      { plcIdentifier: 'B' },
+      {
+        plcIdentifier: 'A1',
+        plcReferencePlace: 'A',
+        locaLocMethod: '5',
+        locaXCoord: '20',
+        locaYCoord: '20',
+      },
+      {
+        plcIdentifier: 'A2',
+        plcReferencePlace: 'A',
+        locaLocMethod: '5',
+        locaXCoord: '0',
+        locaYCoord: '0',
+      },
+      {
+        plcIdentifier: 'B1',
+        plcReferencePlace: 'B',
+        locaLocMethod: '5',
+        locaXCoord: '-10',
+        locaYCoord: '0',
+      },
+      {
+        plcIdentifier: 'B2',
+        plcReferencePlace: 'B',
+        locaLocMethod: '5',
+        locaXCoord: '0',
+        locaYCoord: '-10',
+      },
+      {
+        plcIdentifier: 'B3',
+        plcReferencePlace: 'B',
+        locaLocMethod: '5',
+        locaXCoord: '10',
+        locaYCoord: '0',
+      },
+      {
+        plcIdentifier: 'B4',
+        plcReferencePlace: 'B',
+        locaLocMethod: '5',
+        locaXCoord: '0',
+        locaYCoord: '10',
+      },
+    ],
+  });
+  // Force calculation of cached values
+  const dummy = placesCollection.placesByReferencePlace;
+  placesCollection = deepFreeze(placesCollection);
+
+  return { placesCollection };
+};
+```
+
+On fabrique simplement un jeu de lieux, avec des données fictives. On calcule le `placesByReferencePlace` puis on "freeze" l'objet. C'est une bonne habitude à prendre pour les tests des services qui n'ont pas vocation à modifier des objets: si jamais notre code avait des effets de bord indésirables qui essaieraient de modifier l'objet, le test échouerait.
+
+On va ensuite utiliser ces données dans le fichier de test:
+
+```javascript title="getBboxForPlace.spec.js"
+const { expect } = require('chai');
+const logger = require('@bimo/core-utils-logging').getStupidLogger(true);
+
+const getBboxForPlace = require('../src/getBboxForPlace');
+
+const { placesCollection } = require('./prepareData')();
+
+const serviceContext = { logger };
+
+describe('getBboxForPlace', () => {
+  const testParamsByTestName = {
+    'default config on place A': {
+      placeId: 'A', // pour rappel, le lieu A a deux lieux voies, un à [0,0] et un à [20, 20]
+      config: {},
+      expectedResult: `-100,-100,120,120`, // la config par défaut ajouter des marges de 100 unités dans chaque direction
+    },
+    'default config on place B': {
+      placeId: 'B', // pour rappel, le lieu B a quatre lieux voies, à [-10,0], [10,0], [0,-10], [0,10]
+      config: {},
+      expectedResult: `-110,-110,110,110`,
+    },
+    'custom padding on place A': {
+      placeId: 'A',
+      config: { padding: 5 },
+      expectedResult: `-5,-5,25,25`,
+    },
+    'custom padding only on X on place A': {
+      // so the y padding will remain the default = 100
+      placeId: 'A',
+      config: { xPadding: 5 },
+      expectedResult: `-5,-100,25,120`,
+    },
+  };
+  Object.entries(testParamsByTestName).forEach(([testName, testParams]) => {
+    it(`works with ${testName}`, () => {
+      const { placeId, config, expectedResult } = testParams;
+      const place = placesCollection.getByBusinessId(placeId);
+      const bBox = getBboxForPlace(place, config, serviceContext);
+      expect(bBox.mapshaperStyleString).to.equal(expectedResult);
+    });
+  });
+});
+```
+
+On utilise des tests paramétrables, ce qui permet d'ajouter facilement des cas de tests pour de nouvelles options de configuration qui pourraient apparaître dans le futur.
+
+À ce stade, si on lance les tests, tout devrait échouer, et c'est normal !
+
+## Coder le service
+
+On va maintenant pouvoir coder la fonction et relancer les tests au fur et à mesure, en ajoutant les options de configuration nécessaires etc. Ici pour abréger on va directement passer à la version finale. Ci-dessous, une version largement commentée directement dans le code.
+
+```javascript title="getBboxForPlace.js"
+const { BoundingBox } = require('@bimo/core-entities');
+const retrievePlace = require('@bimo/core-services-retrieve-place');
+
+function getBboxForPlace(placeLike, config = {}, context = {}) {
+  const {
+    padding = 100,
+    xPadding = padding,
+    yPadding = padding,
+    xMinPadding = xPadding,
+    xMaxPadding = xPadding,
+    yMinPadding = yPadding,
+    yMaxPadding = yPadding,
+  } = config;
+  /**
+   * Par défaut, on ajoute des marges de 100 de tous les côtés, ou alors la
+   * marge spécifiée par l'utiliateur de tous les côtés, mais on laisse
+   * aussi l'utilisateur spécifier des marges différentes en X et Y, voire
+   * même à droite, à gauche, en haut et en bas.
+   */
+
+  const sourcePlace = retrievePlace(
+    placeLike,
+    context.placesCollection,
+    context
+  );
+  /** Il arrive souvent qu'on manipule des objets qui ressemblent à des lieux,
+   * mais n'en sont pas vraiment. Par exemple, quand on manipule un voyage, sa
+   * propriété Trip.trpPlaceStart contient seulement un ID de lieu, mais dans
+   * l'esprit de tout le monde, c'est un lieu. Pour éviter de devoir recoder
+   * chaque fois le travail d'aller chercher un lieu dans un jeu de lieu sur la
+   * base de son ID, on utilise le service "retrievePlace". Si on lui passe
+   * quelque chose qui est déjà un lieu en bonne et due forme, il ne fait rien.
+   * Si on lui passe autre chose, il va essayer de l'interpréter, et de
+   * récupérer un vrai lieu à partir de cette autre chose et du jeu de lieux.
+   */
+
+  let xMin = Number.POSITIVE_INFINITY;
+  let yMin = Number.POSITIVE_INFINITY;
+  let xMax = Number.NEGATIVE_INFINITY;
+  let yMax = Number.NEGATIVE_INFINITY;
+
+  const allPlaces = [sourcePlace, ...sourcePlace.childrenPlaces];
+  /** Pour le moment, la seule "intelligence" de notre service est ici: on sait
+   * que pour un lieu donné, on va vouloir contrôler les coordonnées de ce lieu
+   * et de tous les lieux qui lui sont rattachés. Éventuellement, on pourrait
+   * faire évoluer ceci pour ne le faire que si certaines options sont
+   * précisées dans la config.
+   */
+
+  allPlaces.forEach((place) => {
+    if (place.isLocated) {
+      const x = parseFloat(place.locaXCoord);
+      const y = parseFloat(place.locaYCoord);
+      if (x < xMin) xMin = x;
+      if (x > xMax) xMax = x;
+      if (y < yMin) yMin = y;
+      if (y > yMax) yMax = y;
+    }
+  });
+
+  if (xMin === Number.POSITIVE_INFINITY)
+    throw new Error(`Could not compute BBox for ${sourcePlace.slo}`);
+  // Si xMin n'a toujours pas bougé, il y a eu un problème ...
+
+  return new BoundingBox({
+    xMin: xMin - xMinPadding,
+    yMin: yMin - yMinPadding,
+    xMax: xMax + xMaxPadding,
+    yMax: yMax + yMaxPadding,
+  });
+  // Il y a un deuxième petit bout de valeur ajoutée à notre service ici, qui gère les marges.
+}
+
+module.exports = getBboxForPlace;
+```
+
+On peut maintenant vérifier que ça fonctionne pour tous nos tests:
+
+```txt file=consoleOutput
+  getBboxForPlace
+    ✔ works with default config on place A
+    ✔ works with default config on place B
+    ✔ works with custom padding on place A
+    ✔ works with custom padding only on X on place A
+```
+
+Et c'est bien le cas !
+
+## Conclusion
+
+Le temps passer à rédiger le README et les tests a probablement été plus long que le temps passé à rédiger le code du service lui-même. Et à première vue ça peut sembler être une perte de temps. Mais si on n'avait pas fait comme ça, on aurait fait comment ?
+
+On aurait écrit la fonction directement dans le script qui en avait besoin. Pour la tester, il aurait fallu lancer à chaque fois le script complet, qui allait charger à chaque fois un jeu de lieux complet (donc prendre du temps) ... à moins qu'on prenne le temps de préparer un jeu de lieux partiel pour tester le script ?
+
+On aurait regardé le résultat global du script - les images des gares - et si on avait vu qu'elles ne correspondaient pas à ce qu'on souhaitait, on aurait débuggé: est-ce que le problème vient du calcul de la bBox ? Ou d'un bug dans la commande mapshaper ? Ou simplement de données qui sont fausses ? On aurait ajouté des "console.log" un peu partout dans le script ...
+
+Bref, ne serait-ce que pour le développement de ce script, au final, on n'aurait pas nécessairement passé moins de temps si on n'avait pas pris la peine de faire un service séparé avec des tests séparés.
+
+Mais en plus, maintenant:
+
+- si on a besoin de calculer une bBox pour un autre script ou un autre besoin, on a déjà un service spécifique qu'on peut importer individuellement n'importe où
+- si on veut faire évoluer ce service pour y ajouter des fonctionnalités:
+  - on a déjà toute la structure pour ajouter des cas de tests correspondants aux nouvelles fonctionnalités
+  - mais surtout: on n'a pas peur de casser les fonctionnalités existantes, puisqu'on a des tests pour celles-ci. On peut donc même se lancer dans une réécriture complète du service si on le souhaite: tant qu'il passe toujours nos tests actuels à la fin, on sait que les usages actuels fonctionneront toujours
+
+Cette discipline de modularisation des services et de rédaction de tests est ce qui permet à Bimo d'évoluer rapidement sans régressions !
+
+## Épilogue
+
+2 semaines après avoir rédigé ce service, un nouveau besoin semblable est apparu, qui a conduit à créer un nouveau service getBboxForPlaces (avec un s).
+
+En effet, pour ce nouveau besoin, on veut une bBox autour de plusieurs lieux qui n'ont pas nécessairement de lien entre eux.
+
+On a donc transféré le code de getBboxForPlace vers getBboxForPlaces, puis on l'a modifié un peu pour qu'il accepte directement un array de lieux.
+
+Désormais, getBboxForPlace ne conserve que la logique qui construit un array de lieu avec les lieux enfants d'un lieu de référence, puis fait appel à getBboxForPlaces.
+
+Les tests de getBboxForPlace restent les mêmes, et passent toujours. On a facilement pu mutualiser du code, et gagner du temps ...

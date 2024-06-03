@@ -1,0 +1,44 @@
+---
+slug: 'améliorer-les-performances-de-scripts-manipulant-des-données-géographiques'
+language: 'fr'
+title: 'Améliorer les performances de scripts manipulant des données géographiques'
+lead: 'Plusieurs stratégies existent pour améliorer les performances et des services Bimo peuvent aider à implémenter ces stratégies.'
+creationDate: '2022-12-13T23:07:19.703Z'
+author: Gaël Haméon
+orignalLanguage: 'fr'
+translator: 'n/a'
+draft: true
+---
+
+Article en cours de rédaction ...
+
+Dans un article précédent, nous avons vu comment utiliser Lauritz et mapshaper pour générer des images représentant les plans de voies de toutes les gares de France.
+
+Dans cet article, nous allons voir comment le temps de traitement a été optimisé, pour passer de 2h à 8 minutes.
+
+On a en données d'entrées un fond de carte du rfn, enrichi de dessins représentant les quais etc. C'est un volume de données considérable : xx yy.
+
+On souhaite, pour chacune des 5000 gares du rfn, ne sélectionner qu'un sous ensemble de ces segments, ceux qui tombent dans une zone delimkitee autour de la gare. Et on veut couper ceux qui sont à moitié dans la zone et en dehors.
+
+Pour y arriver, il n'y a pas de magie: la commande clip de mapshaper doit, à un moment ou un autre, vérifier pour chaque segment de la carte originale s'il appartient ou pas à la zone qui nous intéresse.
+Et même si c'est un test très rapide, quand il faut le faire 5000 fois 10000000 de fois, ça fini par prendre du temps.
+
+Ca peut sembler stupide: quand on veut représenter la gare de Marseille, c'est évident que les segments situés en Bretagne ne seront pas dans la zone qui nous intéressent.
+
+Mais c'est la nature des ordinateurs: ils sont stupides. Il font ce qu'on leur demande et rien d'autre. Ils le font très vite, ce qui donne parfois l'impression qu'ils sont plus intelligent qu'ils ne le sont... Mais bref.
+
+Dans notre cas, personne n'a appris à Mapshaper que c'était inutile de regarder les segments situés en Bretagne quand on s'intéresse à la gare de Marseille. Donc en ce moment, quand on lui demande de faire un clip de notre carte, il regarde tous les segments de la carte et vérifie pour chacun si on souhaite le garder ou pas.
+
+Comment faire pour rendre notre code un peu plus intelligent, et donc plus performant ?
+
+On a vu que notre réflexe humain était de se dire qu'il était inutile de se préoccuper des segments de la Bretagne quand on souhaite créer un clip de la gare de Marseille. Pour poursuivre dans cette idée, on pourrait dire qu'il ne faut se préoccuper que des segments de la région PACA quand on traite des gares de la région PACA.
+
+Si on avait une association claire et nette entre chaque gare et une région, et entre chaque segment et une région, ça pourrait être aussi simple que ça. Mais on n'a pas ça sous la main, et même si on l'avait, sur des régions très étendues, comme AURA, ou très denses, comme l'Île-de-France, ça ferait peut-être encore de très gros calculs.
+
+Une approche plus universelle est de séparer nous-mêmes notre carte en zones, délimitées par des coordonnées x y. On peut facilement savoir à quelle zone une gare ou un segment est associé(e) sur la base de leurs coordonnées. On fait un premier passage où on sépare le problème en sous-problèmes plus petits, puis on règle chacun de ces sous-problèmes, et ça prend beaucoup moins de temps que de régler le problème initial.
+
+Le problème avec cette approche est que comme on défini nos zones de manière plus ou moins arbitraire, on risque d'avoir des gares qui se retrouvent très près de la frontière de plusieurs zones. Et si ça se produit, sur notre image, on ne verra que les segments de la zone à laquelle la gare a été rattachée, alors que les segments les plus intéressants pour comprendre le plan de voie de la gare pourraient très bien être dans l'autre zone.
+
+Pour remédier à cela, on va tout simplement élargir un peu les frontières de chaque zone quand il s'agira de sélectionner leurs segments.
+
+Article en cours de rédaction ...

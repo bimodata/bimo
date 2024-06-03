@@ -1,0 +1,263 @@
+---
+slug: 'extraire-automatiquement-des-images-de-plans-de-voies-à-partir-de-la-cartographie-hastus'
+title: 'Extraire automatiquement des images de plans de voies à partir de la cartographie Hastus'
+lead: "En utilisant des services Bimo et le projet Open Source Mapshaper, on arrive en moins d'une centaine de lignes de code à écrire un script assez puissant!"
+date: '2022-11-27'
+authors: [gael]
+tags: [hastus, cartographie, geo, mapshaper, lieux]
+---
+
+import DescriptionProbleme from '../../mdx-snippets/description-probleme-must-hastus/fr.mdx';
+
+## Origine du besoin
+
+<DescriptionProbleme />
+
+Un [autre article](./réconcilier-les-lieux-de-deux-systèmes-différents-avec-find-best-match-for-target-among-candidates/) décrira éventuellement comment des services Bimo ont été utilisés pour initialiser ce travail, mais cela restera néanmoins toujours une initialisation : dans certains cas, on n'arrive pas à faire le rapprochement entre les voies automatiquement, et il faut demander à un humain d'intervenir.
+
+Afin de faciliter cette intervention, on souhaite mettre à disposition des humains en question une IHM qui affichera, pour une gare donnée:
+
+- la liste des voies disponibles dans le système SNCF maison
+- la liste des voies disponibles dans Hastus
+- les équivalences trouvées automatiquement par les algos
+- une image du plan de voie de la gare dans Hastus, et de la position des voies Hastus sur ce plan de voie
+
+En effet, il existe souvent plusieurs "alias" pour une même voie, et le nom de voie utilisé dans Hastus n'est pas toujours celui avec lequel les utilisateurs sont le plus familier. En leur montrant à quelle voie correspond un nom sur le plan de voie, on facilite grandement le travail. On aurait pu aussi se contenter de dire aux utilisateurs d'ouvrir la carte Hastus, et de trouver dans la carte la gare concernée à chaque fois. Mais cela aurait ajouté des manipulations et du temps à une tâche déjà pas très amusante ... et mon rôle sur ce projet est précisément de m'amuser à automatiser et accélérer des manipulations pas très amusantes pour des humains.
+
+## Exploration des solutions
+
+### Processus global
+
+Pour ne pas réinventer la roue, on considère que l'IHM qui sera présentée aux utilisateurs sera un fichier Excel par région, contenant un onglet pour chaque gare de la région. Sur cet onglet, on voudrait afficher le plan de voie, les listes de voies, et prévoir un endroit où les utilisateurs pourront confirmer/corriger la correspondance.
+Ces fichiers pourront ensuite être relus automatiquement pour en extraire les correspondances validées.
+
+On souhaite donc produire des images de plan de voie à partir de la carte Hastus, dans un format qui pourra être incorporé dans un fichier Excel.
+
+Les fonctionnalités standard Hastus permettent d'extraire la carte en format Shapefile et on connaît un très bon outil open source pour manipuler des fichiers Shapefile: [mapshaper](https://mapshaper.org)
+
+<details>
+
+<summary>Note sur la sécurité des données</summary>
+
+Pour ceux qui s'inquiéteraient de l'utilisation d'outils internet grand public pour la manipulation de données potentiellement sensibles, sachez que mapshaper traite toutes les données côté client - jamais nos données ne quittent notre poste. Et si cela ne suffisait pas, j'incorpore dans certaines distributions Bimo un "fork" de mapshaper qui pourrait vous rassurer encore plus: après avoir téléchargé Bimo, vous pouvez couper toute connexion internet, lancer Bimo et avoir une instance mapshaper qui tourne.
+
+</details>
+
+Une vérification rapide montre que mapshaper permet d'exporter une carte au format `svg` et qu'Excel permet d'incorporer des images dans ce format.
+
+On va donc utiliser mapshaper pour produire des `svg` de toutes les gares, puis on pourra incorporer ces svg dans les fichiers Excel.
+
+### Commandes mapshaper
+
+Mapshaper peut être utilisé via l'IHM web, mais fourni aussi un CLI node, déjà incorporé dans le backend Bimo. Mais en plus, l'IHM web permet d'utiliser une console pour tester des commandes.
+
+![Manipulations pour afficher la console dans l'IHM Mapshaper](images/mapshaper-console.gif)
+
+L'aide est disponible directement dans la console, ou sur le repo Github du projet.
+
+On y trouve la commande [clip](https://github.com/mbloch/mapshaper/wiki/Command-Reference#-clip), qui va permettre de produire un nouveau calque à partir d'un calque existant, en conservant uniquement une zone délimitée par des coordonnées ou par une géométrie présente sur un autre calque.
+
+En testant un peu, on conclut que la commande ci-dessous semble donner satisfaction. Notez bien l'utilisation du "+" qui indique de créer un nouveau calque, et donc de préserver le calque cible tel qu'il était. L'argument "name" donne le nom du nouveau calque.
+
+`clip target=calque_initial bbox=xmin,ymin,xmax,ymax + name=clip_de_gare_1`
+
+![Exemple d'application de la commande clip](images/commande-clip.gif)
+
+Ça marche très bien pour extraire la géométrie des voies à partir du mapshaper extrait d'Hastus. Par contre les lieux-voies n'apparaissent pas ... En effet, dans Hastus, les lieux sont des objets à part, qui sont associés à des segments de la carte, mais n'en font pas partie.
+
+On devra donc obtenir un autre fichier contenant les données sur les lieux, et l'importer en tant que calque supplémentaire dans Mapshaper (ceci pourrait faire l'objet d'un autre article si ça intéresse quelqu'un !).
+
+À ce stade, on arrive à produire une image dans laquelle on a les voies, ainsi que des points correspondant aux lieux. Mais il manque toujours les libellés.
+
+On va donc utiliser la commande `style` de mapshaper pour les faire apparaître.
+
+`style target=calque_des_lieux" label-text='plcIdentifier' dx=5 dy=5 ...`
+
+![Résultat avec des libellés](images/test-avec-libelles.png)
+
+Ça commence à ressembler pas mal à ce qu'on souhaite ! On va donc se lancer dans l'automatisation.
+
+## Automatisation
+
+On veut générer une image pour chaque gare et on souhaite que cette image englobe toutes les voies de la gare. Dans Hastus, on peut considérer qu'une gare est à peu près équivalente à "lieu de référence", qui n'existe pas sur la carte, mais qui est associé à plusieurs "lieux-voies", qui ont eux des coordonnées.
+
+On va donc:
+
+- itérer sur tous les lieux de référence
+  - pour chaque lieu de référence, récupérer tout ses lieux-voies
+    - à partir des coordonnées de tous les lieux-voies, calculer les coordonnées d'une "Bounding Box"
+    - prendre un clip des calques "voies" et "lieux-voies" avec cette bbox
+    - gérer le style du clip pour ajouter les libellés
+    - exporter le clip au format SVG, avec un nom de fichier correspondant à l'identifiant de la gare
+
+On n'est pas sur un sujet récurrent ici, et on n'a pas vraiment besoin que ce travail puisse être fait facilement par n'importe quel utilisateur. On va donc tout simplement créer un nouveau "script" dans Bimo, qui ne pourra être exécuté que par les utilisateurs qui ont accès au code source, et qui s'appuiera sur les services et utilitaires Bimo existants, notamment:
+
+- `const { getEntityFromOirDataAtPath } = require('@bimo-test/utils-get-test-data');` va permettre de charger facilement un jeu de lieux, puis d'itérer sur les lieux de référence, obtenir leurs lieux-voies et leurs coordonnées
+- `const { api: mapshaper } = require('@bimo/mapshaper');` va permettre d'intégrer des commandes mapshaper dans notre script
+
+### Création du service `getBboxForPlace`
+
+Le sujet du calcul d'une Bbox pour un lieu est nouveau. Il est assez simple à première vue, mais:
+
+- c'est exactement le genre de code dans lequel il est très facile d'introduire des bugs par de mauvais copier/coller ou autre
+- ce thème peut en réalité être assez complexe:
+  - quelles marges ajouter autour des coordonnées des lieux voies ?
+  - pourrions-nous (pour d'autres usages) vouloir passer directement un lieu voie, et avoir une bbox centrée autour de celui-ci ?
+  - et si on voulait un jour une bbox d'une autre forme ? Un cercle, ou un rectangle orienté à 45 degrés
+
+On va donc créer un nouveau service Bimo, avec des tests unitaires, pour ce sujet. Cela peut sembler être une perte de temps à court terme, mais devrait nous en faire gagner à long terme.
+
+{/* Voir <ArticleLink slug="creation-du-service-get-bbox-for-place">cet article</ArticleLink> */}
+
+### Création du script `generate-station-svg`
+
+On a maintenant tous les services de base dont on a besoin pour notre script, dont vous trouverez ci-dessous une version simplifiée et commentée du code final.
+
+```javascript title="script.js"
+const path = require('path');
+const { fsBimo } = require('@bimo/core-utils-filesystem'); // Un package qui nous aide à interagir avec le système de fichier
+const { api: mapshaper } = require('@bimo/mapshaper'); // La fork "bimo" de mapshaper
+
+const {
+  getEntityFromOirDataAtPath,
+} = require('@bimo/test-utils-get-test-data'); // Une fonction pour simplifier le chargement de données oig/oir
+const getBboxForPlace = require('@bimo/core-services-get-bbox-for-place'); // le script qu'on a écrit à l'étape précédente!
+const { featureCollection } = require('@turf/helpers'); // un package externe qui aide à manipuler des geojson
+
+const createGeojsonFeatureFromPlace = require('@bimo/core-services-create-geojson-feature-from-place');
+// un package interne qui aide à créer des geojson à partir de lieux
+
+const { PlacesCollection } = require('@bimo/core-entities');
+// La classe qui définit un jeu de lieux
+
+const PATH_TO_PLACES_COLLECTION_FOLDER = path.join(
+  __dirname,
+  'input',
+  'places-collection'
+);
+// On définit un dossier d'entrée dans lequel l'utilisateur devra déposer
+// une extraction des lieux d'un environnement Hastus, et le fichier OIR
+// qui décrit le format de l'extraction...
+
+const PATH_TO_TRACKS_MAP = path.join(
+  __dirname,
+  'input',
+  'tracks-map',
+  'tracks.geojson'
+);
+// ... et un fichier correspondant à une carte des voies (obtenue soit depuis Hastus, ou une autre source)
+
+const PATH_TO_FULL_PLACES_COLLECTION_MAP = path.join(
+  __dirname,
+  'output',
+  'places-map',
+  'places.geojson'
+);
+// c'est ici que le script déposera la carte des lieux produite à partir du jeu de lieux
+
+async function main() {
+  const startTime = new Date(); // pour mesurer le temps écoulé à la fin
+
+  // Étape 1: on va créer une carte représentant tous les lieux voies et
+  // l'exporter à un endroit où mapshaper pourra ensuite aller la charger
+  const placesCollection = await getEntityFromOirDataAtPath(
+    PATH_TO_PLACES_COLLECTION_FOLDER,
+    OscarPlacesCollection
+  );
+
+  await fsBimo.outputJSON(
+    PATH_TO_FULL_PLACES_COLLECTION_MAP,
+    createPlacesFeatureCollection(placesCollection)
+  ); // voir à la fin du script pour la définition de createPlacesFeatureCollection
+
+  // Étape 2: on va maintenant fabriquer les commandes que l'on va soumettre
+  // à mapshaper
+  const commandLines = [
+    `-i ${PATH_TO_FULL_PLACES_COLLECTION_MAP} name=places`,
+    `-i ${PATH_TO_TRACKS_MAP} name=tracks`,
+    `-style target=places r=4 label-text='plcIdentifier' text-anchor=start dx=10 dy=10 fill=red`,
+  ];
+  // on commence par charger la carte des lieux et la carte des voies, et on
+  // applique un style global à la carte des lieux:
+  // on va afficher un cercle de rayon 4 sur chaque lieu, avec à côté un
+  // libellé contenant le "plcIdentifier", décalé de 10
+  // par rapport au point, et affiché en rouge
+
+  placesCollection
+    .placesByReferencePlace()
+    .forEach((places, referencePlace) => {
+      // On parcourt tous les PR du jeu de lieux, et pour chacun:
+
+      const { plcIdentifier } = referencePlace;
+
+      const pathToOutput = path.join(
+        __dirname,
+        'output',
+        'svgs',
+        `${plcIdentifier}.svg`
+      );
+      // on va produire un fichier nommé selon l'ID de lieu
+
+      const bBoxString =
+        getBboxForPlace(referencePlace).getMapshaperStyleString();
+      // on calcule la "Bounding Box" qui englobe tous les lieux voies
+
+      commandLines.push(
+        `-clip target=places bbox=${bBoxString} + name=${plcIdentifier}_1`,
+        `-clip target=tracks bbox=${bBoxString} + name=${plcIdentifier}_2`,
+        // on prend des clips des deux cartes, aux mesures de la bounding box
+
+        `-o target=${plcIdentifier}_1,${plcIdentifier}_2 ${pathToOutput}`,
+        // on exporte ces clips sous forme de .svg
+
+        `-drop target=${plcIdentifier}_1,${plcIdentifier}_2`
+        // on supprime les clips pour éviter de surcharger la mémoire
+      );
+    });
+
+  // à l'issue de cette boucle, commandeLines contient:
+  // - les 3 commandes initiales permettant de charger et styliser les données
+  // - x commandes permettant de générer, exporter et supprimer les clips pour chaque gare
+
+  await mapshaper.runCommands(commandLines.join('\n'));
+  // on balance toutes les commandes à mapshaper et on attend ...
+
+  console.log(`Done in ${(new Date() - startTime) / 1000} seconds`);
+  // Et voilà !
+}
+
+function createPlacesFeatureCollection(placesCollection) {
+  // cette fonction est relativement simple: on utilise le service existant "createGeojsonFeatureFromPlace"
+  // pour créer, pour chaque lieu, un objet "point" en geojson, qui permettra de constituer une carte de tous
+  // les lieux voies
+  const placeFeatures = [];
+  placesCollection.forEach((place) => {
+    if (place.isLocated) {
+      try {
+        placeFeatures.push(createGeojsonFeatureFromPlace(place));
+      } catch (error) {
+        console.log(
+          `Erreur lors de la création de la feature correspondant au lieu ${place.slo}: ${error}`
+        );
+      }
+    }
+  });
+  return featureCollection(placeFeatures);
+}
+
+// on lance la fonction principale
+main();
+```
+
+Et voilà ! En s'appuyant sur des services Bimo réutilisables et sur la librairie Open Source [mapshaper](https://mapshaper.org), on arrive, en moins d'une centaine de lignes de codes, à écrire un script assez puissant, qui nous donne des images semblables à celle-ci:
+
+![Exemple d'image produite par le script](images/exemple-svg-gare.svg)
+
+On peut éventuellement le raffiner, ajuster le style des libellés des lieux, par exemple, ou la couleur des voies etc.
+
+On peut également se poser la question de la performance: à l'heure actuelle, pour chaque gare, mapshaper doit faire un clip de l'énorme carte de la France entière, ce qui représente pas mal de travail. Avec cette version de base, il aurait fallu laisser tourner le script un peu moins de deux heures pour produire des images des quelques 5000 gares qui pouvaient nous intéresser.
+
+Ce n'est pas rédhibitoire, mais quand même pas très pratique.
+
+Dans un prochain article, on verra comment on a pu améliorer les performances pour descendre de 2h à moins de 10 minutes !
+ {/* améliorer-les-performances-de-scripts-manipulant-des-données-géographiques */}
