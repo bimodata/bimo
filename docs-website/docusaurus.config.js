@@ -54,7 +54,11 @@ const config = {
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
-        docs: { sidebarPath: './sidebars.js' },
+        docs: {
+          sidebarPath: './sidebars.js',
+          editUrl: 'https://github.com/bimodata/bimo/tree/develop/docs-website',
+          editLocalizedFiles: true,
+        },
         blog: {
           showReadingTime: true,
           path: blogRelPath,
