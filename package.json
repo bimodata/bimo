@@ -8,7 +8,7 @@
     "docs-website"
   ],
   "scripts": {
-    "build:all": "yarn workspaces foreach -A -v -t run build",
+    "build:all": "yarn workspaces foreach -A -v -t --exclude @bimo/docs-website run build",
     "test": "cross-env UPDATE_EXPECTED=false NODE_ENV=test mocha **/*.spec.js"
   },
   "devDependencies": {
