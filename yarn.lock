@@ -2460,6 +2460,7 @@ __metadata:
     chai: "npm:^4.4.1"
     mocha: "npm:^10.4.0"
     nyc: "npm:^15.1.0"
+    rimraf: "npm:^5.0.5"
     ts-node: "npm:^10.9.2"
     typescript: "npm:~5.0.2"
   languageName: unknown
