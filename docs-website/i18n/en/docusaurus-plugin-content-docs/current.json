@@ -2,5 +2,13 @@
   "version.label": {
     "message": "Next",
     "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Premiers pas": {
+    "message": "Getting Started",
+    "description": "The label for category Premiers pas in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Premiers pas.link.generated-index.title": {
+    "message": "Getting Started",
+    "description": "The generated-index page title for category Premiers pas in sidebar tutorialSidebar"
   }
 }
