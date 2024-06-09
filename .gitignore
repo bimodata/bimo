@@ -26,17 +26,13 @@ yarn-error.log
 
 *.heapsnapshot
 .nmprc
-.yarnrc
 debug.log
 packageInfoByPackageName.json
 
 .yarn/*
-.yarnrc.yml
-yarn.lock
-# !.yarn/cache
-# !.yarn/patches
-# !.yarn/releases
-# !.yarn/plugins
-# !.yarn/sdks
-# !.yarn/versions
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
 .pnp.*
