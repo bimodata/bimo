@@ -1,0 +1,30 @@
+separator ";"
+
+line vehicle_schedule
+    {
+    keyword vehicle_schedule
+    object vehicle_schedule
+    item vsc_name
+    item vsc_scenario
+    item vsc_sched_type
+    item vsc_booking
+    item vsc_description
+
+    line trip
+        {
+        keyword trip
+        object trip
+        item trp_number
+        item trp_route
+
+        line trip_point
+            {
+            keyword trip_point
+            object trip_point
+            item trppt_place
+            item trppt_internal_arrival_time
+            item trppt_internal_departure_time
+            }
+        }
+    } 
+

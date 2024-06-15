@@ -1,7 +1,7 @@
 {
-  "name": "@bimo/test-utils-get-test-data",
+  "name": "@bimo/core-utils-get-entity-from-oir-data-at-path",
   "version": "0.0.1",
-  "description": "Util that retrieves data from a test data package",
+  "description": "Helper function that loads oir data from a folder",
   "main": "index.js",
   "author": "Gaël Haméon <gael.hameon@gmail.com>",
   "license": "LGPL-3.0-or-later",
@@ -10,10 +10,12 @@
     "coverage": "nyc --reporter=html --reporter=text npm test"
   },
   "dependencies": {
-    "@bimo/core-utils-filesystem": "^0.0.1",
-    "@bimo/core-utils-get-entity-from-oir-data-at-path": "^0.0.1"
+    "@bimo/core-services-get-entity-from-oir-data-string-and-control-file": "^0.0.1",
+    "@bimo/core-utils-async-for-each": "^0.0.1",
+    "@bimo/core-utils-filesystem": "^0.0.1"
   },
   "devDependencies": {
+    "@bimo/core-entities": "^0.0.1",
     "chai": "^4.4.1",
     "mocha": "^10.4.0",
     "nyc": "^15.1.0"

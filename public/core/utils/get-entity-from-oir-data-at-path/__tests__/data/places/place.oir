@@ -1,0 +1,16 @@
+separator ";"
+
+line place
+   {
+   keyword place
+   object place
+   item plcIdentifier
+   item plcDescription
+   item plcReferencePlace
+   item plcType
+   item locaXCoord
+   item locaYCoord
+   item customItem1
+   item customItem2
+   } 
+

@@ -2205,6 +2205,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@bimo/core-utils-get-entity-from-oir-data-at-path@npm:^0.0.1, @bimo/core-utils-get-entity-from-oir-data-at-path@workspace:public/core/utils/get-entity-from-oir-data-at-path":
+  version: 0.0.0-use.local
+  resolution: "@bimo/core-utils-get-entity-from-oir-data-at-path@workspace:public/core/utils/get-entity-from-oir-data-at-path"
+  dependencies:
+    "@bimo/core-services-get-entity-from-oir-data-string-and-control-file": "npm:^0.0.1"
+    "@bimo/core-utils-async-for-each": "npm:^0.0.1"
+    "@bimo/core-utils-filesystem": "npm:^0.0.1"
+    chai: "npm:^4.4.1"
+    mocha: "npm:^10.4.0"
+    nyc: "npm:^15.1.0"
+  languageName: unknown
+  linkType: soft
+
 "@bimo/core-utils-get-iterator-for-values-at-path@npm:^0.0.1, @bimo/core-utils-get-iterator-for-values-at-path@workspace:public/core/utils/get-iterator-for-values-at-path":
   version: 0.0.0-use.local
   resolution: "@bimo/core-utils-get-iterator-for-values-at-path@workspace:public/core/utils/get-iterator-for-values-at-path"
@@ -2596,11 +2609,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bimo/test-utils-get-test-data@workspace:public/test/utils/get-test-data"
   dependencies:
-    "@bimo/core-services-get-entity-from-oir-data-string-and-control-file": "npm:^0.0.1"
-    "@bimo/core-utils-async-for-each": "npm:^0.0.1"
     "@bimo/core-utils-filesystem": "npm:^0.0.1"
+    "@bimo/core-utils-get-entity-from-oir-data-at-path": "npm:^0.0.1"
     chai: "npm:^4.4.1"
-    fs-extra: "npm:^11.2.0"
     mocha: "npm:^10.4.0"
     nyc: "npm:^15.1.0"
   languageName: unknown
