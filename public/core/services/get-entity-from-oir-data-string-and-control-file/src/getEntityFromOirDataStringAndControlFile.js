@@ -9,7 +9,7 @@ const Parser = require('@bimo/core-utils-control-file-and-csv-data-parser');
  * @param {Object=} context.logger
  */
 async function getEntityFromOirDataStringAndControlFile(
-  { oirDataString, oirControlFile, EntityConstructor },
+  { oirDataString, oirControlFileString, EntityConstructor },
   config = { convertKeysToCamel: true, convertItemNamesToCamel: true },
   context = {},
 ) {
@@ -17,7 +17,7 @@ async function getEntityFromOirDataStringAndControlFile(
 
   const oirParser = new Parser(
     oirDataString,
-    oirControlFile.fileData,
+    oirControlFileString,
     config,
   );
   await oirParser.init();

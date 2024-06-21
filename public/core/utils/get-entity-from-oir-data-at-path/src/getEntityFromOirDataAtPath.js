@@ -29,7 +29,7 @@ async function getEntityFromOirDataAtPath(sourcePath, EntityConstructor, options
     const dataFile = await fs.readFile(file.fullPath, { encoding: 'latin1' });
     const newEntity = await getEntityFromOirDataStringAndControlFile({
       oirDataString: dataFile,
-      oirControlFile: { fileData: oirFile },
+      oirControlFileString: oirFile,
       EntityConstructor,
     });
     newEntity.label = file.name;
