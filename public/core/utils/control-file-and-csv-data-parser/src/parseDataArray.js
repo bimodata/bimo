@@ -33,7 +33,7 @@ module.exports = function (splitLines, parsedControlFile, specificLogger = undef
 
     const objectType = objectTypeByKeyword[keyword];
     if (!objectType) {
-      throw new Error(`Could not find a suitable objectType for this keyword: ${keyword}`);
+      throw new Error(`Could not find a suitable objectType for this keyword: "${keyword}"`);
     }
 
     const parentObjectType = parentObjectTypeByObjectType[objectType];
