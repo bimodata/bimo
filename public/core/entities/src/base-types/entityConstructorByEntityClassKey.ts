@@ -123,6 +123,14 @@ import {
   PassengerLoadTripsCollection,
   PassengerLoadVersion,
   PassengerLoadVersionsCollection,
+  CirculationDay,
+  CirculationDaysCollection,
+  CirculationPeriod,
+  CirculationPeriodsCollection,
+  CirculationPlan,
+  CirculationPlansCollection,
+  CirculationPlanVehicleScheduleInfo,
+  CirculationPlanVehicleScheduleInfosCollection,
 } from "./rawIndex";
 
 export declare const entityConstructorByEntityClassKey: {
@@ -250,6 +258,14 @@ export declare const entityConstructorByEntityClassKey: {
   PassengerLoadTripsCollection: typeof PassengerLoadTripsCollection;
   PassengerLoadVersion: typeof PassengerLoadVersion;
   PassengerLoadVersionsCollection: typeof PassengerLoadVersionsCollection;
+  CirculationDay: typeof CirculationDay;
+  CirculationDaysCollection:typeof CirculationDaysCollection;
+  CirculationPeriod: typeof CirculationPeriod;
+  CirculationPeriodsCollection: typeof CirculationPeriodsCollection;
+  CirculationPlan: typeof CirculationPlan;
+  CirculationPlansCollection: typeof CirculationPlansCollection;
+  CirculationPlanVehicleScheduleInfo: typeof CirculationPlanVehicleScheduleInfo;
+  CirculationPlanVehicleScheduleInfosCollection: typeof CirculationPlanVehicleScheduleInfosCollection;
 };
 
 export type EntityConstructorByEntityClassKey = typeof entityConstructorByEntityClassKey;

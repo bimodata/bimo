@@ -113,6 +113,14 @@ export {
   PassengerLoadTripsCollection,
   PassengerLoadVersion,
   PassengerLoadVersionsCollection,
+  CirculationDay,
+  CirculationDaysCollection,
+  CirculationPeriod,
+  CirculationPeriodsCollection,
+  CirculationPlan,
+  CirculationPlansCollection,
+  CirculationPlanVehicleScheduleInfo,
+  CirculationPlanVehicleScheduleInfosCollection,
 } from "./rawIndex";
 
 export {

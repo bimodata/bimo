@@ -152,6 +152,14 @@ const {
   PassengerLoadTripsCollection, 
   PassengerLoadVersion, 
   PassengerLoadVersionsCollection, 
+  CirculationDay,
+  CirculationDaysCollection,
+  CirculationPeriod,
+  CirculationPeriodsCollection,
+  CirculationPlan,
+  CirculationPlansCollection,
+  CirculationPlanVehicleScheduleInfo,
+  CirculationPlanVehicleScheduleInfosCollection,
 } = entityConstructorByEntityClassKey;
 
 export {
@@ -279,4 +287,12 @@ export {
   PassengerLoadTripsCollection, 
   PassengerLoadVersion, 
   PassengerLoadVersionsCollection, 
+  CirculationDay,
+  CirculationDaysCollection,
+  CirculationPeriod,
+  CirculationPeriodsCollection,
+  CirculationPlan,
+  CirculationPlansCollection,
+  CirculationPlanVehicleScheduleInfo,
+  CirculationPlanVehicleScheduleInfosCollection,
 };

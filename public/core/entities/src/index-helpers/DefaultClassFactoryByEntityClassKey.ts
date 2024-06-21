@@ -123,6 +123,14 @@ import {
   PassengerLoadTripsCollectionClassFactory,
   PassengerLoadVersionClassFactory,
   PassengerLoadVersionsCollectionClassFactory,
+  CirculationDayClassFactory,
+  CirculationDaysCollectionClassFactory,
+  CirculationPeriodClassFactory,
+  CirculationPeriodsCollectionClassFactory,
+  CirculationPlanClassFactory,
+  CirculationPlansCollectionClassFactory,
+  CirculationPlanVehicleScheduleInfoClassFactory,
+  CirculationPlanVehicleScheduleInfosCollectionClassFactory,
 } from "./rawIndex";
 
 export const DefaultClassFactoryByEntityClassKey = {
@@ -290,4 +298,12 @@ export const DefaultClassFactoryByEntityClassKey = {
   PassengerLoadTripsCollection: PassengerLoadTripsCollectionClassFactory,
   PassengerLoadVersion: PassengerLoadVersionClassFactory,
   PassengerLoadVersionsCollection: PassengerLoadVersionsCollectionClassFactory,
+  CirculationDay: CirculationDayClassFactory,
+  CirculationDaysCollection: CirculationDaysCollectionClassFactory,
+  CirculationPeriod: CirculationPeriodClassFactory,
+  CirculationPeriodsCollection: CirculationPeriodsCollectionClassFactory,
+  CirculationPlanVehicleScheduleInfo: CirculationPlanVehicleScheduleInfoClassFactory,
+  CirculationPlanVehicleScheduleInfosCollection: CirculationPlanVehicleScheduleInfosCollectionClassFactory,
+  CirculationPlan: CirculationPlanClassFactory,
+  CirculationPlansCollection: CirculationPlansCollectionClassFactory,
 };

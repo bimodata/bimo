@@ -131,6 +131,14 @@ export {
   SchedulingUnitRoutesCollection,
   VariantItinerary,
   VariantItinerariesCollection,
+  CirculationDay,
+  CirculationDaysCollection,
+  CirculationPeriod,
+  CirculationPeriodsCollection,
+  CirculationPlan,
+  CirculationPlansCollection,
+  CirculationPlanVehicleScheduleInfo,
+  CirculationPlanVehicleScheduleInfosCollection,
 } from "./src/index-helpers/entityConstructorByEntityClassKey";
 
 export { Jour } from "./src/jour/Jour";
