@@ -33,13 +33,13 @@
     "tsc": "tsc"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.14",
+    "@types/chai": "^4.3.16",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.14.7",
     "chai": "^4.4.1",
     "mocha": "^10.4.0",
     "nyc": "^15.1.0",
-    "rimraf": "^5.0.5",
+    "rimraf": "^5.0.7",
     "ts-node": "^10.9.2",
     "typescript": "~5.0.2"
   },
