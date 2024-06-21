@@ -30,6 +30,20 @@ export function BookingsCollectionClassFactory({
     generateOirStyleData() {
       return { booking: this.items };
     }
+
+    /**
+     *
+     * @param {Object} oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
+     */
+    static createFromOirStyleData(oirStyleData: any, label: string) {
+      const rawBookings = oirStyleData.booking;
+
+      if (!rawBookings) {
+        throw new Error(`Bad oirStyleData: could not find "booking" key`);
+      }
+      const newBookingsCollection = new this({ items: rawBookings, label });
+      return newBookingsCollection;
+    }
   }
 
   BookingsCollection.allChildClasses = getAllChildClasses(childClasses);
