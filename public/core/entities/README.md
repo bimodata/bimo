@@ -126,7 +126,7 @@ import { Route as BimoRoute, Place as BimoPlace, ... } from "../base-types/index
 
 They are only used in type annotations, and point to files that contain only type declarations. (And that should probably be suffixed as _.d.ts rather than _.ts, I'm not exactly sure why they are not).
 
-Right now, the typescript compiler does not seem to understand that this should all be stripped at compilation, and we and up with references to empty files.
+Right now, the typescript compiler does not seem to understand that this should all be stripped at compilation, and we end up with references to empty files.
 
 And when the UI imports the ESM version of the entities, and later tries to compile, it does not like that.
 
