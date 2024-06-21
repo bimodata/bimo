@@ -23,7 +23,7 @@ describe('getEntityFromOirDataAtPath', () => {
         expect(result.llo).to.eql(expectedLongString1);
       });
       it(`loads custom data into the entities as expected`, async () => {
-        expect(result.items[0]._rawOigProps.customItem1).to.eql(`123`);
+        expect(result.items[0]._rawOirProps.customItem1).to.eql(`123`);
       });
     });
     describe(`using multipleEntitiesMode=true`, () => {

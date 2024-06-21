@@ -56,7 +56,7 @@ const createHastusStyleCsvForOneObject = function (oirStyleData, ouputLines, lin
   lineInfo.items.forEach((item) => {
     logger.trace(`ajout de l'item ${item.name}`);
     let value = oirStyleData[item.name];
-    if (value === undefined) value = oirStyleData._rawOigProps?.[item.name];
+    if (value === undefined) value = oirStyleData._rawOirProps?.[item.name];
     // let value = `${item.name}=${oirStyleData[item.name]}`;
     if (!value || value === 'null') {
       value = '';

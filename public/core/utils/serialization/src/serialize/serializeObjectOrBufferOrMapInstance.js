@@ -2,7 +2,7 @@
 
 const KEYS_TO_IGNORE = new Set([
   'temp', '_cachedValueByValueKey', 'ItemConstructor', 'EntityConstructor', '_links', 'policy', '_context', '_abstract', // Todo #29 review policy
-  '_placesByReferencePlace', '_rawOigProps',
+  '_placesByReferencePlace', '_rawOirProps',
   'vehicleTask',
 ]);
 

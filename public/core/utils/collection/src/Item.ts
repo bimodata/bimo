@@ -4,7 +4,7 @@ import { Collection } from "./Collection";
 import { shallowAssign } from "@bimo/core-utils-shallow-assign";
 import { BimoContext } from "@bimo/core-global-types";
 
-export interface RawOigProps {
+export interface RawOirProps {
   [key: string]: string;
 }
 
@@ -13,7 +13,7 @@ export interface ExtendedItemProps extends EntityProps {
 }
 
 export class Item<ItemType> extends Entity {
-  _rawOigProps: RawOigProps;
+  _rawOirProps: RawOirProps;
   static updateNextIdFunction?: (knownId?: string) => void;
   static incrementIdFunction: () => void;
   static nextIdValue: string;
@@ -22,7 +22,7 @@ export class Item<ItemType> extends Entity {
 
   constructor(props: ExtendedItemProps = {}, context: BimoContext = {}) {
     super(props, context);
-    this._rawOigProps = Item.getRawOigProps(props);
+    this._rawOirProps = Item.getRawOirProps(props);
   }
 
   clone(): ItemType {
@@ -36,7 +36,7 @@ export class Item<ItemType> extends Entity {
     return clone;
   }
 
-  static getRawOigProps(props: EntityProps) {
+  static getRawOirProps(props: EntityProps) {
     const shallowProps = shallowAssign({}, props);
     return Object.fromEntries(
       Object.entries(shallowProps).map(([key, value]) => [
