@@ -1,0 +1,108 @@
+---
+sidebar_position: 10
+---
+
+# Charger des données depuis HASTUS
+
+Le package [`@bimo/core-utils-control-file-and-csv-data-parser`](https://github.com/bimodata/bimo/tree/main/public/core/utils/control-file-and-csv-data-parser) permet de: 
+- analyser un fichier de contrôle (par exemple, un fichier .oir HASTUS) qui décrit un format de données
+- analyser un fichier de données en interprétant son contenu à la lumière des informations préalablement obtenues en analysant le fichier de contrôle
+- renvoyer les données sous forme d'objets JavaScript structurés
+
+Plusieurs packages ont été créés pour enrober ce package et en simplifier l'utilisation en fonction des cas d'usage. 
+
+## Généralités 
+
+### Types d'entités "chargeables"
+
+Comme vous le verrez dans les exemples, pour toutes les méthodes, il faut passer en argument le constructeur du type d'entité que l'on souhaite charger. À ce jour, les types d'entités "chargeables" sont: 
+
+- `PlacesCollection`
+- `VehicleSchedulesCollection`
+- `RouteVersionsCollection`
+- `RunTimeVersionsCollection`
+- `BookingsCollection`
+
+### Compatibilité avec votre version HASTUS
+
+Bimo a pour le moment été utilisé uniquement avec HASTUS 2019 et 2020 (et un tout petit peu 2014). Les entités Bimo sont construites sur la base des objets HASTUS disponibles dans ces versions. Les principaux objets HASTUS n'évoluent pas énormément - vous ne devriez donc pas avoir de problème à utiliser Bimo avec d'autres versions d'HASTUS (mais n'hésitez pas à nous contacter en cas de problème). 
+
+### Compatibilité avec vos attributs spécifiques
+
+Si vous avez ajouté des attributs spécifiques sur des objets dans votre version d'HASTUS, vous avez probablement envie de pouvoir manipuler ces attributs dans Bimo !
+
+Il y a deux méthodes pour y arriver: 
+
+- La méthode compliquée: créer vos propres entités dans Bimo en étendant les entités Bimo de base
+  - Cette méthode n'est pas documentée pour le moment
+- La méthode simple: utiliser "_rawOirProps"
+
+Quand vous chargez les entités à partir d'un fichier de données et d'un fichier de contrôle extraits d'HASTUS, les valeurs brutes de tous les attributs décrits dans les fichiers sont stockées dans l'attributs `_rawOirProps` sur chaque entité chargée. Ces valeurs seront également réexportées vers des fichiers à la fin de votre traitement si le fichier de contrôle utilisé pour l'export décrit un attribut ayant le même nom. 
+
+
+## Charger des données disponibles dans un répertoire local
+
+Si vous écrivez simplement un script qui tournera en Node.js sur une machine et qui chargera les données depuis son système de fichier, utilisez [`@bimo/core-utils-get-entity-from-oir-data-at-path`](https://github.com/bimodata/bimo/tree/main/public/core/utils/get-entity-from-oir-data-at-path). Ce package lit les fichiers du dossier que vous lui passez en paramètre, se base sur les extensions pour distinguer le fichier de contrôle et les fichiers de données, et charge les données dans des entités Bimo. 
+
+### Exemple
+
+1. Exportez des horaires de véhicules depuis HASTUS en utilisant l'`oig` standard `hastus_vehicle_schedule.id`
+2. Récupérez le fichier `oir` standard `hastus_vehicle_schedule.oir`
+3. Déposez le fichier `oir` et les fichiers de données dans un même dossier et notez le chemin complet de ce dossier.
+4. Vous pouvez maintenant charger ces données avec le script ci-dessous
+
+```javascript title="script.js"
+
+const { getEntityFromOirDataAtPath } = require('@bimo/core-utils-get-entity-from-oir-data-at-path');
+const { VehicleSchedulesCollection } = require('@bimo/core-entities');
+
+const pathToFolder = `C:\path\to\folder`;
+
+async function main() {
+  const myVehicleSchedulesCollection = await getEntityFromOirDataAtPath(pathToFolder, VehicleSchedulesCollection);
+  
+  // You can now do whatever you want with myVehicleSchedulesCollection ...
+  console.log(myVehicleSchedulesCollection.longLoggingOutput); 
+}
+```
+
+### Options
+
+N'hésitez pas à consulter le [readme](https://github.com/bimodata/bimo/tree/main/public/core/utils/get-entity-from-oir-data-at-path) du package et ses tests unitaires pour un vision complète des options disponibles. 
+
+Sachez toutefois qu'il est possible de spécifier si on souhaite lire plusieurs fichiers de données, auquel cas la fonction renverra un tableau contenant une entité par fichier, ou un seul, auquel cas la fonction lira le premier qu'elle trouve et renverra directement l'entité concernée. 
+
+Il est également possible de personnaliser les extensions (ou même les noms) de fichiers qui sont interprétés comme fichier de contrôle ou fichiers de données. 
+
+## Charger des données dans une architecture plus complexe
+
+Dans une application plus complexe où vous ne pouvez pas simplement lire les fichiers dans un répertoire, vous pouvez utiliser le package [`@bimo/core-services-get-entity-from-oir-data-string-and-control-file`](https://github.com/bimodata/bimo/tree/main/public/core/services/get-entity-from-oir-data-string-and-control-file).
+
+Son fonctionnement est très similaire à celui de [`@bimo/core-utils-get-entity-from-oir-data-at-path`](https://github.com/bimodata/bimo/tree/main/public/core/utils/get-entity-from-oir-data-at-path) mais cette fois, plutôt que de passer le chemin vers un répertoire, on passe directement le contenu du fichier de données et du fichier de contrôle sous forme de `string`. À vous de voir comment obtenir ces strings. 
+
+### Exemple
+
+```javascript title="someLambdaFunction.js"
+
+const fetch = require("isomorphic-unfetch");
+
+const getEntityFromOirDataStringAndControlFile = require('@bimo/core-services-get-entity-from-oir-data-string-and-control-file');
+const { VehicleSchedulesCollection } = require('@bimo/core-entities');
+
+let url = "https://some.api.that.will.return.data/";
+
+exports.handler = async function (event) {
+  const res = await fetch(url);
+  const { oirDataString, oirControlFileString } = await res.json();
+
+  const myVehicleSchedulesCollection = await getEntityFromOirDataStringAndControlFile(
+    {oirDataString, oirControlFileString, EntityConstructor: VehicleSchedulesCollection}
+  );
+
+  // Do whatever you want with the vehicle schedules collection
+  // For example count the total number of trips
+  const totalCountOftrips = myVehicleSchedulesCollection.tripsCollectionOfAllTripsOfAllVscs.count();
+
+  return totalCountOftrips;
+};
+```

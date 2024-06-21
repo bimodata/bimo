@@ -1,0 +1,107 @@
+---
+sidebar_position: 10
+---
+
+# Loading Data from HASTUS
+
+The [`@bimo/core-utils-control-file-and-csv-data-parser`](https://github.com/bimodata/bimo/tree/main/public/core/utils/control-file-and-csv-data-parser) package allows you to:
+- Parse a control file (e.g., a HASTUS .oir file) that describes a data format
+- Parse a data file by interpreting its content based on the information obtained from parsing the control file
+- Return the data as structured JavaScript objects
+
+Several packages have been created to wrap this package and simplify its use for various use cases.
+
+## General Information
+
+### Types of "loadable" Entities
+
+As you will see in the examples, for all methods, you need to pass the constructor of the type of entity you want to load as an argument. To date, the "loadable" entity types are:
+
+- `PlacesCollection`
+- `VehicleSchedulesCollection`
+- `RouteVersionsCollection`
+- `RunTimeVersionsCollection`
+- `BookingsCollection`
+
+### Compatibility with Your HASTUS Version
+
+Bimo has so far been used only with HASTUS 2019 and 2020 (and a little bit with 2014). Bimo entities are built based on the HASTUS objects available in these versions. The main HASTUS objects do not evolve significantly, so you should not have any issues using Bimo with other versions of HASTUS (but feel free to contact us if you encounter any problems).
+
+### Compatibility with Your Specific Attributes
+
+If you have added specific attributes to objects in your version of HASTUS, you probably want to be able to manipulate these attributes in Bimo!
+
+There are two methods to achieve this:
+
+- The complicated method: create your own entities in Bimo by extending the base Bimo entities
+  - This method is not documented at the moment
+- The simple method: use "_rawOirProps"
+
+When you load entities from a data file and a control file extracted from HASTUS, the raw values of all attributes described in the files are stored in the `_rawOirProps` attribute on each loaded entity. These values will also be re-exported to files at the end of your process if the control file used for the export describes an attribute with the same name.
+
+## Loading Data Available in a Local Directory
+
+If you are simply writing a script that will run on Node.js on a machine and load the data from its file system, use [`@bimo/core-utils-get-entity-from-oir-data-at-path`](https://github.com/bimodata/bimo/tree/main/public/core/utils/get-entity-from-oir-data-at-path). This package reads the files from the folder you pass as a parameter, uses the extensions to distinguish the control file from the data files, and loads the data into Bimo entities.
+
+### Example
+
+1. Export vehicle schedules from HASTUS using the standard `oig` `hastus_vehicle_schedule.id`
+2. Retrieve the standard `oir` file `hastus_vehicle_schedule.oir`
+3. Place the `oir` file and the data files in the same folder and note the full path of this folder.
+4. You can now load this data with the script below
+
+```javascript title="script.js"
+
+const { getEntityFromOirDataAtPath } = require('@bimo/core-utils-get-entity-from-oir-data-at-path');
+const { VehicleSchedulesCollection } = require('@bimo/core-entities');
+
+const pathToFolder = `C:\\path\\to\\folder`;
+
+async function main() {
+  const myVehicleSchedulesCollection = await getEntityFromOirDataAtPath(pathToFolder, VehicleSchedulesCollection);
+  
+  // You can now do whatever you want with myVehicleSchedulesCollection ...
+  console.log(myVehicleSchedulesCollection.longLoggingOutput); 
+}
+```
+
+### Options
+
+Feel free to check out the [readme](https://github.com/bimodata/bimo/tree/main/public/core/utils/get-entity-from-oir-data-at-path) of the package and its unit tests for a comprehensive view of the available options.
+
+Note that it is possible to specify whether you want to read multiple data files, in which case the function will return an array containing one entity per file, or a single one, in which case the function will read the first it finds and directly return the concerned entity.
+
+It is also possible to customize the extensions (or even the names) of files that are interpreted as control files or data files.
+
+## Loading Data in a More Complex Architecture
+
+In a more complex application where you cannot simply read files from a directory, you can use the package [`@bimo/core-services-get-entity-from-oir-data-string-and-control-file`](https://github.com/bimodata/bimo/tree/main/public/core/services/get-entity-from-oir-data-string-and-control-file).
+
+Its operation is very similar to [`@bimo/core-utils-get-entity-from-oir-data-at-path`](https://github.com/bimodata/bimo/tree/main/public/core/utils/get-entity-from-oir-data-at-path) but this time, instead of passing the path to a directory, you pass the content of the data file and the control file as strings. It's up to you to figure out how to obtain these strings.
+
+### Example
+
+```javascript title="someLambdaFunction.js"
+
+const fetch = require("isomorphic-unfetch");
+
+const getEntityFromOirDataStringAndControlFile = require('@bimo/core-services-get-entity-from-oir-data-string-and-control-file');
+const { VehicleSchedulesCollection } = require('@bimo/core-entities');
+
+let url = "https://some.api.that.will.return.data/";
+
+exports.handler = async function (event) {
+  const res = await fetch(url);
+  const { oirDataString, oirControlFileString } = await res.json();
+
+  const myVehicleSchedulesCollection = await getEntityFromOirDataStringAndControlFile(
+    {oirDataString, oirControlFileString, EntityConstructor: VehicleSchedulesCollection}
+  );
+
+  // Do whatever you want with the vehicle schedules collection
+  // For example, count the total number of trips
+  const totalCountOfTrips = myVehicleSchedulesCollection.tripsCollectionOfAllTripsOfAllVscs.count();
+
+  return totalCountOfTrips;
+};
+```
