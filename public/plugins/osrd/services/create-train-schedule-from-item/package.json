@@ -1,0 +1,27 @@
+{
+  "name": "@bimo/osrd-services-create-train-schedule-from-item",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Gaël Haméon",
+  "license": "LGPL-3.0-or-later",
+  "scripts": {
+    "test": "mocha --recursive __tests__/**/*.spec.js",
+    "coverage": "nyc --reporter=html --reporter=text npm test"
+  },
+  "dependencies": {
+    "@bimo/core-utils-create-props-from-items": "^0.0.1",
+    "@bimo/core-utils-logging": "^0.0.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "chai": "^4.4.1",
+    "mocha": "^10.4.0",
+    "nyc": "^15.1.0"
+  },
+  "peerDependencies": {
+    "@bimo/core-entities": "0"
+  },
+  "files": [
+    "src"
+  ]
+}

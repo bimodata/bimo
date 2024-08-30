@@ -1,0 +1,30 @@
+module.exports = {
+  defaultBaseScheduleFactory: () => ({
+    train_name: 'trainName',
+    labels: [],
+    rolling_stock_name: 'electric_rolling_stock',
+    start_time: '2025-01-01T12:00:00Z',
+    path: [],
+    schedule: [],
+    margins: { boundaries: [], values: ['0%'] },
+    initial_speed: 0,
+    comfort: 'STANDARD',
+    constraint_distribution: 'MARECO',
+    speed_limit_tag: null,
+    power_restrictions: [],
+    options: { use_electrical_profiles: true },
+  }),
+  defaultPathPointFactory: () => ({
+    id: 'id',
+    deleted: false,
+    uic: '',
+    secondary_code: '',
+  }),
+  defaultSchedulePointFactory: () => ({
+    at: 'id',
+    arrival: null,
+    stop_for: 'P0D',
+    on_stop_signal: false,
+    locked: false,
+  }),
+};
