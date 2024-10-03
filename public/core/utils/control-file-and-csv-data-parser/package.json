@@ -7,13 +7,14 @@
   "license": "LGPL-3.0-or-later",
   "dependencies": {
     "@bimo/core-utils-logging": "^0.0.1",
+    "debug": "^4.3.7",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@bimo/test-utils-hash-and-compare-contents": "^0.0.1",
-    "chai": "^4.4.1",
+    "chai": "^4.5.0",
     "fs-extra": "^11.2.0",
-    "mocha": "^10.4.0",
+    "mocha": "^10.7.3",
     "nyc": "^15.1.0"
   },
   "scripts": {

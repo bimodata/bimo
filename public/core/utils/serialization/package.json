@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@bimo/test-utils-test-entities": "^0.0.1",
-    "chai": "^4.4.1",
-    "mocha": "^10.4.0",
+    "chai": "^4.5.0",
+    "mocha": "^10.7.3",
     "nyc": "^15.1.0"
   },
   "homepage": "https://bimodata.com/",

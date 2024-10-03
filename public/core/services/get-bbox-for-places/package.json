@@ -14,9 +14,9 @@
     "@bimo/core-utils-logging": "^0.0.1"
   },
   "devDependencies": {
-    "chai": "^4.4.1",
+    "chai": "^4.5.0",
     "lodash": "^4.17.21",
-    "mocha": "^10.4.0",
+    "mocha": "^10.7.3",
     "nyc": "^15.1.0"
   },
   "peerDependencies": {
