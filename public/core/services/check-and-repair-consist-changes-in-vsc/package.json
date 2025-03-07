@@ -15,9 +15,9 @@
   "devDependencies": {
     "@bimo/test-utils-get-test-data": "^0.0.1",
     "chai": "^4.5.0",
-    "mocha": "^10.8.2",
-    "nyc": "^15.1.0",
-    "sinon": "^17.0.1"
+    "mocha": "^11.1.0",
+    "nyc": "^17.1.0",
+    "sinon": "^19.0.2"
   },
   "peerDependencies": {
     "@bimo/core-entities": "0"
