@@ -18,7 +18,7 @@
     "chai": "^4.5.0",
     "deep-freeze-es6": "^1.4.1",
     "lodash": "^4.17.21",
-    "mocha": "^10.7.3",
+    "mocha": "^10.8.2",
     "nyc": "^15.1.0"
   },
   "peerDependencies": {

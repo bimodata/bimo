@@ -17,7 +17,7 @@
     "@bimo/core-utils-logging": "^0.0.1",
     "@bimo/test-utils-hash-and-compare-contents": "^0.0.1",
     "chai": "^4.5.0",
-    "mocha": "^10.7.3",
+    "mocha": "^10.8.2",
     "nyc": "^15.1.0"
   },
   "homepage": "https://bimodata.com/",
