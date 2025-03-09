@@ -19,12 +19,13 @@ module.exports = {
     deleted: false,
     uic: '',
     secondary_code: '',
+    track_reference: null,
   }),
   defaultSchedulePointFactory: () => ({
     at: 'id',
     arrival: null,
-    stop_for: 'P0D',
-    on_stop_signal: false,
+    stop_for: null,
+    reception_signal: 'OPEN',
     locked: false,
   }),
 };
