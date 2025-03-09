@@ -5,22 +5,22 @@ module.exports = {
     rolling_stock_name: 'electric_rolling_stock',
     start_time: '18:00',
     path: [
-      { id: '0', deleted: false, uic: 'A', secondary_code: '' },
-      { id: '1', deleted: false, uic: 'B', secondary_code: '' },
+      { id: '0', deleted: false, uic: 'A', secondary_code: '', track_reference: null },
+      { id: '1', deleted: false, uic: 'B', secondary_code: '', track_reference: null },
     ],
     schedule: [
       {
         at: '0',
         arrival: null,
-        stop_for: 'P0D',
-        on_stop_signal: false,
+        stop_for: null,
+        reception_signal: 'OPEN',
         locked: false,
       },
       {
         at: '1',
         arrival: '18:30',
-        stop_for: 'P0D',
-        on_stop_signal: false,
+        stop_for: null,
+        reception_signal: 'OPEN',
         locked: false,
       },
     ],
