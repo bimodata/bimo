@@ -7,3 +7,4 @@ export {
 } from "@bimo/core-global-types";
 export * from "./src/getStupidLogger";
 export * from "./src/getAndAddLoggerToServiceOptions";
+export * from "./src/getProgressMessageInLoop"
