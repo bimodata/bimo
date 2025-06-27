@@ -139,8 +139,8 @@ const expectedLongString2 = `B1 - Track B1 - 2 (45.3, 1.23)
 B2 - Track B2 - 2 (45.3, 1.27)
 B - Station B -  (, )`;
 
-const expectedLongString3 = `1: vsc#1 - Example schedule 1 (04) | 4 trips | 0 blocks
-2: vsc#2 - Example schedule 2 (04) | 4 trips | 0 blocks`;
+const expectedLongString3 = `1: vsc#1 01 - Example schedule 1 (04) | 4 trips | 0 blocks
+2: vsc#2 02 - Example schedule 2 (04) | 4 trips | 0 blocks`;
 
 const expectedLongString4 = `0-trip#1-routeA-undefined-undefined(placeA|07:00 → 08:00|placeD)[4]
 0-trip#2-routeA-undefined-undefined(placeD|07:00 → 08:00|placeA)[4]

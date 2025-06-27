@@ -75,7 +75,7 @@ describe('Domain :: VehicleSchedulesCollection', () => {
   });
 });
 
-const expectedString1 = `WAz-(ThzGtpB, H90Bgai)-[7] (vsc: 5506: ow1JpYy0 -  (13))
+const expectedString1 = `WAz-(ThzGtpB, H90Bgai)-[7] (vsc: 5506: ow1JpYy0 32 -  (13))
 Voyage (2) - 8iJJMr-(etvk|10:10 → 10:30|XK6Q) (block: WAz-(ThzGtpB, H90Bgai)-[7])
 Voyage (2) - HKlP2r-(bhA2GI|5:44 → 6:14|WZKR5G) (block: WAz-(ThzGtpB, H90Bgai)-[7])
 Voyage (4) - 9a9L23-(XK6Q|10:43 → 11:25|Uotlp) (block: WAz-(ThzGtpB, H90Bgai)-[7])

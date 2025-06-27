@@ -298,7 +298,7 @@ export function VehicleScheduleClassFactory(
     }
 
     get shortLoggingOutput() {
-      return `${this.vscIntId}: ${this.vscName} - ${this.vscDescription} (${this.vscSchedType})`;
+      return `${this.vscIntId}: ${this.vscName} ${this.vscScenario} - ${this.vscDescription} (${this.vscSchedType})`;
     }
 
     get mediumLoggingOutput() {
