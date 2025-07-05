@@ -53,12 +53,13 @@ function hastusHoursAndMinutesToDuration(hastusHoursAndMinutesString) {
   return duration;
 }
 
-function durationToDateTime(duration) {
-  return DATE_TO_USE_FOR_UNKNOWN_DATES.plus(duration);
+function durationToDateTime(duration, baseDateTime = DATE_TO_USE_FOR_UNKNOWN_DATES) {
+  return baseDateTime.plus(duration);
 }
 
-function hastusExtendedHoursToDateTime(hastusExtendedHoursString) {
-  return durationToDateTime(hastusExtendedHoursToDuration(hastusExtendedHoursString));
+function hastusExtendedHoursToDateTime(hastusExtendedHoursString, baseDateAsIsoString = null) {
+  const baseDateTime = baseDateAsIsoString && DateTime.fromISO(`${baseDateAsIsoString}T00:00:00`);
+  return durationToDateTime(hastusExtendedHoursToDuration(hastusExtendedHoursString), baseDateTime);
 }
 
 function hastusExtendedHoursToJsDate(hastusExtendedHoursString) {
