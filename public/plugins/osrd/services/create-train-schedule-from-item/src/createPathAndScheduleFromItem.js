@@ -30,14 +30,14 @@ function createPathAndScheduleFromItem(item, config, context) {
 
   arrayOfPoints.forEach((point, index) => {
     logger.trace(`Handling point ${point}`);
-    /** We make the original item and the index available in case we want to derive some props from it */
-    const enrichedPoint = { ...point, __item__: item, __index__: index };
 
-    const pathPointProps = createPropsFromItems(enrichedPoint, createPathPointFromPointConfig, context);
+    /** We create a new object that includes the point, the item and the index in case we want to derive some props from them */
+    const pointItemAndIndex = { point, item, index };
+    const pathPointProps = createPropsFromItems(pointItemAndIndex, createPathPointFromPointConfig, context);
     const pathPoint = { ...defaultPathPointFactory(), ...pathPointProps };
     pathPoints.push(pathPoint);
 
-    const schedulePointProps = createPropsFromItems(enrichedPoint, createSchedulePointFromPointConfig, context);
+    const schedulePointProps = createPropsFromItems(pointItemAndIndex, createSchedulePointFromPointConfig, context);
     const schedulePoint = { ...defaultSchedulePointFactory(), ...schedulePointProps };
     schedulePoints.push(schedulePoint);
   });

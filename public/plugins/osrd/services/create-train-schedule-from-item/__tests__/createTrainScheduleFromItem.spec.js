@@ -18,12 +18,12 @@ describe('createTrainScheduleFromItem', () => {
       createPathAndScheduleConfig: {
         pathToArrayOfPoints: 'points',
         createPathPointFromPointConfig: {
-          id: '__index__',
-          uic: 'lieu',
+          id: 'index',
+          uic: 'point.lieu',
         },
         createSchedulePointFromPointConfig: {
-          at: '__index__',
-          arrival: 'heure',
+          at: 'index',
+          arrival: 'point.heure',
         },
       },
     };
