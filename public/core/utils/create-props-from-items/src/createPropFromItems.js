@@ -23,7 +23,7 @@ const getAndValidateItemsFromItemOrItems = require('./getAndValidateItemsFromIte
  * sourcePropPaths concatenate to falsey
  * @property {[string, string][]=} createConfig.regexAndReplacePairs - regexAndReplace pairs that will be applied to the sourceItemProp
  * @property {number=} createConfig.sourceItemIndex - index of the item to use in items
- * @property {'string'|'array'|'any'} [createConfig.destinationPropType='string'] - index of the item to use in items
+ * @property {'string'|'array'|'number'|'any'} [createConfig.destinationPropType='string'] - destination prop type
  */
 
 /**
@@ -83,9 +83,10 @@ function createPropFromItems(itemOrItems, config, context = {}) {
         return lookupValue === undefined ? lookupFallback : lookupValue;
       });
 
-      if (destinationPropType === 'string') {
+      if (destinationPropType === 'string' || destinationPropType === 'number') {
         const valueToClean = values.join(separator) || sourcePropFallbackValue;
-        return cleanStringUsingRegexAndReplacePairs(valueToClean, regexAndReplacePairs);
+        const cleanValue = cleanStringUsingRegexAndReplacePairs(valueToClean, regexAndReplacePairs);
+        return destinationPropType === 'string' ? cleanValue : Number(cleanValue);
       }
       if (destinationPropType === 'array') return values;
 
