@@ -2,7 +2,7 @@ module.exports = {
   defaultBaseScheduleFactory: () => ({
     train_name: 'trainName',
     labels: [],
-    rolling_stock_name: 'electric_rolling_stock',
+    rolling_stock_name: 'fast_rolling_stock',
     start_time: '2025-01-01T12:00:00Z',
     path: [],
     schedule: [],

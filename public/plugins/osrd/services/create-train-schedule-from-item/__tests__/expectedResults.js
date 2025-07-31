@@ -2,7 +2,7 @@ module.exports = {
   expected1: {
     train_name: '1',
     labels: [],
-    rolling_stock_name: 'electric_rolling_stock',
+    rolling_stock_name: 'fast_rolling_stock',
     start_time: '18:00',
     path: [
       { id: '0', deleted: false, uic: 'A', secondary_code: '', track_reference: null },
