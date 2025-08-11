@@ -2,4 +2,4 @@
 
 const execute = require('./src/switchPackageToTypeScript');
 
-execute('C:/Users/8808412L/dev/bimo/public/core/utils/async-for-each');
+execute('C:/Users/8808412L/dev/lauritz/public/core/utils/serialization');

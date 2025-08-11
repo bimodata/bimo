@@ -34,14 +34,14 @@ async function updatePackageJson(rootDir) {
     prepublish: 'tsc',
     tsc: 'tsc',
   };
-  packageFile.devDependencies['@types/chai'] = '^4.3.4';
-  packageFile.devDependencies['@types/mocha'] = '^10.0.1';
-  packageFile.devDependencies['@types/node'] = '^18.15.11';
-  packageFile.devDependencies.chai = '^4.3.7';
-  packageFile.devDependencies.mocha = '^10.2.0';
-  packageFile.devDependencies.nyc = '^15.1.0';
-  packageFile.devDependencies.rimraf = '^4.4.1';
-  packageFile.devDependencies['ts-node'] = '^10.9.1';
+  packageFile.devDependencies['@types/chai'] = '^4.3.20';
+  packageFile.devDependencies['@types/mocha'] = '^10.0.10';
+  packageFile.devDependencies['@types/node'] = '^22.13.9';
+  packageFile.devDependencies.chai = '^4.5.0';
+  packageFile.devDependencies.mocha = '^11.1.0';
+  packageFile.devDependencies.nyc = '^17.1.0';
+  packageFile.devDependencies.rimraf = '^6.0.1';
+  packageFile.devDependencies['ts-node'] = '^10.9.2';
   packageFile.devDependencies.typescript = '^5.0.2';
 
   /** Manipulate the file above * */
