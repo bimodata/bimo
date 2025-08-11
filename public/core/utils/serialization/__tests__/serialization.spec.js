@@ -82,7 +82,7 @@ describe('#serializeModel and #parseModel complete', () => {
       it('serializeModel stores maps as tuples', () => {
         expect(serializedInstance1.serializedInstanceByIdByType.Map['1']).to.eql(
           [[{ _type: 'Object', _id: '2' }, { _type: 'Object', _id: '3' }],
-          [{ _type: 'Object', _id: '4' }, { _type: 'Object', _id: '5' }]],
+            [{ _type: 'Object', _id: '4' }, { _type: 'Object', _id: '5' }]],
         );
       });
       it('parseModel returns an object that is equivalent to the original', async () => {

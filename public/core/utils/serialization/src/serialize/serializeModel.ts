@@ -1,10 +1,11 @@
-const serializeObjectOrBufferOrMapInstance = require('./serializeObjectOrBufferOrMapInstance');
+import { SerializedInstanceByIdByType } from '../parse/ParseTypes';
+import serializeObjectOrBufferOrMapInstance from './serializeObjectOrBufferOrMapInstance';
 
-function serializeModel(instance, options = {}) {
+export default function serializeModel(instance: Object, options = {}) {
   if (typeof instance !== 'object') {
     throw new Error('Instance must be an object');
   }
-  const dataByConstructorName = new Map();
+  const dataByConstructorName: Map<string, {[key: string]: any}> = new Map();
   /*
    * const exampleOfDataByConstructorName = {
    *  SegmentPivot: {
@@ -25,7 +26,7 @@ function serializeModel(instance, options = {}) {
 
   const serializedRootObject = serializeObjectOrBufferOrMapInstance(instance, dataByConstructorName, false, options);
 
-  const serializedInstanceByIdByType = {};
+  const serializedInstanceByIdByType:SerializedInstanceByIdByType = {};
   dataByConstructorName.forEach((data, constructorName) => {
     serializedInstanceByIdByType[constructorName] = data.serializedInstanceById;
   });
@@ -33,4 +34,4 @@ function serializeModel(instance, options = {}) {
   return { serializedRootObject, serializedInstanceByIdByType };
 }
 
-module.exports = serializeModel;
+

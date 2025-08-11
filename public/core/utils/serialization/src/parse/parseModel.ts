@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
 
-const unserializeInstance = require('./unserializeInstance');
+import { ParseParams, SerializedModel } from './ParseTypes';
+import unserializeInstance from './unserializeInstance';
 
-async function parseModel(serializedModel, params = {}) {
+export default async function parseModel(serializedModel:SerializedModel, params:any = {}) {
   // console.log(`In parseModel with:
   // serializedModel: (keys:) ${Object.keys(serializeModel)}
   // params: ${JSON.stringify(params)}`);
@@ -17,7 +18,6 @@ async function parseModel(serializedModel, params = {}) {
   params.unserializedInstanceByIdByConstructor = new Map();
   params.serializedInstanceByIdByType = serializedInstanceByIdByType;
 
-  return unserializeInstance(serializedRootObject, params);
+  return unserializeInstance(serializedRootObject, params as ParseParams);
 }
 
-module.exports = parseModel;

@@ -2,12 +2,19 @@
   "name": "@bimo/core-utils-serialization",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
   "author": "Gaël Haméon <gael.hameon@gmail.com>",
   "license": "LGPL-3.0-or-later",
   "scripts": {
-    "test": "mocha --recursive __tests__/**/*.spec.js",
-    "coverage": "nyc --reporter=html --reporter=text npm test"
+    "clean": "rimraf ./dist && rimraf ./types",
+    "build": "yarn clean && yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc -p ./configs/tsconfig.esm.json",
+    "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+    "prepack": "build",
+    "test": "mocha",
+    "coverage": "nyc --reporter=html --reporter=text npm test",
+    "prepublish": "tsc",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@bimo/core-utils-async-for-each": "^0.0.1",
@@ -18,11 +25,33 @@
   },
   "devDependencies": {
     "@bimo/test-utils-test-entities": "^0.0.1",
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.9",
     "chai": "^4.5.0",
     "mocha": "^11.1.0",
-    "nyc": "^17.1.0"
+    "nyc": "^17.1.0",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.0.2"
   },
   "homepage": "https://bimodata.com/",
   "bugs": "https://github.com/bimodata/bimo/issues",
-  "repository": "github:bimodata/bimo"
+  "repository": "github:bimodata/bimo",
+  "types": "types/cjs/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./types/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  }
 }

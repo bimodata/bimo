@@ -1,10 +1,11 @@
 /* eslint-disable no-use-before-define */
 // @ts-nocheck
 
-const { asyncForEach } = require('@bimo/core-utils-async-for-each');
-const { shallowAssign } = require('@bimo/core-utils-shallow-assign');
+import { asyncForEach } from '@bimo/core-utils-async-for-each';
+import { shallowAssign } from '@bimo/core-utils-shallow-assign';
+import { parseParams } from './ParseTypes';
 
-async function unserializeInstance(serializedObjectTypeAndId, params) {
+export default async function unserializeInstance(serializedObjectTypeAndId, params:parseParams) {
   if (!serializedObjectTypeAndId) {
     // eslint-disable-next-line no-console
     console.log(params);
@@ -146,4 +147,4 @@ async function unserializeValue(value, params) {
   return value;
 }
 
-module.exports = unserializeInstance;
+
