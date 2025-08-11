@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ConsistChange as BimoConsistChange } from "../base-types/rawIndex";
-export { ConsistChange as BimoConsistChange } from "../base-types/rawIndex";
+import { ConsistChange as BimoConsistChange, BlockActivity as BimoBlockActivity , Place as BimoPlace , ConsistChangesCollection as BimoConsistChangesCollection , Trip as BimoTrip  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -16,10 +15,6 @@ import {
   computeSetOfBlockActivitiesHelper,
   getSingleBlockActivityHelper,
 } from "./BlockActivityItem";
-import { BimoBlockActivity } from "./BlockActivity";
-import { BimoPlace } from "./Place";
-import { BimoConsistChangesCollection } from "./ConsistChangesCollection";
-import { BimoTrip } from "./Trip";
 
 export interface ConsistChangeProps extends ExtendedItemProps {
   cchgActivity?: string;

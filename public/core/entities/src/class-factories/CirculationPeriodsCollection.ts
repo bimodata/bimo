@@ -1,20 +1,16 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { CirculationPeriodsCollection as BimoCirculationPeriodsCollection } from "../base-types/rawIndex";
-export { CirculationPeriodsCollection as BimoCirculationPeriodsCollection } from "../base-types/rawIndex";
+import {
+  CirculationPeriodsCollection as BimoCirculationPeriodsCollection,
+  CirculationPeriod as BimoCirculationPeriod,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import {
-  BimoCirculationPeriod,
-  CirculationPeriodProps,
-} from "./CirculationPeriod";
+import { CirculationPeriodProps } from "./CirculationPeriod";
 
 export interface CirculationPeriodsCollectionProps
-  extends ExtendedCollectionProps<
-    BimoCirculationPeriod,
-    CirculationPeriodProps
-  > {}
+  extends ExtendedCollectionProps<BimoCirculationPeriod, CirculationPeriodProps> {}
 
 export function CirculationPeriodsCollectionClassFactory({
   CirculationPeriod,
@@ -35,7 +31,6 @@ export function CirculationPeriodsCollectionClassFactory({
         ...props,
       });
     }
-
   }
 
   CirculationPeriodsCollection.allChildClasses = getAllChildClasses(childClasses);

@@ -1,19 +1,18 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TrainPathVariant as BimoTrainPathVariant } from "../base-types/rawIndex";
-export { TrainPathVariant as BimoTrainPathVariant } from "../base-types/rawIndex";
+import {
+  TrainPathVariant as BimoTrainPathVariant,
+  TrainPath as BimoTrainPath,
+  TrainPathVariantDate as BimoTrainPathVariantDate,
+  TrainPathVariantDatesCollection as BimoTrainPathVariantDatesCollection,
+  TrainPathVariantPointsCollection as BimoTrainPathVariantPointsCollection,
+  TrainPathVariantPoint as BimoTrainPathVariantPoint,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoTrainPath } from "./TrainPath";
-import { BimoTrainPathVariantDate } from "./TrainPathVariantDate";
-import { BimoTrainPathVariantDatesCollection } from "./TrainPathVariantDatesCollection";
-import { BimoTrainPathVariantPointsCollection } from "./TrainPathVariantPointsCollection";
-import {
-  BimoTrainPathVariantPoint,
-  TrainPathVariantPointProps,
-} from "./TrainPathVariantPoint";
+import { TrainPathVariantPointProps } from "./TrainPathVariantPoint";
 import { BimoContext } from "@bimo/core-global-types";
 
 export interface TrainPathVariantProps extends ExtendedItemProps {

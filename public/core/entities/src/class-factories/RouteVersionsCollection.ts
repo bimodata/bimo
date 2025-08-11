@@ -1,16 +1,20 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { RouteVersionsCollection as BimoRouteVersionsCollection } from "../base-types/rawIndex";
-export { RouteVersionsCollection as BimoRouteVersionsCollection } from "../base-types/rawIndex";
+import {
+  RouteVersionsCollection as BimoRouteVersionsCollection,
+  Route as BimoRoute,
+  TripOrVariantSection as BimoTripOrVariantSection,
+  RouteVersion as BimoRouteVersion,
+  Variant as BimoVariant,
+  VariantPoint as BimoVariantPoint,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 /* eslint-disable no-param-reassign */
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoRouteVersion, RouteVersionProps } from "./RouteVersion";
-import { BimoRoute } from "./Route";
-import { BimoVariant, VariantProps } from "./Variant";
-import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
-import { BimoTripOrVariantSection } from "./TripOrVariantSection";
+import { RouteVersionProps } from "./RouteVersion";
+import { VariantProps } from "./Variant";
+import { VariantPointProps } from "./VariantPoint";
 
 export interface RouteVersionsCollectionProps
   extends ExtendedCollectionProps<BimoRouteVersion, RouteVersionProps> {}

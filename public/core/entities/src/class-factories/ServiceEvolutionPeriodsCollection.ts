@@ -1,14 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceEvolutionPeriodsCollection as BimoServiceEvolutionPeriodsCollection } from "../base-types/rawIndex";
-export { ServiceEvolutionPeriodsCollection as BimoServiceEvolutionPeriodsCollection } from "../base-types/rawIndex";
+import {
+  ServiceEvolutionPeriodsCollection as BimoServiceEvolutionPeriodsCollection,
+  ServiceEvolutionPeriod as BimoServiceEvolutionPeriod,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import {
-  BimoServiceEvolutionPeriod,
-  ServiceEvolutionPeriodProps,
-} from "./ServiceEvolutionPeriod";
+import { ServiceEvolutionPeriodProps } from "./ServiceEvolutionPeriod";
 
 export interface ServiceEvolutionPeriodsCollectionProps
   extends ExtendedCollectionProps<

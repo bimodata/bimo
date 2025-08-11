@@ -1,17 +1,19 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Variant as BimoVariant } from "../base-types/rawIndex";
-export { Variant as BimoVariant } from "../base-types/rawIndex";
+import {
+  Variant as BimoVariant,
+  VariantPointsCollection as BimoVariantPointsCollection,
+  Route as BimoRoute,
+  Place as BimoPlace,
+  VariantItinerariesCollection as BimoVariantItinerariesCollection,
+  VariantPoint as BimoVariantPoint,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 import { BimoContext } from "@bimo/core-global-types";
 
-import { BimoVariantPointsCollection } from "./VariantPointsCollection";
-import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
-import { BimoRoute } from "./Route";
-import { BimoPlace } from "./Place";
-import { BimoVariantItinerariesCollection } from "./VariantItinerariesCollection";
+import { VariantPointProps } from "./VariantPoint";
 
 export interface VariantProps extends ExtendedItemProps {
   bimoId?: string;

@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { NetworkEvent as BimoNetworkEvent } from "../base-types/rawIndex";
-export { NetworkEvent as BimoNetworkEvent } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";

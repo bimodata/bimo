@@ -1,14 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContext as BimoServiceContext } from "../base-types/rawIndex";
-export { ServiceContext as BimoServiceContext } from "../base-types/rawIndex";
+import { ServiceContext as BimoServiceContext, ServiceContextParentsCollection as BimoServiceContextParentsCollection , ServiceContextIntervalsCollection as BimoServiceContextIntervalsCollection , ServiceEvolutionPeriodsCollection as BimoServiceEvolutionPeriodsCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoServiceContextParentsCollection } from "./ServiceContextParentsCollection";
-import { BimoServiceContextIntervalsCollection } from "./ServiceContextIntervalsCollection";
-import { BimoServiceEvolutionPeriodsCollection } from "./ServiceEvolutionPeriodsCollection";
 
 export interface ServiceContextProps extends ExtendedItemProps {
   sctxName?: string;

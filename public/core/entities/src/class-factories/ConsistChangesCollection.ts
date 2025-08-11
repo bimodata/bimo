@@ -1,12 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ConsistChangesCollection as BimoConsistChangesCollection } from "../base-types/rawIndex";
-export { ConsistChangesCollection as BimoConsistChangesCollection } from "../base-types/rawIndex";
+import {
+  ConsistChangesCollection as BimoConsistChangesCollection,
+  VehicleSchedule as BimoVehicleSchedule,
+  ConsistChange as BimoConsistChange,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoConsistChange, ConsistChangeProps } from "./ConsistChange";
-import { BimoVehicleSchedule } from "./VehicleSchedule";
+import { ConsistChangeProps } from "./ConsistChange";
 export interface ConsistChangesCollectionProps
   extends ExtendedCollectionProps<BimoConsistChange, ConsistChangeProps> {}
 

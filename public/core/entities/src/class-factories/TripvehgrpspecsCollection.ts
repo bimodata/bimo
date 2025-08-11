@@ -1,8 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripvehgrpspecsCollection as BimoTripvehgrpspecsCollection } from "../base-types/rawIndex";
-export { TripvehgrpspecsCollection as BimoTripvehgrpspecsCollection } from "../base-types/rawIndex";
+import { TripvehgrpspecsCollection as BimoTripvehgrpspecsCollection, Tripvehgrpspec as BimoTripvehgrpspec  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
-import { BimoTripvehgrpspec, TripvehgrpspecProps } from "./Tripvehgrpspec";
+import { TripvehgrpspecProps } from "./Tripvehgrpspec";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 

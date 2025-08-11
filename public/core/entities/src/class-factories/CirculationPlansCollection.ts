@@ -1,20 +1,16 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { CirculationPlansCollection as BimoCirculationPlansCollection } from "../base-types/rawIndex";
-export { CirculationPlansCollection as BimoCirculationPlansCollection } from "../base-types/rawIndex";
+import {
+  CirculationPlansCollection as BimoCirculationPlansCollection,
+  CirculationPlan as BimoCirculationPlan,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import {
-  BimoCirculationPlan,
-  CirculationPlanProps,
-} from "./CirculationPlan";
+import { CirculationPlanProps } from "./CirculationPlan";
 
 export interface CirculationPlansCollectionProps
-  extends ExtendedCollectionProps<
-    BimoCirculationPlan,
-    CirculationPlanProps
-  > { }
+  extends ExtendedCollectionProps<BimoCirculationPlan, CirculationPlanProps> {}
 
 export function CirculationPlansCollectionClassFactory({
   CirculationPlan,
@@ -36,7 +32,6 @@ export function CirculationPlansCollectionClassFactory({
       });
     }
 
-
     static createFromOirStyleData(oirStyleData: any) {
       const rawCirculationsPlans = oirStyleData.circulation_plan;
 
@@ -54,12 +49,14 @@ export function CirculationPlansCollectionClassFactory({
       return {
         circulation_plan: this.map((circulationPlan) => ({
           ...circulationPlan,
-          circulation_plan_vehicle_schedule_info: circulationPlan.circulationPlanVehicleScheduleInfos?.items,
-          circulation_period: circulationPlan.circulationPeriods?.map((circulationPeriod) => ({
-            ...circulationPeriod,
-            circulation_day: circulationPeriod.circulationDays?.items
-          }),
-          )
+          circulation_plan_vehicle_schedule_info:
+            circulationPlan.circulationPlanVehicleScheduleInfos?.items,
+          circulation_period: circulationPlan.circulationPeriods?.map(
+            (circulationPeriod) => ({
+              ...circulationPeriod,
+              circulation_day: circulationPeriod.circulationDays?.items,
+            })
+          ),
         })),
       };
     }

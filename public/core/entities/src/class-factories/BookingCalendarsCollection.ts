@@ -1,6 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BookingCalendarsCollection as BimoBookingCalendarsCollection } from "../base-types/rawIndex";
-export { BookingCalendarsCollection as BimoBookingCalendarsCollection } from "../base-types/rawIndex";
+import {
+  BookingCalendarsCollection as BimoBookingCalendarsCollection,
+  BookingsCollection as BimoBookingsCollection,
+  ServiceDefinitionsCollection as BimoServiceDefinitionsCollection,
+  SchedulingUnitsCollection as BimoSchedulingUnitsCollection,
+  BookingCalendar as BimoBookingCalendar,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
@@ -8,11 +13,7 @@ import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoBookingsCollection } from "./BookingsCollection";
-import { BimoBookingCalendar, BookingCalendarProps } from "./BookingCalendar";
-
-import { BimoServiceDefinitionsCollection } from "./ServiceDefinitionsCollection";
-import { BimoSchedulingUnitsCollection } from "./SchedulingUnitsCollection";
+import { BookingCalendarProps } from "./BookingCalendar";
 
 export interface BookingCalendarsCollectionProps
   extends ExtendedCollectionProps<BimoBookingCalendar, BookingCalendarProps> {}

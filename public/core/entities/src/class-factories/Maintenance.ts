@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Maintenance as BimoMaintenance } from "../base-types/rawIndex";
-export { Maintenance as BimoMaintenance } from "../base-types/rawIndex";
+import { Maintenance as BimoMaintenance, BlockActivity as BimoBlockActivity , Place as BimoPlace , MaintenancesCollection as BimoMaintenancesCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -16,9 +15,6 @@ import {
   computeSetOfBlockActivitiesHelper,
   getSingleBlockActivityHelper,
 } from "./BlockActivityItem";
-import { BimoBlockActivity } from "./BlockActivity";
-import { BimoPlace } from "./Place";
-import { BimoMaintenancesCollection } from "./MaintenancesCollection";
 export interface MaintenanceProps extends ExtendedItemProps {
   bimoId?: string;
   mtnInternalNumber?: string;

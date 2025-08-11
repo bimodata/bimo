@@ -1,8 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlockSectionsCollection as BimoBlockSectionsCollection } from "../base-types/rawIndex";
-export { BlockSectionsCollection as BimoBlockSectionsCollection } from "../base-types/rawIndex";
+import { BlockSectionsCollection as BimoBlockSectionsCollection, BlockSection as BimoBlockSection } from "../base-types/rawIndex";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoBlockSection, BlockSectionProps } from "./BlockSection";
+import { BlockSectionProps } from "./BlockSection";
 
 export interface BlockSectionsCollectionProps
   extends ExtendedCollectionProps<BimoBlockSection, BlockSectionProps> {}

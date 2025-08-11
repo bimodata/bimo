@@ -95,49 +95,13 @@ I think I have written something somewhere else about the switch to this pattern
 It turned out to be much more complicated than I expected, but it kindof works now: at least, VsCode is able to give good autocomplete about entities in most cases.
 
 And the current cases are usually that I consume the actual code in its CJS form, in packages that are still written in plain javascript, and use require.
-And I had JSDOC annotations in these packages, and I import the types in these annotations.
-
-When I tried switching the next.js UI to the new version of the entities, the build of the UI started to fail.
-
-All of the entities have the following pattern at the start of the Class Factory:
-
-```
-import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Route as BimoRoute } from "../base-types/rawIndex";
-export { Route as BimoRoute } from "../base-types/rawIndex";
-```
-
-The important part is the last line from above: we reexport the "base-type" from the Class Factory, under an Alias.
-This allows easier imports in other Entities of the hierarchy. For example, in Variant.ts, we have:
-
-```
-import { BimoVariantPointsCollection } from "./VariantPointsCollection";
-import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
-import { BimoRoute } from "./Route";
-import { BimoPlace } from "./Place";
-import { BimoVariantItinerariesCollection } from "./VariantItinerariesCollection";
-```
-
-All of these are "base types" and could have directly been imported from the "base-types" index as follows:
-
-```
-import { Route as BimoRoute, Place as BimoPlace, ... } from "../base-types/index";
-```
-
-They are only used in type annotations, and point to files that contain only type declarations. (And that should probably be suffixed as _.d.ts rather than _.ts, I'm not exactly sure why they are not).
-
-Right now, the typescript compiler does not seem to understand that this should all be stripped at compilation, and we end up with references to empty files.
-
-And when the UI imports the ESM version of the entities, and later tries to compile, it does not like that.
-
-So right now, I disabled the ESM compilation of the entities, and pointed the "import" to CJS, and it seems to work.
+And I add JSDOC annotations in these packages, and I import the types in these annotations.
 
 ## Old Typescript issue
 
 https://github.com/microsoft/TypeScript/issues/38484
 
 
-# ESM does not work !
 
 ## Thoughts about specific entities / groupes of entities
 

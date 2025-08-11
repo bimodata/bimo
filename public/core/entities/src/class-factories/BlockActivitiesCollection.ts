@@ -1,13 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlockActivitiesCollection as BimoBlockActivitiesCollection } from "../base-types/rawIndex";
-export { BlockActivitiesCollection as BimoBlockActivitiesCollection } from "../base-types/rawIndex";
+import {
+  BlockActivitiesCollection as BimoBlockActivitiesCollection,
+  Maintenance as BimoMaintenance,
+  Trip as BimoTrip,
+  BlockActivity as BimoBlockActivity,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
-import { BimoMaintenance } from "./Maintenance";
-import { BimoTrip } from "./Trip";
+import { BlockActivityProps } from "./BlockActivity";
 import { BlockActivityItem, BaseBlockActivityItem } from "./BlockActivityItem";
 export interface BlockActivitiesCollectionProps
   extends ExtendedCollectionProps<BimoBlockActivity, BlockActivityProps> {}

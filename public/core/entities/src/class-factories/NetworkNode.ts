@@ -1,15 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkNode as BimoNetworkNode } from "../base-types/rawIndex";
-export { NetworkNode as BimoNetworkNode } from "../base-types/rawIndex";
+import { NetworkNode as BimoNetworkNode, AdjacentLink as BimoAdjacentLink , NetworkNodesCollection as BimoNetworkNodesCollection , Network as BimoNetwork , NetworkSection as BimoNetworkSection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoAdjacentLink } from "./AdjacentLink";
-import { BimoNetworkNodesCollection } from "./NetworkNodesCollection";
-import { BimoNetwork } from "./Network";
-import { BimoNetworkSection } from "./NetworkSection";
 
 /** Une représentation logique d'un point discret du réseau. */
 export interface NetworkNodeProps extends ExtendedItemProps {

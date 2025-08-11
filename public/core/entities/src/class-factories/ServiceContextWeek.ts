@@ -1,12 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContextWeek as BimoServiceContextWeek } from "../base-types/rawIndex";
-export { ServiceContextWeek as BimoServiceContextWeek } from "../base-types/rawIndex";
+import { ServiceContextWeek as BimoServiceContextWeek, ServiceContextDaysCollection as BimoServiceContextDaysCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoServiceContextDaysCollection } from "./ServiceContextDaysCollection";
 
 export interface ServiceContextWeekProps extends ExtendedItemProps {
   scwkSchedUnitId?: string;

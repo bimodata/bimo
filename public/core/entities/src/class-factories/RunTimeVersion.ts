@@ -1,13 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { RunTimeVersion as BimoRunTimeVersion } from "../base-types/rawIndex";
-export { RunTimeVersion as BimoRunTimeVersion } from "../base-types/rawIndex";
+import { RunTimeVersion as BimoRunTimeVersion, RunTimesCollection as BimoRunTimesCollection , LoadTimesCollection as BimoLoadTimesCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-import { BimoRunTimesCollection } from "./RunTimesCollection";
-import { BimoLoadTimesCollection } from "./LoadTimesCollection";
 
 export interface RunTimeVersionProps extends ExtendedItemProps {
   bimoId?: string;

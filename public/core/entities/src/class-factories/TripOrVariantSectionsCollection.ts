@@ -1,15 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripOrVariantSectionsCollection as BimoTripOrVariantSectionsCollection } from "../base-types/rawIndex";
-export { TripOrVariantSectionsCollection as BimoTripOrVariantSectionsCollection } from "../base-types/rawIndex";
+import {
+  TripOrVariantSectionsCollection as BimoTripOrVariantSectionsCollection,
+  TripOrVariantPoint as BimoTripOrVariantPoint,
+  TripOrVariantSection as BimoTripOrVariantSection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
-import {
-  BimoTripOrVariantSection,
-  TripOrVariantSectionProps,
-} from "./TripOrVariantSection";
-import { BimoTripOrVariantPoint } from "./TripOrVariantPoint";
+import { TripOrVariantSectionProps } from "./TripOrVariantSection";
 export interface TripOrVariantSectionsCollectionProps<
   PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
   PointProps extends ExtendedItemProps,

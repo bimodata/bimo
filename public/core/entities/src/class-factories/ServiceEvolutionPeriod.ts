@@ -1,13 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceEvolutionPeriod as BimoServiceEvolutionPeriod } from "../base-types/rawIndex";
-export { ServiceEvolutionPeriod as BimoServiceEvolutionPeriod } from "../base-types/rawIndex";
+import { ServiceEvolutionPeriod as BimoServiceEvolutionPeriod, ServiceEvolutionPeriodSchedulesBookingsCollection as BimoServiceEvolutionPeriodSchedulesBookingsCollection , ServiceContextWeeksCollection as BimoServiceContextWeeksCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoServiceEvolutionPeriodSchedulesBookingsCollection } from "./ServiceEvolutionPeriodSchedulesBookingsCollection";
-import { BimoServiceContextWeeksCollection } from "./ServiceContextWeeksCollection";
 
 export interface ServiceEvolutionPeriodProps extends ExtendedItemProps {
   sevopStartDate?: string;

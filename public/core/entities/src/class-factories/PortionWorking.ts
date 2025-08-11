@@ -1,7 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { PortionWorking as BimoPortionWorking } from "../base-types/rawIndex";
-export { PortionWorking as BimoPortionWorking } from "../base-types/rawIndex";
-import { PortionWorkingVersion as BimoPortionWorkingVersion } from "../base-types/rawIndex";
+import { PortionWorking as BimoPortionWorking, PortionWorkingVersion as BimoPortionWorkingVersion } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";

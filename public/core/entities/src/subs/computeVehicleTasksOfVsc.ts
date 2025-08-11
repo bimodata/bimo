@@ -2,15 +2,15 @@ import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
 
 import computeContentsOfOneVta from "./computeContentsOfOneVta";
 
-import { BimoVehicleSchedule } from "../class-factories/VehicleSchedule";
-import { BimoBlocksCollection } from "../class-factories/BlocksCollection";
-import { BimoVehicleTasksCollection } from "../class-factories/VehicleTasksCollection";
-import { BimoBlock } from "../class-factories/Block";
-import { BimoVehicleTask } from "../class-factories/VehicleTask";
-import { BimoBlockActivity } from "../class-factories/BlockActivity";
-import { BimoBlockActivitiesCollection } from "../class-factories/BlockActivitiesCollection";
-import { BimoBlockSection } from "../class-factories/BlockSection";
-import { BimoBlockSectionsCollection } from "../class-factories/BlockSectionsCollection";
+import { VehicleSchedule as BimoVehicleSchedule } from "../base-types/rawIndex";
+import { BlocksCollection as BimoBlocksCollection } from "../base-types/rawIndex";
+import { VehicleTasksCollection as BimoVehicleTasksCollection } from "../base-types/rawIndex";
+import { Block as BimoBlock } from "../base-types/rawIndex";
+import { VehicleTask as BimoVehicleTask } from "../base-types/rawIndex";
+import { BlockActivity as BimoBlockActivity } from "../base-types/rawIndex";
+import { BlockActivitiesCollection as BimoBlockActivitiesCollection } from "../base-types/rawIndex";
+import { BlockSection as BimoBlockSection } from "../base-types/rawIndex";
+import { BlockSectionsCollection as BimoBlockSectionsCollection } from "../base-types/rawIndex";
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 
 export interface BlocksAndActsAndSections {

@@ -1,14 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContextIntervalsCollection as BimoServiceContextIntervalsCollection } from "../base-types/rawIndex";
-export { ServiceContextIntervalsCollection as BimoServiceContextIntervalsCollection } from "../base-types/rawIndex";
+import {
+  ServiceContextIntervalsCollection as BimoServiceContextIntervalsCollection,
+  ServiceContextInterval as BimoServiceContextInterval,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import {
-  BimoServiceContextInterval,
-  ServiceContextIntervalProps,
-} from "./ServiceContextInterval";
+import { ServiceContextIntervalProps } from "./ServiceContextInterval";
 
 export interface ServiceContextIntervalsCollectionProps
   extends ExtendedCollectionProps<

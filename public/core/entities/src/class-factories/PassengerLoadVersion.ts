@@ -1,12 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { PassengerLoadVersion as BimoPassengerLoadVersion, PassengerLoadTrip as BimoPassengerLoadTrip } from "../base-types/rawIndex";
-export { PassengerLoadVersion as BimoPassengerLoadVersion } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-import { BimoPassengerLoadTripsCollection } from "./PassengerLoadTripsCollection";
+import { PassengerLoadTripsCollection as BimoPassengerLoadTripsCollection  } from "../base-types/rawIndex";
 
 export interface PassengerLoadVersionProps extends ExtendedItemProps {
   bimoId?: string;

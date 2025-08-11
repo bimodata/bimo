@@ -1,14 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripOrVariant as BimoTripOrVariant } from "../base-types/rawIndex";
-export { TripOrVariant as BimoTripOrVariant } from "../base-types/rawIndex";
+import { TripOrVariant as BimoTripOrVariant, TripOrVariantSectionsCollection as BimoTripOrVariantSectionsCollection , Place as BimoPlace , TripOrVariantPoint as BimoTripOrVariantPoint  } from "../base-types/rawIndex";
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 import { Collection } from "@bimo/core-utils-collection";
 import { get } from "lodash";
-import { BimoTripOrVariantSectionsCollection } from "./TripOrVariantSectionsCollection";
 import computeTripOrVariantSectionsOfTripOrVariant from "../subs/computeTripOrVariantSectionsOfTripOrVariant";
 import { BimoContext } from "@bimo/core-global-types";
-import { BimoPlace } from "./Place";
-import { BimoTripOrVariantPoint } from "./TripOrVariantPoint";
 
 export interface TripOrVariantProps extends ExtendedItemProps {
   _abstract?: string;

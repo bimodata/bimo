@@ -1,15 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TrainPathVariantPointsCollection as BimoTrainPathVariantPointsCollection } from "../base-types/rawIndex";
-export { TrainPathVariantPointsCollection as BimoTrainPathVariantPointsCollection } from "../base-types/rawIndex";
+import {
+  TrainPathVariantPointsCollection as BimoTrainPathVariantPointsCollection,
+  TrainPathVariantPoint as BimoTrainPathVariantPoint,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import {
-  BimoTrainPathVariantPoint,
-  TrainPathVariantPointProps,
-} from "./TrainPathVariantPoint";
+import { TrainPathVariantPointProps } from "./TrainPathVariantPoint";
 
 export interface TrainPathVariantPointsCollectionProps
   extends ExtendedCollectionProps<

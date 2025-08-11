@@ -1,11 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleStandbysCollection as BimoVehicleStandbysCollection } from "../base-types/rawIndex";
-export { VehicleStandbysCollection as BimoVehicleStandbysCollection } from "../base-types/rawIndex";
+import {
+  VehicleStandbysCollection as BimoVehicleStandbysCollection,
+  VehicleSchedule as BimoVehicleSchedule,
+  VehicleStandby as BimoVehicleStandby,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoVehicleStandby, VehicleStandbyProps } from "./VehicleStandby";
-import { BimoVehicleSchedule } from "./VehicleSchedule";
+import { VehicleStandbyProps } from "./VehicleStandby";
 
 export interface VehicleStandbysCollectionProps
   extends ExtendedCollectionProps<BimoVehicleStandby, VehicleStandbyProps> {}

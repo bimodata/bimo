@@ -1,8 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleUnitsCollection as BimoVehicleUnitsCollection } from "../base-types/rawIndex";
-export { VehicleUnitsCollection as BimoVehicleUnitsCollection } from "../base-types/rawIndex";
+import { VehicleUnitsCollection as BimoVehicleUnitsCollection, VehicleUnit as BimoVehicleUnit  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
-import { BimoVehicleUnit, VehicleUnitProps } from "./VehicleUnit";
+import { VehicleUnitProps } from "./VehicleUnit";
 
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";

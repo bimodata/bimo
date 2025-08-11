@@ -1,16 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BookingCalendar as BimoBookingCalendar } from "../base-types/rawIndex";
-export { BookingCalendar as BimoBookingCalendar } from "../base-types/rawIndex";
+import { BookingCalendar as BimoBookingCalendar, BookingCalendarDatesCollection as BimoBookingCalendarDatesCollection , ServiceEvolutionsCollection as BimoServiceEvolutionsCollection , ServiceContextsCollection as BimoServiceContextsCollection , BookingCalendarDate as BimoBookingCalendarDate  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoBookingCalendarDatesCollection } from "./BookingCalendarDatesCollection";
-import { BimoServiceEvolutionsCollection } from "./ServiceEvolutionsCollection";
-import { BimoServiceContextsCollection } from "./ServiceContextsCollection";
 
-import { BimoBookingCalendarDate } from "./BookingCalendarDate";
 
 export interface BookingCalendarProps extends ExtendedItemProps {
   bcalBookingId?: string;

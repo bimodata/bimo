@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkMapsCollection as BimoNetworkMapsCollection } from "../base-types/rawIndex";
-export { NetworkMapsCollection as BimoNetworkMapsCollection } from "../base-types/rawIndex";
+import { NetworkMapsCollection as BimoNetworkMapsCollection, NetworkMap as BimoNetworkMap  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoNetworkMap, NetworkMapProps } from "./NetworkMap";
+import { NetworkMapProps } from "./NetworkMap";
 export interface NetworkMapsCollectionProps
   extends ExtendedCollectionProps<BimoNetworkMap, NetworkMapProps> {}
 

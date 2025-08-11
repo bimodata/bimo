@@ -1,13 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VariantPoint as BimoVariantPoint } from "../base-types/rawIndex";
-export { VariantPoint as BimoVariantPoint } from "../base-types/rawIndex";
+import { VariantPoint as BimoVariantPoint, Variant as BimoVariant  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoVariant } from "./Variant";
 
 export interface VariantPointProps extends ExtendedItemProps {
   varptIsTimingPoint?: string;

@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripOrVariantPoint as BimoTripOrVariantPoint } from "../base-types/rawIndex";
-export { TripOrVariantPoint as BimoTripOrVariantPoint } from "../base-types/rawIndex";
+import { TripOrVariantPoint as BimoTripOrVariantPoint, Place as BimoPlace  } from "../base-types/rawIndex";
 
 import {
   Item,
@@ -14,7 +13,6 @@ import { Duration } from "luxon";
 
 import { get, set } from "lodash";
 
-import { BimoPlace } from "./Place";
 import { TripOrVariantTypeEnum } from "./TripOrVariant";
 export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoTripOrVariantPoint {
   const pathByTripOrVariantPropNameByTripOrVariantType = {

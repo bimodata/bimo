@@ -1,10 +1,9 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripPointsCollection as BimoTripPointsCollection } from "../base-types/rawIndex";
-export { TripPointsCollection as BimoTripPointsCollection } from "../base-types/rawIndex";
+import { TripPointsCollection as BimoTripPointsCollection, TripPoint as BimoTripPoint  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoTripPoint, TripPointProps } from "./TripPoint";
+import { TripPointProps } from "./TripPoint";
 export interface TripPointsCollectionProps
   extends ExtendedCollectionProps<BimoTripPoint, TripPointProps> {}
 

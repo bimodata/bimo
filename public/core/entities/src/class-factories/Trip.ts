@@ -1,6 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Trip as BimoTrip } from "../base-types/rawIndex";
-export { Trip as BimoTrip } from "../base-types/rawIndex";
+import {
+  Trip as BimoTrip,
+  TripTpsCollection as BimoTripTpsCollection,
+  TripPointsCollection as BimoTripPointsCollection,
+  TripvehgrpspecsCollection as BimoTripvehgrpspecsCollection,
+  BlockActivity as BimoBlockActivity,
+  TripsCollection as BimoTripsCollection,
+  VehicleSchedule as BimoVehicleSchedule,
+  TripPoint as BimoTripPoint,
+  Place as BimoPlace,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
@@ -14,20 +23,13 @@ import {
 
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoTripTpsCollection } from "./TripTpsCollection";
-import { BimoTripPointsCollection } from "./TripPointsCollection";
-import { BimoTripPoint, TripPointProps } from "./TripPoint";
-import { BimoTripvehgrpspecsCollection } from "./TripvehgrpspecsCollection";
+import { TripPointProps } from "./TripPoint";
 import { TripOrVariantTypeEnum } from "./TripOrVariant";
 import {
   BlockActivityItem,
   computeSetOfBlockActivitiesHelper,
   getSingleBlockActivityHelper,
 } from "./BlockActivityItem";
-import { BimoBlockActivity } from "./BlockActivity";
-import { BimoTripsCollection } from "./TripsCollection";
-import { BimoVehicleSchedule } from "./VehicleSchedule";
-import { BimoPlace } from "./Place";
 
 export type TripType = "0" | "3";
 

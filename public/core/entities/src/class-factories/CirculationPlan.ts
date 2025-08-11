@@ -1,13 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { CirculationPlan as BimoCirculationPlan } from "../base-types/rawIndex";
-export { CirculationPlan as BimoCirculationPlan } from "../base-types/rawIndex";
+import { CirculationPlan as BimoCirculationPlan, CirculationPeriodsCollection as BimoCirculationPeriodsCollection , CirculationPlanVehicleScheduleInfosCollection as BimoCirculationPlanVehicleScheduleInfosCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-import { BimoCirculationPeriodsCollection } from "./CirculationPeriodsCollection";
-import { BimoCirculationPlanVehicleScheduleInfosCollection } from "./CirculationPlanVehicleScheduleInfosCollection";
 
 export interface CirculationPlanProps extends ExtendedItemProps {
 

@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { SchedulingUnitsCollection as BimoSchedulingUnitsCollection } from "../base-types/rawIndex";
-export { SchedulingUnitsCollection as BimoSchedulingUnitsCollection } from "../base-types/rawIndex";
+import { SchedulingUnitsCollection as BimoSchedulingUnitsCollection, SchedulingUnit as BimoSchedulingUnit  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoSchedulingUnit, SchedulingUnitProps } from "./SchedulingUnit";
+import { SchedulingUnitProps } from "./SchedulingUnit";
 
 export interface SchedulingUnitsCollectionProps
   extends ExtendedCollectionProps<BimoSchedulingUnit, SchedulingUnitProps> {}

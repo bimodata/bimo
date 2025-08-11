@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlockActivity as BimoBlockActivity } from "../base-types/rawIndex";
-export { BlockActivity as BimoBlockActivity } from "../base-types/rawIndex";
+import { BlockActivity as BimoBlockActivity, Block as BimoBlock , Trip as BimoTrip , BlockActivitiesCollection as BimoBlockActivitiesCollection , ConsistChange as BimoConsistChange , VehicleTask as BimoVehicleTask , Place as BimoPlace , BlockSection as BimoBlockSection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -8,14 +7,7 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { StringByLanguageCode } from "@bimo/core-global-types";
 
-import { BimoBlock } from "./Block";
-import { BimoTrip } from "./Trip";
-import { BimoBlockActivitiesCollection } from "./BlockActivitiesCollection";
-import { BimoConsistChange } from "./ConsistChange";
-import { BimoVehicleTask } from "./VehicleTask";
-import { BimoPlace } from "./Place";
 import BlockActivityItem, { BaseBlockActivityItem } from "./BlockActivityItem";
-import { BimoBlockSection } from "./BlockSection";
 export interface BlockActivityProps extends ExtendedItemProps {
   blkactVehicleActivityTypeNo: string;
   blkactTripNo?: string;

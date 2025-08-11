@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlocksCollection as BimoBlocksCollection } from "../base-types/rawIndex";
-export { BlocksCollection as BimoBlocksCollection } from "../base-types/rawIndex";
+import { BlocksCollection as BimoBlocksCollection, Block as BimoBlock} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoBlock, BlockProps } from "./Block";
+import { BlockProps } from "./Block";
 
 export interface BlocksCollectionProps
   extends ExtendedCollectionProps<BimoBlock, BlockProps> {}

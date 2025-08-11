@@ -1,14 +1,6 @@
 import { Duration } from "luxon";
 import { Item } from "@bimo/core-utils-collection";
-import { BimoPlace } from "./Place";
-import { BimoBlock } from "./Block";
-import { BimoBlockActivity } from "./BlockActivity";
-import { BimoVehicleTask } from "./VehicleTask";
-import { BimoVehicleSchedule } from "./VehicleSchedule";
-import { BimoTrip } from "./Trip";
-import { BimoMaintenance } from "./Maintenance";
-import { BimoVehicleStandby } from "./VehicleStandby";
-import { BimoConsistChange } from "./ConsistChange";
+import { Place as BimoPlace , Block as BimoBlock , BlockActivity as BimoBlockActivity , VehicleTask as BimoVehicleTask , VehicleSchedule as BimoVehicleSchedule , Trip as BimoTrip , Maintenance as BimoMaintenance , VehicleStandby as BimoVehicleStandby , ConsistChange as BimoConsistChange  } from "../base-types/rawIndex";
 
 export type BaseBlockActivityItem =
   | BimoTrip

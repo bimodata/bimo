@@ -1,13 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlockSection as BimoBlockSection } from "../base-types/rawIndex";
-export { BlockSection as BimoBlockSection } from "../base-types/rawIndex";
+import { BlockSection as BimoBlockSection, BlockActivitiesCollection as BimoBlockActivitiesCollection , BlockSectionsCollection as BimoBlockSectionsCollection , VehicleTask as BimoVehicleTask , Block as BimoBlock  } from "../base-types/rawIndex";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoBlockActivitiesCollection } from "./BlockActivitiesCollection";
 import { BlockActivityProps } from "./BlockActivity";
-import { BimoBlockSectionsCollection } from "./BlockSectionsCollection";
-import { BimoVehicleTask } from "./VehicleTask";
-import { BimoBlock } from "./Block";
 
 export interface BlockSectionProps extends ExtendedItemProps {
   id?: string;

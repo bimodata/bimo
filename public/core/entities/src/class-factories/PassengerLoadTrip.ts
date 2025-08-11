@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { PassengerLoadTrip as BimoPassengerLoadTrip } from "../base-types/rawIndex";
-export { PassengerLoadTrip as BimoPassengerLoadTrip } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";

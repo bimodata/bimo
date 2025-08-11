@@ -1,8 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { PassengerLoadTripsCollection as BimoPassengerLoadTripsCollection } from "../base-types/rawIndex";
-export { PassengerLoadTripsCollection as BimoPassengerLoadTripsCollection } from "../base-types/rawIndex";
+import { PassengerLoadTripsCollection as BimoPassengerLoadTripsCollection, PassengerLoadTrip as BimoPassengerLoadTrip  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
-import { BimoPassengerLoadTrip, PassengerLoadTripProps } from "./PassengerLoadTrip";
+import { PassengerLoadTripProps } from "./PassengerLoadTrip";
 
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";

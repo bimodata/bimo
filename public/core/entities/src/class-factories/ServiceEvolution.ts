@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { ServiceEvolution as BimoServiceEvolution } from "../base-types/rawIndex";
-export { ServiceEvolution as BimoServiceEvolution } from "../base-types/rawIndex";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 

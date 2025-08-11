@@ -1,33 +1,18 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleSchedule as BimoVehicleSchedule } from "../base-types/rawIndex";
-export { VehicleSchedule as BimoVehicleSchedule } from "../base-types/rawIndex";
+import { VehicleSchedule as BimoVehicleSchedule, TripsCollection as BimoTripsCollection , Vscincloir as BimoVscincloir , VscincloirsCollection as BimoVscincloirsCollection , NetworkEventsCollection as BimoNetworkEventsCollection , VehicleUnitsCollection as BimoVehicleUnitsCollection , BlocksCollection as BimoBlocksCollection , VehicleStandbysCollection as BimoVehicleStandbysCollection , MaintenancesCollection as BimoMaintenancesCollection , TripShiftsCollection as BimoTripShiftsCollection , ConsistChangesCollection as BimoConsistChangesCollection , OvernightLinksCollection as BimoOvernightLinksCollection , BlockActivity as BimoBlockActivity , Trip as BimoTrip , SchedulingUnitDatesCollection as BimoSchedulingUnitDatesCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import getIteratorForValuesAtPath from "@bimo/core-utils-get-iterator-for-values-at-path";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoTripsCollection } from "./TripsCollection";
-import { BimoVscincloir } from "./Vscincloir";
-import { BimoVscincloirsCollection } from "./VscincloirsCollection";
-import { BimoNetworkEventsCollection } from "./NetworkEventsCollection";
-import { BimoVehicleUnitsCollection } from "./VehicleUnitsCollection";
-import { BimoBlocksCollection } from "./BlocksCollection";
-import { BimoVehicleStandbysCollection } from "./VehicleStandbysCollection";
-import { BimoMaintenancesCollection } from "./MaintenancesCollection";
-import { BimoTripShiftsCollection } from "./TripShiftsCollection";
-import { BimoConsistChangesCollection } from "./ConsistChangesCollection";
-import { BimoOvernightLinksCollection } from "./OvernightLinksCollection";
 
-import { BimoBlockActivity } from "./BlockActivity";
-import { BimoTrip } from "./Trip";
 import computeVehicleTasksOfVsc, {
   ComputedVehicleTaskObjects,
 } from "../subs/computeVehicleTasksOfVsc";
 import computeActivityEntityItemsOfVsc, {
   ComputedActivityEntityItemObjects,
 } from "../subs/computeActivityEntityItemsOfVsc";
-import { BimoSchedulingUnitDatesCollection } from "./SchedulingUnitDatesCollection";
 
 export interface VehicleScheduleProps extends ExtendedItemProps {
   vscName?: string;

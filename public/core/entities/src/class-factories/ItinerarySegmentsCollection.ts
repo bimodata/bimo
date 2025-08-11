@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ItinerarySegmentsCollection as BimoItinerarySegmentsCollection } from "../base-types/rawIndex";
-export { ItinerarySegmentsCollection as BimoItinerarySegmentsCollection } from "../base-types/rawIndex";
+import { ItinerarySegmentsCollection as BimoItinerarySegmentsCollection, ItinerarySegment as BimoItinerarySegment  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoItinerarySegment, ItinerarySegmentProps } from "./ItinerarySegment";
+import { ItinerarySegmentProps } from "./ItinerarySegment";
 export interface ItinerarySegmentsCollectionProps
   extends ExtendedCollectionProps<BimoItinerarySegment, ItinerarySegmentProps> {}
 

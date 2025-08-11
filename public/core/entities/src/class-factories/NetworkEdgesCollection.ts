@@ -1,12 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkEdgesCollection as BimoNetworkEdgesCollection } from "../base-types/rawIndex";
-export { NetworkEdgesCollection as BimoNetworkEdgesCollection } from "../base-types/rawIndex";
+import { NetworkEdgesCollection as BimoNetworkEdgesCollection, Network as BimoNetwork, NetworkEdge as BimoNetworkEdge  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoNetworkEdge, NetworkEdgeProps } from "./NetworkEdge";
-import { BimoNetwork } from "./Network";
+import { NetworkEdgeProps } from "./NetworkEdge";
 
 export interface NetworkEdgesCollectionProps
   extends ExtendedCollectionProps<BimoNetworkEdge, NetworkEdgeProps> {}

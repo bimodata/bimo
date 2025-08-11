@@ -1,13 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceDefinition as BimoServiceDefinition } from "../base-types/rawIndex";
-export { ServiceDefinition as BimoServiceDefinition } from "../base-types/rawIndex";
+import { ServiceDefinition as BimoServiceDefinition, SdefSchedulingUnitsCollection as BimoSdefSchedulingUnitsCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoSdefSchedulingUnitsCollection } from "./SdefSchedulingUnitsCollection";
 
 export interface ServiceDefinitionProps extends ExtendedItemProps {
   sdefIdentifier?: string;

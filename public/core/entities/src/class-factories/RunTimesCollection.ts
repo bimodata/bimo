@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { RunTimesCollection as BimoRunTimesCollection } from "../base-types/rawIndex";
-export { RunTimesCollection as BimoRunTimesCollection } from "../base-types/rawIndex";
+import { RunTimesCollection as BimoRunTimesCollection, RunTime as BimoRunTime  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoRunTime, RunTimeProps } from "./RunTime";
+import { RunTimeProps } from "./RunTime";
 
 export interface RunTimesCollectionProps
   extends ExtendedCollectionProps<BimoRunTime, RunTimeProps> {}

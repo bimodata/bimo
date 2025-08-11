@@ -1,6 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleStandby as BimoVehicleStandby } from "../base-types/rawIndex";
-export { VehicleStandby as BimoVehicleStandby } from "../base-types/rawIndex";
+import {
+  VehicleStandby as BimoVehicleStandby,
+  BlockActivity as BimoBlockActivity,
+  Place as BimoPlace,
+  VehicleStandbysCollection as BimoVehicleStandbysCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -16,12 +20,9 @@ import {
   computeSetOfBlockActivitiesHelper,
   getSingleBlockActivityHelper,
 } from "./BlockActivityItem";
-import { BimoBlockActivity, BlockActivityProps } from "./BlockActivity";
-import { BimoPlace, PlaceProps } from "./Place";
-import {
-  BimoVehicleStandbysCollection,
-  VehicleStandbysCollectionProps,
-} from "./VehicleStandbysCollection";
+import { BlockActivityProps } from "./BlockActivity";
+import { PlaceProps } from "./Place";
+import { VehicleStandbysCollectionProps } from "./VehicleStandbysCollection";
 
 export interface VehicleStandbyProps extends ExtendedItemProps {
   bimoId?: string;

@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContextDaysCollection as BimoServiceContextDaysCollection } from "../base-types/rawIndex";
-export { ServiceContextDaysCollection as BimoServiceContextDaysCollection } from "../base-types/rawIndex";
+import { ServiceContextDaysCollection as BimoServiceContextDaysCollection, ServiceContextDay as BimoServiceContextDay  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoServiceContextDay, ServiceContextDayProps } from "./ServiceContextDay";
+import { ServiceContextDayProps } from "./ServiceContextDay";
 export interface ServiceContextDaysCollectionProps
   extends ExtendedCollectionProps<BimoServiceContextDay, ServiceContextDayProps> {}
 

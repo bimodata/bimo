@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { TrainPathsGeneralInfo as BimoTrainPathsGeneralInfo } from "../base-types/rawIndex";
-export { TrainPathsGeneralInfo as BimoTrainPathsGeneralInfo } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";

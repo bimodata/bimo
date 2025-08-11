@@ -1,12 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Place as BimoPlace } from "../base-types/rawIndex";
-export { Place as BimoPlace } from "../base-types/rawIndex";
+import { Place as BimoPlace, PlacesCollection as BimoPlacesCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoPlacesCollection } from "./PlacesCollection";
 
 export interface PlaceProps extends ExtendedItemProps {
   bimoId?: string;

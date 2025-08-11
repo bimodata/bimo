@@ -1,6 +1,8 @@
 import getAndSetIfRequired from "@bimo/core-utils-get-and-set-if-required";
-import { BimoBlockActivity } from "../class-factories/BlockActivity";
-import { BimoVehicleSchedule } from "../class-factories/VehicleSchedule";
+import {
+  BlockActivity as BimoBlockActivity,
+  VehicleSchedule as BimoVehicleSchedule,
+} from "../base-types/rawIndex";
 import {
   BlockActivityItem,
   BaseBlockActivityItem,

@@ -1,15 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkEdge as BimoNetworkEdge } from "../base-types/rawIndex";
-export { NetworkEdge as BimoNetworkEdge } from "../base-types/rawIndex";
+import { NetworkEdge as BimoNetworkEdge, NetworkNode as BimoNetworkNode , Network as BimoNetwork , NetworkSection as BimoNetworkSection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoNetworkNode, NetworkNodeProps } from "./NetworkNode";
-import { BimoNetwork, NetworkProps } from "./Network";
-import { BimoNetworkSection, NetworkSectionProps } from "./NetworkSection";
+import { NetworkNodeProps } from "./NetworkNode";
+import { NetworkProps } from "./Network";
+import { NetworkSectionProps } from "./NetworkSection";
 
 /** Une représentation logique d'un lien entre deux points discrets du réseau */
 export interface NetworkEdgeProps extends ExtendedItemProps {

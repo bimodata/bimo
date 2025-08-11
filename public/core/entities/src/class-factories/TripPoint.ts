@@ -1,14 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripPoint as BimoTripPoint } from "../base-types/rawIndex";
-export { TripPoint as BimoTripPoint } from "../base-types/rawIndex";
+import { TripPoint as BimoTripPoint, TripPointsCollection as BimoTripPointsCollection , Trip as BimoTrip  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoTripPointsCollection } from "./TripPointsCollection";
-import { BimoTrip } from "./Trip";
 
 export interface TripPointProps extends ExtendedItemProps {
   trpptPlace?: string;

@@ -1,11 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BookingCalendarDatesCollection as BimoBookingCalendarDatesCollection } from "../base-types/rawIndex";
-export { BookingCalendarDatesCollection as BimoBookingCalendarDatesCollection } from "../base-types/rawIndex";
+import {
+  BookingCalendarDatesCollection as BimoBookingCalendarDatesCollection,
+  BookingCalendarDate as BimoBookingCalendarDate,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoBookingCalendarDate, BookingCalendarDateProps } from "./BookingCalendarDate";
+import { BookingCalendarDateProps } from "./BookingCalendarDate";
 
 export interface BookingCalendarDatesCollectionProps
   extends ExtendedCollectionProps<BimoBookingCalendarDate, BookingCalendarDateProps> {}

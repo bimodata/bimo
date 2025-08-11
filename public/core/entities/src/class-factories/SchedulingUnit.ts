@@ -1,13 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { SchedulingUnit as BimoSchedulingUnit } from "../base-types/rawIndex";
-export { SchedulingUnit as BimoSchedulingUnit } from "../base-types/rawIndex";
+import { SchedulingUnit as BimoSchedulingUnit, SchedulingUnitRoutesCollection as BimoSchedulingUnitRoutesCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoSchedulingUnitRoutesCollection } from "./SchedulingUnitRoutesCollection";
 
 export interface SchedulingUnitProps extends ExtendedItemProps {
   scuIdentifier?: string;

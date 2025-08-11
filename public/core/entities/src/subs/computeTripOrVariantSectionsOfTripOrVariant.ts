@@ -1,5 +1,4 @@
-import { BimoTripOrVariant } from "../class-factories/TripOrVariant";
-import { BimoTripOrVariantPoint } from "../class-factories/TripOrVariantPoint";
+import { TripOrVariant as BimoTripOrVariant, TripOrVariantPoint as BimoTripOrVariantPoint } from "../base-types/rawIndex";
 import { ExtendedItem, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 

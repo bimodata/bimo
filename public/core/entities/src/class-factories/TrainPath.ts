@@ -1,13 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TrainPath as BimoTrainPath } from "../base-types/rawIndex";
-export { TrainPath as BimoTrainPath } from "../base-types/rawIndex";
+import { TrainPath as BimoTrainPath, TrainPathVariantsCollection as BimoTrainPathVariantsCollection , TrainPathVariantDate as BimoTrainPathVariantDate  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoTrainPathVariantsCollection } from "./TrainPathVariantsCollection";
-import { BimoTrainPathVariantDate } from "./TrainPathVariantDate";
 
 export interface TrainPathProps extends ExtendedItemProps {
   trnpIdentifier: string;

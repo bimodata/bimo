@@ -1,8 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { AdjacentLink as BimoAdjacentLink } from "../base-types/rawIndex";
-export { AdjacentLink as BimoAdjacentLink } from "../base-types/rawIndex";
-import { BimoNetworkNode } from "./NetworkNode";
-import { BimoNetworkEdge } from "./NetworkEdge";
+import { AdjacentLink as BimoAdjacentLink, NetworkNode as BimoNetworkNode , NetworkEdge as BimoNetworkEdge  } from "../base-types/rawIndex";
 export function AdjacentLinkClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoAdjacentLink {
   /**
    * A link is a helper object that makes it easier to traverse the network in a certain order

@@ -4,7 +4,6 @@ import {
   VariantPointsCollection,
   VehicleScheduleOrRouteVersion as BimoVehicleScheduleOrRouteVersion,
 } from "../base-types/rawIndex";
-export { VehicleScheduleOrRouteVersion as BimoVehicleScheduleOrRouteVersion } from "../base-types/rawIndex";
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 import { Collection } from "@bimo/core-utils-collection";
 import { get } from "lodash";

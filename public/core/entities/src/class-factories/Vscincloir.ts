@@ -1,13 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Vscincloir as BimoVscincloir } from "../base-types/rawIndex";
-export { Vscincloir as BimoVscincloir } from "../base-types/rawIndex";
+import { Vscincloir as BimoVscincloir, VehicleSchedule as BimoVehicleSchedule , VehicleSchedulesCollection as BimoVehicleSchedulesCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoVehicleSchedule } from "./VehicleSchedule";
-import { BimoVehicleSchedulesCollection } from "./VehicleSchedulesCollection";
 export interface VscincloirProps extends ExtendedItemProps {
   vscincloirIntKey?: string;
   bimoId?: string;

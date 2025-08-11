@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { CirculationDaysCollection as BimoCirculationDaysCollection } from "../base-types/rawIndex";
-export { CirculationDaysCollection as BimoCirculationDaysCollection } from "../base-types/rawIndex";
+import { CirculationDaysCollection as BimoCirculationDaysCollection, CirculationDay as BimoCirculationDay  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoCirculationDay, CirculationDayProps } from "./CirculationDay";
+import { CirculationDayProps } from "./CirculationDay";
 
 export interface CirculationDaysCollectionProps
   extends ExtendedCollectionProps<BimoCirculationDay, CirculationDayProps> {}

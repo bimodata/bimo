@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceEvolutionsCollection as BimoServiceEvolutionsCollection } from "../base-types/rawIndex";
-export { ServiceEvolutionsCollection as BimoServiceEvolutionsCollection } from "../base-types/rawIndex";
+import { ServiceEvolutionsCollection as BimoServiceEvolutionsCollection, ServiceEvolution as BimoServiceEvolution  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoServiceEvolution, ServiceEvolutionProps } from "./ServiceEvolution";
+import { ServiceEvolutionProps } from "./ServiceEvolution";
 
 export interface ServiceEvolutionsCollectionProps
   extends ExtendedCollectionProps<BimoServiceEvolution, ServiceEvolutionProps> {}

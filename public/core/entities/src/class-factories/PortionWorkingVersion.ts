@@ -1,12 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { PortionWorkingVersion as BimoPortionWorkingVersion } from "../base-types/rawIndex";
-export { PortionWorkingVersion as BimoPortionWorkingVersion } from "../base-types/rawIndex";
+import { PortionWorkingVersion as BimoPortionWorkingVersion, PortionWorkingsCollection as BimoPortionWorkingsCollection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-import { BimoPortionWorkingsCollection } from "./PortionWorkingsCollection";
 
 export interface PortionWorkingVersionProps extends ExtendedItemProps {
   bimoId?: string;

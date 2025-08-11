@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContextWeeksCollection as BimoServiceContextWeeksCollection } from "../base-types/rawIndex";
-export { ServiceContextWeeksCollection as BimoServiceContextWeeksCollection } from "../base-types/rawIndex";
+import { ServiceContextWeeksCollection as BimoServiceContextWeeksCollection, ServiceContextWeek as BimoServiceContextWeek  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoServiceContextWeek, ServiceContextWeekProps } from "./ServiceContextWeek";
+import { ServiceContextWeekProps } from "./ServiceContextWeek";
 
 export interface ServiceContextWeeksCollectionProps
   extends ExtendedCollectionProps<BimoServiceContextWeek, ServiceContextWeekProps> {}

@@ -1,8 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleTasksCollection as BimoVehicleTasksCollection } from "../base-types/rawIndex";
-export { VehicleTasksCollection as BimoVehicleTasksCollection } from "../base-types/rawIndex";
+import { VehicleTasksCollection as BimoVehicleTasksCollection, VehicleTask as BimoVehicleTask  } from "../base-types/rawIndex";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoVehicleTask, VehicleTaskProps } from "./VehicleTask";
+import { VehicleTaskProps } from "./VehicleTask";
 
 export interface VehicleTasksCollectionProps
   extends ExtendedCollectionProps<BimoVehicleTask, VehicleTaskProps> {}

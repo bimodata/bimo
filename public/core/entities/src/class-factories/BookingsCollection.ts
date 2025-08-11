@@ -1,12 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BookingsCollection as BimoBookingsCollection } from "../base-types/rawIndex";
-export { BookingsCollection as BimoBookingsCollection } from "../base-types/rawIndex";
+import { BookingsCollection as BimoBookingsCollection, Booking as BimoBooking  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 /* eslint-disable no-self-assign */
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoBooking, BookingProps } from "./Booking";
+import { BookingProps } from "./Booking";
 export interface BookingsCollectionProps
   extends ExtendedCollectionProps<BimoBooking, BookingProps> {}
 

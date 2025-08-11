@@ -1,11 +1,9 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TrainPathVariantDate as BimoTrainPathVariantDate } from "../base-types/rawIndex";
-export { TrainPathVariantDate as BimoTrainPathVariantDate } from "../base-types/rawIndex";
+import { TrainPathVariantDate as BimoTrainPathVariantDate, TrainPathVariant as BimoTrainPathVariant  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoTrainPathVariant } from "./TrainPathVariant";
 
 const childClasses: (typeof Entity)[] = [];
 

@@ -1,8 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkEventsCollection as BimoNetworkEventsCollection } from "../base-types/rawIndex";
-export { NetworkEventsCollection as BimoNetworkEventsCollection } from "../base-types/rawIndex";
+import { NetworkEventsCollection as BimoNetworkEventsCollection, NetworkEvent as BimoNetworkEvent  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
-import { BimoNetworkEvent, NetworkEventProps } from "./NetworkEvent";
+import { NetworkEventProps } from "./NetworkEvent";
 
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";

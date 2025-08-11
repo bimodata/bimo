@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleSchedulesCollection as BimoVehicleSchedulesCollection } from "../base-types/rawIndex";
-export { VehicleSchedulesCollection as BimoVehicleSchedulesCollection } from "../base-types/rawIndex";
+import { VehicleSchedulesCollection as BimoVehicleSchedulesCollection, VehicleSchedule as BimoVehicleSchedule  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -12,7 +11,7 @@ import {
 import { evaluateItemQuery } from "@bimo/core-utils-evaluate-item-query";
 import mapsAndSets from "@bimo/core-utils-maps-and-sets";
 
-import { BimoVehicleSchedule, VehicleScheduleProps } from "./VehicleSchedule";
+import { VehicleScheduleProps } from "./VehicleSchedule";
 
 export interface VehicleSchedulesCollectionProps
   extends ExtendedCollectionProps<BimoVehicleSchedule, VehicleScheduleProps> {}

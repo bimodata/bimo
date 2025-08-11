@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VariantPointsCollection as BimoVariantPointsCollection } from "../base-types/rawIndex";
-export { VariantPointsCollection as BimoVariantPointsCollection } from "../base-types/rawIndex";
+import { VariantPointsCollection as BimoVariantPointsCollection, VariantPoint as BimoVariantPoint  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoVariantPoint, VariantPointProps } from "./VariantPoint";
+import { VariantPointProps } from "./VariantPoint";
 export interface VariantPointsCollectionProps
   extends ExtendedCollectionProps<BimoVariantPoint, VariantPointProps> {}
 

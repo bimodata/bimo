@@ -1,13 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TrainPathsCollection as BimoTrainPathsCollection } from "../base-types/rawIndex";
-export { TrainPathsCollection as BimoTrainPathsCollection } from "../base-types/rawIndex";
+import {
+  TrainPathsCollection as BimoTrainPathsCollection,
+  TrainPathsGeneralInfo as BimoTrainPathsGeneralInfo,
+  TrainPath as BimoTrainPath,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoTrainPath, TrainPathProps } from "./TrainPath";
-import { BimoTrainPathsGeneralInfo } from "./TrainPathsGeneralInfo";
+import { TrainPathProps } from "./TrainPath";
 
 export interface TrainPathsCollectionProps
   extends ExtendedCollectionProps<BimoTrainPath, TrainPathProps> {

@@ -1,11 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VariantsCollection as BimoVariantsCollection } from "../base-types/rawIndex";
-export { VariantsCollection as BimoVariantsCollection } from "../base-types/rawIndex";
+import {
+  VariantsCollection as BimoVariantsCollection,
+  PlacesCollection as BimoPlacesCollection,
+  Variant as BimoVariant,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { BimoVariant, VariantProps } from "./Variant";
-import { BimoPlacesCollection } from "./PlacesCollection";
+import { VariantProps } from "./Variant";
 
 export interface VariantsCollectionProps
   extends ExtendedCollectionProps<BimoVariant, VariantProps> {}

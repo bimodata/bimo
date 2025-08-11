@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Route as BimoRoute } from "../base-types/rawIndex";
-export { Route as BimoRoute } from "../base-types/rawIndex";
+import { Route as BimoRoute, VariantsCollection as BimoVariantsCollection , RouteVersion as BimoRouteVersion  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import _ from "lodash";
 
@@ -9,8 +8,8 @@ import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 
-import { BimoVariantsCollection, VariantsCollectionProps } from "./VariantsCollection";
-import { BimoRouteVersion, RouteVersionProps } from "./RouteVersion";
+import { VariantsCollectionProps } from "./VariantsCollection";
+import { RouteVersionProps } from "./RouteVersion";
 
 export interface RouteProps extends ExtendedItemProps {
   bimoId?: string;

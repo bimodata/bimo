@@ -1,11 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkSectionsCollection as BimoNetworkSectionsCollection } from "../base-types/rawIndex";
-export { NetworkSectionsCollection as BimoNetworkSectionsCollection } from "../base-types/rawIndex";
+import { NetworkSectionsCollection as BimoNetworkSectionsCollection, NetworkSection as BimoNetworkSection  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import { BimoNetworkSection, NetworkSectionProps } from "./NetworkSection";
+import { NetworkSectionProps } from "./NetworkSection";
 
 export interface NetworkSectionsCollectionProps
   extends ExtendedCollectionProps<BimoNetworkSection, NetworkSectionProps> {}

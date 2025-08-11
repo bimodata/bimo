@@ -1,14 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContextParentsCollection as BimoServiceContextParentsCollection } from "../base-types/rawIndex";
-export { ServiceContextParentsCollection as BimoServiceContextParentsCollection } from "../base-types/rawIndex";
+import {
+  ServiceContextParentsCollection as BimoServiceContextParentsCollection,
+  ServiceContextParent as BimoServiceContextParent,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import {
-  BimoServiceContextParent,
-  ServiceContextParentProps,
-} from "./ServiceContextParent";
+import { ServiceContextParentProps } from "./ServiceContextParent";
 export interface ServiceContextParentsCollectionProps
   extends ExtendedCollectionProps<BimoServiceContextParent, ServiceContextParentProps> {}
 

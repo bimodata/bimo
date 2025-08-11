@@ -1,8 +1,7 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripShiftsCollection as BimoTripShiftsCollection } from "../base-types/rawIndex";
-export { TripShiftsCollection as BimoTripShiftsCollection } from "../base-types/rawIndex";
+import { TripShiftsCollection as BimoTripShiftsCollection, TripShift as BimoTripShift  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
-import { BimoTripShift, TripShiftProps } from "./TripShift";
+import { TripShiftProps } from "./TripShift";
 
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";

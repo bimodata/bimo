@@ -1,14 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceEvolutionPeriodSchedulesBookingsCollection as BimoServiceEvolutionPeriodSchedulesBookingsCollection } from "../base-types/rawIndex";
-export { ServiceEvolutionPeriodSchedulesBookingsCollection as BimoServiceEvolutionPeriodSchedulesBookingsCollection } from "../base-types/rawIndex";
+import {
+  ServiceEvolutionPeriodSchedulesBookingsCollection as BimoServiceEvolutionPeriodSchedulesBookingsCollection,
+  ServiceEvolutionPeriodSchedulesBooking as BimoServiceEvolutionPeriodSchedulesBooking,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import {
-  BimoServiceEvolutionPeriodSchedulesBooking,
-  ServiceEvolutionPeriodSchedulesBookingProps,
-} from "./ServiceEvolutionPeriodSchedulesBooking";
+import { ServiceEvolutionPeriodSchedulesBookingProps } from "./ServiceEvolutionPeriodSchedulesBooking";
 
 export interface ServiceEvolutionPeriodSchedulesBookingsCollectionProps
   extends ExtendedCollectionProps<

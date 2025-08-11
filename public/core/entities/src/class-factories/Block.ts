@@ -1,18 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Block as BimoBlock } from "../base-types/rawIndex";
-export { Block as BimoBlock } from "../base-types/rawIndex";
+import { Block as BimoBlock, BlkvehuoirsCollection as BimoBlkvehuoirsCollection , BlockActivitiesCollection as BimoBlockActivitiesCollection , VehicleTask as BimoVehicleTask , VehicleUnit as BimoVehicleUnit , VehicleSchedule as BimoVehicleSchedule , Trip as BimoTrip  } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import _ from "lodash";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-import { BimoBlkvehuoirsCollection } from "./BlkvehuoirsCollection";
-import { BimoBlockActivitiesCollection } from "./BlockActivitiesCollection";
-import { BimoVehicleTask } from "./VehicleTask";
-import { BimoVehicleUnit } from "./VehicleUnit";
-import { BimoVehicleSchedule } from "./VehicleSchedule";
-import { BimoTrip } from "./Trip";
 
 export interface BlockProps extends ExtendedItemProps {
   blkIntNumber?: string;

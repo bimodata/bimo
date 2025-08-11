@@ -1,20 +1,16 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { PassengerLoadVersionsCollection as BimoPassengerLoadVersionsCollection } from "../base-types/rawIndex";
-export { PassengerLoadVersionsCollection as BimoPassengerLoadVersionsCollection } from "../base-types/rawIndex";
+import {
+  PassengerLoadVersionsCollection as BimoPassengerLoadVersionsCollection,
+  PassengerLoadVersion as BimoPassengerLoadVersion,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 
-import {
-  BimoPassengerLoadVersion,
-  PassengerLoadVersionProps,
-} from "./PassengerLoadVersion";
+import { PassengerLoadVersionProps } from "./PassengerLoadVersion";
 
 export interface PassengerLoadVersionsCollectionProps
-  extends ExtendedCollectionProps<
-    BimoPassengerLoadVersion,
-    PassengerLoadVersionProps
-  > {}
+  extends ExtendedCollectionProps<BimoPassengerLoadVersion, PassengerLoadVersionProps> {}
 
 export function PassengerLoadVersionsCollectionClassFactory({
   PassengerLoadVersion,
@@ -27,11 +23,11 @@ export function PassengerLoadVersionsCollectionClassFactory({
   > {
     constructor(props: PassengerLoadVersionsCollectionProps = {}) {
       super({
-        itemName: 'PassengerLoadVersion', 
-        ItemConstructor: PassengerLoadVersion, 
-        associationType: 'aggregation',
+        itemName: "PassengerLoadVersion",
+        ItemConstructor: PassengerLoadVersion,
+        associationType: "aggregation",
         idPropName: `bimoId`,
-        businessIdPropName: 'pldvIdentifier',
+        businessIdPropName: "pldvIdentifier",
         labelPropName: `pldvIdentifier`,
         ...props,
       });
@@ -40,7 +36,7 @@ export function PassengerLoadVersionsCollectionClassFactory({
     get shortLoggingOutput() {
       return `${this.label} - (${this.count()} pldvs)`;
     }
-    
+
     /**
      * @param oirStyleData - données en "style" oir, telles qu'obtenues de OIG-OIR-to-JSON
      */
@@ -73,6 +69,3 @@ export function PassengerLoadVersionsCollectionClassFactory({
 }
 
 export default PassengerLoadVersionsCollectionClassFactory;
-
-
-

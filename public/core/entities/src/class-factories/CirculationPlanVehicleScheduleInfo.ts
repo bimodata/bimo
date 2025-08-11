@@ -1,6 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 import { CirculationPlanVehicleScheduleInfo as BimoCirculationPlanVehicleScheduleInfo } from "../base-types/rawIndex";
-export { CirculationPlanVehicleScheduleInfo as BimoCirculationPlanVehicleScheduleInfo } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
