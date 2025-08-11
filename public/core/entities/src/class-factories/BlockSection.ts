@@ -1,5 +1,11 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlockSection as BimoBlockSection, BlockActivitiesCollection as BimoBlockActivitiesCollection , BlockSectionsCollection as BimoBlockSectionsCollection , VehicleTask as BimoVehicleTask , Block as BimoBlock  } from "../base-types/rawIndex";
+import {
+  BlockSection as BimoBlockSection,
+  BlockActivitiesCollection as BimoBlockActivitiesCollection,
+  BlockSectionsCollection as BimoBlockSectionsCollection,
+  VehicleTask as BimoVehicleTask,
+  Block as BimoBlock,
+} from "../base-types/rawIndex";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { BlockActivityProps } from "./BlockActivity";

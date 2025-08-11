@@ -147,7 +147,7 @@ export function VehicleStandbyClassFactory({
 
     get startTimeAsDuration() {
       return this._getAndSetCachedValue("startTimeAsDuration", () =>
-        hastusExtendedHoursToDuration(this.startTime)
+        hastusExtendedHoursToDuration(this.startTime),
       );
     }
 
@@ -157,7 +157,7 @@ export function VehicleStandbyClassFactory({
 
     get endTimeAsDuration() {
       return this._getAndSetCachedValue("endTimeAsDuration", () =>
-        hastusExtendedHoursToDuration(this.endTime)
+        hastusExtendedHoursToDuration(this.endTime),
       );
     }
 
@@ -179,10 +179,10 @@ export function VehicleStandbyClassFactory({
 
     shiftTimes(shiftInSeconds: number) {
       this.sdbyStartTime = durationToHastusExtendedHoursString(
-        this.startTimeAsDuration.plus({ second: shiftInSeconds })
+        this.startTimeAsDuration.plus({ second: shiftInSeconds }),
       );
       this.sdbyEndTime = durationToHastusExtendedHoursString(
-        this.endTimeAsDuration.plus({ second: shiftInSeconds })
+        this.endTimeAsDuration.plus({ second: shiftInSeconds }),
       );
       this._nullifyCachedValue("startTimeAsDuration");
       this._nullifyCachedValue("endTimeAsDuration");

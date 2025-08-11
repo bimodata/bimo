@@ -19,7 +19,7 @@ export interface CirculationPlanVehicleScheduleInfoProps extends ExtendedItemPro
 }
 
 export function CirculationPlanVehicleScheduleInfoClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoCirculationPlanVehicleScheduleInfo {
   class CirculationPlanVehicleScheduleInfo extends Item<CirculationPlanVehicleScheduleInfo> {
     bimoId?: string;
@@ -41,11 +41,13 @@ export function CirculationPlanVehicleScheduleInfoClassFactory(
       this.cirpvscinfoEvents = gavpfp("cirpvscinfoEvents", props, `string`);
       this.cirpvscinfoStatus = gavpfp("cirpvscinfoStatus", props, `string`);
     }
-
   }
 
-  CirculationPlanVehicleScheduleInfo.hastusKeywords = ["circulation_plan_vehicle_schedule_info"];
-  CirculationPlanVehicleScheduleInfo.hastusObject = "circulation_plan_vehicle_schedule_info";
+  CirculationPlanVehicleScheduleInfo.hastusKeywords = [
+    "circulation_plan_vehicle_schedule_info",
+  ];
+  CirculationPlanVehicleScheduleInfo.hastusObject =
+    "circulation_plan_vehicle_schedule_info";
 
   CirculationPlanVehicleScheduleInfo.allChildClasses = getAllChildClasses(childClasses);
 

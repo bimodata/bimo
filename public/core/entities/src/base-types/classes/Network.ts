@@ -30,19 +30,19 @@ export declare class Network extends Item<Network> {
     options?: {
       removeNodes?: boolean;
       skipCacheUpdate?: boolean;
-    }
+    },
   ): void;
   removeEdges(
     arrayOrSetOfEdges: NetworkEdge[] | Set<NetworkEdge>,
     options?: {
       removeNodes?: boolean;
-    }
+    },
   ): void;
   removeNodes(
     arrayOrSetOfNodes: NetworkNode[] | Set<NetworkNode>,
     options?: {
       removeEdges?: boolean;
-    }
+    },
   ): void;
   /**
    * @callback ArrayMethodsCallback
@@ -57,7 +57,7 @@ export declare class Network extends Item<Network> {
    * @returns Array of items that were removed from the collection
    */
   filterEdges(
-    callback: (value: NetworkEdge, index: number, array: NetworkEdge[]) => boolean
+    callback: (value: NetworkEdge, index: number, array: NetworkEdge[]) => boolean,
   ): NetworkEdge[];
   /**
    * Keeps only the nodes for which the callback returns true, and resets the adjacent links
@@ -66,13 +66,13 @@ export declare class Network extends Item<Network> {
    * @returns Array of items that were kept in the collection
    */
   filterNodes(
-    callback: (value: NetworkNode, index: number, array: NetworkNode[]) => boolean
+    callback: (value: NetworkNode, index: number, array: NetworkNode[]) => boolean,
   ): NetworkNode[];
   addEdge(
     edge: NetworkEdge,
     options?: {
       skipCacheUpdate?: boolean;
-    }
+    },
   ): NetworkEdge;
   hasEdge(edge: NetworkEdge): boolean;
   removeNode(
@@ -80,13 +80,13 @@ export declare class Network extends Item<Network> {
     options?: {
       removeEdges?: boolean;
       skipCacheUpdate?: boolean;
-    }
+    },
   ): void;
   addNode(
     node: NetworkNode,
     options?: {
       skipCacheUpdate?: boolean;
-    }
+    },
   ): NetworkNode;
   hasNode(node: NetworkNode): boolean;
   get mermaidString(): string;

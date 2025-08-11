@@ -1,6 +1,16 @@
 import { Duration } from "luxon";
 import { Item } from "@bimo/core-utils-collection";
-import { Place as BimoPlace , Block as BimoBlock , BlockActivity as BimoBlockActivity , VehicleTask as BimoVehicleTask , VehicleSchedule as BimoVehicleSchedule , Trip as BimoTrip , Maintenance as BimoMaintenance , VehicleStandby as BimoVehicleStandby , ConsistChange as BimoConsistChange  } from "../base-types/rawIndex";
+import {
+  Place as BimoPlace,
+  Block as BimoBlock,
+  BlockActivity as BimoBlockActivity,
+  VehicleTask as BimoVehicleTask,
+  VehicleSchedule as BimoVehicleSchedule,
+  Trip as BimoTrip,
+  Maintenance as BimoMaintenance,
+  VehicleStandby as BimoVehicleStandby,
+  ConsistChange as BimoConsistChange,
+} from "../base-types/rawIndex";
 
 export type BaseBlockActivityItem =
   | BimoTrip
@@ -31,25 +41,25 @@ export interface BlockActivityItem<ItemType> extends Item<ItemType> {
 export default BlockActivityItem;
 
 export function computeSetOfBlockActivitiesHelper<ItemType>(
-  blockActivityItem: BlockActivityItem<ItemType>
+  blockActivityItem: BlockActivityItem<ItemType>,
 ) {
   if (!blockActivityItem.vehicleSchedule)
     throw new Error(
-      `An item must have a vehicleSchedule when its blockActivities are accessed(${blockActivityItem.slo})`
+      `An item must have a vehicleSchedule when its blockActivities are accessed(${blockActivityItem.slo})`,
     );
   let setOfBlockActivities: Set<BimoBlockActivity> =
     blockActivityItem.vehicleSchedule.setOfBlockActivitiesByBlockActivityEntityItem.get(
-      blockActivityItem
+      blockActivityItem,
     );
   if (!setOfBlockActivities) {
     const foundInBlockingVsc = blockActivityItem.vehicleSchedule.blockingVscs.some(
       (blockingVsc) => {
         setOfBlockActivities =
           blockingVsc.setOfBlockActivitiesByBlockActivityEntityItem.get(
-            blockActivityItem
+            blockActivityItem,
           );
         return setOfBlockActivities;
-      }
+      },
     );
     if (!foundInBlockingVsc) {
       /** This is pretty weird but corresponds to a case where we don't really know what is the blocking vsc
@@ -60,7 +70,7 @@ export function computeSetOfBlockActivitiesHelper<ItemType>(
        */
       setOfBlockActivities = blockActivityItem._getAndSetCachedValue(
         "fallbackSetOfBlockActivities",
-        () => new Set()
+        () => new Set(),
       );
     }
   }
@@ -68,7 +78,7 @@ export function computeSetOfBlockActivitiesHelper<ItemType>(
 }
 
 export function getSingleBlockActivityHelper<ItemType>(
-  blockActivityItem: BlockActivityItem<ItemType>
+  blockActivityItem: BlockActivityItem<ItemType>,
 ) {
   const blockActs = blockActivityItem.blockActivities;
   return (blockActs && blockActs[0]) ?? null;

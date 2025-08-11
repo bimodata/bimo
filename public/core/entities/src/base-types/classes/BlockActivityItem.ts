@@ -30,8 +30,8 @@ export interface BlockActivityItem<ItemType> extends Item<ItemType> {
   shiftTimes: (shiftInSeconds: number) => void;
 }
 export declare function computeSetOfBlockActivitiesHelper<ItemType>(
-  blockActivityItem: BlockActivityItem<ItemType>
+  blockActivityItem: BlockActivityItem<ItemType>,
 ): Set<BlockActivity>;
 export declare function getSingleBlockActivityHelper<ItemType>(
-  blockActivityItem: BlockActivityItem<ItemType>
+  blockActivityItem: BlockActivityItem<ItemType>,
 ): BlockActivity;

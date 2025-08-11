@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { RoutesCollection as BimoRoutesCollection, Route as BimoRoute  } from "../base-types/rawIndex";
+import {
+  RoutesCollection as BimoRoutesCollection,
+  Route as BimoRoute,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { RouteProps } from "./Route";
 

@@ -1,5 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Block as BimoBlock, BlkvehuoirsCollection as BimoBlkvehuoirsCollection , BlockActivitiesCollection as BimoBlockActivitiesCollection , VehicleTask as BimoVehicleTask , VehicleUnit as BimoVehicleUnit , VehicleSchedule as BimoVehicleSchedule , Trip as BimoTrip  } from "../base-types/rawIndex";
+import {
+  Block as BimoBlock,
+  BlkvehuoirsCollection as BimoBlkvehuoirsCollection,
+  BlockActivitiesCollection as BimoBlockActivitiesCollection,
+  VehicleTask as BimoVehicleTask,
+  VehicleUnit as BimoVehicleUnit,
+  VehicleSchedule as BimoVehicleSchedule,
+  Trip as BimoTrip,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import _ from "lodash";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -73,13 +81,13 @@ export function BlockClassFactory({
         "blkStartUpAtStationUser",
         props,
         `string`,
-        `0`
+        `0`,
       );
       this.blkShutDownAtStationUser = gavpfp(
         "blkShutDownAtStationUser",
         props,
         `string`,
-        `0`
+        `0`,
       );
       this.blkVehicleGroup = gavpfp("blkVehicleGroup", props);
       this.blkVehicleType = gavpfp("blkVehicleType", props);
@@ -97,14 +105,14 @@ export function BlockClassFactory({
         props,
         BlkvehuoirsCollection,
         new BlkvehuoirsCollection(),
-        { altPropName: "blkvehuoir", parent: this }
+        { altPropName: "blkvehuoir", parent: this },
       );
       this.blockActivities = gavpfp(
         "blockActivities",
         props,
         BlockActivitiesCollection,
         new BlockActivitiesCollection(),
-        { altPropName: "block_activity", parent: this }
+        { altPropName: "block_activity", parent: this },
       );
     }
 
@@ -112,7 +120,7 @@ export function BlockClassFactory({
       return (
         this.vehicleSchedule &&
         Array.from(
-          this.vehicleSchedule.setOfVtasByBlock.get(this) as Set<BimoVehicleTask>
+          this.vehicleSchedule.setOfVtasByBlock.get(this) as Set<BimoVehicleTask>,
         )
       );
     }
@@ -122,11 +130,11 @@ export function BlockClassFactory({
         this.vehicleSchedule &&
         this.blkvehuoirs.map((blkVehuOir) => {
           const vehu = this.vehicleSchedule?.vehicleUnits.getById(
-            blkVehuOir.vehuUniqueId
+            blkVehuOir.vehuUniqueId,
           );
           if (!vehu)
             throw new Error(
-              `Could not find vehicule unit with id ${blkVehuOir.vehuUniqueId}`
+              `Could not find vehicule unit with id ${blkVehuOir.vehuUniqueId}`,
             );
           return vehu;
         })

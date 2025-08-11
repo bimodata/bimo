@@ -1,8 +1,5 @@
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import {
-  CirculationPlan,
-  CirculationPlanProps,
-} from "./CirculationPlan";
+import { CirculationPlan, CirculationPlanProps } from "./CirculationPlan";
 export interface CirculationPlansCollectionProps
   extends ExtendedCollectionProps<CirculationPlan, CirculationPlanProps> {}
 export declare class CirculationPlansCollection extends Collection<

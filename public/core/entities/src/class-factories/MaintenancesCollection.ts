@@ -1,7 +1,9 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { MaintenancesCollection as BimoMaintenancesCollection, VehicleSchedule as BimoVehicleSchedule,
-  Maintenance as BimoMaintenance
-  } from "../base-types/rawIndex";
+import {
+  MaintenancesCollection as BimoMaintenancesCollection,
+  VehicleSchedule as BimoVehicleSchedule,
+  Maintenance as BimoMaintenance,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";

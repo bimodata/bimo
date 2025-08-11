@@ -45,7 +45,7 @@ export function BlockActivitiesCollectionClassFactory({
         });
       } catch (error) {
         const newError = new Error(
-          `Error while sorting these blockActivities:\n${this.longLoggingOutput}\n${error.stack}`
+          `Error while sorting these blockActivities:\n${this.longLoggingOutput}\n${error.stack}`,
         );
         throw newError;
       }

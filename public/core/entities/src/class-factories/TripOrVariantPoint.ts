@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripOrVariantPoint as BimoTripOrVariantPoint, Place as BimoPlace  } from "../base-types/rawIndex";
+import {
+  TripOrVariantPoint as BimoTripOrVariantPoint,
+  Place as BimoPlace,
+} from "../base-types/rawIndex";
 
 import {
   Item,
@@ -80,7 +83,7 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
 
   class TripOrVariantPoint<
     PointType extends ExtendedItem<PointType>,
-    PointProps extends ExtendedItemProps
+    PointProps extends ExtendedItemProps,
   > extends Item<PointType> {
     _abstract?: any;
     declare parent?: Collection<PointType, PointProps>;
@@ -112,12 +115,12 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
     get place(): BimoPlace {
       if (!this.context?.placesCollection)
         throw new Error(
-          `context.placesCollection must be set to get place on tripOrVariantPoint`
+          `context.placesCollection must be set to get place on tripOrVariantPoint`,
         );
       const place = this.context.placesCollection.getByBusinessId(this.placeId);
       if (!place)
         throw new Error(
-          `${this.placeId} not found in ${this.context.placesCollection.slo}`
+          `${this.placeId} not found in ${this.context.placesCollection.slo}`,
         );
       return place;
     }
@@ -221,7 +224,7 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
 
     getTimeAsDuration(
       departureOrArrival: "departure" | "arrival" = `departure`,
-      allowFallback: boolean = true
+      allowFallback: boolean = true,
     ): Duration {
       let mainValue: string;
       let fallBackValue: string | false;
@@ -233,7 +236,7 @@ export function TripOrVariantPointClassFactory({}: EntityConstructorByEntityClas
         fallBackValue = allowFallback && this.departureTime;
       } else {
         throw new Error(
-          `departureOrArrival should equal "departure" or "arrival". Got ${departureOrArrival}`
+          `departureOrArrival should equal "departure" or "arrival". Got ${departureOrArrival}`,
         );
       }
       const finalValue = allowFallback ? mainValue || fallBackValue : mainValue;

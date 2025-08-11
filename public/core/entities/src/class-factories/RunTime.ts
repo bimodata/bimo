@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { RunTime as BimoRunTime, RunTimeVersion as BimoRunTimeVersion } from "../base-types/rawIndex";
+import {
+  RunTime as BimoRunTime,
+  RunTimeVersion as BimoRunTimeVersion,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -21,7 +24,7 @@ export interface RunTimeProps extends ExtendedItemProps {
 }
 
 export function RunTimeClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoRunTime {
   class RunTime extends Item<RunTime> {
     bimoId?: string;

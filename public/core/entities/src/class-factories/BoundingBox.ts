@@ -25,7 +25,7 @@ export interface BoundingBoxCoordinatesBySystemName {
 }
 
 export function BoundingBoxClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoBoundingBox {
   class BoundingBox extends Item<BoundingBox> {
     activeCoordinatesSystemName: string = "default";
@@ -39,7 +39,7 @@ export function BoundingBoxClassFactory(
         "activeCoordinatesSystemName",
         props,
         "string",
-        "default"
+        "default",
       );
       this.coordinatesBySystemName = gavpfp("coordinatesBySystemName", props, Object, {});
       if (Object.keys(this.coordinatesBySystemName).length === 0) {

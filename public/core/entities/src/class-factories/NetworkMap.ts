@@ -26,7 +26,7 @@ export interface NetworkMapProps extends ExtendedItemProps {
 }
 
 export function NetworkMapClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoNetworkMap {
   class NetworkMap extends Item<NetworkMap> {
     bimoId: string;

@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { PlacesCollection as BimoPlacesCollection, Place as BimoPlace  } from "../base-types/rawIndex";
+import {
+  PlacesCollection as BimoPlacesCollection,
+  Place as BimoPlace,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
@@ -50,7 +53,7 @@ export function PlacesCollectionClassFactory({
 
     get placesByReferencePlace() {
       return this._getAndSetCachedValue("placesByReferencePlace", () =>
-        this.groupByProp(`plcReferencePlace`)
+        this.groupByProp(`plcReferencePlace`),
       );
     }
 

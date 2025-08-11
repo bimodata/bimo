@@ -5,12 +5,12 @@ import { VariantPointsCollection } from "./VariantPointsCollection";
 export interface VehicleScheduleOrRouteVersionProps extends ExtendedItemProps {}
 export declare class VehicleScheduleOrRouteVersion<
   ItemType extends ExtendedItem<ItemType>,
-  ItemProps extends ExtendedItemProps
+  ItemProps extends ExtendedItemProps,
 > extends Item<ItemType> {
   _abstract?: any;
   constructor(
     props: VehicleScheduleOrRouteVersionProps,
-    tripOrVariantType: "variant" | "trip" | "scheduledTrip"
+    tripOrVariantType: "variant" | "trip" | "scheduledTrip",
   );
   get tripOrVariantType(): any;
   get tripsOrVariants(): Collection<ItemType, ItemProps>;

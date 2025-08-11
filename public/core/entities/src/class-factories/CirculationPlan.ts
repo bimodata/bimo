@@ -1,13 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { CirculationPlan as BimoCirculationPlan, CirculationPeriodsCollection as BimoCirculationPeriodsCollection , CirculationPlanVehicleScheduleInfosCollection as BimoCirculationPlanVehicleScheduleInfosCollection  } from "../base-types/rawIndex";
+import {
+  CirculationPlan as BimoCirculationPlan,
+  CirculationPeriodsCollection as BimoCirculationPeriodsCollection,
+  CirculationPlanVehicleScheduleInfosCollection as BimoCirculationPlanVehicleScheduleInfosCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-
 export interface CirculationPlanProps extends ExtendedItemProps {
-
   bimoId?: string;
   cirpName?: string;
   cirpScenario?: string;
@@ -26,13 +28,16 @@ export interface CirculationPlanProps extends ExtendedItemProps {
   cirpNextCirpScenario?: string;
   cirpNextCirpBooking?: string;
   circulationPeriods?: BimoCirculationPeriodsCollection;
-  circulationPlanVehicleScheduleInfos?:BimoCirculationPlanVehicleScheduleInfosCollection;
+  circulationPlanVehicleScheduleInfos?: BimoCirculationPlanVehicleScheduleInfosCollection;
 }
 export function CirculationPlanClassFactory({
   CirculationPeriodsCollection,
   CirculationPlanVehicleScheduleInfosCollection,
 }: EntityConstructorByEntityClassKey): typeof BimoCirculationPlan {
-  const childClasses: (typeof Entity)[] = [CirculationPeriodsCollection, CirculationPlanVehicleScheduleInfosCollection];
+  const childClasses: (typeof Entity)[] = [
+    CirculationPeriodsCollection,
+    CirculationPlanVehicleScheduleInfosCollection,
+  ];
 
   class CirculationPlan extends Item<CirculationPlan> {
     bimoId?: string;
@@ -54,7 +59,7 @@ export function CirculationPlanClassFactory({
     cirpNextCirpBooking?: string;
 
     circulationPeriods?: BimoCirculationPeriodsCollection;
-    circulationPlanVehicleScheduleInfos?:BimoCirculationPlanVehicleScheduleInfosCollection;
+    circulationPlanVehicleScheduleInfos?: BimoCirculationPlanVehicleScheduleInfosCollection;
 
     constructor(props: CirculationPlanProps) {
       super(props);
@@ -80,14 +85,14 @@ export function CirculationPlanClassFactory({
         props,
         CirculationPeriodsCollection,
         new CirculationPeriodsCollection(),
-        { altPropName: "circulation_period", parent: this }
+        { altPropName: "circulation_period", parent: this },
       );
       this.circulationPlanVehicleScheduleInfos = gavpfp(
         "circulationPlanVehicleScheduleInfos",
         props,
         CirculationPlanVehicleScheduleInfosCollection,
         new CirculationPlanVehicleScheduleInfosCollection(),
-        { altPropName: "circulation_plan_vehicle_schedule_info", parent: this }
+        { altPropName: "circulation_plan_vehicle_schedule_info", parent: this },
       );
     }
 

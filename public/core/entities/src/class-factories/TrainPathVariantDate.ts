@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TrainPathVariantDate as BimoTrainPathVariantDate, TrainPathVariant as BimoTrainPathVariant  } from "../base-types/rawIndex";
+import {
+  TrainPathVariantDate as BimoTrainPathVariantDate,
+  TrainPathVariant as BimoTrainPathVariant,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -34,7 +37,7 @@ export function TrainPathVariantDateClassFactory({}: EntityConstructorByEntityCl
       this.trnpdIsCanceledOrInfeasible = gavpfp(
         "trnpdIsCanceledOrInfeasible",
         props,
-        `string`
+        `string`,
       );
     }
 

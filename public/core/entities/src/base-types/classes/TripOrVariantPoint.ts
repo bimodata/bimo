@@ -10,7 +10,7 @@ import { TripOrVariantTypeEnum } from "./TripOrVariant";
 
 export declare class TripOrVariantPoint<
   PointType extends ExtendedItem<PointType>,
-  PointProps extends ExtendedItemProps
+  PointProps extends ExtendedItemProps,
 > extends Item<PointType> {
   _abstract?: any;
   parent?: Collection<PointType, PointProps>;
@@ -44,7 +44,7 @@ export declare class TripOrVariantPoint<
   get isFirstOrLast(): boolean;
   getTimeAsDuration(
     departureOrArrival?: "departure" | "arrival",
-    allowFallback?: boolean
+    allowFallback?: boolean,
   ): Duration;
   get stopDurationInSeconds(): number;
   timesAreValid(): boolean;

@@ -1,5 +1,9 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleUnit as BimoVehicleUnit, VehicleSchedule as BimoVehicleSchedule , VehicleTask as BimoVehicleTask  } from "../base-types/rawIndex";
+import {
+  VehicleUnit as BimoVehicleUnit,
+  VehicleSchedule as BimoVehicleSchedule,
+  VehicleTask as BimoVehicleTask,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 

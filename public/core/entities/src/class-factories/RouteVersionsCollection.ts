@@ -61,7 +61,7 @@ export function RouteVersionsCollectionClassFactory({
       temporaryRoutesCollection.forEach((newRoute) => {
         const routeVersion = newRouteVersionsCollection.getByPropName(
           `rtevIdentifier`,
-          newRoute.rteVersion
+          newRoute.rteVersion,
         );
         if (!routeVersion) throw new Error(`Could not find ${newRoute.rteVersion}`);
         routeVersion.routes.add(newRoute);
@@ -86,12 +86,12 @@ export function RouteVersionsCollectionClassFactory({
                   // @ts-ignore
                   varItinerary.itinerary_segment = varItinerary.itinerarySegments.items;
                   return varItinerary;
-                }
+                },
               );
               return variant;
             });
             return route;
-          })
+          }),
         );
       });
       return { route_version: routeVersions, route: routes };
@@ -117,7 +117,7 @@ export function RouteVersionsCollectionClassFactory({
             items: allVariants,
             associationType: `aggregation`,
           });
-        }
+        },
       );
     }
 
@@ -136,7 +136,7 @@ export function RouteVersionsCollectionClassFactory({
               routeVersion.variantSectionsCollectionOfAllVariantsOfAllRoutes;
             if (variantSectionsCollOfThisRouteVersion) {
               allVariantSections = allVariantSections.concat(
-                variantSectionsCollOfThisRouteVersion.items
+                variantSectionsCollOfThisRouteVersion.items,
               );
             }
           });
@@ -144,7 +144,7 @@ export function RouteVersionsCollectionClassFactory({
             items: allVariantSections,
             associationType: `aggregation`,
           });
-        }
+        },
       );
     }
   }

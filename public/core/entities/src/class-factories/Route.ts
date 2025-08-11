@@ -1,5 +1,9 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Route as BimoRoute, VariantsCollection as BimoVariantsCollection , RouteVersion as BimoRouteVersion  } from "../base-types/rawIndex";
+import {
+  Route as BimoRoute,
+  VariantsCollection as BimoVariantsCollection,
+  RouteVersion as BimoRouteVersion,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import _ from "lodash";
 
@@ -107,7 +111,7 @@ export function RouteClassFactory({
       this.rteSecondaryColorAdjustedRgb = gavpfp(
         "rteSecondaryColorAdjustedRgb",
         props,
-        "string"
+        "string",
       );
       this.rtePubIdSpec = gavpfp("rtePubIdSpec", props, "string");
       this.rteForPublicInfo = gavpfp("rteForPublicInfo", props, "string");
@@ -135,7 +139,7 @@ export function RouteClassFactory({
         props,
         VariantsCollection,
         new VariantsCollection(),
-        { altPropName: "variant", parent: this }
+        { altPropName: "variant", parent: this },
       );
     }
 

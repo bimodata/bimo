@@ -10,9 +10,9 @@ export function generateEntityConstructorByEntityClassKey({
       const ClassFactory =
         CustomClassFactoryByEntityClassKey[entityClassKey] ?? DefaultClassFactory;
       entityConstructorByEntityClassKey[entityClassKey] = ClassFactory(
-        entityConstructorByEntityClassKey
+        entityConstructorByEntityClassKey,
       );
-    }
+    },
   );
   return entityConstructorByEntityClassKey;
 }

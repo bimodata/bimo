@@ -1,12 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VariantItinerary as BimoVariantItinerary, Variant as BimoVariant , ItinerarySegmentsCollection as BimoItinerarySegmentsCollection  } from "../base-types/rawIndex";
+import {
+  VariantItinerary as BimoVariantItinerary,
+  Variant as BimoVariant,
+  ItinerarySegmentsCollection as BimoItinerarySegmentsCollection,
+} from "../base-types/rawIndex";
 import { Item } from "@bimo/core-utils-collection";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface VariantItineraryProps extends ExtendedItemProps {
   itnStopStart?: string;
@@ -67,18 +70,18 @@ export function VariantItineraryClassFactory({
       this.itnVerifiedNetworkDistance = gavpfp("itnVerifiedNetworkDistance", props);
       this.itnIgnoreCircAndTurnRestriction = gavpfp(
         "itnIgnoreCircAndTurnRestriction",
-        props
+        props,
       );
       this.itnRoutingInstructionsSpecified = gavpfp(
         "itnRoutingInstructionsSpecified",
-        props
+        props,
       );
       this.itinerarySegments = gavpfp(
         "itinerarySegments",
         props,
         ItinerarySegmentsCollection,
         new ItinerarySegmentsCollection(),
-        { altPropName: "itinerary_segment", parent: this }
+        { altPropName: "itinerary_segment", parent: this },
       );
     }
 

@@ -67,7 +67,7 @@ export function RouteVersionClassFactory({
         "rtevRoutesBasedOnRailLinks",
         props,
         "string",
-        "0"
+        "0",
       );
       this.rtevOwner = gavpfp("rtevOwner", props, "string", "ADMIN");
       this.rtevPublicAccess = gavpfp("rtevPublicAccess", props, "string", "0");
@@ -149,7 +149,7 @@ export function RouteVersionClassFactory({
             items: allVariants,
             associationType: `aggregation`,
           });
-        }
+        },
       );
     }
 
@@ -165,7 +165,7 @@ export function RouteVersionClassFactory({
             items: allPoints,
             associationType: `aggregation`,
           });
-        }
+        },
       );
     }
     get variantItinerariesCollectionOfAllItinerariesOfAllRoutes() {
@@ -180,7 +180,7 @@ export function RouteVersionClassFactory({
             items: allItineraries,
             associationType: `aggregation`,
           });
-        }
+        },
       );
     }
 

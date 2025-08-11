@@ -27,7 +27,7 @@ export declare class NetworkSection extends Item<NetworkSection> {
       addNodes,
     }?: {
       addNodes?: boolean;
-    }
+    },
   ): void;
   addNode(node: NetworkNode): void;
   hasNode(node: NetworkNode): boolean;

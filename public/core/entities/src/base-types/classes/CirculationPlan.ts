@@ -21,7 +21,7 @@ export interface CirculationPlanProps extends ExtendedItemProps {
   cirpNextCirpBooking?: string;
 
   circulationPeriods?: CirculationPeriodsCollection;
-  circulationPlanVehicleScheduleInfos?:CirculationPlanVehicleScheduleInfosCollection;
+  circulationPlanVehicleScheduleInfos?: CirculationPlanVehicleScheduleInfosCollection;
 }
 export declare class CirculationPlan extends Item<CirculationPlan> {
   bimoId?: string;
@@ -43,7 +43,7 @@ export declare class CirculationPlan extends Item<CirculationPlan> {
   cirpNextCirpBooking?: string;
 
   circulationPeriods?: CirculationPeriodsCollection;
-  circulationPlanVehicleScheduleInfos?:CirculationPlanVehicleScheduleInfosCollection;
+  circulationPlanVehicleScheduleInfos?: CirculationPlanVehicleScheduleInfosCollection;
   constructor(props: CirculationPlanProps);
   get shortLoggingOutput(): string;
 }

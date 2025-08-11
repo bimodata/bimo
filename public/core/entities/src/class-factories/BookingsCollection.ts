@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BookingsCollection as BimoBookingsCollection, Booking as BimoBooking  } from "../base-types/rawIndex";
+import {
+  BookingsCollection as BimoBookingsCollection,
+  Booking as BimoBooking,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 /* eslint-disable no-self-assign */
 import { getAllChildClasses } from "@bimo/core-utils-serialization";

@@ -46,7 +46,7 @@ export declare class BlockActivity extends Item<BlockActivity> {
       | import("./BlockActivityItem").BlockActivityItem<
           import("./BlockActivityItem").BaseBlockActivityItem
         >
-      | undefined
+      | undefined,
   );
   get startTime(): string | undefined;
   get startTimeAsDuration(): import("luxon").Duration | undefined;

@@ -18,7 +18,7 @@ export declare class VehicleSchedulesCollection extends Collection<
   static createFromOirStyleData(
     oirStyleData: any,
     label: string,
-    associationType?: CollectionAssociationType
+    associationType?: CollectionAssociationType,
   ): VehicleSchedulesCollection;
   get shortLoggingOutput(): string;
   setScenarioNumberOnAllVscs(scenarioNumber: number | string): void;
@@ -34,7 +34,7 @@ export declare class VehicleSchedulesCollection extends Collection<
   get arrayOfAllPlaceIdentifiers(): unknown[];
   getOrCreateVehicleScheduleByVscName(
     vscName: string,
-    defaultPropsForNewVsc: VehicleScheduleProps
+    defaultPropsForNewVsc: VehicleScheduleProps,
   ): VehicleSchedule;
   getVehicleScheduleByVscName(vscName: string): VehicleSchedule | undefined;
   /**
@@ -44,7 +44,7 @@ export declare class VehicleSchedulesCollection extends Collection<
    * @return this modified vscColl
    */
   mergeWithOtherVscColl(
-    otherVscColl: VehicleSchedulesCollection
+    otherVscColl: VehicleSchedulesCollection,
   ): VehicleSchedulesCollection;
   /**
    * Ne conserve que les block_activity qui correspondent à blockActivitySelectorQuery

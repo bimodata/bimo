@@ -139,7 +139,7 @@ export declare class Trip
   constructor(
     props: TripProps,
     context?: BimoContext,
-    tripOrVariantType?: TripOrVariantTypeEnum
+    tripOrVariantType?: TripOrVariantTypeEnum,
   );
   /** en km */
   get trpDistance(): string | null;
@@ -194,7 +194,7 @@ export declare class Trip
   validateTripPointTimes(): void;
   getTimeDiffInSecondsBetweenTripPointIndexes(
     indexOfFirst: number,
-    indexOfSecond: number
+    indexOfSecond: number,
   ): any;
   changeCurrentStartPlace(newStartPlace: Place | string): void;
   changeOriginalStartPlace(newStartPlace: Place | string): void;

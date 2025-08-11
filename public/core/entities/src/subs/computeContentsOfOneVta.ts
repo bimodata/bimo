@@ -24,7 +24,7 @@ function computeContentsOfOneVta(
     BlocksCollection,
     BlockActivitiesCollection,
     BlockSectionsCollection,
-  }: EntityConstructorByEntityClassKey
+  }: EntityConstructorByEntityClassKey,
 ) {
   const { vehicleSchedule, vehicleUnit } = vehicleTask;
   try {
@@ -66,7 +66,7 @@ function computeContentsOfOneVta(
     };
   } catch (error) {
     const err = new Error(
-      `Erreur au chargement du vta du vehicleUnit ${vehicleUnit.slo} de ${vehicleSchedule?.slo}: ${error.message}`
+      `Erreur au chargement du vta du vehicleUnit ${vehicleUnit.slo} de ${vehicleSchedule?.slo}: ${error.message}`,
     );
     err.stack = `Re-thrown: ${err.stack}\nOriginal:${error.stack}`;
     throw err;
@@ -102,7 +102,7 @@ function recursivelyAddBlocksAndBlockActivities({
   const setOfVtasOfBlockToTreat = getAndSetIfRequired(
     setOfVtasByBlock,
     blockToTreat,
-    new Set()
+    new Set(),
   );
   setOfVtasOfBlockToTreat.add(vehicleTask);
 
@@ -119,7 +119,7 @@ function recursivelyAddBlocksAndBlockActivities({
     const setOfVtasOfBlkAct = getAndSetIfRequired(
       setOfVtasByBlockActivity,
       blockActivity,
-      new Set()
+      new Set(),
     );
     setOfVtasOfBlkAct.add(vehicleTask);
 
@@ -127,7 +127,7 @@ function recursivelyAddBlocksAndBlockActivities({
     const setOfBlockSectionsOfBlockActivity = getAndSetIfRequired(
       setOfBlockSectionsByBlockActivity,
       blockActivity,
-      new Set()
+      new Set(),
     );
     setOfBlockSectionsOfBlockActivity.add(blockSection);
 
@@ -154,7 +154,7 @@ function recursivelyAddBlocksAndBlockActivities({
       return blocksCollOfThisVehu.some(
         (blk) =>
           blk.blockActivities.first.blkactVehicleActivityTypeNo === "15" &&
-          blk.blockActivities.first.blkactCchgNo === blockActivity.blkactCchgNo
+          blk.blockActivities.first.blkactCchgNo === blockActivity.blkactCchgNo,
       );
     }
 
@@ -170,7 +170,7 @@ function recursivelyAddBlocksAndBlockActivities({
         foundIndex = block.blockActivities.findIndex(
           (blkAct) =>
             blkAct.blkactVehicleActivityTypeNo === "13" &&
-            blkAct.blkactCchgNo === blockActivity.blkactCchgNo
+            blkAct.blkactCchgNo === blockActivity.blkactCchgNo,
         );
         return foundIndex !== -1;
       });
@@ -186,13 +186,13 @@ function recursivelyAddBlocksAndBlockActivities({
       } else {
         throw new Error(
           `Impossible de trouver l'activité "13-atteler" correspondant à l'activité "12-À atteler" ci-dessous:\n` +
-            `${blockActivity.mlo}`
+            `${blockActivity.mlo}`,
         );
       }
     }
 
     throw new Error(
-      `blkactVehicleActivityTypeNo = ${blockActivity.blkactVehicleActivityTypeNo} but was not matched in the ifs above ???`
+      `blkactVehicleActivityTypeNo = ${blockActivity.blkactVehicleActivityTypeNo} but was not matched in the ifs above ???`,
     );
   });
 

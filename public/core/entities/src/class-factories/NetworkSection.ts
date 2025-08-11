@@ -1,10 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkSection as BimoNetworkSection, NetworkNodesCollection as BimoNetworkNodesCollection , NetworkEdgesCollection as BimoNetworkEdgesCollection , NetworkEdge as BimoNetworkEdge , NetworkNode as BimoNetworkNode  } from "../base-types/rawIndex";
+import {
+  NetworkSection as BimoNetworkSection,
+  NetworkNodesCollection as BimoNetworkNodesCollection,
+  NetworkEdgesCollection as BimoNetworkEdgesCollection,
+  NetworkEdge as BimoNetworkEdge,
+  NetworkNode as BimoNetworkNode,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface NetworkSectionProps extends ExtendedItemProps {
   bimoId: string;

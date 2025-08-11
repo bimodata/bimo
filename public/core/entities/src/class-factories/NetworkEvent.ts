@@ -11,7 +11,7 @@ export interface NetworkEventProps extends ExtendedItemProps {
 }
 
 export function NetworkEventClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoNetworkEvent {
   class NetworkEvent extends Item<NetworkEvent> {
     nevtIdentifier: string;

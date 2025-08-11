@@ -16,7 +16,7 @@ export interface DataFileProps extends ExtendedItemProps {
 }
 
 export function DataFileClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoDataFile {
   class DataFile extends Item<DataFile> {
     fileInfo: BimoFileInfo;

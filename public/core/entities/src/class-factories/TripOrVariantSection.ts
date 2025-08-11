@@ -1,11 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripOrVariantSection as BimoTripOrVariantSection, TripOrVariantPoint as BimoTripOrVariantPoint , TripOrVariant as BimoTripOrVariant  } from "../base-types/rawIndex";
+import {
+  TripOrVariantSection as BimoTripOrVariantSection,
+  TripOrVariantPoint as BimoTripOrVariantPoint,
+  TripOrVariant as BimoTripOrVariant,
+} from "../base-types/rawIndex";
 
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 
 export interface TripOrVariantSectionProps<
   PointType extends ExtendedItem<PointType>,
-  PointProps extends ExtendedItemProps
+  PointProps extends ExtendedItemProps,
 > extends ExtendedItemProps {
   points: BimoTripOrVariantPoint<PointType, PointProps>[];
 }
@@ -29,7 +33,7 @@ export function TripOrVariantSectionClassFactory({}: EntityConstructorByEntityCl
     PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
     PointProps extends ExtendedItemProps,
     TripOrVariantType extends ExtendedItem<TripOrVariantType>,
-    TripOrVariantProps extends ExtendedItemProps
+    TripOrVariantProps extends ExtendedItemProps,
   > extends Item<
     TripOrVariantSection<PointType, PointProps, TripOrVariantType, TripOrVariantProps>
   > {
@@ -62,7 +66,7 @@ export function TripOrVariantSectionClassFactory({}: EntityConstructorByEntityCl
         .reduce(
           (previousValue, currentPoint) =>
             previousValue + parseFloat(currentPoint.distance),
-          0
+          0,
         );
     }
 

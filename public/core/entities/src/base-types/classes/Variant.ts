@@ -62,7 +62,7 @@ export declare class Variant extends TripOrVariant<
   changeStartPlace(newStartPlace: Place | string): void;
   changeEndPlace(newEndPlace: Place | string): void;
   usesOneOfThesePlaces(
-    listOfPlaces: string | Set<string> | string[]
+    listOfPlaces: string | Set<string> | string[],
   ): boolean | undefined;
   updatePlacesAndReturnListOfChanges(newPlaceIdByOldPlaceId: {
     [oldPlaceId: string]: string;

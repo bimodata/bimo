@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VariantPointsCollection as BimoVariantPointsCollection, VariantPoint as BimoVariantPoint  } from "../base-types/rawIndex";
+import {
+  VariantPointsCollection as BimoVariantPointsCollection,
+  VariantPoint as BimoVariantPoint,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
@@ -26,7 +29,7 @@ export function VariantPointsCollectionClassFactory({
 
     get mediumLoggingOutput() {
       return this.map(
-        (varPt) => `${varPt.varptPlace}${varPt.varptNoStopping === "1" ? "~" : "|"}`
+        (varPt) => `${varPt.varptPlace}${varPt.varptNoStopping === "1" ? "~" : "|"}`,
       ).join("");
     }
 

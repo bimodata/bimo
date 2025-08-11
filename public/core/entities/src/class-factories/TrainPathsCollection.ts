@@ -38,7 +38,7 @@ export function TrainPathsCollectionClassFactory({
         props,
         TrainPathsGeneralInfo,
         new TrainPathsGeneralInfo(),
-        { altPropName: "trnpgeninfo", parent: this }
+        { altPropName: "trnpgeninfo", parent: this },
       );
     }
 
@@ -51,12 +51,12 @@ export function TrainPathsCollectionClassFactory({
 
       if (!rawGeneralInfos || !rawTrainPaths) {
         throw new Error(
-          `Bad oirStyleData: could not find "train_path_general_information" or "train_path" key`
+          `Bad oirStyleData: could not find "train_path_general_information" or "train_path" key`,
         );
       }
       if (rawGeneralInfos.length !== 1) {
         throw new Error(
-          `Bad oirStyleData: there should be exactly one trainPathGeneralInfo line. Got ${rawGeneralInfos.length}`
+          `Bad oirStyleData: there should be exactly one trainPathGeneralInfo line. Got ${rawGeneralInfos.length}`,
         );
       }
 
@@ -84,7 +84,7 @@ export function TrainPathsCollectionClassFactory({
               trainPathVariant.trainPathVariantDates &&
               trainPathVariant.trainPathVariantDates.items;
             return trainPathVariant;
-          }
+          },
         );
         return trainPath;
       });

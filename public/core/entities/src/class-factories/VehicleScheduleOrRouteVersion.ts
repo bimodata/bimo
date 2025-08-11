@@ -25,12 +25,12 @@ export function VehicleScheduleOrRouteVersionClassFactory({}: EntityConstructorB
 
   class VehicleScheduleOrRouteVersion<
     ItemType extends ExtendedItem<ItemType>,
-    ItemProps extends ExtendedItemProps
+    ItemProps extends ExtendedItemProps,
   > extends Item<ItemType> {
     _abstract?: any;
     constructor(
       props: VehicleScheduleOrRouteVersionProps,
-      tripOrVariantType: "variant" | "trip" | "scheduledTrip"
+      tripOrVariantType: "variant" | "trip" | "scheduledTrip",
     ) {
       super(props);
       this._abstract = {
@@ -58,7 +58,7 @@ export function VehicleScheduleOrRouteVersionClassFactory({}: EntityConstructorB
 
     get setOfAllPlaceIdentifiers(): Set<string> {
       const allSets = this.tripsOrVariants.map(
-        (tripOrVariant) => tripOrVariant.setOfAllPlaceIdentifiers
+        (tripOrVariant) => tripOrVariant.setOfAllPlaceIdentifiers,
       );
       return mapsAndSets.mergeSets(...allSets);
     }
@@ -66,7 +66,7 @@ export function VehicleScheduleOrRouteVersionClassFactory({}: EntityConstructorB
     removeTripOrVariant(tripOrVariant: ItemType) {
       const removeFunction = get(
         this,
-        this._abstract.pathByPropName.removeTripOrVariant
+        this._abstract.pathByPropName.removeTripOrVariant,
       ).bind(this);
       return removeFunction(tripOrVariant);
     }

@@ -1,10 +1,17 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Network as BimoNetwork, NetworkNodesCollection as BimoNetworkNodesCollection , NetworkEdge as BimoNetworkEdge , NetworkNode as BimoNetworkNode , NetworkEdgesCollection as BimoNetworkEdgesCollection , NetworkSectionsCollection as BimoNetworkSectionsCollection , AdjacentLink as BimoAdjacentLink  } from "../base-types/rawIndex";
+import {
+  Network as BimoNetwork,
+  NetworkNodesCollection as BimoNetworkNodesCollection,
+  NetworkEdge as BimoNetworkEdge,
+  NetworkNode as BimoNetworkNode,
+  NetworkEdgesCollection as BimoNetworkEdgesCollection,
+  NetworkSectionsCollection as BimoNetworkSectionsCollection,
+  AdjacentLink as BimoAdjacentLink,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface NetworkProps extends ExtendedItemProps {
   bimoId?: string;
@@ -66,14 +73,14 @@ export function NetworkClassFactory({
               wipAdjacentLinksByNode.set(anyEdge.fromNode, []);
             }
             (wipAdjacentLinksByNode.get(anyEdge.fromNode) as BimoAdjacentLink[]).push(
-              new AdjacentLink(anyEdge.fromNode, anyEdge.toNode, anyEdge)
+              new AdjacentLink(anyEdge.fromNode, anyEdge.toNode, anyEdge),
             );
 
             if (!wipAdjacentLinksByNode.has(anyEdge.toNode)) {
               wipAdjacentLinksByNode.set(anyEdge.toNode, []);
             }
             (wipAdjacentLinksByNode.get(anyEdge.toNode) as BimoAdjacentLink[]).push(
-              new AdjacentLink(anyEdge.toNode, anyEdge.fromNode, anyEdge)
+              new AdjacentLink(anyEdge.toNode, anyEdge.fromNode, anyEdge),
             );
           }
         });
@@ -83,20 +90,20 @@ export function NetworkClassFactory({
 
     removeEdge(
       edge: BimoNetworkEdge,
-      options: { removeNodes?: boolean; skipCacheUpdate?: boolean } = {}
+      options: { removeNodes?: boolean; skipCacheUpdate?: boolean } = {},
     ) {
       const { removeNodes = false, skipCacheUpdate = false } = options;
       if (!skipCacheUpdate) {
         edge.nodes.forEach((node) => {
           // eslint-disable-next-line no-param-reassign
           node.adjacentLinks = node.adjacentLinks.filter(
-            ({ edge: adjEdge }) => adjEdge !== edge
+            ({ edge: adjEdge }) => adjEdge !== edge,
           );
         });
       }
       if (removeNodes) {
         edge.nodes.forEach((node) =>
-          this.removeNode(node, { removeEdges: false, skipCacheUpdate })
+          this.removeNode(node, { removeEdges: false, skipCacheUpdate }),
         );
       }
       this.edges.remove(edge);
@@ -104,7 +111,7 @@ export function NetworkClassFactory({
 
     removeEdges(
       arrayOrSetOfEdges: BimoNetworkEdge[] | Set<BimoNetworkEdge>,
-      options: { removeNodes?: boolean } = {}
+      options: { removeNodes?: boolean } = {},
     ) {
       const { removeNodes = false } = options;
       const edgesToRemove =
@@ -119,7 +126,7 @@ export function NetworkClassFactory({
 
     removeNodes(
       arrayOrSetOfNodes: BimoNetworkNode[] | Set<BimoNetworkNode>,
-      options: { removeEdges?: boolean } = {}
+      options: { removeEdges?: boolean } = {},
     ) {
       const { removeEdges = false } = options;
       const nodesToRemove =
@@ -150,8 +157,8 @@ export function NetworkClassFactory({
       callback: (
         value: BimoNetworkEdge,
         index: number,
-        array: BimoNetworkEdge[]
-      ) => boolean
+        array: BimoNetworkEdge[],
+      ) => boolean,
     ): BimoNetworkEdge[] {
       const removedEdges = this.edges.filter(callback);
       this._nullifyCachedValue("adjacentLinksByNode");
@@ -168,8 +175,8 @@ export function NetworkClassFactory({
       callback: (
         value: BimoNetworkNode,
         index: number,
-        array: BimoNetworkNode[]
-      ) => boolean
+        array: BimoNetworkNode[],
+      ) => boolean,
     ): BimoNetworkNode[] {
       const removedNodes = this.nodes.filter(callback);
       this._nullifyCachedValue("adjacentLinksByNode");
@@ -180,7 +187,7 @@ export function NetworkClassFactory({
       const { skipCacheUpdate = false } = options;
       if (!edge.nodes.every((node) => this.hasNode(node))) {
         throw new Error(
-          `${edge.shortLoggingOutput} a des nodes qui n'appartiennent pas à ${this.shortLoggingOutput}`
+          `${edge.shortLoggingOutput} a des nodes qui n'appartiennent pas à ${this.shortLoggingOutput}`,
         );
       }
       this.edges.add(edge, { ensureId: true });
@@ -202,12 +209,12 @@ export function NetworkClassFactory({
 
     removeNode(
       node: BimoNetworkNode,
-      options: { removeEdges?: boolean; skipCacheUpdate?: boolean } = {}
+      options: { removeEdges?: boolean; skipCacheUpdate?: boolean } = {},
     ) {
       const { removeEdges = false, skipCacheUpdate = false } = options;
       if (removeEdges) {
         node.adjacentEdges.forEach((edge) =>
-          this.removeEdge(edge, { removeNodes: false, skipCacheUpdate })
+          this.removeEdge(edge, { removeNodes: false, skipCacheUpdate }),
         );
       }
       this.nodes.remove(node);
@@ -217,7 +224,7 @@ export function NetworkClassFactory({
       const { skipCacheUpdate = false } = options;
       if (!node.adjacentEdges.every((edge) => this.hasEdge(edge))) {
         throw new Error(
-          `${node.shortLoggingOutput} a des adjacent edges qui n'appartiennent pas à ${this.shortLoggingOutput}`
+          `${node.shortLoggingOutput} a des adjacent edges qui n'appartiennent pas à ${this.shortLoggingOutput}`,
         );
       }
       this.nodes.add(node, { ensureId: true });

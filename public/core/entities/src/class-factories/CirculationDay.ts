@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { CirculationDay as BimoCirculationDay, CirculationPeriod as BimoCirculationPeriod } from "../base-types/rawIndex";
+import {
+  CirculationDay as BimoCirculationDay,
+  CirculationPeriod as BimoCirculationPeriod,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -24,7 +27,7 @@ export interface CirculationDayProps extends ExtendedItemProps {
 }
 
 export function CirculationDayClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoCirculationDay {
   class CirculationDay extends Item<CirculationDay> {
     bimoId?: string;

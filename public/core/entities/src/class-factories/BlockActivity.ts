@@ -1,5 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlockActivity as BimoBlockActivity, Block as BimoBlock , Trip as BimoTrip , BlockActivitiesCollection as BimoBlockActivitiesCollection , ConsistChange as BimoConsistChange , VehicleTask as BimoVehicleTask , Place as BimoPlace , BlockSection as BimoBlockSection  } from "../base-types/rawIndex";
+import {
+  BlockActivity as BimoBlockActivity,
+  Block as BimoBlock,
+  Trip as BimoTrip,
+  BlockActivitiesCollection as BimoBlockActivitiesCollection,
+  ConsistChange as BimoConsistChange,
+  VehicleTask as BimoVehicleTask,
+  Place as BimoPlace,
+  BlockSection as BimoBlockSection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";

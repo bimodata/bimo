@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripTpsCollection as BimoTripTpsCollection, TripTp as BimoTripTp  } from "../base-types/rawIndex";
+import {
+  TripTpsCollection as BimoTripTpsCollection,
+  TripTp as BimoTripTp,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { TripTpProps } from "./TripTp";
 

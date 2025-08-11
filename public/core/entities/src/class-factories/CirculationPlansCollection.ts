@@ -55,7 +55,7 @@ export function CirculationPlansCollectionClassFactory({
             (circulationPeriod) => ({
               ...circulationPeriod,
               circulation_day: circulationPeriod.circulationDays?.items,
-            })
+            }),
           ),
         })),
       };

@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripPointsCollection as BimoTripPointsCollection, TripPoint as BimoTripPoint  } from "../base-types/rawIndex";
+import {
+  TripPointsCollection as BimoTripPointsCollection,
+  TripPoint as BimoTripPoint,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
@@ -26,11 +29,11 @@ export function TripPointsCollectionClassFactory({
         this.items.sort(
           (trpptA, trpptB) =>
             trpptA.getTimeAsDuration().as("second") -
-            trpptB.getTimeAsDuration().as("second")
+            trpptB.getTimeAsDuration().as("second"),
         );
       } catch (error) {
         const newError = new Error(
-          `Error while sorting these trip points:\n${this.longLoggingOutput}\n${error.message}`
+          `Error while sorting these trip points:\n${this.longLoggingOutput}\n${error.message}`,
         );
         throw newError;
       }
@@ -38,7 +41,7 @@ export function TripPointsCollectionClassFactory({
 
     get mediumLoggingOutput() {
       return this.map((pt) => `${pt.placeId}${pt.noStopping === "1" ? "~" : "|"}`).join(
-        ""
+        "",
       );
     }
 

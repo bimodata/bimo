@@ -35,11 +35,11 @@ export function VariantsCollectionClassFactory({
      * @returns a map of variants arrays, indexed by a string made of `${refPlaceOfTheVariantsOrigin}>>>${refPlaceOfTheVariantsDestination}`
      */
     getVariantsByRefPlaceOD(
-      placesCollection: BimoPlacesCollection
+      placesCollection: BimoPlacesCollection,
     ): Map<string, BimoVariant[]> {
       const variantsByRefPlaceOD = this.groupByCustomKey((variant) => {
         const firstPlace = placesCollection.getByBusinessId(
-          variant.firstPoint.varptPlace
+          variant.firstPoint.varptPlace,
         );
         const lastPlace = placesCollection.getByBusinessId(variant.lastPoint.varptPlace);
 
@@ -104,7 +104,7 @@ export function VariantsCollectionClassFactory({
 
     sortByPriority() {
       this.sort(
-        (varA, varB) => parseInt(varA.varPriority, 10) - parseInt(varB.varPriority, 10)
+        (varA, varB) => parseInt(varA.varPriority, 10) - parseInt(varB.varPriority, 10),
       );
       return this;
     }

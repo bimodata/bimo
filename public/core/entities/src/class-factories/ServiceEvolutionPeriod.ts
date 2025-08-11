@@ -1,10 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceEvolutionPeriod as BimoServiceEvolutionPeriod, ServiceEvolutionPeriodSchedulesBookingsCollection as BimoServiceEvolutionPeriodSchedulesBookingsCollection , ServiceContextWeeksCollection as BimoServiceContextWeeksCollection  } from "../base-types/rawIndex";
+import {
+  ServiceEvolutionPeriod as BimoServiceEvolutionPeriod,
+  ServiceEvolutionPeriodSchedulesBookingsCollection as BimoServiceEvolutionPeriodSchedulesBookingsCollection,
+  ServiceContextWeeksCollection as BimoServiceContextWeeksCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface ServiceEvolutionPeriodProps extends ExtendedItemProps {
   sevopStartDate?: string;
@@ -36,7 +39,7 @@ export function ServiceEvolutionPeriodClassFactory({
         props,
         ServiceEvolutionPeriodSchedulesBookingsCollection,
         new ServiceEvolutionPeriodSchedulesBookingsCollection(),
-        { altPropName: "service_evolution_period_schedules_booking", parent: this }
+        { altPropName: "service_evolution_period_schedules_booking", parent: this },
       );
 
       this.serviceContextWeeks = gavpfp(
@@ -44,7 +47,7 @@ export function ServiceEvolutionPeriodClassFactory({
         props,
         ServiceContextWeeksCollection,
         new ServiceContextWeeksCollection(),
-        { altPropName: "service_context_week", parent: this }
+        { altPropName: "service_context_week", parent: this },
       );
     }
   }

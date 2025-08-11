@@ -1,11 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { SchedulingUnit as BimoSchedulingUnit, SchedulingUnitRoutesCollection as BimoSchedulingUnitRoutesCollection  } from "../base-types/rawIndex";
+import {
+  SchedulingUnit as BimoSchedulingUnit,
+  SchedulingUnitRoutesCollection as BimoSchedulingUnitRoutesCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface SchedulingUnitProps extends ExtendedItemProps {
   scuIdentifier?: string;
@@ -38,7 +40,7 @@ export function SchedulingUnitClassFactory({
         "scuDescription",
         props,
         `string`,
-        "Générée par Lauritz"
+        "Générée par Lauritz",
       );
       this.scuOwner = gavpfp("scuOwner", props, `string`, "ADMIN");
       this.scuDataGroup = gavpfp("scuDataGroup", props, `string`, "");
@@ -49,7 +51,7 @@ export function SchedulingUnitClassFactory({
         props,
         SchedulingUnitRoutesCollection,
         new SchedulingUnitRoutesCollection({}),
-        { altPropName: "sched_unit_route", parent: this }
+        { altPropName: "sched_unit_route", parent: this },
       );
     }
 

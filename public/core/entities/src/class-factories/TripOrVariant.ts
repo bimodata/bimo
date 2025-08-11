@@ -1,5 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripOrVariant as BimoTripOrVariant, TripOrVariantSectionsCollection as BimoTripOrVariantSectionsCollection , Place as BimoPlace , TripOrVariantPoint as BimoTripOrVariantPoint  } from "../base-types/rawIndex";
+import {
+  TripOrVariant as BimoTripOrVariant,
+  TripOrVariantSectionsCollection as BimoTripOrVariantSectionsCollection,
+  Place as BimoPlace,
+  TripOrVariantPoint as BimoTripOrVariantPoint,
+} from "../base-types/rawIndex";
 import { Item, ExtendedItemProps, ExtendedItem } from "@bimo/core-utils-collection";
 import { Collection } from "@bimo/core-utils-collection";
 import { get } from "lodash";
@@ -16,7 +21,7 @@ export type TripOrVariantTypeEnum =
   | "scheduledTrip"
   | "trainPathVariant";
 export function TripOrVariantClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoTripOrVariant {
   const pathByTripOrVariantPropNameByTripOrVariantType = {
     trip: {
@@ -59,13 +64,13 @@ export function TripOrVariantClassFactory(
     TripOrVariantType extends ExtendedItem<TripOrVariantType>,
     TripOrVariantProps extends ExtendedItemProps,
     PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
-    PointProps extends ExtendedItemProps
+    PointProps extends ExtendedItemProps,
   > extends Item<TripOrVariantType> {
     _abstract?: any;
     constructor(
       props: TripOrVariantProps,
       context: BimoContext,
-      tripOrVariantType: TripOrVariantTypeEnum
+      tripOrVariantType: TripOrVariantTypeEnum,
     ) {
       super(props, context);
       this._abstract = {
@@ -172,13 +177,13 @@ export function TripOrVariantClassFactory(
 
     changeStartPlace(newStartPlace: BimoPlace | string) {
       throw new Error(
-        `changeStartPlace method should be implemented in ${this.tripOrVariantType}`
+        `changeStartPlace method should be implemented in ${this.tripOrVariantType}`,
       );
     }
 
     changeEndPlace(newEndPlace: BimoPlace | string) {
       throw new Error(
-        `changeEndPlace method should be implemented in ${this.tripOrVariantType}`
+        `changeEndPlace method should be implemented in ${this.tripOrVariantType}`,
       );
     }
   }

@@ -1,11 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { PassengerLoadVersion as BimoPassengerLoadVersion, PassengerLoadTrip as BimoPassengerLoadTrip } from "../base-types/rawIndex";
+import {
+  PassengerLoadVersion as BimoPassengerLoadVersion,
+  PassengerLoadTrip as BimoPassengerLoadTrip,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-import { PassengerLoadTripsCollection as BimoPassengerLoadTripsCollection  } from "../base-types/rawIndex";
+import { PassengerLoadTripsCollection as BimoPassengerLoadTripsCollection } from "../base-types/rawIndex";
 
 export interface PassengerLoadVersionProps extends ExtendedItemProps {
   bimoId?: string;
@@ -34,23 +37,11 @@ export function PassengerLoadVersionClassFactory({
     constructor(props: PassengerLoadVersionProps) {
       super(props);
       this.bimoId = gavpfp("bimoId", props);
-      this.pldvIdentifier = gavpfp(
-        "pldvIdentifier",
-        props,
-        "string"
-      );
-      this.pldvDescription = gavpfp(
-        "pldvDescription",
-        props,
-        "string"
-      );
+      this.pldvIdentifier = gavpfp("pldvIdentifier", props, "string");
+      this.pldvDescription = gavpfp("pldvDescription", props, "string");
       this.pldvDataGroup = gavpfp("pldvDataGroup", props, "string");
       this.pldvOwner = gavpfp("pldvOwner", props, "string");
-      this.pldvPublicAccess = gavpfp(
-        "pldvPublicAccess",
-        props,
-        "string"
-      );
+      this.pldvPublicAccess = gavpfp("pldvPublicAccess", props, "string");
       this.pldvUserStamp = gavpfp("pldvUserStamp", props, "string");
 
       this.passengerLoadTrips = gavpfp(
@@ -58,7 +49,7 @@ export function PassengerLoadVersionClassFactory({
         props,
         PassengerLoadTripsCollection,
         new PassengerLoadTripsCollection(),
-        { altPropName: "passenger_load_trip", parent: this }
+        { altPropName: "passenger_load_trip", parent: this },
       );
     }
 

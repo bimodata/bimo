@@ -259,7 +259,7 @@ export declare const entityConstructorByEntityClassKey: {
   PassengerLoadVersion: typeof PassengerLoadVersion;
   PassengerLoadVersionsCollection: typeof PassengerLoadVersionsCollection;
   CirculationDay: typeof CirculationDay;
-  CirculationDaysCollection:typeof CirculationDaysCollection;
+  CirculationDaysCollection: typeof CirculationDaysCollection;
   CirculationPeriod: typeof CirculationPeriod;
   CirculationPeriodsCollection: typeof CirculationPeriodsCollection;
   CirculationPlan: typeof CirculationPlan;

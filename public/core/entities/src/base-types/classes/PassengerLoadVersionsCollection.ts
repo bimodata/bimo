@@ -1,8 +1,5 @@
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import {
-  PassengerLoadVersion,
-  PassengerLoadVersionProps,
-} from "./PassengerLoadVersion";
+import { PassengerLoadVersion, PassengerLoadVersionProps } from "./PassengerLoadVersion";
 export interface PassengerLoadVersionsCollectionProps
   extends ExtendedCollectionProps<PassengerLoadVersion, PassengerLoadVersionProps> {}
 export declare class PassengerLoadVersionsCollection extends Collection<

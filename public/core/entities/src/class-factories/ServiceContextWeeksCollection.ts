@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContextWeeksCollection as BimoServiceContextWeeksCollection, ServiceContextWeek as BimoServiceContextWeek  } from "../base-types/rawIndex";
+import {
+  ServiceContextWeeksCollection as BimoServiceContextWeeksCollection,
+  ServiceContextWeek as BimoServiceContextWeek,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 

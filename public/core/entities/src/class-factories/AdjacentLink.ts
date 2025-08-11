@@ -1,5 +1,9 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { AdjacentLink as BimoAdjacentLink, NetworkNode as BimoNetworkNode , NetworkEdge as BimoNetworkEdge  } from "../base-types/rawIndex";
+import {
+  AdjacentLink as BimoAdjacentLink,
+  NetworkNode as BimoNetworkNode,
+  NetworkEdge as BimoNetworkEdge,
+} from "../base-types/rawIndex";
 export function AdjacentLinkClassFactory({}: EntityConstructorByEntityClassKey): typeof BimoAdjacentLink {
   /**
    * A link is a helper object that makes it easier to traverse the network in a certain order
@@ -33,7 +37,7 @@ export function AdjacentLinkClassFactory({}: EntityConstructorByEntityClassKey):
     constructor(
       public startNode: BimoNetworkNode,
       public endNode: BimoNetworkNode,
-      public edge: BimoNetworkEdge
+      public edge: BimoNetworkEdge,
     ) {}
 
     get network() {
@@ -58,7 +62,7 @@ export function AdjacentLinkClassFactory({}: EntityConstructorByEntityClassKey):
     get previousLink() {
       if (this.startNode.degree !== 2)
         throw new Error(
-          `Invalid previous link: start node is degree ${this.endNode.degree}`
+          `Invalid previous link: start node is degree ${this.endNode.degree}`,
         );
       return this.startNode.adjacentLinks.find(({ edge }) => edge !== this.edge);
     }

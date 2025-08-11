@@ -56,7 +56,7 @@ export function TrainPathVariantClassFactory({
         props,
         TrainPathVariantPointsCollection,
         new TrainPathVariantPointsCollection(),
-        { altPropName: "train_path_variant_point", parent: this }
+        { altPropName: "train_path_variant_point", parent: this },
       );
       /** @type {TrainPathVariantDatesCollection} */
       this.trainPathVariantDates = gavpfp(
@@ -64,7 +64,7 @@ export function TrainPathVariantClassFactory({
         props,
         TrainPathVariantDatesCollection,
         new TrainPathVariantDatesCollection(),
-        { altPropName: "train_path_date", parent: this }
+        { altPropName: "train_path_date", parent: this },
       );
     }
 

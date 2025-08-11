@@ -1,5 +1,9 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Vscincloir as BimoVscincloir, VehicleSchedule as BimoVehicleSchedule , VehicleSchedulesCollection as BimoVehicleSchedulesCollection  } from "../base-types/rawIndex";
+import {
+  Vscincloir as BimoVscincloir,
+  VehicleSchedule as BimoVehicleSchedule,
+  VehicleSchedulesCollection as BimoVehicleSchedulesCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -36,7 +40,7 @@ export function VscincloirClassFactory({}: EntityConstructorByEntityClassKey): t
           this.vscsCollection?.getById(this.vscincloirIntKey) ??
           this.context?.loadedVscs?.find(
             (candidateVsc: BimoVehicleSchedule) =>
-              candidateVsc.vscIntId === this.vscincloirIntKey
+              candidateVsc.vscIntId === this.vscincloirIntKey,
           );
 
         if (!includedVsc) return null;
@@ -49,7 +53,7 @@ export function VscincloirClassFactory({}: EntityConstructorByEntityClassKey): t
     set vsc(v) {
       if (this.vsc !== null && v !== this.vsc) {
         throw new Error(
-          `${v?.shortLoggingOutput} should equal ${this.vsc.shortLoggingOutput}`
+          `${v?.shortLoggingOutput} should equal ${this.vsc.shortLoggingOutput}`,
         );
       }
       if (v?.vscIntId !== this.vscincloirIntKey) {

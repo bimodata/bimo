@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlockSectionsCollection as BimoBlockSectionsCollection, BlockSection as BimoBlockSection } from "../base-types/rawIndex";
+import {
+  BlockSectionsCollection as BimoBlockSectionsCollection,
+  BlockSection as BimoBlockSection,
+} from "../base-types/rawIndex";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
 import { BlockSectionProps } from "./BlockSection";
 
@@ -25,11 +28,11 @@ export function BlockSectionsCollectionClassFactory({
         this.items.sort(
           (sectionA, sectionB) =>
             sectionA.firstBlockActivity.startTimeAsDuration.as("second") -
-            sectionB.firstBlockActivity.startTimeAsDuration.as("second")
+            sectionB.firstBlockActivity.startTimeAsDuration.as("second"),
         );
       } catch (error) {
         const newError = new Error(
-          `Error while sorting these block sections:\n${this.longLoggingOutput}\n${error.message}`
+          `Error while sorting these block sections:\n${this.longLoggingOutput}\n${error.message}`,
         );
         throw newError;
       }

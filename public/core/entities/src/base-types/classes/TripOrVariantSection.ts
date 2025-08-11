@@ -18,7 +18,7 @@ import { TripOrVariant } from "./TripOrVariant";
  */
 export interface TripOrVariantSectionProps<
   PointType extends ExtendedItem<PointType>,
-  PointProps extends ExtendedItemProps
+  PointProps extends ExtendedItemProps,
 > extends ExtendedItemProps {
   points: TripOrVariantPoint<PointType, PointProps>[];
 }
@@ -26,7 +26,7 @@ export declare class TripOrVariantSection<
   PointType extends TripOrVariantPoint<PointType, PointProps>,
   PointProps extends ExtendedItemProps,
   TripOrVariantType extends ExtendedItem<TripOrVariantType>,
-  TripOrVariantProps extends ExtendedItemProps
+  TripOrVariantProps extends ExtendedItemProps,
 > extends Item<
   TripOrVariantSection<PointType, PointProps, TripOrVariantType, TripOrVariantProps>
 > {

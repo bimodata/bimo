@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { CirculationPlanVehicleScheduleInfosCollection as BimoCirculationPlanVehicleScheduleInfosCollection, CirculationPlanVehicleScheduleInfo as BimoCirculationPlanVehicleScheduleInfo  } from "../base-types/rawIndex";
+import {
+  CirculationPlanVehicleScheduleInfosCollection as BimoCirculationPlanVehicleScheduleInfosCollection,
+  CirculationPlanVehicleScheduleInfo as BimoCirculationPlanVehicleScheduleInfo,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
@@ -7,7 +10,10 @@ import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection
 import { CirculationPlanVehicleScheduleInfoProps } from "./CirculationPlanVehicleScheduleInfo";
 
 export interface CirculationPlanVehicleScheduleInfosCollectionProps
-  extends ExtendedCollectionProps<BimoCirculationPlanVehicleScheduleInfo, CirculationPlanVehicleScheduleInfoProps> {}
+  extends ExtendedCollectionProps<
+    BimoCirculationPlanVehicleScheduleInfo,
+    CirculationPlanVehicleScheduleInfoProps
+  > {}
 
 export function CirculationPlanVehicleScheduleInfosCollectionClassFactory({
   CirculationPlanVehicleScheduleInfo,
@@ -29,7 +35,8 @@ export function CirculationPlanVehicleScheduleInfosCollectionClassFactory({
     }
   }
 
-  CirculationPlanVehicleScheduleInfosCollection.allChildClasses = getAllChildClasses(childClasses);
+  CirculationPlanVehicleScheduleInfosCollection.allChildClasses =
+    getAllChildClasses(childClasses);
 
   return CirculationPlanVehicleScheduleInfosCollection;
 }

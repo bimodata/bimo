@@ -174,7 +174,7 @@ export function TripClassFactory({
     constructor(
       props: TripProps,
       context: BimoContext = {},
-      tripOrVariantType: TripOrVariantTypeEnum = "trip"
+      tripOrVariantType: TripOrVariantTypeEnum = "trip",
     ) {
       super(props, context, tripOrVariantType);
       this._bimoId = gavpfp("bimoId", props);
@@ -216,7 +216,7 @@ export function TripClassFactory({
         "trpShftMaxEarlier",
         props,
         `string`,
-        `0h00`
+        `0h00`,
       );
       this.trpInternalShftMaxLater = gavpfp("trpShftMaxLater", props, `string`, `0h00`);
       this.trpIsSpecial = gavpfp("trpIsSpecial", props, `string`, `0`);
@@ -244,20 +244,20 @@ export function TripClassFactory({
         "trpAreVehGroupSpecsFromVehcv",
         props,
         `string`,
-        `1`
+        `1`,
       );
       this.trpAreVehSpecCstrFromVehcv = gavpfp(
         "trpAreVehSpecCstrFromVehcv",
         props,
         `string`,
-        `1`
+        `1`,
       );
       this.trpRecommendedVehGroup = gavpfp("trpRecommendedVehGroup", props);
       this.trpConsiderLoadAtStart = gavpfp(
         "trpConsiderLoadAtStart",
         props,
         `string`,
-        `0`
+        `0`,
       );
       this.trpConsiderLoadAtEnd = gavpfp("trpConsiderLoadAtEnd", props, `string`, `0`);
       this.BlockNo = undefined; // Échanges par mail avec Mathieu M et Isabel L: il ne sert à rien, et il bug.
@@ -268,21 +268,21 @@ export function TripClassFactory({
         props,
         TripTpsCollection,
         new TripTpsCollection(),
-        { altPropName: "trip_tp", parent: this }
+        { altPropName: "trip_tp", parent: this },
       );
       /** @type {TripPointsCollection} */ this.tripPoints = gavpfp(
         "tripPoints",
         props,
         TripPointsCollection,
         new TripPointsCollection(),
-        { altPropName: "trip_point", parent: this }
+        { altPropName: "trip_point", parent: this },
       );
       /** @type {TripvehgrpspecsCollection} */ this.tripvehgrpspecs = gavpfp(
         "tripvehgrpspecs",
         props,
         TripvehgrpspecsCollection,
         new TripvehgrpspecsCollection(),
-        { altPropName: "tripvehgrpspec", parent: this }
+        { altPropName: "tripvehgrpspec", parent: this },
       );
     }
 
@@ -443,7 +443,7 @@ export function TripClassFactory({
       const copiedTrip = new this.constructor(
         props,
         this.context,
-        this.tripOrVariantType
+        this.tripOrVariantType,
       );
       copiedTrip._links.copiedFrom = this;
       return copiedTrip;
@@ -498,7 +498,7 @@ export function TripClassFactory({
     get durationInSeconds() {
       return timeAndDate.getDifferenceInSecondsBetweenTwoHastusExtendedHoursStrings(
         this.trpTimeStart,
-        this.trpTimeEnd
+        this.trpTimeEnd,
       );
     }
 
@@ -512,14 +512,14 @@ export function TripClassFactory({
               tripPoint.getTimeAsDuration("arrival", false)
             ) {
               throw new Error(
-                `Arrivée avant le départ du précédent (${previousTripPoint.shortLoggingOutput})`
+                `Arrivée avant le départ du précédent (${previousTripPoint.shortLoggingOutput})`,
               );
             }
           }
           if (!tripPoint.timesAreValid()) throw new Error(`Départ avant l'arrivée`);
         } catch (error) {
           throw new Error(
-            `Problème avec ${tripPoint.shortLoggingOutput}: ${error.message}`
+            `Problème avec ${tripPoint.shortLoggingOutput}: ${error.message}`,
           );
         }
       });
@@ -527,15 +527,15 @@ export function TripClassFactory({
 
     getTimeDiffInSecondsBetweenTripPointIndexes(
       indexOfFirst: number,
-      indexOfSecond: number
+      indexOfSecond: number,
     ) {
       const firstAsDuration = this.tripPoints.items[indexOfFirst].getTimeAsDuration(
         `departure`,
-        true
+        true,
       );
       const secondAsDuration = this.tripPoints.items[indexOfSecond].getTimeAsDuration(
         `arrival`,
-        true
+        true,
       );
       return secondAsDuration.minus(firstAsDuration).as("second");
     }
@@ -625,7 +625,7 @@ export function TripClassFactory({
 
     get startTimeAsDuration() {
       return this._getAndSetCachedValue("startTimeAsDuration", () =>
-        hastusExtendedHoursToDuration(this.startTime)
+        hastusExtendedHoursToDuration(this.startTime),
       );
     }
 
@@ -635,7 +635,7 @@ export function TripClassFactory({
 
     get endTimeAsDuration() {
       return this._getAndSetCachedValue("endTimeAsDuration", () =>
-        hastusExtendedHoursToDuration(this.endTime)
+        hastusExtendedHoursToDuration(this.endTime),
       );
     }
 
@@ -650,10 +650,10 @@ export function TripClassFactory({
     shiftTimes(shiftInSeconds: number) {
       // TODO: also shift trip points and timing points
       this.trpTimeStart = durationToHastusExtendedHoursString(
-        this.startTimeAsDuration.plus({ second: shiftInSeconds })
+        this.startTimeAsDuration.plus({ second: shiftInSeconds }),
       );
       this.trpTimeEnd = durationToHastusExtendedHoursString(
-        this.endTimeAsDuration.plus({ second: shiftInSeconds })
+        this.endTimeAsDuration.plus({ second: shiftInSeconds }),
       );
       this._nullifyCachedValue("startTimeAsDuration");
       this._nullifyCachedValue("endTimeAsDuration");

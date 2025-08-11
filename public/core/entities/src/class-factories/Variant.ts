@@ -73,7 +73,7 @@ export function VariantClassFactory({
         "varAllowDeviationFromTrackNetwork",
         props,
         "string",
-        "0"
+        "0",
       );
 
       this.variantPoints = gavpfp(
@@ -81,7 +81,7 @@ export function VariantClassFactory({
         props,
         VariantPointsCollection,
         new VariantPointsCollection(),
-        { altPropName: "variant_point", parent: this }
+        { altPropName: "variant_point", parent: this },
       );
 
       this.variantItineraries = gavpfp(
@@ -89,7 +89,7 @@ export function VariantClassFactory({
         props,
         VariantItinerariesCollection,
         new VariantItinerariesCollection(),
-        { altPropName: "variant_itinerary", parent: this }
+        { altPropName: "variant_itinerary", parent: this },
       );
     }
 
@@ -175,7 +175,7 @@ export function VariantClassFactory({
         this.points.reduce(
           (previousValue, currentPoint) =>
             previousValue + parseFloat(currentPoint.distance),
-          0
+          0,
         ) / 1000
       );
     }
@@ -204,7 +204,7 @@ export function VariantClassFactory({
         listOfPlaces = new Set(listOfPlaces);
       }
       return this.variantPoints.some((variantPoint) =>
-        (listOfPlaces as Set<string>).has(variantPoint.varptPlace)
+        (listOfPlaces as Set<string>).has(variantPoint.varptPlace),
       );
     }
 

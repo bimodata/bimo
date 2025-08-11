@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContextDaysCollection as BimoServiceContextDaysCollection, ServiceContextDay as BimoServiceContextDay  } from "../base-types/rawIndex";
+import {
+  ServiceContextDaysCollection as BimoServiceContextDaysCollection,
+  ServiceContextDay as BimoServiceContextDay,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 

@@ -47,7 +47,7 @@ export declare class RouteVersion extends VehicleScheduleOrRouteVersion<
   get shortLoggingOutput(): string;
   get mediumLoggingOutput(): string;
   getVariantsThatUseOneOfThesePlaces(
-    listOfPlaces: string | Set<string> | string[]
+    listOfPlaces: string | Set<string> | string[],
   ): Variant[] | undefined;
   getRouteById(routeId: string): import("./Route").Route | undefined;
   get variantsCollectionOfAllVariantsOfAllRoutes(): VariantsCollection | undefined;

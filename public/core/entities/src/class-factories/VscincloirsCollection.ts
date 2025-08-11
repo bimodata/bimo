@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VscincloirsCollection as BimoVscincloirsCollection, Vscincloir as BimoVscincloir  } from "../base-types/rawIndex";
+import {
+  VscincloirsCollection as BimoVscincloirsCollection,
+  Vscincloir as BimoVscincloir,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { VscincloirProps } from "./Vscincloir";
 

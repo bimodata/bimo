@@ -13,7 +13,7 @@ export interface TripOrVariantSectionsCollectionProps<
   PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
   PointProps extends ExtendedItemProps,
   TripOrVariantType extends ExtendedItem<TripOrVariantType>,
-  TripOrVariantProps extends ExtendedItemProps
+  TripOrVariantProps extends ExtendedItemProps,
 > extends ExtendedCollectionProps<
     BimoTripOrVariantSection<
       PointType,
@@ -32,7 +32,7 @@ export function TripOrVariantSectionsCollectionClassFactory({
     PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
     PointProps extends ExtendedItemProps,
     TripOrVariantType extends ExtendedItem<TripOrVariantType>,
-    TripOrVariantProps extends ExtendedItemProps
+    TripOrVariantProps extends ExtendedItemProps,
   > extends Collection<
     BimoTripOrVariantSection<
       PointType,
@@ -48,7 +48,7 @@ export function TripOrVariantSectionsCollectionClassFactory({
         PointProps,
         TripOrVariantType,
         TripOrVariantProps
-      > = {}
+      > = {},
     ) {
       super({
         itemName: "TripOrVariantSection",

@@ -13,7 +13,7 @@ export declare class BookingCalendarDatesCollection extends Collection<
       refreshCache,
     }?: {
       refreshCache?: boolean;
-    }
+    },
   ): BookingCalendarDate | null;
   getByDate(date: string): BookingCalendarDate | undefined;
   sortByDate(): void;

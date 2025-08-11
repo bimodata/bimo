@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TrainPathVariantsCollection as BimoTrainPathVariantsCollection, TrainPathVariant as BimoTrainPathVariant  } from "../base-types/rawIndex";
+import {
+  TrainPathVariantsCollection as BimoTrainPathVariantsCollection,
+  TrainPathVariant as BimoTrainPathVariant,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 

@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleUnitsCollection as BimoVehicleUnitsCollection, VehicleUnit as BimoVehicleUnit  } from "../base-types/rawIndex";
+import {
+  VehicleUnitsCollection as BimoVehicleUnitsCollection,
+  VehicleUnit as BimoVehicleUnit,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { VehicleUnitProps } from "./VehicleUnit";
 

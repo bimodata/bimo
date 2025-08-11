@@ -49,6 +49,6 @@ export declare class NetworkEdge extends Item<NetworkEdge> {
       bringNodes?: boolean;
       copyNodes?: boolean;
       skipCacheUpdate?: boolean;
-    }
+    },
   ): void;
 }

@@ -16,13 +16,13 @@ export declare class TripOrVariant<
   TripOrVariantType extends ExtendedItem<TripOrVariantType>,
   TripOrVariantProps extends ExtendedItemProps,
   PointType extends TripOrVariantPoint<PointType, PointProps>,
-  PointProps extends ExtendedItemProps
+  PointProps extends ExtendedItemProps,
 > extends Item<TripOrVariantType> {
   _abstract?: any;
   constructor(
     props: TripOrVariantProps,
     context: BimoContext,
-    tripOrVariantType: TripOrVariantTypeEnum
+    tripOrVariantType: TripOrVariantTypeEnum,
   );
   get tripOrVariantType(): any;
   get veryShortOdRefPlaceLabel(): string;

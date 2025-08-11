@@ -1,7 +1,13 @@
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";
-import { CirculationPlanVehicleScheduleInfo, CirculationPlanVehicleScheduleInfoProps } from "./CirculationPlanVehicleScheduleInfo";
+import {
+  CirculationPlanVehicleScheduleInfo,
+  CirculationPlanVehicleScheduleInfoProps,
+} from "./CirculationPlanVehicleScheduleInfo";
 export interface CirculationPlanVehicleScheduleInfosCollectionProps
-  extends ExtendedCollectionProps<CirculationPlanVehicleScheduleInfo, CirculationPlanVehicleScheduleInfoProps> {}
+  extends ExtendedCollectionProps<
+    CirculationPlanVehicleScheduleInfo,
+    CirculationPlanVehicleScheduleInfoProps
+  > {}
 export declare class CirculationPlanVehicleScheduleInfosCollection extends Collection<
   CirculationPlanVehicleScheduleInfo,
   CirculationPlanVehicleScheduleInfoProps

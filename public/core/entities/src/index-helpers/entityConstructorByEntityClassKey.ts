@@ -4,19 +4,19 @@ export const entityConstructorByEntityClassKey =
   generateEntityConstructorByEntityClassKey({});
 
 export const exportableEntityClassKeys = Object.keys(
-  entityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey,
 ).filter(
   (entityClassKey) =>
     //@ts-ignore
-    entityConstructorByEntityClassKey[entityClassKey].defaultExportedDataDataName
+    entityConstructorByEntityClassKey[entityClassKey].defaultExportedDataDataName,
 );
 
 export const importableEntityClassKeys = Object.keys(
-  entityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey,
 ).filter(
   (entityClassKey) =>
     //@ts-ignore
-    entityConstructorByEntityClassKey[entityClassKey].defaultImportDataDataName
+    entityConstructorByEntityClassKey[entityClassKey].defaultImportDataDataName,
 );
 
 import rawResetAllEntitiesNextIds from "@bimo/core-utils-reset-all-entities-next-ids";
@@ -148,10 +148,10 @@ const {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
-  PassengerLoadTrip, 
-  PassengerLoadTripsCollection, 
-  PassengerLoadVersion, 
-  PassengerLoadVersionsCollection, 
+  PassengerLoadTrip,
+  PassengerLoadTripsCollection,
+  PassengerLoadVersion,
+  PassengerLoadVersionsCollection,
   CirculationDay,
   CirculationDaysCollection,
   CirculationPeriod,
@@ -283,10 +283,10 @@ export {
   NetworksCollection,
   NetworkSection,
   NetworkSectionsCollection,
-  PassengerLoadTrip, 
-  PassengerLoadTripsCollection, 
-  PassengerLoadVersion, 
-  PassengerLoadVersionsCollection, 
+  PassengerLoadTrip,
+  PassengerLoadTripsCollection,
+  PassengerLoadVersion,
+  PassengerLoadVersionsCollection,
   CirculationDay,
   CirculationDaysCollection,
   CirculationPeriod,

@@ -1,5 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkEdge as BimoNetworkEdge, NetworkNode as BimoNetworkNode , Network as BimoNetwork , NetworkSection as BimoNetworkSection  } from "../base-types/rawIndex";
+import {
+  NetworkEdge as BimoNetworkEdge,
+  NetworkNode as BimoNetworkNode,
+  Network as BimoNetwork,
+  NetworkSection as BimoNetworkSection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
@@ -62,7 +67,7 @@ export function NetworkEdgeClassFactory({
       return (
         this.network &&
         [...this._sectionIds.values()].map((sectionId) =>
-          (this.network as BimoNetwork).sections.getById(sectionId)
+          (this.network as BimoNetwork).sections.getById(sectionId),
         )
       );
     }
@@ -121,7 +126,7 @@ export function NetworkEdgeClassFactory({
       if (this.fromNode === node) return this.toNode;
       if (this.toNode === node) return this.fromNode;
       throw new Error(
-        `La node ${node.shortLoggingOutput} n'est pas liée à cette edge ${this.shortLoggingOutput}`
+        `La node ${node.shortLoggingOutput} n'est pas liée à cette edge ${this.shortLoggingOutput}`,
       );
     }
 
@@ -139,7 +144,7 @@ export function NetworkEdgeClassFactory({
 
     moveToNetwork(
       targetNetwork: BimoNetwork,
-      options: { bringNodes?: boolean; copyNodes?: boolean; skipCacheUpdate?: boolean }
+      options: { bringNodes?: boolean; copyNodes?: boolean; skipCacheUpdate?: boolean },
     ) {
       const { bringNodes = true, copyNodes = false, skipCacheUpdate = false } = options;
       if (this.network) {

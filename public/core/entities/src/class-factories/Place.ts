@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Place as BimoPlace, PlacesCollection as BimoPlacesCollection  } from "../base-types/rawIndex";
+import {
+  Place as BimoPlace,
+  PlacesCollection as BimoPlacesCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -92,32 +95,32 @@ export function PlaceClassFactory({
       this.plcLastApprovedSegmentName = gavpfp(
         "plcLastApprovedSegmentName",
         props,
-        "string"
+        "string",
       );
       this.plcLastApprovedSegmentSide = gavpfp(
         "plcLastApprovedSegmentSide",
         props,
-        "string"
+        "string",
       );
       this.plcLastApprovedIntersect1 = gavpfp(
         "plcLastApprovedIntersect1",
         props,
-        "string"
+        "string",
       );
       this.plcLastApprovedIntersect2 = gavpfp(
         "plcLastApprovedIntersect2",
         props,
-        "string"
+        "string",
       );
       this.plcLastApprovedDistInter1 = gavpfp(
         "plcLastApprovedDistInter1",
         props,
-        "string"
+        "string",
       );
       this.plcLastApprovedDistInter2 = gavpfp(
         "plcLastApprovedDistInter2",
         props,
-        "string"
+        "string",
       );
       this.plcRim = gavpfp("plcRim", props, "string");
 
@@ -153,7 +156,7 @@ export function PlaceClassFactory({
 
     get childrenPlaces() {
       return this.isRefPlace
-        ? this.parent?.placesByReferencePlace.get(this.plcIdentifier) ?? []
+        ? (this.parent?.placesByReferencePlace.get(this.plcIdentifier) ?? [])
         : [];
     }
 
@@ -169,7 +172,7 @@ export function PlaceClassFactory({
       return this._getAndSetCachedValue("mapZone", () => {
         if (!this.isLocated) return null;
         return `${Math.floor(parseFloat(this.locaXCoord as string) / 100)}_${Math.floor(
-          parseFloat(this.locaYCoord as string) / 100
+          parseFloat(this.locaYCoord as string) / 100,
         )}`;
       });
     }

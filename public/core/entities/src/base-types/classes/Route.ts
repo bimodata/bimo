@@ -88,7 +88,7 @@ export declare class Route extends Item<Route> {
   get shortLoggingOutput(): string;
   get mediumLoggingOutput(): string;
   getVariantsThatUseOneOfThesePlaces(
-    listOfPlaces: string | Set<string> | string[]
+    listOfPlaces: string | Set<string> | string[],
   ): import("./Variant").Variant[] | undefined;
   getVariantById(variantId: any): import("./Variant").Variant | undefined;
   get routeVersion(): RouteVersion | undefined;

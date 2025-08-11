@@ -21,7 +21,7 @@ export interface BlocksAndActsAndSections {
 
 function computeVehicleTasksOfVsc(
   vsc: BimoVehicleSchedule,
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ) {
   const { BlocksCollection, VehicleTasksCollection } = entityConstructorByEntityClassKey;
   const blocksCollByVehuUniqueId: { [vehuUniqueId: string]: BimoBlocksCollection } = {};
@@ -43,7 +43,7 @@ function computeVehicleTasksOfVsc(
       const blocksCollOfThisVehu = getAndSetIfRequired(
         blocksCollByVehuUniqueId,
         blkVehu.vehuUniqueId,
-        new BlocksCollection({ associationType: "aggregation" })
+        new BlocksCollection({ associationType: "aggregation" }),
       );
       blocksCollOfThisVehu.add(block);
     });
@@ -64,7 +64,7 @@ function computeVehicleTasksOfVsc(
         setOfVtasByBlockActivity,
         setOfBlockSectionsByBlockActivity,
       },
-      entityConstructorByEntityClassKey
+      entityConstructorByEntityClassKey,
     );
     blocksAndActsAndSectionsByVta.set(vehicleTask, blocksAndActsAndSectionsOfThisVta);
   });

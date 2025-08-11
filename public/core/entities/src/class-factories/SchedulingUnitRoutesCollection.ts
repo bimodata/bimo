@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { SchedulingUnitRoutesCollection as BimoSchedulingUnitRoutesCollection, SchedulingUnitRoute as BimoSchedulingUnitRoute  } from "../base-types/rawIndex";
+import {
+  SchedulingUnitRoutesCollection as BimoSchedulingUnitRoutesCollection,
+  SchedulingUnitRoute as BimoSchedulingUnitRoute,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";

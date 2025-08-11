@@ -1,5 +1,10 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Maintenance as BimoMaintenance, BlockActivity as BimoBlockActivity , Place as BimoPlace , MaintenancesCollection as BimoMaintenancesCollection  } from "../base-types/rawIndex";
+import {
+  Maintenance as BimoMaintenance,
+  BlockActivity as BimoBlockActivity,
+  Place as BimoPlace,
+  MaintenancesCollection as BimoMaintenancesCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -138,7 +143,7 @@ export function MaintenanceClassFactory({}: EntityConstructorByEntityClassKey): 
 
     get startTimeAsDuration() {
       return this._getAndSetCachedValue("startTimeAsDuration", () =>
-        hastusExtendedHoursToDuration(this.startTime)
+        hastusExtendedHoursToDuration(this.startTime),
       );
     }
 
@@ -148,7 +153,7 @@ export function MaintenanceClassFactory({}: EntityConstructorByEntityClassKey): 
 
     get endTimeAsDuration() {
       return this._getAndSetCachedValue("endTimeAsDuration", () =>
-        hastusExtendedHoursToDuration(this.endTime)
+        hastusExtendedHoursToDuration(this.endTime),
       );
     }
 
@@ -170,10 +175,10 @@ export function MaintenanceClassFactory({}: EntityConstructorByEntityClassKey): 
 
     shiftTimes(shiftInSeconds: number) {
       this.mtnStartTime = durationToHastusExtendedHoursString(
-        this.startTimeAsDuration.plus({ second: shiftInSeconds })
+        this.startTimeAsDuration.plus({ second: shiftInSeconds }),
       );
       this.mtnEndTime = durationToHastusExtendedHoursString(
-        this.endTimeAsDuration.plus({ second: shiftInSeconds })
+        this.endTimeAsDuration.plus({ second: shiftInSeconds }),
       );
       this._nullifyCachedValue("startTimeAsDuration");
       this._nullifyCachedValue("endTimeAsDuration");

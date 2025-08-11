@@ -1,13 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { CirculationPeriod as BimoCirculationPeriod, CirculationDaysCollection as BimoCirculationDaysCollection  } from "../base-types/rawIndex";
+import {
+  CirculationPeriod as BimoCirculationPeriod,
+  CirculationDaysCollection as BimoCirculationDaysCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
-
 export interface CirculationPeriodProps extends ExtendedItemProps {
-
   bimoId?: string;
   cirperId?: string;
   cirperPrevPeriodId?: string;
@@ -36,7 +37,7 @@ export function CirculationPeriodClassFactory({
         props,
         CirculationDaysCollection,
         new CirculationDaysCollection(),
-        { altPropName: "circulation_day", parent: this }
+        { altPropName: "circulation_day", parent: this },
       );
     }
 

@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { OvernightLinksCollection as BimoOvernightLinksCollection, OvernightLink as BimoOvernightLink  } from "../base-types/rawIndex";
+import {
+  OvernightLinksCollection as BimoOvernightLinksCollection,
+  OvernightLink as BimoOvernightLink,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { OvernightLinkProps } from "./OvernightLink";
 

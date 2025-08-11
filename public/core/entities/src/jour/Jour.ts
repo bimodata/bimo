@@ -130,7 +130,7 @@ export class Jour {
   EN2: JourEN2;
   vscSchedType: string;
   constructor(
-    jourValue: Jour | JourValue | { FR0?: JourFR0; vscSchedType?: VscSchedType }
+    jourValue: Jour | JourValue | { FR0?: JourFR0; vscSchedType?: VscSchedType },
   ) {
     if (jourValue instanceof Jour) {
       return jourValue;
@@ -149,8 +149,8 @@ export class Jour {
     if (!jourId) {
       throw new Error(
         `Impossible de construire un jour à partir de cet argument: ${JSON.stringify(
-          jourValue
-        )}`
+          jourValue,
+        )}`,
       );
     }
     if (Jour.jourByJourId[jourId]) {
@@ -199,7 +199,7 @@ Object.keys(ALL_JOUR_VALUE_BY_KEY_BY_ID).forEach((id) => {
 Jour.jourIdByJourValue = jourIdByJourValue;
 
 Object.keys(ALL_JOUR_VALUE_BY_KEY_BY_ID).forEach(
-  (id) => new Jour(id as unknown as JourId)
+  (id) => new Jour(id as unknown as JourId),
 );
 
 Jour.prototype.serializeModel = serializeThis;

@@ -1,11 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripPoint as BimoTripPoint, TripPointsCollection as BimoTripPointsCollection , Trip as BimoTrip  } from "../base-types/rawIndex";
+import {
+  TripPoint as BimoTripPoint,
+  TripPointsCollection as BimoTripPointsCollection,
+  Trip as BimoTrip,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface TripPointProps extends ExtendedItemProps {
   trpptPlace?: string;
@@ -95,13 +98,13 @@ export function TripPointClassFactory({
         "trpptInternalArrivalTime",
         props,
         `string`,
-        this.trpptArrivalTimeUnrounded
+        this.trpptArrivalTimeUnrounded,
       );
       this._trpptInternalDepartureTime = gavpfp(
         "trpptInternalDepartureTime",
         props,
         `string`,
-        this.trpptDepartureTimeUnrounded
+        this.trpptDepartureTimeUnrounded,
       );
       this.trpptNoStopping = gavpfp("trpptNoStopping", props, `string`, `0`);
 
@@ -120,56 +123,56 @@ export function TripPointClassFactory({
         "trpptInternalAllowLoadTime",
         props,
         `string`,
-        `1`
+        `1`,
       );
       this.trpptInternalArrivalTimeDiff = gavpfp(
         "trpptInternalArrivalTimeDiff",
         props,
         `string`,
-        `0h00`
+        `0h00`,
       );
       this.trpptInternalDepartureTimeDiff = gavpfp(
         "trpptInternalDepartureTimeDiff",
         props,
         `string`,
-        `0h00`
+        `0h00`,
       );
       this.trpptDepartureTpNote = gavpfp("trpptDepartureTpNote", props);
       this.trpptInternalTimeFactor = gavpfp(
         "trpptInternalTimeFactor",
         props,
         `string`,
-        `1.00`
+        `1.00`,
       );
       this.trpptInternalPublicInfo = gavpfp(
         "trpptInternalPublicInfo",
         props,
         `string`,
-        `1`
+        `1`,
       );
       this.trpptInternalPathPrevPoint = gavpfp("trpptInternalPathPrevPoint", props);
       this.trpptInternalPassengersMvmtRestrict = gavpfp(
         "trpptInternalPassengersMvmtRestrict",
-        props
+        props,
       );
       this.trpptOriginalStop = gavpfp("trpptOriginalStop", props);
       this.trpptInternalOriginalPlaceId = gavpfp(
         "trpptInternalOriginalPlaceId",
         props,
         `string`,
-        this.trpptPlace
+        this.trpptPlace,
       );
       this.trpptInternalOriginalNoStopping = gavpfp(
         "trpptInternalOriginalNoStopping",
         props,
         `string`,
-        this.trpptNoStopping
+        this.trpptNoStopping,
       );
       this.trpptInternalOriginalAllowLoadTime = gavpfp(
         "trpptInternalOriginalAllowLoadTime",
         props,
         `string`,
-        this.trpptInternalAllowLoadTime
+        this.trpptInternalAllowLoadTime,
       );
       this.trpptInternalBackwardHoldTime = gavpfp("trpptInternalBackwardHoldTime", props);
       this.trpptInternalForwardHoldTime = gavpfp("trpptInternalForwardHoldTime", props);

@@ -38,6 +38,6 @@ export declare class NetworkNode extends Item<NetworkNode> {
       bringEdges?: boolean;
       copyEdges?: boolean;
       skipCacheUpdate?: boolean;
-    }
+    },
   ): void;
 }

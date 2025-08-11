@@ -1,10 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { RunTimeVersion as BimoRunTimeVersion, RunTimesCollection as BimoRunTimesCollection , LoadTimesCollection as BimoLoadTimesCollection  } from "../base-types/rawIndex";
+import {
+  RunTimeVersion as BimoRunTimeVersion,
+  RunTimesCollection as BimoRunTimesCollection,
+  LoadTimesCollection as BimoLoadTimesCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
-
 
 export interface RunTimeVersionProps extends ExtendedItemProps {
   bimoId?: string;
@@ -57,13 +60,13 @@ export function RunTimeVersionClassFactory({
         "rtvAllowsMapBasedRunTimes",
         props,
         `string`,
-        `0`
+        `0`,
       );
       this.rtvMapBasedRunTimeFactor = gavpfp(
         "rtvMapBasedRunTimeFactor",
         props,
         `string`,
-        `1`
+        `1`,
       );
 
       this.runTimes = gavpfp(
@@ -71,7 +74,7 @@ export function RunTimeVersionClassFactory({
         props,
         RunTimesCollection,
         new RunTimesCollection(),
-        { altPropName: "run_time", parent: this }
+        { altPropName: "run_time", parent: this },
       );
 
       /** @type {LoadTimesCollection} */
@@ -80,7 +83,7 @@ export function RunTimeVersionClassFactory({
         props,
         LoadTimesCollection,
         new LoadTimesCollection(),
-        { altPropName: "load_time", parent: this }
+        { altPropName: "load_time", parent: this },
       );
     }
 

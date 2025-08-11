@@ -1,11 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceDefinition as BimoServiceDefinition, SdefSchedulingUnitsCollection as BimoSdefSchedulingUnitsCollection  } from "../base-types/rawIndex";
+import {
+  ServiceDefinition as BimoServiceDefinition,
+  SdefSchedulingUnitsCollection as BimoSdefSchedulingUnitsCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface ServiceDefinitionProps extends ExtendedItemProps {
   sdefIdentifier?: string;
@@ -35,7 +37,7 @@ export function ServiceDefinitionClassFactory({
         "sdefDescription",
         props,
         `string`,
-        "Générée par Lauritz"
+        "Générée par Lauritz",
       );
       this.sdefOwner = gavpfp("sdefOwner", props, `string`, "ADMIN");
       this.sdefDataGroup = gavpfp("sdefDataGroup", props, `string`);
@@ -48,7 +50,7 @@ export function ServiceDefinitionClassFactory({
         props,
         SdefSchedulingUnitsCollection,
         new SdefSchedulingUnitsCollection(),
-        { altPropName: "sdef_scheduling_unit", parent: this }
+        { altPropName: "sdef_scheduling_unit", parent: this },
       );
     }
 

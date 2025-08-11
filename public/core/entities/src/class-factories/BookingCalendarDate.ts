@@ -1,12 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BookingCalendarDate as BimoBookingCalendarDate, SchedulingUnitDatesCollection as BimoSchedulingUnitDatesCollection , SchedulingUnitDate as BimoSchedulingUnitDate  } from "../base-types/rawIndex";
+import {
+  BookingCalendarDate as BimoBookingCalendarDate,
+  SchedulingUnitDatesCollection as BimoSchedulingUnitDatesCollection,
+  SchedulingUnitDate as BimoSchedulingUnitDate,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { cleanStringUsingRegexAndReplacePairs } from "@bimo/core-utils-string";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
-
 
 export interface BookingCalendarDateProps extends ExtendedItemProps {
   bcaldDate?: string;
@@ -44,7 +46,7 @@ export function BookingCalendarDateClassFactory({
         props,
         SchedulingUnitDatesCollection,
         new SchedulingUnitDatesCollection({}),
-        { altPropName: "scheduling_unit_date", parent: this }
+        { altPropName: "scheduling_unit_date", parent: this },
       );
     }
 
@@ -52,7 +54,7 @@ export function BookingCalendarDateClassFactory({
       return this._getAndSetCachedValue("dateAsIsoDateString", () =>
         cleanStringUsingRegexAndReplacePairs(this.bcaldDate, [
           ["/^(\\d{2})/(\\d{2})/(\\d{4})$/", "$3-$2-$1"],
-        ])
+        ]),
       );
     }
 

@@ -1,10 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { NetworkNode as BimoNetworkNode, AdjacentLink as BimoAdjacentLink , NetworkNodesCollection as BimoNetworkNodesCollection , Network as BimoNetwork , NetworkSection as BimoNetworkSection  } from "../base-types/rawIndex";
+import {
+  NetworkNode as BimoNetworkNode,
+  AdjacentLink as BimoAdjacentLink,
+  NetworkNodesCollection as BimoNetworkNodesCollection,
+  Network as BimoNetwork,
+  NetworkSection as BimoNetworkSection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 /** Une représentation logique d'un point discret du réseau. */
 export interface NetworkNodeProps extends ExtendedItemProps {
@@ -38,7 +43,7 @@ export function NetworkNodeClassFactory({}: EntityConstructorByEntityClassKey): 
 
     get sections() {
       return [...this._sectionIds.values()].map((sectionId) =>
-        this.network?.sections.getById(sectionId)
+        this.network?.sections.getById(sectionId),
       );
     }
 
@@ -53,7 +58,7 @@ export function NetworkNodeClassFactory({}: EntityConstructorByEntityClassKey): 
     get adjacentLinks(): BimoAdjacentLink[] {
       if (!this.network) return [];
       return (this.network.adjacentLinksByNode.get(this) || []).filter(
-        ({ edge }) => !this.network?.deletedEdges.has(edge)
+        ({ edge }) => !this.network?.deletedEdges.has(edge),
       );
     }
 
@@ -100,7 +105,7 @@ export function NetworkNodeClassFactory({}: EntityConstructorByEntityClassKey): 
         bringEdges?: boolean;
         copyEdges?: boolean;
         skipCacheUpdate?: boolean;
-      }
+      },
     ) {
       const { bringEdges = false, copyEdges = false, skipCacheUpdate = false } = options;
       if (this.network) {
@@ -108,7 +113,7 @@ export function NetworkNodeClassFactory({}: EntityConstructorByEntityClassKey): 
       }
       if (bringEdges) {
         this.adjacentEdges.forEach((edge) =>
-          edge.moveToNetwork(targetNetwork, { bringNodes: false, skipCacheUpdate })
+          edge.moveToNetwork(targetNetwork, { bringNodes: false, skipCacheUpdate }),
         );
       } else if (copyEdges) {
         throw new Error(`copyEdges option is not implemented yet`);

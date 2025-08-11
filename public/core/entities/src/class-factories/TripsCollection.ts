@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TripsCollection as BimoTripsCollection, Trip as BimoTrip  } from "../base-types/rawIndex";
+import {
+  TripsCollection as BimoTripsCollection,
+  Trip as BimoTrip,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Collection, ExtendedCollectionProps } from "@bimo/core-utils-collection";

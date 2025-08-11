@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { SdefSchedulingUnit as BimoSdefSchedulingUnit, SchedulingUnit as BimoSchedulingUnit  } from "../base-types/rawIndex";
+import {
+  SdefSchedulingUnit as BimoSdefSchedulingUnit,
+  SchedulingUnit as BimoSchedulingUnit,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";

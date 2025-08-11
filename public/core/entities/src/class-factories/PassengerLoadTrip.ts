@@ -20,7 +20,7 @@ export interface PassengerLoadTripProps extends ExtendedItemProps {
 }
 
 export function PassengerLoadTripClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoPassengerLoadTrip {
   class PassengerLoadTrip extends Item<PassengerLoadTrip> {
     bimoId?: string;

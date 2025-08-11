@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BlkvehuoirsCollection as BimoBlkvehuoirsCollection, Blkvehuoir as BimoBlkvehuoir } from "../base-types/rawIndex";
+import {
+  BlkvehuoirsCollection as BimoBlkvehuoirsCollection,
+  Blkvehuoir as BimoBlkvehuoir,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { BlkvehuoirProps } from "./Blkvehuoir";
 

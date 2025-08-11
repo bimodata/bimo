@@ -25,7 +25,7 @@ export function TrainPathsGeneralInfoClassFactory({}: EntityConstructorByEntityC
       this.trnpgeninfoAdministrativeYear = gavpfp(
         "trnpgeninfoAdministrativeYear",
         props,
-        `string`
+        `string`,
       );
     }
   }

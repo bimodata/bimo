@@ -26,19 +26,19 @@ export function computeActivityEntityItemsOfVsc(vsc: BimoVehicleSchedule) {
         hastusIdKeyByEntityClassKey[blockActivity.activityEntityClassKey];
 
       let activityEntityItem = vsc[collectionKey].getByBusinessId(
-        blockActivity[hastusIdKey]
+        blockActivity[hastusIdKey],
       );
       if (!activityEntityItem) {
         const foundInOtherSchedule = vsc.vscincloirs.some((vscInclOir) => {
           activityEntityItem = vscInclOir.vsc?.[collectionKey].getByBusinessId(
-            blockActivity[hastusIdKey]
+            blockActivity[hastusIdKey],
           );
           return !!activityEntityItem;
         });
         if (!foundInOtherSchedule) {
           throw new Error(
             `Impossible de trouver un ${blockActivity.activityNameByLanguageCode.fr} avec l'id ${blockActivity[hastusIdKey]} ` +
-              `dans l'horaire ${vsc.shortLoggingOutput} et ses horaires inclus.`
+              `dans l'horaire ${vsc.shortLoggingOutput} et ses horaires inclus.`,
           );
         }
       }
@@ -46,7 +46,7 @@ export function computeActivityEntityItemsOfVsc(vsc: BimoVehicleSchedule) {
       const setOfBlockActivitiesOfThisEntityItem = getAndSetIfRequired(
         setOfBlockActivitiesByBlockActivityEntityItem,
         activityEntityItem,
-        new Set()
+        new Set(),
       );
       setOfBlockActivitiesOfThisEntityItem.add(blockActivity);
 

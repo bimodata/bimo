@@ -1,4 +1,7 @@
-import { TripOrVariant as BimoTripOrVariant, TripOrVariantPoint as BimoTripOrVariantPoint } from "../base-types/rawIndex";
+import {
+  TripOrVariant as BimoTripOrVariant,
+  TripOrVariantPoint as BimoTripOrVariantPoint,
+} from "../base-types/rawIndex";
 import { ExtendedItem, ExtendedItemProps } from "@bimo/core-utils-collection";
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
 
@@ -6,7 +9,7 @@ function computeTripOrVariantSectionsOfTripOrVariant<
   TripOrVariantType extends ExtendedItem<TripOrVariantType>,
   TripOrVariantProps extends ExtendedItemProps,
   PointType extends BimoTripOrVariantPoint<PointType, PointProps>,
-  PointProps extends ExtendedItemProps
+  PointProps extends ExtendedItemProps,
 >(
   tripOrVariant: BimoTripOrVariant<
     TripOrVariantType,
@@ -14,7 +17,7 @@ function computeTripOrVariantSectionsOfTripOrVariant<
     PointType,
     PointProps
   >,
-  { TripOrVariantSectionsCollection }: EntityConstructorByEntityClassKey
+  { TripOrVariantSectionsCollection }: EntityConstructorByEntityClassKey,
 ) {
   try {
     const tripOrVariantSections = new TripOrVariantSectionsCollection<
@@ -38,7 +41,7 @@ function computeTripOrVariantSectionsOfTripOrVariant<
     return tripOrVariantSections;
   } catch (error: any) {
     const err = new Error(
-      `Erreur dans le calcul des tripOrVariantSections de ${tripOrVariant.slo}: ${error.message}`
+      `Erreur dans le calcul des tripOrVariantSections de ${tripOrVariant.slo}: ${error.message}`,
     );
     err.stack = `Re-thrown: ${err.stack}\nOriginal:${error.stack}`;
     throw err;

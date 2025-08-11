@@ -303,7 +303,8 @@ export const DefaultClassFactoryByEntityClassKey = {
   CirculationPeriod: CirculationPeriodClassFactory,
   CirculationPeriodsCollection: CirculationPeriodsCollectionClassFactory,
   CirculationPlanVehicleScheduleInfo: CirculationPlanVehicleScheduleInfoClassFactory,
-  CirculationPlanVehicleScheduleInfosCollection: CirculationPlanVehicleScheduleInfosCollectionClassFactory,
+  CirculationPlanVehicleScheduleInfosCollection:
+    CirculationPlanVehicleScheduleInfosCollectionClassFactory,
   CirculationPlan: CirculationPlanClassFactory,
   CirculationPlansCollection: CirculationPlansCollectionClassFactory,
 };

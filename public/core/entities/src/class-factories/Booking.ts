@@ -18,7 +18,7 @@ export interface BookingProps extends ExtendedItemProps {
 }
 
 export function BookingClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoBooking {
   class Booking extends Item<Booking> {
     bimoId?: string;
@@ -39,7 +39,7 @@ export function BookingClassFactory(
       this.bkTrainPathAdministrativeYear = gavpfp(
         "bkTrainPathAdministrativeYear",
         props,
-        `string`
+        `string`,
       );
     }
   }

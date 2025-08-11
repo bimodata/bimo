@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleSchedulesCollection as BimoVehicleSchedulesCollection, VehicleSchedule as BimoVehicleSchedule  } from "../base-types/rawIndex";
+import {
+  VehicleSchedulesCollection as BimoVehicleSchedulesCollection,
+  VehicleSchedule as BimoVehicleSchedule,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
@@ -43,7 +46,7 @@ export function VehicleSchedulesCollectionClassFactory({
     static createFromOirStyleData(
       oirStyleData: any,
       label: string,
-      associationType: CollectionAssociationType = "composition"
+      associationType: CollectionAssociationType = "composition",
     ): VehicleSchedulesCollection {
       const rawVehicleSchedules = oirStyleData.vehicle_schedule;
 
@@ -86,7 +89,7 @@ export function VehicleSchedulesCollectionClassFactory({
           block.block_activity = block.blockActivities.items.filter(
             /** Ces activités ne doivent pas être dans le fichier sinon elles font planter Hastus
              * qui les calcule tout seul            */
-            (blockAct) => !["13", "14"].includes(blockAct.blkactVehicleActivityTypeNo)
+            (blockAct) => !["13", "14"].includes(blockAct.blkactVehicleActivityTypeNo),
           );
           //@ts-ignore
           block.blk_vehicle_unit_at_start = block.blkvehuoirs.items;
@@ -123,7 +126,7 @@ export function VehicleSchedulesCollectionClassFactory({
           new TripsCollection({
             items: this.flatMap((vsc) => vsc.trips.items),
             associationType: "aggregation",
-          })
+          }),
       );
     }
 
@@ -134,7 +137,7 @@ export function VehicleSchedulesCollectionClassFactory({
           new VehicleTasksCollection({
             items: this.flatMap((vsc) => vsc.vehicleTasks.items),
             associationType: "aggregation",
-          })
+          }),
       );
     }
 
@@ -149,7 +152,7 @@ export function VehicleSchedulesCollectionClassFactory({
 
     getOrCreateVehicleScheduleByVscName(
       vscName: string,
-      defaultPropsForNewVsc: VehicleScheduleProps
+      defaultPropsForNewVsc: VehicleScheduleProps,
     ) {
       defaultPropsForNewVsc = defaultPropsForNewVsc || {};
       defaultPropsForNewVsc.vscName = vscName;
@@ -167,7 +170,7 @@ export function VehicleSchedulesCollectionClassFactory({
      * @return this modified vscColl
      */
     mergeWithOtherVscColl(
-      otherVscColl: VehicleSchedulesCollection
+      otherVscColl: VehicleSchedulesCollection,
     ): VehicleSchedulesCollection {
       this._tripsCollectionOfAllTripsOfAllVscs = null;
       this.label = `${this.label} - ${otherVscColl.label}`;
@@ -185,7 +188,7 @@ export function VehicleSchedulesCollectionClassFactory({
       this.forEach((vechicleSchedule) => {
         vechicleSchedule.blocks.forEach((block) => {
           block.blockActivities.filter((blockActivity) =>
-            evaluateItemQuery(blockActivity, blockActivitySelectorQuery)
+            evaluateItemQuery(blockActivity, blockActivitySelectorQuery),
           );
         });
       });

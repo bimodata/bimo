@@ -1,5 +1,8 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContextsCollection as BimoServiceContextsCollection, ServiceContext as BimoServiceContext  } from "../base-types/rawIndex";
+import {
+  ServiceContextsCollection as BimoServiceContextsCollection,
+  ServiceContext as BimoServiceContext,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 

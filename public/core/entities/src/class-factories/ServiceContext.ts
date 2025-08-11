@@ -1,10 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ServiceContext as BimoServiceContext, ServiceContextParentsCollection as BimoServiceContextParentsCollection , ServiceContextIntervalsCollection as BimoServiceContextIntervalsCollection , ServiceEvolutionPeriodsCollection as BimoServiceEvolutionPeriodsCollection  } from "../base-types/rawIndex";
+import {
+  ServiceContext as BimoServiceContext,
+  ServiceContextParentsCollection as BimoServiceContextParentsCollection,
+  ServiceContextIntervalsCollection as BimoServiceContextIntervalsCollection,
+  ServiceEvolutionPeriodsCollection as BimoServiceEvolutionPeriodsCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface ServiceContextProps extends ExtendedItemProps {
   sctxName?: string;
@@ -76,7 +80,7 @@ export function ServiceContextClassFactory({
         props,
         ServiceContextParentsCollection,
         new ServiceContextParentsCollection(),
-        { altPropName: "service_context_parent", parent: this }
+        { altPropName: "service_context_parent", parent: this },
       );
 
       this.serviceContextIntervals = gavpfp(
@@ -84,7 +88,7 @@ export function ServiceContextClassFactory({
         props,
         ServiceContextIntervalsCollection,
         new ServiceContextIntervalsCollection(),
-        { altPropName: "service_context_interval", parent: this }
+        { altPropName: "service_context_interval", parent: this },
       );
 
       this.serviceEvolutionPeriods = gavpfp(
@@ -92,7 +96,7 @@ export function ServiceContextClassFactory({
         props,
         ServiceEvolutionPeriodsCollection,
         new ServiceEvolutionPeriodsCollection(),
-        { altPropName: "service_evolution_period", parent: this }
+        { altPropName: "service_evolution_period", parent: this },
       );
     }
   }

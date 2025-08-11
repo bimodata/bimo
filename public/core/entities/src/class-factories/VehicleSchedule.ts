@@ -1,11 +1,26 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { VehicleSchedule as BimoVehicleSchedule, TripsCollection as BimoTripsCollection , Vscincloir as BimoVscincloir , VscincloirsCollection as BimoVscincloirsCollection , NetworkEventsCollection as BimoNetworkEventsCollection , VehicleUnitsCollection as BimoVehicleUnitsCollection , BlocksCollection as BimoBlocksCollection , VehicleStandbysCollection as BimoVehicleStandbysCollection , MaintenancesCollection as BimoMaintenancesCollection , TripShiftsCollection as BimoTripShiftsCollection , ConsistChangesCollection as BimoConsistChangesCollection , OvernightLinksCollection as BimoOvernightLinksCollection , BlockActivity as BimoBlockActivity , Trip as BimoTrip , SchedulingUnitDatesCollection as BimoSchedulingUnitDatesCollection  } from "../base-types/rawIndex";
+import {
+  VehicleSchedule as BimoVehicleSchedule,
+  TripsCollection as BimoTripsCollection,
+  Vscincloir as BimoVscincloir,
+  VscincloirsCollection as BimoVscincloirsCollection,
+  NetworkEventsCollection as BimoNetworkEventsCollection,
+  VehicleUnitsCollection as BimoVehicleUnitsCollection,
+  BlocksCollection as BimoBlocksCollection,
+  VehicleStandbysCollection as BimoVehicleStandbysCollection,
+  MaintenancesCollection as BimoMaintenancesCollection,
+  TripShiftsCollection as BimoTripShiftsCollection,
+  ConsistChangesCollection as BimoConsistChangesCollection,
+  OvernightLinksCollection as BimoOvernightLinksCollection,
+  BlockActivity as BimoBlockActivity,
+  Trip as BimoTrip,
+  SchedulingUnitDatesCollection as BimoSchedulingUnitDatesCollection,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import getIteratorForValuesAtPath from "@bimo/core-utils-get-iterator-for-values-at-path";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 import computeVehicleTasksOfVsc, {
   ComputedVehicleTaskObjects,
@@ -69,7 +84,7 @@ export interface VehicleScheduleProps extends ExtendedItemProps {
 }
 
 export function VehicleScheduleClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoVehicleSchedule {
   const {
     TripsCollection,
@@ -207,14 +222,14 @@ export function VehicleScheduleClassFactory(
         props,
         VscincloirsCollection,
         new VscincloirsCollection(),
-        { altPropName: "vscincloir", parent: this }
+        { altPropName: "vscincloir", parent: this },
       );
       this.networkEvents = gavpfp(
         "networkEvents",
         props,
         NetworkEventsCollection,
         new NetworkEventsCollection(),
-        { altPropName: "network_event", parent: this }
+        { altPropName: "network_event", parent: this },
       );
       /** @type {VehicleUnitsCollection} */
       this.vehicleUnits = gavpfp(
@@ -222,7 +237,7 @@ export function VehicleScheduleClassFactory(
         props,
         VehicleUnitsCollection,
         new VehicleUnitsCollection(),
-        { altPropName: "vehicle_unit", parent: this }
+        { altPropName: "vehicle_unit", parent: this },
       );
       /** @type {BlocksCollection} */
       this.blocks = gavpfp("blocks", props, BlocksCollection, new BlocksCollection(), {
@@ -235,7 +250,7 @@ export function VehicleScheduleClassFactory(
         props,
         VehicleStandbysCollection,
         new VehicleStandbysCollection(),
-        { altPropName: "vehicle_standby", parent: this }
+        { altPropName: "vehicle_standby", parent: this },
       );
       /** @type {MaintenancesCollection} */
       this.maintenances = gavpfp(
@@ -243,7 +258,7 @@ export function VehicleScheduleClassFactory(
         props,
         MaintenancesCollection,
         new MaintenancesCollection(),
-        { altPropName: "maintenance", parent: this }
+        { altPropName: "maintenance", parent: this },
       );
       /** @type {TripsCollection} */
       this.trips = gavpfp("trips", props, TripsCollection, new TripsCollection(), {
@@ -255,7 +270,7 @@ export function VehicleScheduleClassFactory(
         props,
         TripShiftsCollection,
         new TripShiftsCollection(),
-        { altPropName: "trip_shift", parent: this }
+        { altPropName: "trip_shift", parent: this },
       );
       /** @type {ConsistChangesCollection} */
       this.consistChanges = gavpfp(
@@ -263,21 +278,21 @@ export function VehicleScheduleClassFactory(
         props,
         ConsistChangesCollection,
         new ConsistChangesCollection(),
-        { altPropName: "consist_change", parent: this }
+        { altPropName: "consist_change", parent: this },
       );
       this.overnightLinks = gavpfp(
         "overnightLinks",
         props,
         OvernightLinksCollection,
         new OvernightLinksCollection(),
-        { altPropName: "overnight_link", parent: this }
+        { altPropName: "overnight_link", parent: this },
       );
       this.schedulingUnitDates = gavpfp(
         "schedulingUnitDates",
         props,
         SchedulingUnitDatesCollection,
         new SchedulingUnitDatesCollection({}),
-        { altPropName: "scheduling_unit_date", parent: this }
+        { altPropName: "scheduling_unit_date", parent: this },
       );
       /* eslint-enable max-len */
     }
@@ -333,7 +348,7 @@ export function VehicleScheduleClassFactory(
 
     findVscInclOirForVsc(vsc: VehicleSchedule): BimoVscincloir {
       return this.vscincloirs.find(
-        (vscInclOir) => vscInclOir.vscincloirIntKey === vsc.vscIntId
+        (vscInclOir) => vscInclOir.vscincloirIntKey === vsc.vscIntId,
       );
     }
 
@@ -356,13 +371,13 @@ export function VehicleScheduleClassFactory(
 
     get computedVehicleTaskObjects(): ComputedVehicleTaskObjects {
       return this._getAndSetCachedValue("computedVehicleTaskObjects", () =>
-        computeVehicleTasksOfVsc(this, entityConstructorByEntityClassKey)
+        computeVehicleTasksOfVsc(this, entityConstructorByEntityClassKey),
       );
     }
 
     get computedActivityEntityItemObjects(): ComputedActivityEntityItemObjects {
       return this._getAndSetCachedValue("computedActivityEntityItemObjects", () =>
-        computeActivityEntityItemsOfVsc(this)
+        computeActivityEntityItemsOfVsc(this),
       );
     }
 
@@ -407,10 +422,10 @@ export function VehicleScheduleClassFactory(
     get setOfAllPlaceIdentifiers() {
       const setOfAllPlaceIdentifiers = super.setOfAllPlaceIdentifiers;
       this.consistChanges.forEach((cchg) =>
-        setOfAllPlaceIdentifiers.add(cchg.cchgPlaceStart)
+        setOfAllPlaceIdentifiers.add(cchg.cchgPlaceStart),
       );
       this.vehicleStandbys.forEach((sdby) =>
-        setOfAllPlaceIdentifiers.add(sdby.sdbyPlace)
+        setOfAllPlaceIdentifiers.add(sdby.sdbyPlace),
       );
       this.maintenances.forEach((mtn) => setOfAllPlaceIdentifiers.add(mtn.mtnPlace));
       return setOfAllPlaceIdentifiers;
@@ -435,21 +450,21 @@ export function VehicleScheduleClassFactory(
         (prevMap, collection) => {
           prevMap.set(
             collection.itemName,
-            new Set(Array.from(collection.items as any[]))
+            new Set(Array.from(collection.items as any[])),
           );
           return prevMap;
         },
-        new Map()
+        new Map(),
       );
 
       const getShouldContinue = () =>
         [...unusedItemsByEntityClassKey.values()].some(
-          (unusedItemsSet) => unusedItemsSet.size > 0
+          (unusedItemsSet) => unusedItemsSet.size > 0,
         );
 
       const blockActivitiesIterator = getIteratorForValuesAtPath(
         this,
-        "blocks.items.blockActivities.items"
+        "blocks.items.blockActivities.items",
       );
 
       let shouldContinue = getShouldContinue();
@@ -458,7 +473,7 @@ export function VehicleScheduleClassFactory(
       while (shouldContinue && !nextBlockAct.done) {
         const blockActivity: BimoBlockActivity = nextBlockAct.value;
         const unusedItems = unusedItemsByEntityClassKey.get(
-          blockActivity.activityEntityClassKey
+          blockActivity.activityEntityClassKey,
         );
         if (unusedItems.has(blockActivity.activityEntityItem)) {
           unusedItems.delete(blockActivity.activityEntityItem);
@@ -470,7 +485,7 @@ export function VehicleScheduleClassFactory(
       blockActivityCollections.forEach((collection) =>
         unusedItemsByEntityClassKey
           .get(collection.itemName)
-          .forEach((item: any) => collection.remove(item))
+          .forEach((item: any) => collection.remove(item)),
       );
     }
   }

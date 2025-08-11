@@ -22,7 +22,7 @@ export interface OvernightLinkProps extends ExtendedItemProps {
 }
 
 export function OvernightLinkClassFactory(
-  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey
+  entityConstructorByEntityClassKey: EntityConstructorByEntityClassKey,
 ): typeof BimoOvernightLink {
   class OvernightLink extends Item<OvernightLink> {
     olInternalNumber?: string;

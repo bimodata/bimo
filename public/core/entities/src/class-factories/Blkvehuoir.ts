@@ -1,5 +1,5 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { Blkvehuoir as BimoBlkvehuoir, Block as BimoBlock  } from "../base-types/rawIndex";
+import { Blkvehuoir as BimoBlkvehuoir, Block as BimoBlock } from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";

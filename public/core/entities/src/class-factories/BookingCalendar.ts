@@ -1,11 +1,15 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { BookingCalendar as BimoBookingCalendar, BookingCalendarDatesCollection as BimoBookingCalendarDatesCollection , ServiceEvolutionsCollection as BimoServiceEvolutionsCollection , ServiceContextsCollection as BimoServiceContextsCollection , BookingCalendarDate as BimoBookingCalendarDate  } from "../base-types/rawIndex";
+import {
+  BookingCalendar as BimoBookingCalendar,
+  BookingCalendarDatesCollection as BimoBookingCalendarDatesCollection,
+  ServiceEvolutionsCollection as BimoServiceEvolutionsCollection,
+  ServiceContextsCollection as BimoServiceContextsCollection,
+  BookingCalendarDate as BimoBookingCalendarDate,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
-
 
 export interface BookingCalendarProps extends ExtendedItemProps {
   bcalBookingId?: string;
@@ -64,7 +68,7 @@ export function BookingCalendarClassFactory({
         "bcalIsForCompatibility",
         props,
         "string",
-        "0"
+        "0",
       );
       /** Propriété nécessaire si calendrier pour compatibilité : référence à l'ancien calendrier */
       this.bcalEffectiveCalendarId = gavpfp("bcalEffectiveCalendarId", props);
@@ -76,7 +80,7 @@ export function BookingCalendarClassFactory({
         props,
         BookingCalendarDatesCollection,
         new BookingCalendarDatesCollection({}),
-        { altPropName: "booking_calendar_date", parent: this }
+        { altPropName: "booking_calendar_date", parent: this },
       );
 
       /** @type {ServiceEvolutionsCollection} */
@@ -85,7 +89,7 @@ export function BookingCalendarClassFactory({
         props,
         ServiceEvolutionsCollection,
         new ServiceEvolutionsCollection(),
-        { altPropName: "service_evolution", parent: this }
+        { altPropName: "service_evolution", parent: this },
       );
 
       /** @type {ServiceContextsCollection} */
@@ -94,7 +98,7 @@ export function BookingCalendarClassFactory({
         props,
         ServiceContextsCollection,
         new ServiceContextsCollection(),
-        { altPropName: "service_context", parent: this }
+        { altPropName: "service_context", parent: this },
       );
     }
 

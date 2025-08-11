@@ -1,10 +1,13 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { TrainPath as BimoTrainPath, TrainPathVariantsCollection as BimoTrainPathVariantsCollection , TrainPathVariantDate as BimoTrainPathVariantDate  } from "../base-types/rawIndex";
+import {
+  TrainPath as BimoTrainPath,
+  TrainPathVariantsCollection as BimoTrainPathVariantsCollection,
+  TrainPathVariantDate as BimoTrainPathVariantDate,
+} from "../base-types/rawIndex";
 import { Entity } from "@bimo/core-utils-entity";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import { Item, ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface TrainPathProps extends ExtendedItemProps {
   trnpIdentifier: string;
@@ -37,7 +40,7 @@ export function TrainPathClassFactory({
         props,
         TrainPathVariantsCollection,
         new TrainPathVariantsCollection(),
-        { altPropName: "train_path_variant", parent: this }
+        { altPropName: "train_path_variant", parent: this },
       );
     }
 
@@ -50,7 +53,7 @@ export function TrainPathClassFactory({
         let allTrainPathDates: BimoTrainPathVariantDate[] = [];
         this.trainPathVariants.forEach((trainPathVariant) => {
           allTrainPathDates = allTrainPathDates.concat(
-            trainPathVariant.trainPathVariantDates.items
+            trainPathVariant.trainPathVariantDates.items,
           );
         });
         return new TrainPathVariantDatesCollection({

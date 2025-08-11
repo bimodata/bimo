@@ -50,7 +50,7 @@ export function BookingCalendarsCollectionClassFactory({
         props,
         ServiceDefinitionsCollection,
         new ServiceDefinitionsCollection(),
-        { altPropName: "service_definition", parent: this }
+        { altPropName: "service_definition", parent: this },
       );
 
       /** @type {SchedulingUnitsCollection} */
@@ -59,7 +59,7 @@ export function BookingCalendarsCollectionClassFactory({
         props,
         SchedulingUnitsCollection,
         new SchedulingUnitsCollection(),
-        { altPropName: "scheduling_unit", parent: this }
+        { altPropName: "scheduling_unit", parent: this },
       );
 
       /** @type {BookingsCollection} */
@@ -68,7 +68,7 @@ export function BookingCalendarsCollectionClassFactory({
         props,
         BookingsCollection,
         new BookingsCollection(),
-        { altPropName: "booking", parent: this }
+        { altPropName: "booking", parent: this },
       );
     }
     /**
@@ -100,11 +100,11 @@ export function BookingCalendarsCollectionClassFactory({
               bookingCalendarDate.schedulingUnitDates &&
               bookingCalendarDate.schedulingUnitDates.items;
             return bookingCalendarDate;
-          }
+          },
         );
         //@ts-ignore
         bookingCalendar.service_evolution = bookingCalendar.serviceEvolutions.map(
-          (serviceEvolution) => serviceEvolution
+          (serviceEvolution) => serviceEvolution,
         );
         //@ts-ignore
         bookingCalendar.service_context = bookingCalendar.serviceContexts.map(
@@ -132,13 +132,13 @@ export function BookingCalendarsCollectionClassFactory({
                       serviceContextWeek.serviceContextDays &&
                       serviceContextWeek.serviceContextDays.items;
                     return serviceContextWeek;
-                  }
+                  },
                 );
                 return servEvolPeriod;
-              }
+              },
             );
             return serviceContext;
-          }
+          },
         );
 
         return bookingCalendar;

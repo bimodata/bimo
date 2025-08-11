@@ -1,12 +1,14 @@
 import { EntityConstructorByEntityClassKey } from "../base-types/entityConstructorByEntityClassKey";
-import { ItinerarySegment as BimoItinerarySegment, VariantItinerary as BimoVariantItinerary  } from "../base-types/rawIndex";
+import {
+  ItinerarySegment as BimoItinerarySegment,
+  VariantItinerary as BimoVariantItinerary,
+} from "../base-types/rawIndex";
 import { Item } from "@bimo/core-utils-collection";
 import { Entity } from "@bimo/core-utils-entity";
 const childClasses: (typeof Entity)[] = [];
 import { getAllChildClasses } from "@bimo/core-utils-serialization";
 import gavpfp from "@bimo/core-utils-get-and-validate-prop-from-props";
 import { ExtendedItemProps } from "@bimo/core-utils-collection";
-
 
 export interface ItinerarySegmentProps extends ExtendedItemProps {
   isegSegmentExternalId?: string;
