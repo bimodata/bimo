@@ -2,8 +2,12 @@ const { DateTime, Interval, Settings, Duration } = require('luxon');
 
 Settings.defaultZone = 'Europe/Paris';
 
-const userDefinedMaxHours = process.env.MAX_DURATION_FOR_HASTUS_EXTENDED_HOURS
- && parseInt(process.env.MAX_DURATION_FOR_HASTUS_EXTENDED_HOURS, 10);
+let userDefinedMaxHours = 36;
+
+if (typeof process !== 'undefined') {
+  userDefinedMaxHours = process.env.MAX_DURATION_FOR_HASTUS_EXTENDED_HOURS
+  && parseInt(process.env.MAX_DURATION_FOR_HASTUS_EXTENDED_HOURS, 10);
+}
 
 const MAX_DURATION_FOR_HASTUS_EXTENDED_HOURS = Duration.fromObject({ hour: (userDefinedMaxHours || 36) });
 const DATE_TO_USE_FOR_UNKNOWN_DATES = DateTime.local(2000, 1, 1);
